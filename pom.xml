@@ -6,7 +6,7 @@
 
 	<groupId>de.fraunhofer.iais.eis</groupId>
 	<artifactId>aas-merged-serializer</artifactId>
-	<version>0.1-SNAPSHOT</version>
+	<version>0.1</version>
 	<properties>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<maven.compiler.target>1.8</maven.compiler.target>
