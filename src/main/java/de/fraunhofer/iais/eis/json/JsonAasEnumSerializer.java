@@ -3,62 +3,31 @@ package de.fraunhofer.iais.eis.json;
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
+import com.fasterxml.jackson.databind.JsonSerializer;
+import com.fasterxml.jackson.databind.PropertyNamingStrategy.PropertyNamingStrategyBase;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import com.fasterxml.jackson.databind.ser.std.StdSerializer;
 
-@SuppressWarnings("serial")
-public class JsonAasEnumSerializer extends StdSerializer<Object> {
+public class JsonAasEnumSerializer extends JsonSerializer<Enum> {
 
-	protected JsonAasEnumSerializer() {
-		super(Object.class);
-	}
+    private static final PropertyNamingStrategyBase DEFAULT_NAMING_STRATEGY = new UpperSnakeCaseToUpperCamelCaseStrategy();
 
-	@Override
-	public void serialize(Object value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-		String enumId = getEnumIdFromObject(value);
-		if (isExceptionFromCamelCase(enumId)) {
-			gen.writeString(generateEnumExceptionString(enumId));
-			return;
-		}
+    @Override
+    public void serialize(Enum value, JsonGenerator gen, SerializerProvider provider) throws IOException {
+        String enumId = getEnumIdFromObject(value);
+        if (isExceptionFromCamelCase(enumId)) {
+            gen.writeString(enumId);
+            return;
+        }
+        gen.writeString(DEFAULT_NAMING_STRATEGY.translate(enumId));
+    }
 
-		String lowerCaseEnumName = enumId.toLowerCase();
-		String firstLetterUpperCase = handleFirstLetter(lowerCaseEnumName);
-		String camelCaseEnumString = handleUnderscores(firstLetterUpperCase);
-		gen.writeString(camelCaseEnumString);
-	}
+    private String getEnumIdFromObject(Object value) {
+        String[] enumIdParts = value.toString().split("/");
+        return enumIdParts[enumIdParts.length - 1];
+    }
 
-	private String getEnumIdFromObject(Object value) {
-		String[] enumIdParts = value.toString().split("/");
-		return enumIdParts[enumIdParts.length - 1];
-	}
+    private boolean isExceptionFromCamelCase(String enumName) {
+        return enumName.equals("IRDI") || enumName.equals("IRI");
+    }
 
-	private String generateEnumExceptionString(String enumName) {
-		return enumName;
-	}
-
-	private boolean isExceptionFromCamelCase(String enumName) {
-		return enumName.equals("IRDI") || enumName.equals("IRI");
-	}
-
-	private String handleUnderscores(String withUnderscores) {
-		String withCamelCase = "";
-
-		boolean charToUpperCase = false;
-		for (int i = 0; i < withUnderscores.length(); i++) {
-			char currentChar = withUnderscores.charAt(i);
-			if (charToUpperCase) {
-				withCamelCase += Character.toUpperCase(currentChar);
-				charToUpperCase = false;
-			} else if (currentChar == '_') {
-				charToUpperCase = true;
-			} else {
-				withCamelCase += currentChar;
-			}
-		}
-		return withCamelCase;
-	}
-
-	private String handleFirstLetter(String lowerCase) {
-		return lowerCase.substring(0, 1).toUpperCase() + lowerCase.substring(1);
-	}
 }
