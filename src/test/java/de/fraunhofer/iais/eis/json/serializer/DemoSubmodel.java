@@ -15,27 +15,28 @@ import de.fraunhofer.iais.eis.ReferenceBuilder;
 import de.fraunhofer.iais.eis.SubmodelElement;
 
 public class DemoSubmodel extends DefaultSubmodel {
-	private final String ID_SHORT = "MySubmodelName";
-	private final String ID = "MySubmodelId";
 
-	public DemoSubmodel() {
-		this.idShort = ID_SHORT;
-		this.identification = createIdentifier();
-		this.submodelElements = createSubmodelElements();
-	}
+    private final String ID_SHORT = "MySubmodelName";
+    private final String ID = "MySubmodelId";
 
-	private Identifier createIdentifier() {
-		return new IdentifierBuilder().identifier(ID).idType(IdentifierType.CUSTOM).build();
-	}
+    public DemoSubmodel() {
+        this.idShort = ID_SHORT;
+        this.identification = createIdentifier();
+        this.submodelElements = createSubmodelElements();
+    }
 
-	private List<SubmodelElement> createSubmodelElements() {
-		return Arrays.asList(new DemoStringProperty());
-	}
+    private Identifier createIdentifier() {
+        return new IdentifierBuilder().identifier(ID).idType(IdentifierType.CUSTOM).build();
+    }
 
-	protected Reference getReference() {
-		return new ReferenceBuilder()
-				.keys(Arrays
-						.asList(new KeyBuilder().type(KeyElements.SUBMODEL).idType(KeyType.CUSTOM).value(ID).build()))
-				.build();
-	}
+    private List<SubmodelElement> createSubmodelElements() {
+        return Arrays.asList(new DemoStringProperty());
+    }
+
+    protected Reference getReference() {
+        return new ReferenceBuilder()
+                .keys(Arrays
+                        .asList(new KeyBuilder().type(KeyElements.SUBMODEL).idType(KeyType.CUSTOM).value(ID).build()))
+                .build();
+    }
 }

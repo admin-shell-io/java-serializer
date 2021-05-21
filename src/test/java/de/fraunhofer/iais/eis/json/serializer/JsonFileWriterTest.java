@@ -15,35 +15,36 @@ import de.fraunhofer.iais.eis.json.JsonAasFileWriter;
 import de.fraunhofer.iais.eis.json.JsonAasSerializer;
 
 public class JsonFileWriterTest {
-	private static final JsonAasFileWriter fileWriter = new JsonAasFileWriter();
-	private static final String TEST_FILENAME = "testJsonSerialization.json";
-	private static final AssetAdministrationShell DEMO_AAS = new DemoAssetAdministrationShell();
 
-	@Before
-	public void clearFile() {
-		File file2Remove = new File(TEST_FILENAME);
-		if (file2Remove.exists()) {
-			file2Remove.delete();
-		}
-	}
+    private static final JsonAasFileWriter fileWriter = new JsonAasFileWriter();
+    private static final String TEST_FILENAME = "testJsonSerialization.json";
+    private static final AssetAdministrationShell DEMO_AAS = new DemoAssetAdministrationShell();
 
-	@Test
-	public void writeFileForAas() throws IOException {
-		fileWriter.serializeToFile(DEMO_AAS, TEST_FILENAME);
-		File outputFile = new File(TEST_FILENAME);
-		assertTrue(outputFile.exists());
-	}
+    @Before
+    public void clearFile() {
+        File file2Remove = new File(TEST_FILENAME);
+        if (file2Remove.exists()) {
+            file2Remove.delete();
+        }
+    }
 
-	@Test
-	public void serializeAas() throws IOException {
-		fileWriter.serializeToFile(DEMO_AAS, TEST_FILENAME);
+    @Test
+    public void writeFileForAas() throws IOException {
+        fileWriter.serializeToFile(DEMO_AAS, TEST_FILENAME);
+        File outputFile = new File(TEST_FILENAME);
+        assertTrue(outputFile.exists());
+    }
 
-		JsonAasSerializer stringSerializer = new JsonAasSerializer();
-		String serializedAasFromString = stringSerializer.serialize(DEMO_AAS);
+    @Test
+    public void serializeAas() throws IOException {
+        fileWriter.serializeToFile(DEMO_AAS, TEST_FILENAME);
 
-		File outputFile = new File(TEST_FILENAME);
-		String serializedAasFromFile = new String(Files.readAllBytes(outputFile.toPath()));
+        JsonAasSerializer stringSerializer = new JsonAasSerializer();
+        String serializedAasFromString = stringSerializer.serialize(DEMO_AAS);
 
-		assertEquals(serializedAasFromString, serializedAasFromFile);
-	}
+        File outputFile = new File(TEST_FILENAME);
+        String serializedAasFromFile = new String(Files.readAllBytes(outputFile.toPath()));
+
+        assertEquals(serializedAasFromString, serializedAasFromFile);
+    }
 }
