@@ -261,7 +261,7 @@
                         "keys": [
                             {
                                 "type": "GlobalReference",
-                                "value": "http://adminshell.io/DataSpecificationTemplates/DataSpecificationIEC61360",
+                                "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0",
                                 "idType": "IRI"
                             }
                         ]
@@ -315,7 +315,7 @@
                         "keys": [
                             {
                                 "type": "GlobalReference",
-                                "value": "http://adminshell.io/DataSpecificationTemplates/DataSpecificationIEC61360",
+                                "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0",
                                 "idType": "IRI"
                             }
                         ]
@@ -371,7 +371,13 @@
             "embeddedDataSpecifications": [
                 {
                     "dataSpecification": {
-                        "keys": []
+                        "keys": [
+                            {
+                                "type": "GlobalReference",
+                                "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0",
+                                "idType": "IRI"
+                            }
+                        ]
                     },
                     "dataSpecificationContent": {
                         "preferredName": [
@@ -427,7 +433,7 @@
                         "keys": [
                             {
                                 "type": "GlobalReference",
-                                "value": "http://adminshell.io/DataSpecificationTemplates/DataSpecificationIEC61360",
+                                "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0",
                                 "idType": "IRI"
                             }
                         ]
@@ -494,7 +500,7 @@
                         "keys": [
                             {
                                 "type": "GlobalReference",
-                                "value": "http://adminshell.io/DataSpecificationTemplates/DataSpecificationIEC61360",
+                                "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0",
                                 "idType": "IRI"
                             }
                         ]
