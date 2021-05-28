@@ -10,6 +10,6 @@ import de.fraunhofer.iais.eis.Qualifier;
     @JsonSubTypes.Type(value = Qualifier.class, name = "Qualifier"),
     @JsonSubTypes.Type(value = Formula.class, name = "Formula")
 })
-public class ConstraintMixin {
+public interface ConstraintMixin {
 
 }

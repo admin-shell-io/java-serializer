@@ -8,4 +8,7 @@ public interface SubmodelElementCollectionMixin {
 
     @JsonProperty("value")
     public void setValues(Collection<SubmodelElement> values);
+
+    @JsonProperty("value")
+    public Collection<SubmodelElement> getValues();
 }

@@ -9,9 +9,18 @@ public interface DataSpecificationIEC61360Mixin {
     @JsonProperty("shortName")
     public void setShortNames(List<LangString> values);
 
+    @JsonProperty("shortName")
+    public List<LangString> getShortNames();
+
     @JsonProperty("preferredName")
     public void setPreferredNames(List<LangString> values);
 
+    @JsonProperty("preferredName")
+    public List<LangString> getPreferredNames();
+
     @JsonProperty("definition")
     public void setDefinitions(List<LangString> values);
+
+    @JsonProperty("definition")
+    public List<LangString> getDefinitions();
 }

@@ -7,4 +7,7 @@ public interface IdentifierKeyValuePairMixin {
 
     @JsonProperty("subjectId")
     public void setExternalSubjectId(Reference value);
+
+    @JsonProperty("subjectId")
+    public Reference getExternalSubjectId();
 }

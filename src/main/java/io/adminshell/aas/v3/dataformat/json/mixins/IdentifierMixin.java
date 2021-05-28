@@ -6,4 +6,7 @@ public interface IdentifierMixin {
 
     @JsonProperty("id")
     public void setIdentifier(String identifier);
+
+    @JsonProperty("id")
+    public String getIdentifier();
 }

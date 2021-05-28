@@ -44,6 +44,7 @@ import de.fraunhofer.iais.eis.Constraint;
 import de.fraunhofer.iais.eis.ConstraintMixin;
 import de.fraunhofer.iais.eis.DataElement;
 import de.fraunhofer.iais.eis.DataElementMixin;
+import de.fraunhofer.iais.eis.DataSpecification;
 import de.fraunhofer.iais.eis.DataSpecificationContent;
 import de.fraunhofer.iais.eis.DataSpecificationContentMixin;
 import de.fraunhofer.iais.eis.DataSpecificationIEC61360;
@@ -144,6 +145,8 @@ import io.adminshell.aas.v3.dataformat.json.enums.IdentifierTypeMapping;
 import io.adminshell.aas.v3.dataformat.json.enums.KeyTypeMapping;
 import io.adminshell.aas.v3.dataformat.json.enums.ScreamingSnakeCaseEnumNaming;
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
+import io.adminshell.aas.v3.dataformat.json.serialization.DataSpecificationSerializer;
+import io.adminshell.aas.v3.dataformat.json.serialization.mixins.AssetAdministrationShellEnvironmentMixin;
 
 public class JsonSerializer {
 
@@ -171,6 +174,8 @@ public class JsonSerializer {
         module.addSerializer(ModelingKind.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(ModelingKind.class)));
         module.addSerializer(PermissionKind.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(PermissionKind.class))); // not used in JSON
         module.addSerializer(ReferableElements.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(ReferableElements.class))); // not used in JSON
+
+        module.addSerializer(DataSpecification.class, new DataSpecificationSerializer());
         mapper.registerModule(module);
 
         mapper.addMixIn(AccessControl.class, AccessControlMixin.class);
@@ -179,6 +184,9 @@ public class JsonSerializer {
         mapper.addMixIn(AdministrativeInformation.class, AdministrativeInformationMixin.class);
         mapper.addMixIn(AnnotatedRelationshipElement.class, AnnotatedRelationshipElementMixin.class);
         mapper.addMixIn(AssetAdministrationShell.class, AssetAdministrationShellMixin.class);
+        // does AASEnv need to have properties without value always present?
+        // if yes, this requires mixin and potentially changing Default classes to init collection properties with empty collection/list
+        //mapper.addMixIn(AssetAdministrationShellEnvironment.class, AssetAdministrationShellEnvironmentMixin.class);
         mapper.addMixIn(AssetInformation.class, AssetInformationMixin.class);
         mapper.addMixIn(Asset.class, AssetMixin.class);
         mapper.addMixIn(BasicEvent.class, BasicEventMixin.class);

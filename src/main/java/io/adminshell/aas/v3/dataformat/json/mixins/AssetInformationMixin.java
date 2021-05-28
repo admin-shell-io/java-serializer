@@ -7,4 +7,7 @@ public interface AssetInformationMixin {
 
     @JsonProperty("thumbnail")
     public void setDefaultThumbnail(File value);
+
+    @JsonProperty("thumbnail")
+    public File getDefaultThumbnail();
 }
