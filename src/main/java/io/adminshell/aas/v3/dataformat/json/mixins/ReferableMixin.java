@@ -1,8 +1,9 @@
-package io.adminshell.aas.v3.dataformat.json.deserialization.mixins;
+package io.adminshell.aas.v3.dataformat.json.mixins;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeInfo.As;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import de.fraunhofer.iais.eis.AccessPermissionRule;
 import de.fraunhofer.iais.eis.Asset;
 import de.fraunhofer.iais.eis.AssetAdministrationShell;
@@ -16,6 +17,7 @@ import de.fraunhofer.iais.eis.View;
  *
  * @author Michael Jacoby
  */
+@JsonTypeName("Referable")
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, include = As.PROPERTY, property = "modelType")
 @JsonSubTypes({
     @JsonSubTypes.Type(value = AccessPermissionRule.class, name = "AccessPermissionRule"),

@@ -1,9 +1,13 @@
 package io.adminshell.aas.v3.dataformat.json.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import com.fasterxml.jackson.annotation.JsonTypeName;
 import de.fraunhofer.iais.eis.util.LangString;
 import java.util.List;
 
+@JsonTypeName("DataSpecificationIEC61360")
+@JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "modelType")
 public interface DataSpecificationIEC61360Mixin {
 
     @JsonProperty("shortName")

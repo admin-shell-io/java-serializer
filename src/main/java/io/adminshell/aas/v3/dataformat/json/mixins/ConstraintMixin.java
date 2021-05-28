@@ -1,4 +1,4 @@
-package io.adminshell.aas.v3.dataformat.json.deserialization.mixins;
+package io.adminshell.aas.v3.dataformat.json.mixins;
 
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;

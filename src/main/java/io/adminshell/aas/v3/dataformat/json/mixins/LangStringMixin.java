@@ -2,8 +2,11 @@ package io.adminshell.aas.v3.dataformat.json.mixins;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public abstract class LangStringMixin {
+public interface LangStringMixin {
 
     @JsonProperty("text")
-    private String value;
+    public String getValue();
+
+    @JsonProperty("text")
+    public void setValue(String value);
 }
