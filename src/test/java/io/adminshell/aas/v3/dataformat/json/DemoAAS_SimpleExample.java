@@ -120,7 +120,7 @@ public class DemoAAS_SimpleExample {
                     .keys(Arrays.asList(new DefaultKeyBuilder()
                             .type(KeyElements.GLOBAL_REFERENCE)
                             .value(SUBMODEL_TECHNICAL_DATA_SEMANTIC_ID)
-                            .idType(KeyType.IRI)
+                            .idType(KeyType.IRDI)
                             .build()))
                     .build())
             .kind(ModelingKind.INSTANCE)
@@ -347,7 +347,6 @@ public class DemoAAS_SimpleExample {
                     .build())
             .embeddedDataSpecifications(Arrays.asList(new DefaultDataSpecificationBuilder()
                     //TODO: DataSpecification
-
                     .dataSpecificationContent(new DefaultDataSpecificationIEC61360Builder()
                             .preferredNames(Arrays.asList(
                                     new LangString("Document", "EN"),
