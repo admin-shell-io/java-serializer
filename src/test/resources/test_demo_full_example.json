@@ -1059,8 +1059,7 @@
                                     }
                                 ]
                             },
-                            "mimeType": "application/pdf",
-                            "value": "AQIDBAU="
+                            "mimeType": "application/pdf"
                         },
                         {
                             "idShort": "ExampleFile",
@@ -1820,8 +1819,7 @@
                                     }
                                 ]
                             },
-                            "mimeType": "application/pdf",
-                            "value": "AQIDBAU="
+                            "mimeType": "application/pdf"
                         },
                         {
                             "idShort": "ExampleFile",

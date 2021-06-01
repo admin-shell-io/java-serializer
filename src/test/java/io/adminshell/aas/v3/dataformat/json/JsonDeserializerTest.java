@@ -1,14 +1,10 @@
 package io.adminshell.aas.v3.dataformat.json;
 
+import de.fraunhofer.iais.eis.*;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import de.fraunhofer.iais.eis.AssetAdministrationShellEnvironment;
-import de.fraunhofer.iais.eis.DefaultProperty;
-import de.fraunhofer.iais.eis.DefaultSubmodel;
-import de.fraunhofer.iais.eis.Property;
-import de.fraunhofer.iais.eis.Submodel;
 import java.io.File;
 
 import static org.junit.Assert.assertEquals;
@@ -58,4 +54,42 @@ public class JsonDeserializerTest {
         AssetAdministrationShellEnvironment env = deserializer.read(AASFull.FILE);
         assertEquals(env, AASFull.ENVIRONMENT);
     }
+
+    @Test
+    public void testFullExampleSubmodels() throws Exception {
+        AssetAdministrationShellEnvironment env = deserializer.read(AASFull.FILE);
+        AssetAdministrationShellEnvironment src_env = AASFull.ENVIRONMENT;
+
+        assertEquals(env.getSubmodels(), src_env.getSubmodels());
+    }
+
+    @Test
+    public void testFullExampleAssets() throws Exception {
+        AssetAdministrationShellEnvironment env = deserializer.read(AASFull.FILE);
+        AssetAdministrationShellEnvironment src_env = AASFull.ENVIRONMENT;
+
+        assertEquals(env.getAssets(), src_env.getAssets());
+
+    }
+
+    @Test
+    public void testFullExampleConceptDescriptions() throws Exception {
+        AssetAdministrationShellEnvironment env = deserializer.read(AASFull.FILE);
+        AssetAdministrationShellEnvironment src_env = AASFull.ENVIRONMENT;
+
+        assertEquals(env.getConceptDescriptions(), src_env.getConceptDescriptions());
+
+    }
+
+    @Test
+    public void testFullExampleAAS() throws Exception {
+        AssetAdministrationShellEnvironment env = deserializer.read(AASFull.FILE);
+        AssetAdministrationShellEnvironment src_env = AASFull.ENVIRONMENT;
+
+        assertEquals(env.getAssetAdministrationShells(), src_env.getAssetAdministrationShells());
+
+    }
+
+
+
 }

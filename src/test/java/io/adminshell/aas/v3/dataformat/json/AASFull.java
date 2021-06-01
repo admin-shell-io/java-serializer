@@ -380,7 +380,7 @@ public class AASFull {
                     .build())
             .semanticId(new DefaultReferenceBuilder()
                     .keys(Arrays.asList(new DefaultKeyBuilder()
-                            .type(KeyElements.SUBMODEL)
+                            .type(KeyElements.GLOBAL_REFERENCE)
                             .idType(KeyType.IRI)
                             .value("http://acplt.org/SubmodelTemplates/ExampleSubmodel")
                             .build()))
@@ -623,7 +623,7 @@ public class AASFull {
                                             .category("CONSTANT")
                                             .descriptions(Arrays.asList(
                                                     new LangString("Example MultiLanguageProperty object", "en-us"),
-                                                    new LangString("Beispiel MultiLanguageProperty Element", "de")
+                                                    new LangString("Beispiel MulitLanguageProperty Element", "de")
                                             ))
                                             .semanticId(new DefaultReferenceBuilder()
                                                     .keys(Arrays.asList(new DefaultKeyBuilder()
@@ -694,7 +694,7 @@ public class AASFull {
                                                     .build()))
                                             .build())
                                     .mimeType("application/pdf")
-                                    .value("AQIDBAU=".getBytes())
+                                    //TODO value - removed in example
                                     .build(),
                                     new DefaultFileBuilder()
                                             .idShort("ExampleFile")
@@ -759,7 +759,7 @@ public class AASFull {
                     .second(new DefaultReferenceBuilder()
                             .keys(Arrays.asList(new DefaultKeyBuilder()
                                     .type(KeyElements.PROPERTY)
-                                    .value("ExampleProperty2")
+                                    .value("ExampleProperty")
                                     .idType(KeyType.IDSHORT)
                                     .build()))
                             .build())
@@ -776,7 +776,7 @@ public class AASFull {
                             .second(new DefaultReferenceBuilder()
                                     .keys(Arrays.asList(new DefaultKeyBuilder()
                                             .type(KeyElements.PROPERTY)
-                                            .value("ExampleProperty2")
+                                            .value("ExampleProperty")
                                             .idType(KeyType.IDSHORT)
                                             .build()))
                                     .build())
@@ -853,7 +853,7 @@ public class AASFull {
                     .build())
             .semanticId(new DefaultReferenceBuilder()
                     .keys(Arrays.asList(new DefaultKeyBuilder()
-                            .type(KeyElements.SUBMODEL)
+                            .type(KeyElements.GLOBAL_REFERENCE)
                             .idType(KeyType.IRI)
                             .value("http://acplt.org/SubmodelTemplates/ExampleSubmodel")
                             .build()))
@@ -1072,7 +1072,7 @@ public class AASFull {
                                             .category("CONSTANT")
                                             .descriptions(Arrays.asList(
                                                     new LangString("Example MultiLanguageProperty object", "en-us"),
-                                                    new LangString("Beispiel MultiLanguageProperty Element", "de")
+                                                    new LangString("Beispiel MulitLanguageProperty Element", "de")
                                             ))
                                             .semanticId(new DefaultReferenceBuilder()
                                                     .keys(Arrays.asList(new DefaultKeyBuilder()
@@ -1136,7 +1136,8 @@ public class AASFull {
                                                     .build()))
                                             .build())
                                     .mimeType("application/pdf")
-                                    .value("AQIDBAU=".getBytes())
+                                            //TODO value
+                                            //.value("AQIDBAU=".getBytes())
                                     .build(),
                                     new DefaultFileBuilder()
                                             .idShort("ExampleFile")
@@ -1199,7 +1200,7 @@ public class AASFull {
                     .build())
             .semanticId(new DefaultReferenceBuilder()
                     .keys(Arrays.asList(new DefaultKeyBuilder()
-                            .type(KeyElements.SUBMODEL)
+                            .type(KeyElements.GLOBAL_REFERENCE)
                             .idType(KeyType.IRI)
                             .value("http://acplt.org/SubmodelTemplates/ExampleSubmodel")
                             .build()))
@@ -1418,7 +1419,7 @@ public class AASFull {
                                             .category("CONSTANT")
                                             .descriptions(Arrays.asList(
                                                     new LangString("Example MultiLanguageProperty object", "en-us"),
-                                                    new LangString("Beispiel MultiLanguageProperty Element", "de")
+                                                    new LangString("Beispiel MulitLanguageProperty Element", "de")
                                             ))
                                             .semanticId(new DefaultReferenceBuilder()
                                                     .keys(Arrays.asList(new DefaultKeyBuilder()
@@ -1594,6 +1595,8 @@ public class AASFull {
             .identification(new DefaultIdentifierBuilder()
                     .idType(IdentifierType.IRI)
                     .identifier("https://acplt.org/Test_Asset_Missing")
+                    .build())
+            .administration(new DefaultAdministrativeInformationBuilder()
                     .build())
             .build();
 
