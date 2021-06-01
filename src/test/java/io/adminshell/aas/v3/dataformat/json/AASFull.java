@@ -442,8 +442,13 @@ public class AASFull {
                                             .idType(KeyType.IDSHORT)
                                             .build()))
                                     .build())
-                            //TODO annotation
-                            .annotations(Arrays.asList())
+                            .annotations(Arrays.asList(new DefaultReferenceBuilder()
+                                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                                    .type(KeyElements.PROPERTY)
+                                                    .value("ExampleProperty3")
+                                                    .idType(KeyType.IDSHORT)
+                                                    .build()))
+                                            .build()))
                             .build(),
                     new DefaultOperationBuilder()
                             .idShort("ExampleOperation")
@@ -910,8 +915,13 @@ public class AASFull {
                                             .idType(KeyType.IDSHORT)
                                             .build()))
                                     .build())
-                            //TODO annotation
-                            .annotations(Arrays.asList())
+                            .annotations(Arrays.asList(new DefaultReferenceBuilder()
+                                    .keys(Arrays.asList(new DefaultKeyBuilder()
+                                            .type(KeyElements.PROPERTY)
+                                            .value("ExampleProperty")
+                                            .idType(KeyType.IDSHORT)
+                                            .build()))
+                                    .build()))
                             .build(),
                     new DefaultOperationBuilder()
                             .idShort("ExampleOperation")
