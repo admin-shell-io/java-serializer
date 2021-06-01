@@ -22,7 +22,7 @@ public class ModelTypeProcessor {
         return result;
     }
 
-    public static void postprocess(JsonNode node) throws JsonProcessingException {
+    public static JsonNode postprocess(JsonNode node) throws JsonProcessingException {
         JsonTreeProcessor.traverse(node,
                 x -> {
                     if (x.get(MODEL_TYPE) != null && x.get(MODEL_TYPE).isTextual()) {
@@ -31,5 +31,6 @@ public class ModelTypeProcessor {
                         x.replace(MODEL_TYPE, nodeModelType);
                     }
                 });
+        return node;
     }
 }

@@ -5,12 +5,13 @@ import de.fraunhofer.iais.eis.util.LangString;
 
 import java.util.Arrays;
 
-public class DemoAAS_SimpleExample {
+public class AASSimple {
+
+    public static final java.io.File FILE = new java.io.File("src/test/resources/jsonExample.json");
 
     //AAS
     public static final String AAS_ID = "ExampleMotor";
     public static final String AAS_IDENTIFIER = "http://customer.com/aas/9175_7013_7091_9168";
-
 
     //SUBMODEL_TECHNICAL_DATA
     public static final String SUBMODEL_TECHNICAL_DATA_PROPERTY_ID_SHORT = "MaxRotationSpeed";
@@ -45,7 +46,7 @@ public class DemoAAS_SimpleExample {
     private static final String SUBMODEL_OPERATIONAL_DATA_PROPERTY_VALUE = "4370";
     private static final String SUBMODEL_OPERATIONAL_DATA_PROPERTY_VALUETYPE = "integer";
 
-    public DemoAAS_SimpleExample() {
+    public AASSimple() {
     }
 
     public static final AssetAdministrationShell AAS = new DefaultAssetAdministrationShellBuilder()
@@ -69,7 +70,7 @@ public class DemoAAS_SimpleExample {
                                     .value("538fd1b3-f99f-4a52-9c75-72e9fa921270")
                                     .externalSubjectId(new DefaultReferenceBuilder()
                                             .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                    .type(KeyElements.ASSET)
+                                                    .type(KeyElements.GLOBAL_REFERENCE)
                                                     .value("http://customer.com/Systems/ERP/012")
                                                     .idType(KeyType.IRI)
                                                     .build()))
@@ -80,7 +81,7 @@ public class DemoAAS_SimpleExample {
                                     .value("QjYgPggjwkiHk4RrQiYSLg==")
                                     .externalSubjectId(new DefaultReferenceBuilder()
                                             .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                    .type(KeyElements.ASSET)
+                                                    .type(KeyElements.GLOBAL_REFERENCE)
                                                     .value("http://customer.com/Systems/IoT/1")
                                                     .idType(KeyType.IRI)
                                                     .build()))
@@ -93,29 +94,30 @@ public class DemoAAS_SimpleExample {
                             .mimeType("image/png")
                             .value("https://github.com/admin-shell/io/blob/master/verwaltungsschale-detail-part1.png")
                             .build())
-
                     .build()
             )
-            .submodels(Arrays.asList(new DefaultReferenceBuilder()
-                    .keys(Arrays
-                            .asList(new DefaultKeyBuilder()
-                                            .type(KeyElements.SUBMODEL)
-                                            .value("http.//i40.customer.com/type/1/1/7A7104BDAB57E184")
-                                            .idType(KeyType.IRI)
-                                            .build(),
-                                    new DefaultKeyBuilder()
-                                            .type(KeyElements.SUBMODEL)
-                                            .value("http://i40.customer.com/instance/1/1/AC69B1CB44F07935")
-                                            .idType(KeyType.IRI)
-                                            .build(),
-                                    new DefaultKeyBuilder()
-                                            .type(KeyElements.SUBMODEL)
-                                            .value("http://i40.customer.com/type/1/1/1A7B62B529F19152")
-                                            .idType(KeyType.IRI)
-                                            .build()
-
-                            ))
-                    .build()))
+            .submodels(Arrays.asList(
+                    new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.SUBMODEL)
+                                    .value("http.//i40.customer.com/type/1/1/7A7104BDAB57E184")
+                                    .idType(KeyType.IRI)
+                                    .build()))
+                            .build(),
+                    new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.SUBMODEL)
+                                    .value("http://i40.customer.com/instance/1/1/AC69B1CB44F07935")
+                                    .idType(KeyType.IRI)
+                                    .build()))
+                            .build(),
+                    new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.SUBMODEL)
+                                    .value("http://i40.customer.com/type/1/1/1A7B62B529F19152")
+                                    .idType(KeyType.IRI)
+                                    .build()))
+                            .build()))
             .build();
 
     public static final Asset ASSET = new DefaultAssetBuilder()
@@ -153,6 +155,78 @@ public class DemoAAS_SimpleExample {
                     .category(SUBMODEL_TECHNICAL_DATA_PROPERTY_CATEGORY)
                     .value(SUBMODEL_TECHNICAL_DATA_PROPERTY_VALUE)
                     .valueType(SUBMODEL_TECHNICAL_DATA_PROPERTY_VALUETYPE)
+                    .build()))
+            .build();
+
+    public static final Submodel SUBMODEL_OPERATIONAL_DATA = new DefaultSubmodelBuilder()
+            .kind(ModelingKind.INSTANCE)
+            .idShort(SUBMODEL_OPERATIONAL_DATA_ID_SHORT)
+            .identification(new DefaultIdentifierBuilder()
+                    .identifier(SUBMODEL_OPERATIONAL_DATA_ID)
+                    .idType(IdentifierType.IRI)
+                    .build())
+            .submodelElements(Arrays.asList(new DefaultPropertyBuilder()
+                    .kind(ModelingKind.INSTANCE)
+                    .semanticId(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.CONCEPT_DESCRIPTION)
+                                    .value(SUBMODEL_OPERATIONAL_DATA_SEMANTIC_ID_PROPERTY)
+                                    .idType(KeyType.IRI)
+                                    .build()))
+                            .build())
+                    .idShort(SUBMODEL_OPERATIONAL_DATA_PROPERTY_ID_SHORT)
+                    .category(SUBMODEL_OPERATIONAL_DATA_PROPERTY_CATEGORY)
+                    .value(SUBMODEL_OPERATIONAL_DATA_PROPERTY_VALUE)
+                    .valueType(SUBMODEL_OPERATIONAL_DATA_PROPERTY_VALUETYPE)
+                    .build()))
+            .build();
+
+    public static final Submodel SUBMODEL_DOCUMENTATION = new DefaultSubmodelBuilder()
+            .kind(ModelingKind.INSTANCE)
+            .idShort(SUBMODEL_DOCUMENTATION_ID_SHORT)
+            .identification(new DefaultIdentifierBuilder()
+                    .identifier(SUBMODEL_DOCUMENTATION_ID)
+                    .idType(IdentifierType.IRI)
+                    .build())
+            .submodelElements(Arrays.asList(new DefaultSubmodelElementCollectionBuilder()
+                    .kind(ModelingKind.INSTANCE)
+                    .semanticId(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.CONCEPT_DESCRIPTION)
+                                    .value(SUBMODEL_DOCUMENTATION_ELEMENTCOLLECTION_SEMANTIC_ID)
+                                    .idType(KeyType.IRI)
+                                    .build()))
+                            .build())
+                    .idShort(SUBMODEL_DOCUMENTATION_ELEMENTCOLLECTION_ID_SHORT)
+                    .values(Arrays.asList(
+                            new DefaultPropertyBuilder()
+                                    .kind(ModelingKind.INSTANCE)
+                                    .semanticId(new DefaultReferenceBuilder()
+                                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                                    .type(KeyElements.CONCEPT_DESCRIPTION)
+                                                    .value(SUBMODEL_DOCUMENTATION_PROPERTY_SEMANTIC_ID)
+                                                    .idType(KeyType.IRI)
+                                                    .build()))
+                                            .build())
+                                    .idShort(SUBMODEL_DOCUMENTATION_PROPERTY_ID_SHORT)
+                                    .value(SUBMODEL_DOCUMENTATION_PROPERTY_VALUE)
+                                    .valueType(SUBMODEL_DOCUMENTATION_PROPERTY_VALUETYPE)
+                                    .build(),
+                            new DefaultFileBuilder()
+                                    .kind(ModelingKind.INSTANCE)
+                                    .semanticId(new DefaultReferenceBuilder()
+                                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                                    .type(KeyElements.CONCEPT_DESCRIPTION)
+                                                    .value(SUBMODEL_DOCUMENTATION_FILE_SEMANTIC_ID)
+                                                    .idType(KeyType.IRI)
+                                                    .build()))
+                                            .build())
+                                    .idShort(SUBMODEL_DOCUMENTATION_FILE_ID_SHORT)
+                                    .mimeType(SUBMODEL_DOCUMENTATION_FILE_MIMETYPE)
+                                    .value(SUBMODEL_DOCUMENTATION_FILE_VALUE)
+                                    .build()))
+                    .ordered(false)
+                    .allowDuplicates(false)
                     .build()))
             .build();
 
@@ -218,7 +292,6 @@ public class DemoAAS_SimpleExample {
                             .preferredNames(Arrays.asList(
                                     new LangString("max.Drehzahl", "de"),
                                     new LangString("Max.rotationspeed", "en")))
-                            .shortNames(Arrays.asList())
                             .unit("1/min")
                             .unitId(new DefaultReferenceBuilder()
                                     .keys(Arrays.asList(new DefaultKeyBuilder()
@@ -277,10 +350,9 @@ public class DemoAAS_SimpleExample {
                     .build())
             .embeddedDataSpecifications(Arrays.asList(new DefaultDataSpecificationBuilder()
                     .dataSpecificationContent(new DefaultDataSpecificationIEC61360Builder()
-                            .preferredNames(Arrays.asList(
+                            .shortNames(Arrays.asList(
                                     new LangString("Document", "EN"),
                                     new LangString("Dokument", "DE")))
-
                             .unit("")
                             .sourceOfDefinition("[ISO15519-1:2010]")
                             .dataType(DataTypeIEC61360.STRING)
@@ -290,81 +362,9 @@ public class DemoAAS_SimpleExample {
                     .build()))
             .build();
 
-    public static final Submodel SUBMODEL_DOCUMENTATION = new DefaultSubmodelBuilder()
-            .kind(ModelingKind.INSTANCE)
-            .idShort(SUBMODEL_DOCUMENTATION_ID_SHORT)
-            .identification(new DefaultIdentifierBuilder()
-                    .identifier(SUBMODEL_DOCUMENTATION_ID)
-                    .idType(IdentifierType.IRI)
-                    .build())
-            .submodelElements(Arrays.asList(new DefaultSubmodelElementCollectionBuilder()
-                    .kind(ModelingKind.INSTANCE)
-                    .semanticId(new DefaultReferenceBuilder()
-                            .keys(Arrays.asList(new DefaultKeyBuilder()
-                                    .type(KeyElements.CONCEPT_DESCRIPTION)
-                                    .value(SUBMODEL_DOCUMENTATION_ELEMENTCOLLECTION_SEMANTIC_ID)
-                                    .idType(KeyType.IRI)
-                                    .build()))
-                            .build())
-                    .idShort(SUBMODEL_DOCUMENTATION_ELEMENTCOLLECTION_ID_SHORT)
-                    .values(Arrays.asList(
-                            new DefaultPropertyBuilder()
-                                    .kind(ModelingKind.INSTANCE)
-                                    .semanticId(new DefaultReferenceBuilder()
-                                            .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                    .type(KeyElements.CONCEPT_DESCRIPTION)
-                                                    .value(SUBMODEL_DOCUMENTATION_PROPERTY_SEMANTIC_ID)
-                                                    .idType(KeyType.IRI)
-                                                    .build()))
-                                            .build())
-                                    .idShort(SUBMODEL_DOCUMENTATION_PROPERTY_ID_SHORT)
-                                    .value(SUBMODEL_DOCUMENTATION_PROPERTY_VALUE)
-                                    .valueType(SUBMODEL_DOCUMENTATION_PROPERTY_VALUETYPE)
-                                    .build(),
-                            new DefaultFileBuilder()
-                                    .kind(ModelingKind.INSTANCE)
-                                    .semanticId(new DefaultReferenceBuilder()
-                                            .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                    .type(KeyElements.CONCEPT_DESCRIPTION)
-                                                    .value(SUBMODEL_DOCUMENTATION_FILE_SEMANTIC_ID)
-                                                    .idType(KeyType.IRI)
-                                                    .build()))
-                                            .build())
-                                    .idShort(SUBMODEL_DOCUMENTATION_FILE_ID_SHORT)
-                                    .mimeType(SUBMODEL_DOCUMENTATION_FILE_MIMETYPE)
-                                    .value(SUBMODEL_DOCUMENTATION_FILE_VALUE)
-                                    .build()))
-                    .ordered(false)
-                    .allowDuplicates(false)
-                    .build()))
-            .build();
-
-    public static final Submodel SUBMODEL_OPERATIONAL_DATA = new DefaultSubmodelBuilder()
-            .kind(ModelingKind.INSTANCE)
-            .idShort(SUBMODEL_OPERATIONAL_DATA_ID_SHORT)
-            .identification(new DefaultIdentifierBuilder()
-                    .identifier(SUBMODEL_OPERATIONAL_DATA_ID)
-                    .idType(IdentifierType.IRI)
-                    .build())
-            .submodelElements(Arrays.asList(new DefaultPropertyBuilder()
-                    .kind(ModelingKind.INSTANCE)
-                    .semanticId(new DefaultReferenceBuilder()
-                            .keys(Arrays.asList(new DefaultKeyBuilder()
-                                    .type(KeyElements.CONCEPT_DESCRIPTION)
-                                    .value(SUBMODEL_OPERATIONAL_DATA_SEMANTIC_ID_PROPERTY)
-                                    .idType(KeyType.IRI)
-                                    .build()))
-                            .build())
-                    .idShort(SUBMODEL_OPERATIONAL_DATA_PROPERTY_ID_SHORT)
-                    .category(SUBMODEL_OPERATIONAL_DATA_PROPERTY_CATEGORY)
-                    .value(SUBMODEL_OPERATIONAL_DATA_PROPERTY_VALUE)
-                    .valueType(SUBMODEL_OPERATIONAL_DATA_PROPERTY_VALUETYPE)
-                    .build()))
-            .build();
-
     public static final AssetAdministrationShellEnvironment ENVIRONMENT = new DefaultAssetAdministrationShellEnvironmentBuilder()
             .assetAdministrationShells(Arrays.asList(AAS))
-            .submodels(Arrays.asList(SUBMODEL_TECHNICAL_DATA, SUBMODEL_DOCUMENTATION , SUBMODEL_OPERATIONAL_DATA))
+            .submodels(Arrays.asList(SUBMODEL_TECHNICAL_DATA, SUBMODEL_DOCUMENTATION, SUBMODEL_OPERATIONAL_DATA))
             .conceptDescriptions(Arrays.asList(CONCEPT_DESCRIPTION_TITLE, CONCEPT_DESCRIPTION_DIGITALFILE, CONCEPT_DESCRIPTION_MAXROTATIONSPEED, CONCEPT_DESCRIPTION_ROTATIONSPEED, CONCEPT_DESCRIPTION_DOCUMENT))
             .assets(Arrays.asList(ASSET))
             .build();

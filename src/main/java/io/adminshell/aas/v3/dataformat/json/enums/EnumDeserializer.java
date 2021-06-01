@@ -1,6 +1,5 @@
 package io.adminshell.aas.v3.dataformat.json.enums;
 
-import io.adminshell.aas.v3.dataformat.json.enums.CustomEnumNaming;
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonParser;

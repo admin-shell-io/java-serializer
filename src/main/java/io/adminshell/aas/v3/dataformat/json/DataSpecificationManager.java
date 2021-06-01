@@ -4,7 +4,6 @@ import de.fraunhofer.iais.eis.DataSpecificationContent;
 import de.fraunhofer.iais.eis.DataSpecificationIEC61360;
 import de.fraunhofer.iais.eis.DefaultKeyBuilder;
 import de.fraunhofer.iais.eis.DefaultReferenceBuilder;
-import de.fraunhofer.iais.eis.Key;
 import de.fraunhofer.iais.eis.KeyElements;
 import de.fraunhofer.iais.eis.KeyType;
 import de.fraunhofer.iais.eis.Reference;

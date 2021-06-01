@@ -390,7 +390,6 @@
                                 "text": "Max.rotationspeed"
                             }
                         ],
-                        "shortName": [],
                         "unit": "1/min",
                         "unitId": {
                             "keys": [
@@ -506,7 +505,6 @@
                         ]
                     },
                     "dataSpecificationContent": {
-                        "preferredName": [],
                         "shortName": [
                             {
                                 "language": "EN",

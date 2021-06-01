@@ -1,6 +1,5 @@
 package io.adminshell.aas.v3.dataformat.json.enums;
 
-import io.adminshell.aas.v3.dataformat.json.enums.CustomEnumNaming;
 import de.fraunhofer.iais.eis.KeyType;
 import java.util.Map;
 

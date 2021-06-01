@@ -5,7 +5,9 @@ import de.fraunhofer.iais.eis.util.LangString;
 
 import java.util.Arrays;
 
-public class DemoAAS_FullExample {
+public class AASFull {
+
+    public static final java.io.File FILE = new java.io.File("src/test/resources/test_demo_full_example.json");
 
     public static final AssetAdministrationShell AAS_1 = new DefaultAssetAdministrationShellBuilder()
             .idShort("TestAssetAdministrationShell")
@@ -41,28 +43,31 @@ public class DemoAAS_FullExample {
             .submodels(Arrays.asList(new DefaultReferenceBuilder()
                     .keys(Arrays
                             .asList(new DefaultKeyBuilder()
-                                            .type(KeyElements.SUBMODEL)
-                                            .value("https://acplt.org/Test_Submodel")
-                                            .idType(KeyType.IRI)
-                                            .build(),
-                                    new DefaultKeyBuilder()
+                                    .type(KeyElements.SUBMODEL)
+                                    .value("https://acplt.org/Test_Submodel")
+                                    .idType(KeyType.IRI)
+                                    .build()))
+                    .build(),
+                    new DefaultReferenceBuilder()
+                            .keys(Arrays
+                                    .asList(new DefaultKeyBuilder()
                                             .type(KeyElements.SUBMODEL)
                                             .value("http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial")
                                             .idType(KeyType.IRI)
-                                            .build(),
-                                    new DefaultKeyBuilder()
+                                            .build()))
+                            .build(),
+                    new DefaultReferenceBuilder()
+                            .keys(Arrays
+                                    .asList(new DefaultKeyBuilder()
                                             .type(KeyElements.SUBMODEL)
                                             .value("http://acplt.org/Submodels/Assets/TestAsset/Identification")
                                             .idType(KeyType.IRI)
-                                            .build()
-
-                            ))
-                    .build()))
+                                            .build()))
+                            .build()))
             .build();
 
     public static final AssetAdministrationShell AAS_2 = new DefaultAssetAdministrationShellBuilder()
             .idShort("")
-
             .identification(new DefaultIdentifierBuilder()
                     .idType(IdentifierType.IRI)
                     .identifier("https://acplt.org/Test_AssetAdministrationShell_Mandatory")
@@ -78,21 +83,21 @@ public class DemoAAS_FullExample {
                             .build())
                     .build())
             .submodels(Arrays.asList(new DefaultReferenceBuilder()
-                    .keys(Arrays
-                            .asList(new DefaultKeyBuilder()
-                                            .type(KeyElements.SUBMODEL)
-                                            .value("https://acplt.org/Test_Submodel_Mandatory")
-                                            .idType(KeyType.IRI)
-                                            .build(),
-                                    new DefaultKeyBuilder()
+                    .keys(Arrays.asList(
+                            new DefaultKeyBuilder()
+                                    .type(KeyElements.SUBMODEL)
+                                    .value("https://acplt.org/Test_Submodel_Mandatory")
+                                    .idType(KeyType.IRI)
+                                    .build()))
+                    .build(),
+                    new DefaultReferenceBuilder()
+                            .keys(Arrays
+                                    .asList(new DefaultKeyBuilder()
                                             .type(KeyElements.SUBMODEL)
                                             .value("https://acplt.org/Test_Submodel2_Mandatory")
                                             .idType(KeyType.IRI)
-                                            .build()
-
-                            ))
-                    .build()))
-
+                                            .build()))
+                            .build()))
             .build();
 
     public static final AssetAdministrationShell AAS_3 = new DefaultAssetAdministrationShellBuilder()
@@ -111,7 +116,6 @@ public class DemoAAS_FullExample {
                                     .build()))
                             .build())
                     .build())
-
             .build();
 
     public static final AssetAdministrationShell AAS_4 = new DefaultAssetAdministrationShellBuilder()
@@ -145,26 +149,23 @@ public class DemoAAS_FullExample {
                                     .value("https://acplt.org/Test_Submodel_Missing")
                                     .idType(KeyType.IRI)
                                     .build()
-
                             ))
                     .build()))
             .views(Arrays.asList(new DefaultViewBuilder()
-                            .idShort("ExampleView")
-                            .containedElements(Arrays.asList((new DefaultReferenceBuilder()
-                                    .keys(Arrays
-                                            .asList(new DefaultKeyBuilder()
-                                                    .type(KeyElements.SUBMODEL)
-                                                    .value("https://acplt.org/Test_Submodel_Missing")
-                                                    .idType(KeyType.IRI)
-                                                    .build()
-                                            )))
-                                    .build()))
-                            .build(),
+                    .idShort("ExampleView")
+                    .containedElements(Arrays.asList((new DefaultReferenceBuilder()
+                            .keys(Arrays
+                                    .asList(new DefaultKeyBuilder()
+                                            .type(KeyElements.SUBMODEL)
+                                            .value("https://acplt.org/Test_Submodel_Missing")
+                                            .idType(KeyType.IRI)
+                                            .build()
+                                    )))
+                            .build()))
+                    .build(),
                     new DefaultViewBuilder()
                             .idShort("ExampleView2")
                             .build()))
-
-
             .build();
 
     public static final Submodel SUBMODEL_1 = new DefaultSubmodelBuilder()
@@ -189,43 +190,20 @@ public class DemoAAS_FullExample {
                             .build()))
                     .build())
             .submodelElements(Arrays.asList(new DefaultPropertyBuilder()
-                            .idShort("ManufacturerName")
-                            .descriptions(Arrays.asList(
-                                    new LangString("Legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation.", "en-us"),
-                                    new LangString("Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist", "de")
-                            ))
-                            .semanticId(new DefaultReferenceBuilder()
-                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                            .value("0173-1#02-AAO677#002")
-                                            .idType(KeyType.IRI)
-                                            .build()))
-                                    .build())
-                            .qualifiers(Arrays.asList(new DefaultQualifierBuilder()
-                                            .value("100")
-                                            .valueId(new DefaultReferenceBuilder()
-                                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                                            .idType(KeyType.IRI)
-                                                            .value("http://acplt.org/ValueId/ExampleValueId")
-                                                            .build()))
-                                                    .build())
-                                            .valueType("int")
-                                            .type("http://acplt.org/Qualifier/ExampleQualifier")
-                                            .build(),
-                                    new DefaultQualifierBuilder()
-                                            .value("50")
-                                            .valueId(new DefaultReferenceBuilder()
-                                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                                            .idType(KeyType.IRI)
-                                                            .value("http://acplt.org/ValueId/ExampleValueId")
-                                                            .build()))
-                                                    .build())
-                                            .valueType("int")
-                                            .type("http://acplt.org/Qualifier/ExampleQualifier2")
-                                            .build()))
-                            .value("ACPLT")
+                    .idShort("ManufacturerName")
+                    .descriptions(Arrays.asList(
+                            new LangString("Legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation.", "en-us"),
+                            new LangString("Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist", "de")
+                    ))
+                    .semanticId(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                    .value("0173-1#02-AAO677#002")
+                                    .idType(KeyType.IRI)
+                                    .build()))
+                            .build())
+                    .qualifiers(Arrays.asList(new DefaultQualifierBuilder()
+                            .value("100")
                             .valueId(new DefaultReferenceBuilder()
                                     .keys(Arrays.asList(new DefaultKeyBuilder()
                                             .type(KeyElements.GLOBAL_REFERENCE)
@@ -233,8 +211,31 @@ public class DemoAAS_FullExample {
                                             .value("http://acplt.org/ValueId/ExampleValueId")
                                             .build()))
                                     .build())
-                            .valueType("string")
+                            .valueType("int")
+                            .type("http://acplt.org/Qualifier/ExampleQualifier")
                             .build(),
+                            new DefaultQualifierBuilder()
+                                    .value("50")
+                                    .valueId(new DefaultReferenceBuilder()
+                                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                                    .idType(KeyType.IRI)
+                                                    .value("http://acplt.org/ValueId/ExampleValueId")
+                                                    .build()))
+                                            .build())
+                                    .valueType("int")
+                                    .type("http://acplt.org/Qualifier/ExampleQualifier2")
+                                    .build()))
+                    .value("ACPLT")
+                    .valueId(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                    .idType(KeyType.IRI)
+                                    .value("http://acplt.org/ValueId/ExampleValueId")
+                                    .build()))
+                            .build())
+                    .valueType("string")
+                    .build(),
                     new DefaultPropertyBuilder()
                             .idShort("InstanceId")
                             .descriptions(Arrays.asList(
@@ -282,71 +283,69 @@ public class DemoAAS_FullExample {
                             .build()))
                     .build())
             .submodelElements(Arrays.asList(new DefaultEntityBuilder()
-                            .idShort("ExampleEntity")
+                    .idShort("ExampleEntity")
+                    .descriptions(Arrays.asList(
+                            new LangString("Legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation.", "en-us"),
+                            new LangString("Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist", "de")
+                    ))
+                    .semanticId(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                    .value("http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber")
+                                    .idType(KeyType.IRI)
+                                    .build()))
+                            .build())
+                    .statements(Arrays.asList(new DefaultPropertyBuilder()
+                            .idShort("ExampleProperty2")
+                            .category("CONSTANT")
                             .descriptions(Arrays.asList(
-                                    new LangString("Legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation.", "en-us"),
-                                    new LangString("Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist", "de")
+                                    new LangString("Example Property object", "en-us"),
+                                    new LangString("Beispiel Property Element", "de")
                             ))
                             .semanticId(new DefaultReferenceBuilder()
                                     .keys(Arrays.asList(new DefaultKeyBuilder()
                                             .type(KeyElements.GLOBAL_REFERENCE)
-                                            .value("http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber")
+                                            .value("http://acplt.org/Properties/ExampleProperty")
                                             .idType(KeyType.IRI)
                                             .build()))
                                     .build())
-                            .statements(Arrays.asList(new DefaultPropertyBuilder()
-                                            .idShort("ExampleProperty2")
-                                            .category("CONSTANT")
-                                            .descriptions(Arrays.asList(
-                                                    new LangString("Example Property object", "en-us"),
-                                                    new LangString("Beispiel Property Element", "de")
-                                            ))
-                                            .semanticId(new DefaultReferenceBuilder()
-                                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                                            .value("http://acplt.org/Properties/ExampleProperty")
-                                                            .idType(KeyType.IRI)
-                                                            .build()))
-                                                    .build())
-                                            .value("exampleValue2")
-                                            .valueId(new DefaultReferenceBuilder()
-                                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                                            .idType(KeyType.IRI)
-                                                            .value("http://acplt.org/ValueId/ExampleValueId")
-                                                            .build()))
-                                                    .build())
-                                            .valueType("string")
-                                            .build(),
-                                    new DefaultPropertyBuilder()
-                                            .idShort("ExampleProperty")
-                                            .category("CONSTANT")
-                                            .descriptions(Arrays.asList(
-                                                    new LangString("Example Property object", "en-us"),
-                                                    new LangString("Beispiel Property Element", "de")
-                                            ))
-                                            .semanticId(new DefaultReferenceBuilder()
-                                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                                            .value("http://acplt.org/Properties/ExampleProperty")
-                                                            .idType(KeyType.IRI)
-                                                            .build()))
-                                                    .build())
-                                            .value("exampleValue")
-                                            .valueId(new DefaultReferenceBuilder()
-                                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                                            .idType(KeyType.IRI)
-                                                            .value("http://acplt.org/ValueId/ExampleValueId")
-                                                            .build()))
-                                                    .build())
-                                            .valueType("string")
-
-                                            .build()
-                            ))
-                            .entityType(EntityType.CO_MANAGED_ENTITY)
+                            .value("exampleValue2")
+                            .valueId(new DefaultReferenceBuilder()
+                                    .keys(Arrays.asList(new DefaultKeyBuilder()
+                                            .type(KeyElements.GLOBAL_REFERENCE)
+                                            .idType(KeyType.IRI)
+                                            .value("http://acplt.org/ValueId/ExampleValueId")
+                                            .build()))
+                                    .build())
+                            .valueType("string")
                             .build(),
-
+                            new DefaultPropertyBuilder()
+                                    .idShort("ExampleProperty")
+                                    .category("CONSTANT")
+                                    .descriptions(Arrays.asList(
+                                            new LangString("Example Property object", "en-us"),
+                                            new LangString("Beispiel Property Element", "de")
+                                    ))
+                                    .semanticId(new DefaultReferenceBuilder()
+                                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                                    .value("http://acplt.org/Properties/ExampleProperty")
+                                                    .idType(KeyType.IRI)
+                                                    .build()))
+                                            .build())
+                                    .value("exampleValue")
+                                    .valueId(new DefaultReferenceBuilder()
+                                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                                    .idType(KeyType.IRI)
+                                                    .value("http://acplt.org/ValueId/ExampleValueId")
+                                                    .build()))
+                                            .build())
+                                    .valueType("string")
+                                    .build()
+                    ))
+                    .entityType(EntityType.CO_MANAGED_ENTITY)
+                    .build(),
                     new DefaultEntityBuilder()
                             .idShort("ExampleEntity2")
                             .descriptions(Arrays.asList(
@@ -360,7 +359,6 @@ public class DemoAAS_FullExample {
                                             .idType(KeyType.IRI)
                                             .build()))
                                     .build())
-
                             .entityType(EntityType.SELF_MANAGED_ENTITY)
                             .build()
             ))
@@ -388,34 +386,34 @@ public class DemoAAS_FullExample {
                             .build()))
                     .build())
             .submodelElements(Arrays.asList(new DefaultRelationshipElementBuilder()
-                            .idShort("ExampleRelationshipElement")
-                            .category("PARAMETER")
-                            .descriptions(Arrays.asList(
-                                    new LangString("Example RelationshipElement object", "en-us"),
-                                    new LangString("Beispiel RelationshipElement Element", "de")
-                            ))
-                            .semanticId(new DefaultReferenceBuilder()
-                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                            .value("http://acplt.org/RelationshipElements/ExampleRelationshipElement")
-                                            .idType(KeyType.IRI)
-                                            .build()))
-                                    .build())
-                            .first(new DefaultReferenceBuilder()
-                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                            .type(KeyElements.PROPERTY)
-                                            .value("ExampleProperty")
-                                            .idType(KeyType.IDSHORT)
-                                            .build()))
-                                    .build())
-                            .second(new DefaultReferenceBuilder()
-                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                            .type(KeyElements.PROPERTY)
-                                            .value("ExampleProperty2")
-                                            .idType(KeyType.IDSHORT)
-                                            .build()))
-                                    .build())
-                            .build(),
+                    .idShort("ExampleRelationshipElement")
+                    .category("PARAMETER")
+                    .descriptions(Arrays.asList(
+                            new LangString("Example RelationshipElement object", "en-us"),
+                            new LangString("Beispiel RelationshipElement Element", "de")
+                    ))
+                    .semanticId(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                    .value("http://acplt.org/RelationshipElements/ExampleRelationshipElement")
+                                    .idType(KeyType.IRI)
+                                    .build()))
+                            .build())
+                    .first(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.PROPERTY)
+                                    .value("ExampleProperty")
+                                    .idType(KeyType.IDSHORT)
+                                    .build()))
+                            .build())
+                    .second(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.PROPERTY)
+                                    .value("ExampleProperty2")
+                                    .idType(KeyType.IDSHORT)
+                                    .build()))
+                            .build())
+                    .build(),
                     new DefaultAnnotatedRelationshipElementBuilder()
                             .idShort("ExampleAnnotatedRelationshipElement")
                             .category("PARAMETER")
@@ -447,7 +445,6 @@ public class DemoAAS_FullExample {
                             //TODO annotation
                             .annotations(Arrays.asList())
                             .build(),
-
                     new DefaultOperationBuilder()
                             .idShort("ExampleOperation")
                             .category("PARAMETER")
@@ -541,7 +538,6 @@ public class DemoAAS_FullExample {
                                             .build())
                                     .build()))
                             .build(),
-
                     new DefaultCapabilityBuilder()
                             .idShort("ExampleCapability")
                             .category("PARAMETER")
@@ -556,10 +552,7 @@ public class DemoAAS_FullExample {
                                             .idType(KeyType.IRI)
                                             .build()))
                                     .build())
-                            .build()
-
-                    ,
-
+                            .build(),
                     new DefaultBasicEventBuilder()
                             .idShort("ExampleBasicEvent")
                             .category("PARAMETER")
@@ -581,9 +574,7 @@ public class DemoAAS_FullExample {
                                             .value("ExampleProperty")
                                             .build()))
                                     .build())
-                            .build()
-                    ,
-
+                            .build(),
                     new DefaultSubmodelElementCollectionBuilder()
                             .idShort("ExampleSubmodelCollectionOrdered")
                             .category("PARAMETER")
@@ -599,30 +590,29 @@ public class DemoAAS_FullExample {
                                             .build()))
                                     .build())
                             .values(Arrays.asList(new DefaultPropertyBuilder()
-                                            .idShort("ExampleProperty")
-                                            .category("CONSTANT")
-                                            .descriptions(Arrays.asList(
-                                                    new LangString("Example Property object", "en-us"),
-                                                    new LangString("Beispiel Property Element", "de")
-                                            ))
-                                            .semanticId(new DefaultReferenceBuilder()
-                                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                                            .value("http://acplt.org/Properties/ExampleProperty")
-                                                            .idType(KeyType.IRI)
-                                                            .build()))
-                                                    .build())
-                                            .value("exampleValue")
-                                            .valueId(new DefaultReferenceBuilder()
-                                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                                            .idType(KeyType.IRI)
-                                                            .value("http://acplt.org/ValueId/ExampleValueId")
-                                                            .build()))
-                                                    .build())
-                                            .valueType("string")
-                                            .build(),
-
+                                    .idShort("ExampleProperty")
+                                    .category("CONSTANT")
+                                    .descriptions(Arrays.asList(
+                                            new LangString("Example Property object", "en-us"),
+                                            new LangString("Beispiel Property Element", "de")
+                                    ))
+                                    .semanticId(new DefaultReferenceBuilder()
+                                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                                    .value("http://acplt.org/Properties/ExampleProperty")
+                                                    .idType(KeyType.IRI)
+                                                    .build()))
+                                            .build())
+                                    .value("exampleValue")
+                                    .valueId(new DefaultReferenceBuilder()
+                                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                                    .idType(KeyType.IRI)
+                                                    .value("http://acplt.org/ValueId/ExampleValueId")
+                                                    .build()))
+                                            .build())
+                                    .valueType("string")
+                                    .build(),
                                     new DefaultMultiLanguagePropertyBuilder()
                                             .idShort("ExampleMultiLanguageProperty")
                                             .category("CONSTANT")
@@ -649,7 +639,6 @@ public class DemoAAS_FullExample {
                                                             .build()))
                                                     .build())
                                             .build(),
-
                                     new DefaultRangeBuilder()
                                             .idShort("ExampleRange")
                                             .category("PARAMETER")
@@ -670,9 +659,7 @@ public class DemoAAS_FullExample {
                                             .build()
                             ))
                             .ordered(true)
-                            .build()
-                    ,
-
+                            .build(),
                     new DefaultSubmodelElementCollectionBuilder()
                             .idShort("ExampleSubmodelCollectionUnordered")
                             .category("PARAMETER")
@@ -688,23 +675,22 @@ public class DemoAAS_FullExample {
                                             .build()))
                                     .build())
                             .values(Arrays.asList(new DefaultBlobBuilder()
-                                            .idShort("ExampleBlob")
-                                            .category("PARAMETER")
-                                            .descriptions(Arrays.asList(
-                                                    new LangString("Example Blob object", "en-us"),
-                                                    new LangString("Beispiel Blob Element", "de")
-                                            ))
-                                            .semanticId(new DefaultReferenceBuilder()
-                                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                                            .value("http://acplt.org/Blobs/ExampleBlob")
-                                                            .idType(KeyType.IRI)
-                                                            .build()))
-                                                    .build())
-                                            .mimeType("application/pdf")
-                                            .value("AQIDBAU=".getBytes())
-                                            .build(),
-
+                                    .idShort("ExampleBlob")
+                                    .category("PARAMETER")
+                                    .descriptions(Arrays.asList(
+                                            new LangString("Example Blob object", "en-us"),
+                                            new LangString("Beispiel Blob Element", "de")
+                                    ))
+                                    .semanticId(new DefaultReferenceBuilder()
+                                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                                    .value("http://acplt.org/Blobs/ExampleBlob")
+                                                    .idType(KeyType.IRI)
+                                                    .build()))
+                                            .build())
+                                    .mimeType("application/pdf")
+                                    .value("AQIDBAU=".getBytes())
+                                    .build(),
                                     new DefaultFileBuilder()
                                             .idShort("ExampleFile")
                                             .category("PARAMETER")
@@ -721,9 +707,7 @@ public class DemoAAS_FullExample {
                                                     .build())
                                             .value("/TestFile.pdf")
                                             .mimeType("application/pdf")
-
                                             .build(),
-
                                     new DefaultReferenceElementBuilder()
                                             .idShort("ExampleReferenceElement")
                                             .category("PARAMETER")
@@ -758,25 +742,23 @@ public class DemoAAS_FullExample {
                     .idType(IdentifierType.IRI)
                     .identifier("https://acplt.org/Test_Submodel_Mandatory")
                     .build())
-
             .submodelElements(Arrays.asList(new DefaultRelationshipElementBuilder()
-                            .idShort("ExampleRelationshipElement")
-                            .first(new DefaultReferenceBuilder()
-                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                            .type(KeyElements.PROPERTY)
-                                            .value("ExampleProperty")
-                                            .idType(KeyType.IDSHORT)
-                                            .build()))
-                                    .build())
-                            .second(new DefaultReferenceBuilder()
-                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                            .type(KeyElements.PROPERTY)
-                                            .value("ExampleProperty2")
-                                            .idType(KeyType.IDSHORT)
-                                            .build()))
-                                    .build())
-                            .build(),
-
+                    .idShort("ExampleRelationshipElement")
+                    .first(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.PROPERTY)
+                                    .value("ExampleProperty")
+                                    .idType(KeyType.IDSHORT)
+                                    .build()))
+                            .build())
+                    .second(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.PROPERTY)
+                                    .value("ExampleProperty2")
+                                    .idType(KeyType.IDSHORT)
+                                    .build()))
+                            .build())
+                    .build(),
                     new DefaultAnnotatedRelationshipElementBuilder()
                             .idShort("ExampleAnnotatedRelationshipElement")
                             .first(new DefaultReferenceBuilder()
@@ -794,15 +776,12 @@ public class DemoAAS_FullExample {
                                             .build()))
                                     .build())
                             .build(),
-
                     new DefaultOperationBuilder()
                             .idShort("ExampleOperation")
                             .build(),
-
                     new DefaultCapabilityBuilder()
                             .idShort("ExampleCapability")
                             .build(),
-
                     new DefaultBasicEventBuilder()
                             .idShort("ExampleBasicEvent")
                             .observed(new DefaultReferenceBuilder().keys(Arrays.asList(
@@ -813,7 +792,6 @@ public class DemoAAS_FullExample {
                                             .build()))
                                     .build())
                             .build(),
-
                     new DefaultSubmodelElementCollectionBuilder()
                             .idShort("ExampleSubmodelCollectionOrdered")
                             .values(Arrays.asList(
@@ -822,15 +800,11 @@ public class DemoAAS_FullExample {
                                             .value(null)
                                             .valueType("string")
                                             .build(),
-
                                     new DefaultMultiLanguagePropertyBuilder().idShort("ExampleMultiLanguageProperty").build(),
-
                                     new DefaultRangeBuilder().idShort("ExampleRange").valueType("int").min(null).max(null).build()
-
                             ))
                             .ordered(true)
                             .build(),
-
                     new DefaultSubmodelElementCollectionBuilder()
                             .idShort("ExampleSubmodelCollectionUnordered")
                             .values(Arrays.asList(
@@ -838,13 +812,11 @@ public class DemoAAS_FullExample {
                                             .idShort("ExampleBlob")
                                             .mimeType("application/pdf")
                                             .build(),
-
                                     new DefaultFileBuilder().idShort("ExampleFile").value(null).mimeType("application/pdf").build(),
                                     new DefaultReferenceElementBuilder().idShort("ExampleReferenceElement").build()
                             ))
                             .ordered(false)
                             .build(),
-
                     new DefaultSubmodelElementCollectionBuilder()
                             .idShort("ExampleSubmodelCollectionUnordered2")
                             .ordered(false)
@@ -882,34 +854,34 @@ public class DemoAAS_FullExample {
                             .build()))
                     .build())
             .submodelElements(Arrays.asList(new DefaultRelationshipElementBuilder()
-                            .idShort("ExampleRelationshipElement")
-                            .category("PARAMETER")
-                            .descriptions(Arrays.asList(
-                                    new LangString("Example RelationshipElement object", "en-us"),
-                                    new LangString("Beispiel RelationshipElement Element", "de")
-                            ))
-                            .semanticId(new DefaultReferenceBuilder()
-                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                            .value("http://acplt.org/RelationshipElements/ExampleRelationshipElement")
-                                            .idType(KeyType.IRI)
-                                            .build()))
-                                    .build())
-                            .first(new DefaultReferenceBuilder()
-                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                            .type(KeyElements.PROPERTY)
-                                            .value("ExampleProperty")
-                                            .idType(KeyType.IDSHORT)
-                                            .build()))
-                                    .build())
-                            .second(new DefaultReferenceBuilder()
-                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                            .type(KeyElements.PROPERTY)
-                                            .value("ExampleProperty")
-                                            .idType(KeyType.IDSHORT)
-                                            .build()))
-                                    .build())
-                            .build(),
+                    .idShort("ExampleRelationshipElement")
+                    .category("PARAMETER")
+                    .descriptions(Arrays.asList(
+                            new LangString("Example RelationshipElement object", "en-us"),
+                            new LangString("Beispiel RelationshipElement Element", "de")
+                    ))
+                    .semanticId(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                    .value("http://acplt.org/RelationshipElements/ExampleRelationshipElement")
+                                    .idType(KeyType.IRI)
+                                    .build()))
+                            .build())
+                    .first(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.PROPERTY)
+                                    .value("ExampleProperty")
+                                    .idType(KeyType.IDSHORT)
+                                    .build()))
+                            .build())
+                    .second(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.PROPERTY)
+                                    .value("ExampleProperty")
+                                    .idType(KeyType.IDSHORT)
+                                    .build()))
+                            .build())
+                    .build(),
                     new DefaultAnnotatedRelationshipElementBuilder()
                             .idShort("ExampleAnnotatedRelationshipElement")
                             .category("PARAMETER")
@@ -941,7 +913,6 @@ public class DemoAAS_FullExample {
                             //TODO annotation
                             .annotations(Arrays.asList())
                             .build(),
-
                     new DefaultOperationBuilder()
                             .idShort("ExampleOperation")
                             .category("PARAMETER")
@@ -1017,7 +988,6 @@ public class DemoAAS_FullExample {
                                             .build())
                                     .build()))
                             .build(),
-
                     new DefaultCapabilityBuilder()
                             .idShort("ExampleCapability")
                             .category("PARAMETER")
@@ -1032,10 +1002,7 @@ public class DemoAAS_FullExample {
                                             .idType(KeyType.IRI)
                                             .build()))
                                     .build())
-                            .build()
-
-                    ,
-
+                            .build(),
                     new DefaultBasicEventBuilder()
                             .idShort("ExampleBasicEvent")
                             .category("PARAMETER")
@@ -1057,9 +1024,7 @@ public class DemoAAS_FullExample {
                                             .value("ExampleProperty")
                                             .build()))
                                     .build())
-                            .build()
-                    ,
-
+                            .build(),
                     new DefaultSubmodelElementCollectionBuilder()
                             .idShort("ExampleSubmodelCollectionOrdered")
                             .category("PARAMETER")
@@ -1075,24 +1040,23 @@ public class DemoAAS_FullExample {
                                             .build()))
                                     .build())
                             .values(Arrays.asList(new DefaultPropertyBuilder()
-                                            .idShort("ExampleProperty")
-                                            .category("CONSTANT")
-                                            .descriptions(Arrays.asList(
-                                                    new LangString("Example Property object", "en-us"),
-                                                    new LangString("Beispiel Property Element", "de")
-                                            ))
-                                            .semanticId(new DefaultReferenceBuilder()
-                                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                                            .value("http://acplt.org/Properties/ExampleProperty")
-                                                            .idType(KeyType.IRI)
-                                                            .build()))
-                                                    .build())
-                                            .qualifiers(Arrays.asList(new DefaultQualifierBuilder().valueType("string").type("http://acplt.org/Qualifier/ExampleQualifier").build()))
-                                            .value("exampleValue")
-                                            .valueType("string")
-                                            .build(),
-
+                                    .idShort("ExampleProperty")
+                                    .category("CONSTANT")
+                                    .descriptions(Arrays.asList(
+                                            new LangString("Example Property object", "en-us"),
+                                            new LangString("Beispiel Property Element", "de")
+                                    ))
+                                    .semanticId(new DefaultReferenceBuilder()
+                                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                                    .value("http://acplt.org/Properties/ExampleProperty")
+                                                    .idType(KeyType.IRI)
+                                                    .build()))
+                                            .build())
+                                    .qualifiers(Arrays.asList(new DefaultQualifierBuilder().valueType("string").type("http://acplt.org/Qualifier/ExampleQualifier").build()))
+                                    .value("exampleValue")
+                                    .valueType("string")
+                                    .build(),
                                     new DefaultMultiLanguagePropertyBuilder()
                                             .idShort("ExampleMultiLanguageProperty")
                                             .category("CONSTANT")
@@ -1112,7 +1076,6 @@ public class DemoAAS_FullExample {
                                                     new LangString("Beispielswert für ein MulitLanguageProperty-Element", "de")
                                             ))
                                             .build(),
-
                                     new DefaultRangeBuilder()
                                             .idShort("ExampleRange")
                                             .category("PARAMETER")
@@ -1133,9 +1096,7 @@ public class DemoAAS_FullExample {
                                             .build()
                             ))
                             .ordered(true)
-                            .build()
-                    ,
-
+                            .build(),
                     new DefaultSubmodelElementCollectionBuilder()
                             .idShort("ExampleSubmodelCollectionUnordered")
                             .category("PARAMETER")
@@ -1151,23 +1112,22 @@ public class DemoAAS_FullExample {
                                             .build()))
                                     .build())
                             .values(Arrays.asList(new DefaultBlobBuilder()
-                                            .idShort("ExampleBlob")
-                                            .category("PARAMETER")
-                                            .descriptions(Arrays.asList(
-                                                    new LangString("Example Blob object", "en-us"),
-                                                    new LangString("Beispiel Blob Element", "de")
-                                            ))
-                                            .semanticId(new DefaultReferenceBuilder()
-                                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                                            .value("http://acplt.org/Blobs/ExampleBlob")
-                                                            .idType(KeyType.IRI)
-                                                            .build()))
-                                                    .build())
-                                            .mimeType("application/pdf")
-                                            .value("AQIDBAU=".getBytes())
-                                            .build(),
-
+                                    .idShort("ExampleBlob")
+                                    .category("PARAMETER")
+                                    .descriptions(Arrays.asList(
+                                            new LangString("Example Blob object", "en-us"),
+                                            new LangString("Beispiel Blob Element", "de")
+                                    ))
+                                    .semanticId(new DefaultReferenceBuilder()
+                                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                                    .value("http://acplt.org/Blobs/ExampleBlob")
+                                                    .idType(KeyType.IRI)
+                                                    .build()))
+                                            .build())
+                                    .mimeType("application/pdf")
+                                    .value("AQIDBAU=".getBytes())
+                                    .build(),
                                     new DefaultFileBuilder()
                                             .idShort("ExampleFile")
                                             .category("PARAMETER")
@@ -1184,9 +1144,7 @@ public class DemoAAS_FullExample {
                                                     .build())
                                             .value("/TestFile.pdf")
                                             .mimeType("application/pdf")
-
                                             .build(),
-
                                     new DefaultReferenceElementBuilder()
                                             .idShort("ExampleReferenceElement")
                                             .category("PARAMETER")
@@ -1238,35 +1196,35 @@ public class DemoAAS_FullExample {
                     .build())
             .kind(ModelingKind.TEMPLATE)
             .submodelElements(Arrays.asList(new DefaultRelationshipElementBuilder()
-                            .idShort("ExampleRelationshipElement")
-                            .category("PARAMETER")
-                            .descriptions(Arrays.asList(
-                                    new LangString("Example RelationshipElement object", "en-us"),
-                                    new LangString("Beispiel RelationshipElement Element", "de")
-                            ))
-                            .semanticId(new DefaultReferenceBuilder()
-                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                            .value("http://acplt.org/RelationshipElements/ExampleRelationshipElement")
-                                            .idType(KeyType.IRI)
-                                            .build()))
-                                    .build())
-                            .kind(ModelingKind.TEMPLATE)
-                            .first(new DefaultReferenceBuilder()
-                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                            .type(KeyElements.PROPERTY)
-                                            .value("ExampleProperty")
-                                            .idType(KeyType.IDSHORT)
-                                            .build()))
-                                    .build())
-                            .second(new DefaultReferenceBuilder()
-                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                            .type(KeyElements.PROPERTY)
-                                            .value("ExampleProperty")
-                                            .idType(KeyType.IDSHORT)
-                                            .build()))
-                                    .build())
-                            .build(),
+                    .idShort("ExampleRelationshipElement")
+                    .category("PARAMETER")
+                    .descriptions(Arrays.asList(
+                            new LangString("Example RelationshipElement object", "en-us"),
+                            new LangString("Beispiel RelationshipElement Element", "de")
+                    ))
+                    .semanticId(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                    .value("http://acplt.org/RelationshipElements/ExampleRelationshipElement")
+                                    .idType(KeyType.IRI)
+                                    .build()))
+                            .build())
+                    .kind(ModelingKind.TEMPLATE)
+                    .first(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.PROPERTY)
+                                    .value("ExampleProperty")
+                                    .idType(KeyType.IDSHORT)
+                                    .build()))
+                            .build())
+                    .second(new DefaultReferenceBuilder()
+                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                    .type(KeyElements.PROPERTY)
+                                    .value("ExampleProperty")
+                                    .idType(KeyType.IDSHORT)
+                                    .build()))
+                            .build())
+                    .build(),
                     new DefaultAnnotatedRelationshipElementBuilder()
                             .idShort("ExampleAnnotatedRelationshipElement")
                             .category("PARAMETER")
@@ -1297,7 +1255,6 @@ public class DemoAAS_FullExample {
                                             .build()))
                                     .build())
                             .build(),
-
                     new DefaultOperationBuilder()
                             .idShort("ExampleOperation")
                             .category("PARAMETER")
@@ -1374,7 +1331,6 @@ public class DemoAAS_FullExample {
                                             .build())
                                     .build()))
                             .build(),
-
                     new DefaultCapabilityBuilder()
                             .idShort("ExampleCapability")
                             .category("PARAMETER")
@@ -1390,10 +1346,7 @@ public class DemoAAS_FullExample {
                                             .build()))
                                     .build())
                             .kind(ModelingKind.TEMPLATE)
-                            .build()
-
-                    ,
-
+                            .build(),
                     new DefaultBasicEventBuilder()
                             .idShort("ExampleBasicEvent")
                             .category("PARAMETER")
@@ -1416,9 +1369,7 @@ public class DemoAAS_FullExample {
                                             .value("ExampleProperty")
                                             .build()))
                                     .build())
-                            .build()
-                    ,
-
+                            .build(),
                     new DefaultSubmodelElementCollectionBuilder()
                             .idShort("ExampleSubmodelCollectionOrdered")
                             .category("PARAMETER")
@@ -1435,24 +1386,23 @@ public class DemoAAS_FullExample {
                                     .build())
                             .kind(ModelingKind.TEMPLATE)
                             .values(Arrays.asList(new DefaultPropertyBuilder()
-                                            .idShort("ExampleProperty")
-                                            .category("CONSTANT")
-                                            .descriptions(Arrays.asList(
-                                                    new LangString("Example Property object", "en-us"),
-                                                    new LangString("Beispiel Property Element", "de")
-                                            ))
-                                            .semanticId(new DefaultReferenceBuilder()
-                                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                                            .value("http://acplt.org/Properties/ExampleProperty")
-                                                            .idType(KeyType.IRI)
-                                                            .build()))
-                                                    .build())
-                                            .kind(ModelingKind.TEMPLATE)
-                                            .value(null)
-                                            .valueType("string")
-                                            .build(),
-
+                                    .idShort("ExampleProperty")
+                                    .category("CONSTANT")
+                                    .descriptions(Arrays.asList(
+                                            new LangString("Example Property object", "en-us"),
+                                            new LangString("Beispiel Property Element", "de")
+                                    ))
+                                    .semanticId(new DefaultReferenceBuilder()
+                                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                                    .value("http://acplt.org/Properties/ExampleProperty")
+                                                    .idType(KeyType.IRI)
+                                                    .build()))
+                                            .build())
+                                    .kind(ModelingKind.TEMPLATE)
+                                    .value(null)
+                                    .valueType("string")
+                                    .build(),
                                     new DefaultMultiLanguagePropertyBuilder()
                                             .idShort("ExampleMultiLanguageProperty")
                                             .category("CONSTANT")
@@ -1469,7 +1419,6 @@ public class DemoAAS_FullExample {
                                                     .build())
                                             .kind(ModelingKind.TEMPLATE)
                                             .build(),
-
                                     new DefaultRangeBuilder()
                                             .idShort("ExampleRange")
                                             .category("PARAMETER")
@@ -1489,7 +1438,6 @@ public class DemoAAS_FullExample {
                                             .min(null)
                                             .max("100")
                                             .build(),
-
                                     new DefaultRangeBuilder()
                                             .idShort("ExampleRange2")
                                             .category("PARAMETER")
@@ -1511,9 +1459,7 @@ public class DemoAAS_FullExample {
                                             .build()
                             ))
                             .ordered(true)
-                            .build()
-                    ,
-
+                            .build(),
                     new DefaultSubmodelElementCollectionBuilder()
                             .idShort("ExampleSubmodelCollectionUnordered")
                             .category("PARAMETER")
@@ -1530,23 +1476,22 @@ public class DemoAAS_FullExample {
                                     .build())
                             .kind(ModelingKind.TEMPLATE)
                             .values(Arrays.asList(new DefaultBlobBuilder()
-                                            .idShort("ExampleBlob")
-                                            .category("PARAMETER")
-                                            .descriptions(Arrays.asList(
-                                                    new LangString("Example Blob object", "en-us"),
-                                                    new LangString("Beispiel Blob Element", "de")
-                                            ))
-                                            .semanticId(new DefaultReferenceBuilder()
-                                                    .keys(Arrays.asList(new DefaultKeyBuilder()
-                                                            .type(KeyElements.GLOBAL_REFERENCE)
-                                                            .value("http://acplt.org/Blobs/ExampleBlob")
-                                                            .idType(KeyType.IRI)
-                                                            .build()))
-                                                    .build())
+                                    .idShort("ExampleBlob")
+                                    .category("PARAMETER")
+                                    .descriptions(Arrays.asList(
+                                            new LangString("Example Blob object", "en-us"),
+                                            new LangString("Beispiel Blob Element", "de")
+                                    ))
+                                    .semanticId(new DefaultReferenceBuilder()
+                                            .keys(Arrays.asList(new DefaultKeyBuilder()
+                                                    .type(KeyElements.GLOBAL_REFERENCE)
+                                                    .value("http://acplt.org/Blobs/ExampleBlob")
+                                                    .idType(KeyType.IRI)
+                                                    .build()))
+                                            .build())
                                     .kind(ModelingKind.TEMPLATE)
-                                            .mimeType("application/pdf")
-                                            .build(),
-
+                                    .mimeType("application/pdf")
+                                    .build(),
                                     new DefaultFileBuilder()
                                             .idShort("ExampleFile")
                                             .category("PARAMETER")
@@ -1565,7 +1510,6 @@ public class DemoAAS_FullExample {
                                             .value(null)
                                             .mimeType("application/pdf")
                                             .build(),
-
                                     new DefaultReferenceElementBuilder()
                                             .idShort("ExampleReferenceElement")
                                             .category("PARAMETER")
@@ -1585,7 +1529,6 @@ public class DemoAAS_FullExample {
                             ))
                             .ordered(false)
                             .build(),
-
                     new DefaultSubmodelElementCollectionBuilder()
                             .idShort("ExampleSubmodelCollectionUnordered2")
                             .category("PARAMETER")
@@ -1605,7 +1548,6 @@ public class DemoAAS_FullExample {
                             .build()
             ))
             .build();
-
 
     public final static Asset ASSET_1 = new DefaultAssetBuilder()
             .idShort("Test_Asset")
@@ -1696,7 +1638,7 @@ public class DemoAAS_FullExample {
             .idShort("TestSpec_01")
             .identification(new DefaultIdentifierBuilder()
                     .idType(IdentifierType.IRI)
-                    .identifier( "http://acplt.org/DataSpecifciations/Example/Identification")
+                    .identifier("http://acplt.org/DataSpecifciations/Example/Identification")
                     .build())
             .administration(new DefaultAdministrativeInformationBuilder()
                     .version("0.9")
@@ -1718,7 +1660,6 @@ public class DemoAAS_FullExample {
                             .definitions(Arrays.asList(
                                     new LangString("Dies ist eine Data Specification für Testzwecke", "de"),
                                     new LangString("This is a DataSpecification for testing purposes", "en-us")
-
                             ))
                             .shortNames(Arrays.asList(
                                     new LangString("Test Spec", "de"),
@@ -1735,7 +1676,7 @@ public class DemoAAS_FullExample {
                             .symbol("SU")
                             .valueFormat("string")
                             .value("TEST")
-                            .levelTypes(Arrays.asList(LevelType.MIN,LevelType.MAX))
+                            .levelTypes(Arrays.asList(LevelType.MIN, LevelType.MAX))
                             .valueList(new DefaultValueListBuilder()
                                     .valueReferencePairTypes(Arrays.asList(new DefaultValueReferencePairBuilder()
                                             .value("exampleValue")
@@ -1748,7 +1689,6 @@ public class DemoAAS_FullExample {
                                                     .build())
                                             //TODO valueType
                                             .build(),
-
                                             new DefaultValueReferencePairBuilder()
                                                     .value("exampleValue2")
                                                     .valueId(new DefaultReferenceBuilder()
@@ -1758,18 +1698,16 @@ public class DemoAAS_FullExample {
                                                                     .value("http://acplt.org/ValueId/ExampleValueId2")
                                                                     .build()))
                                                             .build())
-                                            //TODO valueType
-                                            .build()
-                                            ))
-
+                                                    //TODO valueType
+                                                    .build()
+                                    ))
                                     .build())
                             .build())
                     .build()))
-
             .build();
 
     public static final AssetAdministrationShellEnvironment ENVIRONMENT = new DefaultAssetAdministrationShellEnvironmentBuilder()
-            .assetAdministrationShells(Arrays.asList(AAS_1,AAS_2,AAS_3,AAS_4))
+            .assetAdministrationShells(Arrays.asList(AAS_1, AAS_2, AAS_3, AAS_4))
             .submodels(Arrays.asList(SUBMODEL_1, SUBMODEL_2, SUBMODEL_3, SUBMODEL_4, SUBMODEL_5, SUBMODEL_6, SUBMODEL_7))
             .conceptDescriptions(Arrays.asList(CONCEPT_DESCRIPTION_1, CONCEPT_DESCRIPTION_2, CONCEPT_DESCRIPTION_3, CONCEPT_DESCRIPTION_4))
             .assets(Arrays.asList(ASSET_1, ASSET_2, ASSET_3))

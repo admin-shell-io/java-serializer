@@ -14,19 +14,15 @@ import java.util.Set;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "modelType")
 public interface AssetAdministrationShellEnvironmentMixin {
 
-    // TODO maybe include always, would require default classes to create empty list in constructor
-    // @JsonInclude(JsonInclude.Include.ALWAYS)
+    @JsonInclude(JsonInclude.Include.ALWAYS)
     public Set<AssetAdministrationShell> getAssetAdministrationShells();
 
-    // TODO maybe include always, would require default classes to create empty list in constructor
-    // @JsonInclude(JsonInclude.Include.ALWAYS)
+    @JsonInclude(JsonInclude.Include.ALWAYS)
     public List<Submodel> getSubmodels();
 
-    // TODO maybe include always, would require default classes to create empty list in constructor
-    // @JsonInclude(JsonInclude.Include.ALWAYS)
+    @JsonInclude(JsonInclude.Include.ALWAYS)
     public List<ConceptDescription> getConceptDescriptions();
 
-    // TODO maybe include always, would require default classes to create empty list in constructor
-    // @JsonInclude(JsonInclude.Include.ALWAYS)
+    @JsonInclude(JsonInclude.Include.ALWAYS)
     public List<Asset> getAssets();
 }

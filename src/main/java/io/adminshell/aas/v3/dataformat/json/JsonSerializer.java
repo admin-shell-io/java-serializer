@@ -5,9 +5,8 @@ import io.adminshell.aas.v3.dataformat.json.enums.UpperCamelCaseEnumNaming;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import de.fraunhofer.iais.eis.AccessControl;
 import de.fraunhofer.iais.eis.AccessControlPolicyPoints;
@@ -89,23 +88,160 @@ import de.fraunhofer.iais.eis.util.LangString;
 import io.adminshell.aas.v3.dataformat.json.enums.IdentifierTypeMapping;
 import io.adminshell.aas.v3.dataformat.json.enums.KeyTypeMapping;
 import io.adminshell.aas.v3.dataformat.json.enums.ScreamingSnakeCaseEnumNaming;
+import io.adminshell.aas.v3.dataformat.json.mixins.AssetAdministrationShellMixin;
+import io.adminshell.aas.v3.dataformat.json.mixins.AssetAdministrationShellEnvironmentMixin;
+import io.adminshell.aas.v3.dataformat.json.mixins.AssetInformationMixin;
+import io.adminshell.aas.v3.dataformat.json.mixins.ConceptDescriptionMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.DataSpecificationMixin;
+import io.adminshell.aas.v3.dataformat.json.mixins.EntityMixin;
+import io.adminshell.aas.v3.dataformat.json.mixins.HasDataSpecificationMixin;
+import io.adminshell.aas.v3.dataformat.json.mixins.HasExtensionsMixin;
+import io.adminshell.aas.v3.dataformat.json.mixins.IdentifierKeyValuePairMixin;
+import io.adminshell.aas.v3.dataformat.json.mixins.IdentifierMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.LangStringMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.ValueListMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.ValueReferencePairMixin;
+import io.adminshell.aas.v3.dataformat.json.mixins.QualifiableMixin;
+import io.adminshell.aas.v3.dataformat.json.mixins.ReferenceMixin;
+import io.adminshell.aas.v3.dataformat.json.mixins.RelationshipElementMixin;
+import io.adminshell.aas.v3.dataformat.json.mixins.SubjectAttributesMixin;
+import io.adminshell.aas.v3.dataformat.json.mixins.SubmodelMixin;
+import io.adminshell.aas.v3.dataformat.json.mixins.ViewMixin;
+import de.fraunhofer.iais.eis.AccessControlMixin;
+import de.fraunhofer.iais.eis.AccessControlPolicyPointsMixin;
+import de.fraunhofer.iais.eis.AccessPermissionRuleMixin;
+import de.fraunhofer.iais.eis.AdministrativeInformationMixin;
+import de.fraunhofer.iais.eis.AnnotatedRelationshipElementMixin;
+import de.fraunhofer.iais.eis.AssetMixin;
+import de.fraunhofer.iais.eis.BasicEventMixin;
+import de.fraunhofer.iais.eis.BlobCertificateMixin;
+import de.fraunhofer.iais.eis.BlobMixin;
+import de.fraunhofer.iais.eis.CapabilityMixin;
+import de.fraunhofer.iais.eis.CertificateMixin;
+import de.fraunhofer.iais.eis.ConstraintMixin;
+import de.fraunhofer.iais.eis.DataElementMixin;
+import de.fraunhofer.iais.eis.DataSpecificationContentMixin;
+import de.fraunhofer.iais.eis.DataSpecificationIEC61360Mixin;
+import de.fraunhofer.iais.eis.EventElementMixin;
+import de.fraunhofer.iais.eis.EventMessageMixin;
+import de.fraunhofer.iais.eis.EventMixin;
+import de.fraunhofer.iais.eis.ExtensionMixin;
+import de.fraunhofer.iais.eis.FileMixin;
+import de.fraunhofer.iais.eis.FormulaMixin;
+import de.fraunhofer.iais.eis.HasKindMixin;
+import de.fraunhofer.iais.eis.HasSemanticsMixin;
+import de.fraunhofer.iais.eis.IdentifiableMixin;
+import de.fraunhofer.iais.eis.KeyMixin;
+import de.fraunhofer.iais.eis.MultiLanguagePropertyMixin;
+import de.fraunhofer.iais.eis.ObjectAttributesMixin;
+import de.fraunhofer.iais.eis.OperationMixin;
+import de.fraunhofer.iais.eis.OperationVariableMixin;
+import de.fraunhofer.iais.eis.PermissionMixin;
+import de.fraunhofer.iais.eis.PermissionsPerObjectMixin;
+import de.fraunhofer.iais.eis.PolicyAdministrationPointMixin;
+import de.fraunhofer.iais.eis.PolicyDecisionPointMixin;
+import de.fraunhofer.iais.eis.PolicyEnforcementPointsMixin;
+import de.fraunhofer.iais.eis.PolicyInformationPointsMixin;
+import de.fraunhofer.iais.eis.PropertyMixin;
+import de.fraunhofer.iais.eis.QualifierMixin;
+import de.fraunhofer.iais.eis.RC01Mixin;
+import de.fraunhofer.iais.eis.RangeMixin;
+import de.fraunhofer.iais.eis.ReferableMixin;
+import de.fraunhofer.iais.eis.ReferenceElementMixin;
+import de.fraunhofer.iais.eis.SecurityMixin;
+import de.fraunhofer.iais.eis.SubmodelElementCollectionMixin;
+import de.fraunhofer.iais.eis.SubmodelElementMixin;
+import de.fraunhofer.iais.eis.ValueListMixin;
+import de.fraunhofer.iais.eis.ValueReferencePairMixin;
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
 import io.adminshell.aas.v3.dataformat.json.serialization.DataSpecificationSerializer;
-import io.adminshell.aas.v3.dataformat.json.mixins.AssetAdministrationShellEnvironmentMixin;
 
-public class JsonSerializer {
+public class JsonSerializer implements Serializer {
 
-    private final ObjectMapper mapper = new ObjectMapper();
+    private final JsonMapper mapper;
 
     public JsonSerializer() {
-        mapper.setDefaultPropertyInclusion(JsonInclude.Include.NON_NULL);
-        mapper.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY);
-        mapper.enable(SerializationFeature.INDENT_OUTPUT);
+        mapper = initMapper();
+    }
 
+    protected JsonMapper initMapper() {
+        return JsonMapper.builder()
+                .enable(SerializationFeature.INDENT_OUTPUT)
+                .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+                .serializationInclusion(JsonInclude.Include.NON_NULL)
+                .addModule(buildEnumModule())
+                .addModule(buildCustomDeserializerModule())
+                .addMixIn(AccessControl.class, AccessControlMixin.class)
+                .addMixIn(AccessControlPolicyPoints.class, AccessControlPolicyPointsMixin.class)
+                .addMixIn(AccessPermissionRule.class, AccessPermissionRuleMixin.class)
+                .addMixIn(AdministrativeInformation.class, AdministrativeInformationMixin.class)
+                .addMixIn(AnnotatedRelationshipElement.class, AnnotatedRelationshipElementMixin.class)
+                .addMixIn(AssetAdministrationShellEnvironment.class, AssetAdministrationShellEnvironmentMixin.class)
+                .addMixIn(AssetAdministrationShell.class, AssetAdministrationShellMixin.class)
+                .addMixIn(AssetInformation.class, AssetInformationMixin.class)
+                .addMixIn(Asset.class, AssetMixin.class)
+                .addMixIn(BasicEvent.class, BasicEventMixin.class)
+                .addMixIn(BlobCertificate.class, BlobCertificateMixin.class)
+                .addMixIn(Blob.class, BlobMixin.class)
+                .addMixIn(Capability.class, CapabilityMixin.class)
+                .addMixIn(Certificate.class, CertificateMixin.class)
+                .addMixIn(ConceptDescription.class, ConceptDescriptionMixin.class)
+                .addMixIn(Constraint.class, ConstraintMixin.class)
+                .addMixIn(DataElement.class, DataElementMixin.class)
+                .addMixIn(DataSpecificationContent.class, DataSpecificationContentMixin.class)
+                .addMixIn(DataSpecificationIEC61360.class, DataSpecificationIEC61360Mixin.class)
+                .addMixIn(DataSpecification.class, DataSpecificationMixin.class)
+                .addMixIn(Entity.class, EntityMixin.class)
+                .addMixIn(EventElement.class, EventElementMixin.class)
+                .addMixIn(EventMessage.class, EventMessageMixin.class)
+                .addMixIn(Event.class, EventMixin.class)
+                .addMixIn(Extension.class, ExtensionMixin.class)
+                .addMixIn(File.class, FileMixin.class)
+                .addMixIn(Formula.class, FormulaMixin.class)
+                .addMixIn(HasDataSpecification.class, HasDataSpecificationMixin.class)
+                .addMixIn(HasExtensions.class, HasExtensionsMixin.class)
+                .addMixIn(HasKind.class, HasKindMixin.class)
+                .addMixIn(HasSemantics.class, HasSemanticsMixin.class)
+                .addMixIn(Identifiable.class, IdentifiableMixin.class)
+                .addMixIn(IdentifierKeyValuePair.class, IdentifierKeyValuePairMixin.class)
+                .addMixIn(Identifier.class, IdentifierMixin.class)
+                .addMixIn(Key.class, KeyMixin.class)
+                .addMixIn(LangString.class, LangStringMixin.class)
+                .addMixIn(MultiLanguageProperty.class, MultiLanguagePropertyMixin.class)
+                .addMixIn(ObjectAttributes.class, ObjectAttributesMixin.class)
+                .addMixIn(Operation.class, OperationMixin.class)
+                .addMixIn(OperationVariable.class, OperationVariableMixin.class)
+                .addMixIn(Permission.class, PermissionMixin.class)
+                .addMixIn(PermissionsPerObject.class, PermissionsPerObjectMixin.class)
+                .addMixIn(PolicyAdministrationPoint.class, PolicyAdministrationPointMixin.class)
+                .addMixIn(PolicyDecisionPoint.class, PolicyDecisionPointMixin.class)
+                .addMixIn(PolicyEnforcementPoints.class, PolicyEnforcementPointsMixin.class)
+                .addMixIn(PolicyInformationPoints.class, PolicyInformationPointsMixin.class)
+                .addMixIn(Property.class, PropertyMixin.class)
+                .addMixIn(Qualifiable.class, QualifiableMixin.class)
+                .addMixIn(Qualifier.class, QualifierMixin.class)
+                .addMixIn(RC01.class, RC01Mixin.class)
+                .addMixIn(Range.class, RangeMixin.class)
+                .addMixIn(Referable.class, ReferableMixin.class)
+                .addMixIn(ReferenceElement.class, ReferenceElementMixin.class)
+                .addMixIn(Reference.class, ReferenceMixin.class)
+                .addMixIn(RelationshipElement.class, RelationshipElementMixin.class)
+                .addMixIn(Security.class, SecurityMixin.class)
+                .addMixIn(SubjectAttributes.class, SubjectAttributesMixin.class)
+                .addMixIn(SubmodelElementCollection.class, SubmodelElementCollectionMixin.class)
+                .addMixIn(SubmodelElement.class, SubmodelElementMixin.class)
+                .addMixIn(Submodel.class, SubmodelMixin.class)
+                .addMixIn(ValueList.class, ValueListMixin.class)
+                .addMixIn(ValueReferencePair.class, ValueReferencePairMixin.class)
+                .addMixIn(View.class, ViewMixin.class)
+                .build();
+    }
+
+    protected SimpleModule buildCustomDeserializerModule() {
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(DataSpecification.class, new DataSpecificationSerializer());
+        return module;
+    }
+
+    protected SimpleModule buildEnumModule() {
         SimpleModule module = new SimpleModule();
         // enums with custom naming strategy
         module.addSerializer(IdentifierType.class, new EnumSerializer<>(new IdentifierTypeMapping()));
@@ -123,77 +259,13 @@ public class JsonSerializer {
         module.addSerializer(ModelingKind.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(ModelingKind.class)));
         module.addSerializer(PermissionKind.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(PermissionKind.class))); // not used in JSON
         module.addSerializer(ReferableElements.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(ReferableElements.class))); // not used in JSON
-
-        module.addSerializer(DataSpecification.class, new DataSpecificationSerializer());
-        mapper.registerModule(module);
-        mapper.addMixIn(AccessControl.class, io.adminshell.aas.v3.dataformat.json.mixins.AccessControlMixin.class);
-        mapper.addMixIn(AccessControlPolicyPoints.class, io.adminshell.aas.v3.dataformat.json.mixins.AccessControlPolicyPointsMixin.class);
-        mapper.addMixIn(AccessPermissionRule.class, io.adminshell.aas.v3.dataformat.json.mixins.AccessPermissionRuleMixin.class);
-        mapper.addMixIn(AdministrativeInformation.class, io.adminshell.aas.v3.dataformat.json.mixins.AdministrativeInformationMixin.class);
-        mapper.addMixIn(AnnotatedRelationshipElement.class, io.adminshell.aas.v3.dataformat.json.mixins.AnnotatedRelationshipElementMixin.class);
-        mapper.addMixIn(AssetAdministrationShellEnvironment.class, AssetAdministrationShellEnvironmentMixin.class);
-        mapper.addMixIn(AssetAdministrationShell.class, io.adminshell.aas.v3.dataformat.json.mixins.AssetAdministrationShellMixin.class);
-        mapper.addMixIn(AssetInformation.class, io.adminshell.aas.v3.dataformat.json.mixins.AssetInformationMixin.class);
-        mapper.addMixIn(Asset.class, io.adminshell.aas.v3.dataformat.json.mixins.AssetMixin.class);
-        mapper.addMixIn(BasicEvent.class, io.adminshell.aas.v3.dataformat.json.mixins.BasicEventMixin.class);
-        mapper.addMixIn(BlobCertificate.class, io.adminshell.aas.v3.dataformat.json.mixins.BlobCertificateMixin.class);
-        mapper.addMixIn(Blob.class, io.adminshell.aas.v3.dataformat.json.mixins.BlobMixin.class);
-        mapper.addMixIn(Capability.class, io.adminshell.aas.v3.dataformat.json.mixins.CapabilityMixin.class);
-        mapper.addMixIn(Certificate.class, io.adminshell.aas.v3.dataformat.json.mixins.CertificateMixin.class);
-        mapper.addMixIn(ConceptDescription.class, io.adminshell.aas.v3.dataformat.json.mixins.ConceptDescriptionMixin.class);
-        mapper.addMixIn(Constraint.class, io.adminshell.aas.v3.dataformat.json.mixins.ConstraintMixin.class);
-        mapper.addMixIn(DataElement.class, io.adminshell.aas.v3.dataformat.json.mixins.DataElementMixin.class);
-        mapper.addMixIn(DataSpecificationContent.class, io.adminshell.aas.v3.dataformat.json.mixins.DataSpecificationContentMixin.class);
-        mapper.addMixIn(DataSpecificationIEC61360.class, io.adminshell.aas.v3.dataformat.json.mixins.DataSpecificationIEC61360Mixin.class);
-        mapper.addMixIn(DataSpecification.class, DataSpecificationMixin.class);
-        mapper.addMixIn(Entity.class, io.adminshell.aas.v3.dataformat.json.mixins.EntityMixin.class);
-        mapper.addMixIn(EventElement.class, io.adminshell.aas.v3.dataformat.json.mixins.EventElementMixin.class);
-        mapper.addMixIn(EventMessage.class, io.adminshell.aas.v3.dataformat.json.mixins.EventMessageMixin.class);
-        mapper.addMixIn(Event.class, io.adminshell.aas.v3.dataformat.json.mixins.EventMixin.class);
-        mapper.addMixIn(Extension.class, io.adminshell.aas.v3.dataformat.json.mixins.ExtensionMixin.class);
-        mapper.addMixIn(File.class, io.adminshell.aas.v3.dataformat.json.mixins.FileMixin.class);
-        mapper.addMixIn(Formula.class, io.adminshell.aas.v3.dataformat.json.mixins.FormulaMixin.class);
-        mapper.addMixIn(HasDataSpecification.class, io.adminshell.aas.v3.dataformat.json.mixins.HasDataSpecificationMixin.class);
-        mapper.addMixIn(HasExtensions.class, io.adminshell.aas.v3.dataformat.json.mixins.HasExtensionsMixin.class);
-        mapper.addMixIn(HasKind.class, io.adminshell.aas.v3.dataformat.json.mixins.HasKindMixin.class);
-        mapper.addMixIn(HasSemantics.class, io.adminshell.aas.v3.dataformat.json.mixins.HasSemanticsMixin.class);
-        mapper.addMixIn(Identifiable.class, io.adminshell.aas.v3.dataformat.json.mixins.IdentifiableMixin.class);
-        mapper.addMixIn(IdentifierKeyValuePair.class, io.adminshell.aas.v3.dataformat.json.mixins.IdentifierKeyValuePairMixin.class);
-        mapper.addMixIn(Identifier.class, io.adminshell.aas.v3.dataformat.json.mixins.IdentifierMixin.class);
-        mapper.addMixIn(Key.class, io.adminshell.aas.v3.dataformat.json.mixins.KeyMixin.class);
-        mapper.addMixIn(LangString.class, LangStringMixin.class);
-        mapper.addMixIn(MultiLanguageProperty.class, io.adminshell.aas.v3.dataformat.json.mixins.MultiLanguagePropertyMixin.class);
-        mapper.addMixIn(ObjectAttributes.class, io.adminshell.aas.v3.dataformat.json.mixins.ObjectAttributesMixin.class);
-        mapper.addMixIn(Operation.class, io.adminshell.aas.v3.dataformat.json.mixins.OperationMixin.class);
-        mapper.addMixIn(OperationVariable.class, io.adminshell.aas.v3.dataformat.json.mixins.OperationVariableMixin.class);
-        mapper.addMixIn(Permission.class, io.adminshell.aas.v3.dataformat.json.mixins.PermissionMixin.class);
-        mapper.addMixIn(PermissionsPerObject.class, io.adminshell.aas.v3.dataformat.json.mixins.PermissionsPerObjectMixin.class);
-        mapper.addMixIn(PolicyAdministrationPoint.class, io.adminshell.aas.v3.dataformat.json.mixins.PolicyAdministrationPointMixin.class);
-        mapper.addMixIn(PolicyDecisionPoint.class, io.adminshell.aas.v3.dataformat.json.mixins.PolicyDecisionPointMixin.class);
-        mapper.addMixIn(PolicyEnforcementPoints.class, io.adminshell.aas.v3.dataformat.json.mixins.PolicyEnforcementPointsMixin.class);
-        mapper.addMixIn(PolicyInformationPoints.class, io.adminshell.aas.v3.dataformat.json.mixins.PolicyInformationPointsMixin.class);
-        mapper.addMixIn(Property.class, io.adminshell.aas.v3.dataformat.json.mixins.PropertyMixin.class);
-        mapper.addMixIn(Qualifiable.class, io.adminshell.aas.v3.dataformat.json.mixins.QualifiableMixin.class);
-        mapper.addMixIn(Qualifier.class, io.adminshell.aas.v3.dataformat.json.mixins.QualifierMixin.class);
-        mapper.addMixIn(RC01.class, io.adminshell.aas.v3.dataformat.json.mixins.RC01Mixin.class);
-        mapper.addMixIn(Range.class, io.adminshell.aas.v3.dataformat.json.mixins.RangeMixin.class);
-        mapper.addMixIn(Referable.class, io.adminshell.aas.v3.dataformat.json.mixins.ReferableMixin.class);
-        mapper.addMixIn(ReferenceElement.class, io.adminshell.aas.v3.dataformat.json.mixins.ReferenceElementMixin.class);
-        mapper.addMixIn(Reference.class, io.adminshell.aas.v3.dataformat.json.mixins.ReferenceMixin.class);
-        mapper.addMixIn(RelationshipElement.class, io.adminshell.aas.v3.dataformat.json.mixins.RelationshipElementMixin.class);
-        mapper.addMixIn(Security.class, io.adminshell.aas.v3.dataformat.json.mixins.SecurityMixin.class);
-        mapper.addMixIn(SubjectAttributes.class, io.adminshell.aas.v3.dataformat.json.mixins.SubjectAttributesMixin.class);
-        mapper.addMixIn(SubmodelElementCollection.class, io.adminshell.aas.v3.dataformat.json.mixins.SubmodelElementCollectionMixin.class);
-        mapper.addMixIn(SubmodelElement.class, io.adminshell.aas.v3.dataformat.json.mixins.SubmodelElementMixin.class);
-        mapper.addMixIn(Submodel.class, io.adminshell.aas.v3.dataformat.json.mixins.SubmodelMixin.class);
-        mapper.addMixIn(ValueList.class, ValueListMixin.class);
-        mapper.addMixIn(ValueReferencePair.class, ValueReferencePairMixin.class);
-        mapper.addMixIn(View.class, io.adminshell.aas.v3.dataformat.json.mixins.ViewMixin.class);
+        return module;
     }
 
-    public String serialize(AssetAdministrationShellEnvironment aasEnvironment) throws JsonProcessingException {
-        JsonNode node = mapper.valueToTree(aasEnvironment);
-        ModelTypeProcessor.postprocess(node);
-        return mapper.writeValueAsString(node);
+    @Override
+    public String write(AssetAdministrationShellEnvironment aasEnvironment) throws JsonProcessingException {
+        return mapper.writeValueAsString(
+                ModelTypeProcessor.postprocess(
+                        mapper.valueToTree(aasEnvironment)));
     }
 }
