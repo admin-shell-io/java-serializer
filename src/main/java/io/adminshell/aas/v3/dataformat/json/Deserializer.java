@@ -15,24 +15,24 @@ public interface Deserializer {
 
     public static final Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
-    public AssetAdministrationShellEnvironment read(String value) throws Exception;
+    public AssetAdministrationShellEnvironment read(String value) throws DeserializationException;
 
-    public default AssetAdministrationShellEnvironment read(InputStream src) throws Exception {
+    public default AssetAdministrationShellEnvironment read(InputStream src) throws DeserializationException {
         return read(src, DEFAULT_CHARSET);
     }
 
-    public default AssetAdministrationShellEnvironment read(InputStream src, Charset charset) throws Exception {
+    public default AssetAdministrationShellEnvironment read(InputStream src, Charset charset) throws DeserializationException {
         return read(new BufferedReader(
                 new InputStreamReader(src, charset))
                 .lines()
                 .collect(Collectors.joining(System.lineSeparator())));
     }
 
-    public default AssetAdministrationShellEnvironment read(File file, Charset charset) throws FileNotFoundException, Exception {
+    public default AssetAdministrationShellEnvironment read(File file, Charset charset) throws FileNotFoundException, DeserializationException {
         return read(new FileInputStream(file), charset);
     }
 
-    public default AssetAdministrationShellEnvironment read(File file) throws FileNotFoundException, Exception {
+    public default AssetAdministrationShellEnvironment read(File file) throws FileNotFoundException, DeserializationException {
         return read(file, DEFAULT_CHARSET);
     }
 

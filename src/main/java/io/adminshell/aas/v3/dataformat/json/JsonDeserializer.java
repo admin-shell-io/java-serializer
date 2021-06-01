@@ -1,6 +1,7 @@
 package io.adminshell.aas.v3.dataformat.json;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver;
@@ -182,6 +183,8 @@ import de.fraunhofer.iais.eis.SubmodelElementMixin;
 import de.fraunhofer.iais.eis.ValueListMixin;
 import de.fraunhofer.iais.eis.ValueReferencePairMixin;
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class JsonDeserializer implements Deserializer {
 
@@ -337,8 +340,12 @@ public class JsonDeserializer implements Deserializer {
     }
 
     @Override
-    public AssetAdministrationShellEnvironment read(String value) throws Exception {
-        return mapper.treeToValue(ModelTypeProcessor.preprocess(value), AssetAdministrationShellEnvironment.class);
+    public AssetAdministrationShellEnvironment read(String value) throws DeserializationException {
+        try {
+            return mapper.treeToValue(ModelTypeProcessor.preprocess(value), AssetAdministrationShellEnvironment.class);
+        } catch (JsonProcessingException ex) {
+            throw new DeserializationException("deserialization failed", ex);
+        }
     }
 
     @Override

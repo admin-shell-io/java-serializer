@@ -153,6 +153,9 @@ import de.fraunhofer.iais.eis.ValueListMixin;
 import de.fraunhofer.iais.eis.ValueReferencePairMixin;
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
 import io.adminshell.aas.v3.dataformat.json.serialization.DataSpecificationSerializer;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class JsonSerializer implements Serializer {
 
@@ -263,9 +266,13 @@ public class JsonSerializer implements Serializer {
     }
 
     @Override
-    public String write(AssetAdministrationShellEnvironment aasEnvironment) throws JsonProcessingException {
-        return mapper.writeValueAsString(
-                ModelTypeProcessor.postprocess(
-                        mapper.valueToTree(aasEnvironment)));
+    public String write(AssetAdministrationShellEnvironment aasEnvironment) throws SerializationException {
+        try {
+            return mapper.writeValueAsString(
+                    ModelTypeProcessor.postprocess(
+                            mapper.valueToTree(aasEnvironment)));
+        } catch (JsonProcessingException ex) {
+            throw new SerializationException("serialization failed", ex);
+        }
     }
 }

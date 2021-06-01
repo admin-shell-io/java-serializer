@@ -30,19 +30,19 @@ public class JsonSerializerTest {
     public TemporaryFolder tempFolder = new TemporaryFolder();
 
     @Test
-    public void testSerializeEmpty() throws JsonProcessingException, IOException {
+    public void testSerializeEmpty() throws JsonProcessingException, IOException, SerializationException {
         assertEquals("null", serializer.write(null));
     }
 
     @Test
-    public void testWriteToFile() throws JsonProcessingException, IOException {
+    public void testWriteToFile() throws JsonProcessingException, IOException, SerializationException {
         File file = tempFolder.newFile("output.json");
         serializer.write(file, AASSimple.ENVIRONMENT);
         assertTrue(file.exists());
     }
 
     @Test
-    public void testSerializeSimple() throws JsonProcessingException, IOException, JSONException {
+    public void testSerializeSimple() throws JsonProcessingException, IOException, JSONException, SerializationException {
         String json = serializer.write(AASSimple.ENVIRONMENT);
         logger.info(json);
         assertFalse(json.isEmpty());
