@@ -3,8 +3,8 @@ package io.adminshell.aas.v3.dataformat.json;
 import java.util.List;
 import java.util.Objects;
 
-import de.fraunhofer.iais.eis.util.LangString;
 import io.adminshell.aas.v3.model.Constraint;
+import io.adminshell.aas.v3.model.LangString;
 import io.adminshell.aas.v3.model.ModelingKind;
 import io.adminshell.aas.v3.model.Property;
 import io.adminshell.aas.v3.model.Reference;
