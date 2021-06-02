@@ -6,7 +6,6 @@
             },
             "idShort": "ExampleMotor",
             "identification": {
-                "idType": "IRI",
                 "id": "http://customer.com/aas/9175_7013_7091_9168"
             },
             "assetInformation": {
@@ -485,9 +484,6 @@
             ]
         },
         {
-            "modelType": {
-                "name": "ConceptDescription"
-            },
             "idShort": "Document",
             "identification": {
                 "idType": "IRI",
@@ -505,8 +501,8 @@
                         ]
                     },
                     "dataSpecificationContent": {
-                    	"preferredName": [
-                    	],
+                        "preferredName": [
+                        ],
                         "shortName": [
                             {
                                 "language": "EN",
