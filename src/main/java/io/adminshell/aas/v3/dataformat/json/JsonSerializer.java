@@ -11,73 +11,21 @@ import de.fraunhofer.iais.eis.util.LangString;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.Serializer;
 import io.adminshell.aas.v3.dataformat.json.custommixins.AssetAdministrationShellEnvironmentMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.AssetAdministrationShellMixin;
 import io.adminshell.aas.v3.dataformat.json.custommixins.AssetInformationMixin;
 import io.adminshell.aas.v3.dataformat.json.custommixins.ConceptDescriptionMixin;
 import io.adminshell.aas.v3.dataformat.json.custommixins.DataSpecificationMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.EntityMixin;
 import io.adminshell.aas.v3.dataformat.json.custommixins.HasDataSpecificationMixin;
 import io.adminshell.aas.v3.dataformat.json.custommixins.HasExtensionsMixin;
 import io.adminshell.aas.v3.dataformat.json.custommixins.IdentifierKeyValuePairMixin;
 import io.adminshell.aas.v3.dataformat.json.custommixins.IdentifierMixin;
 import io.adminshell.aas.v3.dataformat.json.custommixins.LangStringMixin;
 import io.adminshell.aas.v3.dataformat.json.custommixins.QualifiableMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.ReferenceMixin;
 import io.adminshell.aas.v3.dataformat.json.custommixins.RelationshipElementMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.SubjectAttributesMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.SubmodelMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.ViewMixin;
 import io.adminshell.aas.v3.dataformat.json.enums.EnumSerializer;
 import io.adminshell.aas.v3.dataformat.json.enums.IdentifierTypeMapping;
 import io.adminshell.aas.v3.dataformat.json.enums.KeyTypeMapping;
 import io.adminshell.aas.v3.dataformat.json.enums.ScreamingSnakeCaseEnumNaming;
 import io.adminshell.aas.v3.dataformat.json.enums.UpperCamelCaseEnumNaming;
-import io.adminshell.aas.v3.dataformat.json.mixins.AccessControlMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.AccessControlPolicyPointsMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.AccessPermissionRuleMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.AdministrativeInformationMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.AnnotatedRelationshipElementMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.AssetMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.BasicEventMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.BlobCertificateMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.BlobMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.CapabilityMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.CertificateMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.ConstraintMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.DataElementMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.DataSpecificationContentMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.DataSpecificationIEC61360Mixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.EventElementMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.EventMessageMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.EventMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.ExtensionMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.FileMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.FormulaMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.HasKindMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.HasSemanticsMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.IdentifiableMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.KeyMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.MultiLanguagePropertyMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.ObjectAttributesMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.OperationMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.OperationVariableMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.PermissionMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.PermissionsPerObjectMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.PolicyAdministrationPointMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.PolicyDecisionPointMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.PolicyEnforcementPointsMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.PolicyInformationPointsMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.PropertyMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.QualifierMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.RC01Mixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.RangeMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.ReferableMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.ReferenceElementMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.SecurityMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.SubmodelElementCollectionMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.SubmodelElementMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.ValueListMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.ValueReferencePairMixin;
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
 import io.adminshell.aas.v3.dataformat.json.serialization.DataSpecificationSerializer;
 import io.adminshell.aas.v3.model.AccessControl;
@@ -158,113 +106,77 @@ import io.adminshell.aas.v3.model.View;
 
 public class JsonSerializer implements Serializer {
 
-	private final JsonMapper mapper;
+    private final JsonMapper mapper;
 
-	public JsonSerializer() {
-		mapper = initMapper();
-	}
+    public JsonSerializer() {
+        mapper = initMapper();
+    }
 
-	protected JsonMapper initMapper() {
-		return JsonMapper.builder().enable(SerializationFeature.INDENT_OUTPUT)
-				.enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-				.serializationInclusion(JsonInclude.Include.NON_NULL).addModule(buildEnumModule())
-				.addModule(buildCustomDeserializerModule()).addMixIn(AccessControl.class, AccessControlMixin.class)
-				.addMixIn(AccessControlPolicyPoints.class, AccessControlPolicyPointsMixin.class)
-				.addMixIn(AccessPermissionRule.class, AccessPermissionRuleMixin.class)
-				.addMixIn(AdministrativeInformation.class, AdministrativeInformationMixin.class)
-				.addMixIn(AnnotatedRelationshipElement.class, AnnotatedRelationshipElementMixin.class)
-				.addMixIn(AssetAdministrationShellEnvironment.class, AssetAdministrationShellEnvironmentMixin.class)
-				.addMixIn(AssetAdministrationShell.class, AssetAdministrationShellMixin.class)
-				.addMixIn(AssetInformation.class, AssetInformationMixin.class).addMixIn(Asset.class, AssetMixin.class)
-				.addMixIn(BasicEvent.class, BasicEventMixin.class)
-				.addMixIn(BlobCertificate.class, BlobCertificateMixin.class).addMixIn(Blob.class, BlobMixin.class)
-				.addMixIn(Capability.class, CapabilityMixin.class).addMixIn(Certificate.class, CertificateMixin.class)
-				.addMixIn(ConceptDescription.class, ConceptDescriptionMixin.class)
-				.addMixIn(Constraint.class, ConstraintMixin.class).addMixIn(DataElement.class, DataElementMixin.class)
-				.addMixIn(DataSpecificationContent.class, DataSpecificationContentMixin.class)
-				.addMixIn(DataSpecificationIEC61360.class, DataSpecificationIEC61360Mixin.class)
-				.addMixIn(DataSpecification.class, DataSpecificationMixin.class)
-				.addMixIn(Entity.class, EntityMixin.class).addMixIn(EventElement.class, EventElementMixin.class)
-				.addMixIn(EventMessage.class, EventMessageMixin.class).addMixIn(Event.class, EventMixin.class)
-				.addMixIn(Extension.class, ExtensionMixin.class).addMixIn(File.class, FileMixin.class)
-				.addMixIn(Formula.class, FormulaMixin.class)
-				.addMixIn(HasDataSpecification.class, HasDataSpecificationMixin.class)
-				.addMixIn(HasExtensions.class, HasExtensionsMixin.class).addMixIn(HasKind.class, HasKindMixin.class)
-				.addMixIn(HasSemantics.class, HasSemanticsMixin.class)
-				.addMixIn(Identifiable.class, IdentifiableMixin.class)
-				.addMixIn(IdentifierKeyValuePair.class, IdentifierKeyValuePairMixin.class)
-				.addMixIn(Identifier.class, IdentifierMixin.class).addMixIn(Key.class, KeyMixin.class)
-				.addMixIn(LangString.class, LangStringMixin.class)
-				.addMixIn(MultiLanguageProperty.class, MultiLanguagePropertyMixin.class)
-				.addMixIn(ObjectAttributes.class, ObjectAttributesMixin.class)
-				.addMixIn(Operation.class, OperationMixin.class)
-				.addMixIn(OperationVariable.class, OperationVariableMixin.class)
-				.addMixIn(Permission.class, PermissionMixin.class)
-				.addMixIn(PermissionsPerObject.class, PermissionsPerObjectMixin.class)
-				.addMixIn(PolicyAdministrationPoint.class, PolicyAdministrationPointMixin.class)
-				.addMixIn(PolicyDecisionPoint.class, PolicyDecisionPointMixin.class)
-				.addMixIn(PolicyEnforcementPoints.class, PolicyEnforcementPointsMixin.class)
-				.addMixIn(PolicyInformationPoints.class, PolicyInformationPointsMixin.class)
-				.addMixIn(Property.class, PropertyMixin.class).addMixIn(Qualifiable.class, QualifiableMixin.class)
-				.addMixIn(Qualifier.class, QualifierMixin.class).addMixIn(RC01.class, RC01Mixin.class)
-				.addMixIn(Range.class, RangeMixin.class).addMixIn(Referable.class, ReferableMixin.class)
-				.addMixIn(ReferenceElement.class, ReferenceElementMixin.class)
-				.addMixIn(Reference.class, ReferenceMixin.class)
-				.addMixIn(RelationshipElement.class, RelationshipElementMixin.class)
-				.addMixIn(Security.class, SecurityMixin.class)
-				.addMixIn(SubjectAttributes.class, SubjectAttributesMixin.class)
-				.addMixIn(SubmodelElementCollection.class, SubmodelElementCollectionMixin.class)
-				.addMixIn(SubmodelElement.class, SubmodelElementMixin.class)
-				.addMixIn(Submodel.class, SubmodelMixin.class).addMixIn(ValueList.class, ValueListMixin.class)
-				.addMixIn(ValueReferencePair.class, ValueReferencePairMixin.class).addMixIn(View.class, ViewMixin.class)
-				.build();
-	}
+    protected JsonMapper initMapper() {
+        return JsonMapper.builder().enable(SerializationFeature.INDENT_OUTPUT)
+                .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
+                .serializationInclusion(JsonInclude.Include.NON_NULL).addModule(buildEnumModule())
+                .addModule(buildCustomDeserializerModule())
+                .annotationIntrospector(new AnnotationIntrospector())
+                .addMixIn(AssetAdministrationShellEnvironment.class, AssetAdministrationShellEnvironmentMixin.class)
+                .addMixIn(AssetInformation.class, AssetInformationMixin.class)
+                .addMixIn(ConceptDescription.class, ConceptDescriptionMixin.class)
+                .addMixIn(DataSpecification.class, DataSpecificationMixin.class)
+                .addMixIn(HasDataSpecification.class, HasDataSpecificationMixin.class)
+                .addMixIn(HasExtensions.class, HasExtensionsMixin.class)
+                .addMixIn(IdentifierKeyValuePair.class, IdentifierKeyValuePairMixin.class)
+                .addMixIn(Identifier.class, IdentifierMixin.class)
+                .addMixIn(LangString.class, LangStringMixin.class)
+                .addMixIn(Qualifiable.class, QualifiableMixin.class)
+                .addMixIn(RelationshipElement.class, RelationshipElementMixin.class)
+                .build();
+    }
 
-	protected SimpleModule buildCustomDeserializerModule() {
-		SimpleModule module = new SimpleModule();
-		module.addSerializer(DataSpecification.class, new DataSpecificationSerializer());
-		return module;
-	}
+    protected SimpleModule buildCustomDeserializerModule() {
+        SimpleModule module = new SimpleModule();
+        module.addSerializer(DataSpecification.class, new DataSpecificationSerializer());
+        return module;
+    }
 
-	protected SimpleModule buildEnumModule() {
-		SimpleModule module = new SimpleModule();
-		// enums with custom naming strategy
-		module.addSerializer(IdentifierType.class, new EnumSerializer<>(new IdentifierTypeMapping()));
-		module.addSerializer(KeyType.class, new EnumSerializer<>(new KeyTypeMapping()));
-		// enums with screaming snake case naming strategy (e.g. HELLO_WORLD)
-		module.addSerializer(DataTypeIEC61360.class,
-				new EnumSerializer<>(new ScreamingSnakeCaseEnumNaming(DataTypeIEC61360.class)));
-		module.addSerializer(Category.class, new EnumSerializer<>(new ScreamingSnakeCaseEnumNaming(Category.class))); // not
-																														// used
-																														// in
-																														// JSON
-		// enums with upper camel case (default) naming strategy (e.g. HelloWorld)
-		module.addSerializer(AssetKind.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(AssetKind.class)));
-		module.addSerializer(EntityType.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(EntityType.class)));
-		module.addSerializer(IdentifiableElements.class,
-				new EnumSerializer<>(new UpperCamelCaseEnumNaming(IdentifiableElements.class))); // not used in JSON
-		module.addSerializer(KeyElements.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(KeyElements.class))); // not
-																														// used
-																														// in
-																														// JSON
-		module.addSerializer(LevelType.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(LevelType.class)));
-		module.addSerializer(LocalKeyType.class,
-				new EnumSerializer<>(new UpperCamelCaseEnumNaming(LocalKeyType.class))); // not used in JSON
-		module.addSerializer(ModelingKind.class,
-				new EnumSerializer<>(new UpperCamelCaseEnumNaming(ModelingKind.class)));
-		module.addSerializer(PermissionKind.class,
-				new EnumSerializer<>(new UpperCamelCaseEnumNaming(PermissionKind.class))); // not used in JSON
-		module.addSerializer(ReferableElements.class,
-				new EnumSerializer<>(new UpperCamelCaseEnumNaming(ReferableElements.class))); // not used in JSON
-		return module;
-	}
+    protected SimpleModule buildEnumModule() {
+        SimpleModule module = new SimpleModule();
+        // enums with custom naming strategy
+        module.addSerializer(IdentifierType.class, new EnumSerializer<>(new IdentifierTypeMapping()));
+        module.addSerializer(KeyType.class, new EnumSerializer<>(new KeyTypeMapping()));
+        // enums with screaming snake case naming strategy (e.g. HELLO_WORLD)
+        module.addSerializer(DataTypeIEC61360.class,
+                new EnumSerializer<>(new ScreamingSnakeCaseEnumNaming(DataTypeIEC61360.class)));
+        module.addSerializer(Category.class, new EnumSerializer<>(new ScreamingSnakeCaseEnumNaming(Category.class))); // not
+        // used
+        // in
+        // JSON
+        // enums with upper camel case (default) naming strategy (e.g. HelloWorld)
+        module.addSerializer(AssetKind.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(AssetKind.class)));
+        module.addSerializer(EntityType.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(EntityType.class)));
+        module.addSerializer(IdentifiableElements.class,
+                new EnumSerializer<>(new UpperCamelCaseEnumNaming(IdentifiableElements.class))); // not used in JSON
+        module.addSerializer(KeyElements.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(KeyElements.class))); // not
+        // used
+        // in
+        // JSON
+        module.addSerializer(LevelType.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(LevelType.class)));
+        module.addSerializer(LocalKeyType.class,
+                new EnumSerializer<>(new UpperCamelCaseEnumNaming(LocalKeyType.class))); // not used in JSON
+        module.addSerializer(ModelingKind.class,
+                new EnumSerializer<>(new UpperCamelCaseEnumNaming(ModelingKind.class)));
+        module.addSerializer(PermissionKind.class,
+                new EnumSerializer<>(new UpperCamelCaseEnumNaming(PermissionKind.class))); // not used in JSON
+        module.addSerializer(ReferableElements.class,
+                new EnumSerializer<>(new UpperCamelCaseEnumNaming(ReferableElements.class))); // not used in JSON
+        return module;
+    }
 
-	@Override
-	public String write(AssetAdministrationShellEnvironment aasEnvironment) throws SerializationException {
-		try {
-			return mapper.writeValueAsString(ModelTypeProcessor.postprocess(mapper.valueToTree(aasEnvironment)));
-		} catch (JsonProcessingException ex) {
-			throw new SerializationException("serialization failed", ex);
-		}
-	}
+    @Override
+    public String write(AssetAdministrationShellEnvironment aasEnvironment) throws SerializationException {
+        try {
+            return mapper.writeValueAsString(ModelTypeProcessor.postprocess(mapper.valueToTree(aasEnvironment)));
+        } catch (JsonProcessingException ex) {
+            throw new SerializationException("serialization failed", ex);
+        }
+    }
 }
