@@ -1,6 +1,8 @@
 package io.adminshell.aas.v3.dataformat.json;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import de.fraunhofer.iais.eis.SerializationException;
+import de.fraunhofer.iais.eis.Serializer;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;

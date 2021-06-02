@@ -147,15 +147,14 @@ import de.fraunhofer.iais.eis.RangeMixin;
 import de.fraunhofer.iais.eis.ReferableMixin;
 import de.fraunhofer.iais.eis.ReferenceElementMixin;
 import de.fraunhofer.iais.eis.SecurityMixin;
+import de.fraunhofer.iais.eis.SerializationException;
+import de.fraunhofer.iais.eis.Serializer;
 import de.fraunhofer.iais.eis.SubmodelElementCollectionMixin;
 import de.fraunhofer.iais.eis.SubmodelElementMixin;
 import de.fraunhofer.iais.eis.ValueListMixin;
 import de.fraunhofer.iais.eis.ValueReferencePairMixin;
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
 import io.adminshell.aas.v3.dataformat.json.serialization.DataSpecificationSerializer;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class JsonSerializer implements Serializer {
 

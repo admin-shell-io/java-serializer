@@ -151,6 +151,8 @@ import de.fraunhofer.iais.eis.DataElementMixin;
 import de.fraunhofer.iais.eis.DataSpecificationContentMixin;
 import de.fraunhofer.iais.eis.DataSpecificationIEC61360Mixin;
 import de.fraunhofer.iais.eis.DefaultOperationVariable;
+import de.fraunhofer.iais.eis.DeserializationException;
+import de.fraunhofer.iais.eis.Deserializer;
 import de.fraunhofer.iais.eis.EventElementMixin;
 import de.fraunhofer.iais.eis.EventMessageMixin;
 import de.fraunhofer.iais.eis.EventMixin;
@@ -184,8 +186,6 @@ import de.fraunhofer.iais.eis.ValueListMixin;
 import de.fraunhofer.iais.eis.ValueReferencePairMixin;
 import io.adminshell.aas.v3.dataformat.json.deserialization.ByteArrayDeserializer;
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class JsonDeserializer implements Deserializer {
 
