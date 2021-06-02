@@ -182,6 +182,7 @@ import de.fraunhofer.iais.eis.SubmodelElementCollectionMixin;
 import de.fraunhofer.iais.eis.SubmodelElementMixin;
 import de.fraunhofer.iais.eis.ValueListMixin;
 import de.fraunhofer.iais.eis.ValueReferencePairMixin;
+import io.adminshell.aas.v3.dataformat.json.deserialization.ByteArrayDeserializer;
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -274,6 +275,7 @@ public class JsonDeserializer implements Deserializer {
     protected SimpleModule buildCustomDeserializerModule() {
         SimpleModule module = new SimpleModule();
         module.addDeserializer(DataSpecification.class, new DataSpecificationDeserializer());
+        module.addDeserializer(byte[].class, new ByteArrayDeserializer());
         return module;
     }
 
