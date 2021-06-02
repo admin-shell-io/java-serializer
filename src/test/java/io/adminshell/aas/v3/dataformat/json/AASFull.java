@@ -2,7 +2,6 @@ package io.adminshell.aas.v3.dataformat.json;
 
 import java.util.Arrays;
 
-import de.fraunhofer.iais.eis.util.LangString;
 import io.adminshell.aas.v3.model.*;
 import io.adminshell.aas.v3.model.impl.builder.*;
 
