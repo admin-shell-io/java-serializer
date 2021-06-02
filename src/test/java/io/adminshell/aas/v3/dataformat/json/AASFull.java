@@ -476,7 +476,7 @@ public class AASFull {
 															.idType(KeyType.IRI).build()))
 													.build())
 											.mimeType("application/pdf")
-											// TODO value - removed in example
+											.value("AQIDBAU=".getBytes())
 											.build(),
 									new DefaultFileBuilder().idShort("ExampleFile").category("PARAMETER")
 											.descriptions(Arrays.asList(new LangString("Example File object", "en-us"),
@@ -763,8 +763,7 @@ public class AASFull {
 															.idType(KeyType.IRI).build()))
 													.build())
 											.mimeType("application/pdf")
-											// TODO value
-											// .value("AQIDBAU=".getBytes())
+											.value("AQIDBAU=".getBytes())
 											.build(),
 									new DefaultFileBuilder().idShort("ExampleFile").category("PARAMETER")
 											.descriptions(Arrays.asList(new LangString("Example File object", "en-us"),
