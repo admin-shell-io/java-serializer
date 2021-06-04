@@ -35,7 +35,7 @@ public class JsonValidationTest {
 	}
 
 	@Test
-	@Parameters({ "src/test/resources/invalidJSONExample.json" })
+	@Parameters({ "src/test/resources/invalidJsonExample.json" })
 	public void validateInvalidJson(String file) throws IOException {
 		String serializedEnvironment = new String(Files.readAllBytes(Paths.get(file)));
 		Set<String> errors = validator.validateSchema(serializedEnvironment);
