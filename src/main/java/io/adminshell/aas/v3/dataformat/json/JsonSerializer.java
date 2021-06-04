@@ -31,7 +31,6 @@ import io.adminshell.aas.v3.dataformat.json.enums.IdentifierTypeMapping;
 import io.adminshell.aas.v3.dataformat.json.enums.KeyTypeMapping;
 import io.adminshell.aas.v3.dataformat.json.enums.ScreamingSnakeCaseEnumNaming;
 import io.adminshell.aas.v3.dataformat.json.enums.UpperCamelCaseEnumNaming;
-
 import io.adminshell.aas.v3.dataformat.json.mixins.AccessControlMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.AccessControlPolicyPointsMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.AccessPermissionRuleMixin;
@@ -78,10 +77,9 @@ import io.adminshell.aas.v3.dataformat.json.mixins.SubmodelElementCollectionMixi
 import io.adminshell.aas.v3.dataformat.json.mixins.SubmodelElementMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.ValueListMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.ValueReferencePairMixin;
-
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
 import io.adminshell.aas.v3.dataformat.json.serialization.DataSpecificationSerializer;
-
+import io.adminshell.aas.v3.dataformat.json.serialization.SerializationAnnotationIntrospector;
 import io.adminshell.aas.v3.model.AccessControl;
 import io.adminshell.aas.v3.model.AccessControlPolicyPoints;
 import io.adminshell.aas.v3.model.AccessPermissionRule;
@@ -209,7 +207,8 @@ public class JsonSerializer implements Serializer {
 				.addMixIn(PolicyEnforcementPoints.class, PolicyEnforcementPointsMixin.class)
 				.addMixIn(PolicyInformationPoints.class, PolicyInformationPointsMixin.class)
 				.addMixIn(Property.class, PropertyMixin.class).addMixIn(Qualifiable.class, QualifiableMixin.class)
-				.addMixIn(Qualifier.class, QualifierMixin.class).addMixIn(DataSpecificationPhysicalUnit.class, DataSpecificationPhysicalUnitMixin.class)
+				.addMixIn(Qualifier.class, QualifierMixin.class)
+				.addMixIn(DataSpecificationPhysicalUnit.class, DataSpecificationPhysicalUnitMixin.class)
 				.addMixIn(Range.class, RangeMixin.class).addMixIn(Referable.class, ReferableMixin.class)
 				.addMixIn(ReferenceElement.class, ReferenceElementMixin.class)
 				.addMixIn(Reference.class, ReferenceMixin.class)
@@ -220,6 +219,10 @@ public class JsonSerializer implements Serializer {
 				.addMixIn(SubmodelElement.class, SubmodelElementMixin.class)
 				.addMixIn(Submodel.class, SubmodelMixin.class).addMixIn(ValueList.class, ValueListMixin.class)
 				.addMixIn(ValueReferencePair.class, ValueReferencePairMixin.class).addMixIn(View.class, ViewMixin.class)
+
+				// add custom serialization annotation introspector
+				.annotationIntrospector(new SerializationAnnotationIntrospector())
+
 				.build();
 	}
 
