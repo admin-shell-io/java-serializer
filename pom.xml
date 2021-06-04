@@ -29,8 +29,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>de.fraunhofer.iais.eis.aas.infomodel</groupId>
-            <artifactId>java</artifactId>
+            <groupId>io.adminshell.aas</groupId>
+            <artifactId>model</artifactId>
             <version>${revision}</version>
             <scope>compile</scope>
         </dependency>
