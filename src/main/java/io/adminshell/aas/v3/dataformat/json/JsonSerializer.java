@@ -31,6 +31,7 @@ import io.adminshell.aas.v3.dataformat.json.enums.IdentifierTypeMapping;
 import io.adminshell.aas.v3.dataformat.json.enums.KeyTypeMapping;
 import io.adminshell.aas.v3.dataformat.json.enums.ScreamingSnakeCaseEnumNaming;
 import io.adminshell.aas.v3.dataformat.json.enums.UpperCamelCaseEnumNaming;
+
 import io.adminshell.aas.v3.dataformat.json.mixins.AccessControlMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.AccessControlPolicyPointsMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.AccessPermissionRuleMixin;
@@ -46,6 +47,7 @@ import io.adminshell.aas.v3.dataformat.json.mixins.ConstraintMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.DataElementMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.DataSpecificationContentMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.DataSpecificationIEC61360Mixin;
+import io.adminshell.aas.v3.dataformat.json.mixins.DataSpecificationPhysicalUnitMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.EventElementMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.EventMessageMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.EventMixin;
@@ -68,7 +70,6 @@ import io.adminshell.aas.v3.dataformat.json.mixins.PolicyEnforcementPointsMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.PolicyInformationPointsMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.PropertyMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.QualifierMixin;
-import io.adminshell.aas.v3.dataformat.json.mixins.RC01Mixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.RangeMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.ReferableMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.ReferenceElementMixin;
@@ -77,8 +78,10 @@ import io.adminshell.aas.v3.dataformat.json.mixins.SubmodelElementCollectionMixi
 import io.adminshell.aas.v3.dataformat.json.mixins.SubmodelElementMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.ValueListMixin;
 import io.adminshell.aas.v3.dataformat.json.mixins.ValueReferencePairMixin;
+
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
 import io.adminshell.aas.v3.dataformat.json.serialization.DataSpecificationSerializer;
+
 import io.adminshell.aas.v3.model.AccessControl;
 import io.adminshell.aas.v3.model.AccessControlPolicyPoints;
 import io.adminshell.aas.v3.model.AccessPermissionRule;
@@ -101,6 +104,7 @@ import io.adminshell.aas.v3.model.DataElement;
 import io.adminshell.aas.v3.model.DataSpecification;
 import io.adminshell.aas.v3.model.DataSpecificationContent;
 import io.adminshell.aas.v3.model.DataSpecificationIEC61360;
+import io.adminshell.aas.v3.model.DataSpecificationPhysicalUnit;
 import io.adminshell.aas.v3.model.DataTypeIEC61360;
 import io.adminshell.aas.v3.model.Entity;
 import io.adminshell.aas.v3.model.EntityType;
@@ -140,7 +144,6 @@ import io.adminshell.aas.v3.model.PolicyInformationPoints;
 import io.adminshell.aas.v3.model.Property;
 import io.adminshell.aas.v3.model.Qualifiable;
 import io.adminshell.aas.v3.model.Qualifier;
-import io.adminshell.aas.v3.model.RC01;
 import io.adminshell.aas.v3.model.Range;
 import io.adminshell.aas.v3.model.Referable;
 import io.adminshell.aas.v3.model.ReferableElements;
@@ -206,7 +209,7 @@ public class JsonSerializer implements Serializer {
 				.addMixIn(PolicyEnforcementPoints.class, PolicyEnforcementPointsMixin.class)
 				.addMixIn(PolicyInformationPoints.class, PolicyInformationPointsMixin.class)
 				.addMixIn(Property.class, PropertyMixin.class).addMixIn(Qualifiable.class, QualifiableMixin.class)
-				.addMixIn(Qualifier.class, QualifierMixin.class).addMixIn(RC01.class, RC01Mixin.class)
+				.addMixIn(Qualifier.class, QualifierMixin.class).addMixIn(DataSpecificationPhysicalUnit.class, DataSpecificationPhysicalUnitMixin.class)
 				.addMixIn(Range.class, RangeMixin.class).addMixIn(Referable.class, ReferableMixin.class)
 				.addMixIn(ReferenceElement.class, ReferenceElementMixin.class)
 				.addMixIn(Reference.class, ReferenceMixin.class)
