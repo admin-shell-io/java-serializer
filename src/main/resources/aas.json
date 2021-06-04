@@ -50,7 +50,10 @@
               "type": "string"
             },
             "displayName": {
-              "type": "string"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/LangString"
+              }
             },
             "description": {
               "type": "array",
@@ -690,10 +693,10 @@
         {
           "properties": {
             "key": {
-              "type": "string"
+              "dataType": "string"
             },
             "value": {
-              "type": "string"
+              "dataType": "string"
             },
             "subjectId": {
               "$ref": "#/definitions/Reference"
@@ -861,7 +864,7 @@
               "$ref": "#/definitions/ModelingKind"
             },
             "idShort": {
-              "type": "string"
+              "dataType": "string"
             }
           },
           "required": [

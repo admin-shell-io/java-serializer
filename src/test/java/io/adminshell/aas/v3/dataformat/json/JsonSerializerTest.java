@@ -7,10 +7,10 @@ import static org.junit.Assert.assertTrue;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.json.JSONException;
@@ -48,33 +48,32 @@ public class JsonSerializerTest {
 	}
 
 	@Test
-	public void testSerializeSimple()
-			throws JsonProcessingException, IOException, JSONException, SerializationException {
+	public void testSimpleEnvValidatedByJsonLenient() throws SerializationException, JSONException, IOException {
 		String json = serializer.write(AASSimple.ENVIRONMENT);
 		logger.info(json);
 		assertFalse(json.isEmpty());
 		String expected = readFile(AASSimple.FILE);
-		// failes when using JSONCompareMode.STRICT
 		JSONAssert.assertEquals(expected, json, JSONCompareMode.LENIENT);
+		// failes when using JSONCompareMode.STRICT
 		// maybe check on JSON-level if things are equal
 		// could be problematic as specification allows for aggregation/list
 		// properties to be either serialized as empty array or be left out
 		// completely
 	}
 
-	private static String readFile(File file) throws FileNotFoundException {
-		return new BufferedReader(new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8)).lines()
-				.collect(Collectors.joining(System.lineSeparator()));
+	private static String readFile(File file) throws IOException {
+		try (FileInputStream fileInputStream = new FileInputStream(file)) {
+			InputStreamReader inputStreamReader = new InputStreamReader(fileInputStream, StandardCharsets.UTF_8);
+			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+			return bufferedReader.lines().collect(Collectors.joining(System.lineSeparator()));
+		}
 	}
 
 	@Test
-	public void testSerializeFull() throws JsonProcessingException, IOException {
-//        String json = serializer.write(AASSimple.ENVIRONMENT);
-//        logger.info(json);
-//        assertFalse(json.isEmpty());
-		// maybe check on JSON-level if things are equal
-		// could be problematic as specification allows for aggregation/list
-		// properties to be either serialized as empty array or be left out
-		// completely
+	public void testSimpleEnvValidatedBySchema() throws SerializationException, JSONException, IOException {
+		String json = serializer.write(AASSimple.ENVIRONMENT);
+		JsonSchemaValidator schemaValidator = new JsonSchemaValidator();
+		Set<String> foundErrors = schemaValidator.validateSchema(json);
+		assertTrue(foundErrors.isEmpty());
 	}
 }
