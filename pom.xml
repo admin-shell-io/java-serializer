@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>de.fraunhofer.iais.eis</groupId>
-    <artifactId>aas-merged-serializer</artifactId>
-    <version>0.1</version>
+    <groupId>io.adminshell.aas</groupId>
+    <artifactId>dataformat-json</artifactId>
+    <version>${revision}</version>
     <build>
         <plugins>
             <plugin>
@@ -24,6 +24,7 @@
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <revision>1.0.0-SNAPSHOT</revision>
     </properties>
 
     <dependencies>
