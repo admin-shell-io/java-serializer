@@ -3,7 +3,6 @@ package io.adminshell.aas.v3.dataformat.json;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashSet;
 import java.util.Set;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -15,49 +14,43 @@ import com.networknt.schema.SpecVersionDetector;
 import com.networknt.schema.ValidationMessage;
 
 import io.adminshell.aas.v3.dataformat.SchemaValidator;
+import java.util.stream.Collectors;
 
 public class JsonSchemaValidator implements SchemaValidator {
-	private static final String SCHEMA = "src/main/resources/aas.json";
-	private ObjectMapper mapper = new ObjectMapper();
 
-	protected JsonSchema schema;
+    private static final String SCHEMA = "src/main/resources/aas.json";
+    private ObjectMapper mapper = new ObjectMapper();
 
-	public JsonSchemaValidator() throws IOException {
-		loadSchemaFromResource();
-	}
+    protected JsonSchema schema;
 
-	public void loadSchemaFromResource() throws IOException {
-		JsonNode schemaRootNode = mapper.readTree(new String(Files.readAllBytes(Paths.get(SCHEMA))));
-		JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersionDetector.detect(schemaRootNode));
-		schema = factory.getSchema(schemaRootNode);
-	}
+    public JsonSchemaValidator() throws IOException {
+        loadSchema();
+    }
 
-	public Set<ValidationMessage> validateJsonSpecific(String serialized) throws JsonProcessingException {
-		JsonNode node = mapper.readTree(serialized);
-		return schema.validate(node);
-	}
+    public void loadSchema() throws IOException {
+        JsonNode schemaRootNode = mapper.readTree(new String(Files.readAllBytes(Paths.get(SCHEMA))));
+        JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersionDetector.detect(schemaRootNode));
+        schema = factory.getSchema(schemaRootNode);
+    }
 
-	@Override
-	public Set<String> validateSchema(String serialized) {
-		try {
-			Set<ValidationMessage> validationMessages = validateJsonSpecific(serialized);
-			return generalizeValidationMessagesAsStringSet(validationMessages);
-		} catch (JsonProcessingException e) {
-			return convertProcessingExceptionToErrorMessages(e);
-		}
-	}
+    public Set<ValidationMessage> validateJsonSpecific(String serialized) throws JsonProcessingException {
+        JsonNode node = mapper.readTree(serialized);
+        return schema.validate(node);
+    }
 
-	private Set<String> convertProcessingExceptionToErrorMessages(JsonProcessingException e) {
-		Set<String> errorMessages = new HashSet<>();
-		errorMessages.add(e.getMessage());
-		return errorMessages;
-	}
+    @Override
+    public Set<String> validateSchema(String serialized) {
+        try {
+            Set<ValidationMessage> validationMessages = validateJsonSpecific(serialized);
+            return generalizeValidationMessagesAsStringSet(validationMessages);
+        } catch (JsonProcessingException e) {
+            return Set.of(e.getMessage());
+        }
+    }
 
-	private Set<String> generalizeValidationMessagesAsStringSet(Set<ValidationMessage> messages) {
-		Set<String> errorMessages = new HashSet<>();
-		for (ValidationMessage message : messages) {
-			errorMessages.add(message.getMessage());
-		}
-		return errorMessages;
-	}
+    private Set<String> generalizeValidationMessagesAsStringSet(Set<ValidationMessage> messages) {
+        return messages.stream()
+                .map(x -> x.getMessage())
+                .collect(Collectors.toSet());
+    }
 }

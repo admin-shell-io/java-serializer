@@ -4,8 +4,6 @@ import io.adminshell.aas.v3.model.*;
 import io.adminshell.aas.v3.model.impl.builder.*;
 import java.util.Arrays;
 
-import de.fraunhofer.iais.eis.util.LangString;
-
 public class AASSimple {
 
     public static final java.io.File FILE = new java.io.File("src/test/resources/jsonExample.json");

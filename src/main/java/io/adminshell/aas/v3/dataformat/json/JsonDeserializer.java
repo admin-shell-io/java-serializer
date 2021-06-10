@@ -1,26 +1,14 @@
 package io.adminshell.aas.v3.dataformat.json;
 
-import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.deser.AbstractDeserializer;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 
-import de.fraunhofer.iais.eis.util.LangString;
 import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.Deserializer;
-import io.adminshell.aas.v3.dataformat.json.custommixins.AssetAdministrationShellEnvironmentMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.AssetInformationMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.ConceptDescriptionMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.DataSpecificationMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.HasDataSpecificationMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.HasExtensionsMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.IdentifierKeyValuePairMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.IdentifierMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.LangStringMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.QualifiableMixin;
-import io.adminshell.aas.v3.dataformat.json.custommixins.RelationshipElementMixin;
 import io.adminshell.aas.v3.dataformat.json.deserialization.ByteArrayDeserializer;
 import io.adminshell.aas.v3.dataformat.json.deserialization.DataSpecificationDeserializer;
 import io.adminshell.aas.v3.dataformat.json.enums.EnumDeserializer;
@@ -29,85 +17,21 @@ import io.adminshell.aas.v3.dataformat.json.enums.KeyTypeMapping;
 import io.adminshell.aas.v3.dataformat.json.enums.ScreamingSnakeCaseEnumNaming;
 import io.adminshell.aas.v3.dataformat.json.enums.UpperCamelCaseEnumNaming;
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
-import io.adminshell.aas.v3.model.AdministrativeInformation;
-import io.adminshell.aas.v3.model.AnnotatedRelationshipElement;
-import io.adminshell.aas.v3.model.Asset;
-import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
-import io.adminshell.aas.v3.model.AssetInformation;
 import io.adminshell.aas.v3.model.AssetKind;
-import io.adminshell.aas.v3.model.BasicEvent;
-import io.adminshell.aas.v3.model.Blob;
-import io.adminshell.aas.v3.model.Capability;
 import io.adminshell.aas.v3.model.Category;
-import io.adminshell.aas.v3.model.ConceptDescription;
 import io.adminshell.aas.v3.model.DataSpecification;
-import io.adminshell.aas.v3.model.DataSpecificationIEC61360;
 import io.adminshell.aas.v3.model.DataTypeIEC61360;
-import io.adminshell.aas.v3.model.Entity;
 import io.adminshell.aas.v3.model.EntityType;
-import io.adminshell.aas.v3.model.File;
-import io.adminshell.aas.v3.model.Formula;
-import io.adminshell.aas.v3.model.HasDataSpecification;
-import io.adminshell.aas.v3.model.HasExtensions;
 import io.adminshell.aas.v3.model.IdentifiableElements;
-import io.adminshell.aas.v3.model.Identifier;
-import io.adminshell.aas.v3.model.IdentifierKeyValuePair;
 import io.adminshell.aas.v3.model.IdentifierType;
-import io.adminshell.aas.v3.model.Key;
 import io.adminshell.aas.v3.model.KeyElements;
 import io.adminshell.aas.v3.model.KeyType;
 import io.adminshell.aas.v3.model.LevelType;
 import io.adminshell.aas.v3.model.LocalKeyType;
 import io.adminshell.aas.v3.model.ModelingKind;
-import io.adminshell.aas.v3.model.MultiLanguageProperty;
-import io.adminshell.aas.v3.model.Operation;
-import io.adminshell.aas.v3.model.OperationVariable;
 import io.adminshell.aas.v3.model.PermissionKind;
-import io.adminshell.aas.v3.model.Property;
-import io.adminshell.aas.v3.model.Qualifiable;
-import io.adminshell.aas.v3.model.Qualifier;
-import io.adminshell.aas.v3.model.Range;
 import io.adminshell.aas.v3.model.ReferableElements;
-import io.adminshell.aas.v3.model.Reference;
-import io.adminshell.aas.v3.model.ReferenceElement;
-import io.adminshell.aas.v3.model.RelationshipElement;
-import io.adminshell.aas.v3.model.Submodel;
-import io.adminshell.aas.v3.model.SubmodelElementCollection;
-import io.adminshell.aas.v3.model.ValueList;
-import io.adminshell.aas.v3.model.ValueReferencePair;
-import io.adminshell.aas.v3.model.View;
-import io.adminshell.aas.v3.model.impl.DefaultAdministrativeInformation;
-import io.adminshell.aas.v3.model.impl.DefaultAnnotatedRelationshipElement;
-import io.adminshell.aas.v3.model.impl.DefaultAsset;
-import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShell;
-import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShellEnvironment;
-import io.adminshell.aas.v3.model.impl.DefaultAssetInformation;
-import io.adminshell.aas.v3.model.impl.DefaultBasicEvent;
-import io.adminshell.aas.v3.model.impl.DefaultBlob;
-import io.adminshell.aas.v3.model.impl.DefaultCapability;
-import io.adminshell.aas.v3.model.impl.DefaultConceptDescription;
-import io.adminshell.aas.v3.model.impl.DefaultDataSpecificationIEC61360;
-import io.adminshell.aas.v3.model.impl.DefaultEntity;
-import io.adminshell.aas.v3.model.impl.DefaultFile;
-import io.adminshell.aas.v3.model.impl.DefaultFormula;
-import io.adminshell.aas.v3.model.impl.DefaultIdentifier;
-import io.adminshell.aas.v3.model.impl.DefaultIdentifierKeyValuePair;
-import io.adminshell.aas.v3.model.impl.DefaultKey;
-import io.adminshell.aas.v3.model.impl.DefaultMultiLanguageProperty;
-import io.adminshell.aas.v3.model.impl.DefaultOperation;
-import io.adminshell.aas.v3.model.impl.DefaultOperationVariable;
-import io.adminshell.aas.v3.model.impl.DefaultProperty;
-import io.adminshell.aas.v3.model.impl.DefaultQualifier;
-import io.adminshell.aas.v3.model.impl.DefaultRange;
-import io.adminshell.aas.v3.model.impl.DefaultReference;
-import io.adminshell.aas.v3.model.impl.DefaultReferenceElement;
-import io.adminshell.aas.v3.model.impl.DefaultRelationshipElement;
-import io.adminshell.aas.v3.model.impl.DefaultSubmodel;
-import io.adminshell.aas.v3.model.impl.DefaultSubmodelElementCollection;
-import io.adminshell.aas.v3.model.impl.DefaultValueList;
-import io.adminshell.aas.v3.model.impl.DefaultValueReferencePair;
-import io.adminshell.aas.v3.model.impl.DefaultView;
 
 public class JsonDeserializer implements Deserializer {
 
@@ -121,24 +45,14 @@ public class JsonDeserializer implements Deserializer {
 
     protected void buildMapper() {
         mapper = JsonMapper.builder()
-                // needed because 'modelType' only handled for polymorphism and needs to be
-                // ignored otherwise
                 .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
                 .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-                .serializationInclusion(JsonInclude.Include.NON_NULL).addModule(buildEnumModule())
-                .addModule(buildImplementationModule()).addModule(buildCustomDeserializerModule())
-                .addMixIn(AssetAdministrationShellEnvironment.class, AssetAdministrationShellEnvironmentMixin.class)
-                .addMixIn(AssetInformation.class, AssetInformationMixin.class)
-                .addMixIn(ConceptDescription.class, ConceptDescriptionMixin.class)
-                .addMixIn(DataSpecification.class, DataSpecificationMixin.class)
-                .addMixIn(HasDataSpecification.class, HasDataSpecificationMixin.class)
-                .addMixIn(HasExtensions.class, HasExtensionsMixin.class)
-                .addMixIn(IdentifierKeyValuePair.class, IdentifierKeyValuePairMixin.class)
-                .addMixIn(Identifier.class, IdentifierMixin.class)
-                .addMixIn(LangString.class, LangStringMixin.class)
-                .addMixIn(Qualifiable.class, QualifiableMixin.class)
-                .addMixIn(RelationshipElement.class, RelationshipElementMixin.class)
+                .annotationIntrospector(new AnnotationIntrospector())
+                .addModule(buildEnumModule())
+                .addModule(buildImplementationModule())
+                .addModule(buildCustomDeserializerModule())
                 .build();
+        ReflectionHelper.MIXINS.entrySet().forEach(x -> mapper.addMixIn(x.getKey(), x.getValue()));
     }
 
     protected SimpleModule buildCustomDeserializerModule() {
@@ -150,38 +64,7 @@ public class JsonDeserializer implements Deserializer {
 
     private void initTypeResolver() {
         typeResolver = new SimpleAbstractTypeResolver();
-        typeResolver.addMapping(AdministrativeInformation.class, DefaultAdministrativeInformation.class);
-        typeResolver.addMapping(AnnotatedRelationshipElement.class, DefaultAnnotatedRelationshipElement.class);
-        typeResolver.addMapping(Asset.class, DefaultAsset.class);
-        typeResolver.addMapping(AssetAdministrationShell.class, DefaultAssetAdministrationShell.class);
-        typeResolver.addMapping(AssetAdministrationShellEnvironment.class,
-                DefaultAssetAdministrationShellEnvironment.class);
-        typeResolver.addMapping(AssetInformation.class, DefaultAssetInformation.class);
-        typeResolver.addMapping(BasicEvent.class, DefaultBasicEvent.class);
-        typeResolver.addMapping(Blob.class, DefaultBlob.class);
-        typeResolver.addMapping(Capability.class, DefaultCapability.class);
-        typeResolver.addMapping(ConceptDescription.class, DefaultConceptDescription.class);
-        typeResolver.addMapping(DataSpecificationIEC61360.class, DefaultDataSpecificationIEC61360.class);
-        typeResolver.addMapping(Entity.class, DefaultEntity.class);
-        typeResolver.addMapping(File.class, DefaultFile.class);
-        typeResolver.addMapping(Formula.class, DefaultFormula.class);
-        typeResolver.addMapping(Identifier.class, DefaultIdentifier.class);
-        typeResolver.addMapping(IdentifierKeyValuePair.class, DefaultIdentifierKeyValuePair.class);
-        typeResolver.addMapping(Key.class, DefaultKey.class);
-        typeResolver.addMapping(MultiLanguageProperty.class, DefaultMultiLanguageProperty.class);
-        typeResolver.addMapping(Operation.class, DefaultOperation.class);
-        typeResolver.addMapping(OperationVariable.class, DefaultOperationVariable.class);
-        typeResolver.addMapping(Property.class, DefaultProperty.class);
-        typeResolver.addMapping(Qualifier.class, DefaultQualifier.class);
-        typeResolver.addMapping(Range.class, DefaultRange.class);
-        typeResolver.addMapping(Reference.class, DefaultReference.class);
-        typeResolver.addMapping(ReferenceElement.class, DefaultReferenceElement.class);
-        typeResolver.addMapping(RelationshipElement.class, DefaultRelationshipElement.class);
-        typeResolver.addMapping(Submodel.class, DefaultSubmodel.class);
-        typeResolver.addMapping(SubmodelElementCollection.class, DefaultSubmodelElementCollection.class);
-        typeResolver.addMapping(ValueList.class, DefaultValueList.class);
-        typeResolver.addMapping(ValueReferencePair.class, DefaultValueReferencePair.class);
-        typeResolver.addMapping(View.class, DefaultView.class);
+        ReflectionHelper.DEFAULT_IMPLEMENTATIONS.forEach(x -> typeResolver.addMapping(x.getImplementedClass(), x.getImplementationClass()));
     }
 
     protected SimpleModule buildEnumModule() {
@@ -225,7 +108,8 @@ public class JsonDeserializer implements Deserializer {
         try {
             return mapper.treeToValue(ModelTypeProcessor.preprocess(value), AssetAdministrationShellEnvironment.class);
         } catch (JsonProcessingException ex) {
-            throw new DeserializationException("deserialization failed", ex);
+            AbstractDeserializer d;
+            throw new DeserializationException("error deserializing AssetAdministrationShellEnvironment", ex);
         }
     }
 

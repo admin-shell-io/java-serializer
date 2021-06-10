@@ -513,16 +513,7 @@
                             }
                         ]
                     },
-                    "entityType": "SelfManagedEntity",
-                    "asset": {
-                        "keys": [
-                            {
-                                "type": "Asset",
-                                "idType": "IRI",
-                                "value": "https://acplt.org/Test_Asset2"
-                            }
-                        ]
-                    }
+                    "entityType": "SelfManagedEntity"
                 }
             ]
         },
@@ -1059,7 +1050,8 @@
                                     }
                                 ]
                             },
-                            "mimeType": "application/pdf"
+                            "mimeType": "application/pdf",
+                            "value": "AQIDBAU="
                         },
                         {
                             "idShort": "ExampleFile",
@@ -1124,8 +1116,7 @@
                                 ]
                             }
                         }
-                    ],
-                    "ordered": false
+                    ]
                 }
             ]
         },
@@ -1819,7 +1810,8 @@
                                     }
                                 ]
                             },
-                            "mimeType": "application/pdf"
+                            "mimeType": "application/pdf",
+                            "value": "AQIDBAU="
                         },
                         {
                             "idShort": "ExampleFile",
@@ -2516,8 +2508,7 @@
             "administration": {
                 "version": "0.9",
                 "revision": "0"
-            },
-            "kind": "Instance"
+            }
         },
         {
             "idShort": "",
@@ -2527,8 +2518,7 @@
             "identification": {
                 "id": "https://acplt.org/Test_Asset_Mandatory",
                 "idType": "IRI"
-            },
-            "kind": "Instance"
+            }
         },
         {
             "idShort": "Test_Asset",
@@ -2551,8 +2541,7 @@
             },
             "administration": {
 
-            },
-            "kind": "Instance"
+            }
         }
     ],
     "conceptDescriptions": [

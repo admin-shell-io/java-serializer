@@ -206,9 +206,7 @@
                             "mimeType": "application/pdf",
                             "value": "/aasx/OperatingManual.pdf"
                         }
-                    ],
-                    "ordered": false,
-                    "allowDuplicates": false
+                    ]
                 }
             ]
         },
@@ -505,8 +503,8 @@
                         ]
                     },
                     "dataSpecificationContent": {
-                    	"preferredName": [
-                    	],
+                        "preferredName": [
+                        ],
                         "shortName": [
                             {
                                 "language": "EN",

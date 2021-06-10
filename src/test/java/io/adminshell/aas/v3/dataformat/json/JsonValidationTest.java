@@ -17,32 +17,33 @@ import junitparams.Parameters;
 
 @RunWith(JUnitParamsRunner.class)
 public class JsonValidationTest {
-	private static JsonSchemaValidator validator;
 
-	@BeforeClass
-	public static void prepareValidator() throws IOException {
-		validator = new JsonSchemaValidator();
-	}
+    private static JsonSchemaValidator validator;
 
-	@Test
-	@Parameters({ "src/test/resources/jsonExample.json", "src/test/resources/test_demo_full_example.json",
-			"src/test/resources/MotorAAS.json", "src/test/resources/MotorAAS_reduced.json" })
-	public void validateValidJson(String file) throws IOException {
-		String serializedEnvironment = new String(Files.readAllBytes(Paths.get(file)));
-		Set<String> errors = validator.validateSchema(serializedEnvironment);
-		System.out.println("Validating: " + file);
-		assertTrue(errors.isEmpty());
-	}
+    @BeforeClass
+    public static void prepareValidator() throws IOException {
+        validator = new JsonSchemaValidator();
+    }
 
-	@Test
-	@Parameters({ "src/test/resources/invalidJSONExample.json" })
-	public void validateInvalidJson(String file) throws IOException {
-		String serializedEnvironment = new String(Files.readAllBytes(Paths.get(file)));
-		Set<String> errors = validator.validateSchema(serializedEnvironment);
-		System.out.println("Validating: " + file);
-		for (String s : errors) {
-			System.out.println(s);
-		}
-		assertEquals(2, errors.size());
-	}
+    @Test
+    @Parameters({"src/test/resources/jsonExample.json", "src/test/resources/test_demo_full_example.json",
+        "src/test/resources/MotorAAS.json", "src/test/resources/MotorAAS_reduced.json"})
+    public void validateValidJson(String file) throws IOException {
+        String serializedEnvironment = new String(Files.readAllBytes(Paths.get(file)));
+        Set<String> errors = validator.validateSchema(serializedEnvironment);
+        System.out.println("Validating: " + file);
+        assertTrue(errors.isEmpty());
+    }
+
+    @Test
+    @Parameters({"src/test/resources/invalidJsonExample.json"})
+    public void validateInvalidJson(String file) throws IOException {
+        String serializedEnvironment = new String(Files.readAllBytes(Paths.get(file)));
+        Set<String> errors = validator.validateSchema(serializedEnvironment);
+        System.out.println("Validating: " + file);
+        for (String s : errors) {
+            System.out.println(s);
+        }
+        assertEquals(2, errors.size());
+    }
 }

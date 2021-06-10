@@ -21,30 +21,30 @@ import io.adminshell.aas.v3.model.impl.builder.DefaultDataSpecificationBuilder;
 
 public class DataSpecificationDeserializer extends JsonDeserializer<DataSpecification> {
 
-	@Override
-	public DataSpecification deserialize(JsonParser parser, DeserializationContext context)
-			throws IOException, JsonProcessingException {
-		Object temp = parser.getCodec().readTree(parser);
-		ObjectNode node = (ObjectNode) temp;
-		if (node == null) {
-			return null;
-		}
-		JsonNode nodeDataSpecification = node.get(PROP_DATA_SPECIFICATION);
-		if (nodeDataSpecification == null) {
-			throw new JsonMappingException(parser,
-					String.format("data specification must contain node '%s'", PROP_DATA_SPECIFICATION));
-		}
-		JsonParser parserReference = parser.getCodec().getFactory().getCodec().treeAsTokens(nodeDataSpecification);
-		parserReference.nextToken();
-		Reference reference = parserReference.readValueAs(Reference.class);
-		Class<? extends DataSpecificationContent> targetClass = DataSpecificationManager.getImplementation(reference);
-		JsonNode nodeContent = node.get(PROP_DATA_SPECIFICATION_CONTENT);
-		if (nodeContent == null) {
-			context.reportInputMismatch(targetClass, "property {} must not be empty", PROP_DATA_SPECIFICATION_CONTENT);
-		}
-		JsonParser parserContent = parser.getCodec().getFactory().getCodec().treeAsTokens(nodeContent);
-		parserContent.nextToken();
-		DataSpecificationContent content = parserContent.readValueAs(targetClass);
-		return new DefaultDataSpecificationBuilder().dataSpecificationContent(content).build();
-	}
+    @Override
+    public DataSpecification deserialize(JsonParser parser, DeserializationContext context)
+            throws IOException, JsonProcessingException {
+        Object temp = parser.getCodec().readTree(parser);
+        ObjectNode node = (ObjectNode) temp;
+        if (node == null) {
+            return null;
+        }
+        JsonNode nodeDataSpecification = node.get(PROP_DATA_SPECIFICATION);
+        if (nodeDataSpecification == null) {
+            throw new JsonMappingException(parser,
+                    String.format("data specification must contain node '%s'", PROP_DATA_SPECIFICATION));
+        }
+        JsonParser parserReference = parser.getCodec().getFactory().getCodec().treeAsTokens(nodeDataSpecification);
+        parserReference.nextToken();
+        Reference reference = parserReference.readValueAs(Reference.class);
+        Class<? extends DataSpecificationContent> targetClass = DataSpecificationManager.getImplementation(reference);
+        JsonNode nodeContent = node.get(PROP_DATA_SPECIFICATION_CONTENT);
+        if (nodeContent == null) {
+            context.reportInputMismatch(targetClass, "property {} must not be empty", PROP_DATA_SPECIFICATION_CONTENT);
+        }
+        JsonParser parserContent = parser.getCodec().getFactory().getCodec().treeAsTokens(nodeContent);
+        parserContent.nextToken();
+        DataSpecificationContent content = parserContent.readValueAs(targetClass);
+        return new DefaultDataSpecificationBuilder().dataSpecificationContent(content).build();
+    }
 }

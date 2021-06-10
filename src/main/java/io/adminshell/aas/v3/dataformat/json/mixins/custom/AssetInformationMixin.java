@@ -1,8 +1,10 @@
-package io.adminshell.aas.v3.dataformat.json.custommixins;
+package io.adminshell.aas.v3.dataformat.json.mixins.custom;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.adminshell.aas.v3.model.AssetKind;
 
 import io.adminshell.aas.v3.model.File;
 import io.adminshell.aas.v3.model.Submodel;
@@ -20,4 +22,7 @@ public interface AssetInformationMixin {
 
     @JsonProperty("billOfMaterial")
     public void setBillOfMaterials(List<Submodel> billOfMaterials);
+
+    @JsonInclude(JsonInclude.Include.ALWAYS)
+    public AssetKind getAssetKind();
 }

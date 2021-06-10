@@ -1,4 +1,4 @@
-package io.adminshell.aas.v3.dataformat.json.custommixins;
+package io.adminshell.aas.v3.dataformat.json.mixins.custom;
 
 import java.util.List;
 
