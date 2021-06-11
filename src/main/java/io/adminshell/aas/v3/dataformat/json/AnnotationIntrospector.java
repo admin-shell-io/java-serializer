@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.databind.jsontype.TypeResolverBuilder;
+import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -101,7 +102,7 @@ public class AnnotationIntrospector extends JacksonAnnotationIntrospector {
             AnnotatedMethod method = (AnnotatedMethod) a;
             if (method.getParameterCount() == 0
                     && method.getName().startsWith(GETTER_PREFIX)
-                    && Objects.equals(List.class, method.getRawReturnType())
+                    && Collection.class.isAssignableFrom(method.getRawReturnType())
                     && ReflectionHelper.isModelInterfaceOrDefaultImplementation(method.getDeclaringClass())) {
                 return result.withValueInclusion(JsonInclude.Include.NON_EMPTY);
             }

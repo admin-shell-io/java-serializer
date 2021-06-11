@@ -1216,7 +1216,6 @@
                             "modelType": {
                                 "name": "Property"
                             },
-                            "value": null,
                             "valueType": "string"
                         },
                         {
@@ -1230,9 +1229,7 @@
                             "modelType": {
                                 "name": "Range"
                             },
-                            "valueType": "int",
-                            "min": null,
-                            "max": null
+                            "valueType": "int"
                         }
                     ],
                     "ordered": true
@@ -1255,7 +1252,6 @@
                             "modelType": {
                                 "name": "File"
                             },
-                            "value": null,
                             "mimeType": "application/pdf"
                         },
                         {
@@ -1264,15 +1260,13 @@
                                 "name": "ReferenceElement"
                             }
                         }
-                    ],
-                    "ordered": false
+                    ]
                 },
                 {
                     "idShort": "ExampleSubmodelCollectionUnordered2",
                     "modelType": {
                         "name": "SubmodelElementCollection"
-                    },
-                    "ordered": false
+                    }
                 }
             ]
         },
@@ -1876,8 +1870,7 @@
                                 ]
                             }
                         }
-                    ],
-                    "ordered": false
+                    ]
                 }
             ]
         },
@@ -2059,7 +2052,6 @@
                                     ]
                                 },
                                 "kind": "Template",
-                                "value": null,
                                 "valueType": "string"
                             }
                         }
@@ -2092,7 +2084,6 @@
                                     ]
                                 },
                                 "kind": "Template",
-                                "value": null,
                                 "valueType": "string"
                             }
                         }
@@ -2125,7 +2116,6 @@
                                     ]
                                 },
                                 "kind": "Template",
-                                "value": null,
                                 "valueType": "string"
                             }
                         }
@@ -2247,7 +2237,6 @@
                                 ]
                             },
                             "kind": "Template",
-                            "value": null,
                             "valueType": "string"
                         },
                         {
@@ -2304,7 +2293,6 @@
                             },
                             "kind": "Template",
                             "valueType": "int",
-                            "min": null,
                             "max": "100"
                         },
                         {
@@ -2334,8 +2322,7 @@
                             },
                             "kind": "Template",
                             "valueType": "int",
-                            "min": "0",
-                            "max": null
+                            "min": "0"
                         }
                     ],
                     "ordered": true
@@ -2421,7 +2408,6 @@
                                 ]
                             },
                             "kind": "Template",
-                            "value": null,
                             "mimeType": "application/pdf"
                         },
                         {
@@ -2451,8 +2437,7 @@
                             },
                             "kind": "Template"
                         }
-                    ],
-                    "ordered": false
+                    ]
                 },
                 {
                     "idShort": "ExampleSubmodelCollectionUnordered2",
@@ -2479,8 +2464,7 @@
                             }
                         ]
                     },
-                    "kind": "Template",
-                    "ordered": false
+                    "kind": "Template"
                 }
             ]
         }
