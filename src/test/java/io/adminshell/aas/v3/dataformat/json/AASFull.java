@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import io.adminshell.aas.v3.model.*;
 import io.adminshell.aas.v3.model.impl.builder.*;
+import java.util.Base64;
 
 public class AASFull {
 
@@ -476,7 +477,7 @@ public class AASFull {
                                                             .idType(KeyType.IRI).build()))
                                                     .build())
                                             .mimeType("application/pdf")
-                                            .value("AQIDBAU=".getBytes())
+                                            .value(Base64.getDecoder().decode("AQIDBAU="))
                                             .build(),
                                     new DefaultFileBuilder().idShort("ExampleFile").category("PARAMETER")
                                             .descriptions(Arrays.asList(new LangString("Example File object", "en-us"),
@@ -763,7 +764,7 @@ public class AASFull {
                                                             .idType(KeyType.IRI).build()))
                                                     .build())
                                             .mimeType("application/pdf")
-                                            .value("AQIDBAU=".getBytes())
+                                            .value(Base64.getDecoder().decode("AQIDBAU="))
                                             .build(),
                                     new DefaultFileBuilder().idShort("ExampleFile").category("PARAMETER")
                                             .descriptions(Arrays.asList(new LangString("Example File object", "en-us"),
