@@ -9,7 +9,6 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.Deserializer;
-import io.adminshell.aas.v3.dataformat.json.deserialization.ByteArrayDeserializer;
 import io.adminshell.aas.v3.dataformat.json.deserialization.DataSpecificationDeserializer;
 import io.adminshell.aas.v3.dataformat.json.enums.EnumDeserializer;
 import io.adminshell.aas.v3.dataformat.json.enums.IdentifierTypeMapping;
@@ -58,7 +57,6 @@ public class JsonDeserializer implements Deserializer {
     protected SimpleModule buildCustomDeserializerModule() {
         SimpleModule module = new SimpleModule();
         module.addDeserializer(DataSpecification.class, new DataSpecificationDeserializer());
-        module.addDeserializer(byte[].class, new ByteArrayDeserializer());
         return module;
     }
 
