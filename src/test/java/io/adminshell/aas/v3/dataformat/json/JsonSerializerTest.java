@@ -20,7 +20,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
-import io.adminshell.aas.v3.model.impl.builder.DefaultAssetAdministrationShellEnvironmentBuilder;
+import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShellEnvironment;
 import java.nio.file.Files;
 
 public class JsonSerializerTest {
@@ -44,7 +44,7 @@ public class JsonSerializerTest {
 
     @Test
     public void testSerializeEmpty() throws JsonProcessingException, IOException, SerializationException, JSONException {
-        validateAndCompare(new java.io.File("src/test/resources/empty_aas.json"), new DefaultAssetAdministrationShellEnvironmentBuilder().build());
+        validateAndCompare(new java.io.File("src/test/resources/empty_aas.json"), new DefaultAssetAdministrationShellEnvironment.Builder().build());
     }
 
     @Test

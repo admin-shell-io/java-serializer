@@ -10,8 +10,8 @@ import io.adminshell.aas.v3.model.DataSpecificationIEC61360;
 import io.adminshell.aas.v3.model.KeyElements;
 import io.adminshell.aas.v3.model.KeyType;
 import io.adminshell.aas.v3.model.Reference;
-import io.adminshell.aas.v3.model.impl.builder.DefaultKeyBuilder;
-import io.adminshell.aas.v3.model.impl.builder.DefaultReferenceBuilder;
+import io.adminshell.aas.v3.model.impl.DefaultKey;
+import io.adminshell.aas.v3.model.impl.DefaultReference;
 
 public class DataSpecificationManager {
 
@@ -31,8 +31,8 @@ public class DataSpecificationManager {
     }
 
     private static Reference createGlobalIri(String iri) {
-        return new DefaultReferenceBuilder().keys(Arrays.asList(
-                new DefaultKeyBuilder().idType(KeyType.IRI).type(KeyElements.GLOBAL_REFERENCE).value(iri).build()))
+        return new DefaultReference.Builder().keys(Arrays.asList(
+                new DefaultKey.Builder().idType(KeyType.IRI).type(KeyElements.GLOBAL_REFERENCE).value(iri).build()))
                 .build();
     }
 

@@ -17,7 +17,7 @@ import io.adminshell.aas.v3.dataformat.json.DataSpecificationManager;
 import io.adminshell.aas.v3.model.DataSpecification;
 import io.adminshell.aas.v3.model.DataSpecificationContent;
 import io.adminshell.aas.v3.model.Reference;
-import io.adminshell.aas.v3.model.impl.builder.DefaultDataSpecificationBuilder;
+import io.adminshell.aas.v3.model.impl.DefaultDataSpecification;
 
 public class DataSpecificationDeserializer extends JsonDeserializer<DataSpecification> {
 
@@ -45,6 +45,6 @@ public class DataSpecificationDeserializer extends JsonDeserializer<DataSpecific
         JsonParser parserContent = parser.getCodec().getFactory().getCodec().treeAsTokens(nodeContent);
         parserContent.nextToken();
         DataSpecificationContent content = parserContent.readValueAs(targetClass);
-        return new DefaultDataSpecificationBuilder().dataSpecificationContent(content).build();
+        return new DefaultDataSpecification.Builder().dataSpecificationContent(content).build();
     }
 }
