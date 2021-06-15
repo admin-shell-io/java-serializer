@@ -70,50 +70,18 @@ public class ReflectionHelper {
                 .enableClassInfo()
                 .acceptPackagesNonRecursive(MODEL_PACKAGE_NAME)
                 .scan();
-        TYPES_WITH_MODEL_TYPE = MODEL_TYPE_SUPERCLASSES.stream()
-                .flatMap(x -> modelScan.getClassesImplementing(x.getName()).loadClasses().stream())
-                .collect(Collectors.toSet());
-        TYPES_WITH_MODEL_TYPE.addAll(MODEL_TYPE_SUPERCLASSES);
-        Function<ClassInfo, Set<Class<?>>> getSubclasses = x
-                -> x.getClassesImplementing()
-                        .directOnly()
-                        .filter(y -> y.isInterface())
-                        .loadClasses()
-                        .stream()
-                        .collect(Collectors.toSet());
-        SUBTYPES = modelScan.getAllInterfaces().stream()
-                .filter(x -> !getSubclasses.apply(x).isEmpty())
-                .collect(Collectors.toMap(x -> x.loadClass(), getSubclasses));
-        ScanResult mixinScan = new ClassGraph()
-                .enableClassInfo()
-                .acceptPackagesNonRecursive(MIXINS_PACKAGE_NAME)
-                .scan();
-        MIXINS = new HashMap<>();
-        mixinScan.getAllClasses()
-                .filter(x -> x.getSimpleName().endsWith(MIXIN_SUFFIX))
-                .loadClasses()
-                .forEach(x -> {
-                    String modelClassName = x.getSimpleName().substring(0, x.getSimpleName().length() - MIXIN_SUFFIX.length());
-                    ClassInfoList modelClassInfos = modelScan.getAllClasses().filter(y -> Objects.equals(y.getSimpleName(), modelClassName));
-                    if (modelClassInfos == null || modelClassInfos.isEmpty()) {
-                        logger.warn("could not auto-resolve target class for mixin '{}'", x.getSimpleName());
-                    } else if (modelClassInfos.size() > 1) {
-                        logger.warn("found multiple target classes for mixin '{}'. Mixin will be applied to all of them. (target classes: {})",
-                                x.getSimpleName(),
-                                modelClassInfos.stream().map(y -> y.getName()).collect(Collectors.joining(", ")));
-                    } else {
-                        MIXINS.put(modelClassInfos.get(0).loadClass(), x);
-                        logger.info("using mixin '{}' for class '{}'",
-                                x.getSimpleName(),
-                                modelClassInfos.get(0).getName());
-                    }
-                });
+        TYPES_WITH_MODEL_TYPE = scanModelTypes(modelScan);
+        SUBTYPES = scanSubtypes(modelScan);
+        MIXINS = scanMixins(modelScan);
+        DEFAULT_IMPLEMENTATIONS = scanDefaultImplementations(modelScan);
+    }
 
-        ScanResult defaulImplementationScan = new ClassGraph()
+	private static List<ImplementationInfo> scanDefaultImplementations(ScanResult modelScan) {
+		ScanResult defaulImplementationScan = new ClassGraph()
                 .enableClassInfo()
                 .acceptPackagesNonRecursive(DEFAULT_IMPLEMENTATION_PACKAGE_NAME)
                 .scan();
-        DEFAULT_IMPLEMENTATIONS = new ArrayList<>();
+		List<ImplementationInfo> defaultImplementations = new ArrayList<>();
         defaulImplementationScan.getAllClasses()
                 .filter(x -> x.getSimpleName().startsWith(DEFAULT_IMPLEMENTATION_PREFIX))
                 .loadClasses()
@@ -134,15 +102,65 @@ public class ReflectionHelper {
                                     x.getSimpleName(),
                                     modelClassInfos.get(0).getName());
                         } else {
-                            DEFAULT_IMPLEMENTATIONS.add(new ImplementationInfo(implementedClass, x));
+                            defaultImplementations.add(new ImplementationInfo(implementedClass, x));
                             logger.info("using default implementation class '{}' for interface '{}'",
                                     x.getSimpleName(),
                                     modelClassInfos.get(0).getName());
                         }
                     }
                 });
+        return defaultImplementations;
+	}
 
-    }
+	private static Map<Class<?>, Class<?>>  scanMixins(ScanResult modelScan) {
+		ScanResult mixinScan = new ClassGraph()
+                .enableClassInfo()
+                .acceptPackagesNonRecursive(MIXINS_PACKAGE_NAME)
+                .scan();
+		Map<Class<?>, Class<?>> mixins = new HashMap<>();
+        mixinScan.getAllClasses()
+                .filter(x -> x.getSimpleName().endsWith(MIXIN_SUFFIX))
+                .loadClasses()
+                .forEach(x -> {
+                    String modelClassName = x.getSimpleName().substring(0, x.getSimpleName().length() - MIXIN_SUFFIX.length());
+                    ClassInfoList modelClassInfos = modelScan.getAllClasses().filter(y -> Objects.equals(y.getSimpleName(), modelClassName));
+                    if (modelClassInfos == null || modelClassInfos.isEmpty()) {
+                        logger.warn("could not auto-resolve target class for mixin '{}'", x.getSimpleName());
+                    } else if (modelClassInfos.size() > 1) {
+                        logger.warn("found multiple target classes for mixin '{}'. Mixin will be applied to all of them. (target classes: {})",
+                                x.getSimpleName(),
+                                modelClassInfos.stream().map(y -> y.getName()).collect(Collectors.joining(", ")));
+                    } else {
+                    	mixins.put(modelClassInfos.get(0).loadClass(), x);
+                        logger.info("using mixin '{}' for class '{}'",
+                                x.getSimpleName(),
+                                modelClassInfos.get(0).getName());
+                    }
+                });
+        return mixins;
+	}
+
+	private static Map<Class<?>, Set<Class<?>>> scanSubtypes(ScanResult modelScan) {
+		Function<ClassInfo, Set<Class<?>>> getSubclasses = x
+                -> x.getClassesImplementing()
+                        .directOnly()
+                        .filter(y -> y.isInterface())
+                        .loadClasses()
+                        .stream()
+                        .collect(Collectors.toSet());
+        return modelScan.getAllInterfaces().stream()
+                .filter(x -> !getSubclasses.apply(x).isEmpty())
+                .collect(Collectors.toMap(x -> x.loadClass(), getSubclasses));
+	}
+
+	private static Set<Class<?>> scanModelTypes(ScanResult modelScan) {
+	    Set<Class<?>> typesWithModelTypes;
+		typesWithModelTypes = MODEL_TYPE_SUPERCLASSES.stream()
+                .flatMap(x -> modelScan.getClassesImplementing(x.getName()).loadClasses().stream())
+                .collect(Collectors.toSet());
+        typesWithModelTypes.addAll(MODEL_TYPE_SUPERCLASSES);
+        return typesWithModelTypes;
+	}
 
     private ReflectionHelper() {
     }
