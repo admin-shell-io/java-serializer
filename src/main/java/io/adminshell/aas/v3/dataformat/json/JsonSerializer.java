@@ -34,7 +34,7 @@ import io.adminshell.aas.v3.model.ReferableElements;
 
 public class JsonSerializer implements Serializer {
 
-    private JsonMapper mapper;
+    protected JsonMapper mapper;
 
     public JsonSerializer() {
         buildMapper();

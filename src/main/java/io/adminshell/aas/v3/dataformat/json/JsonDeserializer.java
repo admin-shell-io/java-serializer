@@ -34,8 +34,8 @@ import io.adminshell.aas.v3.model.ReferableElements;
 
 public class JsonDeserializer implements Deserializer {
 
-    private JsonMapper mapper;
-    private SimpleAbstractTypeResolver typeResolver;
+    protected JsonMapper mapper;
+    protected SimpleAbstractTypeResolver typeResolver;
 
     public JsonDeserializer() {
         initTypeResolver();
