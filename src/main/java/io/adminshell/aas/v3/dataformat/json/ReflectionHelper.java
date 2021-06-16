@@ -30,8 +30,8 @@ public class ReflectionHelper {
     public static final Set<Class<?>> MODEL_TYPE_SUPERCLASSES = Set.of(Referable.class, Constraint.class);
     public static final Set<Class<?>> TYPES_WITH_MODEL_TYPE;
     public static final Map<Class<?>, Set<Class<?>>> SUBTYPES;
-    public static final Map<Class<?>, Class<?>> MIXINS;
-    public static final List<ImplementationInfo> DEFAULT_IMPLEMENTATIONS;
+    public static final Map<Class<?>, Class<?>> MIXINS; 
+    public static final List<ImplementationInfo> DEFAULT_IMPLEMENTATIONS; 
     public static final List<Class<?>> INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION = List.of(DataSpecification.class);
 
     public static class ImplementationInfo<T> {
@@ -70,10 +70,12 @@ public class ReflectionHelper {
                 .enableClassInfo()
                 .acceptPackagesNonRecursive(MODEL_PACKAGE_NAME)
                 .scan();
+        //review BR: splitted it into 4 static methods
         TYPES_WITH_MODEL_TYPE = scanModelTypes(modelScan);
         SUBTYPES = scanSubtypes(modelScan);
         MIXINS = scanMixins(modelScan);
         DEFAULT_IMPLEMENTATIONS = scanDefaultImplementations(modelScan);
+        //comment: what is easier to maintain? code using reflection or manually maintained sets and maps
     }
 
 	private static List<ImplementationInfo> scanDefaultImplementations(ScanResult modelScan) {
@@ -87,25 +89,26 @@ public class ReflectionHelper {
                 .loadClasses()
                 .stream()
                 .forEach(x -> {
-                    String defaultImplementationClassName = x.getSimpleName().substring(DEFAULT_IMPLEMENTATION_PREFIX.length());
-                    ClassInfoList modelClassInfos = modelScan.getAllClasses().filter(y -> y.isInterface() && Objects.equals(y.getSimpleName(), defaultImplementationClassName));
-                    if (modelClassInfos == null || modelClassInfos.isEmpty()) {
+                    String interfaceName = x.getSimpleName().substring(DEFAULT_IMPLEMENTATION_PREFIX.length());//using conventions
+                    ClassInfoList interfaceClassInfos = modelScan.getAllClasses().filter(y -> y.isInterface() && Objects.equals(y.getSimpleName(), interfaceName));
+                    //null check not needed according to javadoc
+                    if (interfaceClassInfos == null || interfaceClassInfos.isEmpty()) {
                         logger.warn("could not find interface realized by default implementation class '{}'", x.getSimpleName());
-                    } else if (modelClassInfos.size() > 1) {
+                    } else if (interfaceClassInfos.size() > 1) {//actually not possible use case, i think this is if and only if name clashes exists
                         logger.warn("found multiple potential interfaces realized by default implementation class '{}'. Default implementation class will not be used at all until ambiguity is resolved. (potential interfaces: {})",
                                 x.getSimpleName(),
-                                modelClassInfos.stream().map(y -> y.getName()).collect(Collectors.joining(", ")));
+                                interfaceClassInfos.stream().map(y -> y.getName()).collect(Collectors.joining(", ")));
                     } else {
-                        Class<?> implementedClass = modelClassInfos.get(0).loadClass();
+                        Class<?> implementedClass = interfaceClassInfos.get(0).loadClass();
                         if (INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION.contains(implementedClass)) {
                             logger.info("skipping found default implementation class '{}' for interface '{}' because explicitely excluded",
                                     x.getSimpleName(),
-                                    modelClassInfos.get(0).getName());
+                                    interfaceClassInfos.get(0).getName());
                         } else {
                             defaultImplementations.add(new ImplementationInfo(implementedClass, x));
                             logger.info("using default implementation class '{}' for interface '{}'",
                                     x.getSimpleName(),
-                                    modelClassInfos.get(0).getName());
+                                    interfaceClassInfos.get(0).getName());
                         }
                     }
                 });
@@ -124,9 +127,10 @@ public class ReflectionHelper {
                 .forEach(x -> {
                     String modelClassName = x.getSimpleName().substring(0, x.getSimpleName().length() - MIXIN_SUFFIX.length());
                     ClassInfoList modelClassInfos = modelScan.getAllClasses().filter(y -> Objects.equals(y.getSimpleName(), modelClassName));
+                    //null check needed?
                     if (modelClassInfos == null || modelClassInfos.isEmpty()) {
                         logger.warn("could not auto-resolve target class for mixin '{}'", x.getSimpleName());
-                    } else if (modelClassInfos.size() > 1) {
+                    } else if (modelClassInfos.size() > 1) {//name clashes?
                         logger.warn("found multiple target classes for mixin '{}'. Mixin will be applied to all of them. (target classes: {})",
                                 x.getSimpleName(),
                                 modelClassInfos.stream().map(y -> y.getName()).collect(Collectors.joining(", ")));
@@ -141,23 +145,31 @@ public class ReflectionHelper {
 	}
 
 	private static Map<Class<?>, Set<Class<?>>> scanSubtypes(ScanResult modelScan) {
-		Function<ClassInfo, Set<Class<?>>> getSubclasses = x
-                -> x.getClassesImplementing()
-                        .directOnly()
-                        .filter(y -> y.isInterface())
-                        .loadClasses()
-                        .stream()
-                        .collect(Collectors.toSet());
         return modelScan.getAllInterfaces().stream()
-                .filter(x -> !getSubclasses.apply(x).isEmpty())
-                .collect(Collectors.toMap(x -> x.loadClass(), getSubclasses));
+                .filter(ReflectionHelper::hasSubclass)
+                .collect(Collectors.toMap(x -> x.loadClass(), ReflectionHelper::getSubclasses));
 	}
+	
+	private static Set<Class<?>> getSubclasses(ClassInfo clazzInfo){
+		return clazzInfo.getClassesImplementing()
+                .directOnly()
+                .filter(y -> y.isInterface())
+                .loadClasses()
+                .stream()
+                .collect(Collectors.toSet());
+	}
+	
+	private static boolean hasSubclass(ClassInfo clazzInfo){
+		return !getSubclasses(clazzInfo).isEmpty();
+	}
+
 
 	private static Set<Class<?>> scanModelTypes(ScanResult modelScan) {
 	    Set<Class<?>> typesWithModelTypes;
 		typesWithModelTypes = MODEL_TYPE_SUPERCLASSES.stream()
                 .flatMap(x -> modelScan.getClassesImplementing(x.getName()).loadClasses().stream())
                 .collect(Collectors.toSet());
+		//review BR: according to javadoc of getClassesImplementing, it is not clear if it includes classes, abstract classes and/or interfaces.
         typesWithModelTypes.addAll(MODEL_TYPE_SUPERCLASSES);
         return typesWithModelTypes;
 	}

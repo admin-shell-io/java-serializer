@@ -12,9 +12,9 @@ import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.databind.jsontype.TypeResolverBuilder;
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 
+//review BR: simple name equals indirectly inherited abstract class
 public class AnnotationIntrospector extends JacksonAnnotationIntrospector {
 
     private static final String MODEL_TYPE_PROPERTY = "modelType";
