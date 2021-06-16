@@ -1,8 +1,12 @@
 package io.adminshell.aas.v3.dataformat.json;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
+//review AAS-134: some basic, rather simple tests would be helpful to understand/document the cases for which the introspector is build for
+//also some javadoc could help
+@Ignore
 public class ReflectionAnnotationIntrospectorTest {
 
 	@Before
