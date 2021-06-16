@@ -46,7 +46,7 @@ public class JsonDeserializer implements Deserializer {
         mapper = JsonMapper.builder()
                 .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
                 .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-                .annotationIntrospector(new AnnotationIntrospector())
+                .annotationIntrospector(new ReflectionAnnotationIntrospector())
                 .addModule(buildEnumModule())
                 .addModule(buildImplementationModule())
                 .addModule(buildCustomDeserializerModule())

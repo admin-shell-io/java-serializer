@@ -46,7 +46,7 @@ public class JsonSerializer implements Serializer {
                 .serializationInclusion(JsonInclude.Include.NON_NULL)
                 .addModule(buildEnumModule())
                 .addModule(buildCustomDeserializerModule())
-                .annotationIntrospector(new AnnotationIntrospector())
+                .annotationIntrospector(new ReflectionAnnotationIntrospector())
                 .build();
         ReflectionHelper.MIXINS.entrySet().forEach(x -> mapper.addMixIn(x.getKey(), x.getValue()));
     }
