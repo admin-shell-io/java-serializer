@@ -14,10 +14,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-//review BR: simple name equals indirectly inherited abstract class
 public class ReflectionAnnotationIntrospector extends JacksonAnnotationIntrospector {
 
-    private static final String MODEL_TYPE_PROPERTY = "modelType";
+    private static final long serialVersionUID = 1L;
+	
+	private static final String MODEL_TYPE_PROPERTY = "modelType";
     private static final String GETTER_PREFIX = "get";
 
     @Override
