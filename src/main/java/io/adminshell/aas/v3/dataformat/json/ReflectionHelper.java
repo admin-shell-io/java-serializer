@@ -22,8 +22,8 @@ public class ReflectionHelper {
     private static final Logger logger = LoggerFactory.getLogger(ReflectionHelper.class);
     public static final String ROOT_PACKAGE_NAME = "io.adminshell.aas.v3";
     public static final String MODEL_PACKAGE_NAME = ROOT_PACKAGE_NAME + ".model";
+     */
     public static final String DEFAULT_IMPLEMENTATION_PACKAGE_NAME = MODEL_PACKAGE_NAME + ".impl";
-    public static final String MIXINS_PACKAGE_NAME = ROOT_PACKAGE_NAME + ".dataformat.json.mixins.custom";
     public static final String MIXIN_SUFFIX = "Mixin";
     public static final String DEFAULT_IMPLEMENTATION_PREFIX = "Default";
     public static final Set<Class<?>> MODEL_TYPE_SUPERCLASSES = Set.of(Referable.class, Constraint.class);
