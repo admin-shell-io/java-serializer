@@ -14,11 +14,28 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * This class helps to dynamically decide how to de-/serialize classes and
+ * properties defined in the AAS model library.
+ *
+ * This is equivialent to adding the following annotations 
+ * <ul>
+ *   <li> to all interfaces defined in the AAS model:
+ *     <ul>
+ *       <li> @JsonTypeName([interface name])
+ *       <li> @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "modelType")
+ *       <li> @JsonSubTypes({ @Type(value = [sub-interface].class, name = "[sub-interface name]"), ...}) for each sub-interface
+ *     </ul>
+ *   <li> to all getter methods returning any type of Collection<?> defined in the AAS model:
+ *     <ul> @JsonInclude(JsonInclude.Include.NON_EMPTY)
+ *     </ul>
+ * </ul>
+ */
 public class ReflectionAnnotationIntrospector extends JacksonAnnotationIntrospector {
 
     private static final long serialVersionUID = 1L;
-	
-	private static final String MODEL_TYPE_PROPERTY = "modelType";
+
+    private static final String MODEL_TYPE_PROPERTY = "modelType";
     private static final String GETTER_PREFIX = "get";
 
     @Override

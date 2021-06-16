@@ -13,6 +13,11 @@ import io.adminshell.aas.v3.model.Reference;
 import io.adminshell.aas.v3.model.impl.DefaultKey;
 import io.adminshell.aas.v3.model.impl.DefaultReference;
 
+/**
+ * This class is used to manage supported data specification templates. Each
+ * template is identified through a reference and provides a corresponding Java
+ * class.
+ */
 public class DataSpecificationManager {
 
     public static final String PROP_DATA_SPECIFICATION = "dataSpecification";
@@ -22,10 +27,26 @@ public class DataSpecificationManager {
             createGlobalIri("http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0"),
             DataSpecificationIEC61360.class);
 
+    /**
+     * Allows to register an additional data specification template based on any
+     * kind of Reference.
+     *
+     * @param reference The reference used to identify the data specification
+     * template
+     * @param implementation The Java class implementing that template
+     */
     public static void register(Reference reference, Class<? extends DataSpecificationContent> implementation) {
         KNOWN_IMPLEMENTATIONS.put(reference, implementation);
     }
 
+    /**
+     * Allows to register an additional data specification template based on a
+     * global IRI.
+     *
+     * @param iri The IRI of the global reference used to identify the data
+     * specification template
+     * @param implementation The Java class implementing that template
+     */
     public static void registerGlobalIri(String iri, Class<? extends DataSpecificationContent> implementation) {
         KNOWN_IMPLEMENTATIONS.put(createGlobalIri(iri), implementation);
     }
@@ -36,6 +57,15 @@ public class DataSpecificationManager {
                 .build();
     }
 
+    /**
+     * Returns a Reference describing the data specification template
+     * implemented by the given class. If the class is unknown, null is
+     * returned.
+     *
+     * @param implementation type of the implementation class
+     * @return a reference describing the data specification template
+     * implemented by the given class
+     */
     public static Reference getReference(Class<? extends DataSpecificationContent> implementation) {
         Reference result = getReferenceSafe(implementation);
         if (result == null) {
@@ -59,6 +89,16 @@ public class DataSpecificationManager {
         return null;
     }
 
+    /**
+     * Returns the Java class implementing the data specification template
+     * identified by the given reference. If the reference is unkown
+     *
+     * @param reference A reference used to identify the used data specification
+     * template.
+     * @return Java class implementing the given data specification template
+     * @throws IllegalArgumentException if there is no known implementation for
+     * the given reference identifier
+     */
     public static Class<? extends DataSpecificationContent> getImplementation(Reference reference) {
         if (KNOWN_IMPLEMENTATIONS.containsKey(reference)) {
             return KNOWN_IMPLEMENTATIONS.get(reference);

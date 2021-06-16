@@ -32,6 +32,9 @@ import io.adminshell.aas.v3.model.ModelingKind;
 import io.adminshell.aas.v3.model.PermissionKind;
 import io.adminshell.aas.v3.model.ReferableElements;
 
+/**
+ * Class for deserializing/parsing AAS JSON documents.
+ */
 public class JsonDeserializer implements Deserializer {
 
     protected JsonMapper mapper;

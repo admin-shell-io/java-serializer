@@ -19,6 +19,12 @@ import io.adminshell.aas.v3.model.DataSpecificationContent;
 import io.adminshell.aas.v3.model.Reference;
 import io.adminshell.aas.v3.model.impl.DefaultDataSpecification;
 
+/**
+ * Custom Deserializer for class DataSpecification. First reads property
+ * PROP_DATA_SPECIFICATION and tries to resolve which Java class to use for
+ * deserialization based on the found value with the help of
+ * DataSpecificationManager.
+ */
 public class DataSpecificationDeserializer extends JsonDeserializer<DataSpecification> {
 
     @Override

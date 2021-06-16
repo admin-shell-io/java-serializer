@@ -32,6 +32,9 @@ import io.adminshell.aas.v3.model.ModelingKind;
 import io.adminshell.aas.v3.model.PermissionKind;
 import io.adminshell.aas.v3.model.ReferableElements;
 
+/**
+ * Class for serializing an instance of AssetAdministrationShellEnvironment to JSON.
+ */
 public class JsonSerializer implements Serializer {
 
     protected JsonMapper mapper;

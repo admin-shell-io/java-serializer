@@ -6,11 +6,32 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.JsonNodeFactory;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
+/**
+ * Helper class to deal with nested nature of modelType property in JSON. As
+ * Jackson can not natively deal with such nested type information, this class
+ * offers functions to unwrapp the modelType information via the preprocess(...)
+ * method and wrap it again via postprocess(...).
+ */
 public class ModelTypeProcessor {
 
     private static final String MODEL_TYPE = "modelType";
     private static final String MODEL_TYPE_NAME = "name";
 
+    /**
+     * Unwrapps type information recursively, e.g. converts
+     * <pre>
+     * "modelType": {
+     *      "name": "Foo"
+     * }
+     * </pre> to
+     * <pre>
+     * "modelType": "Foo"
+     * </pre>
+     *
+     * @param json json as string
+     * @return root node with unwrapped type information
+     * @throws JsonProcessingException parsing JSON fails
+     */
     public static JsonNode preprocess(String json) throws JsonProcessingException {
         JsonNode result = new ObjectMapper().readTree(json);
         JsonTreeProcessor.traverse(result,
@@ -22,6 +43,21 @@ public class ModelTypeProcessor {
         return result;
     }
 
+    /**
+     * Wraps type information recursively, e.g. converts
+     * <pre>
+     * "modelType": "Foo"
+     * </pre> to
+     * <pre>
+     * "modelType": {
+     *      "name": "Foo"
+     * }
+     * </pre>
+     *
+     * @param node root node
+     * @return transformed root node
+     * @throws JsonProcessingException parsing JSON fails
+     */
     public static JsonNode postprocess(JsonNode node) throws JsonProcessingException {
         JsonTreeProcessor.traverse(node,
                 x -> {

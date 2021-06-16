@@ -15,6 +15,11 @@ import io.adminshell.aas.v3.dataformat.json.DataSpecificationManager;
 import io.adminshell.aas.v3.model.DataSpecification;
 import io.adminshell.aas.v3.model.Reference;
 
+/**
+ * Custom Serializer for class DataSpecification. Adds type information in form
+ * of a reference. Uses DataSpecificationManager to resolve java type to
+ * reference.
+ */
 public class DataSpecificationSerializer extends JsonSerializer<DataSpecification> {
 
     @Override
@@ -32,9 +37,6 @@ public class DataSpecificationSerializer extends JsonSerializer<DataSpecificatio
             throws IOException, JsonProcessingException {
 
         serialize(data, generator, provider);
-//        typeSer.writeTypePrefixForObject(value, gen);
-//        serialize(value, gen, provider); // call your customized serialize method
-//        typeSer.writeTypeSuffixForObject(value, gen);
     }
 
 }
