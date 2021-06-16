@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,12 +69,10 @@ public class ReflectionHelper {
                 .enableClassInfo()
                 .acceptPackagesNonRecursive(MODEL_PACKAGE_NAME)
                 .scan();
-        //review BR: splitted it into 4 static methods
         TYPES_WITH_MODEL_TYPE = scanModelTypes(modelScan);
         SUBTYPES = scanSubtypes(modelScan);
         MIXINS = scanMixins(modelScan);
         DEFAULT_IMPLEMENTATIONS = scanDefaultImplementations(modelScan);
-        //comment: what is easier to maintain? code using reflection or manually maintained sets and maps
     }
 
 	private static List<ImplementationInfo> scanDefaultImplementations(ScanResult modelScan) {
@@ -91,13 +88,8 @@ public class ReflectionHelper {
                 .forEach(x -> {
                     String interfaceName = x.getSimpleName().substring(DEFAULT_IMPLEMENTATION_PREFIX.length());//using conventions
                     ClassInfoList interfaceClassInfos = modelScan.getAllClasses().filter(y -> y.isInterface() && Objects.equals(y.getSimpleName(), interfaceName));
-                    //null check not needed according to javadoc
-                    if (interfaceClassInfos == null || interfaceClassInfos.isEmpty()) {
+                    if (interfaceClassInfos.isEmpty()) {
                         logger.warn("could not find interface realized by default implementation class '{}'", x.getSimpleName());
-                    } else if (interfaceClassInfos.size() > 1) {//actually not possible use case, i think this is if and only if name clashes exists
-                        logger.warn("found multiple potential interfaces realized by default implementation class '{}'. Default implementation class will not be used at all until ambiguity is resolved. (potential interfaces: {})",
-                                x.getSimpleName(),
-                                interfaceClassInfos.stream().map(y -> y.getName()).collect(Collectors.joining(", ")));
                     } else {
                         Class<?> implementedClass = interfaceClassInfos.get(0).loadClass();
                         if (INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION.contains(implementedClass)) {
@@ -127,13 +119,8 @@ public class ReflectionHelper {
                 .forEach(x -> {
                     String modelClassName = x.getSimpleName().substring(0, x.getSimpleName().length() - MIXIN_SUFFIX.length());
                     ClassInfoList modelClassInfos = modelScan.getAllClasses().filter(y -> Objects.equals(y.getSimpleName(), modelClassName));
-                    //null check needed?
-                    if (modelClassInfos == null || modelClassInfos.isEmpty()) {
+                    if (modelClassInfos.isEmpty()) {
                         logger.warn("could not auto-resolve target class for mixin '{}'", x.getSimpleName());
-                    } else if (modelClassInfos.size() > 1) {//name clashes?
-                        logger.warn("found multiple target classes for mixin '{}'. Mixin will be applied to all of them. (target classes: {})",
-                                x.getSimpleName(),
-                                modelClassInfos.stream().map(y -> y.getName()).collect(Collectors.joining(", ")));
                     } else {
                     	mixins.put(modelClassInfos.get(0).loadClass(), x);
                         logger.info("using mixin '{}' for class '{}'",
@@ -169,7 +156,6 @@ public class ReflectionHelper {
 		typesWithModelTypes = MODEL_TYPE_SUPERCLASSES.stream()
                 .flatMap(x -> modelScan.getClassesImplementing(x.getName()).loadClasses().stream())
                 .collect(Collectors.toSet());
-		//review BR: according to javadoc of getClassesImplementing, it is not clear if it includes classes, abstract classes and/or interfaces.
         typesWithModelTypes.addAll(MODEL_TYPE_SUPERCLASSES);
         return typesWithModelTypes;
 	}
