@@ -639,13 +639,17 @@
                     },
                     "annotation": [
                         {
-                            "keys": [
-                                {
-                                    "type": "Property",
-                                    "idType": "IdShort",
-                                    "value": "ExampleProperty3"
-                                }
-                            ]
+                            "modelType": {
+                                "name": "Property"
+                            },
+                            "kind": "Instance",
+                            "semanticId": {
+                                "keys": []
+                            },
+                            "idShort": "ExampleProperty3",
+                            "category": "PARAMETER",
+                            "value": "some example annotation",
+                            "valueType": "string"
                         }
                     ]
                 },
@@ -1402,13 +1406,17 @@
                     },
                     "annotation": [
                         {
-                            "keys": [
-                                {
-                                    "type": "Property",
-                                    "idType": "IdShort",
-                                    "value": "ExampleProperty"
-                                }
-                            ]
+                            "modelType": {
+                                "name": "Property"
+                            },
+                            "kind": "Instance",
+                            "semanticId": {
+                                "keys": []
+                            },
+                            "idShort": "ExampleProperty3",
+                            "category": "PARAMETER",
+                            "value": "some example annotation",
+                            "valueType": "string"
                         }
                     ]
                 },
