@@ -643,9 +643,6 @@
                                 "name": "Property"
                             },
                             "kind": "Instance",
-                            "semanticId": {
-                                "keys": []
-                            },
                             "idShort": "ExampleProperty3",
                             "category": "PARAMETER",
                             "value": "some example annotation",
@@ -1410,10 +1407,7 @@
                                 "name": "Property"
                             },
                             "kind": "Instance",
-                            "semanticId": {
-                                "keys": []
-                            },
-                            "idShort": "ExampleProperty3",
+                            "idShort": "ExampleProperty",
                             "category": "PARAMETER",
                             "value": "some example annotation",
                             "valueType": "string"
