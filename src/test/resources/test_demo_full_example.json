@@ -42,7 +42,18 @@
                             "value": "https://acplt.org/Test_Asset"
                         }
                     ]
-                }
+                },
+                "billOfMaterial": [
+                    {
+                        "keys": [
+                            {
+                                "type": "Submodel",
+                                "idType": "IRI",
+                                "value": "http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial"
+                            }
+                        ]
+                    }
+                ]
             },
             "submodels": [
                 {
@@ -513,7 +524,17 @@
                             }
                         ]
                     },
-                    "entityType": "SelfManagedEntity"
+                    "entityType": "SelfManagedEntity",
+                    "globalAssetId":
+                            {
+                                "keys": [
+                                    {
+                                        "type": "Asset",
+                                        "idType": "IRI",
+                                        "value": "https://acplt.org/Test_Asset2"
+                                    }
+                                ]
+                            }
                 }
             ]
         },
@@ -2469,65 +2490,6 @@
                     "kind": "Template"
                 }
             ]
-        }
-    ],
-    "assets": [
-        {
-            "idShort": "Test_Asset",
-            "description": [
-                {
-                    "language": "en-us",
-                    "text": "An example asset for the test application"
-                },
-                {
-                    "language": "de",
-                    "text": "Ein Beispiel-Asset für eine Test-Anwendung"
-                }
-            ],
-            "modelType": {
-                "name": "Asset"
-            },
-            "identification": {
-                "id": "https://acplt.org/Test_Asset",
-                "idType": "IRI"
-            },
-            "administration": {
-                "version": "0.9",
-                "revision": "0"
-            }
-        },
-        {
-            "idShort": "",
-            "modelType": {
-                "name": "Asset"
-            },
-            "identification": {
-                "id": "https://acplt.org/Test_Asset_Mandatory",
-                "idType": "IRI"
-            }
-        },
-        {
-            "idShort": "Test_Asset",
-            "description": [
-                {
-                    "language": "en-us",
-                    "text": "An example asset for the test application"
-                },
-                {
-                    "language": "de",
-                    "text": "Ein Beispiel-Asset für eine Test-Anwendung"
-                }
-            ],
-            "modelType": {
-                "name": "Asset"
-            },
-            "identification": {
-                "id": "https://acplt.org/Test_Asset_Missing",
-                "idType": "IRI"
-            },
-            "administration": {
-
-            }
         }
     ],
     "conceptDescriptions": [

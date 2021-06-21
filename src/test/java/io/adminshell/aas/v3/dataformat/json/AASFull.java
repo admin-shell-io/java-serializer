@@ -37,6 +37,13 @@ public class AASFull {
                                     .value("https://acplt.org/Test_Asset")
                                     .build())
                             .build())
+                    .billOfMaterial((new DefaultReference.Builder()
+                            .key(new DefaultKey.Builder()
+                                    .type(KeyElements.SUBMODEL)
+                                    .idType(KeyType.IRI)
+                                    .value("http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial")
+                                    .build()))
+                            .build())
                     .build())
             .submodel(new DefaultReference.Builder()
                     .key(new DefaultKey.Builder()
@@ -329,6 +336,13 @@ public class AASFull {
                                     .build())
                             .build())
                     .entityType(EntityType.SELF_MANAGED_ENTITY)
+                    .globalAssetId(new DefaultReference.Builder()
+                            .key(new DefaultKey.Builder()
+                                    .type(KeyElements.ASSET)
+                                    .idType(KeyType.IRI)
+                                    .value("https://acplt.org/Test_Asset2")
+                                    .build())
+                            .build())
                     .build())
             .build();
 
@@ -1425,42 +1439,6 @@ public class AASFull {
                     .build())
             .build();
 
-    public final static Asset ASSET_1 = new DefaultAsset.Builder()
-            .idShort("Test_Asset")
-            .description(new LangString("An example asset for the test application", "en-us"))
-            .description(new LangString("Ein Beispiel-Asset für eine Test-Anwendung", "de"))
-            .identification(new DefaultIdentifier.Builder()
-                    .idType(IdentifierType.IRI)
-                    .identifier("https://acplt.org/Test_Asset")
-                    .build())
-            .administration(new DefaultAdministrativeInformation.Builder()
-                    .version("0.9")
-                    .revision("0")
-                    .build())
-            // TODO removed AssetIdentificationModel in full example json
-            // TODO removed BillOfMaterial in full example json
-            .build();
-
-    public final static Asset ASSET_2 = new DefaultAsset.Builder()
-            .idShort("")
-            .identification(new DefaultIdentifier.Builder()
-                    .idType(IdentifierType.IRI)
-                    .identifier("https://acplt.org/Test_Asset_Mandatory")
-                    .build())
-            .build();
-
-    public final static Asset ASSET_3 = new DefaultAsset.Builder()
-            .idShort("Test_Asset")
-            .description(new LangString("An example asset for the test application", "en-us"))
-            .description(new LangString("Ein Beispiel-Asset für eine Test-Anwendung", "de"))
-            .identification(new DefaultIdentifier.Builder()
-                    .idType(IdentifierType.IRI)
-                    .identifier("https://acplt.org/Test_Asset_Missing")
-                    .build())
-            .administration(new DefaultAdministrativeInformation.Builder()
-                    .build())
-            .build();
-
     public final static ConceptDescription CONCEPT_DESCRIPTION_1 = new DefaultConceptDescription.Builder()
             .idShort("TestConceptDescription")
             .description(new LangString("An example concept description  for the test application", "en-us"))
@@ -1592,9 +1570,5 @@ public class AASFull {
                     CONCEPT_DESCRIPTION_2,
                     CONCEPT_DESCRIPTION_3,
                     CONCEPT_DESCRIPTION_4))
-            .assets(List.of(
-                    ASSET_1,
-                    ASSET_2,
-                    ASSET_3))
             .build();
 }

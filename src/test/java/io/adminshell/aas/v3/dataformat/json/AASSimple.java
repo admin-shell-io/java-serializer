@@ -354,7 +354,6 @@ public class AASSimple {
             .conceptDescriptions(CONCEPT_DESCRIPTION_MAXROTATIONSPEED)
             .conceptDescriptions(CONCEPT_DESCRIPTION_ROTATIONSPEED)
             .conceptDescriptions(CONCEPT_DESCRIPTION_DOCUMENT)
-            .assets(ASSET)
             .build();
 
 }
