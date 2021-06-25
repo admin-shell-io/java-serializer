@@ -26,3 +26,6 @@ local.properties
 
 .classpath
 .project
+
+testJsonSerialization.json
+
