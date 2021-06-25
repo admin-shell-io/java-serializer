@@ -1,2 +1,2 @@
 # java-serializer
-AAS model serializer in Java
+AAS model serializer implemented in Java
