@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import io.adminshell.aas.v3.model.Constraint;
+import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
 import io.adminshell.aas.v3.model.LangString;
 import io.adminshell.aas.v3.model.ModelingKind;
 import io.adminshell.aas.v3.model.Property;
@@ -11,7 +12,7 @@ import io.adminshell.aas.v3.model.Reference;
 
 public class CustomProperty implements Property {
 
-    protected List<Reference> dataSpecifications;
+    protected List<EmbeddedDataSpecification> dataSpecifications;
 
     protected ModelingKind kind;
 
@@ -144,16 +145,6 @@ public class CustomProperty implements Property {
     }
 
     @Override
-    final public List<Reference> getDataSpecifications() {
-        return dataSpecifications;
-    }
-
-    @Override
-    final public void setDataSpecifications(List<Reference> dataSpecifications) {
-        this.dataSpecifications = dataSpecifications;
-    }
-
-    @Override
     final public ModelingKind getKind() {
         return kind;
     }
@@ -172,4 +163,15 @@ public class CustomProperty implements Property {
     final public void setSemanticId(Reference semanticId) {
         this.semanticId = semanticId;
     }
+
+    @Override
+    public List<EmbeddedDataSpecification> getEmbeddedDataSpecifications() {
+        return dataSpecifications;
+    }
+
+    @Override
+    public void setEmbeddedDataSpecifications(List<EmbeddedDataSpecification> list) {
+        this.dataSpecifications = list;
+    }
+
 }

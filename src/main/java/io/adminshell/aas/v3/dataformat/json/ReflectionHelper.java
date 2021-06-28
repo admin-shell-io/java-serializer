@@ -79,6 +79,10 @@ public class ReflectionHelper {
      * explicitely.
      */
     public static final List<Class<?>> INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION = List.of(DataSpecification.class);
+    /**
+     * List of enums from the MODEL_PACKAGE_NAME package.
+     */
+    public static final List<Class<Enum>> ENUMS;
 
     public static class ImplementationInfo<T> {
 
@@ -142,6 +146,7 @@ public class ReflectionHelper {
         SUBTYPES = scanSubtypes(modelScan);
         MIXINS = scanMixins(modelScan);
         DEFAULT_IMPLEMENTATIONS = scanDefaultImplementations(modelScan);
+        ENUMS = modelScan.getAllEnums().loadClasses(Enum.class);
     }
 
     private static List<ImplementationInfo> scanDefaultImplementations(ScanResult modelScan) {
