@@ -1499,7 +1499,7 @@ public class AASFull {
                             .value("http://acplt.org/ReferenceElements/ConceptDescriptionX")
                             .build())
                     .build())
-            .embeddedDataSpecification(new DefaultDataSpecification.Builder()
+            .embeddedDataSpecification(new DefaultEmbeddedDataSpecification.Builder()
                     .dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder()
                             .preferredName(new LangString("Test Specification", "de"))
                             .preferredName(new LangString("TestSpecification", "en-us"))
