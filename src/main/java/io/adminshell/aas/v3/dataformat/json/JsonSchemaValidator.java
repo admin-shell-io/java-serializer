@@ -10,6 +10,9 @@ import com.networknt.schema.ValidationMessage;
 import io.adminshell.aas.v3.dataformat.SchemaValidator;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -18,31 +21,36 @@ public class JsonSchemaValidator implements SchemaValidator {
     private static final String SCHEMA = "aas.json";
     private final ObjectMapper mapper = new ObjectMapper();
 
-    protected JsonSchema schema;
-
-    public JsonSchemaValidator() throws IOException {
-        loadSchema();
-    }
-
-    public void loadSchema() throws IOException {
-        JsonNode schemaRootNode = mapper.readTree(getClass().getClassLoader().getResource(SCHEMA));
-        JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersionDetector.detect(schemaRootNode));
-        schema = factory.getSchema(schemaRootNode);
-    }
-
-    public Set<ValidationMessage> validateJsonSpecific(String serialized) throws JsonProcessingException {
-        JsonNode node = mapper.readTree(serialized);
-        return schema.validate(node);
+    public JsonSchemaValidator() {
     }
 
     @Override
     public Set<String> validateSchema(String serialized) {
+        try{
+            return validateSchema(serialized, loadDefaultSchema());
+        }
+        catch (IOException e) {
+            return Set.of(e.getMessage());
+        }
+    }
+
+    public Set<String> validateSchema(String serialized, String serializedSchema){
         try {
-            Set<ValidationMessage> validationMessages = validateJsonSpecific(serialized);
+            JsonNode schemaRootNode = mapper.readTree(serializedSchema);
+            JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersionDetector.detect(schemaRootNode));
+            JsonSchema schema = factory.getSchema(schemaRootNode);
+            JsonNode node = mapper.readTree(serialized);
+            Set<ValidationMessage> validationMessages = schema.validate(node);
+
             return generalizeValidationMessagesAsStringSet(validationMessages);
         } catch (JsonProcessingException e) {
             return Set.of(e.getMessage());
         }
+    }
+
+    private String loadDefaultSchema() throws IOException {
+        String defaultPath = Objects.requireNonNull(getClass().getClassLoader().getResource(SCHEMA)).getPath();
+        return new String(Files.readAllBytes(Paths.get(defaultPath)));
     }
 
     private Set<String> generalizeValidationMessagesAsStringSet(Set<ValidationMessage> messages) {
