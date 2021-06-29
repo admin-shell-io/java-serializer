@@ -21,7 +21,7 @@ public class JsonValidationTest {
     private static JsonSchemaValidator validator;
 
     @BeforeClass
-    public static void prepareValidator() throws IOException {
+    public static void prepareValidator() {
         validator = new JsonSchemaValidator();
     }
 
@@ -46,4 +46,15 @@ public class JsonValidationTest {
         }
         assertEquals(2, errors.size());
     }
+
+    @Test
+    @Parameters({"src/test/resources/test_demo_full_example.json, /home/arno/Desktop/schema_technicaldata_v02.json"})
+    public void validateValidJsonWithCustomSchema(String file, String schemaPath) throws IOException {
+        String serializedEnvironment = new String(Files.readAllBytes(Paths.get(file)));
+        String serializedSchema = new String(Files.readAllBytes(Paths.get(schemaPath)));
+        Set<String> errors = validator.validateSchema(serializedEnvironment, serializedSchema);
+        System.out.println("Validating with custom Schema: " + file);
+        assertEquals(5, errors.size()); // attributes required for technical data missing in full_example
+    }
+
 }
