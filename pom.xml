@@ -3,26 +3,30 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>io.adminshell.aas</groupId>
     <artifactId>dataformat-parent</artifactId>
     <version>${revision}</version>
     <packaging>pom</packaging>
-
-
     <modules>
         <module>dataformat-json</module>
         <module>dataformat-xml</module>
     </modules>
-
     <properties>
+        <revision>1.1.1</revision>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <model.version>1.1.1</model.version>
-        <revision>1.1.1</revision>
+        <classgraph.version>4.8.108</classgraph.version>
+        <hibernate.version>7.0.1.Final</hibernate.version>
+        <jackson.version>2.12.3</jackson.version>
+        <javax-validation.version>2.0.1.Final</javax-validation.version>
+        <jsonassert.version>1.5.0</jsonassert.version>
+        <json-schema-validator.version>1.0.55</json-schema-validator.version>
+        <junit.version>4.13</junit.version>
+        <junit-params.version>1.1.1</junit-params.version>
+        <model.version>1.1.2-SNAPSHOT</model.version>
+        <slf4j.version>1.7.31</slf4j.version>
+        <woodstox-core-asl.version>4.4.1</woodstox-core-asl.version>
     </properties>
-
-
 </project>

@@ -14,10 +14,10 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 
 import io.adminshell.aas.v3.dataformat.json.DataSpecificationManager;
-import io.adminshell.aas.v3.model.DataSpecification;
 import io.adminshell.aas.v3.model.DataSpecificationContent;
+import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
 import io.adminshell.aas.v3.model.Reference;
-import io.adminshell.aas.v3.model.impl.DefaultDataSpecification;
+import io.adminshell.aas.v3.model.impl.DefaultEmbeddedDataSpecification;
 
 /**
  * Custom Deserializer for class DataSpecification. First reads property
@@ -25,10 +25,10 @@ import io.adminshell.aas.v3.model.impl.DefaultDataSpecification;
  * deserialization based on the found value with the help of
  * DataSpecificationManager.
  */
-public class DataSpecificationDeserializer extends JsonDeserializer<DataSpecification> {
+public class EmbeddedDataSpecificationDeserializer extends JsonDeserializer<EmbeddedDataSpecification> {
 
     @Override
-    public DataSpecification deserialize(JsonParser parser, DeserializationContext context)
+    public EmbeddedDataSpecification deserialize(JsonParser parser, DeserializationContext context)
             throws IOException, JsonProcessingException {
         Object temp = parser.getCodec().readTree(parser);
         ObjectNode node = (ObjectNode) temp;
@@ -43,14 +43,14 @@ public class DataSpecificationDeserializer extends JsonDeserializer<DataSpecific
         JsonParser parserReference = parser.getCodec().getFactory().getCodec().treeAsTokens(nodeDataSpecification);
         parserReference.nextToken();
         Reference reference = parserReference.readValueAs(Reference.class);
-        Class<? extends DataSpecificationContent> targetClass = DataSpecificationManager.getImplementation(reference);
         JsonNode nodeContent = node.get(PROP_DATA_SPECIFICATION_CONTENT);
-        if (nodeContent == null) {
-            context.reportInputMismatch(targetClass, "property {} must not be empty", PROP_DATA_SPECIFICATION_CONTENT);
+        if (nodeContent != null) {
+            Class<? extends DataSpecificationContent> targetClass = DataSpecificationManager.getImplementation(reference);
+            JsonParser parserContent = parser.getCodec().getFactory().getCodec().treeAsTokens(nodeContent);
+            parserContent.nextToken();
+            DataSpecificationContent content = parserContent.readValueAs(targetClass);
+            return new DefaultEmbeddedDataSpecification.Builder().dataSpecificationContent(content).build();
         }
-        JsonParser parserContent = parser.getCodec().getFactory().getCodec().treeAsTokens(nodeContent);
-        parserContent.nextToken();
-        DataSpecificationContent content = parserContent.readValueAs(targetClass);
-        return new DefaultDataSpecification.Builder().dataSpecificationContent(content).build();
+        return new DefaultEmbeddedDataSpecification.Builder().dataSpecification(reference).build();
     }
 }

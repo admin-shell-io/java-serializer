@@ -11,9 +11,9 @@ import io.adminshell.aas.v3.dataformat.Deserializer;
 import io.adminshell.aas.v3.dataformat.xml.XmlDeserializer;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 
-public class JsonDeserializerTest {
+public class XMLDeserializerTest {
 
-	private static final Logger logger = LoggerFactory.getLogger(JsonDeserializerTest.class);
+	private static final Logger logger = LoggerFactory.getLogger(XMLDeserializerTest.class);
 	private static final Deserializer deserializer = new XmlDeserializer();
 
 	@Test

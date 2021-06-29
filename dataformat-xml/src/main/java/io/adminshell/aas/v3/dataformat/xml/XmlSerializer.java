@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.Serializer;
@@ -16,7 +17,6 @@ import io.adminshell.aas.v3.dataformat.xml.enums.ScreamingSnakeCaseEnumNaming;
 import io.adminshell.aas.v3.dataformat.xml.enums.UpperCamelCaseEnumNaming;
 import io.adminshell.aas.v3.dataformat.xml.mixin.AdministrativeInformationMixin;
 import io.adminshell.aas.v3.dataformat.xml.mixin.AnnotatedRelationshipElementMixin;
-import io.adminshell.aas.v3.dataformat.xml.mixin.AssetAdministrationShellEnvironmentMixin;
 import io.adminshell.aas.v3.dataformat.xml.mixin.AssetAdministrationShellMixin;
 import io.adminshell.aas.v3.dataformat.xml.mixin.AssetInformationMixin;
 import io.adminshell.aas.v3.dataformat.xml.mixin.AssetMixin;
@@ -54,6 +54,7 @@ import io.adminshell.aas.v3.dataformat.xml.mixin.SubmodelMixin;
 import io.adminshell.aas.v3.dataformat.xml.mixin.ValueListMixin;
 import io.adminshell.aas.v3.dataformat.xml.mixin.ValueReferencePairMixin;
 import io.adminshell.aas.v3.dataformat.xml.mixin.ViewMixin;
+import io.adminshell.aas.v3.dataformat.xml.serialization.AssetAdministrationShellEnvironmentSerializer;
 import io.adminshell.aas.v3.model.AdministrativeInformation;
 import io.adminshell.aas.v3.model.AnnotatedRelationshipElement;
 import io.adminshell.aas.v3.model.Asset;
@@ -109,12 +110,6 @@ import io.adminshell.aas.v3.model.ValueReferencePair;
 import io.adminshell.aas.v3.model.View;
 
 public class XmlSerializer implements Serializer {
-
-	private final String XML_HEADER = "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" + 
-			"<aas:aasenv xmlns:aas=\"http://www.admin-shell.io/aas/3/0\"\r\n" + 
-			"	xmlns:IEC61360=\"http://www.admin-shell.io/IEC61360/3/0\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\"\r\n" + 
-			"	xsi:schemaLocation=\"http://www.admin-shell.io/aas/3/0 AAS.xsd http://www.admin-shell.io/IEC61360/3/0 IEC61360.xsd\">";
-	
 	private final XmlMapper mapper;
 
 	public XmlSerializer() {
@@ -130,7 +125,6 @@ public class XmlSerializer implements Serializer {
 				.addModule(buildCustomDeserializerModule())
 				.addMixIn(AdministrativeInformation.class, AdministrativeInformationMixin.class)
 				.addMixIn(AnnotatedRelationshipElement.class, AnnotatedRelationshipElementMixin.class)
-				.addMixIn(AssetAdministrationShellEnvironment.class, AssetAdministrationShellEnvironmentMixin.class)
 				.addMixIn(AssetAdministrationShell.class, AssetAdministrationShellMixin.class)
 				.addMixIn(AssetInformation.class, AssetInformationMixin.class)
 				.addMixIn(Asset.class, AssetMixin.class)
@@ -168,7 +162,7 @@ public class XmlSerializer implements Serializer {
 				.addMixIn(ValueList.class, ValueListMixin.class)
 				.addMixIn(ValueReferencePair.class, ValueReferencePairMixin.class)
 				.addMixIn(View.class, ViewMixin.class)
-				
+				.configure(ToXmlGenerator.Feature.WRITE_XML_DECLARATION, true)
 
 				.build();
 	}
@@ -208,15 +202,14 @@ public class XmlSerializer implements Serializer {
 				new EnumSerializer<>(new UpperCamelCaseEnumNaming(PermissionKind.class))); // not used in JSON
 		module.addSerializer(ReferableElements.class,
 				new EnumSerializer<>(new UpperCamelCaseEnumNaming(ReferableElements.class))); // not used in JSON
+		module.addSerializer(AssetAdministrationShellEnvironment.class, new AssetAdministrationShellEnvironmentSerializer());
 		return module;
 	}
 
 	@Override
 	public String write(AssetAdministrationShellEnvironment aasEnvironment) throws SerializationException {
 		try {
-			String xml = mapper.writeValueAsString(aasEnvironment);
-			xml = xml.replaceAll("<aas:aasenv>", XML_HEADER);
-			return xml;
+			return mapper.writeValueAsString(aasEnvironment);
 		} catch (JsonProcessingException ex) {
 			throw new SerializationException("serialization failed", ex);
 		}

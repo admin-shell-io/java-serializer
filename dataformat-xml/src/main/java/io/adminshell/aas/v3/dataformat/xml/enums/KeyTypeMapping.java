@@ -8,7 +8,7 @@ public class KeyTypeMapping implements CustomEnumNaming<KeyType> {
 
 	@Override
 	public Map<String, KeyType> getMapping() {
-		return Map.of("Custom", KeyType.CUSTOM, "FragmentId", KeyType.FRAGMENT_ID, "IdShort", KeyType.IDSHORT, "IRDI",
+		return Map.of("Custom", KeyType.CUSTOM, "FragmentId", KeyType.FRAGMENT_ID, "IdShort", KeyType.ID_SHORT, "IRDI",
 				KeyType.IRDI, "IRI", KeyType.IRI);
 	}
 

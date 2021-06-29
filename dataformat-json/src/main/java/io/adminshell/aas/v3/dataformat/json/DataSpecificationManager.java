@@ -59,12 +59,13 @@ public class DataSpecificationManager {
 
     /**
      * Returns a Reference describing the data specification template
-     * implemented by the given class. If the class is unknown, null is
-     * returned.
+     * implemented by the given class. If the class is unknown, an
+     * IllegalArgumentException is thrown
      *
      * @param implementation type of the implementation class
      * @return a reference describing the data specification template
      * implemented by the given class
+     * @throws IllegalArgumentException when implementation class is not known
      */
     public static Reference getReference(Class<? extends DataSpecificationContent> implementation) {
         Reference result = getReferenceSafe(implementation);
@@ -75,7 +76,17 @@ public class DataSpecificationManager {
         return result;
     }
 
-    private static Reference getReferenceSafe(Class<? extends DataSpecificationContent> implementation) {
+    /**
+     * Returns a Reference describing the data specification template
+     * implemented by the given class. If the class is unknown, null is
+     * returned.
+     *
+     * @param implementation type of the implementation class
+     * @return a reference describing the data specification template
+     * implemented by the given class, or null if the implementation class is
+     * unknown
+     */
+    public static Reference getReferenceSafe(Class<? extends DataSpecificationContent> implementation) {
         Optional<Reference> exactMatch = KNOWN_IMPLEMENTATIONS.entrySet().stream()
                 .filter(x -> Objects.equals(x.getValue(), implementation)).map(x -> x.getKey()).findFirst();
         if (exactMatch.isPresent()) {

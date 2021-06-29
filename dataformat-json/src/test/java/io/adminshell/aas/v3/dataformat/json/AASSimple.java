@@ -18,7 +18,7 @@ public class AASSimple {
     public static final String SUBMODEL_TECHNICAL_DATA_ID = "http://i40.customer.com/type/1/1/7A7104BDAB57E184";
     public static final String SUBMODEL_TECHNICAL_DATA_SEMANTIC_ID = "0173-1#01-AFZ615#016";
     public static final String SUBMODEL_TECHNICAL_DATA_SEMANTIC_ID_PROPERTY = "0173-1#02-BAA120#008";
-    public static final String SUBMODEL_TECHNICAL_DATA_PROPERTY_CATEGORY = "PARAMETER";
+    public static final String SUBMODEL_TECHNICAL_DATA_PROPERTY_CATEGORY = "Parameter";
     public static final String SUBMODEL_TECHNICAL_DATA_PROPERTY_VALUE = "5000";
     public static final String SUBMODEL_TECHNICAL_DATA_PROPERTY_VALUETYPE = "integer";
 
@@ -232,7 +232,7 @@ public class AASSimple {
                     .identifier("www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Description/Title")
                     .idType(IdentifierType.IRI)
                     .build())
-            .embeddedDataSpecification(new DefaultDataSpecification.Builder()
+            .embeddedDataSpecification(new DefaultEmbeddedDataSpecification.Builder()
                     .dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder()
                             .preferredName(new LangString("Title", "EN"))
                             .preferredName(new LangString("Titel", "DE"))
@@ -252,7 +252,7 @@ public class AASSimple {
                     .identifier("www.vdi2770.com/blatt1/Entwurf/Okt18/cd/StoredDocumentRepresentation/DigitalFile")
                     .idType(IdentifierType.IRI)
                     .build())
-            .embeddedDataSpecification(new DefaultDataSpecification.Builder()
+            .embeddedDataSpecification(new DefaultEmbeddedDataSpecification.Builder()
                     .dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder()
                             .preferredName(new LangString("DigitalFile", "EN"))
                             .preferredName(new LangString("DigitaleDatei", "DE"))
@@ -277,7 +277,7 @@ public class AASSimple {
                     .identifier("0173-1#02-BAA120#008")
                     .idType(IdentifierType.IRDI)
                     .build())
-            .embeddedDataSpecifications(Arrays.asList(new DefaultDataSpecification.Builder()
+            .embeddedDataSpecifications(Arrays.asList(new DefaultEmbeddedDataSpecification.Builder()
                     .dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder()
                             .preferredName(new LangString("max.Drehzahl", "de"))
                             .preferredName(new LangString("Max.rotationspeed", "en"))
@@ -304,7 +304,7 @@ public class AASSimple {
                     .identifier("http://customer.com/cd/1/1/18EBD56F6B43D895")
                     .idType(IdentifierType.IRI)
                     .build())
-            .embeddedDataSpecification(new DefaultDataSpecification.Builder()
+            .embeddedDataSpecification(new DefaultEmbeddedDataSpecification.Builder()
                     .dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder()
                             .preferredName(new LangString("AktuelleDrehzahl", "DE"))
                             .preferredName(new LangString("Actualrotationspeed", "EN"))
@@ -332,7 +332,7 @@ public class AASSimple {
                     .identifier("www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Document")
                     .idType(IdentifierType.IRI)
                     .build())
-            .embeddedDataSpecification(new DefaultDataSpecification.Builder()
+            .embeddedDataSpecification(new DefaultEmbeddedDataSpecification.Builder()
                     .dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder()
                             .shortName(new LangString("Document", "EN"))
                             .shortName(new LangString("Dokument", "DE"))
