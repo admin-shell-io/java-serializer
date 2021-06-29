@@ -3,7 +3,6 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
     <groupId>io.adminshell.aas</groupId>
     <artifactId>dataformat-json</artifactId>
     <version>${revision}</version>
@@ -44,11 +43,9 @@
         </plugins>
     </build>
     <properties>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <revision>1.1.1</revision>
+        <revision>1.1.2-SNAPSHOT</revision>
         <classgraph.version>4.8.106</classgraph.version>
         <hibernate.version>7.0.1.Final</hibernate.version>
         <jackson.version>2.12.3</jackson.version>
@@ -126,7 +123,6 @@
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate.version}</version>
         </dependency>
-
     </dependencies>
     <repositories>
         <repository>
@@ -135,5 +131,4 @@
             <url>http://maven.iais.fraunhofer.de/artifactory/eis-ids-public</url>
         </repository>
     </repositories>
-
 </project>
