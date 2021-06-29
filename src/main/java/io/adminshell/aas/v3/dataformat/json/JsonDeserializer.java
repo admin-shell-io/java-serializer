@@ -53,8 +53,8 @@ public class JsonDeserializer implements Deserializer {
         typeResolver = new SimpleAbstractTypeResolver();
         ReflectionHelper.DEFAULT_IMPLEMENTATIONS
                 .stream()
-                .filter(x -> !customDeserializers.containsKey(x.getImplementedClass()))
-                .forEach(x -> typeResolver.addMapping(x.getImplementedClass(), x.getImplementationClass()));
+                .filter(x -> !customDeserializers.containsKey(x.getInterfaceType()))
+                .forEach(x -> typeResolver.addMapping(x.getInterfaceType(), x.getImplementationType()));
     }
 
     protected SimpleModule buildEnumModule() {
