@@ -1,7 +1,7 @@
 package io.adminshell.aas.v3.dataformat.json;
 
 import io.adminshell.aas.v3.model.Constraint;
-import io.adminshell.aas.v3.model.DataSpecification;
+import io.adminshell.aas.v3.model.DataSpecificationContent;
 import io.adminshell.aas.v3.model.Referable;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
@@ -78,7 +78,7 @@ public class ReflectionHelper {
      * not have any default implementation and therefore are excluded
      * explicitely.
      */
-    public static final List<Class<?>> INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION = List.of(DataSpecification.class);
+    public static final Set<Class<?>> INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION; // = List.of(DataSpecificationContent.class);
     /**
      * List of enums from the MODEL_PACKAGE_NAME package.
      */
@@ -86,20 +86,20 @@ public class ReflectionHelper {
 
     public static class ImplementationInfo<T> {
 
-        private final Class<T> implementedClass;
-        private final Class<? extends T> implementationClass;
+        private final Class<T> interfaceType;
+        private final Class<? extends T> implementationType;
 
-        protected ImplementationInfo(Class<T> implementedClass, Class<? extends T> implementationClass) {
-            this.implementedClass = implementedClass;
-            this.implementationClass = implementationClass;
+        protected ImplementationInfo(Class<T> interfaceType, Class<? extends T> implementationType) {
+            this.interfaceType = interfaceType;
+            this.implementationType = implementationType;
         }
 
-        public Class<T> getImplementedClass() {
-            return implementedClass;
+        public Class<T> getInterfaceType() {
+            return interfaceType;
         }
 
-        public Class<? extends T> getImplementationClass() {
-            return implementationClass;
+        public Class<? extends T> getImplementationType() {
+            return implementationType;
         }
     }
 
@@ -122,7 +122,17 @@ public class ReflectionHelper {
      * @return whether the given class is a default implementation or not
      */
     public static boolean isDefaultImplementation(Class<?> type) {
-        return DEFAULT_IMPLEMENTATIONS.stream().anyMatch(x -> Objects.equals(x.getImplementationClass(), type));
+        return DEFAULT_IMPLEMENTATIONS.stream().anyMatch(x -> Objects.equals(x.getImplementationType(), type));
+    }
+
+    /**
+     * Returns whether the given interface has a default implementation or not
+     *
+     * @param interfaceType the interface to check
+     * @return whether the given interface has a default implementation or not
+     */
+    public static boolean hasDefaultImplementation(Class<?> interfaceType) {
+        return DEFAULT_IMPLEMENTATIONS.stream().anyMatch(x -> x.getInterfaceType().equals(interfaceType));
     }
 
     /**
@@ -147,6 +157,13 @@ public class ReflectionHelper {
         MIXINS = scanMixins(modelScan);
         DEFAULT_IMPLEMENTATIONS = scanDefaultImplementations(modelScan);
         ENUMS = modelScan.getAllEnums().loadClasses(Enum.class);
+        INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION = getInterfacesWithoutDefaultImplementation(modelScan);
+    }
+
+    private static Set<Class<?>> getInterfacesWithoutDefaultImplementation(ScanResult modelScan) {
+        return modelScan.getAllInterfaces().loadClasses().stream()
+                .filter(x -> !hasDefaultImplementation(x))
+                .collect(Collectors.toSet());
     }
 
     private static List<ImplementationInfo> scanDefaultImplementations(ScanResult modelScan) {
@@ -166,16 +183,11 @@ public class ReflectionHelper {
                         logger.warn("could not find interface realized by default implementation class '{}'", x.getSimpleName());
                     } else {
                         Class<?> implementedClass = interfaceClassInfos.get(0).loadClass();
-                        if (INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION.contains(implementedClass)) {
-                            logger.info("skipping found default implementation class '{}' for interface '{}' because explicitely excluded",
-                                    x.getSimpleName(),
-                                    interfaceClassInfos.get(0).getName());
-                        } else {
-                            defaultImplementations.add(new ImplementationInfo(implementedClass, x));
-                            logger.info("using default implementation class '{}' for interface '{}'",
-                                    x.getSimpleName(),
-                                    interfaceClassInfos.get(0).getName());
-                        }
+                        defaultImplementations.add(new ImplementationInfo(implementedClass, x));
+                        logger.info("using default implementation class '{}' for interface '{}'",
+                                x.getSimpleName(),
+                                interfaceClassInfos.get(0).getName());
+
                     }
                 });
         return defaultImplementations;

@@ -13,7 +13,6 @@ import io.adminshell.aas.v3.dataformat.json.serialization.EnumSerializer;
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
 import io.adminshell.aas.v3.dataformat.json.serialization.EmbeddedDataSpecificationSerializer;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
-import io.adminshell.aas.v3.model.DataSpecification;
 import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
 
 /**
