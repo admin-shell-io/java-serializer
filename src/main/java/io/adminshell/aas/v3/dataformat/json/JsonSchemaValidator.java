@@ -10,15 +10,15 @@ import com.networknt.schema.ValidationMessage;
 import io.adminshell.aas.v3.dataformat.SchemaValidator;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
 public class JsonSchemaValidator implements SchemaValidator {
 
-    private static final String SCHEMA = "aas.json";
+    private static final String SCHEMA = "/aas.json";
     private final ObjectMapper mapper = new ObjectMapper();
 
     public JsonSchemaValidator() {
@@ -26,31 +26,28 @@ public class JsonSchemaValidator implements SchemaValidator {
 
     @Override
     public Set<String> validateSchema(String serialized) {
-        try{
+        try {
             return validateSchema(serialized, loadDefaultSchema());
-        }
-        catch (IOException e) {
+        } catch (IOException | URISyntaxException e) {
             return Set.of(e.getMessage());
         }
     }
 
-    public Set<String> validateSchema(String serialized, String serializedSchema){
+    public Set<String> validateSchema(String serialized, String serializedSchema) {
         try {
             JsonNode schemaRootNode = mapper.readTree(serializedSchema);
             JsonSchemaFactory factory = JsonSchemaFactory.getInstance(SpecVersionDetector.detect(schemaRootNode));
             JsonSchema schema = factory.getSchema(schemaRootNode);
             JsonNode node = mapper.readTree(serialized);
             Set<ValidationMessage> validationMessages = schema.validate(node);
-
             return generalizeValidationMessagesAsStringSet(validationMessages);
         } catch (JsonProcessingException e) {
             return Set.of(e.getMessage());
         }
     }
 
-    private String loadDefaultSchema() throws IOException {
-        String defaultPath = Objects.requireNonNull(getClass().getClassLoader().getResource(SCHEMA)).getPath();
-        return new String(Files.readAllBytes(Paths.get(defaultPath)));
+    private String loadDefaultSchema() throws IOException, URISyntaxException {
+        return Files.readString(Paths.get(getClass().getResource(SCHEMA).toURI()));
     }
 
     private Set<String> generalizeValidationMessagesAsStringSet(Set<ValidationMessage> messages) {
