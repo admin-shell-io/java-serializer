@@ -23,6 +23,8 @@ local.properties
 .settings/
 .loadpath
 .recommenders
+*.iml
 
 .classpath
 .project
+.flattened-pom.xml
