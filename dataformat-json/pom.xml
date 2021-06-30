@@ -17,6 +17,11 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>io.adminshell.aas</groupId>
+            <artifactId>dataformat-core</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
             <version>${javax-validation.version}</version>

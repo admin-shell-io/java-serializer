@@ -8,6 +8,7 @@
     <version>${revision}</version>
     <packaging>pom</packaging>
     <modules>
+        <module>dataformat-core</module>
         <module>dataformat-json</module>
         <module>dataformat-xml</module>
     </modules>
