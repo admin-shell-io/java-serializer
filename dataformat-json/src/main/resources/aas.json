@@ -255,8 +255,8 @@
             "type": "string",
             "enum": [
                 "Custom",
-                "IRDI",
-                "IRI",
+                "Irdi",
+                "Iri",
                 "IdShort",
                 "FragmentId"
             ]
@@ -332,6 +332,7 @@
                 "BasicEvent",
                 "Blob",
                 "Capability",
+                "ConceptDictionary",
                 "DataElement",
                 "File",
                 "Entity",
@@ -361,6 +362,7 @@
                 "BasicEvent",
                 "Blob",
                 "Capability",
+                "ConceptDictionary",
                 "DataElement",
                 "File",
                 "Entity",
@@ -403,8 +405,7 @@
                 }
             },
             "required": [
-                "dataSpecification",
-                "dataSpecificationContent"
+                "dataSpecification"
             ]
         },
         "DataSpecificationContent": {
@@ -479,21 +480,21 @@
                     "properties": {
                         "dataType": {
                             "enum": [
-                                "DATE",
-                                "STRING",
-                                "STRING_TRANSLATABLE",
-                                "REAL_MEASURE",
-                                "REAL_COUNT",
-                                "REAL_CURRENCY",
-                                "BOOLEAN",
-                                "URL",
-                                "RATIONAL",
-                                "RATIONAL_MEASURE",
-                                "TIME",
-                                "TIMESTAMP",
-                                "INTEGER_COUNT",
-                                "INTEGER_MEASURE",
-                                "INTEGER_CURRENCY"
+                                "Date",
+                                "String",
+                                "StringTranslatable",
+                                "RealMeasure",
+                                "RealCount",
+                                "RealCurrency",
+                                "Boolean",
+                                "Url",
+                                "Rational",
+                                "RationalMeasure",
+                                "Time",
+                                "Timestamp",
+                                "IntegerCount",
+                                "IntegerMeasure",
+                                "IntegerCurrency"
                             ]
                         },
                         "definition": {
@@ -799,6 +800,9 @@
                         },
                         {
                             "$ref": "#/definitions/Capability"
+                        },
+                        {
+                            "$ref": "#/definitions/ConceptDictionary"
                         },
                         {
                             "$ref": "#/definitions/Entity"
@@ -1148,6 +1152,9 @@
                                     },
                                     {
                                         "$ref": "#/definitions/Capability"
+                                    },
+                                    {
+                                        "$ref": "#/definitions/ConceptDictionary"
                                     },
                                     {
                                         "$ref": "#/definitions/Entity"

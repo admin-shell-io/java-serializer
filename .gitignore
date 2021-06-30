@@ -27,4 +27,5 @@ local.properties
 
 .classpath
 .project
-.flattened-pom.xml
+**/.flattened-pom.xml
+**/nb-configuration.xml

@@ -20,8 +20,8 @@ import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShell;
 import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.impl.DefaultAssetInformation;
 import io.adminshell.aas.v3.model.impl.DefaultConceptDescription;
-import io.adminshell.aas.v3.model.impl.DefaultDataSpecification;
 import io.adminshell.aas.v3.model.impl.DefaultDataSpecificationIEC61360;
+import io.adminshell.aas.v3.model.impl.DefaultEmbeddedDataSpecification;
 import io.adminshell.aas.v3.model.impl.DefaultFile;
 import io.adminshell.aas.v3.model.impl.DefaultIdentifier;
 import io.adminshell.aas.v3.model.impl.DefaultIdentifierKeyValuePair;
@@ -186,7 +186,7 @@ public class AASSimple {
 			.identification(new DefaultIdentifier.Builder()
 					.identifier("www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Description/Title").idType(IdentifierType.IRI)
 					.build())
-			.embeddedDataSpecification(new DefaultDataSpecification.Builder()
+			.embeddedDataSpecification(new DefaultEmbeddedDataSpecification.Builder()
 					.dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder()
 							.preferredName(new LangString("Title", "EN")).preferredName(new LangString("Titel", "DE"))
 							.shortName(new LangString("Title", "EN")).shortName(new LangString("Titel", "DE")).unit("")
@@ -200,7 +200,7 @@ public class AASSimple {
 			.identification(new DefaultIdentifier.Builder()
 					.identifier("www.vdi2770.com/blatt1/Entwurf/Okt18/cd/StoredDocumentRepresentation/DigitalFile")
 					.idType(IdentifierType.IRI).build())
-			.embeddedDataSpecification(new DefaultDataSpecification.Builder().dataSpecificationContent(
+			.embeddedDataSpecification(new DefaultEmbeddedDataSpecification.Builder().dataSpecificationContent(
 					new DefaultDataSpecificationIEC61360.Builder().preferredName(new LangString("DigitalFile", "EN"))
 							.preferredName(new LangString("DigitaleDatei", "DE"))
 							.shortName(new LangString("DigitalFile", "EN"))
@@ -219,7 +219,7 @@ public class AASSimple {
 			.identification(new DefaultIdentifier.Builder().identifier("0173-1#02-BAA120#008")
 					.idType(IdentifierType.IRDI).build())
 			.embeddedDataSpecifications(
-					Arrays.asList(new DefaultDataSpecification.Builder()
+					Arrays.asList(new DefaultEmbeddedDataSpecification.Builder()
 							.dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder()
 									.preferredName(new LangString("max.Drehzahl", "de"))
 									.preferredName(new LangString("Max.rotationspeed", "en")).unit("1/min")
@@ -243,7 +243,7 @@ public class AASSimple {
 			.identification(new DefaultIdentifier.Builder().identifier("http://customer.com/cd/1/1/18EBD56F6B43D895")
 					.idType(IdentifierType.IRI).build())
 			.embeddedDataSpecification(
-					new DefaultDataSpecification.Builder()
+					new DefaultEmbeddedDataSpecification.Builder()
 							.dataSpecificationContent(
 									new DefaultDataSpecificationIEC61360.Builder()
 											.preferredName(new LangString("AktuelleDrehzahl", "DE"))
@@ -269,7 +269,7 @@ public class AASSimple {
 			.idShort("Document")
 			.identification(new DefaultIdentifier.Builder()
 					.identifier("www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Document").idType(IdentifierType.IRI).build())
-			.embeddedDataSpecification(new DefaultDataSpecification.Builder()
+			.embeddedDataSpecification(new DefaultEmbeddedDataSpecification.Builder()
 					.dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder()
 							.shortName(new LangString("Document", "EN")).shortName(new LangString("Dokument", "DE"))
 							.unit("").sourceOfDefinition("[ISO15519-1:2010]").dataType(DataTypeIEC61360.STRING)
@@ -286,7 +286,7 @@ public class AASSimple {
 			.conceptDescriptions(CONCEPT_DESCRIPTION_DIGITALFILE)
 			.conceptDescriptions(CONCEPT_DESCRIPTION_MAXROTATIONSPEED)
 			.conceptDescriptions(CONCEPT_DESCRIPTION_ROTATIONSPEED).conceptDescriptions(CONCEPT_DESCRIPTION_DOCUMENT)
-			//.assets(ASSET)
+			// .assets(ASSET)
 			.build();
 
 }

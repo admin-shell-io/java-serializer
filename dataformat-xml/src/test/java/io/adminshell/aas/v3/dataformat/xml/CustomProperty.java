@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Objects;
 
 import io.adminshell.aas.v3.model.Constraint;
+import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
 import io.adminshell.aas.v3.model.LangString;
 import io.adminshell.aas.v3.model.ModelingKind;
 import io.adminshell.aas.v3.model.Property;
@@ -11,7 +12,7 @@ import io.adminshell.aas.v3.model.Reference;
 
 public class CustomProperty implements Property {
 
-	protected List<Reference> dataSpecifications;
+	protected List<EmbeddedDataSpecification> embeddedDataSpecifications;
 
 	protected ModelingKind kind;
 
@@ -39,7 +40,7 @@ public class CustomProperty implements Property {
 	@Override
 	public int hashCode() {
 		return Objects.hash(new Object[] { this.valueType, this.value, this.valueId, this.category, this.descriptions,
-				this.displayNames, this.idShort, this.qualifiers, this.dataSpecifications, this.kind,
+				this.displayNames, this.idShort, this.qualifiers, this.embeddedDataSpecifications, this.kind,
 				this.semanticId });
 	}
 
@@ -58,7 +59,7 @@ public class CustomProperty implements Property {
 					&& Objects.equals(this.descriptions, other.descriptions)
 					&& Objects.equals(this.displayNames, other.displayNames)
 					&& Objects.equals(this.idShort, other.idShort) && Objects.equals(this.qualifiers, other.qualifiers)
-					&& Objects.equals(this.dataSpecifications, other.dataSpecifications)
+					&& Objects.equals(this.embeddedDataSpecifications, other.embeddedDataSpecifications)
 					&& Objects.equals(this.kind, other.kind) && Objects.equals(this.semanticId, other.semanticId);
 		}
 	}
@@ -144,13 +145,13 @@ public class CustomProperty implements Property {
 	}
 
 	@Override
-	final public List<Reference> getDataSpecifications() {
-		return dataSpecifications;
+	final public List<EmbeddedDataSpecification> getEmbeddedDataSpecifications() {
+		return embeddedDataSpecifications;
 	}
 
 	@Override
-	final public void setDataSpecifications(List<Reference> dataSpecifications) {
-		this.dataSpecifications = dataSpecifications;
+	final public void setEmbeddedDataSpecifications(List<EmbeddedDataSpecification> embeddedDataSpecifications) {
+		this.embeddedDataSpecifications = embeddedDataSpecifications;
 	}
 
 	@Override

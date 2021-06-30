@@ -15,7 +15,7 @@
                         {
                             "type": "Asset",
                             "value": "http://customer.com/assets/KHBVZJSQKIY",
-                            "idType": "IRI"
+                            "idType": "Iri"
                         }
                     ]
                 },
@@ -28,7 +28,7 @@
                                 {
                                     "type": "GlobalReference",
                                     "value": "http://customer.com/Systems/ERP/012",
-                                    "idType": "IRI"
+                                    "idType": "Iri"
                                 }
                             ]
                         }
@@ -41,7 +41,7 @@
                                 {
                                     "type": "GlobalReference",
                                     "value": "http://customer.com/Systems/IoT/1",
-                                    "idType": "IRI"
+                                    "idType": "Iri"
                                 }
                             ]
                         }
@@ -63,7 +63,7 @@
                         {
                             "type": "Submodel",
                             "value": "http.//i40.customer.com/type/1/1/7A7104BDAB57E184",
-                            "idType": "IRI"
+                            "idType": "Iri"
                         }
                     ]
                 },
@@ -72,7 +72,7 @@
                         {
                             "type": "Submodel",
                             "value": "http://i40.customer.com/instance/1/1/AC69B1CB44F07935",
-                            "idType": "IRI"
+                            "idType": "Iri"
                         }
                     ]
                 },
@@ -81,7 +81,7 @@
                         {
                             "type": "Submodel",
                             "value": "http://i40.customer.com/type/1/1/1A7B62B529F19152",
-                            "idType": "IRI"
+                            "idType": "Iri"
                         }
                     ]
                 }
@@ -95,7 +95,7 @@
             },
             "idShort": "ServoDCMotor",
             "identification": {
-                "idType": "IRI",
+                "idType": "Iri",
                 "id": "http://customer.com/assets/KHBVZJSQKIY"
             }
         }
@@ -110,14 +110,14 @@
                     {
                         "type": "GlobalReference",
                         "value": "0173-1#01-AFZ615#016",
-                        "idType": "IRDI"
+                        "idType": "Irdi"
                     }
                 ]
             },
             "kind": "Instance",
             "idShort": "TechnicalData",
             "identification": {
-                "idType": "IRI",
+                "idType": "Iri",
                 "id": "http://i40.customer.com/type/1/1/7A7104BDAB57E184"
             },
             "submodelElements": [
@@ -131,12 +131,12 @@
                             {
                                 "type": "ConceptDescription",
                                 "value": "0173-1#02-BAA120#008",
-                                "idType": "IRDI"
+                                "idType": "Irdi"
                             }
                         ]
                     },
                     "idShort": "MaxRotationSpeed",
-                    "category": "PARAMETER",
+                    "category": "Parameter",
                     "value": "5000",
                     "valueType": "integer"
                 }
@@ -149,7 +149,7 @@
             "kind": "Instance",
             "idShort": "Documentation",
             "identification": {
-                "idType": "IRI",
+                "idType": "Iri",
                 "id": "http://i40.customer.com/type/1/1/1A7B62B529F19152"
             },
             "submodelElements": [
@@ -163,7 +163,7 @@
                             {
                                 "type": "ConceptDescription",
                                 "value": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Document",
-                                "idType": "IRI"
+                                "idType": "Iri"
                             }
                         ]
                     },
@@ -179,7 +179,7 @@
                                     {
                                         "type": "ConceptDescription",
                                         "value": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Description/Title",
-                                        "idType": "IRI"
+                                        "idType": "Iri"
                                     }
                                 ]
                             },
@@ -197,7 +197,7 @@
                                     {
                                         "type": "ConceptDescription",
                                         "value": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/StoredDocumentRepresentation/DigitalFile",
-                                        "idType": "IRI"
+                                        "idType": "Iri"
                                     }
                                 ]
                             },
@@ -218,7 +218,7 @@
             "kind": "Instance",
             "idShort": "OperationalData",
             "identification": {
-                "idType": "IRI",
+                "idType": "Iri",
                 "id": "http://i40.customer.com/instance/1/1/AC69B1CB44F07935"
             },
             "submodelElements": [
@@ -232,12 +232,12 @@
                             {
                                 "type": "ConceptDescription",
                                 "value": "http://customer.com/cd/1/1/18EBD56F6B43D895",
-                                "idType": "IRI"
+                                "idType": "Iri"
                             }
                         ]
                     },
                     "idShort": "RotationSpeed",
-                    "category": "VARIABLE",
+                    "category": "Variable",
                     "value": "4370",
                     "valueType": "integer"
                 }
@@ -251,7 +251,7 @@
             },
             "idShort": "Title",
             "identification": {
-                "idType": "IRI",
+                "idType": "Iri",
                 "id": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Description/Title"
             },
             "embeddedDataSpecifications": [
@@ -261,7 +261,7 @@
                             {
                                 "type": "GlobalReference",
                                 "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0",
-                                "idType": "IRI"
+                                "idType": "Iri"
                             }
                         ]
                     },
@@ -288,7 +288,7 @@
                         ],
                         "unit": "",
                         "sourceOfDefinition": "",
-                        "dataType": "STRING_TRANSLATABLE",
+                        "dataType": "StringTranslatable",
                         "definition": [
                             {
                                 "language": "DE",
@@ -305,7 +305,7 @@
             },
             "idShort": "DigitalFile",
             "identification": {
-                "idType": "IRI",
+                "idType": "Iri",
                 "id": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/StoredDocumentRepresentation/DigitalFile"
             },
             "embeddedDataSpecifications": [
@@ -315,7 +315,7 @@
                             {
                                 "type": "GlobalReference",
                                 "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0",
-                                "idType": "IRI"
+                                "idType": "Iri"
                             }
                         ]
                     },
@@ -342,7 +342,7 @@
                         ],
                         "unit": "",
                         "sourceOfDefinition": "",
-                        "dataType": "STRING",
+                        "dataType": "String",
                         "definition": [
                             {
                                 "language": "DE",
@@ -364,7 +364,7 @@
                 "revision": "2"
             },
             "identification": {
-                "idType": "IRDI",
+                "idType": "Irdi",
                 "id": "0173-1#02-BAA120#008"
             },
             "embeddedDataSpecifications": [
@@ -374,7 +374,7 @@
                             {
                                 "type": "GlobalReference",
                                 "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0",
-                                "idType": "IRI"
+                                "idType": "Iri"
                             }
                         ]
                     },
@@ -395,12 +395,12 @@
                                 {
                                     "type": "GlobalReference",
                                     "value": "0173-1#05-AAA650#002",
-                                    "idType": "IRDI"
+                                    "idType": "Irdi"
                                 }
                             ]
                         },
                         "sourceOfDefinition": "",
-                        "dataType": "REAL_MEASURE",
+                        "dataType": "RealMeasure",
                         "definition": [
                             {
                                 "language": "de",
@@ -422,7 +422,7 @@
             "idShort": "RotationSpeed",
             "category": "PROPERTY",
             "identification": {
-                "idType": "IRI",
+                "idType": "Iri",
                 "id": "http://customer.com/cd/1/1/18EBD56F6B43D895"
             },
             "embeddedDataSpecifications": [
@@ -432,7 +432,7 @@
                             {
                                 "type": "GlobalReference",
                                 "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0",
-                                "idType": "IRI"
+                                "idType": "Iri"
                             }
                         ]
                     },
@@ -463,12 +463,12 @@
                                 {
                                     "type": "GlobalReference",
                                     "value": "0173-1#05-AAA650#002",
-                                    "idType": "IRDI"
+                                    "idType": "Irdi"
                                 }
                             ]
                         },
                         "sourceOfDefinition": "",
-                        "dataType": "REAL_MEASURE",
+                        "dataType": "RealMeasure",
                         "definition": [
                             {
                                 "language": "DE",
@@ -486,7 +486,7 @@
         {
             "idShort": "Document",
             "identification": {
-                "idType": "IRI",
+                "idType": "Iri",
                 "id": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Document"
             },
             "embeddedDataSpecifications": [
@@ -496,7 +496,7 @@
                             {
                                 "type": "GlobalReference",
                                 "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0",
-                                "idType": "IRI"
+                                "idType": "Iri"
                             }
                         ]
                     },
@@ -515,7 +515,7 @@
                         ],
                         "unit": "",
                         "sourceOfDefinition": "[ISO15519-1:2010]",
-                        "dataType": "STRING",
+                        "dataType": "String",
                         "definition": [
                             {
                                 "language": "DE",

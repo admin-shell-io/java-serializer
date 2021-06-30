@@ -9,31 +9,16 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.Serializer;
-import io.adminshell.aas.v3.dataformat.json.enums.EnumSerializer;
-import io.adminshell.aas.v3.dataformat.json.enums.IdentifierTypeMapping;
-import io.adminshell.aas.v3.dataformat.json.enums.KeyTypeMapping;
-import io.adminshell.aas.v3.dataformat.json.enums.ScreamingSnakeCaseEnumNaming;
-import io.adminshell.aas.v3.dataformat.json.enums.UpperCamelCaseEnumNaming;
+import io.adminshell.aas.v3.dataformat.json.serialization.EnumSerializer;
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
-import io.adminshell.aas.v3.dataformat.json.serialization.DataSpecificationSerializer;
+import io.adminshell.aas.v3.dataformat.json.serialization.EmbeddedDataSpecificationSerializer;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
-import io.adminshell.aas.v3.model.AssetKind;
-import io.adminshell.aas.v3.model.Category;
 import io.adminshell.aas.v3.model.DataSpecification;
-import io.adminshell.aas.v3.model.DataTypeIEC61360;
-import io.adminshell.aas.v3.model.EntityType;
-import io.adminshell.aas.v3.model.IdentifiableElements;
-import io.adminshell.aas.v3.model.IdentifierType;
-import io.adminshell.aas.v3.model.KeyElements;
-import io.adminshell.aas.v3.model.KeyType;
-import io.adminshell.aas.v3.model.LevelType;
-import io.adminshell.aas.v3.model.LocalKeyType;
-import io.adminshell.aas.v3.model.ModelingKind;
-import io.adminshell.aas.v3.model.PermissionKind;
-import io.adminshell.aas.v3.model.ReferableElements;
+import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
 
 /**
- * Class for serializing an instance of AssetAdministrationShellEnvironment to JSON.
+ * Class for serializing an instance of AssetAdministrationShellEnvironment to
+ * JSON.
  */
 public class JsonSerializer implements Serializer {
 
@@ -56,34 +41,13 @@ public class JsonSerializer implements Serializer {
 
     protected SimpleModule buildCustomDeserializerModule() {
         SimpleModule module = new SimpleModule();
-        module.addSerializer(DataSpecification.class, new DataSpecificationSerializer());
+        module.addSerializer(EmbeddedDataSpecification.class, new EmbeddedDataSpecificationSerializer());
         return module;
     }
 
     protected SimpleModule buildEnumModule() {
         SimpleModule module = new SimpleModule();
-        // enums with custom naming strategy
-        module.addSerializer(IdentifierType.class, new EnumSerializer<>(new IdentifierTypeMapping()));
-        module.addSerializer(KeyType.class, new EnumSerializer<>(new KeyTypeMapping()));
-        // enums with screaming snake case naming strategy (e.g. HELLO_WORLD)
-        module.addSerializer(DataTypeIEC61360.class,
-                new EnumSerializer<>(new ScreamingSnakeCaseEnumNaming(DataTypeIEC61360.class)));
-        module.addSerializer(Category.class, new EnumSerializer<>(new ScreamingSnakeCaseEnumNaming(Category.class))); // not used in JSON
-        // enums with upper camel case (default) naming strategy (e.g. HelloWorld)
-        module.addSerializer(AssetKind.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(AssetKind.class)));
-        module.addSerializer(EntityType.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(EntityType.class)));
-        module.addSerializer(IdentifiableElements.class,
-                new EnumSerializer<>(new UpperCamelCaseEnumNaming(IdentifiableElements.class))); // not used in JSON
-        module.addSerializer(KeyElements.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(KeyElements.class))); // not used in JSON
-        module.addSerializer(LevelType.class, new EnumSerializer<>(new UpperCamelCaseEnumNaming(LevelType.class)));
-        module.addSerializer(LocalKeyType.class,
-                new EnumSerializer<>(new UpperCamelCaseEnumNaming(LocalKeyType.class))); // not used in JSON
-        module.addSerializer(ModelingKind.class,
-                new EnumSerializer<>(new UpperCamelCaseEnumNaming(ModelingKind.class)));
-        module.addSerializer(PermissionKind.class,
-                new EnumSerializer<>(new UpperCamelCaseEnumNaming(PermissionKind.class))); // not used in JSON
-        module.addSerializer(ReferableElements.class,
-                new EnumSerializer<>(new UpperCamelCaseEnumNaming(ReferableElements.class))); // not used in JSON
+        module.addSerializer(Enum.class, new EnumSerializer());
         return module;
     }
 
