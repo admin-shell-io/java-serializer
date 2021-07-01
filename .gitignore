@@ -27,5 +27,10 @@ local.properties
 
 .classpath
 .project
+
 **/.flattened-pom.xml
 **/nb-configuration.xml
+**.iml
+**.flattened-pom.xml
+
+testJsonSerialization.json
