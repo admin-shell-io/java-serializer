@@ -9,7 +9,9 @@ import com.networknt.schema.SpecVersionDetector;
 import com.networknt.schema.ValidationMessage;
 import io.adminshell.aas.v3.dataformat.SchemaValidator;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -66,7 +68,7 @@ public class JsonSchemaValidator implements SchemaValidator {
     }
 
     private String loadDefaultSchema() throws IOException, URISyntaxException {
-        return Files.readString(Paths.get(getClass().getResource(SCHEMA).toURI()));
+        return new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(SCHEMA))).lines().collect(Collectors.joining("\n"));
     }
 
     private Set<String> generalizeValidationMessagesAsStringSet(Set<ValidationMessage> messages) {
