@@ -26,6 +26,7 @@ local.properties
 
 .classpath
 .project
+**.iml
+**.flattened-pom.xml
 
 testJsonSerialization.json
-
