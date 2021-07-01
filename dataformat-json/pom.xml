@@ -4,14 +4,14 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <groupId>io.adminshell.aas</groupId>
+        <groupId>io.admin-shell.aas</groupId>
         <artifactId>dataformat-parent</artifactId>
         <version>${revision}</version>
     </parent>
     <artifactId>dataformat-json</artifactId>
     <dependencies>
         <dependency>
-            <groupId>io.adminshell.aas</groupId>
+            <groupId>io.admin-shell.aas</groupId>
             <artifactId>model</artifactId>
             <version>${model.version}</version>
             <scope>compile</scope>
