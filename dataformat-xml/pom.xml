@@ -22,6 +22,11 @@
             <version>${revision}</version>
         </dependency>
         <dependency>
+            <groupId>io.adminshell.aas</groupId>
+            <artifactId>dataformat-json</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>

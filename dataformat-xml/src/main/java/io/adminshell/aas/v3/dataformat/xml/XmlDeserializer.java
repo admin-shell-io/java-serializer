@@ -28,7 +28,7 @@ import io.adminshell.aas.v3.model.Blob;
 import io.adminshell.aas.v3.model.Capability;
 import io.adminshell.aas.v3.model.Category;
 import io.adminshell.aas.v3.model.ConceptDescription;
-import io.adminshell.aas.v3.model.DataSpecification;
+import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
 import io.adminshell.aas.v3.model.DataSpecificationIEC61360;
 import io.adminshell.aas.v3.model.DataTypeIEC61360;
 import io.adminshell.aas.v3.model.Entity;
@@ -166,7 +166,7 @@ public class XmlDeserializer implements Deserializer {
 
 	protected SimpleModule buildCustomDeserializerModule() {
 		SimpleModule module = new SimpleModule();
-		module.addDeserializer(DataSpecification.class, new DataSpecificationDeserializer());
+		module.addDeserializer(EmbeddedDataSpecification.class, new DataSpecificationDeserializer());
 		module.addDeserializer(byte[].class, new ByteArrayDeserializer());
 		return module;
 	}

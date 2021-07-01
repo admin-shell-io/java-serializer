@@ -1,4 +1,4 @@
-package io.adminshell.aas.v3.dataformat.json.serialization;
+package io.adminshell.aas.v3.dataformat.xml.serialization;
 
 import java.io.IOException;
 

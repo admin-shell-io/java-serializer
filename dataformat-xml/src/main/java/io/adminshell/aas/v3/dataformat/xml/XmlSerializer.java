@@ -67,7 +67,7 @@ import io.adminshell.aas.v3.model.Blob;
 import io.adminshell.aas.v3.model.Capability;
 import io.adminshell.aas.v3.model.Category;
 import io.adminshell.aas.v3.model.ConceptDescription;
-import io.adminshell.aas.v3.model.DataSpecification;
+import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
 import io.adminshell.aas.v3.model.DataSpecificationIEC61360;
 import io.adminshell.aas.v3.model.DataTypeIEC61360;
 import io.adminshell.aas.v3.model.Entity;
@@ -133,7 +133,7 @@ public class XmlSerializer implements Serializer {
 				.addMixIn(Capability.class, CapabilityMixin.class)
 				.addMixIn(ConceptDescription.class, ConceptDescriptionMixin.class)
 				.addMixIn(DataSpecificationIEC61360.class, DataSpecificationIEC61360Mixin.class)
-				.addMixIn(DataSpecification.class, DataSpecificationMixin.class)
+				.addMixIn(EmbeddedDataSpecification.class, DataSpecificationMixin.class)
 				.addMixIn(Entity.class, EntityMixin.class)
 				.addMixIn(Extension.class, ExtensionMixin.class)
 				.addMixIn(File.class, FileMixin.class)

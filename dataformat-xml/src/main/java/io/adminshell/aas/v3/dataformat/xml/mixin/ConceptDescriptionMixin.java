@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-import io.adminshell.aas.v3.model.DataSpecification;
+import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
 import io.adminshell.aas.v3.model.Reference;
 
 @JsonPropertyOrder({ "extensions", "idShort", "displayNames", "category", "descriptions", "administration",
@@ -17,6 +17,6 @@ public interface ConceptDescriptionMixin {
     public List<Reference> getIsCaseOfs();
 
 	@JsonIgnore
-    public List<DataSpecification> getEmbeddedDataSpecifications();
+    public List<EmbeddedDataSpecification> getEmbeddedDataSpecifications();
     
 }
