@@ -11,18 +11,18 @@
     <artifactId>dataformat-xml</artifactId>
     <dependencies>
         <dependency>
-            <groupId>io.adminshell.aas</groupId>
+            <groupId>io.admin-shell.aas</groupId>
             <artifactId>model</artifactId>
             <version>${model.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>io.adminshell.aas</groupId>
+            <groupId>io.admin-shell.aas</groupId>
             <artifactId>dataformat-core</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
-            <groupId>io.adminshell.aas</groupId>
+            <groupId>io.admin-shell.aas</groupId>
             <artifactId>dataformat-json</artifactId>
             <version>${revision}</version>
         </dependency>
