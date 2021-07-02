@@ -1,0 +1,31 @@
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
+  },
+  "@type" : "ids:ContractRejectionMessage",
+  "@id" : "https://w3id.org/idsa/autogen/contractRejectionMessage/89b24326-4f98-476a-990d-2e0fb1fa0682",
+  "ids:modelVersion" : "4.0.0",
+  "ids:issued" : {
+    "@value" : "2020-07-10T15:49:08.563+02:00",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  },
+  "ids:issuerConnector" : {
+    "@id" : "http://issuerconnector.org"
+  },
+  "ids:securityToken" : {
+    "@type" : "ids:DynamicAttributeToken",
+    "@id" : "https://w3id.org/idsa/autogen/dynamicAttributeToken/d10c75ac-593b-4b9a-8aa6-a492196c8d42",
+    "ids:tokenValue" : "SomeSecurityToken",
+    "ids:tokenFormat" : {
+      "@id" : "idsc:JWT"
+    }
+  },
+  "ids:senderAgent" : {
+    "@id" : "http://senderagent.org"
+  },
+  "ids:correlationMessage" : {
+    "@id" : "https://lastmessage.org/"
+  },
+  "ids:contractRejectionReason" : "Somebody could write a proper, human readable rejection reason here"
+}

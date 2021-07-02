@@ -1,0 +1,30 @@
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
+  },
+  "@type" : "ids:ArtifactRequestMessage",
+  "@id" : "https://w3id.org/idsa/autogen/artifactRequestMessage/6a3e54d3-d51e-47c4-8582-21ce42266203",
+  "ids:modelVersion" : "4.0.1",
+  "ids:requestedArtifact" : {
+    "@id" : "https://w3id.org/idsa/autogen/dataResource/1d161790-523a-46c5-820b-e632e7ff5ec5"
+  },
+  "ids:issued" : {
+    "@value" : "2020-07-01T17:29:38.539+02:00",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  },
+  "ids:issuerConnector" : {
+    "@id" : "http://example.org/EnterpiseIntegrationConnector"
+  },
+  "ids:securityToken" : {
+    "@type" : "ids:DynamicAttributeToken",
+    "@id" : "https://w3id.org/idsa/autogen/dynamicAttributeToken/758d3b3a-8cf8-4c07-9b52-f7dbc2715ba5",
+    "ids:tokenValue" : "eyJ0eXAiOiJKV1QiLCJraWQiOiJkZWZhdWx0IiwiYWxnIjoiUlMyNTYifQ.eyJzZWN1cml0eVByb2ZpbGUiOiJpZHNjOkJBU0VfU0VDVVJJVFlfUFJPRklMRSIsInJlZmVycmluZ0Nvbm5lY3RvciI6Imh0dHA6Ly9pYWlzMi5kZW1vIiwiQHR5cGUiOiJpZHM6RGF0UGF5bG9hZCIsIkBjb250ZXh0IjoiaHR0cHM6Ly93M2lkLm9yZy9pZHNhL2NvbnRleHRzL2NvbnRleHQuanNvbmxkIiwidHJhbnNwb3J0Q2VydHNTaGEyNTYiOiI2MTQ3ZmZkMDRhOGU0ZWUwMTBhZDE0ZTBhZjQyYjVmZGEzYjUzOGYyODJkNjE1ZThlNjA2MzRiNmQ5MTQ0MmRiIiwic2NvcGVzIjpbImlkc2M6SURTX0NPTk5FQ1RPUl9BVFRSSUJVVEVTX0FMTCJdLCJhdWQiOiJpZHNjOklEU19DT05ORUNUT1JTX0FMTCIsImlzcyI6Imh0dHBzOi8vZGFwcy5haXNlYy5mcmF1bmhvZmVyLmRlIiwic3ViIjoiMjI6NEY6Mjk6MTA6QUE6Qjk6ODU6MUE6NTU6REM6MDI6NzQ6MUU6QTU6NjE6NzQ6Mjg6N0Q6NTY6QUQ6a2V5aWQ6Q0I6OEM6Qzc6QjY6ODU6Nzk6QTg6MjM6QTY6Q0I6MTU6QUI6MTc6NTA6MkY6RTY6NjU6NDM6NUQ6RTgiLCJuYmYiOjE1OTM2MTcyOTMsImV4cCI6MTU5MzYyMDg5M30.gZDojTS_5rWUctXK_bs4EqdXAqZ-GJ3ZJX5lQqC_9THxgoZ23nZr1KmiFO65wV6Y6EvstnMdt9UteCfx1-vigRTU1qKv2ASZ5xHP5HiyIJn6JGwiPBncrz6Wq7rJAvUSYwze7pAJFefrNK-TreLmXSmNCRdXipz48HiH2yDTViaOBIzeol-mix1p1vttouZG1HxlDqDcODtocZwHDkMvG_r-mfvVJdAcQSVqNB5qaRck63fls_qE6gBQhDko9s_OFtUglHBeKoPt77q1TjJ18pSFMblksOVslK3dOVE9y1qQVoVvKmwFiHc8tSpvngyNY1sqir5DUrk2gq3P6tHzog",
+    "ids:tokenFormat" : {
+      "@id" : "idsc:JWT"
+    }
+  },
+  "ids:senderAgent" : {
+    "@id" : "http://example.org/EnterpiseIntegrationConnector"
+  }
+}

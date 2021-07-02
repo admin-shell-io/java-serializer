@@ -1,0 +1,188 @@
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
+  },
+  "@type" : "ids:BaseConnector",
+  "@id" : "https://w3id.org/idsa/autogen/baseConnector/7b934432-a85e-41c5-9f65-669219dde4ea",
+  "ids:publicKey" : {
+    "@type" : "ids:PublicKey",
+    "@id" : "https://w3id.org/idsa/autogen/publicKey/78eb73a3-3a2a-4626-a0ff-631ab50a00f9",
+    "ids:keyType" : {
+      "@id" : "idsc:RSA"
+    },
+    "ids:keyValue" : "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuw6mFrdflXZTJgFOA5smDXC09SmpJWoGpyERZNEy31pKdsRGhTipR27j9irmmqihv7gIgzCnx6kIRNGI2u0oFQ5FgvO1xxgzcihdpF0CheOf9INgisPkq5hj8Ae/DYXkvjhQ6c6ak/ZYfj0NpqyEPcJ5MLRmYGexMaMZmTbqDJvJl5JG3+bE3Ya21hTZYOxiSicpfFgJ30kn5aUIAtd05IZy7z1sDiVLtTXlLfe/ZQC4pnjFts+tc12sX9ihImnCkd0Wvz3CTZoyBSsc1TdBkb9m0C5tvg0fQP4QgF/zH2QoZnnrI52uAZ8MomWtY2lt3D0kkpR69pfVDJ7y3vN/ewIDAQAB"
+  },
+  "ids:version" : "4.1.0-SNAPSHOT",
+  "ids:description" : [ {
+    "@value" : "IDS Connector with static example resources hosted by the Fraunhofer ISST",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:title" : [ {
+    "@value" : "Dataspace Connector",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:hasDefaultEndpoint" : {
+    "@type" : "ids:ConnectorEndpoint",
+    "@id" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
+    "ids:accessURL" : {
+      "@id" : "https://localhost:8080/api/ids/data"
+    }
+  },
+  "ids:inboundModelVersion" : [ "4.0.0" ],
+  "ids:outboundModelVersion" : "4.0.0",
+  "ids:securityProfile" : {
+    "@id" : "idsc:BASE_SECURITY_PROFILE"
+  },
+  "ids:resourceCatalog" : [ {
+    "@type" : "ids:ResourceCatalog",
+    "@id" : "https://w3id.org/idsa/autogen/resourceCatalog/7105f3b5-f745-4666-b01d-2d5bf7ec0de9",
+    "ids:offeredResource" : [ {
+      "@type" : "ids:Resource",
+      "@id" : "https://w3id.org/idsa/autogen/resource/3ac3e996-3263-4f9e-b90d-219af773b094",
+      "ids:language" : [ {
+        "@id" : "idsc:EN"
+      } ],
+      "ids:description" : [ {
+        "@value" : "ExampleResourceDescription",
+        "@language" : "en"
+      } ],
+      "ids:title" : [ {
+        "@value" : "ExampleResource",
+        "@language" : "en"
+      } ],
+      "ids:representation" : [ {
+        "@type" : "ids:Representation",
+        "@id" : "https://w3id.org/idsa/autogen/representation/8e3a5056-1e46-42e1-a1c3-37aa08b2aedd",
+        "ids:instance" : [ {
+          "@type" : "ids:Artifact",
+          "@id" : "https://w3id.org/idsa/autogen/artifact/8e3a5056-1e46-42e1-a1c3-37aa08b2aedd",
+          "ids:fileName" : "Example Representation",
+          "ids:byteSize" : 101
+        } ],
+        "ids:language" : {
+          "@id" : "idsc:EN"
+        },
+        "ids:mediaType" : {
+          "@type" : "ids:IANAMediaType",
+          "@id" : "https://w3id.org/idsa/autogen/iANAMediaType/43e88943-8be6-47b5-a372-c2cf90b19c22",
+          "ids:filenameExtension" : "XML"
+        }
+      } ],
+      "ids:contractOffer" : [ {
+        "@type" : "ids:ContractOffer",
+        "@id" : "https://w3id.org/idsa/autogen/contractOffer/5a4cf056-9a3b-416c-bafd-2b0f25403b8a",
+        "ids:permission" : [ {
+          "@type" : "ids:Permission",
+          "@id" : "https://w3id.org/idsa/autogen/permission/19175f58-6508-4ae3-b111-b233ff58bc38",
+          "ids:description" : [ {
+            "@value" : "provide-access",
+            "@type" : "http://www.w3.org/2001/XMLSchema#string"
+          } ],
+          "ids:title" : [ {
+            "@value" : "Example Usage Policy",
+            "@type" : "http://www.w3.org/2001/XMLSchema#string"
+          } ],
+          "ids:action" : [ {
+            "@id" : "idsc:USE"
+          } ]
+        } ],
+        "ids:provider" : {
+          "@id" : "https://w3id.org/idsa/autogen/baseConnector/7b934432-a85e-41c5-9f65-669219dde4ea"
+        }
+      } ],
+      "ids:keyword" : [ ],
+      "ids:created" : {
+        "@value" : "2021-03-01T17:39:33.760+01:00",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      },
+      "ids:modified" : {
+        "@value" : "2021-03-01T17:39:33.760+01:00",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      },
+      "ids:resourceEndpoint" : [ {
+        "@type" : "ids:ConnectorEndpoint",
+        "@id" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
+        "ids:accessURL" : {
+          "@id" : "https://localhost:8080/api/ids/data"
+        }
+      } ]
+    }, {
+      "@type" : "ids:Resource",
+      "@id" : "https://w3id.org/idsa/autogen/resource/40a24fcf-ea55-4972-9b1a-b95476701832",
+      "ids:language" : [ {
+        "@id" : "idsc:EN"
+      } ],
+      "ids:description" : [ {
+        "@value" : "ExampleResourceDescription",
+        "@language" : "en"
+      } ],
+      "ids:title" : [ {
+        "@value" : "ExampleResource",
+        "@language" : "en"
+      } ],
+      "ids:representation" : [ {
+        "@type" : "ids:Representation",
+        "@id" : "https://w3id.org/idsa/autogen/representation/8e3a5056-1e46-42e1-a1c3-37aa08b2aedd",
+        "ids:instance" : [ {
+          "@type" : "ids:Artifact",
+          "@id" : "https://w3id.org/idsa/autogen/artifact/8e3a5056-1e46-42e1-a1c3-37aa08b2aedd",
+          "ids:fileName" : "Example Representation",
+          "ids:byteSize" : 101
+        } ],
+        "ids:language" : {
+          "@id" : "idsc:EN"
+        },
+        "ids:mediaType" : {
+          "@type" : "ids:IANAMediaType",
+          "@id" : "https://w3id.org/idsa/autogen/iANAMediaType/531ca498-e6f9-4fd2-af6a-357dc85a76e9",
+          "ids:filenameExtension" : "XML"
+        }
+      } ],
+      "ids:contractOffer" : [ {
+        "@type" : "ids:ContractOffer",
+        "@id" : "https://w3id.org/idsa/autogen/contractOffer/8d908e66-7112-485a-99fc-add4cb9dc41c",
+        "ids:permission" : [ {
+          "@type" : "ids:Permission",
+          "@id" : "https://w3id.org/idsa/autogen/permission/19175f58-6508-4ae3-b111-b233ff58bc38",
+          "ids:description" : [ {
+            "@value" : "provide-access",
+            "@type" : "http://www.w3.org/2001/XMLSchema#string"
+          } ],
+          "ids:title" : [ {
+            "@value" : "Example Usage Policy",
+            "@type" : "http://www.w3.org/2001/XMLSchema#string"
+          } ],
+          "ids:action" : [ {
+            "@id" : "idsc:USE"
+          } ]
+        } ],
+        "ids:provider" : {
+          "@id" : "https://w3id.org/idsa/autogen/baseConnector/7b934432-a85e-41c5-9f65-669219dde4ea"
+        }
+      } ],
+      "ids:keyword" : [ ],
+      "ids:created" : {
+        "@value" : "2021-03-01T17:40:43.366+01:00",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      },
+      "ids:modified" : {
+        "@value" : "2021-03-01T17:40:43.366+01:00",
+        "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+      },
+      "ids:resourceEndpoint" : [ {
+        "@type" : "ids:ConnectorEndpoint",
+        "@id" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
+        "ids:accessURL" : {
+          "@id" : "https://localhost:8080/api/ids/data"
+        }
+      } ]
+    } ]
+  } ],
+  "ids:maintainer" : {
+    "@id" : "https://www.isst.fraunhofer.de/"
+  },
+  "ids:curator" : {
+    "@id" : "https://www.isst.fraunhofer.de/"
+  }
+}

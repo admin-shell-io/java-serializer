@@ -1,0 +1,31 @@
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
+  },
+  "@type" : "ids:BaseConnector",
+  "@id" : "https://broker.ids.isst.fraunhofer.de/",
+  "ids:description" : [ {
+    "@value" : "This is a dummy description from the Interaction Library",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:outboundModelVersion" : "4.0.0",
+  "ids:maintainer" : {
+    "@id" : "https://example.org/"
+  },
+  "ids:curator" : {
+    "@id" : "https://example.org/"
+  },
+  "ids:securityProfile" : {
+    "@id" : "idsc:BASE_SECURITY_PROFILE"
+  },
+  "ids:resourceCatalog" : [ {
+    "@type" : "ids:ResourceCatalog",
+    "@id" : "https://w3id.org/idsa/autogen/resourceCatalog/4eecb9ad-72d1-4373-b408-63500bc77d5f"
+  } ],
+  "ids:title" : [ {
+    "@value" : "This is a dummy title from the Interaction Library",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:inboundModelVersion" : [ "4.0.0" ]
+}

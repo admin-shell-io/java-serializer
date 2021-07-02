@@ -1,0 +1,47 @@
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/",
+    "aas" : "http://admin-shell.io/aas/2/0#"
+  },
+  "@type" : "ids:BaseConnector",
+  "@id" : "https://test.connector.de/",
+  "ids:outboundModelVersion" : "4.0.0",
+  "ids:description" : [ {
+    "@value" : "This is a 2nd dummy description from the Interaction Library",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:maintainer" : {
+    "@id" : "https://example.org/"
+  },
+  "ids:securityProfile" : {
+    "@id" : "idsc:BASE_SECURITY_PROFILE"
+  },
+  "ids:curator" : {
+    "@id" : "https://example.org/"
+  },
+  "ids:resourceCatalog" : {
+    "@type" : "ids:ResourceCatalog",
+    "@id" : "https://w3id.org/idsa/autogen/resourcecatalog/fa535e30-8cb0-4ede-b5a9-def664d69556",
+    "ids:offeredResource" : {
+        "@type" : "aas:AssetAdministrationShellDescriptor",
+        "@id" : "https://example.com/aasd123",
+        "aas:idShort": "AASShort",
+        "aas:identification": {
+          "@type" : "aas:Identifier",
+          "@id" : "https://example.com/Identifier",
+          "aas:id": "TestAASId",
+          "aas:idType": "Custom"
+        }
+    }
+  },
+  "ids:mainTitle" : [ {
+    "@value" : "dummy",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:title" : [ {
+    "@value" : "This is a 2nd dummy title from the Interaction Library",
+    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+  } ],
+  "ids:inboundModelVersion" : [ "4.0.0" ]
+}

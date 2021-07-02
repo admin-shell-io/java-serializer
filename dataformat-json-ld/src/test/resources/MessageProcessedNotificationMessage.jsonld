@@ -1,0 +1,25 @@
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
+  },
+  "@type" : "ids:MessageProcessedNotificationMessage",
+  "@id" : "https://w3id.org/7aff0c68-c201-43ec-9d6d-7f453c7b7a37",
+  "ids:securityToken" : {
+    "@type" : "ids:DynamicAttributeToken",
+    "@id" : "https://ac65d3c7-a09f-44a7-bfbf-813d8bfb5239",
+    "ids:tokenValue" : "eyJhbGandsoon",
+    "ids:tokenFormat" : {
+      "@id" : "idsc:JWT"
+    }
+  },
+  "ids:senderAgent" : "https://www.iais.fraunhofer.de",
+  "ids:issuerConnector" : "https://broker.ids.isst.fraunhofer.de/",
+  "ids:recipientConnector" : [{"@id" : "https://www.iais.fraunhofer.de/receiver1"}, {"@id" : "https://www.iais.fraunhofer.de/receiver2"}],
+  "ids:correlationMessage" : {"@id": "https://52d2c3e4-88de-42ee-9261-dfd239ccb8631"},
+  "ids:issued" : {
+    "@value" : "2020-03-18T12:45:11.682Z",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  },
+  "ids:modelVersion" : "4.0.0"
+}

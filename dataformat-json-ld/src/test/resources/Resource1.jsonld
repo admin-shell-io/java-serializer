@@ -1,0 +1,75 @@
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/"
+  },
+  "@type" : "ids:Resource",
+  "@id" : "https://w3id.org/idsa/autogen/resource/95f1060a-750f-4ff2-89a9-d5d389c99249",
+  "ids:language" : [ {
+    "@id" : "idsc:EN"
+  } ],
+  "ids:description" : [ {
+    "@value" : "ExampleResourceDescription",
+    "@language" : "en"
+  } ],
+  "ids:keyword" : [ ],
+  "ids:representation" : [ {
+    "@type" : "ids:Representation",
+    "@id" : "https://w3id.org/idsa/autogen/representation/a16d6d29-8f7b-477a-8ec3-7274976cee3f",
+    "ids:instance" : [ {
+      "@type" : "ids:Artifact",
+      "@id" : "https://w3id.org/idsa/autogen/artifact/a16d6d29-8f7b-477a-8ec3-7274976cee3f",
+      "ids:fileName" : "Example Representation",
+      "ids:byteSize" : 101
+    } ],
+    "ids:language" : {
+      "@id" : "idsc:EN"
+    },
+    "ids:mediaType" : {
+      "@type" : "ids:IANAMediaType",
+      "@id" : "https://w3id.org/idsa/autogen/iANAMediaType/caa4f36d-433c-42a5-8c1d-9b14d905e491",
+      "ids:filenameExtension" : "XML"
+    }
+  } ],
+  "ids:contractOffer" : [ {
+    "@type" : "ids:ContractOffer",
+    "@id" : "https://w3id.org/idsa/autogen/contractOffer/f92e7afc-8f2f-4889-adb4-71d78023277e",
+    "ids:permission" : [ {
+      "@type" : "ids:Permission",
+      "@id" : "https://w3id.org/idsa/autogen/permission/e18a97b9-5774-4477-a055-d2f5411668c7",
+      "ids:description" : [ {
+        "@value" : "provide-access",
+        "@type" : "http://www.w3.org/2001/XMLSchema#string"
+      } ],
+      "ids:title" : [ {
+        "@value" : "Example Usage Policy",
+        "@type" : "http://www.w3.org/2001/XMLSchema#string"
+      } ],
+      "ids:action" : [ {
+        "@id" : "idsc:USE"
+      } ]
+    } ],
+    "ids:provider" : {
+      "@id" : "https://w3id.org/idsa/autogen/baseConnector/7b934432-a85e-41c5-9f65-669219dde4ea"
+    }
+  } ],
+  "ids:resourceEndpoint" : [ {
+    "@type" : "ids:ConnectorEndpoint",
+    "@id" : "https://w3id.org/idsa/autogen/connectorEndpoint/e5e2ab04-633a-44b9-87d9-a097ae6da3cf",
+    "ids:accessURL" : {
+      "@id" : "https://localhost:8080/api/ids/data"
+    }
+  } ],
+  "ids:title" : [ {
+    "@value" : "ExampleResource",
+    "@language" : "en"
+  } ],
+  "ids:created" : {
+    "@value" : "2021-03-17T10:45:19.484+01:00",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  },
+  "ids:modified" : {
+    "@value" : "2021-03-17T10:45:19.484+01:00",
+    "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+  }
+}

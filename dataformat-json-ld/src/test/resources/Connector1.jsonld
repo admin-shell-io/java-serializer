@@ -1,0 +1,28 @@
+{"@context": "https://w3id.org/idsa/contexts/4.0.0/context.jsonld",
+  "@type" : "ids:BaseConnector",
+  "@id" : "https://companyA.com/connector",
+  "outboundModelVersion" : "4.0.0",
+  "curator" : "http://companyA.com/ids/participant",
+  "securityProfile" : {
+    "@type" : "ids:SecurityProfile",
+    "@id" : "idsc:BASE_SECURITY_PROFILE"
+  },
+  "maintainer" : "http://companyA.com/ids/participant",
+  "resourceCatalog" : {
+    "@type" : "ids:ResourceCatalog",
+    "@id" : "http://industrialdataspace.org/catalog/85050e7c-1530-4980-93bc-87d94a831af9",
+    "offeredResource" : [ {
+      "@type" : "ids:Resource",
+      "@id" : "http://industrialdataspace.org/resource/516eb953-c789-4bc4-a989-264e3755698a",
+      "description" : [ {
+        "@value" : "Dataset without retrieval interface and further description.",
+        "@language" : "en"
+      } ],
+      "title" : [ {
+        "@value" : "Quarterly Business Report",
+        "@language" : "en"
+      } ]
+    } ]
+  },
+  "inboundModelVersion" : [ "4.0.0", "4.0.1-SNAPSHOT" ]
+}

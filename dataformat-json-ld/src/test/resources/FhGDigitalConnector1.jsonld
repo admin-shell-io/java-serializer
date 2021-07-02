@@ -1,0 +1,1400 @@
+{
+  "@context" : {
+    "ids" : "https://w3id.org/idsa/core/",
+    "idsc" : "https://w3id.org/idsa/code/",
+    "info" : "http://www.fraunhofer.de/fraunhofer-digital/infomodell/",
+    "kdsf" : "http://kerndatensatz-forschung.de/version1/technisches_datenmodell/owl/Basis#"
+  },
+    "@type" : "ids:BaseConnector",
+    "@id" : "https://test.connector.de/",
+    "ids:curator" : {
+      "@id" : "https://example.org/"
+    },
+    "ids:securityProfile" : {
+      "@id" : "idsc:BASE_SECURITY_PROFILE"
+    },
+    "ids:maintainer" : {
+      "@id" : "https://example.org/"
+    },
+    "ids:resourceCatalog" : [ {
+      "@type" : "ids:ResourceCatalog",
+      "@id" : "https://w3id.org/idsa/autogen/resourceCatalog/d76dae2d-9b46-4130-8b21-439a3b5b2a3a",
+      "ids:offeredResource" : [ {
+        "@type" : "ids:Resource",
+        "@id" : "https://w3id.org/idsa/autogen/resource/d0b8bb72-8747-46ef-8b60-6589e5d737c4",
+        "ids:standardLicense" : {
+          "@id" : "https://example.org/license/officialWork"
+        },
+        "ids:customLicense" : {
+          "@id" : "http://customlicense.org"
+        },
+        "ids:contentType" : {
+          "@id" : "idsc:SCHEMA_DEFINITION"
+        },
+        "ids:rawData" : false,
+        "ids:advisor" : [ {
+          "@type" : "ids:Person",
+          "@id" : "https://w3id.org/idsa/autogen/person/3715b75b-ab66-42b9-ae52-bc3db0913da8",
+          "ids:emailAddress" : [ "mailto:info@example.org" ],
+          "ids:homepage" : "http://example.org",
+          "ids:phoneNumber" : [ "012345678891" ],
+          "ids:givenName" : "Max",
+          "ids:familyName" : "Mustermensch"
+        } ],
+        "ids:isBasedOn" : [ {
+          "@value" : "Based on",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:contractOffer" : [ {
+          "@type" : "ids:ContractOffer",
+          "@id" : "https://w3id.org/idsa/autogen/contractOffer/7ee4dd3f-d7e9-4445-ae2c-d15418646258"
+        } ],
+        "ids:author" : [ {
+          "@type" : "ids:Person",
+          "@id" : "https://w3id.org/idsa/autogen/person/3715b75b-ab66-42b9-ae52-bc3db0913da8",
+          "ids:emailAddress" : [ "mailto:info@example.org" ],
+          "ids:homepage" : "http://example.org",
+          "ids:phoneNumber" : [ "012345678891" ],
+          "ids:givenName" : "Max",
+          "ids:familyName" : "Mustermensch"
+        } ],
+        "ids:sponsorship" : "Sponsored by",
+        "ids:relatedURI" : [ {
+          "@id" : "http://relatedURI.org"
+        } ],
+        "ids:contributor" : [ {
+          "@type" : "ids:Agent",
+          "@id" : "https://w3id.org/idsa/autogen/agent/92997cd7-d507-4c88-9b9a-d6adcf80b0db",
+          "ids:mainTitle" : [ {
+            "@value" : "Contributor Title",
+            "@type" : "http://www.w3.org/2001/XMLSchema#string"
+          } ],
+          "ids:description" : [ {
+            "@value" : "The agents description is given here",
+            "@type" : "http://www.w3.org/2001/XMLSchema#string"
+          } ]
+        } ],
+        "ids:contentIsPartOf" : [ ],
+        "ids:representation" : [ {
+          "@type" : "ids:ImageRepresentation",
+          "@id" : "https://w3id.org/idsa/autogen/imageRepresentation/594c9f8e-f553-4ccf-9339-204af4c98d07",
+          "ids:modified" : {
+            "@value" : "2018-10-30T00:00:00.000Z",
+            "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+          },
+          "ids:created" : {
+            "@value" : "2010-05-23T00:00:00.000Z",
+            "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+          },
+          "ids:instance" : [ {
+            "@type" : "ids:Artifact",
+            "@id" : "https://w3id.org/idsa/autogen/artifact/bdd6abaf-4953-4188-ab9e-8fbdeba74802",
+            "ids:byteSize" : 120,
+            "ids:fileName" : "imageExample.png"
+          } ],
+          "ids:mediaType" : {
+            "@type" : "ids:IANAMediaType",
+            "@id" : "https://w3id.org/idsa/autogen/iANAMediaType/c878f695-b83e-44ce-97df-25c8609e19c5",
+            "ids:filenameExtension" : "PNG"
+          },
+          "ids:representationStandard" : {
+            "@id" : "http://imageRepresentation.org"
+          }
+        } ],
+        "ids:isPartOfSeries" : [ {
+          "@value" : "Part of Series",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:researchMethod" : {
+          "@value" : "Research method",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "ids:keyword" : [ {
+          "@value" : "distributed",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "sensor",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "data",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "monitor",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "process",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "predictive",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:resourceURI" : {
+          "@id" : "http://resourceURI.org"
+        },
+        "ids:fromProject" : {
+          "@value" : "From Project",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "ids:sovereign" : {
+          "@id" : "http://sovereign.org"
+        },
+        "ids:theme" : [ {
+          "@id" : "http://resourceTheme.org"
+        } ],
+        "ids:publisher" : {
+          "@id" : "http://publisher.org"
+        },
+        "ids:dataCreator" : {
+          "@value" : "Data creator/Owner",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "ids:editor" : [ {
+          "@type" : "ids:Person",
+          "@id" : "https://w3id.org/idsa/autogen/person/3715b75b-ab66-42b9-ae52-bc3db0913da8",
+          "ids:emailAddress" : [ "mailto:info@example.org" ],
+          "ids:homepage" : "http://example.org",
+          "ids:phoneNumber" : [ "012345678891" ],
+          "ids:givenName" : "Max",
+          "ids:familyName" : "Mustermensch"
+        } ],
+        "ids:generatedBy" : [ {
+          "@value" : "Software used to generate dataset",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:modified" : {
+          "@value" : "2020-03-20T00:00:00.000Z",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:title" : [ {
+          "@value" : "Predictive process monitoring of the distributed sensor data",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:shapesGraph" : {
+          "@id" : "http://shapesgraph.org"
+        },
+        "ids:contentStandard" : {
+          "@id" : "http://contentstandard.org"
+        },
+        "ids:mainTitle" : [ {
+          "@value" : "Predictive process monitoring of the distributed sensor data",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:created" : {
+          "@value" : "2000-10-20T00:00:00.000Z",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:dateAvailable" : {
+          "@type" : "ids:TemporalEntity",
+          "@id" : "https://w3id.org/idsa/autogen/temporalEntity/127a5419-3f52-4e4f-a9cb-691d48e23562",
+          "ids:hasDuration" : "P2020Y4M6DT10H30M0S"
+        },
+        "ids:version" : "version 3.0.0",
+        "ids:otherContributor" : [ {
+          "@type" : "ids:Person",
+          "@id" : "https://w3id.org/idsa/autogen/person/3715b75b-ab66-42b9-ae52-bc3db0913da8",
+          "ids:emailAddress" : [ "mailto:info@example.org" ],
+          "ids:homepage" : "http://example.org",
+          "ids:phoneNumber" : [ "012345678891" ],
+          "ids:givenName" : "Max",
+          "ids:familyName" : "Mustermensch"
+        } ],
+        "ids:genericResourceIdentifier" : {
+          "@value" : "Generic Resource Identifier",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "ids:bibliographicCitation" : {
+          "@type" : "ids:BibliographicCitation",
+          "@id" : "https://w3id.org/idsa/autogen/bibliographicCitation/23f9a0ef-9fa2-4ed1-8a85-e059fc961658",
+          "ids:articleNumber" : "Article number",
+          "ids:journal" : "Journal",
+          "ids:publicationURI" : {
+            "@id" : "http://publicationURI.org"
+          }
+        },
+        "ids:fraunhoferProjectResource" : {
+          "@type" : "info:Ressource",
+          "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/ressource/1249ce01-a586-4194-b4cf-debc5d204ffe",
+          "info:hatWissenschaftsklassifikation" : [ {
+            "@id" : "http://www.fraunhofer.de/fraunhofer-digital/klassifikation/sci-met/131113"
+          }, {
+            "@id" : "http://www.fraunhofer.de/fraunhofer-digital/klassifikation/sci-met/151114"
+          } ],
+          "info:stammtAusInstitut" : {
+            "@type" : "info:Institut",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/institut/20c6dfc7-5702-4b93-ba81-1bda92f615e3",
+            "info:istEhemalig" : false,
+            "info:hatKurzname" : "IAIS",
+            "info:hatName" : [ {
+              "@value" : "IAIS - Fraunhofer Institute for Intelligent Analysis and Information Systems IAIS",
+              "@type" : "http://www.w3.org/2001/XMLSchema#string"
+            } ],
+            "info:leitet" : [ {
+              "@type" : "info:Projekt",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/projekt/fee6ef27-4fa2-44e6-b77b-7914b864484f",
+              "info:hatKurzname" : "PROJ",
+              "info:hatName" : {
+                "@value" : "Project Name",
+                "@type" : "http://www.w3.org/2001/XMLSchema#string"
+              },
+              "info:hatSigmaProjektnummer" : 123,
+              "info:hatFoerdersumme" : 30000,
+              "info:hatAuftraggeber" : {
+                "@type" : "info:Kunde",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/kunde/4282e22a-e24f-42b0-b048-85130689d897",
+                "info:istEhemalig" : false,
+                "info:hatName" : [ {
+                  "@value" : "kunde",
+                  "@type" : "http://www.w3.org/2001/XMLSchema#string"
+                } ]
+              },
+              "info:hatErgebnis" : [ {
+                "@type" : "info:Ergebnis",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/ergebnis/b699afc8-8048-4ccb-aac7-445a6cb58fc1"
+              } ],
+              "info:hatEntwickelt" : [ {
+                "@type" : "info:Technologie",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/technologie/f4e00e12-a674-41c2-88f9-ae1a76ce2a2d"
+              } ],
+              "info:hatThema" : [ "project theme" ],
+              "info:hatVertrag" : [ {
+                "@type" : "info:Vertrag",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/vertrag/0a61db01-cdc9-4083-8e71-743d7da76ba5",
+                "info:istFuEVertrag" : false,
+                "info:istRahmenvertrag" : false,
+                "info:istIPVerwertungsvertrag" : false
+              } ],
+              "info:hatBudget" : {
+                "@type" : "info:Budget",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/budget/d232416e-bfdf-484d-9925-5114b337cfb1",
+                "info:hatSumme" : {
+                  "@type" : "info:Preisspezifikation",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/preisspezifikation/3ab9f5d2-8823-4675-9f85-a0914dbd2fa2",
+                  "info:hatWert" : 50000,
+                  "info:hatWaehrung" : "Euro"
+                }
+              },
+              "info:hatKostenstelle" : {
+                "@type" : "info:Finanzierungsstelle",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/finanzierungsstelle/7e411e6f-25df-4ddd-a00c-f363ddac2dc3"
+              },
+              "info:hatLaufzeit" : {
+                "@type" : "ids:DurationEntity",
+                "@id" : "https://w3id.org/idsa/autogen/durationEntity/f4e83f65-edaa-43b3-804b-8af0c4651cee",
+                "ids:hasDuration" : "P2020Y4M6DT10H30M0S"
+              }
+            } ]
+          },
+          "info:gehoertZuErgebnis" : {
+            "@type" : "info:Ergebnis",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/ergebnis/f42e675d-e13c-4c18-b592-7b06c1cccc74",
+            "info:entstandInForschungsrahmenprogramm" : [ {
+              "@type" : "info:Forschungsrahmenprogramm",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/forschungsrahmenprogramm/bf1b1dcd-6822-4e66-9c99-aca189f6c05c",
+              "info:enthaeltForschungsprogramm" : [ {
+                "@type" : "info:Forschungsprogramm",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/forschungsprogramm/747e5465-1ee6-4073-92d0-461a216a4b9a"
+              } ]
+            } ],
+            "info:hatPraesentation" : [ {
+              "@type" : "info:Praesentation",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/praesentation/98075011-2c82-44cb-8111-1f15fde0699c"
+            } ],
+            "info:entstandInForschungsprogramm" : [ {
+              "@type" : "info:Forschungsprogramm",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/forschungsprogramm/e824da79-7084-49e3-97d4-f5c972fe0454"
+            } ]
+          },
+          "info:hatDateneigner_in" : [ {
+            "@type" : "info:Mitarbeiter_in",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/mitarbeiter_in/812d56ec-b98b-4d7b-9872-246cb7dd450d",
+            "info:hatTelefonnummerDienstlich" : [ "012345678932" ],
+            "info:hatEMailDienstlich" : {
+              "@id" : "mailto:stein.thomas@fraunhofer.de"
+            },
+            "info:hatIndividualname" : [ "Thomas Stein" ],
+            "kdsf:Staatsangehoerigkeit" : "German",
+            "info:hatDirectoryLink" : {
+              "@id" : "http://fraunhofer-mitarbeiter.de/stein_thomas"
+            },
+            "info:hatPersonalnummer" : 0,
+            "info:hatGeschlecht" : {
+              "@type" : "info:Geschlecht",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/geschlecht/31ffdb34-c3ef-42ad-87fb-b7530f480fb5"
+            },
+            "info:hatVorname" : [ "Thomas" ],
+            "info:hatFamilienname" : [ "Stein" ],
+            "info:hatEMailPrivat" : {
+              "@id" : "mailto:thomas.stein@info.org"
+            },
+            "info:hatArbeitgeber" : [ {
+              "@type" : "info:Organisation",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/organisation/79dc4efc-92fa-498a-9cf8-ae088227882c",
+              "info:hatInfrastruktur" : [ {
+                "@type" : "info:Infrastruktur",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/infrastruktur/a43bf6e7-b02c-4be0-8728-8a60ad711da2"
+              } ],
+              "info:istEhemalig" : false,
+              "info:hatName" : [ {
+                "@value" : "IAIS - Fraunhofer Institute for Intelligent Analysis and Information Systems IAIS",
+                "@type" : "http://www.w3.org/2001/XMLSchema#string"
+              } ],
+              "info:leitet" : [ {
+                "@type" : "info:Projekt",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/projekt/fee6ef27-4fa2-44e6-b77b-7914b864484f",
+                "info:hatKurzname" : "PROJ",
+                "info:hatName" : {
+                  "@value" : "Project Name",
+                  "@type" : "http://www.w3.org/2001/XMLSchema#string"
+                },
+                "info:hatSigmaProjektnummer" : 123,
+                "info:hatFoerdersumme" : 30000,
+                "info:hatAuftraggeber" : {
+                  "@type" : "info:Kunde",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/kunde/4282e22a-e24f-42b0-b048-85130689d897",
+                  "info:istEhemalig" : false,
+                  "info:hatName" : [ {
+                    "@value" : "kunde",
+                    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+                  } ]
+                },
+                "info:hatErgebnis" : [ {
+                  "@type" : "info:Ergebnis",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/ergebnis/b699afc8-8048-4ccb-aac7-445a6cb58fc1"
+                } ],
+                "info:hatEntwickelt" : [ {
+                  "@type" : "info:Technologie",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/technologie/f4e00e12-a674-41c2-88f9-ae1a76ce2a2d"
+                } ],
+                "info:hatThema" : [ "project theme" ],
+                "info:hatVertrag" : [ {
+                  "@type" : "info:Vertrag",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/vertrag/0a61db01-cdc9-4083-8e71-743d7da76ba5",
+                  "info:istFuEVertrag" : false,
+                  "info:istRahmenvertrag" : false,
+                  "info:istIPVerwertungsvertrag" : false
+                } ],
+                "info:hatBudget" : {
+                  "@type" : "info:Budget",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/budget/d232416e-bfdf-484d-9925-5114b337cfb1",
+                  "info:hatSumme" : {
+                    "@type" : "info:Preisspezifikation",
+                    "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/preisspezifikation/3ab9f5d2-8823-4675-9f85-a0914dbd2fa2",
+                    "info:hatWert" : 50000,
+                    "info:hatWaehrung" : "Euro"
+                  }
+                },
+                "info:hatKostenstelle" : {
+                  "@type" : "info:Finanzierungsstelle",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/finanzierungsstelle/7e411e6f-25df-4ddd-a00c-f363ddac2dc3"
+                },
+                "info:hatLaufzeit" : {
+                  "@type" : "ids:DurationEntity",
+                  "@id" : "https://w3id.org/idsa/autogen/durationEntity/f4e83f65-edaa-43b3-804b-8af0c4651cee",
+                  "ids:hasDuration" : "P2020Y4M6DT10H30M0S"
+                }
+              } ]
+            } ],
+            "kdsf:Altersgruppe" : "40-45",
+            "info:hatGeburtsdatum" : {
+              "@value" : "1975-10-15T00:00:00.000Z",
+              "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+            },
+            "kdsf:Name" : "Thomas Stein"
+          } ],
+          "info:hatKontaktperson" : [ {
+            "@type" : "info:Mitarbeiter_in",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/mitarbeiter_in/812d56ec-b98b-4d7b-9872-246cb7dd450d",
+            "info:hatTelefonnummerDienstlich" : [ "012345678932" ],
+            "info:hatEMailDienstlich" : {
+              "@id" : "mailto:stein.thomas@fraunhofer.de"
+            },
+            "info:hatIndividualname" : [ "Thomas Stein" ],
+            "kdsf:Staatsangehoerigkeit" : "German",
+            "info:hatDirectoryLink" : {
+              "@id" : "http://fraunhofer-mitarbeiter.de/stein_thomas"
+            },
+            "info:hatPersonalnummer" : 0,
+            "info:hatGeschlecht" : {
+              "@type" : "info:Geschlecht",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/geschlecht/31ffdb34-c3ef-42ad-87fb-b7530f480fb5"
+            },
+            "info:hatVorname" : [ "Thomas" ],
+            "info:hatFamilienname" : [ "Stein" ],
+            "info:hatEMailPrivat" : {
+              "@id" : "mailto:thomas.stein@info.org"
+            },
+            "info:hatArbeitgeber" : [ {
+              "@type" : "info:Organisation",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/organisation/79dc4efc-92fa-498a-9cf8-ae088227882c",
+              "info:hatInfrastruktur" : [ {
+                "@type" : "info:Infrastruktur",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/infrastruktur/a43bf6e7-b02c-4be0-8728-8a60ad711da2"
+              } ],
+              "info:istEhemalig" : false,
+              "info:hatName" : [ {
+                "@value" : "IAIS - Fraunhofer Institute for Intelligent Analysis and Information Systems IAIS",
+                "@type" : "http://www.w3.org/2001/XMLSchema#string"
+              } ],
+              "info:leitet" : [ {
+                "@type" : "info:Projekt",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/projekt/fee6ef27-4fa2-44e6-b77b-7914b864484f",
+                "info:hatKurzname" : "PROJ",
+                "info:hatName" : {
+                  "@value" : "Project Name",
+                  "@type" : "http://www.w3.org/2001/XMLSchema#string"
+                },
+                "info:hatSigmaProjektnummer" : 123,
+                "info:hatFoerdersumme" : 30000,
+                "info:hatAuftraggeber" : {
+                  "@type" : "info:Kunde",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/kunde/4282e22a-e24f-42b0-b048-85130689d897",
+                  "info:istEhemalig" : false,
+                  "info:hatName" : [ {
+                    "@value" : "kunde",
+                    "@type" : "http://www.w3.org/2001/XMLSchema#string"
+                  } ]
+                },
+                "info:hatErgebnis" : [ {
+                  "@type" : "info:Ergebnis",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/ergebnis/b699afc8-8048-4ccb-aac7-445a6cb58fc1"
+                } ],
+                "info:hatEntwickelt" : [ {
+                  "@type" : "info:Technologie",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/technologie/f4e00e12-a674-41c2-88f9-ae1a76ce2a2d"
+                } ],
+                "info:hatThema" : [ "project theme" ],
+                "info:hatVertrag" : [ {
+                  "@type" : "info:Vertrag",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/vertrag/0a61db01-cdc9-4083-8e71-743d7da76ba5",
+                  "info:istFuEVertrag" : false,
+                  "info:istRahmenvertrag" : false,
+                  "info:istIPVerwertungsvertrag" : false
+                } ],
+                "info:hatBudget" : {
+                  "@type" : "info:Budget",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/budget/d232416e-bfdf-484d-9925-5114b337cfb1",
+                  "info:hatSumme" : {
+                    "@type" : "info:Preisspezifikation",
+                    "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/preisspezifikation/3ab9f5d2-8823-4675-9f85-a0914dbd2fa2",
+                    "info:hatWert" : 50000,
+                    "info:hatWaehrung" : "Euro"
+                  }
+                },
+                "info:hatKostenstelle" : {
+                  "@type" : "info:Finanzierungsstelle",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/finanzierungsstelle/7e411e6f-25df-4ddd-a00c-f363ddac2dc3"
+                },
+                "info:hatLaufzeit" : {
+                  "@type" : "ids:DurationEntity",
+                  "@id" : "https://w3id.org/idsa/autogen/durationEntity/f4e83f65-edaa-43b3-804b-8af0c4651cee",
+                  "ids:hasDuration" : "P2020Y4M6DT10H30M0S"
+                }
+              } ]
+            } ],
+            "kdsf:Altersgruppe" : "40-45",
+            "info:hatGeburtsdatum" : {
+              "@value" : "1975-10-15T00:00:00.000Z",
+              "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+            },
+            "kdsf:Name" : "Thomas Stein"
+          } ],
+          "info:hatDigitaleRepraesentation" : {
+            "@id" : "http://dummyFhGResource.de"
+          }
+        },
+        "ids:researchDataType" : {
+          "@id" : "idsc:EXPERIMENTAL_DATA"
+        },
+        "ids:ontologySourceReference" : [ {
+          "@id" : "https://raw.githubusercontent.com/SemanGit/SemanGit/master/Documentation/ontology/semangitontology.ttl"
+        } ],
+        "ids:bibliographicEditor" : {
+          "@type" : "ids:Person",
+          "@id" : "https://w3id.org/idsa/autogen/person/3715b75b-ab66-42b9-ae52-bc3db0913da8",
+          "ids:emailAddress" : [ "mailto:info@example.org" ],
+          "ids:homepage" : "http://example.org",
+          "ids:phoneNumber" : [ "012345678891" ],
+          "ids:givenName" : "Max",
+          "ids:familyName" : "Mustermensch"
+        },
+        "ids:description" : [ {
+          "@value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur\n        unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam\n        dignissimos laborum fugiat deleniti Eum quasi quidem quibusdam.",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:language" : [ {
+          "@id" : "idsc:EN"
+        }, {
+          "@id" : "idsc:DE"
+        } ]
+      }, {
+        "@type" : "ids:Resource",
+        "@id" : "https://w3id.org/idsa/autogen/resource/06b32bee-65f2-43ed-adef-51d3ab2d6383",
+        "ids:standardLicense" : {
+          "@id" : "https://example.org/license/BSD"
+        },
+        "ids:customLicense" : {
+          "@id" : "http://customlicense.org"
+        },
+        "ids:contentType" : {
+          "@id" : "idsc:INTERFACE_DEFINITION"
+        },
+        "ids:rawData" : false,
+        "ids:author" : [ {
+          "@type" : "ids:Person",
+          "@id" : "https://w3id.org/idsa/autogen/person/3715b75b-ab66-42b9-ae52-bc3db0913da8",
+          "ids:emailAddress" : [ "mailto:info@example.org" ],
+          "ids:homepage" : "http://example.org",
+          "ids:phoneNumber" : [ "012345678891" ],
+          "ids:givenName" : "Max",
+          "ids:familyName" : "Mustermensch"
+        } ],
+        "ids:representation" : [ {
+          "@type" : "ids:SoftwareRepresentation",
+          "@id" : "https://w3id.org/idsa/autogen/softwareRepresentation/440bec5d-3967-4145-8760-8b7bfde01363",
+          "ids:modified" : {
+            "@value" : "2019-01-31T00:00:00.000Z",
+            "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+          },
+          "ids:created" : {
+            "@value" : "2017-02-28T00:00:00.000Z",
+            "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+          },
+          "ids:instance" : [ {
+            "@type" : "ids:Artifact",
+            "@id" : "https://w3id.org/idsa/autogen/artifact/ddbd6c11-449c-4228-b756-284b3ca52c72",
+            "ids:creationDate" : {
+              "@value" : "2020-10-19T10:11:33.646+02:00",
+              "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+            },
+            "ids:byteSize" : 150856,
+            "ids:fileName" : "software.zip"
+          } ],
+          "ids:mediaType" : {
+            "@type" : "ids:IANAMediaType",
+            "@id" : "https://w3id.org/idsa/autogen/iANAMediaType/9f3a2a31-71d1-4af8-9126-aa9d69f51bda",
+            "ids:filenameExtension" : "zip"
+          },
+          "ids:representationStandard" : {
+            "@id" : "http://softwareRepresentation.org"
+          }
+        } ],
+        "ids:keyword" : [ {
+          "@value" : "java",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "j2ee",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "design",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "pattern",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "model",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "application",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:dataCreator" : {
+          "@value" : "Data creator/Owner",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "ids:generatedBy" : [ {
+          "@value" : "Software used to generate dataset",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:modified" : {
+          "@value" : "2019-10-20T00:00:00.000Z",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:title" : [ {
+          "@value" : "A model for developing J2EE applications based on design patterns",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:contentStandard" : {
+          "@id" : "http://contentstandard.org"
+        },
+        "ids:mainTitle" : [ {
+          "@value" : "A model for developing J2EE applications based on design patterns",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:created" : {
+          "@value" : "2015-12-23T00:00:00.000Z",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:version" : "version 3.0.0",
+        "ids:fraunhoferProjectResource" : {
+          "@type" : "info:Ressource",
+          "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/ressource/f2a966d9-0a93-4381-ad4c-d0a1fcc26f50",
+          "info:hatWissenschaftsklassifikation" : [ {
+            "@id" : "http://www.fraunhofer.de/fraunhofer-digital/klassifikation/sci-met/111518"
+          }, {
+            "@id" : "http://www.fraunhofer.de/fraunhofer-digital/klassifikation/sci-met/111515"
+          }, {
+            "@id" : "http://www.fraunhofer.de/fraunhofer-digital/klassifikation/sci-met/121111"
+          } ],
+          "info:stammtAusInstitut" : {
+            "@type" : "info:Institut",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/institut/3d4c0a6d-d492-41f9-b2bb-ef48deb5c35f",
+            "info:istEhemalig" : false,
+            "info:hatKurzname" : "ISST",
+            "info:hatName" : [ {
+              "@value" : "ISST - Fraunhofer Institute for Software and Systems Engineering ISST",
+              "@type" : "http://www.w3.org/2001/XMLSchema#string"
+            } ],
+            "info:leitet" : [ {
+              "@type" : "info:Projekt",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/projekt/fee6ef27-4fa2-44e6-b77b-7914b864484f",
+              "info:hatKurzname" : "PROJ",
+              "info:hatName" : {
+                "@value" : "Project Name",
+                "@type" : "http://www.w3.org/2001/XMLSchema#string"
+              },
+              "info:hatSigmaProjektnummer" : 123,
+              "info:hatFoerdersumme" : 30000,
+              "info:hatAuftraggeber" : {
+                "@type" : "info:Kunde",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/kunde/4282e22a-e24f-42b0-b048-85130689d897",
+                "info:istEhemalig" : false,
+                "info:hatName" : [ {
+                  "@value" : "kunde",
+                  "@type" : "http://www.w3.org/2001/XMLSchema#string"
+                } ]
+              },
+              "info:hatErgebnis" : [ {
+                "@type" : "info:Ergebnis",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/ergebnis/b699afc8-8048-4ccb-aac7-445a6cb58fc1"
+              } ],
+              "info:hatEntwickelt" : [ {
+                "@type" : "info:Technologie",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/technologie/f4e00e12-a674-41c2-88f9-ae1a76ce2a2d"
+              } ],
+              "info:hatThema" : [ "project theme" ],
+              "info:hatVertrag" : [ {
+                "@type" : "info:Vertrag",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/vertrag/0a61db01-cdc9-4083-8e71-743d7da76ba5",
+                "info:istFuEVertrag" : false,
+                "info:istRahmenvertrag" : false,
+                "info:istIPVerwertungsvertrag" : false
+              } ],
+              "info:hatBudget" : {
+                "@type" : "info:Budget",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/budget/d232416e-bfdf-484d-9925-5114b337cfb1",
+                "info:hatSumme" : {
+                  "@type" : "info:Preisspezifikation",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/preisspezifikation/3ab9f5d2-8823-4675-9f85-a0914dbd2fa2",
+                  "info:hatWert" : 50000,
+                  "info:hatWaehrung" : "Euro"
+                }
+              },
+              "info:hatKostenstelle" : {
+                "@type" : "info:Finanzierungsstelle",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/finanzierungsstelle/7e411e6f-25df-4ddd-a00c-f363ddac2dc3"
+              },
+              "info:hatLaufzeit" : {
+                "@type" : "ids:DurationEntity",
+                "@id" : "https://w3id.org/idsa/autogen/durationEntity/f4e83f65-edaa-43b3-804b-8af0c4651cee",
+                "ids:hasDuration" : "P2020Y4M6DT10H30M0S"
+              }
+            } ]
+          },
+          "info:gehoertZuErgebnis" : {
+            "@type" : "info:Ergebnis",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/ergebnis/f42e675d-e13c-4c18-b592-7b06c1cccc74",
+            "info:entstandInForschungsrahmenprogramm" : [ {
+              "@type" : "info:Forschungsrahmenprogramm",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/forschungsrahmenprogramm/bf1b1dcd-6822-4e66-9c99-aca189f6c05c",
+              "info:enthaeltForschungsprogramm" : [ {
+                "@type" : "info:Forschungsprogramm",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/forschungsprogramm/747e5465-1ee6-4073-92d0-461a216a4b9a"
+              } ]
+            } ],
+            "info:hatPraesentation" : [ {
+              "@type" : "info:Praesentation",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/praesentation/98075011-2c82-44cb-8111-1f15fde0699c"
+            } ],
+            "info:entstandInForschungsprogramm" : [ {
+              "@type" : "info:Forschungsprogramm",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/forschungsprogramm/e824da79-7084-49e3-97d4-f5c972fe0454"
+            } ]
+          },
+          "info:hatDateneigner_in" : [ {
+            "@type" : "info:Mitarbeiter_in",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/mitarbeiter_in/7f9543cb-4fc2-4bf3-a926-ea35fea1b509",
+            "info:hatTelefonnummerDienstlich" : [ "012345678932" ],
+            "info:hatEMailDienstlich" : {
+              "@id" : "mailto:stein.albert@fraunhofer.de"
+            },
+            "info:hatIndividualname" : [ "Albert Stein" ],
+            "kdsf:Staatsangehoerigkeit" : "German",
+            "info:hatDirectoryLink" : {
+              "@id" : "http://fraunhofer-mitarbeiter.de/stein_albert"
+            },
+            "info:hatPersonalnummer" : 0,
+            "info:hatGeschlecht" : {
+              "@type" : "info:Geschlecht",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/geschlecht/7117fd00-9664-4885-b16b-9f6074dbb784"
+            },
+            "info:hatVorname" : [ "Albert" ],
+            "info:hatFamilienname" : [ "Stein" ],
+            "info:hatEMailPrivat" : {
+              "@id" : "mailto:albert.stein@info.org"
+            },
+            "info:hatArbeitgeber" : [ {
+              "@type" : "info:Organisation",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/organisation/46dadf74-b5f2-4f7a-bedf-2d6c5befb0a6",
+              "info:istEhemalig" : false,
+              "info:hatName" : [ {
+                "@value" : "ISST - Fraunhofer Institute for Software and Systems Engineering ISST",
+                "@type" : "http://www.w3.org/2001/XMLSchema#string"
+              } ]
+            } ],
+            "kdsf:Altersgruppe" : "25-30",
+            "info:hatGeburtsdatum" : {
+              "@value" : "1995-10-15T00:00:00.000Z",
+              "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+            },
+            "kdsf:Name" : "Albert Stein"
+          } ],
+          "info:hatKontaktperson" : [ {
+            "@type" : "info:Mitarbeiter_in",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/mitarbeiter_in/7f9543cb-4fc2-4bf3-a926-ea35fea1b509",
+            "info:hatTelefonnummerDienstlich" : [ "012345678932" ],
+            "info:hatEMailDienstlich" : {
+              "@id" : "mailto:stein.albert@fraunhofer.de"
+            },
+            "info:hatIndividualname" : [ "Albert Stein" ],
+            "kdsf:Staatsangehoerigkeit" : "German",
+            "info:hatDirectoryLink" : {
+              "@id" : "http://fraunhofer-mitarbeiter.de/stein_albert"
+            },
+            "info:hatPersonalnummer" : 0,
+            "info:hatGeschlecht" : {
+              "@type" : "info:Geschlecht",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/geschlecht/7117fd00-9664-4885-b16b-9f6074dbb784"
+            },
+            "info:hatVorname" : [ "Albert" ],
+            "info:hatFamilienname" : [ "Stein" ],
+            "info:hatEMailPrivat" : {
+              "@id" : "mailto:albert.stein@info.org"
+            },
+            "info:hatArbeitgeber" : [ {
+              "@type" : "info:Organisation",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/organisation/46dadf74-b5f2-4f7a-bedf-2d6c5befb0a6",
+              "info:istEhemalig" : false,
+              "info:hatName" : [ {
+                "@value" : "ISST - Fraunhofer Institute for Software and Systems Engineering ISST",
+                "@type" : "http://www.w3.org/2001/XMLSchema#string"
+              } ]
+            } ],
+            "kdsf:Altersgruppe" : "25-30",
+            "info:hatGeburtsdatum" : {
+              "@value" : "1995-10-15T00:00:00.000Z",
+              "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+            },
+            "kdsf:Name" : "Albert Stein"
+          } ],
+          "info:hatDigitaleRepraesentation" : {
+            "@id" : "http://additionaldummyresource.de"
+          }
+        },
+        "ids:researchDataType" : {
+          "@id" : "idsc:SIMULATION_DATA"
+        },
+        "ids:ontologySourceReference" : [ {
+          "@id" : "https://raw.githubusercontent.com/SemanGit/SemanGit/master/Documentation/ontology/semangitontology.ttl"
+        } ],
+        "ids:description" : [ {
+          "@value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur\n        unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam\n        dignissimos laborum fugiat deleniti Eum quasi quidem quibusdam.",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:language" : [ {
+          "@id" : "idsc:FR"
+        }, {
+          "@id" : "idsc:DE"
+        } ]
+      }, {
+        "@type" : "ids:Resource",
+        "@id" : "https://w3id.org/idsa/autogen/resource/405e9f60-2b9a-4a74-8920-4e9d7cf96d47",
+        "ids:standardLicense" : {
+          "@id" : "https://example.org/license/someCopyLeftLicense"
+        },
+        "ids:customLicense" : {
+          "@id" : "http://customlicense.org"
+        },
+        "ids:contentType" : {
+          "@id" : "idsc:SCHEMA_DEFINITION"
+        },
+        "ids:rawData" : false,
+        "ids:author" : [ {
+          "@type" : "ids:Person",
+          "@id" : "https://w3id.org/idsa/autogen/person/3715b75b-ab66-42b9-ae52-bc3db0913da8",
+          "ids:emailAddress" : [ "mailto:info@example.org" ],
+          "ids:homepage" : "http://example.org",
+          "ids:phoneNumber" : [ "012345678891" ],
+          "ids:givenName" : "Max",
+          "ids:familyName" : "Mustermensch"
+        } ],
+        "ids:representation" : [ {
+          "@type" : "ids:DataRepresentation",
+          "@id" : "https://w3id.org/idsa/autogen/dataRepresentation/97ffd225-2184-4bbe-ab30-c7b47cbbf649",
+          "ids:modified" : {
+            "@value" : "2019-12-19T00:00:00.000Z",
+            "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+          },
+          "ids:created" : {
+            "@value" : "2008-11-15T00:00:00.000Z",
+            "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+          },
+          "ids:instance" : [ {
+            "@type" : "ids:Artifact",
+            "@id" : "https://w3id.org/idsa/autogen/artifact/d3e45ada-95b6-4afc-a049-dde3dde1e4f5",
+            "ids:creationDate" : {
+              "@value" : "2020-10-19T10:11:33.646+02:00",
+              "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+            },
+            "ids:byteSize" : 986,
+            "ids:fileName" : "software.zip"
+          } ],
+          "ids:mediaType" : {
+            "@type" : "ids:IANAMediaType",
+            "@id" : "https://w3id.org/idsa/autogen/iANAMediaType/89762a3b-d8e5-4420-9eee-ba6aa78d5f77",
+            "ids:filenameExtension" : "XML"
+          },
+          "ids:representationStandard" : {
+            "@id" : "http://dataRepresentation.org"
+          }
+        } ],
+        "ids:keyword" : [ {
+          "@value" : "cloud",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "conference",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "things",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "internet",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "international",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:dataCreator" : {
+          "@value" : "Data creator/Owner",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "ids:generatedBy" : [ {
+          "@value" : "Software used to generate dataset",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:modified" : {
+          "@value" : "2020-02-18T00:00:00.000Z",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:title" : [ {
+          "@value" : "International conference on cloud and internet of things",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:contentStandard" : {
+          "@id" : "http://contentstandard.org"
+        },
+        "ids:mainTitle" : [ {
+          "@value" : "International conference on cloud and internet of things",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:created" : {
+          "@value" : "2001-07-15T00:00:00.000Z",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:version" : "version 3.0.0",
+        "ids:fraunhoferProjectResource" : {
+          "@type" : "info:Ressource",
+          "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/ressource/e7ee667f-7737-4a09-96c2-afdfbb32b224",
+          "info:hatWissenschaftsklassifikation" : [ {
+            "@id" : "http://www.fraunhofer.de/fraunhofer-digital/klassifikation/sci-met/141211"
+          }, {
+            "@id" : "http://www.fraunhofer.de/fraunhofer-digital/klassifikation/sci-met/161311"
+          } ],
+          "info:stammtAusInstitut" : {
+            "@type" : "info:Institut",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/institut/9438db37-08a7-46f1-a5f2-2607b45a070d",
+            "info:istEhemalig" : false,
+            "info:hatKurzname" : "IAIS",
+            "info:hatName" : [ {
+              "@value" : "IAIS - Fraunhofer Institute for Intelligent Analysis and Information Systems IAIS",
+              "@type" : "http://www.w3.org/2001/XMLSchema#string"
+            } ],
+            "info:leitet" : [ {
+              "@type" : "info:Projekt",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/projekt/fee6ef27-4fa2-44e6-b77b-7914b864484f",
+              "info:hatKurzname" : "PROJ",
+              "info:hatName" : {
+                "@value" : "Project Name",
+                "@type" : "http://www.w3.org/2001/XMLSchema#string"
+              },
+              "info:hatSigmaProjektnummer" : 123,
+              "info:hatFoerdersumme" : 30000,
+              "info:hatAuftraggeber" : {
+                "@type" : "info:Kunde",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/kunde/4282e22a-e24f-42b0-b048-85130689d897",
+                "info:istEhemalig" : false,
+                "info:hatName" : [ {
+                  "@value" : "kunde",
+                  "@type" : "http://www.w3.org/2001/XMLSchema#string"
+                } ]
+              },
+              "info:hatErgebnis" : [ {
+                "@type" : "info:Ergebnis",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/ergebnis/b699afc8-8048-4ccb-aac7-445a6cb58fc1"
+              } ],
+              "info:hatEntwickelt" : [ {
+                "@type" : "info:Technologie",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/technologie/f4e00e12-a674-41c2-88f9-ae1a76ce2a2d"
+              } ],
+              "info:hatThema" : [ "project theme" ],
+              "info:hatVertrag" : [ {
+                "@type" : "info:Vertrag",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/vertrag/0a61db01-cdc9-4083-8e71-743d7da76ba5",
+                "info:istFuEVertrag" : false,
+                "info:istRahmenvertrag" : false,
+                "info:istIPVerwertungsvertrag" : false
+              } ],
+              "info:hatBudget" : {
+                "@type" : "info:Budget",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/budget/d232416e-bfdf-484d-9925-5114b337cfb1",
+                "info:hatSumme" : {
+                  "@type" : "info:Preisspezifikation",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/preisspezifikation/3ab9f5d2-8823-4675-9f85-a0914dbd2fa2",
+                  "info:hatWert" : 50000,
+                  "info:hatWaehrung" : "Euro"
+                }
+              },
+              "info:hatKostenstelle" : {
+                "@type" : "info:Finanzierungsstelle",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/finanzierungsstelle/7e411e6f-25df-4ddd-a00c-f363ddac2dc3"
+              },
+              "info:hatLaufzeit" : {
+                "@type" : "ids:DurationEntity",
+                "@id" : "https://w3id.org/idsa/autogen/durationEntity/f4e83f65-edaa-43b3-804b-8af0c4651cee",
+                "ids:hasDuration" : "P2020Y4M6DT10H30M0S"
+              }
+            } ]
+          },
+          "info:gehoertZuErgebnis" : {
+            "@type" : "info:Ergebnis",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/ergebnis/f42e675d-e13c-4c18-b592-7b06c1cccc74",
+            "info:entstandInForschungsrahmenprogramm" : [ {
+              "@type" : "info:Forschungsrahmenprogramm",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/forschungsrahmenprogramm/bf1b1dcd-6822-4e66-9c99-aca189f6c05c",
+              "info:enthaeltForschungsprogramm" : [ {
+                "@type" : "info:Forschungsprogramm",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/forschungsprogramm/747e5465-1ee6-4073-92d0-461a216a4b9a"
+              } ]
+            } ],
+            "info:hatPraesentation" : [ {
+              "@type" : "info:Praesentation",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/praesentation/98075011-2c82-44cb-8111-1f15fde0699c"
+            } ],
+            "info:entstandInForschungsprogramm" : [ {
+              "@type" : "info:Forschungsprogramm",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/forschungsprogramm/e824da79-7084-49e3-97d4-f5c972fe0454"
+            } ]
+          },
+          "info:hatDateneigner_in" : [ {
+            "@type" : "info:Mitarbeiter_in",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/mitarbeiter_in/0caa798d-8582-4c96-b0f0-dc67c2fd7475",
+            "info:hatTelefonnummerDienstlich" : [ "012345678932" ],
+            "info:hatEMailDienstlich" : {
+              "@id" : "mailto:tenenbaum.danny@fraunhofer.de"
+            },
+            "info:hatIndividualname" : [ "Danny Tenenbaum" ],
+            "kdsf:Staatsangehoerigkeit" : "German",
+            "info:hatDirectoryLink" : {
+              "@id" : "http://fraunhofer-mitarbeiter.de/tenenbaum_danny"
+            },
+            "info:hatPersonalnummer" : 0,
+            "info:hatGeschlecht" : {
+              "@type" : "info:Geschlecht",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/geschlecht/242e008a-b26f-4633-8fe4-3a5315965eca"
+            },
+            "info:hatVorname" : [ "Danny" ],
+            "info:hatFamilienname" : [ "Tenenbaum" ],
+            "info:hatEMailPrivat" : {
+              "@id" : "mailto:danny.tenenbaum@info.org"
+            },
+            "info:hatArbeitgeber" : [ {
+              "@type" : "info:Organisation",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/organisation/da40b2c8-5ce4-42f3-a6d8-74a03c9330ed",
+              "info:istEhemalig" : false,
+              "info:hatName" : [ {
+                "@value" : "IAIS - Fraunhofer Institute for Intelligent Analysis and Information Systems IAIS",
+                "@type" : "http://www.w3.org/2001/XMLSchema#string"
+              } ]
+            } ],
+            "kdsf:Altersgruppe" : "25-30",
+            "info:hatGeburtsdatum" : {
+              "@value" : "1995-10-15T00:00:00.000Z",
+              "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+            },
+            "kdsf:Name" : "Danny Tenenbaum"
+          } ],
+          "info:hatKontaktperson" : [ {
+            "@type" : "info:Mitarbeiter_in",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/mitarbeiter_in/0caa798d-8582-4c96-b0f0-dc67c2fd7475",
+            "info:hatTelefonnummerDienstlich" : [ "012345678932" ],
+            "info:hatEMailDienstlich" : {
+              "@id" : "mailto:tenenbaum.danny@fraunhofer.de"
+            },
+            "info:hatIndividualname" : [ "Danny Tenenbaum" ],
+            "kdsf:Staatsangehoerigkeit" : "German",
+            "info:hatDirectoryLink" : {
+              "@id" : "http://fraunhofer-mitarbeiter.de/tenenbaum_danny"
+            },
+            "info:hatPersonalnummer" : 0,
+            "info:hatGeschlecht" : {
+              "@type" : "info:Geschlecht",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/geschlecht/242e008a-b26f-4633-8fe4-3a5315965eca"
+            },
+            "info:hatVorname" : [ "Danny" ],
+            "info:hatFamilienname" : [ "Tenenbaum" ],
+            "info:hatEMailPrivat" : {
+              "@id" : "mailto:danny.tenenbaum@info.org"
+            },
+            "info:hatArbeitgeber" : [ {
+              "@type" : "info:Organisation",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/organisation/da40b2c8-5ce4-42f3-a6d8-74a03c9330ed",
+              "info:istEhemalig" : false,
+              "info:hatName" : [ {
+                "@value" : "IAIS - Fraunhofer Institute for Intelligent Analysis and Information Systems IAIS",
+                "@type" : "http://www.w3.org/2001/XMLSchema#string"
+              } ]
+            } ],
+            "kdsf:Altersgruppe" : "25-30",
+            "info:hatGeburtsdatum" : {
+              "@value" : "1995-10-15T00:00:00.000Z",
+              "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+            },
+            "kdsf:Name" : "Danny Tenenbaum"
+          } ],
+          "info:hatDigitaleRepraesentation" : {
+            "@id" : "http://additionaldummyresource.de"
+          }
+        },
+        "ids:researchDataType" : {
+          "@id" : "idsc:DERIVED_COMPILED_DATA"
+        },
+        "ids:ontologySourceReference" : [ {
+          "@id" : "https://gitlab.cc-asp.fraunhofer.de/jdauer/ontologietest/-/raw/master/Beacons.ttl"
+        } ],
+        "ids:description" : [ {
+          "@value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur\n        unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam\n        dignissimos laborum fugiat deleniti Eum quasi quidem quibusdam.",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:language" : [ {
+          "@id" : "idsc:EN"
+        }, {
+          "@id" : "idsc:DE"
+        } ]
+      }, {
+        "@type" : "ids:Resource",
+        "@id" : "https://w3id.org/idsa/autogen/resource/c772dce6-4c91-435b-9e56-54f25e70c0f7",
+        "ids:standardLicense" : {
+          "@id" : "https://example.org/license/officialWork"
+        },
+        "ids:customLicense" : {
+          "@id" : "http://customlicense.org"
+        },
+        "ids:contentType" : {
+          "@id" : "idsc:INTERFACE_DEFINITION"
+        },
+        "ids:rawData" : false,
+        "ids:author" : [ {
+          "@type" : "ids:Person",
+          "@id" : "https://w3id.org/idsa/autogen/person/3715b75b-ab66-42b9-ae52-bc3db0913da8",
+          "ids:emailAddress" : [ "mailto:info@example.org" ],
+          "ids:homepage" : "http://example.org",
+          "ids:phoneNumber" : [ "012345678891" ],
+          "ids:givenName" : "Max",
+          "ids:familyName" : "Mustermensch"
+        } ],
+        "ids:representation" : [ {
+          "@type" : "ids:TextRepresentation",
+          "@id" : "https://w3id.org/idsa/autogen/textRepresentation/841f0dd9-2e55-43d0-9063-7bd91762b812",
+          "ids:modified" : {
+            "@value" : "2020-01-15T00:00:00.000Z",
+            "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+          },
+          "ids:created" : {
+            "@value" : "2013-11-14T00:00:00.000Z",
+            "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+          },
+          "ids:instance" : [ {
+            "@type" : "ids:Artifact",
+            "@id" : "https://w3id.org/idsa/autogen/artifact/fb04c9a8-9ec3-4674-9c72-aef3dbbd20fe",
+            "ids:creationDate" : {
+              "@value" : "2020-10-19T10:11:33.646+02:00",
+              "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+            },
+            "ids:byteSize" : 2678,
+            "ids:fileName" : "data.pdf"
+          } ],
+          "ids:mediaType" : {
+            "@type" : "ids:IANAMediaType",
+            "@id" : "https://w3id.org/idsa/autogen/iANAMediaType/555db257-98b6-4c0f-b18d-390eb007708c",
+            "ids:filenameExtension" : "pdf"
+          },
+          "ids:representationStandard" : {
+            "@id" : "http://textRepresentation.org"
+          }
+        } ],
+        "ids:keyword" : [ {
+          "@value" : "energy",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "energy",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "conservation",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "ad",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        }, {
+          "@value" : "open",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:dataCreator" : {
+          "@value" : "Data creator/Owner",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        },
+        "ids:generatedBy" : [ {
+          "@value" : "Software used to generate dataset",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:modified" : {
+          "@value" : "2020-01-29T00:00:00.000Z",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:title" : [ {
+          "@value" : "Energy Conservation with Open Source Ad Blockers",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:contentStandard" : {
+          "@id" : "http://contentstandard.org"
+        },
+        "ids:mainTitle" : [ {
+          "@value" : "Energy Conservation with Open Source Ad Blockers",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:created" : {
+          "@value" : "2003-01-10T00:00:00.000Z",
+          "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+        },
+        "ids:version" : "version 3.0.0",
+        "ids:fraunhoferProjectResource" : {
+          "@type" : "info:Ressource",
+          "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/ressource/59a16994-1e57-4005-ac99-be77dfaaddbc",
+          "info:hatWissenschaftsklassifikation" : [ {
+            "@id" : "http://www.fraunhofer.de/fraunhofer-digital/klassifikation/sci-met/111518"
+          }, {
+            "@id" : "http://www.fraunhofer.de/fraunhofer-digital/klassifikation/sci-met/111417"
+          }, {
+            "@id" : "http://www.fraunhofer.de/fraunhofer-digital/klassifikation/sci-met/111517"
+          } ],
+          "info:stammtAusInstitut" : {
+            "@type" : "info:Institut",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/institut/af2bf646-b3bd-450a-b192-1e669c9b6570",
+            "info:istEhemalig" : false,
+            "info:hatKurzname" : "AISEC",
+            "info:hatName" : [ {
+              "@value" : "AISEC - Fraunhofer Institute for Applied and Integrated Security AISEC",
+              "@type" : "http://www.w3.org/2001/XMLSchema#string"
+            } ],
+            "info:leitet" : [ {
+              "@type" : "info:Projekt",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/projekt/fee6ef27-4fa2-44e6-b77b-7914b864484f",
+              "info:hatKurzname" : "PROJ",
+              "info:hatName" : {
+                "@value" : "Project Name",
+                "@type" : "http://www.w3.org/2001/XMLSchema#string"
+              },
+              "info:hatSigmaProjektnummer" : 123,
+              "info:hatFoerdersumme" : 30000,
+              "info:hatAuftraggeber" : {
+                "@type" : "info:Kunde",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/kunde/4282e22a-e24f-42b0-b048-85130689d897",
+                "info:istEhemalig" : false,
+                "info:hatName" : [ {
+                  "@value" : "kunde",
+                  "@type" : "http://www.w3.org/2001/XMLSchema#string"
+                } ]
+              },
+              "info:hatErgebnis" : [ {
+                "@type" : "info:Ergebnis",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/ergebnis/b699afc8-8048-4ccb-aac7-445a6cb58fc1"
+              } ],
+              "info:hatEntwickelt" : [ {
+                "@type" : "info:Technologie",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/technologie/f4e00e12-a674-41c2-88f9-ae1a76ce2a2d"
+              } ],
+              "info:hatThema" : [ "project theme" ],
+              "info:hatVertrag" : [ {
+                "@type" : "info:Vertrag",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/vertrag/0a61db01-cdc9-4083-8e71-743d7da76ba5",
+                "info:istFuEVertrag" : false,
+                "info:istRahmenvertrag" : false,
+                "info:istIPVerwertungsvertrag" : false
+              } ],
+              "info:hatBudget" : {
+                "@type" : "info:Budget",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/budget/d232416e-bfdf-484d-9925-5114b337cfb1",
+                "info:hatSumme" : {
+                  "@type" : "info:Preisspezifikation",
+                  "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/preisspezifikation/3ab9f5d2-8823-4675-9f85-a0914dbd2fa2",
+                  "info:hatWert" : 50000,
+                  "info:hatWaehrung" : "Euro"
+                }
+              },
+              "info:hatKostenstelle" : {
+                "@type" : "info:Finanzierungsstelle",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/finanzierungsstelle/7e411e6f-25df-4ddd-a00c-f363ddac2dc3"
+              },
+              "info:hatLaufzeit" : {
+                "@type" : "ids:DurationEntity",
+                "@id" : "https://w3id.org/idsa/autogen/durationEntity/f4e83f65-edaa-43b3-804b-8af0c4651cee",
+                "ids:hasDuration" : "P2020Y4M6DT10H30M0S"
+              }
+            } ]
+          },
+          "info:gehoertZuErgebnis" : {
+            "@type" : "info:Ergebnis",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/ergebnis/f42e675d-e13c-4c18-b592-7b06c1cccc74",
+            "info:entstandInForschungsrahmenprogramm" : [ {
+              "@type" : "info:Forschungsrahmenprogramm",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/forschungsrahmenprogramm/bf1b1dcd-6822-4e66-9c99-aca189f6c05c",
+              "info:enthaeltForschungsprogramm" : [ {
+                "@type" : "info:Forschungsprogramm",
+                "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/forschungsprogramm/747e5465-1ee6-4073-92d0-461a216a4b9a"
+              } ]
+            } ],
+            "info:hatPraesentation" : [ {
+              "@type" : "info:Praesentation",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/praesentation/98075011-2c82-44cb-8111-1f15fde0699c"
+            } ],
+            "info:entstandInForschungsprogramm" : [ {
+              "@type" : "info:Forschungsprogramm",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/forschungsprogramm/e824da79-7084-49e3-97d4-f5c972fe0454"
+            } ]
+          },
+          "info:hatDateneigner_in" : [ {
+            "@type" : "info:Mitarbeiter_in",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/mitarbeiter_in/8daecbe6-d8e8-4898-a259-1b49440ab1f4",
+            "info:hatTelefonnummerDienstlich" : [ "012345678932" ],
+            "info:hatEMailDienstlich" : {
+              "@id" : "mailto:mueller.peter@fraunhofer.de"
+            },
+            "info:hatIndividualname" : [ "Peter Mueller" ],
+            "kdsf:Staatsangehoerigkeit" : "German",
+            "info:hatDirectoryLink" : {
+              "@id" : "http://fraunhofer-mitarbeiter.de/mueller_peter"
+            },
+            "info:hatPersonalnummer" : 0,
+            "info:hatGeschlecht" : {
+              "@type" : "info:Geschlecht",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/geschlecht/877b805a-baf0-43b1-a83e-0649d9438e86"
+            },
+            "info:hatVorname" : [ "Peter" ],
+            "info:hatFamilienname" : [ "Mueller" ],
+            "info:hatEMailPrivat" : {
+              "@id" : "mailto:peter.mueller@info.org"
+            },
+            "info:hatArbeitgeber" : [ {
+              "@type" : "info:Organisation",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/organisation/afe1301c-b4c6-4d76-bb0d-e513df76ddc4",
+              "info:istEhemalig" : false,
+              "info:hatName" : [ {
+                "@value" : "AISEC - Fraunhofer Institute for Applied and Integrated Security AISEC",
+                "@type" : "http://www.w3.org/2001/XMLSchema#string"
+              } ]
+            } ],
+            "kdsf:Altersgruppe" : "25-30",
+            "info:hatGeburtsdatum" : {
+              "@value" : "1995-10-15T00:00:00.000Z",
+              "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+            },
+            "kdsf:Name" : "Peter Mueller"
+          } ],
+          "info:hatKontaktperson" : [ {
+            "@type" : "info:Mitarbeiter_in",
+            "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/mitarbeiter_in/8daecbe6-d8e8-4898-a259-1b49440ab1f4",
+            "info:hatTelefonnummerDienstlich" : [ "012345678932" ],
+            "info:hatEMailDienstlich" : {
+              "@id" : "mailto:mueller.peter@fraunhofer.de"
+            },
+            "info:hatIndividualname" : [ "Peter Mueller" ],
+            "kdsf:Staatsangehoerigkeit" : "German",
+            "info:hatDirectoryLink" : {
+              "@id" : "http://fraunhofer-mitarbeiter.de/mueller_peter"
+            },
+            "info:hatPersonalnummer" : 0,
+            "info:hatGeschlecht" : {
+              "@type" : "info:Geschlecht",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/geschlecht/877b805a-baf0-43b1-a83e-0649d9438e86"
+            },
+            "info:hatVorname" : [ "Peter" ],
+            "info:hatFamilienname" : [ "Mueller" ],
+            "info:hatEMailPrivat" : {
+              "@id" : "mailto:peter.mueller@info.org"
+            },
+            "info:hatArbeitgeber" : [ {
+              "@type" : "info:Organisation",
+              "@id" : "https://fraunhofer.de/fraunhofer-digital/infomodel/autogen/organisation/afe1301c-b4c6-4d76-bb0d-e513df76ddc4",
+              "info:istEhemalig" : false,
+              "info:hatName" : [ {
+                "@value" : "AISEC - Fraunhofer Institute for Applied and Integrated Security AISEC",
+                "@type" : "http://www.w3.org/2001/XMLSchema#string"
+              } ]
+            } ],
+            "kdsf:Altersgruppe" : "25-30",
+            "info:hatGeburtsdatum" : {
+              "@value" : "1995-10-15T00:00:00.000Z",
+              "@type" : "http://www.w3.org/2001/XMLSchema#dateTimeStamp"
+            },
+            "kdsf:Name" : "Peter Mueller"
+          } ],
+          "info:hatDigitaleRepraesentation" : {
+            "@id" : "http://additionaldummyresource.de"
+          }
+        },
+        "ids:researchDataType" : {
+          "@id" : "idsc:OBSERVATIONAL_DATA"
+        },
+        "ids:ontologySourceReference" : [ {
+          "@id" : "https://gitlab.cc-asp.fraunhofer.de/jdauer/ontologietest/-/raw/master/Beacons.ttl"
+        } ],
+        "ids:description" : [ {
+          "@value" : "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quos blanditiis tenetur\n        unde suscipit, quam beatae rerum inventore consectetur, neque doloribus, cupiditate numquam\n        dignissimos laborum fugiat deleniti Eum quasi quidem quibusdam.",
+          "@type" : "http://www.w3.org/2001/XMLSchema#string"
+        } ],
+        "ids:language" : [ {
+          "@id" : "idsc:EN"
+        }, {
+          "@id" : "idsc:ES"
+        } ]
+      } ]
+    } ],
+    "ids:title" : [ {
+      "@value" : "This is a dummy title from the Interaction Library",
+      "@type" : "http://www.w3.org/2001/XMLSchema#string"
+    } ],
+    "ids:outboundModelVersion" : "4.0.0",
+    "ids:description" : [ {
+      "@value" : "This is a dummy description from the Interaction Library",
+      "@type" : "http://www.w3.org/2001/XMLSchema#string"
+    } ],
+    "ids:inboundModelVersion" : [ "4.0.0" ]
+  }

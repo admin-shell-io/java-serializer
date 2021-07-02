@@ -1,0 +1,44 @@
+{ 
+	"@context" : "https://w3id.org/idsa/contexts/4.0.0/context.jsonld",
+	"@type" : "ids:ResourceCatalog",
+	"@id" : "https://iais.fraunhofer.de/eis/ids/someBroker/catalog", 
+	"offeredResource" : [ {
+        "@id" : "https://w3id.org/idsa/autogen/resource/8bc5b952-1376-4356-93cd-7be0e669c587", 
+        "@type" : "ids:Resource", 
+        "contentType" : { 
+            "@id" : "https://w3id.org/idsa/code/SCHEMA_DEFINITION" 
+        }, 
+        "contractOffer" : { 
+            "@id" : "https://w3id.org/idsa/autogen/contractOffer/f979e468-5bd3-4be6-8e8c-bfc73c61caaf", 
+            "@type" : "ids:ContractOffer", 
+            "provider" : "https://example.com/provider" 
+        }, 
+        "description" : "This is the description of the resource from a test", 
+        "language" : [ { 
+            "@id" : "https://w3id.org/idsa/code/JA" 
+        }, { 
+            "@id" : "https://w3id.org/idsa/code/PT" 
+        } ], 
+        "title" : "This is the title of a resource from a broker test", 
+        "version" : "1.1" 
+	}, { 
+        "@id" : "https://w3id.org/idsa/autogen/resource/4db59158-0e18-4326-85ed-e8bc1b7f8b6c", 
+        "@type" : "ids:Resource", 
+        "contentType" : { 
+            "@id" : "https://w3id.org/idsa/code/SCHEMA_DEFINITION" 
+        }, 
+        "contractOffer" : { 
+            "@id" : "https://w3id.org/idsa/autogen/contractOffer/d92ea163-7d50-438e-b9b2-33ea653f7b25", 
+            "@type" : "ids:ContractOffer", 
+            "provider" : "https://example.com/provider" 
+        }, 
+        "description" : "This is the description of the resource from a test", 
+        "language" : [ { 
+            "@id" : "https://w3id.org/idsa/code/JA" 
+        }, { 
+            "@id" : "https://w3id.org/idsa/code/PT" 
+        } ], 
+        "title" : "This is the title of a resource from a broker test", 
+        "version" : "1.1" 
+    } ]
+}
