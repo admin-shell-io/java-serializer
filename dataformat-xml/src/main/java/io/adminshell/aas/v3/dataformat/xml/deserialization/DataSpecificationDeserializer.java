@@ -1,7 +1,30 @@
-package io.adminshell.aas.v3.dataformat.xml.deserialization;
+/*
+Copyright (c) 2021 Fraunhofer IOSB-INA Lemgo,
+    eine rechtlich nicht selbstaendige Einrichtung der Fraunhofer-Gesellschaft
+    zur Foerderung der angewandten Forschung e.V.
 
-import static io.adminshell.aas.v3.dataformat.xml.DataSpecificationManager.PROP_DATA_SPECIFICATION;
-import static io.adminshell.aas.v3.dataformat.xml.DataSpecificationManager.PROP_DATA_SPECIFICATION_CONTENT;
+Copyright (c) 2021 Fraunhofer IOSB-ILT Karlsruhe,
+    eine rechtlich nicht selbstaendige Einrichtung der Fraunhofer-Gesellschaft
+    zur Foerderung der angewandten Forschung e.V.
+
+Copyright (c) 2021 Fraunhofer IAIS,
+    eine rechtlich nicht selbstaendige Einrichtung der Fraunhofer-Gesellschaft
+    zur Foerderung der angewandten Forschung e.V.
+
+Copyright (c) 2021 Fraunhofer IESE,
+    eine rechtlich nicht selbstaendige Einrichtung der Fraunhofer-Gesellschaft
+    zur Foerderung der angewandten Forschung e.V.
+
+Copyright (c) 2021 Fraunhofer IWU Karlsruhe,
+    eine rechtlich nicht selbstaendige Einrichtung der Fraunhofer-Gesellschaft
+    zur Foerderung der angewandten Forschung e.V.
+
+This source code is licensed under the Apache License 2.0 (see LICENSE.txt).
+
+This source code may use other Open Source software components (see LICENSE.txt).
+*/
+
+package io.adminshell.aas.v3.dataformat.xml.deserialization;
 
 import java.io.IOException;
 
@@ -12,17 +35,19 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import io.adminshell.aas.v3.dataformat.core.DataSpecificationManager;
+import static io.adminshell.aas.v3.dataformat.core.DataSpecificationManager.PROP_DATA_SPECIFICATION;
+import static io.adminshell.aas.v3.dataformat.core.DataSpecificationManager.PROP_DATA_SPECIFICATION_CONTENT;
 
-import io.adminshell.aas.v3.dataformat.xml.DataSpecificationManager;
-import io.adminshell.aas.v3.model.DataSpecification;
+import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
 import io.adminshell.aas.v3.model.DataSpecificationContent;
 import io.adminshell.aas.v3.model.Reference;
-import io.adminshell.aas.v3.model.impl.DefaultDataSpecification;
+import io.adminshell.aas.v3.model.impl.DefaultEmbeddedDataSpecification;
 
-public class DataSpecificationDeserializer extends JsonDeserializer<DataSpecification> {
+public class DataSpecificationDeserializer extends JsonDeserializer<EmbeddedDataSpecification> {
 
 	@Override
-	public DataSpecification deserialize(JsonParser parser, DeserializationContext context)
+	public EmbeddedDataSpecification deserialize(JsonParser parser, DeserializationContext context)
 			throws IOException, JsonProcessingException {
 		Object temp = parser.getCodec().readTree(parser);
 		ObjectNode node = (ObjectNode) temp;
@@ -45,6 +70,6 @@ public class DataSpecificationDeserializer extends JsonDeserializer<DataSpecific
 		JsonParser parserContent = parser.getCodec().getFactory().getCodec().treeAsTokens(nodeContent);
 		parserContent.nextToken();
 		DataSpecificationContent content = parserContent.readValueAs(targetClass);
-		return new DefaultDataSpecification.Builder().dataSpecificationContent(content).build();
+		return new DefaultEmbeddedDataSpecification.Builder().dataSpecificationContent(content).build();
 	}
 }

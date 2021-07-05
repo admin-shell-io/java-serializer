@@ -1,4 +1,4 @@
-package io.adminshell.aas.v3.dataformat.json.deserialization;
+package io.adminshell.aas.v3.dataformat.core.deserialization;
 
 import java.io.IOException;
 
@@ -27,7 +27,12 @@ public class EnumDeserializer<T extends Enum> extends JsonDeserializer<T> {
         return (T) Enum.valueOf(type, translate(parser.getText()));
     }
 
-    protected String translate(String input) {
+    /**
+     * Translates an enum value from CamelCase to SCREAMING_SNAKE_CASE
+     * @param input input name in CamelCase
+     * @return name in SCREAMING_SNAKE_CASE
+     */
+    public static String translate(String input) {
         String result = "";
         if (input == null || input.isEmpty()) {
             return result;

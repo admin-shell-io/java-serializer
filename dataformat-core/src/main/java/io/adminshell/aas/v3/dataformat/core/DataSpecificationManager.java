@@ -1,4 +1,4 @@
-package io.adminshell.aas.v3.dataformat.json;
+package io.adminshell.aas.v3.dataformat.core;
 
 import java.util.Arrays;
 import java.util.Map;

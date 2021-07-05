@@ -1,11 +1,11 @@
-package io.adminshell.aas.v3.dataformat.json.serialization;
+package io.adminshell.aas.v3.dataformat.core.serialization;
 
 import java.io.IOException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import io.adminshell.aas.v3.dataformat.json.ReflectionHelper;
+import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 
 /**
  * Serializes enum values. If enum is part of the AAS Java model, the name will
@@ -25,7 +25,13 @@ public class EnumSerializer extends JsonSerializer<Enum> {
         }
     }
 
-    protected String translate(String input) {
+    /**
+     * Translates an enum value from SCREAMING_SNAKE_CASE to CamelCase
+     *
+     * @param input input name in SCREAMING_SNAKE_CASE
+     * @return name in CamelCase
+     */
+    public static String translate(String input) {
         String result = "";
         boolean capitalize = true;
         for (int i = 0; i < input.length(); i++) {

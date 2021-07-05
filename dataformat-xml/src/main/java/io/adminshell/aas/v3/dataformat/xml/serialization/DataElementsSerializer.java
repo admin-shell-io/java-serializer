@@ -12,23 +12,24 @@ import io.adminshell.aas.v3.model.SubmodelElement;
 
 public class DataElementsSerializer extends JsonSerializer<List<SubmodelElement>> {
 
-	@Override
-	public void serialize(List<SubmodelElement> value, JsonGenerator gen, SerializerProvider serializers)
-			throws IOException {
-		
-		ToXmlGenerator xgen = (ToXmlGenerator) gen;
-		xgen.writeStartObject();
-		
-		for (SubmodelElement element : value) {
-			xgen.writeFieldName("aas:dataElement");
-			SubmodelElementSerializer ser = new SubmodelElementSerializer();
-			ser.serialize(element, xgen, serializers);
-		}
-		
-		xgen.writeEndObject();
-		
-	}
+    SubmodelElementSerializer ser = new SubmodelElementSerializer();
 
-	
-	
+    public DataElementsSerializer(SubmodelElementSerializer ser) {
+        this.ser = ser;
+    }
+
+    public DataElementsSerializer() {
+    }
+
+    @Override
+    public void serialize(List<SubmodelElement> value, JsonGenerator gen, SerializerProvider serializers)
+            throws IOException {
+        ToXmlGenerator xgen = (ToXmlGenerator) gen;
+        xgen.writeStartObject();
+        for (SubmodelElement element : value) {
+            xgen.writeFieldName("dataElement");
+            ser.serialize(element, xgen, serializers);
+        }
+        xgen.writeEndObject();
+    }
 }

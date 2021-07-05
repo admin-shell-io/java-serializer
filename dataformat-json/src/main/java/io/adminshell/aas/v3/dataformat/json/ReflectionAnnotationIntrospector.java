@@ -10,6 +10,7 @@ import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
 import com.fasterxml.jackson.databind.introspect.JacksonAnnotationIntrospector;
 import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.databind.jsontype.TypeResolverBuilder;
+import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;

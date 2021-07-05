@@ -3,21 +3,21 @@
 
 	<import namespace="http://www.admin-shell.io/aas/abac/3/0" schemaLocation="AAS_ABAC.xsd"/>
 	<import namespace="http://www.admin-shell.io/IEC61360/3/0" schemaLocation="IEC61360.xsd"/>
-	
+
 	<attributeGroup name="keyTypes">
 		<attribute name="identifierType" use="optional">
 			<simpleType>
 				<restriction base="string">
 					<enumeration value="Custom"/>
-					<enumeration value="IRDI"/>
-					<enumeration value="IRI"/>
+					<enumeration value="Irdi"/>
+					<enumeration value="Iri"/>
 				</restriction>
 			</simpleType>
 		</attribute>
 		<attribute name="localKeyType" use="optional">
 			<simpleType>
 				<restriction base="string">
-					<enumeration value="idShort"/>
+					<enumeration value="IdShort"/>
 				</restriction>
 			</simpleType>
 		</attribute>
@@ -25,7 +25,7 @@
 	<complexType name="aasenv_t">
 		<sequence>
 			<element maxOccurs="1" minOccurs="0" name="assetAdministrationShells" type="aas:assetAdministrationShells_t"/>
-			<element maxOccurs="1" minOccurs="0" name="assets" type="aas:assets_t"/>
+			<!--<element maxOccurs="1" minOccurs="0" name="assets" type="aas:assets_t"/>-->
 			<element maxOccurs="1" minOccurs="0" name="conceptDescriptions" type="aas:conceptDescriptions_t"/>
 			<element maxOccurs="1" minOccurs="0" name="submodels" type="aas:submodels_t"/>
 		</sequence>
@@ -44,12 +44,6 @@
 				</sequence>
 			</extension>
 		</complexContent>
-	</complexType>
-	<complexType name="asset_t">
-		<sequence>
-			<group ref="aas:identifiable"/>
-			<group ref="aas:hasDataSpecification"/>
-		</sequence>
 	</complexType>
 	<complexType name="assetAdministrationShell_t">
 		<sequence>
@@ -79,11 +73,6 @@
 	<complexType name="specificAssetIds_t">
 		<sequence>
 			<element maxOccurs="unbounded" minOccurs="0" name="specificAssetId" type="aas:identifierKeyValuePair_t"/>
-		</sequence>
-	</complexType>
-	<complexType name="assets_t">
-		<sequence>
-			<element maxOccurs="unbounded" minOccurs="0" name="asset" type="aas:asset_t"/>
 		</sequence>
 	</complexType>
 	<complexType name="basicEvent_t">
@@ -159,7 +148,7 @@
 	<complexType name="embeddedDataSpecification_t">
 		<sequence>
 			<element maxOccurs="1" minOccurs="0" name="dataSpecificationContent" type="aas:dataSpecificationContent_t"/>
-			<element maxOccurs="1" minOccurs="0" name="dataSpecification" type="aas:reference_t"/>
+			<element maxOccurs="1" minOccurs="1" name="dataSpecification" type="aas:reference_t"/>
 		</sequence>
 	</complexType>
 	<complexType name="entity_t">
@@ -222,8 +211,8 @@
 					<simpleType>
 						<restriction base="string">
 							<enumeration value="Custom"/>
-							<enumeration value="IRDI"/>
-							<enumeration value="IRI"/>
+							<enumeration value="Irdi"/>
+							<enumeration value="Iri"/>
 						</restriction>
 					</simpleType>
 				</attribute>
@@ -265,8 +254,8 @@
 							<enumeration value="Custom"/>
 							<enumeration value="FragmentId"/>
 							<enumeration value="IdShort"/>
-							<enumeration value="IRDI"/>
-							<enumeration value="IRI"/>
+							<enumeration value="Irdi"/>
+							<enumeration value="Iri"/>
 						</restriction>
 					</simpleType>
 				</attribute>
@@ -550,7 +539,7 @@
 			<element maxOccurs="1" minOccurs="0" name="description" type="aas:langStringSet_t"/>
 		</sequence>
 	</group>
-	
+
 	<simpleType name="assetKind_t">
 		<restriction base="string">
 			<enumeration value="Instance"/>
@@ -563,8 +552,8 @@
 	<simpleType name="identifierType_t">
 		<restriction base="string">
 			<enumeration value="Custom"/>
-			<enumeration value="IRDI"/>
-			<enumeration value="IRI"/>
+			<enumeration value="Irdi"/>
+			<enumeration value="Iri"/>
 		</restriction>
 	</simpleType>
 	<simpleType name="modelingKind_t">

@@ -8,9 +8,9 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 
 import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.Deserializer;
-import io.adminshell.aas.v3.dataformat.json.deserialization.DefaultEmbeddedDataSpecificationDeserializer;
-import io.adminshell.aas.v3.dataformat.json.deserialization.EmbeddedDataSpecificationDeserializer;
-import io.adminshell.aas.v3.dataformat.json.deserialization.EnumDeserializer;
+import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
+import io.adminshell.aas.v3.dataformat.core.deserialization.EmbeddedDataSpecificationDeserializer;
+import io.adminshell.aas.v3.dataformat.core.deserialization.EnumDeserializer;
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
@@ -53,8 +53,8 @@ public class JsonDeserializer implements Deserializer {
         typeResolver = new SimpleAbstractTypeResolver();
         ReflectionHelper.DEFAULT_IMPLEMENTATIONS
                 .stream()
-                .filter(x -> !customDeserializers.containsKey(x.getImplementedClass()))
-                .forEach(x -> typeResolver.addMapping(x.getImplementedClass(), x.getImplementationClass()));
+                .filter(x -> !customDeserializers.containsKey(x.getInterfaceType()))
+                .forEach(x -> typeResolver.addMapping(x.getInterfaceType(), x.getImplementationType()));
     }
 
     protected SimpleModule buildEnumModule() {

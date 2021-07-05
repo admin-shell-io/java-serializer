@@ -1,18 +1,17 @@
 package io.adminshell.aas.v3.dataformat.xml.mixin;
 
-
-
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
-@JsonPropertyOrder({ "extensions",  "idShort", "displayNames", "category", "descriptions",
-	"kind", "semanticId", "qualifiers", "dataSpecifications", "value", "mimeType" })
-public interface FileMixin {
-	
-	@JacksonXmlProperty(localName = "aas:mimeType")
-	public String getMimeType();
+import io.adminshell.aas.v3.dataformat.xml.AasXmlNamespaceContext;
 
-    @JacksonXmlProperty(localName = "aas:value")
+@JsonPropertyOrder({"extensions", "idShort", "displayNames", "category", "descriptions", "kind", "semanticId",
+    "qualifiers", "dataSpecifications", "value", "mimeType"})
+public interface FileMixin {
+
+    @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "mimeType")
+    public String getMimeType();
+
+    @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "value")
     public String getValue();
-	
 }

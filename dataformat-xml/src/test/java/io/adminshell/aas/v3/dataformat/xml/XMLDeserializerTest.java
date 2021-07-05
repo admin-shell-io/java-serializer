@@ -1,33 +1,25 @@
 package io.adminshell.aas.v3.dataformat.xml;
 
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import static org.junit.Assert.assertEquals;
+
+import java.io.FileNotFoundException;
 
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
-import io.adminshell.aas.v3.dataformat.Deserializer;
-import io.adminshell.aas.v3.dataformat.xml.XmlDeserializer;
+import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 
 public class XMLDeserializerTest {
 
-	private static final Logger logger = LoggerFactory.getLogger(XMLDeserializerTest.class);
-	private static final Deserializer deserializer = new XmlDeserializer();
+    @Test
+    public void deserializeAASSimple() throws Exception {
+        AssetAdministrationShellEnvironment env = new XmlDeserializer().read(AASSimple.FILE);
+        assertEquals(AASSimple.ENVIRONMENT, env);
+    }
 
-	@Test
-	public void testReadFromFile() throws Exception {
-		String xml = new String(Files.readAllBytes(Paths.get("src/test/resources/Example_AAS_ServoDCMotor - Simplified V2.0.xml")));
-		XmlDeserializer deserializer = new XmlDeserializer();
-		try {
-			
-			AssetAdministrationShellEnvironment env = deserializer.read(xml);
-			System.out.println();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		//return bufferedReader.lines().collect(Collectors.joining(System.lineSeparator()));
-
-	}
+    @Test
+    public void deserializeAASFull() throws FileNotFoundException, DeserializationException {
+        AssetAdministrationShellEnvironment env = new XmlDeserializer().read(AASFull.FILE);
+        assertEquals(AASFull.ENVIRONMENT, env);
+    }
 }

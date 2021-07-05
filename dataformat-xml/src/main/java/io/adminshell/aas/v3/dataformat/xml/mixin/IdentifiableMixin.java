@@ -1,19 +1,16 @@
 package io.adminshell.aas.v3.dataformat.xml.mixin;
 
-
-
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
+import io.adminshell.aas.v3.dataformat.xml.AasXmlNamespaceContext;
 import io.adminshell.aas.v3.model.AdministrativeInformation;
 import io.adminshell.aas.v3.model.Identifier;
 
-// No order needed -> dealt with in concrete classes
 public interface IdentifiableMixin {
 
-	@JacksonXmlProperty(localName = "aas:administration")
-	public AdministrativeInformation getAdministration();
-	
-	@JacksonXmlProperty(localName = "aas:identification")
-	public Identifier getIdentification();
+    @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "administration")
+    public AdministrativeInformation getAdministration();
 
+    @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "identification")
+    public Identifier getIdentification();
 }

@@ -14,27 +14,24 @@ import io.adminshell.aas.v3.model.Qualifier;
 
 public class ConstraintsSerializer extends JsonSerializer<List<Constraint>> {
 
-	@Override
-	public void serialize(List<Constraint> value, JsonGenerator gen, SerializerProvider serializers)
-			throws IOException {
-
-		ToXmlGenerator xgen = (ToXmlGenerator) gen;
+    @Override
+    public void serialize(List<Constraint> value, JsonGenerator gen, SerializerProvider serializers)
+            throws IOException {
+        ToXmlGenerator xgen = (ToXmlGenerator) gen;
         xgen.writeStartObject();
-        
-        
-        
-        for(Constraint constraint : value) {
-        	if(constraint instanceof Qualifier) {
-        		xgen.writeFieldName("aas:qualifier");				
-        	} else if(constraint instanceof Formula) {
-        		xgen.writeFieldName("aas:formula");				
-			}
-        	xgen.writeObject(constraint);
-		}
-        
-        
+        for (Constraint constraint : value) {
+            if (constraint instanceof Qualifier) {
+                xgen.writeFieldName("qualifier");
+            } else if (constraint instanceof Formula) {
+                xgen.writeFieldName("formula");
+            }
+            xgen.writeObject(constraint);
+        }
         xgen.writeEndObject();
-		
-	}
+    }
 
+    @Override
+    public boolean isEmpty(SerializerProvider provider, List<Constraint> value) {
+        return value == null || value.isEmpty();
+    }
 }

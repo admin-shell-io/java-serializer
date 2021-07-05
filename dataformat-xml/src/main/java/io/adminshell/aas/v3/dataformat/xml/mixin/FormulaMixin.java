@@ -5,13 +5,12 @@ import java.util.List;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
+import io.adminshell.aas.v3.dataformat.xml.AasXmlNamespaceContext;
 import io.adminshell.aas.v3.model.Reference;
 
-// No order needed -> only one element
 public interface FormulaMixin {
-	
-	@JacksonXmlProperty(localName = "aas:reference")
-    @JacksonXmlElementWrapper(localName = "aas:dependsOnRefs")
+
+    @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "reference")
+    @JacksonXmlElementWrapper(namespace = AasXmlNamespaceContext.AAS_URI, localName = "dependsOnRefs")
     public List<Reference> getDependsOns();
-	
 }

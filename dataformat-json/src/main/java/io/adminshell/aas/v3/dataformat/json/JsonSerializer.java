@@ -6,14 +6,14 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.Serializer;
-import io.adminshell.aas.v3.dataformat.json.serialization.EnumSerializer;
+import io.adminshell.aas.v3.dataformat.core.serialization.EnumSerializer;
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
-import io.adminshell.aas.v3.dataformat.json.serialization.EmbeddedDataSpecificationSerializer;
+import io.adminshell.aas.v3.dataformat.core.serialization.EmbeddedDataSpecificationSerializer;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
-import io.adminshell.aas.v3.model.DataSpecification;
 import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
 
 /**
