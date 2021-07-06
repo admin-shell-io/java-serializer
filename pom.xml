@@ -6,6 +6,15 @@
     <groupId>io.admin-shell.aas</groupId>
     <artifactId>dataformat-parent</artifactId>
     <version>${revision}</version>
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>3.1.2</version>
+            </plugin>
+        </plugins>
+    </build>
     <packaging>pom</packaging>
     <modules>
         <module>dataformat-aasx</module>
@@ -33,5 +42,9 @@
         <slf4j.version>1.7.31</slf4j.version>
         <xmlunit.version>2.8.2</xmlunit.version>
         <woodstox-core-asl.version>4.4.1</woodstox-core-asl.version>
+        <commons-codec.version>1.15</commons-codec.version>
+        <commons-io.version>2.6</commons-io.version>
+        <shacl.version>1.3.2</shacl.version>
+        <commons-lang3.version>3.8.1</commons-lang3.version>
     </properties>
 </project>
