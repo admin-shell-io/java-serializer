@@ -123,7 +123,7 @@ public class AASSimple {
             .identification(new DefaultIdentifier.Builder().identifier("www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Description/Title").idType(IdentifierType.IRI).build())
             .embeddedDataSpecification(new DefaultEmbeddedDataSpecification.Builder()
                     .dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder().preferredName(new LangString("Title", "EN")).preferredName(new LangString("Titel", "DE")).shortName(new LangString("Title", "EN"))
-                            .shortName(new LangString("Titel", "DE")).dataType(DataTypeIEC61360.STRING_TRANSLATABLE).definition(new LangString("SprachabhängigerTiteldesDokuments.", "DE")).build())
+                            .shortName(new LangString("Titel", "DE")).dataType(DataTypeIEC61360.STRING_TRANSLATABLE).definition(new LangString("SprachabhaengigerTiteldesDokuments.", "DE")).build())
                     .build())
             .build();
 
@@ -131,7 +131,7 @@ public class AASSimple {
             .identification(new DefaultIdentifier.Builder().identifier("www.vdi2770.com/blatt1/Entwurf/Okt18/cd/StoredDocumentRepresentation/DigitalFile").idType(IdentifierType.IRI).build())
             .embeddedDataSpecification(new DefaultEmbeddedDataSpecification.Builder().dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder().preferredName(new LangString("DigitalFile", "EN"))
                     .preferredName(new LangString("DigitaleDatei", "DE")).shortName(new LangString("DigitalFile", "EN")).shortName(new LangString("DigitaleDatei", "DE")).dataType(DataTypeIEC61360.STRING)
-                    .definition(new LangString("Eine Datei, die die Document Version repräsentiert. Neben der obligatorischen PDF Datei können weitere Dateien angegeben werden.", "DE")).build()).build())
+                    .definition(new LangString("Eine Datei, die die Document Version repraesentiert. Neben der obligatorischen PDF Datei koennen weitere Dateien angegeben werden.", "DE")).build()).build())
             .build();
 
     public static final ConceptDescription CONCEPT_DESCRIPTION_MAXROTATIONSPEED = new DefaultConceptDescription.Builder().idShort("MaxRotationSpeed").category("Property")
@@ -139,7 +139,7 @@ public class AASSimple {
             .embeddedDataSpecifications(Arrays.asList(new DefaultEmbeddedDataSpecification.Builder()
                     .dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder().preferredName(new LangString("max.Drehzahl", "de")).preferredName(new LangString("Max.rotationspeed", "en")).unit("1/min")
                             .unitId(new DefaultReference.Builder().key(new DefaultKey.Builder().type(KeyElements.GLOBAL_REFERENCE).value("0173-1#05-AAA650#002").idType(KeyType.IRDI).build()).build()).dataType(DataTypeIEC61360.REAL_MEASURE)
-                            .definition(new LangString("HöchstezulässigeDrehzahl,mitwelcherderMotoroderdieSpeiseinheitbetriebenwerdendarf", "de"))
+                            .definition(new LangString("HoechstezulaessigeDrehzahl,mitwelcherderMotoroderdieSpeiseinheitbetriebenwerdendarf", "de"))
                             .definition(new LangString("Greatestpermissiblerotationspeedwithwhichthemotororfeedingunitmaybeoperated", "en")).build())
                     .build()))
             .build();
@@ -157,7 +157,7 @@ public class AASSimple {
             .identification(new DefaultIdentifier.Builder().identifier("www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Document").idType(IdentifierType.IRI).build())
             .embeddedDataSpecification(new DefaultEmbeddedDataSpecification.Builder().dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder().shortName(new LangString("Document", "EN"))
                     .shortName(new LangString("Dokument", "DE")).sourceOfDefinition("[ISO15519-1:2010]").dataType(DataTypeIEC61360.STRING)
-                    .definition(new LangString("Feste und geordnete Menge von für die Verwendung durch Personen bestimmte Informationen, die verwaltet und als Einheit zwischen Benutzern und System ausgetauscht werden kann.", "DE")).build())
+                    .definition(new LangString("Feste und geordnete Menge von fuer die Verwendung durch Personen bestimmte Informationen, die verwaltet und als Einheit zwischen Benutzern und System ausgetauscht werden kann.", "DE")).build())
                     .build())
             .build();
 
