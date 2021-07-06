@@ -1,6 +1,6 @@
 Copyright (C) 2021 Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e. V.
 
-The classes contained in this repository provide the functionalities to
+The AASX Serializer contained in this repository provide the functionalities to
 serialize and deserialize instances of the Asset Administration Shell data model
 from and to the AAS Java Model library. It is licensed under the Apache License
 2.0 (Apache-2.0, see below).
