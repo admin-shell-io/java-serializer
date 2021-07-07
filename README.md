@@ -53,6 +53,6 @@ We always look for contributions, bug reports, feature requests etc. Simply open
 | Daniel Espen | Fraunhofer IESE | [daespen](https://github.com/daespen) |  | x | x | x | x |
 | Michael Jacoby | Fraunhofer IOSB| [mjacoby](https://github.com/mjacoby) | x | x |  | x | x |
 | Jens Müller | Fraunhofer IOSB | [JensMueller2709](https://github.com/JensMueller2709) |  |  |  | x |  |
-| Bastian Rössl | Fraunhofer IOSB-INA | []() |  |  |  | x |  |
+| Bastian Rössl | Fraunhofer IOSB-INA | [br-iosb](https://github.com/br-iosb) |  |  |  | x |  |
 | Frank Schnicke | Fraunhofer IESE | [frankschnicke](https://github.com/frankschnicke) |  |  | x |  | x |
 | Arno Weiss | Fraunhofer IWU | []() |  |  |  | x |  |
