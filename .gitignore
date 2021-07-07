@@ -32,5 +32,5 @@ local.properties
 **/nb-configuration.xml
 **.iml
 **.flattened-pom.xml
-
+nbactions.xml
 testJsonSerialization.json
