@@ -54,5 +54,5 @@ We always look for contributions, bug reports, feature requests etc. Simply open
 | Michael Jacoby | Fraunhofer IOSB (ILT)| [mjacoby](https://github.com/mjacoby) | x | x |  | x | x |
 | Jens Müller | Fraunhofer IOSB (ILT) | []() |  |  |  | x |  |
 | Bastian Rössl | Fraunhofer IOSB (INA) | []() |  |  |  | x |  |
-| Frank Schnicke | Fraunhofer IESE | []() |  |  | x |  | x |
+| Frank Schnicke | Fraunhofer IESE | [frankschnicke](https://github.com/frankschnicke) |  |  | x |  | x |
 | Arno Weiss | Fraunhofer IWU | []() |  |  |  | x |  |
