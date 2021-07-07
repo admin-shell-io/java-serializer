@@ -52,7 +52,7 @@ We always look for contributions, bug reports, feature requests etc. Simply open
 | Maximilian Conradi | Fraunhofer IESE | []() |  |  | x |  | x |
 | Daniel Espen | Fraunhofer IESE | []() |  | x |x  | x | x |
 | Michael Jacoby | Fraunhofer IOSB (ILT)| [mjacoby](https://github.com/mjacoby) | x | x |  | x | x |
-| Jens Müller | Fraunhofer IOSB (ILT) | []() |  |  |  | x |  |
+| Jens Müller | Fraunhofer IOSB (ILT) | [JensMueller2709](https://github.com/JensMueller2709) |  |  |  | x |  |
 | Bastian Rössl | Fraunhofer IOSB (INA) | []() |  |  |  | x |  |
 | Frank Schnicke | Fraunhofer IESE | []() |  |  | x |  | x |
 | Arno Weiss | Fraunhofer IWU | []() |  |  |  | x |  |
