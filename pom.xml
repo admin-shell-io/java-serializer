@@ -13,9 +13,10 @@
         <module>dataformat-core</module>
         <module>dataformat-json</module>
         <module>dataformat-xml</module>
+        <!-- <module>dataformat-jsonld</module> -->
     </modules>
     <properties>
-        <revision>1.1.2</revision>
+        <revision>1.0.0</revision>
         <model.version>1.1.2</model.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -29,7 +30,7 @@
         <commons-io.version>2.6</commons-io.version>
         <jackson.version>2.12.3</jackson.version>
         <javax-validation.version>2.0.1.Final</javax-validation.version>
-        <jena.version>3.16.0</jena.version>
+        <jena.version>4.1.0</jena.version>
         <jsonassert.version>1.5.0</jsonassert.version>
         <json-schema-validator.version>1.0.56</json-schema-validator.version>
         <junit.version>4.13</junit.version>
