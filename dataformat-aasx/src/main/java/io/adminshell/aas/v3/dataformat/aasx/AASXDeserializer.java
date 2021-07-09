@@ -90,7 +90,7 @@ public class AASXDeserializer {
      * @throws InvalidFormatException
      * @throws IOException
      */
-    private String getXMLResourceString(OPCPackage aasxPackage) throws InvalidFormatException, IOException {
+    public String getXMLResourceString(OPCPackage aasxPackage) throws InvalidFormatException, IOException {
 
         // Get the "/aasx/aasx-origin" Part. It is Relationship source for the
         // XML-Document
