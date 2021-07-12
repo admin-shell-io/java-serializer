@@ -13,6 +13,7 @@
         <module>dataformat-json</module>
         <module>dataformat-xml</module>
         <!-- <module>dataformat-jsonld</module> -->
+        <module>dataformat-uanodeset</module>
     </modules>
     <properties>
         <revision>1.0.0</revision>
