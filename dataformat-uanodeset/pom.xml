@@ -111,6 +111,20 @@
 							</xsdOptions>
 						</configuration>
 					</execution>
+					<execution>
+						<id>generate-uatypes-classes</id>
+						<phase>generate-sources</phase>
+						<goals>
+							<goal>xsdtojava</goal>
+						</goals>
+						<configuration>
+							<xsdOptions>
+								<xsdOption>
+									<xsd>${basedir}/nodeset/xsd/Opc.Ua.Types.xsd</xsd>
+								</xsdOption>
+							</xsdOptions>
+						</configuration>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
