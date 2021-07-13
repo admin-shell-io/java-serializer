@@ -7,21 +7,23 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.opcfoundation.ua._2008._02.types.ListOfExtensionObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UANode;
 import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 import org.opcfoundation.ua.i4aas.types.AASKeyDataType;
+import org.opcfoundation.ua.i4aas.types.AASKeyTypeDataType;
 import org.w3c.dom.Node;
 
 public class GeneratedExtensionObjectTest {
 
 	@Test
-	public void test() throws JAXBException {
+	public void testJAXBunmarshalling() throws JAXBException {
 		
 		//needed context to unmarshal down to the custom defined types
-		JAXBContext jaxbCtx = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(new Class[] {UANodeSet.class}, null);
+		JAXBContext jaxbCtx = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(new Class[] {UANodeSet.class, ListOfExtensionObject.class, AASKeyDataType.class}, null);
 		
 		InputStream resourceAsStream = GeneratedExtensionObjectTest.class
 				.getResourceAsStream("/aasdatatypekey_example.xml");
@@ -31,18 +33,17 @@ public class GeneratedExtensionObjectTest {
 			if (uaNode.getNodeId().equals("ns=1;i=6002")) {
 				UAVariable uaNodeAsVar = (UAVariable) uaNode;
 				Object genericExtension = uaNodeAsVar.getValue().getAny();
-				System.out.println(genericExtension.getClass().getName());
 				
-				/**
+				Assert.assertEquals(javax.xml.bind.JAXBElement.class.getName(), genericExtension.getClass().getName());
+				
 				JAXBElement<ListOfExtensionObject> asJaxb = (JAXBElement<ListOfExtensionObject>) genericExtension;
 				Object anyAASDataTypeKey = asJaxb.getValue().getExtensionObject().get(0).getBody().getValue().getAny();
-				System.out.println(anyAASDataTypeKey.getClass().getName());
 
-				if (anyAASDataTypeKey instanceof Node) {
-					JAXBContext jaxbCtx2 = JAXBContext.newInstance(AASKeyDataType.class);
-					//TODO
-				}
-				**/
+				Assert.assertTrue(anyAASDataTypeKey instanceof Node);				
+				
+				JAXBElement<AASKeyDataType> aasKey = jaxbCtx.createUnmarshaller().unmarshal((Node) anyAASDataTypeKey, AASKeyDataType.class);
+				
+				Assert.assertEquals(AASKeyTypeDataType.ID_SHORT_0, aasKey.getValue().getIdType());
 			}
 		}
 	}
