@@ -6,14 +6,20 @@ import java.util.List;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 
 import org.junit.Assert;
 import org.junit.Test;
+import org.opcfoundation.ua._2008._02.types.ExtensionObject;
+import org.opcfoundation.ua._2008._02.types.ExtensionObject.Body;
 import org.opcfoundation.ua._2008._02.types.ListOfExtensionObject;
+import org.opcfoundation.ua._2008._02.types.ObjectFactory;
 import org.opcfoundation.ua._2011._03.uanodeset.UANode;
 import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
+import org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Value;
 import org.opcfoundation.ua.i4aas.types.AASKeyDataType;
+import org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType;
 import org.opcfoundation.ua.i4aas.types.AASKeyTypeDataType;
 import org.w3c.dom.Node;
 
@@ -46,6 +52,49 @@ public class GeneratedExtensionObjectTest {
 				Assert.assertEquals(AASKeyTypeDataType.ID_SHORT_0, aasKey.getValue().getIdType());
 			}
 		}
+	}
+	
+	@Test
+	public void testJAXBmarshalling() throws JAXBException {
+		
+		//needed context to unmarshal down to the custom defined types
+		JAXBContext jaxbCtx = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(new Class[] {UANodeSet.class, ListOfExtensionObject.class, AASKeyDataType.class}, null);
+		
+		UANodeSet uaNodeSet = new UANodeSet();
+		UAVariable uaVarWithAASKey = new UAVariable();
+		Value valueWithExtension = new Value();
+		
+		//create extension wrapper
+		ObjectFactory extensionObjectFactory = new ObjectFactory();
+		ListOfExtensionObject anyListOfExtensionObject = new ListOfExtensionObject();
+		anyListOfExtensionObject.getExtensionObject().add(new ExtensionObject());
+		Body body = new Body();
+		
+		//build custom type AAS Key
+		org.opcfoundation.ua.i4aas.types.ObjectFactory i4aasTypesObjectFactory = new org.opcfoundation.ua.i4aas.types.ObjectFactory();
+		AASKeyDataType aasKey = new AASKeyDataType();
+		aasKey.setIdType(AASKeyTypeDataType.ID_SHORT_0);
+		aasKey.setLocal(false);
+		aasKey.setType(AASKeyElementsDataType.ACCESS_PERMISSION_RULE_0);
+		aasKey.setValue("mykey");
+		JAXBElement<AASKeyDataType> jaxbAASKeyDataType = i4aasTypesObjectFactory.createAASKeyDataType(aasKey);
+		
+		//assembly
+		body.setAny(jaxbAASKeyDataType);
+		JAXBElement<Body> jaxbElementBody = extensionObjectFactory.createExtensionObjectBody(body );
+		anyListOfExtensionObject.getExtensionObject().get(0).setBody(jaxbElementBody);
+		
+		JAXBElement<ListOfExtensionObject> createListOfExtensionObject = extensionObjectFactory.createListOfExtensionObject(anyListOfExtensionObject);
+		//new JAXBElement<ListOfExtensionObject>()
+		
+		
+		valueWithExtension.setAny(createListOfExtensionObject );
+		
+		uaVarWithAASKey.setValue(valueWithExtension );
+		uaNodeSet.getUAObjectOrUAVariableOrUAMethod().add(uaVarWithAASKey );
+		Marshaller marshaller = jaxbCtx.createMarshaller();
+		marshaller.setProperty("jaxb.formatted.output", true);
+		marshaller.marshal(uaNodeSet, System.out);
 	}
 
 }
