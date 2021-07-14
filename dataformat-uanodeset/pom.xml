@@ -8,10 +8,6 @@
 		<artifactId>dataformat-parent</artifactId>
 		<version>${revision}</version>
 	</parent>
-	<properties>
-		<org.mapstruct.version>1.4.2.Final</org.mapstruct.version>
-
-	</properties>
 	<artifactId>dataformat-uanodeset</artifactId>
 	<dependencies>
 		<dependency>
@@ -45,17 +41,6 @@
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>org.eclipse.persistence.moxy</artifactId>
 			<version>2.7.8</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.mapstruct</groupId>
-			<artifactId>mapstruct</artifactId>
-			<version>${org.mapstruct.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.mapstruct</groupId>
-			<artifactId>mapstruct-processor</artifactId>
-			<version>${org.mapstruct.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
@@ -67,18 +52,6 @@
 				<configuration>
 					<source>11</source>
 					<target>11</target>
-					<annotationProcessorPaths>
-						<path>
-							<groupId>org.mapstruct</groupId>
-							<artifactId>mapstruct-processor</artifactId>
-							<version>${org.mapstruct.version}</version>
-						</path>
-					</annotationProcessorPaths>
-					<compilerArgs>
-						<arg>
-							-Amapstruct.verbose=true
-						</arg>
-					</compilerArgs>
 				</configuration>
 			</plugin>
 			<plugin>
