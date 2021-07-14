@@ -23,14 +23,14 @@ public class I4AASSerializer implements Serializer {
 		EnvironmentMapper environmentMapper = new EnvironmentMapper(mappingContext.getEnvironment(), mappingContext);
 		
 		//map action
-		UANode i4aas = environmentMapper.toI4AAS();
+		UANodeSet nodeset = environmentMapper.toI4AAS();
 		
 		try {
 			JAXBContext jaxbCtx = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(new Class[] {UANodeSet.class}, null);
 			Marshaller marshaller = jaxbCtx.createMarshaller();
 			marshaller.setProperty("jaxb.formatted.output", true);
 			StringWriter stringWriter = new StringWriter();
-			marshaller.marshal(mappingContext.getNodeSet(), stringWriter);
+			marshaller.marshal(nodeset, stringWriter);
 			return stringWriter.toString();
 		} catch (JAXBException e) {
 			throw new SerializationException("Serialization failed due to a JAXBException.", e);

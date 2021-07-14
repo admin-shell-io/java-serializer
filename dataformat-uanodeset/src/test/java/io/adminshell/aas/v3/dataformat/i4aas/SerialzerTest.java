@@ -14,7 +14,13 @@ public class SerialzerTest {
 		I4AASSerializer i4aasSerializer = new I4AASSerializer();
 		String write = i4aasSerializer.write(new DefaultAssetAdministrationShellEnvironment());
 		System.out.println(write);
-		
+	}
+	
+	@Test
+	public void testSimple() throws SerializationException {
+		I4AASSerializer i4aasSerializer = new I4AASSerializer();
+		String write = i4aasSerializer.write(AASSimple.ENVIRONMENT);
+		System.out.println(write);
 	}
 
 }
