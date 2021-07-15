@@ -16,7 +16,6 @@
 package io.adminshell.aas.v3.dataformat.core;
 
 import io.adminshell.aas.v3.model.Constraint;
-import io.adminshell.aas.v3.model.DataSpecificationContent;
 import io.adminshell.aas.v3.model.Referable;
 import io.github.classgraph.ClassGraph;
 import io.github.classgraph.ClassInfo;
@@ -160,6 +159,62 @@ public class ReflectionHelper {
      */
     public static boolean isModelInterfaceOrDefaultImplementation(Class<?> type) {
         return isModelInterface(type) || isDefaultImplementation(type);
+    }
+
+    /**
+     * Returns the AAS type information used for de-/serialization for a given
+     * class or null if type information should not be included
+     *
+     * @param clazz the class to find the type information for
+     * @return the type information for the given class or null if there is no
+     * type information or type information should not be included
+     */
+    public static String getModelType(Class<?> clazz) {
+        Class<?> type = getMostSpecificTypeWithModelType(clazz);
+        if (type != null) {
+            return type.getSimpleName();
+        }
+        for (Class<?> interfaceClass : clazz.getInterfaces()) {
+            String result = getModelType(interfaceClass);
+            if (result != null) {
+                return result;
+            }
+        }
+        Class<?> superClass = clazz.getSuperclass();
+        if (superClass != null) {
+            return getModelType(superClass);
+        }
+        return null;
+    }
+
+    /**
+     * Returns the most specific supertype that contains some AAS type
+     * information or null if there is none
+     *
+     * @param clazz the class to find the type for
+     * @return the most specific supertype of given class that contains some AAS
+     * type information or null if there is none
+     */
+    public static Class<?> getMostSpecificTypeWithModelType(Class<?> clazz) {
+        return TYPES_WITH_MODEL_TYPE.stream()
+                .filter(x -> clazz.isInterface() ? x.equals(clazz) : x.isAssignableFrom(clazz))
+                .sorted((Class<?> o1, Class<?> o2) -> {
+                    // -1: o1 more special than o2
+                    // 0: o1 equals o2 or on same samelevel
+                    // 1: o2 more special than o1
+                    if (o1.isAssignableFrom(o2)) {
+                        if (o2.isAssignableFrom(o1)) {
+                            return 0;
+                        }
+                        return 1;
+                    }
+                    if (o2.isAssignableFrom(o1)) {
+                        return -1;
+                    }
+                    return 0;
+                })
+                .findFirst()
+                .orElse(null);
     }
 
     static {
