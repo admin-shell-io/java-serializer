@@ -1,4 +1,4 @@
-package io.adminshell.aas.v3.dataformat.i4aas.mappers;
+package io.adminshell.aas.v3.dataformat.i4aas.mappers.utils;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -27,8 +27,10 @@ public class MappingContext {
 
 	private final DatatypeFactory datatypeFactory = DatatypeFactory.newDefaultInstance();
 
-	private int modelNsIndex;
-	private int i4aasNsIndex;
+	private int modelNsIndex; //currently always 1
+	private int i4aasNsIndex; //currently always 2
+
+	private int nodeIdCounter = 1;
 
 	public MappingContext(AssetAdministrationShellEnvironment aasEnvironment) {
 		this.aasEnvironment = aasEnvironment;
@@ -50,16 +52,32 @@ public class MappingContext {
 		for (UaId uaId : UaId.values()) {			
 			NodeIdAlias nodeIdAlias = new NodeIdAlias();
 			nodeIdAlias.setAlias(uaId.getName());
-			nodeIdAlias.setValue("i=" + uaId.getId());
+			nodeIdAlias.setValue(getUaBaseNodeIdAsString(uaId));
 			aliases.add(nodeIdAlias);
 		}
 		// add I4AAS Aliases
 		for (I4aasId i4aasId : I4aasId.values()) {			
 			NodeIdAlias nodeIdAlias = new NodeIdAlias();
 			nodeIdAlias.setAlias(i4aasId.getName());
-			nodeIdAlias.setValue("ns=" + getI4aasNsIndex() + ";i=" + i4aasId.getId());
+			nodeIdAlias.setValue(getI4aasNodeIdAsString(i4aasId));
 			aliases.add(nodeIdAlias);
 		}
+	}
+
+	public String getUaBaseNodeIdAsString(UaId uaId) {
+		return "i=" + uaId.getId(); //if no namespace is given, it is interpreted as a base UA node
+	}
+
+	public String getI4aasNodeIdAsString(I4aasId i4aasId) {
+		return "ns=" + getI4aasNsIndex() + ";i=" + i4aasId.getId();
+	}
+	
+	public String getI4aasNodeIdAsString(Integer id) {
+		return "ns=" + getI4aasNsIndex() + ";i=" + id;
+	}
+
+	public String newModelNodeIdAsString() {
+		return "ns=" + getModelNsIndex() + ";i=" + nodeIdCounter++;
 	}
 
 	private void initModelTable() {
@@ -102,10 +120,6 @@ public class MappingContext {
 		return nodeset;
 	}
 
-	public static void main(String[] args) {
-
-	}
-
 	public int getModelNsIndex() {
 		return modelNsIndex;
 	}
@@ -114,19 +128,8 @@ public class MappingContext {
 		return i4aasNsIndex;
 	}
 
-	private int nodeIdCounter = 1;
 
-	public String newNodeId() {
-		return "ns=" + getModelNsIndex() + ";i=" + nodeIdCounter++;
-	}
 
-	public String getI4aasNodeId(I4aasId id) {
-		return getI4aasNodeId(id.getId());
-	}
-	
-	public String getI4aasNodeId(Integer id) {
-		return "ns=" + getI4aasNsIndex() + ";i=" + id;
-	}
 	
 	public Submodel resolveSubmodelReference(io.adminshell.aas.v3.model.Reference aasRef) {
 		List<Key> keys = aasRef.getKeys();

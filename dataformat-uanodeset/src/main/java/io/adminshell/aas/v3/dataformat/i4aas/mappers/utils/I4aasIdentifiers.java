@@ -1,10 +1,10 @@
-package io.adminshell.aas.v3.dataformat.i4aas.mappers;
+package io.adminshell.aas.v3.dataformat.i4aas.mappers.utils;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
-public class Identifiers {
+public class I4aasIdentifiers {
 
 	public static Integer AASAssetAdministrationShellType = 1002;
 	public static Integer AASViewType = 1003;

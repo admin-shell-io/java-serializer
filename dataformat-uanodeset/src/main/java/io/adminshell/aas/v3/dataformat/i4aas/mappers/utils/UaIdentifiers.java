@@ -1,9 +1,9 @@
-package io.adminshell.aas.v3.dataformat.i4aas.mappers;
+package io.adminshell.aas.v3.dataformat.i4aas.mappers.utils;
 
 import java.util.Map;
 import java.util.TreeMap;
 
-public class UaDefaultIdentifiers {
+public class UaIdentifiers {
 
 	public static Integer Boolean = 1;
 	public static Integer String = 12;

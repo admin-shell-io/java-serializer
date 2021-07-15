@@ -1,6 +1,6 @@
-package io.adminshell.aas.v3.dataformat.i4aas.mappers;
+package io.adminshell.aas.v3.dataformat.i4aas.mappers.utils;
 
-public enum I4aasId {
+public enum I4aasId implements BasicId {
 
 	AASAssetAdministrationShellType("AASAssetAdministrationShellType", 1002),
 	AASViewType("AASViewType", 1003),
