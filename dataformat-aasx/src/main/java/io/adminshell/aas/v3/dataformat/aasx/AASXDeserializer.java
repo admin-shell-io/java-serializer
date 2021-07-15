@@ -58,7 +58,7 @@ public class AASXDeserializer {
     private XmlDeserializer deserializer = new XmlDeserializer();
 
     private AssetAdministrationShellEnvironment environment;
-    private OPCPackage aasxRoot;
+    public OPCPackage aasxRoot;
 
     public AASXDeserializer(InputStream inputStream) throws InvalidFormatException, IOException {
         aasxRoot = OPCPackage.open(inputStream);

@@ -24,6 +24,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Set;
 
+/**
+ * Class to validate the XML file inside an AASX-package
+ */
 public class AASXValidator {
 
     private XmlSchemaValidator xmlValidator;
@@ -34,8 +37,14 @@ public class AASXValidator {
         this.deserializer = new AASXDeserializer(is);
     }
 
-    public Set<String> validateSchema(OPCPackage p) throws IOException, InvalidFormatException {
-        String file = deserializer.getXMLResourceString(p);
+    /**
+     * Calls XML-Validator
+     * @return Set of Strings containing message on AASX-XML-Validation result
+     * @throws IOException
+     * @throws InvalidFormatException
+     */
+    public Set<String> validateSchema() throws IOException, InvalidFormatException {
+        String file = deserializer.getXMLResourceString(deserializer.aasxRoot);
         return xmlValidator.validateSchema(file);
     }
 
