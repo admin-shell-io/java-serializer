@@ -14,9 +14,9 @@ public class ReferableMapper<T extends Referable> extends I4AASMapper<T, UAObjec
 
 	@Override
 	protected UAObject createTargetObject() {
-		UAObject uaObject = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
-		.withBrowseName(browseNameOf(src.getIdShort())).withDisplayName(I4AASUtils.createDisplayName(src)).build();
-		return uaObject;
+		result = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
+		.withBrowseName(browseNameOf(src)).withDisplayName(I4AASUtils.createDisplayName(src)).build();
+		return result;
 	}
 
 	@Override
@@ -25,8 +25,7 @@ public class ReferableMapper<T extends Referable> extends I4AASMapper<T, UAObjec
 		
 	}
 
-
-	private String browseNameOf(String value) {
-		return ctx.getModelNsIndex() + ":" + value;
+	protected String browseNameOf(Referable src) {
+		return super.browseNameOf(src.getIdShort());
 	}
 }
