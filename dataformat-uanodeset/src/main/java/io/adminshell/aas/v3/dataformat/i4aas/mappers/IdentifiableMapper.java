@@ -37,8 +37,8 @@ public class IdentifiableMapper<T extends Identifiable> extends ReferableMapper<
 		Builder<Void> coreUAObject = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
 				.withDisplayName(I4AASUtils.createLocalizedText("Identification"))
 				.withBrowseName(browseNameOf("Identification"));
-		addTypeReference(coreUAObject.build(), I4aasId.AASIdentifierType);
 		UAObject uaObject = coreUAObject.build();
+		addTypeReference(uaObject, I4aasId.AASIdentifierType);
 		addToNodeset(uaObject);
 		attachAsComponent(target, uaObject);
 
