@@ -46,17 +46,13 @@ public class IdentifiableMapper<T extends Identifiable> extends ReferableMapper<
 		addTypeReference(idVarBuilder.build(), UaId.PropertyType);
 		JAXBElement<String> idStringValue = new ObjectFactory().createString(sourceIdentifierValue);
 		UAVariable targetIdVar = idVarBuilder.withValue().withAny(idStringValue).end().build();
+		
 		//map idtype
-		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idTypeVarBuilder = UAVariable.builder().withDisplayName(I4AASUtils.createLocalizedText("IdType"))
-				.withDataType(I4aasId.AASIdentifierTypeDataType.getName()).withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(browseNameOf("IdType")).withAccessLevel(3L);
-		addTypeReference(idTypeVarBuilder.build(), UaId.PropertyType);
-		JAXBElement<Integer> targetIdTypeVar2 = new ObjectFactory().createInt32(sourceIdType.ordinal());
-		UAVariable targetIdTypeVar = idTypeVarBuilder.withValue().withAny(targetIdTypeVar2).end().build();
+		UAVariable mappedEnum = new I4AASEnumMapper(sourceIdType, ctx).map();
 		
 		// attach Properties
 		attachAsProperty(uaObject, targetIdVar);
-		attachAsProperty(uaObject, targetIdTypeVar);
+		attachAsProperty(uaObject, mappedEnum);
 
 	}
 

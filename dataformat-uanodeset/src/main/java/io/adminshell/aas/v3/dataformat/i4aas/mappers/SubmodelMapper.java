@@ -21,7 +21,6 @@ public class SubmodelMapper extends IdentifiableMapper<Submodel> {
 	
 	@Override
 	protected void mapAndAttachChildren() {
-		// TODO Auto-generated method stub
 		super.mapAndAttachChildren();
 	}
 
