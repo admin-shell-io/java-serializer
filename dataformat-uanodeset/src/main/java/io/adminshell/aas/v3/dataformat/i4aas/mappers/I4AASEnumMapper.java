@@ -46,9 +46,9 @@ public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
 
 	@Override
 	protected UAVariable createTargetObject() {
-		String name = src.getClass().getSimpleName();
+		String name = source.getClass().getSimpleName();
 		
-		Enum match = findBestMatch(src);
+		Enum match = findBestMatch(source);
 		
 		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idTypeVarBuilder = UAVariable.builder().withDisplayName(I4AASUtils.createLocalizedText(name))
 				.withDataType(match.getClass().getSimpleName()).withNodeId(ctx.newModelNodeIdAsString())

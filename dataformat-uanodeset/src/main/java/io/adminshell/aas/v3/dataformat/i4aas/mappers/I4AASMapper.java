@@ -1,5 +1,8 @@
 package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 
+import javax.xml.bind.JAXBElement;
+
+import org.opcfoundation.ua._2008._02.types.ObjectFactory;
 import org.opcfoundation.ua._2011._03.uanodeset.ListOfReferences;
 import org.opcfoundation.ua._2011._03.uanodeset.Reference;
 import org.opcfoundation.ua._2011._03.uanodeset.UANode;
@@ -8,6 +11,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject.Builder;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.BasicId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
@@ -16,22 +20,22 @@ import io.adminshell.aas.v3.model.Referable;
 public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 
 	protected MappingContext ctx;
-	protected SOURCE src;
-	protected TARGET result;
+	protected SOURCE source;
+	protected TARGET target;
 
 	public I4AASMapper(SOURCE src, MappingContext ctx) {
-		this.src = src;
+		this.source = src;
 		this.ctx = ctx;
 	}
 
 	public final TARGET map() {
-		if (src == null) {
+		if (source == null) {
 			return null;
 		}
-		result = createTargetObject();
+		target = createTargetObject();
 		addToNodeset();
 		mapAndAttachChildren();
-		return result;
+		return target;
 	}
 
 	protected abstract TARGET createTargetObject();
@@ -39,11 +43,15 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 	protected abstract void mapAndAttachChildren();
 
 	private void addToNodeset() {
-		ctx.getNodeSet().getUAObjectOrUAVariableOrUAMethod().add(result);
+		ctx.getNodeSet().getUAObjectOrUAVariableOrUAMethod().add(target);
+	}
+	
+	protected final void addToNodeset(UANode node) {
+		ctx.getNodeSet().getUAObjectOrUAVariableOrUAMethod().add(node);
 	}
 
 	protected final void addTypeReference(BasicId idForType) {
-		addTypeReference(result, idForType);
+		addTypeReference(target, idForType);
 	}
 	
 	protected final void addTypeReference(UANode anyNode, BasicId idForType) {
@@ -96,5 +104,15 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 				.withValue(child.getNodeId()).build();
 		parent.getReferences().getReference().add(childRef);
 	}
+	
+	protected final UAVariable newStringProperty(String key, String value) {
+		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idVarBuilder = UAVariable.builder().withDisplayName(I4AASUtils.createLocalizedText(key)).withDataType(UaId.String.getName())
+				.withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(browseNameOf(key)).withAccessLevel(3L);
+		addTypeReference(idVarBuilder.build(), UaId.PropertyType);
+		JAXBElement<String> idStringValue = new ObjectFactory().createString(value);
+		UAVariable targetIdVar = idVarBuilder.withValue().withAny(idStringValue).end().build();
+		return targetIdVar;
+	}
+
 
 }

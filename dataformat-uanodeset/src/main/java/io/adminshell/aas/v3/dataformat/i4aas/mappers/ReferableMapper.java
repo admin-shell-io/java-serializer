@@ -1,6 +1,7 @@
 package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
+import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
@@ -14,15 +15,19 @@ public class ReferableMapper<T extends Referable> extends I4AASMapper<T, UAObjec
 
 	@Override
 	protected UAObject createTargetObject() {
-		result = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
-		.withBrowseName(browseNameOf(src)).withDisplayName(I4AASUtils.createDisplayName(src)).build();
-		return result;
+		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
+		.withBrowseName(browseNameOf(source)).withDisplayName(I4AASUtils.createDisplayName(source)).build();
+		return target;
 	}
 
 	@Override
 	protected void mapAndAttachChildren() {
-		// TODO Auto-generated method stub
-		
+		String category = source.getCategory();
+		if (category != null) {
+			UAVariable categoryProperty = newStringProperty("Category", category);
+			addToNodeset(categoryProperty);
+			attachAsProperty(target, categoryProperty);
+		}
 	}
 
 	protected String browseNameOf(Referable src) {
