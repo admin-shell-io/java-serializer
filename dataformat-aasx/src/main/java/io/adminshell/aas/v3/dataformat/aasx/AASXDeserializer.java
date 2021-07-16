@@ -58,7 +58,7 @@ public class AASXDeserializer {
     private XmlDeserializer deserializer = new XmlDeserializer();
 
     private AssetAdministrationShellEnvironment environment;
-    public OPCPackage aasxRoot;
+    private final OPCPackage aasxRoot;
 
     public AASXDeserializer(InputStream inputStream) throws InvalidFormatException, IOException {
         aasxRoot = OPCPackage.open(inputStream);
@@ -70,28 +70,27 @@ public class AASXDeserializer {
     }
 
     public AssetAdministrationShellEnvironment read() throws InvalidFormatException, IOException, DeserializationException {
-
         // If the XML was already parsed return cached environment
         if (environment != null) {
             return environment;
         }
-
         environment = deserializer.read(getXMLResourceString(aasxRoot));
-
         return environment;
     }
 
     /**
      * Return the Content of the xml file in the aasx-package as String
      * 
-     * @param aasxPackage
-     *            - the root package of the AASX
+     * @param aasxPackage - the root package of the AASX
      * @return Content of XML as String
      * @throws InvalidFormatException
      * @throws IOException
      */
-    public String getXMLResourceString(OPCPackage aasxPackage) throws InvalidFormatException, IOException {
+    public String getXMLResourceString() throws InvalidFormatException, IOException {
+        return getXMLResourceString(this.aasxRoot);
+    }
 
+    private String getXMLResourceString(OPCPackage aasxPackage) throws InvalidFormatException, IOException {
         // Get the "/aasx/aasx-origin" Part. It is Relationship source for the
         // XML-Document
         PackagePart originPart = aasxPackage.getPart(PackagingURIHelper.createPartName(AASX_ORIGIN));
@@ -129,11 +128,9 @@ public class AASXDeserializer {
      * 
      */
     private List<String> parseReferencedFilePathsFromAASX() throws IOException, InvalidFormatException, DeserializationException {
+        read();
 
-        AssetAdministrationShellEnvironment environment = read();
-
-        List<String> paths = new ArrayList<String>();
-
+        List<String> paths = new ArrayList<>();
         for (Submodel sm : environment.getSubmodels()) {
             paths.addAll(parseElements(sm.getSubmodelElements()));
         }
@@ -147,8 +144,7 @@ public class AASXDeserializer {
      * @return the Paths from the File elements
      */
     private List<String> parseElements(Collection<SubmodelElement> elements) {
-        List<String> paths = new ArrayList<String>();
-
+        List<String> paths = new ArrayList<>();
         for (SubmodelElement element : elements) {
             if (element instanceof File) {
                 File file = (File) element;
@@ -168,13 +164,10 @@ public class AASXDeserializer {
 
     public List<InMemoryFile> getRelatedFiles() throws InvalidFormatException, IOException, DeserializationException {
         List<String> filePaths = parseReferencedFilePathsFromAASX();
-
         List<InMemoryFile> files = new ArrayList<>();
-
         for (String filePath : filePaths) {
             files.add(readFile(aasxRoot, filePath));
         }
-
         return files;
     }
 
