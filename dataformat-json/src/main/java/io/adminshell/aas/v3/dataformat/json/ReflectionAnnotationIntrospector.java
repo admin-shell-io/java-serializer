@@ -34,15 +34,13 @@ import java.util.stream.Collectors;
  * This class helps to dynamically decide how to de-/serialize classes and
  * properties defined in the AAS model library.
  *
- * This is equivialent to adding the following annotations
+ * This is equivalent to adding the following annotations
  * <ul>
  * <li> to all interfaces defined in the AAS model:
  * <ul>
  * <li> @JsonTypeName([interface name])
  * <li> @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "modelType")
- * <li> @JsonSubTypes({
- *
- * @Type(value = [sub-interface].class, name = "[sub-interface name]"), ...})
+ * <li> @JsonSubTypes({@Type(value = [sub-interface].class, name = "[sub-interface name]"), ...})
  * for each sub-interface
  * </ul>
  * <li> to all getter methods returning any type of Collection<?> defined in the
@@ -71,7 +69,7 @@ public class ReflectionAnnotationIntrospector extends JacksonAnnotationIntrospec
                 .filter(x -> clazz.isInterface() ? x.equals(clazz) : x.isAssignableFrom(clazz))
                 .sorted((Class<?> o1, Class<?> o2) -> {
                     // -1: o1 more special than o2
-                    // 0: o1 equals o2 or on same samelevel
+                    // 0: o1 equals o2 or on same same level
                     // 1: o2 more special than o1
                     if (o1.isAssignableFrom(o2)) {
                         if (o2.isAssignableFrom(o1)) {

@@ -12,11 +12,11 @@
         <module>dataformat-core</module>
         <module>dataformat-json</module>
         <module>dataformat-xml</module>
-        <!-- <module>dataformat-jsonld</module> -->
+        <module>dataformat-jsonld</module>
     </modules>
     <properties>
-        <revision>1.0.0</revision>
-        <model.version>1.1.2</model.version>
+        <revision>1.0.1</revision>
+        <model.version>${revision}</model.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
