@@ -49,10 +49,6 @@ public class EnvironmentMapper {
 			orgaRef.setValue("i=85");
 			aasUaObject.getReferences().getReference().add(orgaRef);
 
-			// map identifier
-			UAObject createIdentifierUaObject = createIdentifierUaObject(assetAdministrationShell);
-			attachAsComponent(aasUaObject, createIdentifierUaObject);
-
 			// map derived from
 			io.adminshell.aas.v3.model.Reference derivedFrom = assetAdministrationShell.getDerivedFrom();
 			if (derivedFrom != null) {

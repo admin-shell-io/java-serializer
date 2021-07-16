@@ -26,12 +26,7 @@ public class I4AASSerializer implements Serializer {
 		UANodeSet nodeset = environmentMapper.toI4AAS();
 		
 		try {
-			JAXBContext jaxbCtx = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(new Class[] {UANodeSet.class}, null);
-			Marshaller marshaller = jaxbCtx.createMarshaller();
-			marshaller.setProperty("jaxb.formatted.output", true);
-			StringWriter stringWriter = new StringWriter();
-			marshaller.marshal(nodeset, stringWriter);
-			return stringWriter.toString();
+			return new UANodeSetMarshaller(nodeset).marshallAsString();
 		} catch (JAXBException e) {
 			throw new SerializationException("Serialization failed due to a JAXBException.", e);
 		}
