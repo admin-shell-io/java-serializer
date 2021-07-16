@@ -56,7 +56,7 @@ public class SerializerTest {
         Assert.assertTrue(output.contains("@context"));
         Assert.assertTrue(output.contains("rdf:"));
 
-        AssetAdministrationShellEnvironment assetAdministrationShellEnvironment = new Serializer().deserialize(output, AssetAdministrationShellEnvironment.class);
-        System.out.println(assetAdministrationShellEnvironment.getAssetAdministrationShells().get(0).getDescriptions().get(0).getValue());
+        //AssetAdministrationShellEnvironment assetAdministrationShellEnvironment = new Serializer().deserialize(output, AssetAdministrationShellEnvironment.class);
+        //System.out.println(assetAdministrationShellEnvironment.getAssetAdministrationShells().get(0).getDescriptions().get(0).getValue());
     }
 }
