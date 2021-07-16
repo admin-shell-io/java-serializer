@@ -34,13 +34,15 @@ import java.util.stream.Collectors;
  * This class helps to dynamically decide how to de-/serialize classes and
  * properties defined in the AAS model library.
  *
- * This is equivalent to adding the following annotations
+ * This is equivialent to adding the following annotations
  * <ul>
  * <li> to all interfaces defined in the AAS model:
  * <ul>
  * <li> @JsonTypeName([interface name])
  * <li> @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "modelType")
- * <li> @JsonSubTypes({@Type(value = [sub-interface].class, name = "[sub-interface name]"), ...})
+ * <li> @JsonSubTypes({
+ *
+ * @Type(value = [sub-interface].class, name = "[sub-interface name]"), ...})
  * for each sub-interface
  * </ul>
  * <li> to all getter methods returning any type of Collection<?> defined in the
@@ -58,55 +60,15 @@ public class ReflectionAnnotationIntrospector extends JacksonAnnotationIntrospec
 
     @Override
     public String findTypeName(AnnotatedClass ac) {
-        String customType = findModelType(ac.getRawType());
+        String customType = ReflectionHelper.getModelType(ac.getRawType());
         return customType != null
                 ? customType
                 : super.findTypeName(ac);
     }
 
-    private Class<?> getMostSpecificTypeWithModelType(Class<?> clazz) {
-        return ReflectionHelper.TYPES_WITH_MODEL_TYPE.stream()
-                .filter(x -> clazz.isInterface() ? x.equals(clazz) : x.isAssignableFrom(clazz))
-                .sorted((Class<?> o1, Class<?> o2) -> {
-                    // -1: o1 more special than o2
-                    // 0: o1 equals o2 or on same same level
-                    // 1: o2 more special than o1
-                    if (o1.isAssignableFrom(o2)) {
-                        if (o2.isAssignableFrom(o1)) {
-                            return 0;
-                        }
-                        return 1;
-                    }
-                    if (o2.isAssignableFrom(o1)) {
-                        return -1;
-                    }
-                    return 0;
-                })
-                .findFirst()
-                .orElse(null);
-    }
-
-    private String findModelType(Class<?> clazz) {
-        Class<?> type = getMostSpecificTypeWithModelType(clazz);
-        if (type != null) {
-            return type.getSimpleName();
-        }
-        for (Class<?> interfaceClass : clazz.getInterfaces()) {
-            String result = findModelType(interfaceClass);
-            if (result != null) {
-                return result;
-            }
-        }
-        Class<?> superClass = clazz.getSuperclass();
-        if (superClass != null) {
-            return findModelType(superClass);
-        }
-        return null;
-    }
-
     @Override
     public TypeResolverBuilder<?> findTypeResolver(MapperConfig<?> config, AnnotatedClass ac, JavaType baseType) {
-        String modelType = findModelType(ac.getRawType());
+        String modelType = ReflectionHelper.getModelType(ac.getRawType());
         if (modelType != null) {
             TypeResolverBuilder<?> result = _constructStdTypeResolverBuilder();
             result = result.init(JsonTypeInfo.Id.NAME, null);
