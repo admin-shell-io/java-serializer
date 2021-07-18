@@ -72,9 +72,11 @@ public class AmlSerializer implements Serializer {
     public String write(AssetAdministrationShellEnvironment aasEnvironment) throws SerializationException {
         try {
             CAEXFile caexFile = modelTransformation(aasEnvironment);
-            String result = convertXml(caexFile);
+            String xml = convertXml(caexFile);
+            String cleanUp = cleanUpXml(xml);
+            String result = cleanUp;
             if (enableClassLibs) {
-                result = addClassLibs(cleanUpXml(result));
+                result = addClassLibs(cleanUp);
             }
             return result;
         } catch (JsonProcessingException ex) {
@@ -156,13 +158,17 @@ public class AmlSerializer implements Serializer {
         // Inside shell loop
         forEachWithCounter(administrationShells, (i, administrationShell) -> {
             // Map asset info to internal element
-            AssetInformation asset = administrationShell.getAssetInformation();
-            InternalElement assetInternalElement = mapper.map(asset, InternalElement.class);
-            shellInternalElements.get(i).setInternalElements(new ArrayList<InternalElement>() {
-                {
-                    add(assetInternalElement);
-                }
-            });
+//            AssetInformation asset = administrationShell.getAssetInformation();
+//            InternalElement assetInternalElement = mapper.map(asset, InternalElement.class);
+//            shellInternalElements.get(i).setInternalElements(new ArrayList<>() {
+//                {
+//                    add(assetInternalElement);
+//                }
+//            });
+
+//            // Map view
+//            List<InternalElement> viewInternalElements = mapper.mapAsList(administrationShell.getViews(), InternalElement.class);
+//            shellInternalElements.addAll(viewInternalElements);
 
 //            // Map all submodels to internal elements
 //            forEachWithCounter(administrationShell.getSubmodels(), (j, submodel) -> {

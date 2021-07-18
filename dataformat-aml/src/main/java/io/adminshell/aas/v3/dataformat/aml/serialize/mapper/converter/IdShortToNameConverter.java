@@ -25,8 +25,8 @@ public class IdShortToNameConverter extends CustomConverter<String, String> {
 
     @Override
     public String convert(String source, Type<? extends String> destinationType, MappingContext mappingContext) {
-        if (source == null) {
-            return UUID.randomUUID().toString();
+        if(source == null) {
+            return null;
         }
 
         return source;

@@ -34,18 +34,45 @@ public class AssetAdministrationShellMapper extends CustomMapper<AssetAdministra
     public void mapAtoB(AssetAdministrationShell assetAdministrationShell, InternalElement internalElement, MappingContext context) {
         internalElement.setRoleRequirements(new RoleRequirements(AssetAdministrationShellRoleClassLib.AssetAdministrationShell.getRefBaseRoleClassPath()));
 
-        // asset information
-        // submodel references
-        Attribute submodels = new Attribute(
-                "submodels",
+        // AssetInformation
+        Attribute assetInformation = new Attribute(
+                "assetInformation",
                 null,
                 null,
                 null,
-                new RefSemantic(AASNamespace.AssetAdministrationShell_Submodels.getRefSemantic()),
+                new RefSemantic(AASNamespace.AssetAdministrationShell_AssetInformation.getRefSemantic()),
                 null
         );
-        submodels.setAttributes(new ArrayList<>());
+        assetInformation.setAttributes(new ArrayList<>());
+        assetInformation.getAttributes().add(new Attribute(
+                "assetKind",
+                null,
+                null,
+                assetAdministrationShell.getAssetInformation().getAssetKind().name(),
+                new RefSemantic(AASNamespace.AssetInformation_AssetKind.getRefSemantic()),
+                null
+        ));
+        assetInformation.getAttributes().add(new Attribute(
+                "globalAssetId",
+                null,
+                null,
+                ReferenceConverterUtil.convert(assetAdministrationShell.getAssetInformation().getGlobalAssetId()),
+                new RefSemantic(AASNamespace.AssetInformation_GlobalAssetId.getRefSemantic()),
+                null
+        ));
+        internalElement.getAttributes().add(assetInformation);
+
+        // Submodels
         assetAdministrationShell.getSubmodels().forEach(submodel -> {
+            Attribute submodels = new Attribute(
+                    "submodel",
+                    null,
+                    null,
+                    null,
+                    new RefSemantic(AASNamespace.AssetAdministrationShell_Submodels.getRefSemantic()),
+                    null
+            );
+            submodels.setAttributes(new ArrayList<>());
             submodels.getAttributes().add(new Attribute(
                     "reference",
                     null,
@@ -54,7 +81,39 @@ public class AssetAdministrationShellMapper extends CustomMapper<AssetAdministra
                     new RefSemantic(AASNamespace.ReferenceElement_Value.getRefSemantic()),
                     null
             ));
+            internalElement.getAttributes().add(submodels);
         });
-        internalElement.getAttributes().add(submodels);
+
+        // View
+        assetAdministrationShell.getViews().forEach(view -> {
+            Attribute views = new Attribute(
+                    "view",
+                    null,
+                    null,
+                    null,
+                    new RefSemantic(AASNamespace.AssetAdministrationShell_View.getRefSemantic()),
+                    null
+            );
+            views.setAttributes(new ArrayList<>());
+            views.getAttributes().add(new Attribute(
+                    "idShort",
+                    null,
+                    null,
+                    view.getIdShort(),
+                    new RefSemantic(AASNamespace.View_IdShort.getRefSemantic()),
+                    null
+            ));
+            if(!view.getContainedElements().isEmpty()) {
+                views.getAttributes().add(new Attribute(
+                        "containedElement",
+                        null,
+                        null,
+                        ReferenceConverterUtil.convert(view.getContainedElements().get(0)),
+                        new RefSemantic(AASNamespace.View_ContainedElement.getRefSemantic()),
+                        null
+                ));
+            }
+            internalElement.getAttributes().add(views);
+        });
     }
 }

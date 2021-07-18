@@ -1569,22 +1569,25 @@ public class FullExample {
 
     public static final AssetAdministrationShellEnvironment ENVIRONMENT = new DefaultAssetAdministrationShellEnvironment.Builder()
             .assetAdministrationShells(Arrays.asList(
-                    AAS_1,
-                    AAS_2,
-                    AAS_3,
-                    AAS_4))
+//                    AAS_1,
+//                    AAS_2,
+                    AAS_3
+//                    AAS_4
+            ))
             .submodels(Arrays.asList(
-                    SUBMODEL_1,
-                    SUBMODEL_2,
-                    SUBMODEL_3,
-                    SUBMODEL_4,
-                    SUBMODEL_5,
-                    SUBMODEL_6,
-                    SUBMODEL_7))
+//                    SUBMODEL_1,
+//                    SUBMODEL_2,
+//                    SUBMODEL_3,
+//                    SUBMODEL_4,
+//                    SUBMODEL_5,
+//                    SUBMODEL_6,
+//                    SUBMODEL_7
+            ))
             .conceptDescriptions(Arrays.asList(
-                    CONCEPT_DESCRIPTION_1,
-                    CONCEPT_DESCRIPTION_2,
-                    CONCEPT_DESCRIPTION_3,
-                    CONCEPT_DESCRIPTION_4))
+//                    CONCEPT_DESCRIPTION_1,
+//                    CONCEPT_DESCRIPTION_2,
+//                    CONCEPT_DESCRIPTION_3,
+//                    CONCEPT_DESCRIPTION_4
+            ))
             .build();
 }
