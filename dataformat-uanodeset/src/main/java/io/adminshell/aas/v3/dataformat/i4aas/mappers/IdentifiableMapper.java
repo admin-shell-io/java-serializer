@@ -44,14 +44,13 @@ public class IdentifiableMapper<T extends Identifiable> extends ReferableMapper<
 
 		UAVariable targetIdVar = newStringProperty("Id", sourceIdentifierValue);
 		addToNodeset(targetIdVar);
-		addTypeReference(targetIdVar, UaId.PropertyType);
 		attachAsProperty(uaObject, targetIdVar);
 		
 		UAVariable mappedEnum = new I4AASEnumMapper(sourceIdType, ctx).map();
 		attachAsProperty(uaObject, mappedEnum);
 		
-		//TODO
-		AdministrativeInformation administration = source.getAdministration();
+		UAObject uaAdministration = new AdministrationMapper(source.getAdministration(), ctx).map();
+		attachAsComponent(target, uaAdministration);
 	}
 
 

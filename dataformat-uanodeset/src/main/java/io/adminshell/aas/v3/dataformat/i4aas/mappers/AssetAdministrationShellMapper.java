@@ -35,7 +35,11 @@ public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdmi
 	@Override
 	protected void mapAndAttachChildren() {
 		super.mapAndAttachChildren();
+		mapSubmodels();
+		mapDerivedFrom();
+	}
 
+	private void mapSubmodels() {
 		List<io.adminshell.aas.v3.model.Reference> submodels = source.getSubmodels();
 		for (int i = 0; i < submodels.size(); i++) {
 			io.adminshell.aas.v3.model.Reference reference = submodels.get(i);
@@ -48,27 +52,13 @@ public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdmi
 					.map();
 			attachAsComponent(target, createSubmodelReferenceUaObject);
 		}
-
-		mapDerivedFrom();
 	}
 
 	private void mapDerivedFrom() {
 		io.adminshell.aas.v3.model.Reference derivedFrom = source.getDerivedFrom();
 		if (derivedFrom != null) {
-			UAObject createDerivedFromUaObject = UAObject.builder()//
-					.withNodeId(ctx.newModelNodeIdAsString())//
-					.addDisplayName(I4AASUtils.createLocalizedText("DerivedFrom"))//
-					.withReferences(ListOfReferences.builder().addReference()//
-							.withReferenceType(UaId.HasTypeDefinition.getName())
-							.withValue(ctx.getI4aasNodeIdAsString(I4aasId.AASReferenceType))//
-							.end().build())
-					.withBrowseName("" + ctx.getI4aasNsIndex() + ":DerivedFrom").build();
-
-			for (Key key : derivedFrom.getKeys()) {
-				// TODO
-			}
-
-			attachAsComponent(target, createDerivedFromUaObject);
+			UAObject uaDerivedFrom = new ReferenceMapper(derivedFrom, ctx, "DerivedFrom").map();
+			attachAsComponent(target, uaDerivedFrom);
 		}
 	}
 }
