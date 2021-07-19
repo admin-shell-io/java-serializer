@@ -51,6 +51,8 @@ public enum I4aasId implements BasicId {
 	AASMimeDataType("AASMimeDataType", 3016),
 	HasInterface("HasInterface", 4002),
 	AASReference("AASReference", 4003),
+	AASKeyDataType_Encoding_DefaultXml("AASKeyDataType_Encoding_DefaultXml",5039);
+
 ;
 
 	private String name;

@@ -45,7 +45,7 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 	private void addToNodeset() {
 		ctx.getNodeSet().getUAObjectOrUAVariableOrUAMethod().add(target);
 	}
-	
+
 	protected final void addToNodeset(UANode node) {
 		ctx.getNodeSet().getUAObjectOrUAVariableOrUAMethod().add(node);
 	}
@@ -53,7 +53,7 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 	protected final void addTypeReference(BasicId idForType) {
 		addTypeReference(target, idForType);
 	}
-	
+
 	protected final void addTypeReference(UANode anyNode, BasicId idForType) {
 		if (anyNode.getReferences() == null) {
 			anyNode.setReferences(new ListOfReferences());
@@ -68,11 +68,11 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 					.withValue(ctx.getUaBaseNodeIdAsString((UaId) idForType)).build());
 		}
 	}
-	
+
 	protected final String browseNameOf(String name) {
 		return ctx.getModelNsIndex() + ":" + name;
 	}
-	
+
 	protected final void attachAsProperty(UAObject parent, UAVariable child) {
 		child.setParentNodeId(parent.getNodeId());
 		if (child.getReferences() == null) {
@@ -88,7 +88,7 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 				.withValue(child.getNodeId()).build();
 		parent.getReferences().getReference().add(childRef);
 	}
-	
+
 	protected final void attachAsComponent(UAObject parent, UAObject child) {
 		child.setParentNodeId(parent.getNodeId());
 		if (child.getReferences() == null) {
@@ -104,15 +104,16 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 				.withValue(child.getNodeId()).build();
 		parent.getReferences().getReference().add(childRef);
 	}
-	
-	protected final UAVariable newStringProperty(String key, String value) {
-		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idVarBuilder = UAVariable.builder().withDisplayName(I4AASUtils.createLocalizedText(key)).withDataType(UaId.String.getName())
-				.withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(browseNameOf(key)).withAccessLevel(3L);
-		addTypeReference(idVarBuilder.build(), UaId.PropertyType);
-		JAXBElement<String> idStringValue = new ObjectFactory().createString(value);
-		UAVariable targetIdVar = idVarBuilder.withValue().withAny(idStringValue).end().build();
-		return targetIdVar;
-	}
 
+	protected final UAVariable newStringProperty(String key, String value) {
+		JAXBElement<String> idStringValue = new ObjectFactory().createString(value);
+		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idVarBuilder = UAVariable.builder()
+				.withValue().withAny(idStringValue).end().withDisplayName(I4AASUtils.createLocalizedText(key))
+				.withDataType(UaId.String.getName()).withNodeId(ctx.newModelNodeIdAsString())
+				.withBrowseName(browseNameOf(key)).withAccessLevel(3L);
+		UAVariable uaVariable = idVarBuilder.build();
+		addTypeReference(uaVariable, UaId.PropertyType);
+		return uaVariable;
+	}
 
 }

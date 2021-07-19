@@ -44,6 +44,7 @@ public class IdentifiableMapper<T extends Identifiable> extends ReferableMapper<
 
 		UAVariable targetIdVar = newStringProperty("Id", sourceIdentifierValue);
 		addToNodeset(targetIdVar);
+		addTypeReference(targetIdVar, UaId.PropertyType);
 		attachAsProperty(uaObject, targetIdVar);
 		
 		UAVariable mappedEnum = new I4AASEnumMapper(sourceIdType, ctx).map();
