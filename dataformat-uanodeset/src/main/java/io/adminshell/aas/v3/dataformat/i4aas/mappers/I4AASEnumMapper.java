@@ -52,10 +52,11 @@ public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
 		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idTypeVarBuilder = UAVariable.builder().withDisplayName(I4AASUtils.createLocalizedText(name))
 				.withDataType(match.getClass().getSimpleName()).withNodeId(ctx.newModelNodeIdAsString())
 				.withBrowseName(browseNameOf(name)).withAccessLevel(3L);
-		addTypeReference(idTypeVarBuilder.build(), UaId.PropertyType);
 		
 		JAXBElement<Integer> targetIdTypeVar2 = new ObjectFactory().createInt32(match.ordinal());
 		UAVariable targetIdTypeVar = idTypeVarBuilder.withValue().withAny(targetIdTypeVar2).end().build();
+
+		addTypeReference(targetIdTypeVar, UaId.PropertyType);
 
 		return targetIdTypeVar;
 	}
