@@ -132,7 +132,7 @@
 					</execution>
 					<execution>
 						<id>generate-uatypes-classes</id>
-						<phase>generate-sources</phase>
+						<phase>none</phase><!-- currently generated classes do not work properly when nested, namespace is not declared, fixable within package-info thus copy-pasted and manually adjusted -->
 						<goals>
 							<goal>xsdtojava</goal>
 						</goals>

@@ -23,6 +23,13 @@ import org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType;
 import org.opcfoundation.ua.i4aas.types.AASKeyTypeDataType;
 import org.w3c.dom.Node;
 
+/**
+ * 
+ * test classes to review nested xml schema with appropriate namespaces
+ * 
+ * @author br
+ *
+ */
 public class GeneratedExtensionObjectTest {
 
 	@Test
@@ -60,6 +67,7 @@ public class GeneratedExtensionObjectTest {
 		//needed context to unmarshal down to the custom defined types
 		JAXBContext jaxbCtx = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(new Class[] {UANodeSet.class, ListOfExtensionObject.class, AASKeyDataType.class}, null);
 		
+		
 		UANodeSet uaNodeSet = new UANodeSet();
 		UAVariable uaVarWithAASKey = new UAVariable();
 		Value valueWithExtension = new Value();
@@ -93,8 +101,45 @@ public class GeneratedExtensionObjectTest {
 		uaVarWithAASKey.setValue(valueWithExtension );
 		uaNodeSet.getUAObjectOrUAVariableOrUAMethod().add(uaVarWithAASKey );
 		Marshaller marshaller = jaxbCtx.createMarshaller();
+		
 		marshaller.setProperty("jaxb.formatted.output", true);
 		marshaller.marshal(uaNodeSet, System.out);
+	}
+
+	@Test
+	public void testJAXBmarshallingOnlyExtension() throws JAXBException {
+		
+		//needed context to unmarshal down to the custom defined types
+		JAXBContext jaxbCtx = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(new Class[] {ListOfExtensionObject.class, AASKeyDataType.class}, null);
+		
+			
+		//create extension wrapper
+		ObjectFactory extensionObjectFactory = new ObjectFactory();
+		ListOfExtensionObject anyListOfExtensionObject = new ListOfExtensionObject();
+		anyListOfExtensionObject.getExtensionObject().add(new ExtensionObject());
+		Body body = new Body();
+		
+		//build custom type AAS Key
+		org.opcfoundation.ua.i4aas.types.ObjectFactory i4aasTypesObjectFactory = new org.opcfoundation.ua.i4aas.types.ObjectFactory();
+		AASKeyDataType aasKey = new AASKeyDataType();
+		aasKey.setIdType(AASKeyTypeDataType.ID_SHORT_0);
+		aasKey.setLocal(false);
+		aasKey.setType(AASKeyElementsDataType.ACCESS_PERMISSION_RULE_0);
+		aasKey.setValue("mykey");
+		JAXBElement<AASKeyDataType> jaxbAASKeyDataType = i4aasTypesObjectFactory.createAASKeyDataType(aasKey);
+		
+		//assembly
+		body.setAny(jaxbAASKeyDataType);
+		JAXBElement<Body> jaxbElementBody = extensionObjectFactory.createExtensionObjectBody(body );
+		anyListOfExtensionObject.getExtensionObject().get(0).setBody(jaxbElementBody);
+		
+		JAXBElement<ListOfExtensionObject> createListOfExtensionObject = extensionObjectFactory.createListOfExtensionObject(anyListOfExtensionObject);
+		//new JAXBElement<ListOfExtensionObject>()
+		
+				Marshaller marshaller = jaxbCtx.createMarshaller();
+		
+		marshaller.setProperty("jaxb.formatted.output", true);
+		marshaller.marshal(createListOfExtensionObject, System.out);
 	}
 
 }
