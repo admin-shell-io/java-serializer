@@ -1,0 +1,77 @@
+{
+  "@context" : {
+    "aas" : "https://admin-shell.io/aas/3/0/RC01/",
+    "rdf" : "http://www.w3.org/1999/02/22-rdf-syntax-ns#",
+    "phys_unit" : "https://admin-shell.io/DataSpecificationTemplates/DataSpecificationPhysicalUnit/3/0/RC01/",
+    "iec61360" : "https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/"
+  },
+  "@id" : "https://example.org/myEnv",
+  "@type" : "aas:AssetAdministrationShellEnvironment",
+  "https://admin-shell.io/aas/3/0/RC01/AssetAdministrationShellEnvironment/assetAdministrationShells" : [ {
+    "@type" : "aas:AssetAdministrationShell",
+    "@id" : "https://example.org/myAAS",
+    "https://admin-shell.io/aas/3/0/RC01/AssetAdministrationShell/assetInformation" : {
+      "@type" : "aas:AssetInformation",
+      "@id" : "https://example.org/myAASInfo",
+      "https://admin-shell.io/aas/3/0/RC01/AssetInformation/assetKind" : "aas:AssetKind/INSTANCE",
+      "https://admin-shell.io/aas/3/0/RC01/AssetInformation/billOfMaterial" : [ ],
+      "https://admin-shell.io/aas/3/0/RC01/AssetInformation/specificAssetId" : [ ]
+    },
+    "https://admin-shell.io/aas/3/0/RC01/AssetAdministrationShell/submodel" : [ ],
+    "https://admin-shell.io/aas/3/0/RC01/AssetAdministrationShell/view" : [ ],
+    "https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification" : [ ],
+    "https://admin-shell.io/aas/3/0/RC01/Referable/description" : [ {
+      "@type" : "rdf:langString",
+      "@value" : "This is a test AAS"
+    } ],
+    "https://admin-shell.io/aas/3/0/RC01/Referable/displayName" : [ {
+      "@language" : "en",
+      "@value" : "Display Name 1"
+    }, {
+      "@language" : "de",
+      "@value" : "Anzeigename 2"
+    } ]
+  } ],
+  "https://admin-shell.io/aas/3/0/RC01/AssetAdministrationShellEnvironment/conceptDescriptions" : [ ],
+  "https://admin-shell.io/aas/3/0/RC01/AssetAdministrationShellEnvironment/submodels" : [ {
+    "@type" : "aas:Submodel",
+    "@id" : "https://example.org/mySubmodel",
+    "https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification" : [ {
+      "@type" : "aas:EmbeddedDataSpecification",
+      "@id" : "https://example.org/myDataSpec",
+      "https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecification" : {
+        "@type" : "aas:Reference",
+        "@id" : "https://example.org/myRef1",
+        "https://admin-shell.io/aas/3/0/RC01/Reference/key" : [ {
+          "@type" : "aas:Key",
+          "@id" : "https://example.org/myKey",
+          "https://admin-shell.io/aas/3/0/RC01/Key/idType" : "aas:KeyType/IRI",
+          "https://admin-shell.io/aas/3/0/RC01/Key/value" : "https://example.org"
+        } ]
+      },
+      "https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent" : {
+        "@type" : "https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360",
+        "@id" : "https://example.org/myDataSpecContent",
+        "https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/dataType" : "https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/RATIONAL",
+        "https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/definition" : [ ],
+        "https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/levelType" : [ ],
+        "https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/preferredName" : [ ],
+        "https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/shortName" : [ ]
+      }
+    } ],
+    "https://admin-shell.io/aas/3/0/RC01/Qualifiable/qualifier" : [ ],
+    "https://admin-shell.io/aas/3/0/RC01/Referable/category" : "Example category",
+    "https://admin-shell.io/aas/3/0/RC01/Referable/description" : [ {
+      "@type" : "rdf:langString",
+      "@value" : "My Submodel"
+    } ],
+    "https://admin-shell.io/aas/3/0/RC01/Referable/displayName" : [ {
+      "@type" : "rdf:langString",
+      "@value" : "First Submodel Element name"
+    }, {
+      "@type" : "rdf:langString",
+      "@value" : "Second Submodel Element name"
+    } ],
+    "https://admin-shell.io/aas/3/0/RC01/Submodel/submodelElement" : [ ]
+  } ]
+}

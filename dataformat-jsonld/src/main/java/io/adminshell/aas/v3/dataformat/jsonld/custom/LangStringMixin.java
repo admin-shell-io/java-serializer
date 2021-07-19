@@ -12,7 +12,7 @@
  * the License.
  */
 
-package io.adminshell.aas.v3.dataformat.jsonld.mixins;
+package io.adminshell.aas.v3.dataformat.jsonld.custom;
 
 
 
@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
 import io.adminshell.aas.v3.model.*;
+import io.adminshell.aas.v3.model.AccessPermissionRule;
 
 import java.util.List;
 
@@ -28,7 +29,7 @@ import java.util.List;
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "@type")
 public interface LangStringMixin {
     @JsonProperty("@value")
-    public List<AccessPermissionRule> getValue();
+    public List<io.adminshell.aas.v3.model.AccessPermissionRule> getValue();
 
     @JsonProperty("@language")
     public List<AccessPermissionRule> getLanguage();

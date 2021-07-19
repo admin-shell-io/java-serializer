@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 import io.adminshell.aas.v3.dataformat.jsonld.custom.BigDecimalSerializer;
 import io.adminshell.aas.v3.dataformat.jsonld.custom.XMLGregorianCalendarDeserializer;
 import io.adminshell.aas.v3.dataformat.jsonld.custom.XMLGregorianCalendarSerializer;
+import io.adminshell.aas.v3.model.LangString;
 
 import java.math.BigDecimal;
 import java.net.URI;
@@ -29,6 +30,7 @@ public class JsonLDModule extends SimpleModule {
         addSerializer(BigDecimal.class, new BigDecimalSerializer());
         
         addSerializer(URI.class, new UriSerializer());
+        addSerializer(LangString.class, new LangStringSerializer());
     }
 
 }

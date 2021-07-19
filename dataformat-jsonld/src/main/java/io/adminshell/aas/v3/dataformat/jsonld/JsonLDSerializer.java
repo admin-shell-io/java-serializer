@@ -26,20 +26,7 @@ public class JsonLDSerializer extends BeanSerializer {
 
     private static int currentRecursionDepth = 0;
 
-    static final Map<String, String> contextItems;
-
-    static {
-        contextItems = new HashMap<>();
-        contextItems.put("ids", "https://w3id.org/idsa/core/");
-        contextItems.put("idsc", "https://w3id.org/idsa/code/");
-        contextItems.put("xsd", "http://www.w3.org/2001/XMLSchema#");
-        contextItems.put("owl", "http://www.w3.org/2002/07/owl#");
-        contextItems.put("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
-        contextItems.put("aas", "https://admin-shell.io/aas/3/0/RC01/");
-        contextItems.put("iec61360", "https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/");
-        contextItems.put("phys_unit", "https://admin-shell.io/DataSpecificationTemplates/DataSpecificationPhysicalUnit/3/0/RC01/");
-    }
-
+    static final Map<String, String> contextItems = new HashMap<>();
 
     JsonLDSerializer(BeanSerializerBase src) {
         super(src);

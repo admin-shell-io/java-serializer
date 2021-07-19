@@ -5,11 +5,14 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import io.adminshell.aas.v3.dataformat.DeserializationException;
+import io.adminshell.aas.v3.dataformat.Deserializer;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.jsonld.custom.ReflectiveMixInResolver;
 import io.adminshell.aas.v3.dataformat.jsonld.preprocessing.JsonPreprocessor;
 import io.adminshell.aas.v3.dataformat.jsonld.preprocessing.TypeNamePreprocessor;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
+import org.apache.commons.lang3.NotImplementedException;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
 import org.apache.jena.riot.Lang;
@@ -25,7 +28,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer {
+public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer, Deserializer {
 
     private static final ObjectMapper mapper = new ObjectMapper();
     private final List<JsonPreprocessor> preprocessors; //TODO: It seems like this list is never used...
@@ -49,6 +52,14 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer {
             charsetWarningPrinted = true;
             logger.warn("Standard Charset is set to " + Charset.defaultCharset() + " - expecting " + StandardCharsets.UTF_8 + ". Some characters might not be displayed correctly.\nThis warning is only printed once");
         }
+
+        //Default namespaces for AAS
+        addKnownNamespace("xsd", "http://www.w3.org/2001/XMLSchema#");
+        addKnownNamespace("owl", "http://www.w3.org/2002/07/owl#");
+        addKnownNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
+        addKnownNamespace("aas", "https://admin-shell.io/aas/3/0/RC01/");
+        addKnownNamespace("iec61360", "https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/");
+        addKnownNamespace("phys_unit", "https://admin-shell.io/DataSpecificationTemplates/DataSpecificationPhysicalUnit/3/0/RC01/");
 
     }
 
@@ -120,9 +131,9 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer {
      * @param <T>           deserialized type
      * @return an object representing the provided JSON(-LD) structure
      */
-    //public <T> T deserialize(String serialization, Class<T> valueType) throws IOException {
-    //    return new Parser().parseMessage(serialization, valueType);
-    //}
+    public <T> T deserialize(String serialization, Class<T> valueType) throws IOException {
+        return new Parser().parseMessage(serialization, valueType);
+    }
 
     /**
      * Inverse method of "serialize"
@@ -132,9 +143,9 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer {
      * @param <T>           deserialized type
      * @return an object representing the provided JSON(-LD) structure
      */
-    //public <T> T deserialize(Model rdfModel, Class<T> valueType) throws IOException {
-    //    return new Parser().parseMessage(rdfModel, valueType);
-    //}
+    public <T> T deserialize(Model rdfModel, Class<T> valueType) throws IOException {
+        return new Parser().parseMessage(rdfModel, valueType);
+    }
 
     /**
      * Allows to add further known namespaces to the message parser. Allows parsing to Java objects with JsonSubTypes annotations with other prefixes than "ids:".
@@ -143,7 +154,7 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer {
      */
     public static void addKnownNamespace(String prefix, String namespaceUrl)
     {
-        //Parser.knownNamespaces.put(prefix, namespaceUrl); //TODO: Add this again
+        Parser.knownNamespaces.put(prefix, namespaceUrl);
         JsonLDSerializer.contextItems.put(prefix, namespaceUrl);
     }
 
@@ -189,5 +200,21 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer {
         {
             throw new SerializationException("Failed to serialize environment.", e);
         }
+    }
+
+    @Override
+    public AssetAdministrationShellEnvironment read(String value) throws DeserializationException {
+        try {
+            return new Parser().parseMessage(value, AssetAdministrationShellEnvironment.class);
+        }
+        catch (IOException e)
+        {
+            throw new DeserializationException("Could not deserialize to environment.", e);
+        }
+    }
+
+    @Override
+    public <T> void useImplementation(Class<T> aasInterface, Class<? extends T> implementation) {
+        throw new NotImplementedException("Custom implementation support not yet implemented"); //TODO
     }
 }
