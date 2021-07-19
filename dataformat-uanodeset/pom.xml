@@ -9,6 +9,9 @@
 		<version>${revision}</version>
 	</parent>
 	<artifactId>dataformat-uanodeset</artifactId>
+	<properties>
+		<jaxb-rich-contract.version>2.1.0</jaxb-rich-contract.version>
+	</properties>
 	<dependencies>
 		<dependency>
 			<groupId>io.admin-shell.aas</groupId>
@@ -45,7 +48,7 @@
 		<dependency>
 			<groupId>net.codesup.util</groupId>
 			<artifactId>jaxb2-rich-contract-plugin</artifactId>
-			<version>2.1.0</version>
+			<version>${jaxb-rich-contract.version}</version>
 		</dependency>
 	</dependencies>
 	<build>
