@@ -23,14 +23,17 @@ public class IdentifiableMapper<T extends Identifiable> extends ReferableMapper<
 	
 	@Override
 	protected UAObject createTargetObject() {
-		// TODO Auto-generated method stub
 		return super.createTargetObject();
 	}
 	
 	@Override
 	protected void mapAndAttachChildren() {
 		super.mapAndAttachChildren();
-		
+		mapIdentification();		
+		mapAdministration();
+	}
+
+	private void mapIdentification() {
 		IdentifierType sourceIdType = source.getIdentification().getIdType();
 		String sourceIdentifierValue = source.getIdentification().getIdentifier();
 		
@@ -48,11 +51,13 @@ public class IdentifiableMapper<T extends Identifiable> extends ReferableMapper<
 		
 		UAVariable mappedEnum = new I4AASEnumMapper(sourceIdType, ctx).map();
 		attachAsProperty(uaObject, mappedEnum);
-		
+	}
+
+	
+	private void mapAdministration() {
 		UAObject uaAdministration = new AdministrationMapper(source.getAdministration(), ctx).map();
 		attachAsComponent(target, uaAdministration);
 	}
-
 
 
 }
