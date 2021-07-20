@@ -15,24 +15,32 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.serialize.mapper.mapper;
 
-import io.adminshell.aas.v3.dataformat.aml.model.caex.AASNamespace;
-import io.adminshell.aas.v3.dataformat.aml.model.caex.AssetAdministrationShellRoleClassLib;
-import io.adminshell.aas.v3.dataformat.aml.model.caex.Attribute;
-import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElement;
-import io.adminshell.aas.v3.dataformat.aml.model.caex.RefSemantic;
-import io.adminshell.aas.v3.dataformat.aml.model.caex.RoleRequirements;
+import io.adminshell.aas.v3.dataformat.aml.model.caex.*;
 import io.adminshell.aas.v3.dataformat.aml.serialize.mapper.util.ReferenceConverterUtil;
-import io.adminshell.aas.v3.model.*;
+import io.adminshell.aas.v3.dataformat.aml.serialize.mapper.util.UrlEncoderUtil;
+import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class AssetAdministrationShellMapper extends CustomMapper<AssetAdministrationShell, InternalElement> {
 
     @Override
     public void mapAtoB(AssetAdministrationShell assetAdministrationShell, InternalElement internalElement, MappingContext context) {
         internalElement.setRoleRequirements(new RoleRequirements(AssetAdministrationShellRoleClassLib.AssetAdministrationShell.getRefBaseRoleClassPath()));
+
+        // Set name and idShort by identification if idShort is not given
+        if (assetAdministrationShell.getIdShort().equals("") || assetAdministrationShell.getIdShort() == null) {
+            String idShort = UrlEncoderUtil.encode(assetAdministrationShell.getIdentification().getIdentifier());
+            // Set AssetAdministrationShell name
+            internalElement.setName(idShort);
+            // Set idShort
+            internalElement.getAttributes().stream()
+                    .filter(Objects::nonNull)
+                    .filter(attribute -> attribute.getName().equals("idShort")).findAny().get().setValue(idShort);
+        }
 
         // AssetInformation
         Attribute assetInformation = new Attribute(

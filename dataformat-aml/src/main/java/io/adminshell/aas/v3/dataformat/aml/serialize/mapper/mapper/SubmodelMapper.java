@@ -19,15 +19,35 @@ import io.adminshell.aas.v3.dataformat.aml.model.caex.AssetAdministrationShellRo
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElement;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.RoleRequirements;
 import io.adminshell.aas.v3.dataformat.aml.serialize.mapper.util.QualifierConverterUtil;
+import io.adminshell.aas.v3.dataformat.aml.serialize.mapper.util.UrlEncoderUtil;
+import io.adminshell.aas.v3.model.ModelingKind;
 import io.adminshell.aas.v3.model.Submodel;
 import ma.glasnost.orika.CustomMapper;
 import ma.glasnost.orika.MappingContext;
+
+import java.util.Objects;
 
 public class SubmodelMapper extends CustomMapper<Submodel, InternalElement> {
 
     @Override
     public void mapAtoB(Submodel submodel, InternalElement internalElement, MappingContext context) {
+        if(submodel.getKind() == ModelingKind.TEMPLATE) {
+            return;
+        }
+
         internalElement.setRoleRequirements(new RoleRequirements(AssetAdministrationShellRoleClassLib.Submodel.getRefBaseRoleClassPath()));
+
+        // Set name and idShort by identification if idShort is not given
+        if (submodel.getIdShort().equals("") || submodel.getIdShort() == null) {
+            String idShort = UrlEncoderUtil.encode(submodel.getIdentification().getIdentifier());
+            // Set AssetAdministrationShell name
+            internalElement.setName(idShort);
+            // Set idShort
+            internalElement.getAttributes().stream()
+                    .filter(Objects::nonNull)
+                    .filter(attribute -> attribute.getName().equals("idShort")).findAny().get().setValue(idShort);
+        }
+
         QualifierConverterUtil.createQualifierAttributesForSubmodel(submodel, internalElement);
     }
 }
