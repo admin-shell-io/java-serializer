@@ -3,6 +3,7 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers.utils;
 import java.util.UUID;
 
 import org.opcfoundation.ua._2011._03.uanodeset.LocalizedText;
+import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
 
 import io.adminshell.aas.v3.model.Asset;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
@@ -12,7 +13,7 @@ import io.adminshell.aas.v3.model.View;
 
 public class I4AASUtils {
 
-	public static String generateRandomNamespace() {
+	public static String generateRandomNamespace(UANodeSet nodeset) {
 		return "http://example.org/i4aasNs/" + UUID.randomUUID() + "/";
 	}
 
@@ -34,4 +35,5 @@ public class I4AASUtils {
 			return LocalizedText.builder().withValue(ref.getIdShort()).build();
 		}
 	}
+	
 }

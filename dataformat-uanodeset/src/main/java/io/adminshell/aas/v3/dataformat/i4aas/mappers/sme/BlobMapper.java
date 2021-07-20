@@ -16,6 +16,11 @@ public class BlobMapper extends SubmodelElementMapper<Blob> {
 	@Override
 	protected UAObject createTargetObject() {
 		super.createTargetObject();
+		
+		//no mapping possible with current I4AAS specification
+		String mimeType = source.getMimeType();
+		byte[] value = source.getValue();
+		
 		addTypeReference(I4aasId.AASBlobType);
 		return target;
 	}

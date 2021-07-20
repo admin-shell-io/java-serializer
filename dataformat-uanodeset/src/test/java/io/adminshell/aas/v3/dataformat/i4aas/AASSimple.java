@@ -21,8 +21,6 @@ import java.util.Arrays;
 
 public class AASSimple {
 
-    public static final java.io.File FILE = new java.io.File("src/test/resources/jsonExample.json");
-
     //AAS
     public static final String AAS_ID = "ExampleMotor";
     public static final String AAS_IDENTIFIER = "http://customer.com/aas/9175_7013_7091_9168";

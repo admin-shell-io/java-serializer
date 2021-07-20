@@ -71,7 +71,8 @@ public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
 		String srcName = src.name().toLowerCase();
 		Enum[] enumConstants = aasEnum.getEnumConstants();
 		for (Enum targetEnumCandidate : enumConstants) {
-			String targetEnumCandidateName = targetEnumCandidate.name().split("_")[0].toLowerCase();
+			int lastUnderscore = targetEnumCandidate.name().lastIndexOf("_");
+			String targetEnumCandidateName = targetEnumCandidate.name().substring(0, lastUnderscore).toLowerCase();
 			if (targetEnumCandidateName.equals(srcName)) {
 				return targetEnumCandidate;
 			}

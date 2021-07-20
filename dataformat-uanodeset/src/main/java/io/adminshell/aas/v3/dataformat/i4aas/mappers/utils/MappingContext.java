@@ -2,6 +2,7 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers.utils;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.function.Function;
 
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -31,11 +32,17 @@ public class MappingContext {
 	private int i4aasNsIndex; //currently always 2
 
 	private int nodeIdCounter = 1;
+	
+	private static Function<UANodeSet, String> modelNamespaceNamingStrategy = I4AASUtils::generateRandomNamespace;
 
+	public static void setModelNamespaceNamingStrategy(Function<UANodeSet, String> strategy) {
+		modelNamespaceNamingStrategy = strategy;
+	}
+	
 	public MappingContext(AssetAdministrationShellEnvironment aasEnvironment) {
 		this.aasEnvironment = aasEnvironment;
 		nodeset = new UANodeSet();
-		modelNamspace = I4AASUtils.generateRandomNamespace();
+		modelNamspace = modelNamespaceNamingStrategy.apply(nodeset);
 		initNodeset();
 	}
 

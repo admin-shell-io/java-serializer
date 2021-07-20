@@ -35,8 +35,15 @@ public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdmi
 	@Override
 	protected void mapAndAttachChildren() {
 		super.mapAndAttachChildren();
+		mapAsset();
 		mapSubmodels();
 		mapDerivedFrom();
+	}
+
+	private void mapAsset() {
+		AssetInformation assetInformation = source.getAssetInformation();
+		UAObject uaAsset = new AssetInformationMapper(assetInformation, ctx).map();
+		attachAsComponent(target, uaAsset);
 	}
 
 	private void mapSubmodels() {

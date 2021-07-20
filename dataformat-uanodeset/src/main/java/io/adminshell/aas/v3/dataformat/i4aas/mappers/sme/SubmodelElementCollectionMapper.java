@@ -3,6 +3,7 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers.sme;
 import java.util.Collection;
 
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
+import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.I4AASMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.ReferableMapper;
@@ -21,7 +22,11 @@ public class SubmodelElementCollectionMapper extends SubmodelElementMapper<Submo
 	@Override
 	protected UAObject createTargetObject() {
 		super.createTargetObject();
-		addTypeReference(I4aasId.AASSubmodelElementCollectionType);
+		if (source.getOrdered()) {			
+			addTypeReference(I4aasId.AASOrderedSubmodelElementCollectionType);
+		} else {
+			addTypeReference(I4aasId.AASSubmodelElementCollectionType);
+		}
 		return target;
 	}
 
@@ -34,6 +39,8 @@ public class SubmodelElementCollectionMapper extends SubmodelElementMapper<Submo
 			UAObject uaSubmodel = mapper.map();
 			attachAsComponent(target, uaSubmodel);
 		}
+		UAVariable uaAllowDuplicates = new BooleanPropertyMapper("AllowDuplicates", source.getAllowDuplicates(), ctx).map();
+		attachAsProperty(target, uaAllowDuplicates);
 	}
 
 }

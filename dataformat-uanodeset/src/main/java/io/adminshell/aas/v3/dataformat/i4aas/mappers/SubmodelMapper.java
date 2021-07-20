@@ -15,7 +15,7 @@ import io.adminshell.aas.v3.model.Submodel;
 import io.adminshell.aas.v3.model.SubmodelElement;
 import io.adminshell.aas.v3.model.SubmodelElementCollection;
 
-public class SubmodelMapper extends IdentifiableMapper<Submodel> {
+public class SubmodelMapper extends IdentifiableMapper<Submodel> implements HasKindMapper, HasSemanticsMapper {
 
 	public SubmodelMapper(Submodel src, MappingContext ctx) {
 		super(src, ctx);
@@ -31,10 +31,10 @@ public class SubmodelMapper extends IdentifiableMapper<Submodel> {
 	@Override
 	protected void mapAndAttachChildren() {
 		super.mapAndAttachChildren();
-		ModelingKind kind = source.getKind();
-		UAVariable mappedKind = new I4AASEnumMapper(kind, ctx).map();
-		attachAsProperty(target, mappedKind);
-
+		
+		mapKind(source.getKind(), target, ctx);
+		mapSemantics(source, target, ctx);
+		
 		List<SubmodelElement> submodelElements = source.getSubmodelElements();
 		for (SubmodelElement submodelElement : submodelElements) {
 			I4AASMapper<? extends SubmodelElement, UAObject> mapper = SubmodelElementMappers.getMapper(submodelElement, ctx);

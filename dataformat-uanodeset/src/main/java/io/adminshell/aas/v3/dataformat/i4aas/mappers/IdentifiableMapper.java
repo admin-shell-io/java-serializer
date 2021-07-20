@@ -7,6 +7,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject.Builder;
 
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.sme.StringPropertyMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
@@ -45,8 +46,7 @@ public class IdentifiableMapper<T extends Identifiable> extends ReferableMapper<
 		addToNodeset(uaObject);
 		attachAsComponent(target, uaObject);
 
-		UAVariable targetIdVar = newStringProperty("Id", sourceIdentifierValue);
-		addToNodeset(targetIdVar);
+		UAVariable targetIdVar = new StringPropertyMapper("Id", sourceIdentifierValue, ctx).map();
 		attachAsProperty(uaObject, targetIdVar);
 		
 		UAVariable mappedEnum = new I4AASEnumMapper(sourceIdType, ctx).map();
@@ -55,8 +55,10 @@ public class IdentifiableMapper<T extends Identifiable> extends ReferableMapper<
 
 	
 	private void mapAdministration() {
-		UAObject uaAdministration = new AdministrationMapper(source.getAdministration(), ctx).map();
-		attachAsComponent(target, uaAdministration);
+		if (source.getAdministration() != null) {
+			UAObject uaAdministration = new AdministrationMapper(source.getAdministration(), ctx).map();
+			attachAsComponent(target, uaAdministration);			
+		}
 	}
 
 
