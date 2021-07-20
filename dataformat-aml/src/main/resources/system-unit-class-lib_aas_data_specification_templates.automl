@@ -1,0 +1,206 @@
+<SystemUnitClassLib
+    Name="AssetAdministrationShellDataSpecificationTemplates">
+    <Version>0</Version>
+    <SystemUnitClass
+            Name="DataSpecificationIEC61360Template"
+            ID="572c0568-4019-40ec-bfc4-a3a82dc6eed4">
+        <Description>An AAS Data Specification template for IEC61369. A template consists of the DataSpecificationContent
+            containing the additional attributes to be added to the element instance that references the data specification
+            template and meta information about the template itself (this is why DataSpecification inherits from
+            Identifiable). In UML these are two separated classes.
+        </Description>
+        <Attribute
+                Name="idShort"
+                AttributeDataType="xs:string">
+            <Description>Identifying string of the element within its name space. Constraint AASd-001: In case of a
+                referable element not being an identifiable element this id is mandatory and used for referring to the
+                element in its name space. Constraint AASd-002: idShort shall only feature letters, digits, underscore
+                ("_"); starting mandatory with a letter. Constraint AASd-003: idShort shall be matched case-insensitive.
+                Note: In case of an identifiable element idShort is optional but recommended to be defined. It can be used
+                for unique reference in its name space and thus allows better usability and a more performant
+                implementation. In this case it is similar to the “BrowserPath” in OPC UA.
+            </Description>
+            <RefSemantic
+                    CorrespondingAttributePath="AAS:Referable/idShort"/>
+        </Attribute>
+        <Attribute
+                Name="category"
+                AttributeDataType="xs:string">
+            <Description>The category is a value that gives further meta information w.r.t. to the class of the element. It
+                affects the expected existence of attributes and the applicability of constraints.
+            </Description>
+            <Value></Value>
+            <RefSemantic
+                    CorrespondingAttributePath="AAS:Referable/category"/>
+        </Attribute>
+        <Attribute
+                Name="description"
+                AttributeDataType="xs:string">
+            <Description>Description or comments on the element. The description can be provided in several languages.
+            </Description>
+            <Value></Value>
+            <RefSemantic
+                    CorrespondingAttributePath="AAS:Referable/description"/>
+            <Attribute
+                    Name="aml-lang=EN"
+                    AttributeDataType="xs:string">
+                <Value></Value>
+            </Attribute>
+            <Attribute
+                    Name="aml-lang=DE"
+                    AttributeDataType="xs:string">
+                <Value></Value>
+            </Attribute>
+        </Attribute>
+        <Attribute
+                Name="identification">
+            <Description>Abstract attribute class for identification. Has the subattributes id and idType.</Description>
+            <RefSemantic
+                    CorrespondingAttributePath="AAS:Identifiable/identification"/>
+            <Attribute
+                    Name="id"
+                    AttributeDataType="xs:string">
+                <Description>Identifier of the element. Its type is defined in idType. Id is a subproperty of
+                    identification.
+                </Description>
+                <Value>http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360</Value>
+                <RefSemantic
+                        CorrespondingAttributePath="AAS:Identifier/id"/>
+            </Attribute>
+            <Attribute
+                    Name="idType"
+                    AttributeDataType="xs:string">
+                <Description>Type of the Identifier, e.g. IRI, IRDI etc. The supported Identifier types are defined in the
+                    enumeration “IdentifierType”. IdType is a subproperty of identification.
+                </Description>
+                <Value>IRI</Value>
+                <RefSemantic
+                        CorrespondingAttributePath="AAS:Identifier/idType"/>
+            </Attribute>
+        </Attribute>
+        <Attribute
+                Name="administration">
+            <Description>Abstract attribute for administration. Has the subattributes revision and version.</Description>
+            <RefSemantic
+                    CorrespondingAttributePath="AAS:Identifiable/administration"/>
+            <Attribute
+                    Name="revision"
+                    AttributeDataType="xs:string">
+                <Description>Revision of the element. Constraint AASd-005: A revision requires a version. This means, if
+                    there is no version there is no revision neither. Revision is a subproperty of administration.
+                </Description>
+                <Value></Value>
+                <RefSemantic
+                        CorrespondingAttributePath="AAS:AdministrativeInformation/revision"/>
+            </Attribute>
+            <Attribute
+                    Name="version"
+                    AttributeDataType="xs:string">
+                <Description>Version of the element. Version is a subproperty of administration.</Description>
+                <Value></Value>
+                <RefSemantic
+                        CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
+            </Attribute>
+        </Attribute>
+        <SupportedRoleClass
+                RefRoleClassPath="AssetAdministrationShellRoleClassLib/DataSpecification"/>
+        <SystemUnitClass
+                Name="DataSpecificationIEC61360"
+                ID="8c019d8e-7ddd-4283-aa63-1747021c3d1b">
+            <Description>The content of an AAS Data Specification template for IEC61360.</Description>
+            <Attribute
+                    Name="preferredName"
+                    AttributeDataType="xs:string">
+                <Description>Identifies the attribute hierarchy for preferredName in above attribute hierachy. Subordinate
+                    attributes are designated by the country code information (see aml-lang literal).
+                </Description>
+                <RefSemantic
+                        CorrespondingAttributePath="IEC:DataSpecificationIEC61360/preferredName"/>
+            </Attribute>
+            <Attribute
+                    Name="shortName"
+                    AttributeDataType="xs:string">
+                <Description>Identifies the attribute for shortName in above attribute hierarchy.</Description>
+                <RefSemantic
+                        CorrespondingAttributePath="IEC:DataSpecificationIEC61360/shortName"/>
+            </Attribute>
+            <Attribute
+                    Name="unit"
+                    AttributeDataType="xs:string">
+                <Description>Identifies the attribute for unit in above attribute hierarchy.</Description>
+                <RefSemantic
+                        CorrespondingAttributePath="IEC:DataSpecificationIEC61360/unit"/>
+            </Attribute>
+            <Attribute
+                    Name="unitId"
+                    AttributeDataType="xs:string">
+                <Description>Identifies the attribute for unitId in above attribute hierarchy in its string serialization.
+                </Description>
+                <RefSemantic
+                        CorrespondingAttributePath="IEC:DataSpecificationIEC61360/unitId"/>
+            </Attribute>
+            <Attribute
+                    Name="sourceOfDefinition"
+                    AttributeDataType="xs:string">
+                <Description>Identifies the attribute for sourceOfDefinition in above attribute hierachy. Subordinate
+                    attributes are designated by the country code information (see aml-lang literal).
+                </Description>
+                <RefSemantic
+                        CorrespondingAttributePath="IEC:DataSpecificationIEC61360/sourceOfDefinition"/>
+            </Attribute>
+            <Attribute
+                    Name="symbol"
+                    AttributeDataType="xs:string">
+                <Description>Identifies the attribute for symbol in above attribute hierarchy.</Description>
+                <RefSemantic
+                        CorrespondingAttributePath="IEC:DataSpecificationIEC61360/symbol"/>
+            </Attribute>
+            <Attribute
+                    Name="dataType"
+                    AttributeDataType="xs:string">
+                <Description>Identifies the attribute for dataType in above attribute hierarchy.</Description>
+                <RefSemantic
+                        CorrespondingAttributePath="IEC:DataSpecificationIEC61360/dataType"/>
+            </Attribute>
+            <Attribute
+                    Name="definition"
+                    AttributeDataType="xs:string">
+                <Description>Identifies the attribute for definition in above attribute hierachy. Subordinate attributes are
+                    designated by the country code information (see aml-lang literal).
+                </Description>
+                <RefSemantic
+                        CorrespondingAttributePath="IEC:DataSpecificationIEC61360/definition"/>
+            </Attribute>
+            <Attribute
+                    Name="valueFormat"
+                    AttributeDataType="xs:string">
+                <Description>Identifies the attribute for valueFormat in above attribute hierarchy.</Description>
+                <RefSemantic
+                        CorrespondingAttributePath="IEC:DataSpecificationIEC61360/valueFormat"/>
+            </Attribute>
+            <Attribute
+                    Name="valueList"
+                    AttributeDataType="xs:string">
+                <Description>Identifies the attribute for valueList in above attribute hierarchy.</Description>
+                <RefSemantic
+                        CorrespondingAttributePath="IEC:DataSpecificationIEC61360/valueList"/>
+            </Attribute>
+            <Attribute
+                    Name="value"
+                    AttributeDataType="xs:string">
+                <Description>The attribute value.</Description>
+                <RefSemantic
+                        CorrespondingAttributePath="IEC:DataSpecificationIEC61360/value"/>
+            </Attribute>
+            <Attribute
+                    Name="valueId"
+                    AttributeDataType="xs:string">
+                <Description>The id for the value.</Description>
+                <RefSemantic
+                        CorrespondingAttributePath="IEC:DataSpecificationIEC61360/valueId"/>
+            </Attribute>
+            <SupportedRoleClass
+                    RefRoleClassPath="AssetAdministrationShellRoleClassLib/DataSpecificationContent"/>
+        </SystemUnitClass>
+    </SystemUnitClass>
+</SystemUnitClassLib>

@@ -15,6 +15,11 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.model.caex;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
+import java.util.List;
+
 public class CAEXFile {
 
     public CAEXFile() {
@@ -39,6 +44,12 @@ public class CAEXFile {
     private AdditionalInformation additionalInformation;
 
     private InstanceHierarchy instanceHierarchy;
+
+    private List<String> interfaceClassLibs;
+
+    private List<String> roleClassLibs;
+
+    private List<String> systemUnitClassLibs;
 
     public String getXmlns() {
         return xmlns;
@@ -78,5 +89,29 @@ public class CAEXFile {
 
     public void setInstanceHierarchy(InstanceHierarchy instanceHierarchy) {
         this.instanceHierarchy = instanceHierarchy;
+    }
+
+    public List<String> getInterfaceClassLibs() {
+        return interfaceClassLibs;
+    }
+
+    public void setInterfaceClassLibs(List<String> interfaceClassLibs) {
+        this.interfaceClassLibs = interfaceClassLibs;
+    }
+
+    public List<String> getRoleClassLibs() {
+        return roleClassLibs;
+    }
+
+    public void setRoleClassLibs(List<String> roleClassLibs) {
+        this.roleClassLibs = roleClassLibs;
+    }
+
+    public List<String> getSystemUnitClassLibs() {
+        return systemUnitClassLibs;
+    }
+
+    public void setSystemUnitClassLibs(List<String> systemUnitClassLibs) {
+        this.systemUnitClassLibs = systemUnitClassLibs;
     }
 }

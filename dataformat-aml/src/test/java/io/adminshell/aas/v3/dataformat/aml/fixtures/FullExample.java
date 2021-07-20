@@ -23,11 +23,11 @@ import java.util.Base64;
 
 public class FullExample {
 
-    public static final java.io.File FILE = new java.io.File("src/test/resources/test_demo_full_example.json");
+    public static final java.io.File FILE = new java.io.File("src/interface-class-lib_automl_interface/resources/test_demo_full_example.json");
 
     public static final AssetAdministrationShell AAS_1 = new DefaultAssetAdministrationShell.Builder()
             .idShort("TestAssetAdministrationShell")
-            .description(new LangString("An Example Asset Administration Shell for the test application", "en-us"))
+            .description(new LangString("An Example Asset Administration Shell for the interface-class-lib_automl_interface application", "en-us"))
             .description(new LangString("Ein Beispiel-Verwaltungsschale für eine Test-Anwendung", "de"))
             .identification(new DefaultIdentifier.Builder()
                     .idType(IdentifierType.IRI)
@@ -136,7 +136,7 @@ public class FullExample {
 
     public static final AssetAdministrationShell AAS_4 = new DefaultAssetAdministrationShell.Builder()
             .idShort("TestAssetAdministrationShell")
-            .description(new LangString("An Example Asset Administration Shell for the test application", "en-us"))
+            .description(new LangString("An Example Asset Administration Shell for the interface-class-lib_automl_interface application", "en-us"))
             .description(new LangString("Ein Beispiel-Verwaltungsschale für eine Test-Anwendung", "de"))
             .identification(new DefaultIdentifier.Builder()
                     .idType(IdentifierType.IRI)
@@ -180,7 +180,7 @@ public class FullExample {
 
     public static final Submodel SUBMODEL_1 = new DefaultSubmodel.Builder()
             .idShort("Identification")
-            .description(new LangString("An example asset identification submodel for the test application", "en-us"))
+            .description(new LangString("An example asset identification submodel for the interface-class-lib_automl_interface application", "en-us"))
             .description(new LangString("Ein Beispiel-Identifikations-Submodel für eine Test-Anwendung", "de"))
             .identification(new DefaultIdentifier.Builder()
                     .idType(IdentifierType.IRI)
@@ -267,7 +267,7 @@ public class FullExample {
 
     public static final Submodel SUBMODEL_2 = new DefaultSubmodel.Builder()
             .idShort("BillOfMaterial")
-            .description(new LangString("An example bill of material submodel for the test application", "en-us"))
+            .description(new LangString("An example bill of material submodel for the interface-class-lib_automl_interface application", "en-us"))
             .description(new LangString("Ein Beispiel-BillofMaterial-Submodel für eine Test-Anwendung", "de"))
             .identification(new DefaultIdentifier.Builder()
                     .idType(IdentifierType.IRI)
@@ -364,7 +364,7 @@ public class FullExample {
 
     public static final Submodel SUBMODEL_3 = new DefaultSubmodel.Builder()
             .idShort("TestSubmodel")
-            .description(new LangString("An example submodel for the test application", "en-us"))
+            .description(new LangString("An example submodel for the interface-class-lib_automl_interface application", "en-us"))
             .description(new LangString("Ein Beispiel-Teilmodell für eine Test-Anwendung", "de"))
             .identification(new DefaultIdentifier.Builder()
                     .idType(IdentifierType.IRI)
@@ -805,7 +805,7 @@ public class FullExample {
 
     public static final Submodel SUBMODEL_6 = new DefaultSubmodel.Builder()
             .idShort("TestSubmodel")
-            .description(new LangString("An example submodel for the test application", "en-us"))
+            .description(new LangString("An example submodel for the interface-class-lib_automl_interface application", "en-us"))
             .description(new LangString("Ein Beispiel-Teilmodell für eine Test-Anwendung", "de"))
             .identification(new DefaultIdentifier.Builder()
                     .idType(IdentifierType.IRI)
@@ -1123,7 +1123,7 @@ public class FullExample {
 
     public static final Submodel SUBMODEL_7 = new DefaultSubmodel.Builder()
             .idShort("TestSubmodel")
-            .description(new LangString("An example submodel for the test application", "en-us"))
+            .description(new LangString("An example submodel for the interface-class-lib_automl_interface application", "en-us"))
             .description(new LangString("Ein Beispiel-Teilmodell für eine Test-Anwendung", "de"))
             .identification(new DefaultIdentifier.Builder()
                     .idType(IdentifierType.IRI)
@@ -1457,7 +1457,7 @@ public class FullExample {
 
     public final static ConceptDescription CONCEPT_DESCRIPTION_1 = new DefaultConceptDescription.Builder()
             .idShort("TestConceptDescription")
-            .description(new LangString("An example concept description  for the test application", "en-us"))
+            .description(new LangString("An example concept description  for the interface-class-lib_automl_interface application", "en-us"))
             .description(new LangString("Ein Beispiel-ConceptDescription für eine Test-Anwendung", "de"))
             .identification(new DefaultIdentifier.Builder()
                     .idType(IdentifierType.IRI)
@@ -1486,7 +1486,7 @@ public class FullExample {
 
     public final static ConceptDescription CONCEPT_DESCRIPTION_3 = new DefaultConceptDescription.Builder()
             .idShort("TestConceptDescription")
-            .description(new LangString("An example concept description  for the test application", "en-us"))
+            .description(new LangString("An example concept description  for the interface-class-lib_automl_interface application", "en-us"))
             .description(new LangString("Ein Beispiel-ConceptDescription für eine Test-Anwendung", "de"))
             .identification(new DefaultIdentifier.Builder()
                     .idType(IdentifierType.IRI)
@@ -1571,11 +1571,11 @@ public class FullExample {
             .assetAdministrationShells(Arrays.asList(
 //                    AAS_1,
 //                    AAS_2,
-                    AAS_3
-//                    AAS_4
+//                    AAS_3,
+                    AAS_4
             ))
             .submodels(Arrays.asList(
-//                    SUBMODEL_1,
+                    SUBMODEL_1
 //                    SUBMODEL_2,
 //                    SUBMODEL_3,
 //                    SUBMODEL_4,
