@@ -60,6 +60,14 @@ class Parser {
                 ArrayList<Class<?>> implementingClasses = getImplementingClasses(targetClass);
 
                 //Get a list of all "rdf:type" statements in our model
+                //In case of a blank node, the "object URI" will just be a string and no valid URI. In that  case, we need a different query syntax
+                try {
+                    new URI(objectUri).toURL();
+                }
+                catch (URISyntaxException | IllegalArgumentException e)
+                {
+                    e.printStackTrace();
+                }
                 String queryString = "SELECT ?type { BIND(<" + objectUri + "> AS ?s). ?s a ?type . }";
                 Query query = QueryFactory.create(queryString);
                 QueryExecution queryExecution = QueryExecutionFactory.create(query, inputModel);
