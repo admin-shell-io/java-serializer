@@ -6,6 +6,7 @@ import io.adminshell.aas.v3.model.annotations.KnownSubtypes;
 import org.apache.jena.datatypes.DatatypeFormatException;
 import org.apache.jena.query.*;
 import org.apache.jena.rdf.model.*;
+import org.apache.jena.riot.Lang;
 import org.apache.jena.riot.RDFDataMgr;
 import org.apache.jena.riot.RDFLanguages;
 import org.apache.jena.riot.RiotException;
@@ -969,17 +970,25 @@ class Parser {
     private Model readMessage(String message) throws IOException {
 
         Model targetModel = ModelFactory.createDefaultModel();
+        List<Lang> supportedLanguages = new ArrayList<>(
+                Arrays.asList(
+                        RDFLanguages.JSONLD, //JSON-LD first
+                        RDFLanguages.TURTLE, //N-TRIPLE is a subset of Turtle
+                        RDFLanguages.RDFXML
+                ));
 
-        //Read incoming message to the same model
-        try {
-            RDFDataMgr.read(targetModel, new ByteArrayInputStream(message.getBytes()), RDFLanguages.JSONLD);
+        boolean successfullyParsed = false;
+        for (Lang lang : supportedLanguages) {
+            try {
+                RDFDataMgr.read(targetModel, new ByteArrayInputStream(message.getBytes()), lang);
+                successfullyParsed = true; //Only set, if no exception occurred
+            } catch (RiotException ignored) {
+            }
         }
-        catch (RiotException e)
-        {
-            throw new IOException("The message is no valid JSON-LD and therefore could not be parsed.", e);
+        if (successfullyParsed) {
+            return targetModel;
         }
-
-        return targetModel;
+        throw new IOException("Could not parse string as any supported RDF format (JSON-LD, Turtle/N-Triple, RDF-XML).");
     }
 
 
