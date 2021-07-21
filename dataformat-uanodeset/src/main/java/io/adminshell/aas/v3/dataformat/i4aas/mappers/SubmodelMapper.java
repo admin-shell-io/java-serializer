@@ -3,17 +3,11 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 import java.util.List;
 
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
-import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
-
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.sme.SubmodelElementMappers;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
-import io.adminshell.aas.v3.model.ModelingKind;
-import io.adminshell.aas.v3.model.Property;
 import io.adminshell.aas.v3.model.Submodel;
 import io.adminshell.aas.v3.model.SubmodelElement;
-import io.adminshell.aas.v3.model.SubmodelElementCollection;
 
 public class SubmodelMapper extends IdentifiableMapper<Submodel> implements HasKindMapper, HasSemanticsMapper {
 

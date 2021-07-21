@@ -2,8 +2,6 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers.sme;
 
 import java.util.Map;
 import java.util.TreeMap;
-import java.util.function.Function;
-
 import javax.xml.bind.JAXBElement;
 
 import org.opcfoundation.ua._2008._02.types.ObjectFactory;

@@ -369,4 +369,10 @@ public class AASSimple {
             .conceptDescriptions(CONCEPT_DESCRIPTION_DOCUMENT)
             .build();
 
+    
+    public static void main(String[] args) {
+		DefaultAssetAdministrationShell defaultAssetAdministrationShell = new DefaultAssetAdministrationShell();
+		defaultAssetAdministrationShell.setCategory("this is my category");
+		DefaultAssetAdministrationShell build = new DefaultAssetAdministrationShell.Builder().category("this is my category").derivedFrom(null).build();
+	}
 }

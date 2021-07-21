@@ -1,11 +1,10 @@
-package io.adminshell.aas.v3.dataformat.i4aas.mappers.sme;
+package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 
 import javax.xml.bind.JAXBElement;
 
 import org.opcfoundation.ua._2008._02.types.ObjectFactory;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.I4AASMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;

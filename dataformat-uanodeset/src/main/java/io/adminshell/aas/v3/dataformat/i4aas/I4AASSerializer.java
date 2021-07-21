@@ -1,12 +1,6 @@
 package io.adminshell.aas.v3.dataformat.i4aas;
 
-import java.io.StringWriter;
-
-import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-
-import org.opcfoundation.ua._2011._03.uanodeset.UANode;
 import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
 
 import io.adminshell.aas.v3.dataformat.SerializationException;

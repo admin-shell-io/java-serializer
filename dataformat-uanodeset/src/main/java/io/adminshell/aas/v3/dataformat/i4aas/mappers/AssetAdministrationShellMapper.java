@@ -2,21 +2,11 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 
 import java.util.List;
 
-import javax.swing.text.StyledEditorKit.ForegroundAction;
-
-import org.opcfoundation.ua._2011._03.uanodeset.ListOfReferences;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
-import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
-import org.opcfoundation.ua._2011._03.uanodeset.UAObject.Builder;
-
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetInformation;
-import io.adminshell.aas.v3.model.Key;
-import io.adminshell.aas.v3.model.ModelingKind;
 import io.adminshell.aas.v3.model.Submodel;
 
 public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdministrationShell> {

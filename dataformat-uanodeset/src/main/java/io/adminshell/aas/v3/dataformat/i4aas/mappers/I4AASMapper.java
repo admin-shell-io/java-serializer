@@ -1,23 +1,16 @@
 package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 
-import javax.xml.bind.JAXBElement;
-
-import org.opcfoundation.ua._2008._02.types.ObjectFactory;
 import org.opcfoundation.ua._2011._03.uanodeset.ListOfReferences;
 import org.opcfoundation.ua._2011._03.uanodeset.LocalizedText;
 import org.opcfoundation.ua._2011._03.uanodeset.Reference;
 import org.opcfoundation.ua._2011._03.uanodeset.UANode;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
-import org.opcfoundation.ua._2011._03.uanodeset.UAObject.Builder;
-
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.BasicId;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
 import io.adminshell.aas.v3.model.LangString;
-import io.adminshell.aas.v3.model.Referable;
 
 public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 
