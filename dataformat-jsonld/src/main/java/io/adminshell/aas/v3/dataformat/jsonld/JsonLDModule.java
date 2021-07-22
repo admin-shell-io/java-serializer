@@ -9,6 +9,7 @@ import io.adminshell.aas.v3.model.LangString;
 
 import java.math.BigDecimal;
 import java.net.URI;
+import java.util.Map;
 
 
 import javax.xml.datatype.XMLGregorianCalendar;
@@ -19,11 +20,11 @@ import javax.xml.datatype.XMLGregorianCalendar;
  */
 public class JsonLDModule extends SimpleModule {
 
-    public JsonLDModule() {
+
+    public JsonLDModule(Map<Object, String> idMap) {
         super();
 
-
-        setSerializerModifier(new JsonLDSerializerModifier());
+        setSerializerModifier(new JsonLDSerializerModifier(idMap));
         
         addSerializer(XMLGregorianCalendar.class, new XMLGregorianCalendarSerializer());
         addDeserializer(XMLGregorianCalendar.class, new XMLGregorianCalendarDeserializer());

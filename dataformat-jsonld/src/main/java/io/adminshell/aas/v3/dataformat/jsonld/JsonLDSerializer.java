@@ -28,8 +28,11 @@ public class JsonLDSerializer extends BeanSerializer {
 
     static final Map<String, String> contextItems = new HashMap<>();
 
-    JsonLDSerializer(BeanSerializerBase src) {
+    private final Map<Object, String> idMap;
+
+    JsonLDSerializer(BeanSerializerBase src, Map<Object, String> idMap) {
         super(src);
+        this.idMap = Objects.requireNonNullElseGet(idMap, HashMap::new);
     }
 
 
@@ -48,6 +51,18 @@ public class JsonLDSerializer extends BeanSerializer {
             //gen.writeStringField("@context", "https://jira.iais.fraunhofer.de/stash/projects/ICTSL/repos/ids-infomodel-commons/raw/jsonld-context/3.0.0/context.jsonld"); // only add @context on top level
 
         }
+
+        if(idMap.containsKey(bean))
+        {
+            gen.writeStringField("@id", idMap.get(bean));
+        }
+        else
+        {
+            String randomUri = "https://admin-shell.io/autogen/" + UUID.randomUUID();
+            idMap.put(bean, randomUri);
+            gen.writeStringField("@id", randomUri);
+        }
+
         WritableTypeId typeIdDef = _typeIdDef(typeSer, bean, JsonToken.START_OBJECT);
         String resolvedTypeId = typeIdDef.id != null ? typeIdDef.id.toString() : typeSer.getTypeIdResolver().idFromValue(bean);
         if (resolvedTypeId != null) {

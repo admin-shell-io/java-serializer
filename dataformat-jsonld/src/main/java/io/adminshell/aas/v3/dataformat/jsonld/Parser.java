@@ -444,6 +444,8 @@ class Parser {
                     }
                     if (querySolution.contains(sparqlParameterName)) {
                         String currentSparqlBinding = querySolution.get(sparqlParameterName).toString();
+                        boolean objectIsBlankNode = querySolution.get(sparqlParameterName).isResource() && querySolution.get(sparqlParameterName).asNode().isBlank();
+                        System.out.println(currentSparqlBinding + " is blank node? " + objectIsBlankNode);
 
                         if (currentType.isEnum()) {
                             entry.getValue().invoke(returnObject, handleEnum(currentType, currentSparqlBinding));

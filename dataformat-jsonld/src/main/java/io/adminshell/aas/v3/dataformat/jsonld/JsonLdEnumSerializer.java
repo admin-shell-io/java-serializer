@@ -19,7 +19,6 @@ package io.adminshell.aas.v3.dataformat.jsonld;
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
-import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import io.adminshell.aas.v3.model.annotations.IRI;
 
 import java.io.IOException;
@@ -29,7 +28,8 @@ public class JsonLdEnumSerializer extends JsonSerializer<Enum<?>> {
 
     @Override
     public void serialize(Enum value, JsonGenerator gen, SerializerProvider provider) throws IOException {
-        if (ReflectionHelper.ENUMS.contains(value.getClass())) {
+        if(value.getClass().isEnum() && value.getClass().getName().startsWith("io.adminshell.aas."))
+        {
             gen.writeString(translate(value.getClass(), value.name()));
         } else {
             provider.findValueSerializer(Enum.class).serialize(value, gen, provider);

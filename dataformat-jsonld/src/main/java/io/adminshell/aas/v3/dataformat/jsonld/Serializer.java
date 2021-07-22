@@ -24,9 +24,7 @@ import org.slf4j.LoggerFactory;
 import java.io.*;
 import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer, Deserializer {
 
@@ -71,15 +69,15 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer, D
      * @return RDF serialization of the provided object graph
      */
     public String serialize(Object instance) throws IOException {
-        return serialize(instance, RDFLanguages.JSONLD);
+        return serialize(instance, RDFLanguages.JSONLD, new HashMap<>());
     }
 
     //Synchronized is required for thread safety. Without it, context elements might be missing in case of multiple simultaneous calls to this function
-    public synchronized String serialize(Object instance, Lang format) throws IOException {
+    public synchronized String serialize(Object instance, Lang format, Map<Object, String> idMap) throws IOException {
         if (format != RDFLanguages.JSONLD && format != RDFLanguages.TURTLE && format != RDFLanguages.RDFXML) {
             throw new IOException("RDFFormat " + format + " is currently not supported by the serializer.");
         }
-        mapper.registerModule(new JsonLDModule());
+        mapper.registerModule(new JsonLDModule(idMap));
         String jsonLD = (instance instanceof Collection)
                 ? serializeCollection((Collection<?>) instance)
                 : mapper.writerWithDefaultPrettyPrinter().writeValueAsString(instance);
@@ -202,6 +200,19 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer, D
         }
     }
 
+    public String write(AssetAdministrationShellEnvironment aasEnvironment, Lang format) throws SerializationException {
+        return write(aasEnvironment, format, new HashMap<>());
+    }
+
+    public String write(AssetAdministrationShellEnvironment aasEnvironment, Lang format, Map<Object, String> idMap) throws SerializationException {
+        try {
+            return serialize(aasEnvironment, format, idMap);
+        }
+        catch (IOException e)
+        {
+            throw new SerializationException("Failed to serialize environment.", e);
+        }
+    }
     @Override
     public AssetAdministrationShellEnvironment read(String value) throws DeserializationException {
         try {
