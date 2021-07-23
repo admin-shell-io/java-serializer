@@ -18,7 +18,6 @@ public interface HasDataSpecificationMapper {
 	public default void mapDataSpecification(HasDataSpecification source, UAObject target, MappingContext ctx) {
 
 		UAObject folder = I4AASMapper.createFolder(target, "DataSpecification", ctx);
-		I4AASMapper.attachAsComponent(target, folder);
 
 		List<EmbeddedDataSpecification> embeddedDataSpecifications = source.getEmbeddedDataSpecifications();
 		for (int i = 0; i < embeddedDataSpecifications.size(); i++) {

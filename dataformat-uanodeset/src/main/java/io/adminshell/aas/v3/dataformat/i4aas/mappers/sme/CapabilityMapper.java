@@ -19,4 +19,9 @@ public class CapabilityMapper extends SubmodelElementMapper<Capability> {
 		addTypeReference(I4aasId.AASCapabilityType);
 		return target;
 	}
+	
+	@Override
+	protected void mapAndAttachChildren() {
+		super.mapAndAttachChildren();
+	}
 }

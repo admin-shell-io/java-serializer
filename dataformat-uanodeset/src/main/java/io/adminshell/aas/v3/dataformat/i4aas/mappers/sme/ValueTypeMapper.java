@@ -19,9 +19,14 @@ public class ValueTypeMapper extends I4AASMapper<String, UAVariable> {
 	private static Map<String, AASValueTypeDataType> staticMap = new TreeMap<>();
 	static {
 		staticMap.put("integer", AASValueTypeDataType.INT_32_5);
-		staticMap.put("langString", AASValueTypeDataType.LOCALIZED_TEXT_14);
+		staticMap.put("int", AASValueTypeDataType.INT_32_5);
+		staticMap.put("langstring", AASValueTypeDataType.LOCALIZED_TEXT_14);
 		staticMap.put("string", AASValueTypeDataType.STRING_11);
-		// TODO
+		staticMap.put("boolean", AASValueTypeDataType.BOOLEAN_0);
+		staticMap.put("float", AASValueTypeDataType.FLOAT_9);
+		staticMap.put("double", AASValueTypeDataType.DOUBLE_10);
+		staticMap.put("long", AASValueTypeDataType.INT_64_7);
+		//to be extended
 	}
 
 	public ValueTypeMapper(String src, MappingContext ctx) {
@@ -47,7 +52,6 @@ public class ValueTypeMapper extends I4AASMapper<String, UAVariable> {
 
 	@Override
 	protected void mapAndAttachChildren() {
-		// TODO Auto-generated method stub
 	}
 
 	private AASValueTypeDataType mappingFuntion(String input) {
@@ -57,7 +61,6 @@ public class ValueTypeMapper extends I4AASMapper<String, UAVariable> {
 		if (aasValueTypeDataType == null) {
 			return aasValueTypeDataType;
 		}
-		// TODO
 		return null;
 	}
 

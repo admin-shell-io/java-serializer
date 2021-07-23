@@ -18,5 +18,11 @@ public class OperationMapper extends SubmodelElementMapper<Operation> {
 		addTypeReference(I4aasId.AASOperationType);
 		return target;
 	}
+	
+	@Override
+	protected void mapAndAttachChildren() {
+		super.mapAndAttachChildren();
+		//not applicable for I4AAS
+	}
 
 }

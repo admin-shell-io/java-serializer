@@ -5,6 +5,7 @@ public enum UaId implements BasicId  {
 	Boolean("Boolean", 1),
 	String("String", 12),
 	DateTime("DateTime", 13),
+	ByteString("ByteString", 15),
 	LocalizedText("LocalizedText", 21),
 	Organizes("Organizes", 35),
 	HasTypeDefinition("HasTypeDefinition", 40),

@@ -13,9 +13,6 @@ public class EventElementMapper extends SubmodelElementMapper<EventElement> {
 
 	@Override
 	protected UAObject createTargetObject() {
-		super.createTargetObject();
-		throw new UnsupportedOperationException("Unknown Target Type.");
-		// addTypeReference(I4aasId.???);
-		// return target;
+		return super.createTargetObject();
 	}
 }

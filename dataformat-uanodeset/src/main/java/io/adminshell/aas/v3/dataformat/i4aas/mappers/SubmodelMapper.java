@@ -6,10 +6,11 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.sme.SubmodelElementMappers;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
+import io.adminshell.aas.v3.model.Qualifiable;
 import io.adminshell.aas.v3.model.Submodel;
 import io.adminshell.aas.v3.model.SubmodelElement;
 
-public class SubmodelMapper extends IdentifiableMapper<Submodel> implements HasKindMapper, HasSemanticsMapper, HasDataSpecificationMapper {
+public class SubmodelMapper extends IdentifiableMapper<Submodel> implements HasKindMapper, HasSemanticsMapper, HasDataSpecificationMapper, QualifiableMapper {
 
 	public SubmodelMapper(Submodel src, MappingContext ctx) {
 		super(src, ctx);
@@ -35,8 +36,8 @@ public class SubmodelMapper extends IdentifiableMapper<Submodel> implements HasK
 			UAObject uaSubmodel = mapper.map();
 			attachAsComponent(target, uaSubmodel);
 		}
-		
 		mapDataSpecification(source, target, ctx);
+		mapQualifiable(source, target, ctx);
 	}
 
 }
