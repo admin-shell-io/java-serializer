@@ -37,6 +37,6 @@ public class ReferableMapper<T extends Referable> extends I4AASMapper<T, UAObjec
 	}
 
 	protected String browseNameOf(Referable src) {
-		return super.browseNameOf(src.getIdShort());
+		return super.createBrowseName(src.getIdShort());
 	}
 }

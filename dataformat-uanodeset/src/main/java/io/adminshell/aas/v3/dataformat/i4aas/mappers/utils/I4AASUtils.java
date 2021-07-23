@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.opcfoundation.ua._2011._03.uanodeset.LocalizedText;
 import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
+import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
 import io.adminshell.aas.v3.model.Asset;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
@@ -15,10 +16,6 @@ public class I4AASUtils {
 
 	public static String generateRandomNamespace(UANodeSet nodeset) {
 		return "http://example.org/i4aasNs/" + UUID.randomUUID() + "/";
-	}
-
-	public static LocalizedText createLocalizedText(String value) {
-		return LocalizedText.builder().withValue(value).build();
 	}
 
 	public static LocalizedText createDisplayName(Referable ref) {

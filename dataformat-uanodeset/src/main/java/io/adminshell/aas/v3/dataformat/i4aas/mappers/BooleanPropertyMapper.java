@@ -22,11 +22,11 @@ public class BooleanPropertyMapper extends I4AASMapper<Boolean, UAVariable> {
 	protected UAVariable createTargetObject() {
 		JAXBElement<Boolean> idBoolValue = new ObjectFactory().createBoolean(source);
 		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idVarBuilder = UAVariable.builder()
-				.withValue().withAny(idBoolValue).end().withDisplayName(I4AASUtils.createLocalizedText(key))
+				.withValue().withAny(idBoolValue).end().withDisplayName(createLocalizedText(key))
 				.withDataType(UaId.Boolean.getName()).withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(browseNameOf(key)).withAccessLevel(3L);
+				.withBrowseName(createBrowseName(key)).withAccessLevel(3L);
 		target = idVarBuilder.build();
-		addTypeReference(target, UaId.PropertyType);
+		addTypeReferenceFor(target, UaId.PropertyType);
 		return target;
 	}
 

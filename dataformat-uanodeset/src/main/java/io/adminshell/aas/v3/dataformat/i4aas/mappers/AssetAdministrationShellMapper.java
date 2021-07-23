@@ -42,13 +42,8 @@ public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdmi
 		List<io.adminshell.aas.v3.model.Reference> submodels = source.getSubmodels();
 		for (int i = 0; i < submodels.size(); i++) {
 			io.adminshell.aas.v3.model.Reference reference = submodels.get(i);
-			Submodel resolvedSubmodel = ctx.resolveSubmodelReference(reference);
-			if (resolvedSubmodel != null) {
-				UAObject createSubmodelUaObject = new SubmodelMapper(resolvedSubmodel, ctx).map();
-				attachAsComponent(target, createSubmodelUaObject);
-			}
-			UAObject createSubmodelReferenceUaObject = new ReferenceMapper(reference, ctx, "SubmodelReference_" + i)
-					.map();
+			UAObject createSubmodelReferenceUaObject = new ReferenceMapper(reference, ctx,
+					"Submodel:" + reference.getKeys().get(0).getValue()).map();
 			attachAsComponent(target, createSubmodelReferenceUaObject);
 		}
 	}

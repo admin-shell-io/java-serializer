@@ -21,8 +21,8 @@ public class DataSpecificationIEC61360Mapper extends I4AASMapper<DataSpecificati
 
 	@Override
 	protected UAObject createTargetObject() {
-		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(browseNameOf(name))
-				.withDisplayName(I4AASUtils.createLocalizedText(name)).build();
+		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(createBrowseName(name))
+				.withDisplayName(createLocalizedText(name)).build();
 		addTypeReference(I4aasId.AASDataSpecificationIEC61360Type);
 		return target;
 	}

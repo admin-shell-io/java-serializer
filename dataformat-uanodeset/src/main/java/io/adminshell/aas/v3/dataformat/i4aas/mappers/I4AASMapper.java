@@ -7,6 +7,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.UANode;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.BasicId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
@@ -46,10 +47,14 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 	}
 
 	protected final void addTypeReference(BasicId idForType) {
-		addTypeReference(target, idForType);
+		addTypeReferenceFor(target, idForType);
 	}
 
-	protected final void addTypeReference(UANode anyNode, BasicId idForType) {
+	protected final void addTypeReferenceFor(UANode anyNode, BasicId idForType) {
+		addTypeReferenceFor(anyNode, idForType, ctx);
+	}
+	
+	private static final void addTypeReferenceFor(UANode anyNode, BasicId idForType, MappingContext ctx) {
 		if (anyNode.getReferences() == null) {
 			anyNode.setReferences(new ListOfReferences());
 		}
@@ -63,12 +68,34 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 					.withValue(ctx.getUaBaseNodeIdAsString((UaId) idForType)).build());
 		}
 	}
+	
+	protected static final LocalizedText createLocalizedText(String value) {
+		return LocalizedText.builder().withValue(value).build();
+	}
 
-	protected final String browseNameOf(String name) {
+	protected final String createBrowseName(String name) {
 		return ctx.getModelNsIndex() + ":" + name;
 	}
 
-	protected final void attachAsProperty(UAObject parent, UAVariable child) {
+	protected final UAObject createFolder(String folderName) {
+		return createFolder((UAObject) target, folderName, ctx);
+	}
+	
+	private static final String createBrowseName(String name, MappingContext ctx) {
+		return ctx.getModelNsIndex() + ":" + name;
+	}
+		
+	public static final UAObject createFolder(UAObject target, String folderName, MappingContext ctx) {
+		UAObject folder = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
+				.withBrowseName(createBrowseName(folderName, ctx)).withDisplayName(createLocalizedText(folderName))
+				.build();
+		ctx.getNodeSet().getUAObjectOrUAVariableOrUAMethod().add(folder);
+		addTypeReferenceFor(folder, UaId.FolderType, ctx);
+		attachAsComponent((UAObject) target, folder);
+		return folder;
+	}
+
+	protected static final void attachAsProperty(UAObject parent, UAVariable child) {
 		child.setParentNodeId(parent.getNodeId());
 		if (child.getReferences() == null) {
 			child.setReferences(new ListOfReferences());
@@ -84,7 +111,7 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 		parent.getReferences().getReference().add(childRef);
 	}
 
-	protected final void attachAsComponent(UAObject parent, UAObject child) {
+	protected static final void attachAsComponent(UAObject parent, UAObject child) {
 		child.setParentNodeId(parent.getNodeId());
 		if (child.getReferences() == null) {
 			child.setReferences(new ListOfReferences());
@@ -100,7 +127,7 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 		parent.getReferences().getReference().add(childRef);
 	}
 
-	protected final void attachAsDictionaryEntry(UAObject parent, UAObject child) {
+	protected static final void attachAsDictionaryEntry(UAObject parent, UAObject child) {
 		child.setParentNodeId(parent.getNodeId());
 		if (child.getReferences() == null) {
 			child.setReferences(new ListOfReferences());
@@ -116,7 +143,7 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 		parent.getReferences().getReference().add(childRef);
 	}
 
-	protected LocalizedText mapLangString(LangString description) {
+	protected static final LocalizedText mapLangString(LangString description) {
 		return LocalizedText.builder().withLocale(description.getLanguage()).withValue(description.getValue()).build();
 	}
 }

@@ -2,6 +2,7 @@ package io.adminshell.aas.v3.dataformat.i4aas;
 
 import javax.xml.bind.JAXBException;
 import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
+import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.Serializer;
@@ -14,10 +15,10 @@ public class I4AASSerializer implements Serializer {
 	@Override
 	public String write(AssetAdministrationShellEnvironment aasEnvironment) throws SerializationException {
 		MappingContext mappingContext = new MappingContext(aasEnvironment);
-		EnvironmentMapper environmentMapper = new EnvironmentMapper(mappingContext.getEnvironment(), mappingContext);
+		UAObject uaEnv = new EnvironmentMapper(mappingContext.getEnvironment(), mappingContext).map();
 		
 		//map action
-		UANodeSet nodeset = environmentMapper.toI4AAS();
+		UANodeSet nodeset = mappingContext.getNodeSet();
 		
 		try {
 			return new UANodeSetMarshaller(nodeset).marshallAsString();

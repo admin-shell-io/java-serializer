@@ -3,11 +3,15 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.sme.FileMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
 import io.adminshell.aas.v3.model.AssetInformation;
 import io.adminshell.aas.v3.model.AssetKind;
+import io.adminshell.aas.v3.model.File;
+import io.adminshell.aas.v3.model.IdentifierKeyValuePair;
 import io.adminshell.aas.v3.model.Reference;
 
 public class AssetInformationMapper extends I4AASMapper<AssetInformation, UAObject> {
@@ -18,7 +22,8 @@ public class AssetInformationMapper extends I4AASMapper<AssetInformation, UAObje
 
 	@Override
 	protected UAObject createTargetObject() {
-		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(browseNameOf("Asset")).withDisplayName(I4AASUtils.createLocalizedText("Asset")).build();
+		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(createBrowseName("Asset"))
+				.withDisplayName(createLocalizedText("Asset")).build();
 		addTypeReference(I4aasId.AASAssetType);
 		return target;
 	}
@@ -28,23 +33,31 @@ public class AssetInformationMapper extends I4AASMapper<AssetInformation, UAObje
 		AssetKind assetKind = source.getAssetKind();
 		UAVariable uaAssetKind = new I4AASEnumMapper(assetKind, ctx).map();
 		attachAsProperty(target, uaAssetKind);
-		
+
 		Reference globalAssetId = source.getGlobalAssetId();
 		if (globalAssetId != null) {
-			UAObject uaIdentification = new ReferenceMapper(globalAssetId, ctx, "AssetIdentificationModel").map();
+			UAObject uaIdentification = new ReferenceMapper(globalAssetId, ctx, "GlobalAssetId").map();
 			attachAsComponent(target, uaIdentification);
 		}
-		
+
 		if (!source.getBillOfMaterials().isEmpty()) {
-			Reference bom = source.getBillOfMaterials().get(0);
+			Reference bom = source.getBillOfMaterials().get(0); // workaround, should be just one entry
 			UAObject uaBom = new ReferenceMapper(bom, ctx, "BillOfMaterial").map();
 			attachAsComponent(target, uaBom);
 		}
-		
-		//not part of I4AAS so far, since it is based on V2
-		source.getDefaultThumbnail();
-		source.getSpecificAssetIds();
-		//TODO
+
+		File defaultThumbnail = source.getDefaultThumbnail();
+		if (defaultThumbnail != null) {
+			UAObject uaThumbnail = new FileMapper(defaultThumbnail, ctx, "DefaultThumbnail").map();
+			attachAsComponent(target, uaThumbnail);
+		}
+
+		UAObject folder = createFolder("SpecificAssetId");
+		for (IdentifierKeyValuePair identifierKeyValuePair : source.getSpecificAssetIds()) {
+			UAObject uaIdKVP = new IdentifierKeyValuePairMapper(identifierKeyValuePair, ctx).map();
+			attachAsComponent(folder, uaIdKVP);
+		}
 	}
+
 
 }

@@ -17,7 +17,7 @@ public class AdministrationMapper extends I4AASMapper<AdministrativeInformation,
 	@Override
 	protected UAObject createTargetObject() {
 		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
-		.withBrowseName(browseNameOf("Administration")).withDisplayName(I4AASUtils.createLocalizedText("Administration")).build();
+		.withBrowseName(createBrowseName("Administration")).withDisplayName(createLocalizedText("Administration")).build();
 		addTypeReference(I4aasId.AASAdministrativeInformationType);
 		return target;
 	}

@@ -34,8 +34,8 @@ public class ReferenceMapper extends I4AASMapper<Reference, UAObject> {
 
 	@Override
 	protected UAObject createTargetObject() {
-		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(browseNameOf(browseName))
-				.withDisplayName(I4AASUtils.createLocalizedText(browseName)).build();
+		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(createBrowseName(browseName))
+				.withDisplayName(createLocalizedText(browseName)).build();
 		addTypeReference(I4aasId.AASReferenceType);
 		return target;
 	}
@@ -44,9 +44,9 @@ public class ReferenceMapper extends I4AASMapper<Reference, UAObject> {
 	protected void mapAndAttachChildren() {
 		UAVariable UAKeyVariable = UAVariable.builder().withNodeId(ctx.newModelNodeIdAsString())
 				.withDataType(I4aasId.AASKeyDataType.getName()).withValueRank(1).withArrayDimensions("0")
-				.withAccessLevel(3L).withDisplayName(I4AASUtils.createLocalizedText("Keys"))
-				.withBrowseName(browseNameOf("Keys")).build();
-		addTypeReference(UAKeyVariable, UaId.PropertyType);
+				.withAccessLevel(3L).withDisplayName(createLocalizedText("Keys"))
+				.withBrowseName(createBrowseName("Keys")).build();
+		addTypeReferenceFor(UAKeyVariable, UaId.PropertyType);
 		attachAsProperty(target, UAKeyVariable);
 		addToNodeset(UAKeyVariable);
 		

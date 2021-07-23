@@ -29,8 +29,8 @@ public class ValueTypeMapper extends I4AASMapper<String, UAVariable> {
 
 	@Override
 	protected UAVariable createTargetObject() {
-		Builder<Void> builder = UAVariable.builder().withDisplayName(I4AASUtils.createLocalizedText("ValueType"))
-				.withBrowseName(browseNameOf("ValueType")).withNodeId(ctx.newModelNodeIdAsString()).withAccessLevel(3L)
+		Builder<Void> builder = UAVariable.builder().withDisplayName(createLocalizedText("ValueType"))
+				.withBrowseName(createBrowseName("ValueType")).withNodeId(ctx.newModelNodeIdAsString()).withAccessLevel(3L)
 				.withDataType(AASValueTypeDataType.class.getSimpleName());
 
 		AASValueTypeDataType derivedEnum = staticMap.computeIfAbsent(source, this::mappingFuntion);
@@ -40,7 +40,7 @@ public class ValueTypeMapper extends I4AASMapper<String, UAVariable> {
 
 		JAXBElement<Integer> targetIdTypeVar = new ObjectFactory().createInt32(derivedEnum.ordinal());
 		UAVariable uaVariable = builder.withValue().withAny(targetIdTypeVar).end().build();
-		addTypeReference(uaVariable, UaId.PropertyType);
+		addTypeReferenceFor(uaVariable, UaId.PropertyType);
 		return uaVariable;
 	}
 

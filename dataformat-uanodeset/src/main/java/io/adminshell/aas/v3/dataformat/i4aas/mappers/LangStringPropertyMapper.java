@@ -34,11 +34,11 @@ public class LangStringPropertyMapper extends I4AASMapper<List<LangString>, UAVa
 		}
 		JAXBElement<ListOfLocalizedText> listOfLocalizedText = objectFactory.createListOfLocalizedText(list);
 		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idVarBuilder = UAVariable.builder()
-				.withValue().withAny(listOfLocalizedText).end().withDisplayName(I4AASUtils.createLocalizedText(key))
+				.withValue().withAny(listOfLocalizedText).end().withDisplayName(createLocalizedText(key))
 				.withDataType(UaId.LocalizedText.getName()).withValueRank(1).withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(browseNameOf(key)).withAccessLevel(3L);
+				.withBrowseName(createBrowseName(key)).withAccessLevel(3L);
 		target = idVarBuilder.build();
-		addTypeReference(target, UaId.PropertyType);
+		addTypeReferenceFor(target, UaId.PropertyType);
 		return target;
 	}
 

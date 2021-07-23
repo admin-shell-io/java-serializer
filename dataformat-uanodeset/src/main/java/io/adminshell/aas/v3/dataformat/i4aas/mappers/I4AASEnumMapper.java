@@ -41,14 +41,14 @@ public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
 		
 		Enum match = findMatch(source);
 		
-		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idTypeVarBuilder = UAVariable.builder().withDisplayName(I4AASUtils.createLocalizedText(name))
+		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idTypeVarBuilder = UAVariable.builder().withDisplayName(createLocalizedText(name))
 				.withDataType(match.getClass().getSimpleName()).withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(browseNameOf(name)).withAccessLevel(3L);
+				.withBrowseName(createBrowseName(name)).withAccessLevel(3L);
 		
 		JAXBElement<Integer> targetIdTypeVar2 = new ObjectFactory().createInt32(match.ordinal());
 		UAVariable targetIdTypeVar = idTypeVarBuilder.withValue().withAny(targetIdTypeVar2).end().build();
 
-		addTypeReference(targetIdTypeVar, UaId.PropertyType);
+		addTypeReferenceFor(targetIdTypeVar, UaId.PropertyType);
 
 		return targetIdTypeVar;
 	}
