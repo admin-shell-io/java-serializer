@@ -20,6 +20,7 @@ public class ValueTypeMapper extends I4AASMapper<String, UAVariable> {
 	static {
 		staticMap.put("integer", AASValueTypeDataType.INT_32_5);
 		staticMap.put("langString", AASValueTypeDataType.LOCALIZED_TEXT_14);
+		staticMap.put("string", AASValueTypeDataType.STRING_11);
 		// TODO
 	}
 

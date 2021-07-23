@@ -21,7 +21,7 @@ public class SubmodelElementCollectionMapper extends SubmodelElementMapper<Submo
 	@Override
 	protected UAObject createTargetObject() {
 		super.createTargetObject();
-		if (source.getOrdered()) {			
+		if (source.getOrdered()) {
 			addTypeReference(I4aasId.AASOrderedSubmodelElementCollectionType);
 		} else {
 			addTypeReference(I4aasId.AASSubmodelElementCollectionType);
@@ -34,12 +34,19 @@ public class SubmodelElementCollectionMapper extends SubmodelElementMapper<Submo
 		super.mapAndAttachChildren();
 		Collection<SubmodelElement> values = source.getValues();
 		for (SubmodelElement submodelElement : values) {
-			I4AASMapper<? extends SubmodelElement, UAObject> mapper = SubmodelElementMappers.getMapper(submodelElement, ctx);
+			I4AASMapper<? extends SubmodelElement, UAObject> mapper = SubmodelElementMappers.getMapper(submodelElement,
+					ctx);
 			UAObject uaSubmodel = mapper.map();
-			attachAsComponent(target, uaSubmodel);
+			if (source.getOrdered()) {
+				attachAsOrderedComponent(target, uaSubmodel);
+			} else {
+				attachAsComponent(target, uaSubmodel);
+			}
 		}
-		UAVariable uaAllowDuplicates = new BooleanPropertyMapper("AllowDuplicates", source.getAllowDuplicates(), ctx).map();
+		UAVariable uaAllowDuplicates = new BooleanPropertyMapper("AllowDuplicates", source.getAllowDuplicates(), ctx)
+				.map();
 		attachAsProperty(target, uaAllowDuplicates);
 	}
+
 
 }

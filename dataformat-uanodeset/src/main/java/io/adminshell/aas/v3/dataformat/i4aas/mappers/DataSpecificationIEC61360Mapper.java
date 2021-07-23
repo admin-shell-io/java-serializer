@@ -29,6 +29,7 @@ public class DataSpecificationIEC61360Mapper extends I4AASMapper<DataSpecificati
 
 	@Override
 	protected void mapAndAttachChildren() {
+		
 		DataTypeIEC61360 dataType = source.getDataType();
 		if (dataType != null) {
 			UAVariable uaDataType = new I4AASEnumMapper(dataType, ctx).map();

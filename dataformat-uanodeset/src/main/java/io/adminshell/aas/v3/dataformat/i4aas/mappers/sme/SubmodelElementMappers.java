@@ -43,6 +43,9 @@ public class SubmodelElementMappers {
 		if (submodelElement instanceof io.adminshell.aas.v3.model.Operation) {
 			return new OperationMapper((io.adminshell.aas.v3.model.Operation) submodelElement, ctx);
 		}
+		if (submodelElement instanceof io.adminshell.aas.v3.model.AnnotatedRelationshipElement) {
+			return new AnnotatedRelationshipElementMapper((io.adminshell.aas.v3.model.AnnotatedRelationshipElement) submodelElement, ctx);
+		}
 		if (submodelElement instanceof io.adminshell.aas.v3.model.RelationshipElement) {
 			return new RelationshipElementMapper((io.adminshell.aas.v3.model.RelationshipElement) submodelElement, ctx);
 		}

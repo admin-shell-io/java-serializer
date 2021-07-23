@@ -139,20 +139,20 @@ public class MappingContext {
 		return i4aasNsIndex;
 	}
 
-	public Submodel resolveSubmodelReference(io.adminshell.aas.v3.model.Reference aasRef) {
-		List<Key> keys = aasRef.getKeys();
-		if (keys.get(0).getType() == KeyElements.SUBMODEL) {
-			List<Submodel> submodels = aasEnvironment.getSubmodels();
-			for (Submodel submodel : submodels) {
-				Identifier ident = submodel.getIdentification();
-				if (ident != null && ident.getIdentifier() != null
-						&& ident.getIdentifier().equals(keys.get(0).getValue())) {
-					return submodel;
-				}
-			}
-		}
-		return null;
-	}
+//	public Submodel resolveSubmodelReference(io.adminshell.aas.v3.model.Reference aasRef) {
+//		List<Key> keys = aasRef.getKeys();
+//		if (keys.get(0).getType() == KeyElements.SUBMODEL) {
+//			List<Submodel> submodels = aasEnvironment.getSubmodels();
+//			for (Submodel submodel : submodels) {
+//				Identifier ident = submodel.getIdentification();
+//				if (ident != null && ident.getIdentifier() != null
+//						&& ident.getIdentifier().equals(keys.get(0).getValue())) {
+//					return submodel;
+//				}
+//			}
+//		}
+//		return null;
+//	}
 
 	private Map<String, UANode> identificationToNodeMap = new TreeMap<>();
 	private Map<UANode, String> node2IdentificationMap = new HashMap<>();

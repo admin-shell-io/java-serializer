@@ -16,7 +16,7 @@ public class SubmodelElementMapper<T extends SubmodelElement> extends ReferableM
 	@Override
 	protected void mapAndAttachChildren() {
 		super.mapAndAttachChildren();
-		mapKind(source.getKind(), target, ctx);
+		mapKind(source, target, ctx);
 		mapSemantics(source, target, ctx);
 		mapDataSpecification(source, target, ctx);
 	}

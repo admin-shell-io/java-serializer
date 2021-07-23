@@ -11,7 +11,7 @@ import io.adminshell.aas.v3.model.DataTypeIEC61360;
 import io.adminshell.aas.v3.model.HasDataSpecification;
 import io.adminshell.aas.v3.model.Submodel;
 
-public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdministrationShell> {
+public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdministrationShell> implements HasDataSpecificationMapper {
 
 	public AssetAdministrationShellMapper(AssetAdministrationShell src, MappingContext ctx) {
 		super(src, ctx);
@@ -30,6 +30,7 @@ public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdmi
 		mapAsset();
 		mapSubmodels();
 		mapDerivedFrom();
+		mapDataSpecification(source, target, ctx);
 	}
 
 	private void mapAsset() {

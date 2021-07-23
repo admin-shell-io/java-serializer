@@ -54,7 +54,7 @@ public class IdentifiableMapper<T extends Identifiable> extends ReferableMapper<
 		if (source.getAdministration() != null) {
 			UAObject uaAdministration = new AdministrationMapper(source.getAdministration(), ctx).map();
 			attachAsComponent(target, uaAdministration);			
-		}
+		}		
 	}
 
 

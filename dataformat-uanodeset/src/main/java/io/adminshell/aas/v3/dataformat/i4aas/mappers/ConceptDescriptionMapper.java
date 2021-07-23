@@ -6,6 +6,7 @@ import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.ConceptDescription;
 import io.adminshell.aas.v3.model.IdentifierType;
+import io.adminshell.aas.v3.model.Reference;
 
 public class ConceptDescriptionMapper extends IdentifiableMapper<ConceptDescription> implements HasDataSpecificationMapper {
 
@@ -34,9 +35,11 @@ public class ConceptDescriptionMapper extends IdentifiableMapper<ConceptDescript
 
 		mapDataSpecification(source, target, ctx);
 
-		// not part of I4AAS V2 so far
-		source.getIsCaseOfs();
-		// TODO
+		UAObject createFolder = createFolder("IsCaseOf");
+		for (Reference reference : source.getIsCaseOfs()) {
+			UAObject uaRef = new ReferenceMapper(reference, ctx, reference.getKeys().get(0).getValue()).map();
+			attachAsComponent(createFolder, uaRef);
+		}
 	}
 
 

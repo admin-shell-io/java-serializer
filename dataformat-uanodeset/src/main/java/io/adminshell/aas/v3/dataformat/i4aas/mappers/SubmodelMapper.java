@@ -9,7 +9,7 @@ import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.Submodel;
 import io.adminshell.aas.v3.model.SubmodelElement;
 
-public class SubmodelMapper extends IdentifiableMapper<Submodel> implements HasKindMapper, HasSemanticsMapper {
+public class SubmodelMapper extends IdentifiableMapper<Submodel> implements HasKindMapper, HasSemanticsMapper, HasDataSpecificationMapper {
 
 	public SubmodelMapper(Submodel src, MappingContext ctx) {
 		super(src, ctx);
@@ -26,7 +26,7 @@ public class SubmodelMapper extends IdentifiableMapper<Submodel> implements HasK
 	protected void mapAndAttachChildren() {
 		super.mapAndAttachChildren();
 		
-		mapKind(source.getKind(), target, ctx);
+		mapKind(source, target, ctx);
 		mapSemantics(source, target, ctx);
 		
 		List<SubmodelElement> submodelElements = source.getSubmodelElements();
@@ -35,6 +35,8 @@ public class SubmodelMapper extends IdentifiableMapper<Submodel> implements HasK
 			UAObject uaSubmodel = mapper.map();
 			attachAsComponent(target, uaSubmodel);
 		}
+		
+		mapDataSpecification(source, target, ctx);
 	}
 
 }

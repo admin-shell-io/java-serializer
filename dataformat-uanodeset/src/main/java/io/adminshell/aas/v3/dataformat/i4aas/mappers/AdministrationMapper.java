@@ -8,7 +8,7 @@ import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.AdministrativeInformation;
 
-public class AdministrationMapper extends I4AASMapper<AdministrativeInformation, UAObject> {
+public class AdministrationMapper extends I4AASMapper<AdministrativeInformation, UAObject> implements HasDataSpecificationMapper {
 
 	public AdministrationMapper(AdministrativeInformation src, MappingContext ctx) {
 		super(src, ctx);
@@ -34,6 +34,7 @@ public class AdministrationMapper extends I4AASMapper<AdministrativeInformation,
 			UAVariable versionStringProperty = new StringPropertyMapper("Version", version, ctx).map();
 			attachAsProperty(target, versionStringProperty);
 		}
+		mapDataSpecification(source, target, ctx);
 	}
 
 }

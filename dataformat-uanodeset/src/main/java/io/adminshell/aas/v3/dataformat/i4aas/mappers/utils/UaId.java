@@ -10,6 +10,7 @@ public enum UaId implements BasicId  {
 	HasTypeDefinition("HasTypeDefinition", 40),
 	HasProperty("HasProperty", 46),
 	HasComponent("HasComponent", 47),
+	HasOrderedComponent("HasOrderedComponent", 49),
 	FolderType("FolderType", 61),
 	PropertyType("PropertyType", 68),
 	IdType("IdType", 256),
