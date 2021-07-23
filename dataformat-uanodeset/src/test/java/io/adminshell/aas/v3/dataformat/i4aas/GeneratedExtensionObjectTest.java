@@ -82,7 +82,6 @@ public class GeneratedExtensionObjectTest {
 		org.opcfoundation.ua.i4aas.types.ObjectFactory i4aasTypesObjectFactory = new org.opcfoundation.ua.i4aas.types.ObjectFactory();
 		AASKeyDataType aasKey = new AASKeyDataType();
 		aasKey.setIdType(AASKeyTypeDataType.ID_SHORT_0);
-		aasKey.setLocal(false);
 		aasKey.setType(AASKeyElementsDataType.ACCESS_PERMISSION_RULE_0);
 		aasKey.setValue("mykey");
 		JAXBElement<AASKeyDataType> jaxbAASKeyDataType = i4aasTypesObjectFactory.createAASKeyDataType(aasKey);
@@ -123,7 +122,6 @@ public class GeneratedExtensionObjectTest {
 		org.opcfoundation.ua.i4aas.types.ObjectFactory i4aasTypesObjectFactory = new org.opcfoundation.ua.i4aas.types.ObjectFactory();
 		AASKeyDataType aasKey = new AASKeyDataType();
 		aasKey.setIdType(AASKeyTypeDataType.ID_SHORT_0);
-		aasKey.setLocal(false);
 		aasKey.setType(AASKeyElementsDataType.ACCESS_PERMISSION_RULE_0);
 		aasKey.setValue("mykey");
 		JAXBElement<AASKeyDataType> jaxbAASKeyDataType = i4aasTypesObjectFactory.createAASKeyDataType(aasKey);

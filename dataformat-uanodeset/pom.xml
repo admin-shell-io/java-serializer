@@ -122,7 +122,7 @@
 						<configuration>
 							<xsdOptions>
 								<xsdOption>
-									<xsd>${basedir}/nodeset/xsd/I4AAS_TypeDictionary.xsd</xsd>
+									<xsd>${basedir}/nodeset/xsd/Opc.Ua.I4AAS_V3Draft.Types.xsd</xsd>
 									<extensionArgs>
 										<extensionArg>-Xfluent-builder</extensionArg>
 									</extensionArgs>

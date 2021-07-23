@@ -7,6 +7,8 @@ import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetInformation;
+import io.adminshell.aas.v3.model.DataTypeIEC61360;
+import io.adminshell.aas.v3.model.HasDataSpecification;
 import io.adminshell.aas.v3.model.Submodel;
 
 public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdministrationShell> {

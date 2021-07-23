@@ -58,7 +58,6 @@ public class ReferenceMapper extends I4AASMapper<Reference, UAObject> {
 				AASKeyDataType aasKeyDataType = AASKeyDataType.builder().//
 				withIdType((AASKeyTypeDataType) I4AASEnumMapper.findMatch(key.getIdType())).//
 				withType((AASKeyElementsDataType) I4AASEnumMapper.findMatch(key.getType())).//
-				withLocal(false).//
 				withValue(key.getValue()).build();
 				JAXBElement<AASKeyDataType> jaxbAASKeyDataType = i4aasTypesObjectFactory.createAASKeyDataType(aasKeyDataType);
 				

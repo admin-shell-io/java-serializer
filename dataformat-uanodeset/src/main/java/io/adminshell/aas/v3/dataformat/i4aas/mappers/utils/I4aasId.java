@@ -3,11 +3,12 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers.utils;
 public enum I4aasId implements BasicId {
 
 	AASAssetAdministrationShellType("AASAssetAdministrationShellType", 1002),
-	AASViewType("AASViewType", 1003),
+	AASReferableType("AASReferableType", 1003),
 	AASReferenceType("AASReferenceType", 1004),
 	AASAssetType("AASAssetType", 1005),
 	AASSubmodelType("AASSubmodelType", 1006),
-	AASConceptDictionaryType("AASConceptDictionaryType", 1007),
+	AASIdentifiableType("AASIdentifiableType", 1007),
+	AASEnvironmentType("AASEnvironmentType",1008),
 	AASSubmodelElementType("AASSubmodelElementType", 1009),
 	AASSubmodelElementCollectionType("AASSubmodelElementCollectionType", 1010),
 	AASOrderedSubmodelElementCollectionType("AASOrderedSubmodelElementCollectionType", 1011),
@@ -30,10 +31,11 @@ public enum I4aasId implements BasicId {
 	AASDataSpecificationIEC61360Type("AASDataSpecificationIEC61360Type", 1028),
 	AASIdentifierType("AASIdentifierType", 1029),
 	AASAdministrativeInformationType("AASAdministrativeInformationType", 1030),
-	ValueListType("ValueListType", 1031),
+	AASAssetInformationType("AASAssetInformationType", 1031),
 	AASQualifierType("AASQualifierType", 1032),
 	IAASReferableType("IAASReferableType", 1033),
 	IAASIdentifiableType("IAASIdentifiableType", 1034),
+	AASIdentifierKeyValuePairType("AASIdentifierKeyValuePairType", 1035),
 	AASKeyTypeDataType("AASKeyTypeDataType", 3002),
 	AASAssetKindDataType("AASAssetKindDataType", 3003),
 	AASValueTypeDataType("AASValueTypeDataType", 3004),
@@ -49,8 +51,6 @@ public enum I4aasId implements BasicId {
 	AASPropertyValueDataType("AASPropertyValueDataType", 3014),
 	AASModelingKindDataType("AASModelingKindDataType", 3015),
 	AASMimeDataType("AASMimeDataType", 3016),
-	HasInterface("HasInterface", 4002),
-	AASReference("AASReference", 4003),
 	AASKeyDataType_Encoding_DefaultXml("AASKeyDataType_Encoding_DefaultXml",5039);
 
 ;
