@@ -26,7 +26,7 @@ public interface HasSemanticsMapper {
 			UANode nodeForIdentification = ctx.getNodeIdForIdentification(key.getValue());
 			
 			
-			if (nodeForIdentification == null) {
+			if (nodeForIdentification == null && key.getValue() != null && !key.getValue().isBlank()) {
 				nodeForIdentification = fixedConceptDescription(ctx, key);
 			}
 
@@ -70,7 +70,7 @@ public interface HasSemanticsMapper {
 			}
 			@Override
 			public IdentifierType getIdType() {
-				return IdentifierType.valueOf(key.getIdType().name());
+				return key.getIdType() == null ? null : IdentifierType.valueOf(key.getIdType().name());
 			}
 		});
 		

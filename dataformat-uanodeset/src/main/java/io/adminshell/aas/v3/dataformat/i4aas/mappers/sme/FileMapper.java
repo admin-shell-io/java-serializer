@@ -40,7 +40,7 @@ public class FileMapper extends SubmodelElementMapper<File> {
 			attachAsProperty(target, map);
 		}
 		if (source.getValue() != null) {
-			UAVariable map = new StringPropertyMapper("Value", source.getValue(), ctx, ctx.getI4aasNsIndex()).map();
+			UAVariable map = new PathTypeMapper(source.getValue(), ctx).map();
 			attachAsProperty(target, map);
 		}
 	}
