@@ -26,9 +26,6 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 	}
 
 	public final TARGET map() {
-		if (source == null) {
-			return null;
-		}
 		target = createTargetObject();
 		addToNodeset();
 		mapAndAttachChildren();
@@ -74,21 +71,29 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 		return LocalizedText.builder().withValue(value).build();
 	}
 
-	protected final String createBrowseName(String name) {
+	protected final String createBrowseName(String name, int namespaceIndx) {
+		return namespaceIndx + ":" + name;
+	}
+	
+	protected final String createModelBrowseName(String name) {
 		return ctx.getModelNsIndex() + ":" + name;
+	}
+	
+	protected final String createI4AASBrowseName(String name) {
+		return ctx.getI4aasNsIndex() + ":" + name;
 	}
 
 	protected final UAObject createFolder(String folderName) {
 		return createFolder((UAObject) target, folderName, ctx);
 	}
 
-	private static final String createBrowseName(String name, MappingContext ctx) {
-		return ctx.getModelNsIndex() + ":" + name;
+	private static final String createI4AASBrowseName(String name, MappingContext ctx) {
+		return ctx.getI4aasNsIndex() + ":" + name;
 	}
 
 	public static final UAObject createFolder(UAObject target, String folderName, MappingContext ctx) {
 		UAObject folder = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(createBrowseName(folderName, ctx)).withDisplayName(createLocalizedText(folderName))
+				.withBrowseName(createI4AASBrowseName(folderName, ctx)).withDisplayName(createLocalizedText(folderName))
 				.build();
 		ctx.getNodeSet().getUAObjectOrUAVariableOrUAMethod().add(folder);
 		addTypeReferenceFor(folder, UaId.FolderType, ctx);

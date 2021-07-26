@@ -18,7 +18,7 @@ public class IdentifierKeyValuePairMapper extends I4AASMapper<IdentifierKeyValue
 	@Override
 	protected UAObject createTargetObject() {
 		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(createBrowseName(source.getKey()))
+				.withBrowseName(createModelBrowseName(source.getKey()))
 				.withDisplayName(createLocalizedText(source.getKey())).build();
 		addTypeReference(I4aasId.AASIdentifierKeyValuePairType);
 		return target;
@@ -33,12 +33,12 @@ public class IdentifierKeyValuePairMapper extends I4AASMapper<IdentifierKeyValue
 		}
 		String key = source.getKey();
 		if (key != null) {
-			UAVariable uaKey = new StringPropertyMapper("Key", key, ctx).map();
+			UAVariable uaKey = new StringPropertyMapper("Key", key, ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, uaKey);
 		}
 		String value = source.getValue();
 		if (value != null) {
-			UAVariable uaValue = new StringPropertyMapper("Value", value, ctx).map();
+			UAVariable uaValue = new StringPropertyMapper("Value", value, ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, uaValue);
 		}
 	}

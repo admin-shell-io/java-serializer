@@ -15,47 +15,44 @@ public class IdentifiableMapper<T extends Identifiable> extends ReferableMapper<
 	public IdentifiableMapper(T src, MappingContext ctx) {
 		super(src, ctx);
 	}
-	
+
 	@Override
 	protected UAObject createTargetObject() {
 		return super.createTargetObject();
 	}
-	
+
 	@Override
 	protected void mapAndAttachChildren() {
 		super.mapAndAttachChildren();
-		mapIdentification();		
+		mapIdentification();
 		mapAdministration();
 	}
 
 	private void mapIdentification() {
 		IdentifierType sourceIdType = source.getIdentification().getIdType();
 		String sourceIdentifierValue = source.getIdentification().getIdentifier();
-		
+
 		Builder<Void> coreUAObject = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
 				.withDisplayName(createLocalizedText("Identification"))
-				.withBrowseName(createBrowseName("Identification"));
+				.withBrowseName(createI4AASBrowseName("Identification"));
 		UAObject uaObject = coreUAObject.build();
 		addTypeReferenceFor(uaObject, I4aasId.AASIdentifierType);
 		addToNodeset(uaObject);
 		attachAsComponent(target, uaObject);
 
-		UAVariable targetIdVar = new StringPropertyMapper("Id", sourceIdentifierValue, ctx).map();
+		UAVariable targetIdVar = new StringPropertyMapper("Id", sourceIdentifierValue, ctx, ctx.getI4aasNsIndex())
+				.map();
 		attachAsProperty(uaObject, targetIdVar);
-		
+
 		UAVariable mappedEnum = new I4AASEnumMapper(sourceIdType, ctx).map();
 		attachAsProperty(uaObject, mappedEnum);
-		
+
 		ctx.addIdentificationWithNodeId(sourceIdentifierValue, target);
 	}
 
-	
 	private void mapAdministration() {
-		if (source.getAdministration() != null) {
-			UAObject uaAdministration = new AdministrationMapper(source.getAdministration(), ctx).map();
-			attachAsComponent(target, uaAdministration);			
-		}		
+		UAObject uaAdministration = new AdministrationMapper(source.getAdministration(), ctx).map();
+		attachAsComponent(target, uaAdministration);
 	}
-
 
 }

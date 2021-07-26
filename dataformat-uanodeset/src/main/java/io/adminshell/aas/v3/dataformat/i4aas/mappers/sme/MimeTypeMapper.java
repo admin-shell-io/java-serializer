@@ -22,7 +22,7 @@ public class MimeTypeMapper extends I4AASMapper<String, UAVariable> {
 		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idVarBuilder = UAVariable.builder()
 				.withValue().withAny(idStringValue).end().withDisplayName(createLocalizedText("MimeType"))
 				.withDataType(I4aasId.AASMimeDataType.getName()).withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(createBrowseName("MimeType")).withAccessLevel(3L);
+				.withBrowseName(createI4AASBrowseName("MimeType")).withAccessLevel(3L);
 		target = idVarBuilder.build();
 		addTypeReferenceFor(target, UaId.PropertyType);
 		return target;

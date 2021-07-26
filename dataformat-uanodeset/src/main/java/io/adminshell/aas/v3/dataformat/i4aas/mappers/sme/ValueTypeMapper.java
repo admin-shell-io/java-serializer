@@ -36,7 +36,7 @@ public class ValueTypeMapper extends I4AASMapper<String, UAVariable> {
 	@Override
 	protected UAVariable createTargetObject() {
 		Builder<Void> builder = UAVariable.builder().withDisplayName(createLocalizedText("ValueType"))
-				.withBrowseName(createBrowseName("ValueType")).withNodeId(ctx.newModelNodeIdAsString()).withAccessLevel(3L)
+				.withBrowseName(createI4AASBrowseName("ValueType")).withNodeId(ctx.newModelNodeIdAsString()).withAccessLevel(3L)
 				.withDataType(AASValueTypeDataType.class.getSimpleName());
 
 		AASValueTypeDataType derivedEnum = staticMap.computeIfAbsent(source, this::mappingFuntion);

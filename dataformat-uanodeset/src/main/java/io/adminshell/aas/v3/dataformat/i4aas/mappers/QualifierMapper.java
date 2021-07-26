@@ -12,15 +12,17 @@ import io.adminshell.aas.v3.model.Reference;
 public class QualifierMapper extends I4AASMapper<Qualifier, UAObject> {
 
 	private String name;
+	private int nsIdx;
 
-	public QualifierMapper(Qualifier src, MappingContext ctx, String name) {
+	public QualifierMapper(Qualifier src, MappingContext ctx, String name, int nsIdx) {
 		super(src, ctx);
 		this.name = name;
+		this.nsIdx = nsIdx;
 	}
 
 	@Override
 	protected UAObject createTargetObject() {
-		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(createBrowseName(name))
+		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(createBrowseName(name, nsIdx))
 				.withDisplayName(createLocalizedText(name)).build();
 		addTypeReference(I4aasId.AASQualifierType);
 		return target;
@@ -36,13 +38,13 @@ public class QualifierMapper extends I4AASMapper<Qualifier, UAObject> {
 
 		String type = source.getType();
 		if (type != null) {
-			UAVariable map = new StringPropertyMapper("Type", type, ctx).map();
+			UAVariable map = new StringPropertyMapper("Type", type, ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, map);
 		}
 
 		String value = source.getValue();
 		if (value != null) {
-			UAVariable map = new StringPropertyMapper("Value", value, ctx).map();
+			UAVariable map = new StringPropertyMapper("Value", value, ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, map);
 		}
 		

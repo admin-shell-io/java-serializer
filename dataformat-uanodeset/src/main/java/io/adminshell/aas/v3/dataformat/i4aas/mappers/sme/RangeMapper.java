@@ -27,13 +27,13 @@ public class RangeMapper extends SubmodelElementMapper<Range> {
 
 		String min = source.getMin();
 		if (min != null) {
-			UAVariable map = new StringPropertyMapper("Min", min, ctx).map();
+			UAVariable map = new StringPropertyMapper("Min", min, ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, map);
 		}
 
 		String max = source.getMax();
 		if (max != null) {
-			UAVariable map = new StringPropertyMapper("Max", max, ctx).map();
+			UAVariable map = new StringPropertyMapper("Max", max, ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, map);
 		}
 

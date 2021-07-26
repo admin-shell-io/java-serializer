@@ -12,23 +12,36 @@ import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
 
 public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
-	
+
 	public final static Map<Class<? extends Enum>, Class<? extends Enum>> enum2enumMap = new HashMap<>();
-	
+
 	static {
-		enum2enumMap.put(io.adminshell.aas.v3.model.KeyElements.class, org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType.class);
-		enum2enumMap.put(io.adminshell.aas.v3.model.KeyType.class, org.opcfoundation.ua.i4aas.types.AASKeyTypeDataType.class);
-		enum2enumMap.put(io.adminshell.aas.v3.model.AssetKind.class, org.opcfoundation.ua.i4aas.types.AASAssetKindDataType.class);
-		enum2enumMap.put(io.adminshell.aas.v3.model.Category.class, org.opcfoundation.ua.i4aas.types.AASCategoryDataType.class);
-		enum2enumMap.put(io.adminshell.aas.v3.model.DataTypeIEC61360.class, org.opcfoundation.ua.i4aas.types.AASDataTypeIEC61360DataType.class);
-		enum2enumMap.put(io.adminshell.aas.v3.model.EntityType.class, org.opcfoundation.ua.i4aas.types.AASEntityTypeDataType.class);
-		enum2enumMap.put(io.adminshell.aas.v3.model.IdentifiableElements.class, org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType.class);//best match so far
-		enum2enumMap.put(io.adminshell.aas.v3.model.IdentifierType.class, org.opcfoundation.ua.i4aas.types.AASIdentifierTypeDataType.class);
-		enum2enumMap.put(io.adminshell.aas.v3.model.LevelType.class, org.opcfoundation.ua.i4aas.types.AASLevelTypeDataType.class);
-		enum2enumMap.put(io.adminshell.aas.v3.model.LocalKeyType.class, org.opcfoundation.ua.i4aas.types.AASKeyTypeDataType.class);//best match so far
-		enum2enumMap.put(io.adminshell.aas.v3.model.ModelingKind.class, org.opcfoundation.ua.i4aas.types.AASModelingKindDataType.class);
-		//enum2enumMap.put(io.adminshell.aas.v3.model.PermissionKind.class, null);//no match, since it is from security part
-		enum2enumMap.put(io.adminshell.aas.v3.model.ReferableElements.class, org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType.class);//best match so far
+		enum2enumMap.put(io.adminshell.aas.v3.model.KeyElements.class,
+				org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType.class);
+		enum2enumMap.put(io.adminshell.aas.v3.model.KeyType.class,
+				org.opcfoundation.ua.i4aas.types.AASKeyTypeDataType.class);
+		enum2enumMap.put(io.adminshell.aas.v3.model.AssetKind.class,
+				org.opcfoundation.ua.i4aas.types.AASAssetKindDataType.class);
+		enum2enumMap.put(io.adminshell.aas.v3.model.Category.class,
+				org.opcfoundation.ua.i4aas.types.AASCategoryDataType.class);
+		enum2enumMap.put(io.adminshell.aas.v3.model.DataTypeIEC61360.class,
+				org.opcfoundation.ua.i4aas.types.AASDataTypeIEC61360DataType.class);
+		enum2enumMap.put(io.adminshell.aas.v3.model.EntityType.class,
+				org.opcfoundation.ua.i4aas.types.AASEntityTypeDataType.class);
+		enum2enumMap.put(io.adminshell.aas.v3.model.IdentifiableElements.class,
+				org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType.class);
+		enum2enumMap.put(io.adminshell.aas.v3.model.IdentifierType.class,
+				org.opcfoundation.ua.i4aas.types.AASIdentifierTypeDataType.class);
+		enum2enumMap.put(io.adminshell.aas.v3.model.LevelType.class,
+				org.opcfoundation.ua.i4aas.types.AASLevelTypeDataType.class);
+		enum2enumMap.put(io.adminshell.aas.v3.model.LocalKeyType.class,
+				org.opcfoundation.ua.i4aas.types.AASKeyTypeDataType.class);
+		enum2enumMap.put(io.adminshell.aas.v3.model.ModelingKind.class,
+				org.opcfoundation.ua.i4aas.types.AASModelingKindDataType.class);
+		// enum2enumMap.put(io.adminshell.aas.v3.model.PermissionKind.class, null);//no
+		// match, since it is from security part
+		enum2enumMap.put(io.adminshell.aas.v3.model.ReferableElements.class,
+				org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType.class);
 	}
 
 	public I4AASEnumMapper(Enum<?> src, MappingContext ctx) {
@@ -37,15 +50,15 @@ public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
 
 	@Override
 	protected UAVariable createTargetObject() {
-		String name = source.getClass().getSimpleName();
-		
-		Enum match = findMatch(source);
-		
-		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idTypeVarBuilder = UAVariable.builder().withDisplayName(createLocalizedText(name))
-				.withDataType(match.getClass().getSimpleName()).withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(createBrowseName(name)).withAccessLevel(3L);
-		
-		JAXBElement<Integer> targetIdTypeVar2 = new ObjectFactory().createInt32(match.ordinal());
+		String name = deriveDefaultName();
+		Enum i4aasMatch = findMatch(source);
+
+		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idTypeVarBuilder = UAVariable.builder()
+				.withDisplayName(createLocalizedText(name)).withDataType(i4aasMatch.getClass().getSimpleName())
+				.withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(createI4AASBrowseName(name))
+				.withAccessLevel(3L);
+
+		JAXBElement<Integer> targetIdTypeVar2 = new ObjectFactory().createInt32(i4aasMatch.ordinal());
 		UAVariable targetIdTypeVar = idTypeVarBuilder.withValue().withAny(targetIdTypeVar2).end().build();
 
 		addTypeReferenceFor(targetIdTypeVar, UaId.PropertyType);
@@ -53,8 +66,15 @@ public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
 		return targetIdTypeVar;
 	}
 
+	protected String deriveDefaultName() {
+		if (source instanceof io.adminshell.aas.v3.model.IdentifierType) {
+			return "IdType";
+		}
+		return source.getClass().getSimpleName();
+	}
+
 	public static Enum findMatch(Enum<?> src) {
-		
+
 		if (!enum2enumMap.containsKey(src.getClass())) {
 			throw new IllegalArgumentException("Class " + src.getClass() + " is not supported by I4AASEnumMapper");
 		}
@@ -69,18 +89,20 @@ public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
 				return targetEnumCandidate;
 			}
 		}
-		
-		throw new IllegalArgumentException("Could not match " +src.name()+ " with any of " + Arrays.toString(aasEnum.getEnumConstants()));
+
+		throw new IllegalArgumentException(
+				"Could not match " + src.name() + " with any of " + Arrays.toString(aasEnum.getEnumConstants()));
 	}
 
 	@Override
 	protected void mapAndAttachChildren() {
 		// nothing to do
 	}
-	
+
 	public static void main(String[] args) {
-		//quick test
-		System.out.println(Arrays.toString(org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType.class.getEnumConstants()));
+		// quick test
+		System.out.println(
+				Arrays.toString(org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType.class.getEnumConstants()));
 	}
 
 }

@@ -39,7 +39,7 @@ public class PropertyMapper extends SubmodelElementMapper<Property> {
 
 		if (source.getValue() != null) {
 			//use string property first, should use a interpretation of valuetype later
-			UAVariable newStringProperty = new StringPropertyMapper("Value", source.getValue(), ctx).map();
+			UAVariable newStringProperty = new StringPropertyMapper("Value", source.getValue(), ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, newStringProperty);
 		}
 	}

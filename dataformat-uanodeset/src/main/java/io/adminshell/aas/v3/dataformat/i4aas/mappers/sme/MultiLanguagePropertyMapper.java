@@ -31,7 +31,7 @@ public class MultiLanguagePropertyMapper extends SubmodelElementMapper<MultiLang
 			UAObject map = new ReferenceMapper(valueId, ctx, "ValueId").map();
 			attachAsComponent(target, map);
 		}
-		UAVariable uaLangString = new LangStringPropertyMapper("Value", source.getValues(), ctx).map();
+		UAVariable uaLangString = new LangStringPropertyMapper("Value", source.getValues(), ctx, ctx.getI4aasNsIndex()).map();
 		attachAsProperty(target, uaLangString);
 	}
 

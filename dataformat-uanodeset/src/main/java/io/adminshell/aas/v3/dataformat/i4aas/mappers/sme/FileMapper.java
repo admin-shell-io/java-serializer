@@ -12,19 +12,21 @@ import io.adminshell.aas.v3.model.File;
 public class FileMapper extends SubmodelElementMapper<File> {
 
 	private String customName;
+	private int namespaceIndex;
 
 	public FileMapper(File src, MappingContext ctx) {
-		this(src, ctx, src.getIdShort());
+		this(src, ctx, src.getIdShort(), ctx.getModelNsIndex());
 	}
 
-	public FileMapper(File src, MappingContext ctx, String name) {
+	public FileMapper(File src, MappingContext ctx, String name, int namespaceIndex) {
 		super(src, ctx);
 		this.customName = name;
+		this.namespaceIndex = namespaceIndex;
 	}
 
 	@Override
 	protected UAObject createTargetObject() {
-		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(createBrowseName(customName))
+		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(createBrowseName(customName, namespaceIndex))
 				.withDisplayName(createLocalizedText(customName)).build();
 		addTypeReference(I4aasId.AASFileType);
 		return target;
@@ -38,7 +40,7 @@ public class FileMapper extends SubmodelElementMapper<File> {
 			attachAsProperty(target, map);
 		}
 		if (source.getValue() != null) {
-			UAVariable map = new StringPropertyMapper("Value", source.getValue(), ctx).map();
+			UAVariable map = new StringPropertyMapper("Value", source.getValue(), ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, map);
 		}
 	}

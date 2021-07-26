@@ -17,10 +17,12 @@ public class LangStringPropertyMapper extends I4AASMapper<List<LangString>, UAVa
 
 	private String key;
 	private ObjectFactory objectFactory = new ObjectFactory();
+	private int nsIdx;
 
-	public LangStringPropertyMapper(String key, List<LangString> src, MappingContext ctx) {
+	public LangStringPropertyMapper(String key, List<LangString> src, MappingContext ctx, int nsIdx) {
 		super(src, ctx);
 		this.key = key;
+		this.nsIdx = nsIdx;
 	}
 
 	@Override
@@ -36,7 +38,7 @@ public class LangStringPropertyMapper extends I4AASMapper<List<LangString>, UAVa
 		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idVarBuilder = UAVariable.builder()
 				.withValue().withAny(listOfLocalizedText).end().withDisplayName(createLocalizedText(key))
 				.withDataType(UaId.LocalizedText.getName()).withValueRank(1).withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(createBrowseName(key)).withAccessLevel(3L);
+				.withBrowseName(createBrowseName(key, nsIdx)).withAccessLevel(3L);
 		target = idVarBuilder.build();
 		addTypeReferenceFor(target, UaId.PropertyType);
 		return target;

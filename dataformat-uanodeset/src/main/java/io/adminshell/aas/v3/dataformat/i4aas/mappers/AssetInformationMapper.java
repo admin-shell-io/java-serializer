@@ -22,9 +22,9 @@ public class AssetInformationMapper extends I4AASMapper<AssetInformation, UAObje
 
 	@Override
 	protected UAObject createTargetObject() {
-		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(createBrowseName("Asset"))
-				.withDisplayName(createLocalizedText("Asset")).build();
-		addTypeReference(I4aasId.AASAssetType);
+		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
+				.withBrowseName(createI4AASBrowseName("AssetInformation")).withDisplayName(createLocalizedText("AssetInformation")).build();
+		addTypeReference(I4aasId.AASAssetInformationType);
 		return target;
 	}
 
@@ -48,7 +48,8 @@ public class AssetInformationMapper extends I4AASMapper<AssetInformation, UAObje
 
 		File defaultThumbnail = source.getDefaultThumbnail();
 		if (defaultThumbnail != null) {
-			UAObject uaThumbnail = new FileMapper(defaultThumbnail, ctx, "DefaultThumbnail").map();
+			UAObject uaThumbnail = new FileMapper(defaultThumbnail, ctx, "DefaultThumbnail", ctx.getI4aasNsIndex())
+					.map();
 			attachAsComponent(target, uaThumbnail);
 		}
 
@@ -58,6 +59,5 @@ public class AssetInformationMapper extends I4AASMapper<AssetInformation, UAObje
 			attachAsComponent(folder, uaIdKVP);
 		}
 	}
-
 
 }

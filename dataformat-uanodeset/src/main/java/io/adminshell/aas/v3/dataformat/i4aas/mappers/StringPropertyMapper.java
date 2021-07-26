@@ -12,10 +12,12 @@ import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
 public class StringPropertyMapper extends I4AASMapper<String, UAVariable> {
 
 	private String key;
+	private int nsIdx;
 
-	public StringPropertyMapper(String key, String src, MappingContext ctx) {
+	public StringPropertyMapper(String key, String src, MappingContext ctx, int nsIdx) {
 		super(src, ctx);
 		this.key = key;
+		this.nsIdx = nsIdx;
 	}
 
 	@Override
@@ -24,7 +26,7 @@ public class StringPropertyMapper extends I4AASMapper<String, UAVariable> {
 		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idVarBuilder = UAVariable.builder()
 				.withValue().withAny(idStringValue).end().withDisplayName(createLocalizedText(key))
 				.withDataType(UaId.String.getName()).withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(createBrowseName(key)).withAccessLevel(3L);
+				.withBrowseName(createBrowseName(key, nsIdx)).withAccessLevel(3L);
 		target = idVarBuilder.build();
 		addTypeReferenceFor(target, UaId.PropertyType);
 		return target;
@@ -33,7 +35,7 @@ public class StringPropertyMapper extends I4AASMapper<String, UAVariable> {
 	@Override
 	protected void mapAndAttachChildren() {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

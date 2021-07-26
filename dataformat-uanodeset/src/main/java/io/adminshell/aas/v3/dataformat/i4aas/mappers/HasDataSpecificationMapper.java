@@ -33,7 +33,7 @@ public interface HasDataSpecificationMapper {
 			DataSpecificationContent dataSpecificationContent = embeddedDataSpecification.getDataSpecificationContent();
 			if (dataSpecificationContent instanceof DataSpecificationIEC61360) {
 				UAObject uaIEC61360 = new DataSpecificationIEC61360Mapper(
-						(DataSpecificationIEC61360) dataSpecificationContent, ctx, "embedded_" + i).map();
+						(DataSpecificationIEC61360) dataSpecificationContent, ctx, "embedded_" + i, ctx.getModelNsIndex()).map();
 				I4AASMapper.attachAsComponent(folder, uaIEC61360);
 			}
 		}

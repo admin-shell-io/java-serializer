@@ -40,12 +40,13 @@ public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdmi
 	}
 
 	private void mapSubmodels() {
+		UAObject smFolder = createFolder("Submodel");
 		List<io.adminshell.aas.v3.model.Reference> submodels = source.getSubmodels();
 		for (int i = 0; i < submodels.size(); i++) {
 			io.adminshell.aas.v3.model.Reference reference = submodels.get(i);
 			UAObject createSubmodelReferenceUaObject = new ReferenceMapper(reference, ctx,
 					"Submodel:" + reference.getKeys().get(0).getValue()).map();
-			attachAsComponent(target, createSubmodelReferenceUaObject);
+			attachAsComponent(smFolder, createSubmodelReferenceUaObject);
 		}
 	}
 

@@ -27,7 +27,7 @@ public class BlobMapper extends SubmodelElementMapper<Blob> {
 		super.mapAndAttachChildren();
 		String mimeType = source.getMimeType();
 		if (mimeType != null) {
-			UAVariable map = new StringPropertyMapper("MimeType", mimeType, ctx).map();
+			UAVariable map = new StringPropertyMapper("MimeType", mimeType, ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, map);
 		}
 		byte[] value = source.getValue();

@@ -24,7 +24,7 @@ public class ByteStringPropertyMapper extends I4AASMapper<byte[], UAVariable> {
 		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idVarBuilder = UAVariable.builder()
 				.withValue().withAny(byteStringValue).end().withDisplayName(createLocalizedText(key))
 				.withDataType(UaId.ByteString.getName()).withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(createBrowseName(key)).withAccessLevel(3L);
+				.withBrowseName(createI4AASBrowseName(key)).withAccessLevel(3L);
 		target = idVarBuilder.build();
 		addTypeReferenceFor(target, UaId.PropertyType);
 		return target;

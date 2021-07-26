@@ -19,7 +19,7 @@ public interface QualifiableMapper {
 		for (int i = 0; i < qualifiers.size(); i++) {
 			Constraint constraint = qualifiers.get(i);
 			if (constraint instanceof Qualifier) {
-				UAObject uaQualifier = new QualifierMapper((Qualifier) constraint, ctx, "qualifier_" + i).map();
+				UAObject uaQualifier = new QualifierMapper((Qualifier) constraint, ctx, "qualifier_" + i, ctx.getModelNsIndex()).map();
 				I4AASMapper.attachAsComponent(folder, uaQualifier);
 			}
 		}

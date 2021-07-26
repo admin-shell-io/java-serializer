@@ -24,7 +24,7 @@ public class EnvironmentMapper extends I4AASMapper<AssetAdministrationShellEnvir
 	@Override
 	protected UAObject createTargetObject() {
 		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(createBrowseName("AASEnvironment"))
+				.withBrowseName(createModelBrowseName("AASEnvironment"))
 				.withDisplayName(createLocalizedText("AASEnvironment"))
 				.withReferences(new ListOfReferences()).build();
 		addTypeReference(I4aasId.AASEnvironmentType);

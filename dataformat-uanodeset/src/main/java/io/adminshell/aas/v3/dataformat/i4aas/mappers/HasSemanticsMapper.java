@@ -54,6 +54,7 @@ public interface HasSemanticsMapper {
 	default UAObject fixedConceptDescription(MappingContext ctx, Key key) {
 		//if not found, a concept description must be created and added
 		DefaultConceptDescription virtualCD = new DefaultConceptDescription();
+		virtualCD.setIdShort(key.getValue());
 		virtualCD.setIdentification(new Identifier() {
 			@Override
 			public void setIdentifier(String arg0) {

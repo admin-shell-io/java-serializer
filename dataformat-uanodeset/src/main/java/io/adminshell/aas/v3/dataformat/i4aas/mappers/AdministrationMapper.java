@@ -8,7 +8,8 @@ import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.AdministrativeInformation;
 
-public class AdministrationMapper extends I4AASMapper<AdministrativeInformation, UAObject> implements HasDataSpecificationMapper {
+public class AdministrationMapper extends I4AASMapper<AdministrativeInformation, UAObject>
+		implements HasDataSpecificationMapper {
 
 	public AdministrationMapper(AdministrativeInformation src, MappingContext ctx) {
 		super(src, ctx);
@@ -17,24 +18,29 @@ public class AdministrationMapper extends I4AASMapper<AdministrativeInformation,
 	@Override
 	protected UAObject createTargetObject() {
 		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
-		.withBrowseName(createBrowseName("Administration")).withDisplayName(createLocalizedText("Administration")).build();
+				.withBrowseName(createI4AASBrowseName("Administration"))
+				.withDisplayName(createLocalizedText("Administration")).build();
 		addTypeReference(I4aasId.AASAdministrativeInformationType);
 		return target;
 	}
 
 	@Override
 	protected void mapAndAttachChildren() {
-		String revision = source.getRevision();
-		if(revision != null) {
-			UAVariable revisionStringProperty = new StringPropertyMapper("Revision", revision, ctx).map();
-			attachAsProperty(target, revisionStringProperty);
+		if (source != null) {
+			String revision = source.getRevision();
+			if (revision != null) {
+				UAVariable revisionStringProperty = new StringPropertyMapper("Revision", revision, ctx,
+						ctx.getI4aasNsIndex()).map();
+				attachAsProperty(target, revisionStringProperty);
+			}
+			String version = source.getVersion();
+			if (version != null) {
+				UAVariable versionStringProperty = new StringPropertyMapper("Version", version, ctx,
+						ctx.getI4aasNsIndex()).map();
+				attachAsProperty(target, versionStringProperty);
+			}
+			mapDataSpecification(source, target, ctx);
 		}
-		String version = source.getVersion();
-		if(version != null) {
-			UAVariable versionStringProperty = new StringPropertyMapper("Version", version, ctx).map();
-			attachAsProperty(target, versionStringProperty);
-		}
-		mapDataSpecification(source, target, ctx);
 	}
 
 }

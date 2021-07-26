@@ -17,17 +17,18 @@ public class ReferableMapper<T extends Referable> extends I4AASMapper<T, UAObjec
 	@Override
 	protected UAObject createTargetObject() {
 		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
-		.withBrowseName(browseNameOf(source)).withDisplayName(I4AASUtils.createDisplayName(source)).build();
+				.withBrowseName(createModelBrowseName(source.getIdShort()))
+				.withDisplayName(I4AASUtils.createDisplayName(source)).build();
 		return target;
 	}
 
 	@Override
 	protected void mapAndAttachChildren() {
-		String category = source.getCategory();
-		if (category != null) {
-			UAVariable categoryProperty = new StringPropertyMapper("Category", category, ctx).map();
-			attachAsProperty(target, categoryProperty);
-		}
+		
+		String category = source.getCategory() == null ? "" : source.getCategory();
+		UAVariable categoryProperty = new StringPropertyMapper("Category", category, ctx, ctx.getI4aasNsIndex()).map();
+		attachAsProperty(target, categoryProperty);
+		
 		for (LangString description : source.getDescriptions()) {
 			target.getDescription().add(mapLangString(description));
 		}
@@ -36,7 +37,4 @@ public class ReferableMapper<T extends Referable> extends I4AASMapper<T, UAObjec
 		}
 	}
 
-	protected String browseNameOf(Referable src) {
-		return super.createBrowseName(src.getIdShort());
-	}
 }
