@@ -9,6 +9,8 @@
 package org.opcfoundation.ua._2008._02.types;
 
 import java.math.BigInteger;
+import java.util.Base64;
+
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlElementDecl;
 import javax.xml.bind.annotation.XmlRegistry;
@@ -5106,8 +5108,9 @@ public class ObjectFactory {
      *     the new instance of {@link JAXBElement }{@code <}{@link byte[]}{@code >}
      */
     @XmlElementDecl(namespace = "http://opcfoundation.org/UA/2008/02/Types.xsd", name = "ByteString")
-    public JAXBElement<byte[]> createByteString(byte[] value) {
-        return new JAXBElement<byte[]>(_ByteString_QNAME, byte[].class, null, ((byte[]) value));
+    public JAXBElement<String> createByteString(byte[] value) {
+    	String encodeToString = Base64.getEncoder().encodeToString(value);
+        return new JAXBElement<String>(_ByteString_QNAME, String.class, null, encodeToString);
     }
 
     /**

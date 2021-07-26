@@ -5,7 +5,6 @@ import javax.xml.bind.JAXBElement;
 import org.opcfoundation.ua._2008._02.types.ObjectFactory;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
 
@@ -20,7 +19,7 @@ public class ByteStringPropertyMapper extends I4AASMapper<byte[], UAVariable> {
 
 	@Override
 	protected UAVariable createTargetObject() {
-		JAXBElement<byte[]> byteStringValue = new ObjectFactory().createByteString(source);
+		JAXBElement<String> byteStringValue = new ObjectFactory().createByteString(source);
 		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idVarBuilder = UAVariable.builder()
 				.withValue().withAny(byteStringValue).end().withDisplayName(createLocalizedText(key))
 				.withDataType(UaId.ByteString.getName()).withNodeId(ctx.newModelNodeIdAsString())
