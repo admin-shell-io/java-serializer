@@ -58,7 +58,7 @@ public class ValueTypeMapper extends I4AASMapper<String, UAVariable> {
 		// retry with lower case
 		AASValueTypeDataType aasValueTypeDataType = null;
 		aasValueTypeDataType = staticMap.get(input.toLowerCase());
-		if (aasValueTypeDataType == null) {
+		if (aasValueTypeDataType != null) {
 			return aasValueTypeDataType;
 		}
 		return null;
