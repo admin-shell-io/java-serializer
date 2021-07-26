@@ -37,18 +37,18 @@
         <Alias Alias="AASValueTypeDataType">ns=1;i=3004</Alias>
         <Alias Alias="AASPathDataType">ns=1;i=3005</Alias>
         <Alias Alias="AASEntityTypeDataType">ns=1;i=3006</Alias>
-        <Alias Alias="AASCategoryDataType">ns=1;i=3007</Alias>
         <Alias Alias="AASDataTypeIEC61360DataType">ns=1;i=3008</Alias>
         <Alias Alias="AASLevelTypeDataType">ns=1;i=3009</Alias>
         <Alias Alias="AASIdentifierTypeDataType">ns=1;i=3010</Alias>
         <Alias Alias="AASKeyDataType">ns=1;i=3011</Alias>
         <Alias Alias="AASKeyElementsDataType">ns=1;i=3012</Alias>
+        <Alias Alias="AASQualifierDataType">ns=1;i=3013</Alias>
         <Alias Alias="AASModelingKindDataType">ns=1;i=3015</Alias>
         <Alias Alias="AASMimeDataType">ns=1;i=3016</Alias>
     </Aliases>
     <Extensions>
         <Extension>
-            <ua:ModelInfo Tool="UaModeler" Hash="5YBqhajXggXXUJ5PAV/6DA==" Version="1.6.4"/>
+            <ua:ModelInfo Tool="UaModeler" Hash="0YniIjH4AVNmbb3mMi+TKQ==" Version="1.6.4"/>
         </Extension>
     </Extensions>
     <UADataType NodeId="ns=1;i=3003" BrowseName="1:AASAssetKindDataType">
@@ -1859,7 +1859,7 @@ Note: In an object oriented view, an instance denotes an object of a template (c
             <Reference ReferenceType="HasProperty">ns=1;i=6469</Reference>
         </References>
     </UAObject>
-    <UAVariable DataType="String" ParentNodeId="ns=1;i=5391" NodeId="ns=1;i=6468" BrowseName="1:Type" AccessLevel="3">
+    <UAVariable DataType="AASQualifierDataType" ParentNodeId="ns=1;i=5391" NodeId="ns=1;i=6468" BrowseName="1:Type" AccessLevel="3">
         <DisplayName>Type</DisplayName>
         <References>
             <Reference ReferenceType="HasDictionaryEntry">ns=1;i=5100</Reference>
@@ -1970,8 +1970,6 @@ Note: In an object oriented view, an instance denotes an object of a template (c
         <References>
             <Reference ReferenceType="HasSubtype" IsForward="false">ns=1;i=1027</Reference>
             <Reference ReferenceType="HasDictionaryEntry">ns=1;i=5136</Reference>
-            <Reference ReferenceType="HasComponent">ns=1;i=5027</Reference>
-            <Reference ReferenceType="HasProperty">ns=1;i=6065</Reference>
             <Reference ReferenceType="HasProperty">ns=1;i=6072</Reference>
             <Reference ReferenceType="HasProperty">ns=1;i=6063</Reference>
             <Reference ReferenceType="HasProperty">ns=1;i=6073</Reference>
@@ -1989,27 +1987,6 @@ Note: In an object oriented view, an instance denotes an object of a template (c
             <Reference ReferenceType="HasComponent">ns=1;i=5029</Reference>
         </References>
     </UAObjectType>
-    <UAObject ParentNodeId="ns=1;i=1028" NodeId="ns=1;i=5027" BrowseName="1:Administration">
-        <DisplayName>Administration</DisplayName>
-        <References>
-            <Reference ReferenceType="HasTypeDefinition">ns=1;i=1030</Reference>
-            <Reference ReferenceType="HasDictionaryEntry">ns=1;i=5132</Reference>
-            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=1028</Reference>
-            <Reference ReferenceType="HasModellingRule">i=78</Reference>
-        </References>
-    </UAObject>
-    <UAVariable DataType="AASCategoryDataType" ParentNodeId="ns=1;i=1028" NodeId="ns=1;i=6065" BrowseName="1:Category" AccessLevel="3">
-        <DisplayName>Category</DisplayName>
-        <References>
-            <Reference ReferenceType="HasDictionaryEntry">ns=1;i=5133</Reference>
-            <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=1028</Reference>
-            <Reference ReferenceType="HasModellingRule">i=80</Reference>
-            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-        </References>
-        <Value>
-            <uax:Int32>0</uax:Int32>
-        </Value>
-    </UAVariable>
     <UAVariable DataType="AASDataTypeIEC61360DataType" ParentNodeId="ns=1;i=1028" NodeId="ns=1;i=6072" BrowseName="1:DataType" AccessLevel="3">
         <DisplayName>DataType</DisplayName>
         <References>
@@ -2300,7 +2277,7 @@ Note: In an object oriented view, an instance denotes an object of a template (c
             <Reference ReferenceType="HasProperty">ns=1;i=6015</Reference>
         </References>
     </UAObjectType>
-    <UAVariable DataType="String" ParentNodeId="ns=1;i=1032" NodeId="ns=1;i=6010" BrowseName="1:Type" AccessLevel="3">
+    <UAVariable DataType="AASQualifierDataType" ParentNodeId="ns=1;i=1032" NodeId="ns=1;i=6010" BrowseName="1:Type" AccessLevel="3">
         <DisplayName>Type</DisplayName>
         <References>
             <Reference ReferenceType="HasDictionaryEntry">ns=1;i=5100</Reference>
@@ -2434,9 +2411,9 @@ Note: In an object oriented view, an instance denotes an object of a template (c
         <DisplayName>AssetInformation</DisplayName>
         <References>
             <Reference ReferenceType="HasTypeDefinition">ns=1;i=1031</Reference>
+            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=1002</Reference>
             <Reference ReferenceType="HasProperty">ns=1;i=6120</Reference>
             <Reference ReferenceType="HasModellingRule">i=78</Reference>
-            <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=1002</Reference>
             <Reference ReferenceType="HasComponent">ns=1;i=5389</Reference>
         </References>
     </UAObject>
@@ -2658,7 +2635,7 @@ Note: In an object oriented view, an instance denotes an object of a template (c
             <Reference ReferenceType="HasProperty">ns=1;i=6459</Reference>
         </References>
     </UAObject>
-    <UAVariable DataType="String" ParentNodeId="ns=1;i=5386" NodeId="ns=1;i=6458" BrowseName="1:Type" AccessLevel="3">
+    <UAVariable DataType="AASQualifierDataType" ParentNodeId="ns=1;i=5386" NodeId="ns=1;i=6458" BrowseName="1:Type" AccessLevel="3">
         <DisplayName>Type</DisplayName>
         <References>
             <Reference ReferenceType="HasDictionaryEntry">ns=1;i=5100</Reference>
@@ -2740,7 +2717,7 @@ Note: In an object oriented view, an instance denotes an object of a template (c
             <Reference ReferenceType="HasProperty">ns=1;i=6136</Reference>
         </References>
     </UAObject>
-    <UAVariable DataType="String" ParentNodeId="ns=1;i=5405" NodeId="ns=1;i=6081" BrowseName="1:Type" AccessLevel="3">
+    <UAVariable DataType="AASQualifierDataType" ParentNodeId="ns=1;i=5405" NodeId="ns=1;i=6081" BrowseName="1:Type" AccessLevel="3">
         <DisplayName>Type</DisplayName>
         <References>
             <Reference ReferenceType="HasDictionaryEntry">ns=1;i=5100</Reference>
@@ -2843,7 +2820,7 @@ Note: In an object oriented view, an instance denotes an object of a template (c
             <Reference ReferenceType="HasProperty">ns=1;i=6135</Reference>
         </References>
     </UAObject>
-    <UAVariable DataType="String" ParentNodeId="ns=1;i=5385" NodeId="ns=1;i=6080" BrowseName="1:Type" AccessLevel="3">
+    <UAVariable DataType="AASQualifierDataType" ParentNodeId="ns=1;i=5385" NodeId="ns=1;i=6080" BrowseName="1:Type" AccessLevel="3">
         <DisplayName>Type</DisplayName>
         <References>
             <Reference ReferenceType="HasDictionaryEntry">ns=1;i=5100</Reference>
@@ -3863,7 +3840,7 @@ Note: In an object oriented view, an instance denotes an object of a template (c
             <Reference ReferenceType="HasProperty">ns=1;i=6461</Reference>
         </References>
     </UAObject>
-    <UAVariable DataType="String" ParentNodeId="ns=1;i=5387" NodeId="ns=1;i=6460" BrowseName="1:Type" AccessLevel="3">
+    <UAVariable DataType="AASQualifierDataType" ParentNodeId="ns=1;i=5387" NodeId="ns=1;i=6460" BrowseName="1:Type" AccessLevel="3">
         <DisplayName>Type</DisplayName>
         <References>
             <Reference ReferenceType="HasDictionaryEntry">ns=1;i=5100</Reference>
@@ -3987,7 +3964,7 @@ Note: In an object oriented view, an instance denotes an object of a template (c
             <Reference ReferenceType="HasProperty">ns=1;i=6467</Reference>
         </References>
     </UAObject>
-    <UAVariable DataType="String" ParentNodeId="ns=1;i=5390" NodeId="ns=1;i=6466" BrowseName="1:Type" AccessLevel="3">
+    <UAVariable DataType="AASQualifierDataType" ParentNodeId="ns=1;i=5390" NodeId="ns=1;i=6466" BrowseName="1:Type" AccessLevel="3">
         <DisplayName>Type</DisplayName>
         <References>
             <Reference ReferenceType="HasDictionaryEntry">ns=1;i=5100</Reference>
@@ -4849,7 +4826,7 @@ Note: In an object oriented view, an instance denotes an object of a template (c
             <Reference ReferenceType="HasProperty">ns=1;i=6475</Reference>
         </References>
     </UAObject>
-    <UAVariable DataType="String" ParentNodeId="ns=1;i=5406" NodeId="ns=1;i=6474" BrowseName="1:Type" AccessLevel="3">
+    <UAVariable DataType="AASQualifierDataType" ParentNodeId="ns=1;i=5406" NodeId="ns=1;i=6474" BrowseName="1:Type" AccessLevel="3">
         <DisplayName>Type</DisplayName>
         <References>
             <Reference ReferenceType="HasDictionaryEntry">ns=1;i=5100</Reference>
@@ -10968,7 +10945,6 @@ Note: In an object oriented view, an instance denotes an object of a template (c
         <DisplayName>Admin-shell.io/DataSpecification/administration</DisplayName>
         <References>
             <Reference ReferenceType="HasTypeDefinition">ns=1;i=1025</Reference>
-            <Reference ReferenceType="HasDictionaryEntry" IsForward="false">ns=1;i=5027</Reference>
             <Reference ReferenceType="Organizes" IsForward="false">i=17594</Reference>
             <Reference ReferenceType="HasComponent">ns=1;i=5323</Reference>
             <Reference ReferenceType="HasProperty">ns=1;i=6223</Reference>
@@ -11046,7 +11022,6 @@ Note: In an object oriented view, an instance denotes an object of a template (c
             <Reference ReferenceType="HasComponent">ns=1;i=5575</Reference>
             <Reference ReferenceType="HasComponent">ns=1;i=5326</Reference>
             <Reference ReferenceType="HasComponent">ns=1;i=5574</Reference>
-            <Reference ReferenceType="HasDictionaryEntry" IsForward="false">ns=1;i=6065</Reference>
         </References>
     </UAObject>
     <UAObject ParentNodeId="ns=1;i=5133" NodeId="ns=1;i=5325" BrowseName="1:Administration">
