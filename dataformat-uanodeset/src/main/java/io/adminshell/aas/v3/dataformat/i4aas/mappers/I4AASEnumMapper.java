@@ -20,8 +20,8 @@ public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
 		enum2enumMap.put(io.adminshell.aas.v3.model.KeyType.class, org.opcfoundation.ua.i4aas.types.AASKeyTypeDataType.class);
 		enum2enumMap.put(io.adminshell.aas.v3.model.AssetKind.class, org.opcfoundation.ua.i4aas.types.AASAssetKindDataType.class);
 		enum2enumMap.put(io.adminshell.aas.v3.model.Category.class, org.opcfoundation.ua.i4aas.types.AASCategoryDataType.class);
-		enum2enumMap.put(io.adminshell.aas.v3.model.DataTypeIEC61360.class, org.opcfoundation.ua.i4aas.types.DataTypeIEC61360DataType.class);
-		enum2enumMap.put(io.adminshell.aas.v3.model.EntityType.class, org.opcfoundation.ua.i4aas.types.EntityTypeDataType.class);
+		enum2enumMap.put(io.adminshell.aas.v3.model.DataTypeIEC61360.class, org.opcfoundation.ua.i4aas.types.AASDataTypeIEC61360DataType.class);
+		enum2enumMap.put(io.adminshell.aas.v3.model.EntityType.class, org.opcfoundation.ua.i4aas.types.AASEntityTypeDataType.class);
 		enum2enumMap.put(io.adminshell.aas.v3.model.IdentifiableElements.class, org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType.class);//best match so far
 		enum2enumMap.put(io.adminshell.aas.v3.model.IdentifierType.class, org.opcfoundation.ua.i4aas.types.AASIdentifierTypeDataType.class);
 		enum2enumMap.put(io.adminshell.aas.v3.model.LevelType.class, org.opcfoundation.ua.i4aas.types.AASLevelTypeDataType.class);
