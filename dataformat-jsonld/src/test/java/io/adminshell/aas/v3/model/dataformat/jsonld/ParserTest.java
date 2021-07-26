@@ -62,6 +62,10 @@ public class ParserTest {
             }
         }
         Assert.assertEquals(0, errorCtr);
+
+
+        AssetAdministrationShell aas = serializer.deserialize(SerializerUtil.readResourceToString("AAS_Reference_shortExample.ttl"), AssetAdministrationShell.class);
+        System.out.println(serializer.serialize(aas));
     }
 
 }
