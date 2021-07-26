@@ -17,7 +17,7 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.ConceptDescription;
 import io.adminshell.aas.v3.model.IdentifierType;
@@ -35,11 +35,11 @@ public class ConceptDescriptionMapper extends IdentifiableMapper<ConceptDescript
 
 		IdentifierType idType = source.getIdentification().getIdType();
 		if (IdentifierType.IRI == idType) {
-			addTypeReference(I4aasId.AASIriConceptDescriptionType);
+			addTypeReference(I4AASIdentifier.AASIriConceptDescriptionType);
 		} else if (IdentifierType.IRDI == idType) {
-			addTypeReference(I4aasId.AASIrdiConceptDescriptionType);
+			addTypeReference(I4AASIdentifier.AASIrdiConceptDescriptionType);
 		} else if (IdentifierType.CUSTOM == idType) {
-			addTypeReference(I4aasId.AASCustomConceptDescriptionType);
+			addTypeReference(I4AASIdentifier.AASCustomConceptDescriptionType);
 		}
 		return target;
 	}

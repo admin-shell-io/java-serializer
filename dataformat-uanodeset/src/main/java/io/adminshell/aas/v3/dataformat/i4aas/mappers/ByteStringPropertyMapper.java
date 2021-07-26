@@ -21,7 +21,7 @@ import org.opcfoundation.ua._2008._02.types.ObjectFactory;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 
 public class ByteStringPropertyMapper extends I4AASMapper<byte[], UAVariable> {
 
@@ -37,10 +37,10 @@ public class ByteStringPropertyMapper extends I4AASMapper<byte[], UAVariable> {
 		JAXBElement<String> byteStringValue = new ObjectFactory().createByteString(source);
 		org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder<Void> idVarBuilder = UAVariable.builder()
 				.withValue().withAny(byteStringValue).end().withDisplayName(createLocalizedText(key))
-				.withDataType(UaId.ByteString.getName()).withNodeId(ctx.newModelNodeIdAsString())
+				.withDataType(UaIdentifier.ByteString.getName()).withNodeId(ctx.newModelNodeIdAsString())
 				.withBrowseName(createI4AASBrowseName(key)).withAccessLevel(3L);
 		target = idVarBuilder.build();
-		addTypeReferenceFor(target, UaId.PropertyType);
+		addTypeReferenceFor(target, UaIdentifier.PropertyType);
 		return target;
 	}
 

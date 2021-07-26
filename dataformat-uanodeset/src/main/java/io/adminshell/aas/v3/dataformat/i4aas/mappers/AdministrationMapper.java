@@ -19,7 +19,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.AdministrativeInformation;
 
@@ -35,7 +35,7 @@ public class AdministrationMapper extends I4AASMapper<AdministrativeInformation,
 		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
 				.withBrowseName(createI4AASBrowseName("Administration"))
 				.withDisplayName(createLocalizedText("Administration")).build();
-		addTypeReference(I4aasId.AASAdministrativeInformationType);
+		addTypeReference(I4AASIdentifier.AASAdministrativeInformationType);
 		return target;
 	}
 

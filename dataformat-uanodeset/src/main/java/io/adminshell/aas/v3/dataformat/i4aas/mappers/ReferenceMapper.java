@@ -29,9 +29,9 @@ import org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType;
 import org.opcfoundation.ua.i4aas.types.AASKeyTypeDataType;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.Key;
 import io.adminshell.aas.v3.model.Reference;
 
@@ -51,17 +51,17 @@ public class ReferenceMapper extends I4AASMapper<Reference, UAObject> {
 	protected UAObject createTargetObject() {
 		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(createI4AASBrowseName(browseName))
 				.withDisplayName(createLocalizedText(browseName)).build();
-		addTypeReference(I4aasId.AASReferenceType);
+		addTypeReference(I4AASIdentifier.AASReferenceType);
 		return target;
 	}
 
 	@Override
 	protected void mapAndAttachChildren() {
 		UAVariable UAKeyVariable = UAVariable.builder().withNodeId(ctx.newModelNodeIdAsString())
-				.withDataType(I4aasId.AASKeyDataType.getName()).withValueRank(1).withArrayDimensions("0")
+				.withDataType(I4AASIdentifier.AASKeyDataType.getName()).withValueRank(1).withArrayDimensions("0")
 				.withAccessLevel(3L).withDisplayName(createLocalizedText("Keys"))
 				.withBrowseName(createI4AASBrowseName("Keys")).build();
-		addTypeReferenceFor(UAKeyVariable, UaId.PropertyType);
+		addTypeReferenceFor(UAKeyVariable, UaIdentifier.PropertyType);
 		attachAsProperty(target, UAKeyVariable);
 		addToNodeset(UAKeyVariable);
 		
@@ -80,7 +80,7 @@ public class ReferenceMapper extends I4AASMapper<Reference, UAObject> {
 				uaxBody.setAny(jaxbAASKeyDataType);
 						
 				NodeId typeId = extensionObjectFactory.createNodeId();
-				typeId.setIdentifier(extensionObjectFactory.createNodeIdIdentifier(ctx.getI4aasNodeIdAsString(I4aasId.AASKeyDataType_Encoding_DefaultXml)));
+				typeId.setIdentifier(extensionObjectFactory.createNodeIdIdentifier(ctx.getI4aasNodeIdAsString(I4AASIdentifier.AASKeyDataType_Encoding_DefaultXml)));
 				
 				ExtensionObject extensionObject = extensionObjectFactory.createExtensionObject();
 				extensionObject.setTypeId(extensionObjectFactory.createNodeId(typeId));

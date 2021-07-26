@@ -20,7 +20,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject.Builder;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.Identifiable;
 import io.adminshell.aas.v3.model.IdentifierType;
@@ -51,7 +51,7 @@ public class IdentifiableMapper<T extends Identifiable> extends ReferableMapper<
 				.withDisplayName(createLocalizedText("Identification"))
 				.withBrowseName(createI4AASBrowseName("Identification"));
 		UAObject uaObject = coreUAObject.build();
-		addTypeReferenceFor(uaObject, I4aasId.AASIdentifierType);
+		addTypeReferenceFor(uaObject, I4AASIdentifier.AASIdentifierType);
 		addToNodeset(uaObject);
 		attachAsComponent(target, uaObject);
 

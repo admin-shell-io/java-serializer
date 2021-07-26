@@ -75,14 +75,14 @@ public class MappingContext {
 		nodeset.setAliases(new AliasTable());
 		List<NodeIdAlias> aliases = nodeset.getAliases().getAlias();
 		// add default aliases
-		for (UaId uaId : UaId.values()) {
+		for (UaIdentifier uaId : UaIdentifier.values()) {
 			NodeIdAlias nodeIdAlias = new NodeIdAlias();
 			nodeIdAlias.setAlias(uaId.getName());
 			nodeIdAlias.setValue(getUaBaseNodeIdAsString(uaId));
 			aliases.add(nodeIdAlias);
 		}
 		// add I4AAS Aliases
-		for (I4aasId i4aasId : I4aasId.values()) {
+		for (I4AASIdentifier i4aasId : I4AASIdentifier.values()) {
 			NodeIdAlias nodeIdAlias = new NodeIdAlias();
 			nodeIdAlias.setAlias(i4aasId.getName());
 			nodeIdAlias.setValue(getI4aasNodeIdAsString(i4aasId));
@@ -90,11 +90,11 @@ public class MappingContext {
 		}
 	}
 
-	public String getUaBaseNodeIdAsString(UaId uaId) {
+	public String getUaBaseNodeIdAsString(UaIdentifier uaId) {
 		return "i=" + uaId.getId(); // if no namespace is given, it is interpreted as a base UA node
 	}
 
-	public String getI4aasNodeIdAsString(I4aasId i4aasId) {
+	public String getI4aasNodeIdAsString(I4AASIdentifier i4aasId) {
 		return "ns=" + getI4aasNsIndex() + ";i=" + i4aasId.getId();
 	}
 

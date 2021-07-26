@@ -20,7 +20,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.StringPropertyMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.File;
 
@@ -43,7 +43,7 @@ public class FileMapper extends SubmodelElementMapper<File> {
 	protected UAObject createTargetObject() {
 		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(createBrowseName(customName, namespaceIndex))
 				.withDisplayName(createLocalizedText(customName)).build();
-		addTypeReference(I4aasId.AASFileType);
+		addTypeReference(I4AASIdentifier.AASFileType);
 		return target;
 	}
 

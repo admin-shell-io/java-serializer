@@ -22,7 +22,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.BooleanPropertyMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.I4AASMapper;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.SubmodelElement;
 import io.adminshell.aas.v3.model.SubmodelElementCollection;
@@ -37,9 +37,9 @@ public class SubmodelElementCollectionMapper extends SubmodelElementMapper<Submo
 	protected UAObject createTargetObject() {
 		super.createTargetObject();
 		if (source.getOrdered()) {
-			addTypeReference(I4aasId.AASOrderedSubmodelElementCollectionType);
+			addTypeReference(I4AASIdentifier.AASOrderedSubmodelElementCollectionType);
 		} else {
-			addTypeReference(I4aasId.AASSubmodelElementCollectionType);
+			addTypeReference(I4AASIdentifier.AASSubmodelElementCollectionType);
 		}
 		return target;
 	}

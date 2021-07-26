@@ -20,7 +20,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.UANode;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.HasSemantics;
 import io.adminshell.aas.v3.model.Identifier;
 import io.adminshell.aas.v3.model.IdentifierType;
@@ -52,14 +52,14 @@ public interface HasSemanticsMapper {
 					nodeForIdentification.setReferences(new ListOfReferences());
 				}
 				org.opcfoundation.ua._2011._03.uanodeset.Reference parentRef = org.opcfoundation.ua._2011._03.uanodeset.Reference
-						.builder().withIsForward(false).withReferenceType(UaId.HasDictionaryEntry.getName())
+						.builder().withIsForward(false).withReferenceType(UaIdentifier.HasDictionaryEntry.getName())
 						.withValue(target.getNodeId()).build();
 				nodeForIdentification.getReferences().getReference().add(parentRef);
 				if (target.getReferences() == null) {
 					target.setReferences(new ListOfReferences());
 				}
 				org.opcfoundation.ua._2011._03.uanodeset.Reference childRef = org.opcfoundation.ua._2011._03.uanodeset.Reference
-						.builder().withReferenceType(UaId.HasDictionaryEntry.getName()).withValue(nodeForIdentification.getNodeId())
+						.builder().withReferenceType(UaIdentifier.HasDictionaryEntry.getName()).withValue(nodeForIdentification.getNodeId())
 						.build();
 				target.getReferences().getReference().add(childRef);
 			}
@@ -91,7 +91,7 @@ public interface HasSemanticsMapper {
 		
 		UAObject uaVirtualCD = new ConceptDescriptionMapper(virtualCD, ctx).map();
 		org.opcfoundation.ua._2011._03.uanodeset.Reference orgaRef = new org.opcfoundation.ua._2011._03.uanodeset.Reference();
-		orgaRef.setReferenceType(UaId.Organizes.getName());
+		orgaRef.setReferenceType(UaIdentifier.Organizes.getName());
 		orgaRef.setIsForward(false);
 		orgaRef.setValue("i=17594");
 		uaVirtualCD.getReferences().getReference().add(orgaRef);

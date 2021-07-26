@@ -21,7 +21,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.ListOfReferences;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.DataSpecificationContent;
 import io.adminshell.aas.v3.model.DataSpecificationIEC61360;
 import io.adminshell.aas.v3.model.EmbeddedDataSpecification;

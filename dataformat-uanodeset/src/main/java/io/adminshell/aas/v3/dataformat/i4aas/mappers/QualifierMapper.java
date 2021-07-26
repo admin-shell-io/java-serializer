@@ -19,7 +19,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.sme.ValueTypeMapper;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.Qualifier;
 import io.adminshell.aas.v3.model.Reference;
@@ -39,7 +39,7 @@ public class QualifierMapper extends I4AASMapper<Qualifier, UAObject> {
 	protected UAObject createTargetObject() {
 		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(createBrowseName(name, nsIdx))
 				.withDisplayName(createLocalizedText(name)).build();
-		addTypeReference(I4aasId.AASQualifierType);
+		addTypeReference(I4AASIdentifier.AASQualifierType);
 		return target;
 	}
 

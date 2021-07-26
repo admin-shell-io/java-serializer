@@ -15,7 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas.mappers.utils;
 
-public enum I4aasId implements BasicId {
+public enum I4AASIdentifier implements BasicIdentifier {
 
 	AASAssetAdministrationShellType("AASAssetAdministrationShellType", 1002),
 	AASReferableType("AASReferableType", 1003),
@@ -73,7 +73,7 @@ public enum I4aasId implements BasicId {
 	private String name;
 	private Integer id;
 
-	private I4aasId(String name, Integer id) {
+	private I4AASIdentifier(String name, Integer id) {
 		this.name = name;
 		this.id = id;
 	}

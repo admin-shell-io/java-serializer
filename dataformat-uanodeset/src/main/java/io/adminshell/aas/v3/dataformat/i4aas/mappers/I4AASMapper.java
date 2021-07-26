@@ -22,11 +22,11 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAInstance;
 import org.opcfoundation.ua._2011._03.uanodeset.UANode;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.BasicId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.BasicIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.LangString;
 
 public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
@@ -59,26 +59,26 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 		ctx.getNodeSet().getUAObjectOrUAVariableOrUAMethod().add(node);
 	}
 
-	protected final void addTypeReference(BasicId idForType) {
+	protected final void addTypeReference(BasicIdentifier idForType) {
 		addTypeReferenceFor(target, idForType);
 	}
 
-	protected final void addTypeReferenceFor(UANode anyNode, BasicId idForType) {
+	protected final void addTypeReferenceFor(UANode anyNode, BasicIdentifier idForType) {
 		addTypeReferenceFor(anyNode, idForType, ctx);
 	}
 
-	private static final void addTypeReferenceFor(UANode anyNode, BasicId idForType, MappingContext ctx) {
+	private static final void addTypeReferenceFor(UANode anyNode, BasicIdentifier idForType, MappingContext ctx) {
 		if (anyNode.getReferences() == null) {
 			anyNode.setReferences(new ListOfReferences());
 		}
 		ListOfReferences references = anyNode.getReferences();
-		if (idForType instanceof I4aasId) {
-			references.getReference().add(Reference.builder().withReferenceType(UaId.HasTypeDefinition.getName())
-					.withValue(ctx.getI4aasNodeIdAsString((I4aasId) idForType)).build());
+		if (idForType instanceof I4AASIdentifier) {
+			references.getReference().add(Reference.builder().withReferenceType(UaIdentifier.HasTypeDefinition.getName())
+					.withValue(ctx.getI4aasNodeIdAsString((I4AASIdentifier) idForType)).build());
 		}
-		if (idForType instanceof UaId) {
-			references.getReference().add(Reference.builder().withReferenceType(UaId.HasTypeDefinition.getName())
-					.withValue(ctx.getUaBaseNodeIdAsString((UaId) idForType)).build());
+		if (idForType instanceof UaIdentifier) {
+			references.getReference().add(Reference.builder().withReferenceType(UaIdentifier.HasTypeDefinition.getName())
+					.withValue(ctx.getUaBaseNodeIdAsString((UaIdentifier) idForType)).build());
 		}
 	}
 
@@ -111,13 +111,13 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 				.withBrowseName(createI4AASBrowseName(folderName, ctx)).withDisplayName(createLocalizedText(folderName))
 				.build();
 		ctx.getNodeSet().getUAObjectOrUAVariableOrUAMethod().add(folder);
-		addTypeReferenceFor(folder, UaId.FolderType, ctx);
+		addTypeReferenceFor(folder, UaIdentifier.FolderType, ctx);
 		attachAsComponent((UAObject) target, folder);
 		return folder;
 	}
 
 
-	protected static void attachAsType(UAInstance parent, UAInstance child, BasicId typeId) {
+	protected static void attachAsType(UAInstance parent, UAInstance child, BasicIdentifier typeId) {
 		child.setParentNodeId(parent.getNodeId());
 		if (child.getReferences() == null) {
 			child.setReferences(new ListOfReferences());
@@ -134,19 +134,19 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 	}
 
 	protected static final void attachAsProperty(UAObject parent, UAVariable child) {
-		attachAsType(parent, child, UaId.HasProperty);
+		attachAsType(parent, child, UaIdentifier.HasProperty);
 	}
 	
 	protected static final void attachAsComponent(UAObject parent, UAObject child) {
-		attachAsType(parent, child, UaId.HasComponent);
+		attachAsType(parent, child, UaIdentifier.HasComponent);
 	}
 
 	protected static final void attachAsOrderedComponent(UAObject parent, UAObject child) {
-		attachAsType(parent, child, UaId.HasOrderedComponent);
+		attachAsType(parent, child, UaIdentifier.HasOrderedComponent);
 
 	}
 	protected static final void attachAsDictionaryEntry(UAObject parent, UAObject child) {
-		attachAsType(parent, child, UaId.HasDictionaryEntry);
+		attachAsType(parent, child, UaIdentifier.HasDictionaryEntry);
 	}
 
 	protected static final LocalizedText mapLangString(LangString description) {

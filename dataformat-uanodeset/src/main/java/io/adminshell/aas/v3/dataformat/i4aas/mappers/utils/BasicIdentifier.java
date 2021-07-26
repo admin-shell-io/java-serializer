@@ -15,7 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas.mappers.utils;
 
-public interface BasicId {
+public interface BasicIdentifier {
 	
 	public String getName();
 

@@ -19,7 +19,7 @@ import java.util.List;
 
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.sme.SubmodelElementMappers;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.Qualifiable;
 import io.adminshell.aas.v3.model.Submodel;
@@ -34,7 +34,7 @@ public class SubmodelMapper extends IdentifiableMapper<Submodel> implements HasK
 	@Override
 	protected UAObject createTargetObject() {
 		super.createTargetObject();
-		addTypeReference(I4aasId.AASSubmodelType);
+		addTypeReference(I4AASIdentifier.AASSubmodelType);
 		return target;
 	}
 

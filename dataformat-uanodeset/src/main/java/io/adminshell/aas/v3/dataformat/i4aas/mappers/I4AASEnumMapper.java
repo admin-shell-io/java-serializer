@@ -24,7 +24,7 @@ import org.opcfoundation.ua._2008._02.types.ObjectFactory;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 
 public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
 
@@ -76,7 +76,7 @@ public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
 		JAXBElement<Integer> targetIdTypeVar2 = new ObjectFactory().createInt32(i4aasMatch.ordinal());
 		UAVariable targetIdTypeVar = idTypeVarBuilder.withValue().withAny(targetIdTypeVar2).end().build();
 
-		addTypeReferenceFor(targetIdTypeVar, UaId.PropertyType);
+		addTypeReferenceFor(targetIdTypeVar, UaIdentifier.PropertyType);
 
 		return targetIdTypeVar;
 	}

@@ -15,7 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas.mappers.utils;
 
-public enum UaId implements BasicId  {
+public enum UaIdentifier implements BasicIdentifier  {
 	
 	Boolean("Boolean", 1),
 	String("String", 12),
@@ -36,7 +36,7 @@ public enum UaId implements BasicId  {
 	private String name;
 	private Integer id;
 
-	private UaId(String name, Integer id) {
+	private UaIdentifier(String name, Integer id) {
 		this.name = name;
 		this.id = id;
 	}

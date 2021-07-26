@@ -22,9 +22,9 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASConstants;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.ConceptDescription;
@@ -42,9 +42,9 @@ public class EnvironmentMapper extends I4AASMapper<AssetAdministrationShellEnvir
 				.withBrowseName(createModelBrowseName("AASEnvironment"))
 				.withDisplayName(createLocalizedText("AASEnvironment"))
 				.withReferences(new ListOfReferences()).build();
-		addTypeReference(I4aasId.AASEnvironmentType);
+		addTypeReference(I4AASIdentifier.AASEnvironmentType);
 		Reference orgaRef = new Reference();
-		orgaRef.setReferenceType(UaId.Organizes.getName());
+		orgaRef.setReferenceType(UaIdentifier.Organizes.getName());
 		orgaRef.setIsForward(false);
 		orgaRef.setValue("i=85");
 		target.getReferences().getReference().add(orgaRef);
@@ -57,7 +57,7 @@ public class EnvironmentMapper extends I4AASMapper<AssetAdministrationShellEnvir
 		for (ConceptDescription conceptDescription : source.getConceptDescriptions()) {
 			UAObject uaCD = new ConceptDescriptionMapper(conceptDescription, ctx).map();
 			Reference orgaRef = new Reference();
-			orgaRef.setReferenceType(UaId.Organizes.getName());
+			orgaRef.setReferenceType(UaIdentifier.Organizes.getName());
 			orgaRef.setIsForward(false);
 			orgaRef.setValue("i=17594");
 			uaCD.getReferences().getReference().add(orgaRef);

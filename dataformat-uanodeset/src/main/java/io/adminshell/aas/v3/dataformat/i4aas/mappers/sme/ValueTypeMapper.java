@@ -27,7 +27,7 @@ import org.opcfoundation.ua.i4aas.types.AASValueTypeDataType;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.I4AASMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 
 public class ValueTypeMapper extends I4AASMapper<String, UAVariable> {
 
@@ -61,7 +61,7 @@ public class ValueTypeMapper extends I4AASMapper<String, UAVariable> {
 
 		JAXBElement<Integer> targetIdTypeVar = new ObjectFactory().createInt32(derivedEnum.ordinal());
 		UAVariable uaVariable = builder.withValue().withAny(targetIdTypeVar).end().build();
-		addTypeReferenceFor(uaVariable, UaId.PropertyType);
+		addTypeReferenceFor(uaVariable, UaIdentifier.PropertyType);
 		return uaVariable;
 	}
 

@@ -19,7 +19,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.IdentifierKeyValuePair;
 import io.adminshell.aas.v3.model.Reference;
@@ -35,7 +35,7 @@ public class IdentifierKeyValuePairMapper extends I4AASMapper<IdentifierKeyValue
 		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
 				.withBrowseName(createModelBrowseName(source.getKey()))
 				.withDisplayName(createLocalizedText(source.getKey())).build();
-		addTypeReference(I4aasId.AASIdentifierKeyValuePairType);
+		addTypeReference(I4AASIdentifier.AASIdentifierKeyValuePairType);
 		return target;
 	}
 

@@ -20,7 +20,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.ReferenceMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.StringPropertyMapper;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4aasId;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.Property;
 
@@ -33,7 +33,7 @@ public class PropertyMapper extends SubmodelElementMapper<Property> {
 	@Override
 	protected UAObject createTargetObject() {
 		super.createTargetObject();
-		addTypeReference(I4aasId.AASPropertyType);
+		addTypeReference(I4AASIdentifier.AASPropertyType);
 		return target;
 	}
 
