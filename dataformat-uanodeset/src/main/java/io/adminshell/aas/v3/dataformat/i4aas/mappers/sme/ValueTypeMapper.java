@@ -25,8 +25,8 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder;
 import org.opcfoundation.ua.i4aas.types.AASValueTypeDataType;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.I4AASMapper;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 
 public class ValueTypeMapper extends I4AASMapper<String, UAVariable> {

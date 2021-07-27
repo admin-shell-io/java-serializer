@@ -19,6 +19,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import org.junit.Assert;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import io.adminshell.aas.v3.dataformat.DeserializationException;
@@ -28,6 +29,7 @@ import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 public class DeserializerTest {
 
 	@Test
+	@Ignore
 	public void testAASSimple()
 			throws SerializationException, IllegalArgumentException, IllegalAccessException, DeserializationException, IOException {
 		//arrange

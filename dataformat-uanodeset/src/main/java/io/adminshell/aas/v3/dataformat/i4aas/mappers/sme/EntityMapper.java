@@ -22,9 +22,9 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.I4AASEnumMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.IdentifierKeyValuePairMapper;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.ReferenceMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.Entity;
 import io.adminshell.aas.v3.model.EntityType;
 import io.adminshell.aas.v3.model.IdentifierKeyValuePair;

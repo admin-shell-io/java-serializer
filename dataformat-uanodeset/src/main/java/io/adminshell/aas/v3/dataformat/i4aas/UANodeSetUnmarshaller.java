@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas;
 
+import java.io.InputStream;
 import java.io.StringReader;
 import java.io.StringWriter;
 
@@ -29,17 +30,20 @@ import org.opcfoundation.ua.i4aas.types.AASKeyDataType;
 
 public class UANodeSetUnmarshaller {
 
+	private JAXBContext jaxbCtx;
+	private Unmarshaller unmarshaller;
 
-	private String nodeset;
-
-	public UANodeSetUnmarshaller(String nodeset) {
-		this.nodeset = nodeset;
+	public UANodeSetUnmarshaller() throws JAXBException {
+		jaxbCtx = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(
+				new Class[] { UANodeSet.class, ListOfExtensionObject.class, AASKeyDataType.class }, null);
+		unmarshaller = jaxbCtx.createUnmarshaller();
 	}
 
-	public UANodeSet unmarshallAsString() throws JAXBException {
-		JAXBContext jaxbCtx = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(new Class[] {UANodeSet.class, ListOfExtensionObject.class, AASKeyDataType.class}, null);
-		Unmarshaller unmarshaller = jaxbCtx.createUnmarshaller();
-		return (UANodeSet) unmarshaller.unmarshal(new StringReader(nodeset));
+	public UANodeSet unmarshall(String input) throws JAXBException {
+		return (UANodeSet) unmarshaller.unmarshal(new StringReader(input));
 	}
 
+	public UANodeSet unmarshall(InputStream input) throws JAXBException {
+		return (UANodeSet) unmarshaller.unmarshal(input);
+	}
 }

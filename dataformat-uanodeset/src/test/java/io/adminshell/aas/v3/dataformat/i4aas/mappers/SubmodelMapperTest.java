@@ -26,7 +26,6 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
 import io.adminshell.aas.v3.dataformat.i4aas.AASSimple;
 import io.adminshell.aas.v3.dataformat.i4aas.UANodeSetMarshaller;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShellEnvironment;
 
 public class SubmodelMapperTest {

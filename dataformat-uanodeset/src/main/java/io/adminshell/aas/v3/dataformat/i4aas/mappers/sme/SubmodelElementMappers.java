@@ -15,7 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas.mappers.sme;
 
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
 import io.adminshell.aas.v3.model.SubmodelElement;
 import io.adminshell.aas.v3.model.SubmodelElementCollection;
 

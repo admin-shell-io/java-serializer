@@ -33,9 +33,9 @@ public class I4AASDeserializer implements Deserializer {
 	@Override
 	public AssetAdministrationShellEnvironment read(String value) throws DeserializationException {
 		try {
-			UANodeSet unmarshallAsString = new UANodeSetUnmarshaller(value).unmarshallAsString();
-			UANode aasEnv = findAASEnvironment(unmarshallAsString);
-			return new EnvironmentParser(aasEnv, new ParserContext()).parse();
+			UANodeSet uaNodeSet = new UANodeSetUnmarshaller().unmarshall(value);
+			UANode aasEnv = findAASEnvironment(uaNodeSet);
+			return new EnvironmentParser(aasEnv, new ParserContext(uaNodeSet)).parse();
 		} catch (JAXBException e) {
 			throw new DeserializationException("Deserialization failed due to a JAXBException.", e);
 		}
