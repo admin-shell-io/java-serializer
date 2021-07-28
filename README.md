@@ -50,9 +50,15 @@ We always look for contributions, bug reports, feature requests etc. Simply open
 | Sebastian Bader | Fraunhofer IAIS | [sebbader](https://github.com/sebbader) | x |  |  |  |  |
 | Matthias Böckmann | Fraunhofer IAIS | [maboeckmann](https://github.com/maboeckmann) | x |  |  |  |  |
 | Maximilian Conradi | Fraunhofer IESE | []() |  |  | x |  | x |
+| Helge Dickel | SAP SE | [heldic](https://github.com/heldic) | x |  |  | x | x |
 | Daniel Espen | Fraunhofer IESE | [daespen](https://github.com/daespen) |  | x | x | x | x |
 | Michael Jacoby | Fraunhofer IOSB| [mjacoby](https://github.com/mjacoby) | x | x |  | x | x |
 | Jens Müller | Fraunhofer IOSB | [JensMueller2709](https://github.com/JensMueller2709) |  |  |  | x |  |
+| Orthodoxos Kipouridis | SAP SE | [akiskips](https://github.com/akiskips) | x |  |  | x | x |
 | Bastian Rössl | Fraunhofer IOSB-INA | [br-iosb](https://github.com/br-iosb) |  |  |  | x |  |
 | Frank Schnicke | Fraunhofer IESE | [frankschnicke](https://github.com/frankschnicke) |  |  | x |  | x |
+| Manuel Sauer | SAP SE | [Manu3756](https://github.com/Manu3756) | x |  |  |  |  |
 | Arno Weiss | Fraunhofer IWU | [alw-iwu](https://github.com/alw-iwu) |  |  |  | x |  |
+
+This project was initiated by SAP and Fraunhofer to provide a foundation for the
+AAS development and to foster its dissemination.
