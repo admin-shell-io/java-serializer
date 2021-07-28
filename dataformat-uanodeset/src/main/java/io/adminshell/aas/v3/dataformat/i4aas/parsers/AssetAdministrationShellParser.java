@@ -13,24 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.i4aas.mappers.sme;
+package io.adminshell.aas.v3.dataformat.i4aas.parsers;
 
-import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
-
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
-import io.adminshell.aas.v3.model.Event;
+import io.adminshell.aas.v3.model.AssetAdministrationShell;
 
-public class EventMapper extends SubmodelElementMapper<Event> {
+public class AssetAdministrationShellParser extends I4AASParser<AssetAdministrationShell> {
 
-	public EventMapper(Event src, MappingContext ctx) {
-		super(src, ctx);
+	public AssetAdministrationShellParser(UANodeWrapper src, ParserContext ctx) {
+		super(src, ctx, I4AASIdentifier.AASAssetAdministrationShellType);
 	}
 
 	@Override
-	protected UAObject createTargetObject() {
-		super.createTargetObject();
-		addTypeReference(I4AASIdentifier.AASEventType);
-		return target;
+	protected void parseAndAttachChildren() {
+		// TODO Auto-generated method stub
+		
 	}
+
+	@Override
+	protected AssetAdministrationShell createTargetObject() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

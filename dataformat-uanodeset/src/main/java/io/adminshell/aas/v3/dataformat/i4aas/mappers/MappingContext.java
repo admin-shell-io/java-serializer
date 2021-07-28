@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.i4aas.mappers.utils;
+package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -33,6 +33,10 @@ import org.opcfoundation.ua._2011._03.uanodeset.UANode;
 import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
 import org.opcfoundation.ua._2011._03.uanodeset.UriTable;
 
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASConstants;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.Identifier;
 import io.adminshell.aas.v3.model.Key;

@@ -21,7 +21,6 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.sme.FileMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.AssetInformation;
 import io.adminshell.aas.v3.model.AssetKind;

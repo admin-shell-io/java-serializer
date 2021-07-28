@@ -13,24 +13,25 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.i4aas.mappers.sme;
+package io.adminshell.aas.v3.dataformat.i4aas.parsers;
 
-import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
-import io.adminshell.aas.v3.model.Event;
+import org.opcfoundation.ua._2011._03.uanodeset.UANode;
+import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
 
-public class EventMapper extends SubmodelElementMapper<Event> {
+public class NodeIdResolver {
 
-	public EventMapper(Event src, MappingContext ctx) {
-		super(src, ctx);
+	private Map<String, UANode> nodeId2NodeMap;
+
+	public NodeIdResolver(UANodeSet nodeset) {
+		nodeId2NodeMap = nodeset.getUAObjectOrUAVariableOrUAMethod().stream()
+				.collect(Collectors.toMap(node -> node.getNodeId(), Function.identity()));
 	}
 
-	@Override
-	protected UAObject createTargetObject() {
-		super.createTargetObject();
-		addTypeReference(I4AASIdentifier.AASEventType);
-		return target;
+	public UANode getUANode(String nodeId) {
+		return nodeId2NodeMap.get(nodeId);
 	}
 }

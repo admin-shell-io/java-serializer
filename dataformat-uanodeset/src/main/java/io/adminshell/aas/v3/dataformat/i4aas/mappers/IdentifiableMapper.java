@@ -21,7 +21,6 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAObject.Builder;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
 import io.adminshell.aas.v3.model.Identifiable;
 import io.adminshell.aas.v3.model.IdentifierType;
 

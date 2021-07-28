@@ -22,7 +22,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.Serializer;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.EnvironmentMapper;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.MappingContext;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 
 public class I4AASSerializer implements Serializer {
