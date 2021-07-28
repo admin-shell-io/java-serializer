@@ -15,18 +15,27 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas.parsers;
 
-import org.opcfoundation.ua._2011._03.uanodeset.UANode;
+import java.util.List;
+import java.util.function.Consumer;
+import java.util.function.Predicate;
 
-public abstract class I4AASParser<SOURCE extends UANode, TARGET> {
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.BasicIdentifier;
+
+public abstract class I4AASParser<TARGET> {
 
 	protected ParserContext ctx;
-	protected SOURCE source;
+	protected UANodeWrapper source;
 	protected TARGET target;
+	protected BasicIdentifier type;
+	protected List<ConditionParserAction<Object>> genericChildParserLogic;
 
-	public I4AASParser(SOURCE src, ParserContext ctx) {
+	public I4AASParser(UANodeWrapper src, ParserContext ctx, BasicIdentifier forUaType) {
 		this.source = src;
 		this.ctx = ctx;
+		this.type = forUaType;
 	}
+
+	protected abstract TARGET createTargetObject();
 
 	public final TARGET parse() {
 		target = createTargetObject();
@@ -34,7 +43,25 @@ public abstract class I4AASParser<SOURCE extends UANode, TARGET> {
 		return target;
 	}
 
-	protected abstract void parseAndAttachChildren();
+	protected final <CHILDTARGET> void addChildMapping(Predicate<UANodeWrapper> condition, I4AASParser<CHILDTARGET> parser,
+			Consumer<CHILDTARGET> action) {
+		genericChildParserLogic.add((ConditionParserAction<Object>) ConditionParserAction.<CHILDTARGET>of(condition, parser, action));
+	}
+	
+	protected Predicate<UANodeWrapper> ofType(BasicIdentifier identifier) {
+		return node -> node.getType() == identifier;
+	}
 
-	protected abstract TARGET createTargetObject();
+	protected void parseAndAttachChildren() {
+		for (UANodeWrapper uaNodeWrapper : source.getPropertiesAndComponents()) {
+			for (ConditionParserAction<Object> logic : genericChildParserLogic) {
+				if (logic.condition.test(uaNodeWrapper)) {
+					Object parse = logic.parser.parse();
+					logic.action.accept(parse);
+				}
+			}
+		}
+	}
+
+
 }

@@ -20,7 +20,6 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.function.Function;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.opcfoundation.ua._2011._03.uanodeset.ListOfReferences;
@@ -39,7 +38,7 @@ public class ParserContext {
 	private int i4aasNsIdx;
 
 	protected NodeIdResolver nodeId2NodeMap;
-	private UANodeWrapper uaNodeWrapper;
+	private UANodeWrapper uaEnvironment;
 
 	public ParserContext(UANodeSet uaNodeset) {
 		this.uaNodeset = uaNodeset;
@@ -50,7 +49,7 @@ public class ParserContext {
 
 		Optional<UANode> environmentNode = findNodeOfAASEnvironmentType();
 		if (environmentNode.isPresent()) {			
-			uaNodeWrapper = new UANodeWrapper(environmentNode.get(), nodeId2NodeMap, this);
+			uaEnvironment = new UANodeWrapper(environmentNode.get(), nodeId2NodeMap, this);
 		} else {
 			//log no environment found
 		}
@@ -131,7 +130,7 @@ public class ParserContext {
 	}
 
 	public UANodeWrapper getPreparsedEnvironment() {
-		return uaNodeWrapper;
+		return uaEnvironment;
 	}
 
 	public int getI4aasNsIdx() {

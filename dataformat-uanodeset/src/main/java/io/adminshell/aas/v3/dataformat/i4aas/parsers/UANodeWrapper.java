@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas.parsers;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -79,6 +80,13 @@ public class UANodeWrapper {
 	
 	public List<UANodeWrapper> getProperties() {
 		return properties;
+	}
+	
+	public List<UANodeWrapper> getPropertiesAndComponents() {
+		List<UANodeWrapper> propertiesAndComponents = new ArrayList<>();
+		propertiesAndComponents.addAll(properties);
+		propertiesAndComponents.addAll(components);
+		return propertiesAndComponents;
 	}
 
 	public BasicIdentifier getType() {

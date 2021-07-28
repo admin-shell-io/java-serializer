@@ -15,26 +15,31 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas.parsers;
 
-import org.opcfoundation.ua._2011._03.uanodeset.UANode;
+import static io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier.AASAssetAdministrationShellType;
+import static io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier.AASSubmodelType;
 
+import java.util.function.Predicate;
+
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
+import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
+import io.adminshell.aas.v3.model.Submodel;
 import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShellEnvironment;
 
-public class EnvironmentParser extends I4AASParser<UANode, AssetAdministrationShellEnvironment> {
+public class EnvironmentParser extends I4AASParser<AssetAdministrationShellEnvironment> {
 
-	public EnvironmentParser(UANode src, ParserContext ctx) {
-		super(src, ctx);
+	private Predicate<UANodeWrapper> pred;
+
+	public EnvironmentParser(UANodeWrapper src, ParserContext ctx) {
+		super(src, ctx, I4AASIdentifier.AASEnvironmentType);
+		this.<Submodel>addChildMapping(ofType(AASSubmodelType), new SubmodelParser(src, ctx), target.getSubmodels()::add);
+		this.<AssetAdministrationShell>addChildMapping(ofType(AASAssetAdministrationShellType), new AssetAdministrationShellParser(src, ctx), target.getAssetAdministrationShells()::add);
 	}
-	
+
 	@Override
 	protected AssetAdministrationShellEnvironment createTargetObject() {
 		target = new DefaultAssetAdministrationShellEnvironment();
 		return target;
 	}
-
-	@Override
-	protected void parseAndAttachChildren() {
-		// TODO Auto-generated method stub
-	}
-
+	
 }

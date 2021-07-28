@@ -26,6 +26,7 @@ import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.Deserializer;
 import io.adminshell.aas.v3.dataformat.i4aas.parsers.EnvironmentParser;
 import io.adminshell.aas.v3.dataformat.i4aas.parsers.ParserContext;
+import io.adminshell.aas.v3.dataformat.i4aas.parsers.UANodeWrapper;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 
 public class I4AASDeserializer implements Deserializer {
@@ -34,8 +35,9 @@ public class I4AASDeserializer implements Deserializer {
 	public AssetAdministrationShellEnvironment read(String value) throws DeserializationException {
 		try {
 			UANodeSet uaNodeSet = new UANodeSetUnmarshaller().unmarshall(value);
-			UANode aasEnv = findAASEnvironment(uaNodeSet);
-			return new EnvironmentParser(aasEnv, new ParserContext(uaNodeSet)).parse();
+			ParserContext parserContext = new ParserContext(uaNodeSet);
+			UANodeWrapper environment = parserContext.getPreparsedEnvironment();
+			return new EnvironmentParser(environment, new ParserContext(uaNodeSet)).parse();
 		} catch (JAXBException e) {
 			throw new DeserializationException("Deserialization failed due to a JAXBException.", e);
 		}
