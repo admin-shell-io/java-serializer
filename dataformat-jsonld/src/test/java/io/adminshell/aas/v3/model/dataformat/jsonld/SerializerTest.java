@@ -14,7 +14,6 @@ import java.util.List;
 
 public class SerializerTest {
 
-    //TODO: Classes have no IDs, so the @id is missing
     //TODO: Optional: Prefixes instead of full URIs
     //TODO: Optional: Do not serialize empty collections
 
