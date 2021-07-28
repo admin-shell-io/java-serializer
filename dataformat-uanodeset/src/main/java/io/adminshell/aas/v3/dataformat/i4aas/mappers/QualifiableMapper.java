@@ -19,6 +19,7 @@ import java.util.List;
 
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.model.Constraint;
 import io.adminshell.aas.v3.model.Qualifiable;
 import io.adminshell.aas.v3.model.Qualifier;
@@ -27,7 +28,7 @@ public interface QualifiableMapper {
 
 	public default void mapQualifiable(Qualifiable source, UAObject target, MappingContext ctx) {
 
-		UAObject folder = I4AASMapper.createFolder(target, "Qualifier", ctx);
+		UAObject folder = I4AASMapper.createFolder(target, "Qualifier", ctx, I4AASIdentifier.AASQualifierList);
 
 		List<Constraint> qualifiers = source.getQualifiers();
 		for (int i = 0; i < qualifiers.size(); i++) {

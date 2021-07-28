@@ -41,8 +41,6 @@ public class I4AASUtils {
 		} else if (ref instanceof Asset) {
 			return LocalizedText.builder().withValue(I4AASConstants.ASSET_DISPLAYNAME_PREFIX + ref.getIdShort())
 					.build();
-		} else if (ref instanceof View) {
-			return LocalizedText.builder().withValue(I4AASConstants.VIEW_DISPLAYNAME_PREFIX + ref.getIdShort()).build();
 		} else {
 			return LocalizedText.builder().withValue(ref.getIdShort()).build();
 		}

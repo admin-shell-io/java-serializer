@@ -2,12 +2,12 @@
 <UANodeSet xmlns="http://opcfoundation.org/UA/2011/03/UANodeSet.xsd">
    <NamespaceUris>
       <Uri>http://example.org/SerializerTest</Uri>
-      <Uri>http://opcfoundation.org/UA/I4AAS/</Uri>
+      <Uri>http://opcfoundation.org/UA/I4AAS/V3/</Uri>
    </NamespaceUris>
    <Models>
-      <Model ModelUri="http://example.org/SerializerTest" Version="1.0.0" PublicationDate="2021-07-26T12:12:27.985751900">
+      <Model ModelUri="http://example.org/SerializerTest" Version="1.0.0" PublicationDate="2021-07-28T09:46:55.837552400">
          <RequiredModel ModelUri="http://opcfoundation.org/UA/" Version="1.04.7" PublicationDate="2020-07-15T00:00:00Z"/>
-         <RequiredModel ModelUri="http://opcfoundation.org/UA/I4AAS/" Version="1.0.0" PublicationDate="2021-06-04T00:00:00Z"/>
+         <RequiredModel ModelUri="http://opcfoundation.org/UA/I4AAS/V3/" Version="1.0.0" PublicationDate="2021-06-04T00:00:00Z"/>
       </Model>
    </Models>
    <Aliases>
@@ -60,6 +60,10 @@
       <Alias Alias="IAASReferableType">ns=2;i=1033</Alias>
       <Alias Alias="IAASIdentifiableType">ns=2;i=1034</Alias>
       <Alias Alias="AASIdentifierKeyValuePairType">ns=2;i=1035</Alias>
+      <Alias Alias="AASReferenceList">ns=2;i=1036</Alias>
+      <Alias Alias="AASQualifierList">ns=2;i=1037</Alias>
+      <Alias Alias="AASSubmodelElementList">ns=2;i=1038</Alias>
+      <Alias Alias="AASIdentifierKeyValuePairList">ns=2;i=1039</Alias>
       <Alias Alias="AASKeyTypeDataType">ns=2;i=3002</Alias>
       <Alias Alias="AASAssetKindDataType">ns=2;i=3003</Alias>
       <Alias Alias="AASValueTypeDataType">ns=2;i=3004</Alias>
@@ -150,7 +154,7 @@
    <UAObject NodeId="ns=1;i=8" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=2">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=2</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=9</Reference>
       </References>
@@ -254,7 +258,7 @@
    <UAObject NodeId="ns=1;i=16" BrowseName="2:IsCaseOf" ParentNodeId="ns=1;i=2">
       <DisplayName>IsCaseOf</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=2</Reference>
       </References>
    </UAObject>
@@ -320,7 +324,7 @@
    <UAObject NodeId="ns=1;i=23" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=17">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=17</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=24</Reference>
       </References>
@@ -424,7 +428,7 @@
    <UAObject NodeId="ns=1;i=31" BrowseName="2:IsCaseOf" ParentNodeId="ns=1;i=17">
       <DisplayName>IsCaseOf</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=17</Reference>
       </References>
    </UAObject>
@@ -513,14 +517,14 @@
    <UAObject NodeId="ns=1;i=40" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=37">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=37</Reference>
       </References>
    </UAObject>
    <UAObject NodeId="ns=1;i=41" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=32">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=32</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=42</Reference>
       </References>
@@ -651,7 +655,7 @@
    <UAObject NodeId="ns=1;i=51" BrowseName="2:IsCaseOf" ParentNodeId="ns=1;i=32">
       <DisplayName>IsCaseOf</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=32</Reference>
       </References>
    </UAObject>
@@ -717,7 +721,7 @@
    <UAObject NodeId="ns=1;i=58" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=52">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=52</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=59</Reference>
       </References>
@@ -857,7 +861,7 @@
    <UAObject NodeId="ns=1;i=68" BrowseName="2:IsCaseOf" ParentNodeId="ns=1;i=52">
       <DisplayName>IsCaseOf</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=52</Reference>
       </References>
    </UAObject>
@@ -923,7 +927,7 @@
    <UAObject NodeId="ns=1;i=75" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=69">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=69</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=76</Reference>
       </References>
@@ -1018,7 +1022,7 @@
    <UAObject NodeId="ns=1;i=83" BrowseName="2:IsCaseOf" ParentNodeId="ns=1;i=69">
       <DisplayName>IsCaseOf</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=69</Reference>
       </References>
    </UAObject>
@@ -1155,14 +1159,14 @@
    <UAObject NodeId="ns=1;i=97" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=91">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=91</Reference>
       </References>
    </UAObject>
    <UAObject NodeId="ns=1;i=98" BrowseName="2:IsCaseOf" ParentNodeId="ns=1;i=91">
       <DisplayName>IsCaseOf</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=91</Reference>
       </References>
    </UAObject>
@@ -1203,14 +1207,14 @@
    <UAObject NodeId="ns=1;i=102" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=99">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=99</Reference>
       </References>
    </UAObject>
    <UAObject NodeId="ns=1;i=103" BrowseName="2:Qualifier" ParentNodeId="ns=1;i=99">
       <DisplayName>Qualifier</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1037</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=99</Reference>
       </References>
    </UAObject>
@@ -1237,14 +1241,14 @@
    <UAObject NodeId="ns=1;i=106" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=84">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=84</Reference>
       </References>
    </UAObject>
    <UAObject NodeId="ns=1;i=107" BrowseName="2:Qualifier" ParentNodeId="ns=1;i=84">
       <DisplayName>Qualifier</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1037</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=84</Reference>
       </References>
    </UAObject>
@@ -1356,14 +1360,14 @@
    <UAObject NodeId="ns=1;i=118" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=115">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=115</Reference>
       </References>
    </UAObject>
    <UAObject NodeId="ns=1;i=119" BrowseName="2:Qualifier" ParentNodeId="ns=1;i=115">
       <DisplayName>Qualifier</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1037</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=115</Reference>
       </References>
    </UAObject>
@@ -1404,14 +1408,14 @@
    <UAObject NodeId="ns=1;i=123" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=120">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=120</Reference>
       </References>
    </UAObject>
    <UAObject NodeId="ns=1;i=124" BrowseName="2:Qualifier" ParentNodeId="ns=1;i=120">
       <DisplayName>Qualifier</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1037</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=120</Reference>
       </References>
    </UAObject>
@@ -1472,14 +1476,14 @@
    <UAObject NodeId="ns=1;i=130" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=127">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=127</Reference>
       </References>
    </UAObject>
    <UAObject NodeId="ns=1;i=131" BrowseName="2:Qualifier" ParentNodeId="ns=1;i=127">
       <DisplayName>Qualifier</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1037</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=127</Reference>
       </References>
    </UAObject>
@@ -1516,14 +1520,14 @@
    <UAObject NodeId="ns=1;i=135" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=108">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=108</Reference>
       </References>
    </UAObject>
    <UAObject NodeId="ns=1;i=136" BrowseName="2:Qualifier" ParentNodeId="ns=1;i=108">
       <DisplayName>Qualifier</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1037</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=108</Reference>
       </References>
    </UAObject>
@@ -1634,14 +1638,14 @@
    <UAObject NodeId="ns=1;i=147" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=144">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=144</Reference>
       </References>
    </UAObject>
    <UAObject NodeId="ns=1;i=148" BrowseName="2:Qualifier" ParentNodeId="ns=1;i=144">
       <DisplayName>Qualifier</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1037</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=144</Reference>
       </References>
    </UAObject>
@@ -1668,14 +1672,14 @@
    <UAObject NodeId="ns=1;i=151" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=137">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=137</Reference>
       </References>
    </UAObject>
    <UAObject NodeId="ns=1;i=152" BrowseName="2:Qualifier" ParentNodeId="ns=1;i=137">
       <DisplayName>Qualifier</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1037</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=137</Reference>
       </References>
    </UAObject>
@@ -1826,14 +1830,14 @@
    <UAObject NodeId="ns=1;i=166" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=163">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=163</Reference>
       </References>
    </UAObject>
    <UAObject NodeId="ns=1;i=167" BrowseName="2:Qualifier" ParentNodeId="ns=1;i=163">
       <DisplayName>Qualifier</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1037</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=163</Reference>
       </References>
    </UAObject>
@@ -1860,7 +1864,7 @@
    <UAObject NodeId="ns=1;i=170" BrowseName="2:SpecificAssetId" ParentNodeId="ns=1;i=159">
       <DisplayName>SpecificAssetId</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1039</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=159</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=171</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=176</Reference>
@@ -1991,7 +1995,7 @@
    <UAObject NodeId="ns=1;i=181" BrowseName="2:Submodel" ParentNodeId="ns=1;i=153">
       <DisplayName>Submodel</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=153</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=182</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=184</Reference>
@@ -2094,9 +2098,8 @@
    <UAObject NodeId="ns=1;i=188" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=153">
       <DisplayName>DataSpecification</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">i=61</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=153</Reference>
       </References>
    </UAObject>
 </UANodeSet>
-

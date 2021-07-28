@@ -20,6 +20,7 @@ import java.util.List;
 import org.opcfoundation.ua._2011._03.uanodeset.ListOfReferences;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.DataSpecificationContent;
 import io.adminshell.aas.v3.model.DataSpecificationIEC61360;
@@ -31,7 +32,7 @@ public interface HasDataSpecificationMapper {
 
 	public default void mapDataSpecification(HasDataSpecification source, UAObject target, MappingContext ctx) {
 
-		UAObject folder = I4AASMapper.createFolder(target, "DataSpecification", ctx);
+		UAObject folder = I4AASMapper.createFolder(target, "DataSpecification", ctx, I4AASIdentifier.AASReferenceList);
 
 		List<EmbeddedDataSpecification> embeddedDataSpecifications = source.getEmbeddedDataSpecifications();
 		for (int i = 0; i < embeddedDataSpecifications.size(); i++) {

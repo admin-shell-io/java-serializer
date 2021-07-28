@@ -1,4 +1,4 @@
-<xs:schema elementFormDefault="qualified" targetNamespace="http://opcfoundation.org/UA/I4AAS/Types.xsd" xmlns:tns="http://opcfoundation.org/UA/I4AAS/Types.xsd" xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<xs:schema elementFormDefault="qualified" targetNamespace="http://opcfoundation.org/UA/I4AAS/V3/Types.xsd" xmlns:tns="http://opcfoundation.org/UA/I4AAS/V3/Types.xsd" xmlns:ua="http://opcfoundation.org/UA/2008/02/Types.xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
     <xs:import namespace="http://opcfoundation.org/UA/2008/02/Types.xsd"/>
     <xs:simpleType name="AASAssetKindDataType">
         <xs:restriction base="xs:string">

@@ -98,23 +98,35 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 	}
 
 	protected final UAObject createFolder(String folderName) {
-		return createFolder((UAObject) target, folderName, ctx);
+		return createFolder((UAObject) target, folderName, ctx, UaIdentifier.FolderType);
 	}
 
 	private static final String createI4AASBrowseName(String name, MappingContext ctx) {
 		return ctx.getI4aasNsIndex() + ":" + name;
 	}
 
-	public static final UAObject createFolder(UAObject target, String folderName, MappingContext ctx) {
+	public static final UAObject createFolder(UAObject target, String folderName, MappingContext ctx, BasicIdentifier folderSubtype) {
 		UAObject folder = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
 				.withBrowseName(createI4AASBrowseName(folderName, ctx)).withDisplayName(createLocalizedText(folderName))
 				.build();
 		ctx.getNodeSet().getUAObjectOrUAVariableOrUAMethod().add(folder);
-		addTypeReferenceFor(folder, UaIdentifier.FolderType, ctx);
+		addTypeReferenceFor(folder, folderSubtype, ctx);
 		attachAsComponent((UAObject) target, folder);
 		return folder;
 	}
+	
 
+	public final UAObject createReferenceList(String folderName) {
+		return createFolder((UAObject) target, folderName, ctx, I4AASIdentifier.AASReferenceList);
+	}
+
+	public final UAObject createSubmodelElementList(String folderName){
+		return createFolder((UAObject)target, folderName, ctx, I4AASIdentifier.AASSubmodelElementList);
+	}
+
+	public final UAObject createIdentifierKeyValuePairList(String folderName) {
+		return createFolder((UAObject)target, folderName, ctx, I4AASIdentifier.AASIdentifierKeyValuePairList);
+	}
 
 	protected static void attachAsType(UAInstance parent, UAInstance child, BasicIdentifier typeId) {
 		child.setParentNodeId(parent.getNodeId());

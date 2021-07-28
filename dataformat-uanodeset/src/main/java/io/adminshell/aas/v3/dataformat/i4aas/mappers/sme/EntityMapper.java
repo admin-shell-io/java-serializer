@@ -65,7 +65,7 @@ public class EntityMapper extends SubmodelElementMapper<Entity> {
 			attachAsComponent(target, map);
 		}
 		
-		UAObject createFolder = createFolder("Statement");
+		UAObject createFolder = createSubmodelElementList("Statement");
 		List<SubmodelElement> statements = source.getStatements();
 		for (SubmodelElement submodelElement : statements) {
 			UAObject map = SubmodelElementMappers.getMapper(submodelElement, ctx).map();

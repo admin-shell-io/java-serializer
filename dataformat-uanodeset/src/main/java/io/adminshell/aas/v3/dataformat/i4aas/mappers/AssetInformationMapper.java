@@ -67,7 +67,7 @@ public class AssetInformationMapper extends I4AASMapper<AssetInformation, UAObje
 			attachAsComponent(target, uaThumbnail);
 		}
 
-		UAObject folder = createFolder("SpecificAssetId");
+		UAObject folder = createIdentifierKeyValuePairList("SpecificAssetId");
 		for (IdentifierKeyValuePair identifierKeyValuePair : source.getSpecificAssetIds()) {
 			UAObject uaIdKVP = new IdentifierKeyValuePairMapper(identifierKeyValuePair, ctx).map();
 			attachAsComponent(folder, uaIdKVP);

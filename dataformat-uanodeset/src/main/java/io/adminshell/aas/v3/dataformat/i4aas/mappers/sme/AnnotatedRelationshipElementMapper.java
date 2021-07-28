@@ -42,7 +42,7 @@ public class AnnotatedRelationshipElementMapper extends SubmodelElementMapper<An
 	@Override
 	protected void mapAndAttachChildren() {
 		super.mapAndAttachChildren();
-		UAObject createFolder = createFolder("Annotation");
+		UAObject createFolder = createSubmodelElementList("Annotation");
 		List<DataElement> annotations = source.getAnnotations();
 		for (DataElement dataElement : annotations) {
 			UAObject uaDataElement = SubmodelElementMappers.getMapper(dataElement, ctx).map();
