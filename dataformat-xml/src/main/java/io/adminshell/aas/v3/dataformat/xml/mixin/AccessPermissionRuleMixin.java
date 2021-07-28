@@ -23,7 +23,6 @@ import io.adminshell.aas.v3.dataformat.xml.AasXmlNamespaceContext;
 import io.adminshell.aas.v3.model.PermissionsPerObject;
 
 public interface AccessPermissionRuleMixin {
-
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.ABAC_URI, localName = "permissionsPerObject")
     public List<PermissionsPerObject> getPermissionsPerObjects();
 

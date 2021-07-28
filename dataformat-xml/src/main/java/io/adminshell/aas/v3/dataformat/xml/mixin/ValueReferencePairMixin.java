@@ -23,13 +23,13 @@ import io.adminshell.aas.v3.dataformat.xml.AasXmlNamespaceContext;
 import io.adminshell.aas.v3.dataformat.xml.serialization.NamespaceIndependentReferenceSerializer;
 import io.adminshell.aas.v3.model.Reference;
 
-@JsonPropertyOrder({"valueId", "value"})
+@JsonPropertyOrder({ "valueId", "value" })
 public interface ValueReferencePairMixin {
 
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.IEC61360_URI, localName = "valueId")
     @JsonSerialize(using = NamespaceIndependentReferenceSerializer.class)
-    Reference getValueId();
+    public Reference getValueId();
 
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.IEC61360_URI, localName = "value")
-    String getValue();
+    public String getValue();
 }

@@ -25,5 +25,5 @@ import io.adminshell.aas.v3.model.ValueReferencePair;
 public interface ValueListMixin {
 
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.IEC61360_URI, localName = "valueReferencePair")
-    List<ValueReferencePair> getValueReferencePairTypes();
+    public List<ValueReferencePair> getValueReferencePairTypes();
 }
