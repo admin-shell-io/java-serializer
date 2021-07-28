@@ -62,6 +62,10 @@
                             <includes>
                                 <include>**/*.java</include>
                             </includes>
+                            <excludes>
+                            	<exclude>**/target/generated/**/*.java</exclude>
+                            	<exclude>**/src/main/java/org/opcfoundation/ua/_2008/_02/types/*.java</exclude>
+                            </excludes>
                         </licenseSet>
                     </licenseSets>
                 </configuration>
