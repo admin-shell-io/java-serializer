@@ -31,6 +31,7 @@ import java.text.SimpleDateFormat;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 
 /**
@@ -219,6 +220,10 @@ class Parser {
                     }
                     queryStringBuilder.append(" (GROUP_CONCAT(?").append(key1).append(";separator=\"||\") AS ?").append(key1).append("s) ");
 
+                    //Additional case for blank nodes
+                    queryStringBuilder.append(" (GROUP_CONCAT(?").append(key1).append("Blank;separator=\"||\") AS ?").append(key1).append("sBlank) ");
+
+
                 } else {
                     //No, it's not a list. No need to aggregate
                     queryStringBuilder.append(" ?").append(key1);
@@ -273,7 +278,12 @@ class Parser {
                     logger.warn("Failed to retrieve JsonAlias for field " + field + ". Assuming aas:" + entry.getKey());
                     queryStringBuilder.append("aas:").append(entry.getKey());
                 }
+                //if(isBlank(?entry.getKey(), use value of artificial, use original value)
                 queryStringBuilder.append(" ?").append(entry.getKey()).append(" ."); //object
+
+                //In case of the object being a blank node, we construct a second result variable with the blank node id
+                queryStringBuilder.append("OPTIONAL { ?").append(entry.getKey()).append(" <").append(blankNodeIdPropertyUri).append("> ?").append(entry.getKey()).append("Blank . } ");
+
                 queryStringBuilder.append("} ");
             }
 
@@ -297,7 +307,7 @@ class Parser {
 
             if(!targetClass.equals(LangString.class)) { //LangString has no additional properties map. Skip this step
 
-                //CONSTRUCT { ?s ?p ?o } { ?s ?p ?o. FILTER(?p NOT IN (liste der ids: properties)) }
+                //CONSTRUCT { ?s ?p ?o } { ?s ?p ?o. FILTER(?p NOT IN (list of ids properties)) }
                 for (Map.Entry<String, String> entry : knownNamespaces.entrySet()) {
                     queryForOtherProperties.append("PREFIX ").append(entry.getKey());
                     if (!entry.getKey().endsWith(":")) {
@@ -465,9 +475,13 @@ class Parser {
                     if (Collection.class.isAssignableFrom(currentType)) {
                         sparqlParameterName += "s"; //plural form for the concatenated values
                     }
-                    querySolution.varNames().forEachRemaining(System.out::println);
-                    System.out.println(querySolution.contains(sparqlParameterName));
-                    if (querySolution.contains(sparqlParameterName)) { //TODO why is this false for keys?! Answer: Because you can't do a GROUP_CONCAT on blank nodes
+                    if(!querySolution.contains(sparqlParameterName))
+                    {
+                        sparqlParameterName += "Blank"; //If not present, try to go with the option for blank nodes instead
+                        //TODO: Note: This would not yield full results yet in case some of the values are encapsulated
+                        // in blank nodes and some are not, for the same property
+                    }
+                    if (querySolution.contains(sparqlParameterName)) {
                         String currentSparqlBinding = querySolution.get(sparqlParameterName).toString();
 
                         boolean objectIsBlankNode = querySolution.get(sparqlParameterName).isResource() && querySolution.get(sparqlParameterName).asNode().isBlank();
@@ -476,13 +490,7 @@ class Parser {
                         //For that case, we add some artificial identifiers here
                         if(objectIsBlankNode) {
                             blankNodeId = querySolution.get(sparqlParameterName).asNode().getBlankNodeId().toString();
-                            inputModel.add(
-                                ResourceFactory.createStatement(
-                                        querySolution.get(sparqlParameterName).asResource(), //subject: the blank node
-                                        ResourceFactory.createProperty(blankNodeIdPropertyUri.toString()), //some artificial property
-                                        ResourceFactory.createStringLiteral(blankNodeId))); //object: the ID of the blank node
                         }
-
                         if (currentType.isEnum()) {
                             //Two possibilities:
                             //1: The URI of the enum value is given directly e.g. ?s ?p <someUri>
@@ -490,18 +498,29 @@ class Parser {
                             //  ?s ?p [ a demo:myEnum, demo:enumValue ]
                             if(objectIsBlankNode)
                             {
+
                                 Query innerEnumQuery = QueryFactory.create("SELECT ?type { ?s <" + blankNodeIdPropertyUri + "> + \"" + blankNodeId + "\" ; a ?type } ");
                                 QueryExecution innerEnumQueryExecution = QueryExecutionFactory.create(innerEnumQuery, inputModel);
                                 ResultSet innerEnumQueryExecutionResultSet = innerEnumQueryExecution.execSelect();
+
+                                //Only throw this if there is no successful execution
+                                IOException anyIOException = null;
+                                boolean oneSuccessfulEnumFound = false;
                                 while(innerEnumQueryExecutionResultSet.hasNext())
                                 {
                                     try {
                                         entry.getValue().invoke(returnObject, handleEnum(currentType, innerEnumQueryExecutionResultSet.next().get("type").toString()));
+                                        oneSuccessfulEnumFound = true;
                                         break; //Stop after the first successful execution
                                     }
-                                    catch (IOException ignored) //There might be errors, if multiple types are present, see example above
-                                    {}
+                                    catch (IOException e) //There might be errors, if multiple types are present, see example above
+                                    {
+                                        anyIOException = e;
+                                    }
                                 }
+                                //If nothing worked, but something failed (i.e. there exists a problematic element, but no proper element), we throw an exception
+                                if(anyIOException != null && !oneSuccessfulEnumFound)
+                                    throw new IOException("Could not parse Enum. ", anyIOException);
                                 innerEnumQueryExecution.close();
                             }
                             else {
@@ -586,7 +605,6 @@ class Parser {
                             } else {
                                 //Not a primitive object, but a complex sub-object. Recursively call this function to handle it
                                 if (objectIsBlankNode) {
-                                    System.out.println("Handling sub-object as blank node");
                                     entry.getValue().invoke(returnObject, handleObject(inputModel, blankNodeId, entry.getValue().getParameterTypes()[0]));
                                 } else {
 
@@ -754,14 +772,12 @@ class Parser {
             url = url.substring(url.lastIndexOf("/") + 1);
         }
         for (T constant : constants) {
-            if (url.equalsIgnoreCase(constant.toString())) {
+            //We artificially added some underscores in the AAS ontology. TODO: This might be a bit dangerous for other ontologies, which really contain underscores in enum names
+            if (url.equalsIgnoreCase(constant.toString()) || url.equalsIgnoreCase(constant.toString().replace("_", ""))) {
                 return constant;
             }
         }
-        for(T constant : constants) {
-            logger.info("Available enums are: " + constant.toString());
-        }
-        throw new IOException("Failed to find matching enum value for " + url);
+        throw new IOException("Failed to find matching enum value for " + url + " . Available enums are: " + Arrays.stream(constants).map(Object::toString).collect(Collectors.joining(", ")));
     }
 
     /**
@@ -941,6 +957,7 @@ class Parser {
      * @throws IOException if the parsing of the message fails
      */
     <T> T parseMessage(Model rdfModel, Class<T> targetClass) throws IOException {
+        addArtificialBlankNodeLabels(rdfModel);
         ArrayList<Class<?>> implementingClasses = getImplementingClasses(targetClass);
 
         // Query to retrieve all instances in the input graph that have a class assignment
@@ -1036,14 +1053,28 @@ class Parser {
     }
 
     /**
-     * Reads a message into an Apache Jena model.
+     * Entry point to this class. Takes a message and a desired target class (can be an interface)
+     * @param message Object to be parsed. Note that the name is misleading: One can also parse non-message IDS objects with this function
+     * @param targetClass Desired target class (something as abstract as "Message.class" is allowed)
+     * @param serializationFormat Input RDF format
+     * @param <T> Desired target class
+     * @return Object of desired target class, representing the values contained in input message
+     * @throws IOException if the parsing of the message fails
+     */
+    <T> T parseMessage(String message, Class<T> targetClass, Lang serializationFormat) throws IOException {
+        Model model = readMessage(message, serializationFormat);
+        return parseMessage(model, targetClass);
+    }
+
+    /**
+     * Reads a message into an Apache Jena model, guessing the input language.
+     * Note: Guessing the language may cause some error messages during parsing attempts
      *
      * @param message Message to be read
      * @return The model of the message
      */
     private Model readMessage(String message) throws IOException {
 
-        Model targetModel = ModelFactory.createDefaultModel();
         List<Lang> supportedLanguages = new ArrayList<>(
                 Arrays.asList(
                         RDFLanguages.JSONLD, //JSON-LD first
@@ -1051,20 +1082,36 @@ class Parser {
                         RDFLanguages.RDFXML
                 ));
 
-        boolean successfullyParsed = false;
         for (Lang lang : supportedLanguages) {
             try {
-                RDFDataMgr.read(targetModel, new ByteArrayInputStream(message.getBytes()), lang);
-                successfullyParsed = true; //Only set, if no exception occurred
-            } catch (RiotException ignored) {
+                return readMessage(message, lang);
+            } catch (IOException ignored) {
             }
-        }
-        if (successfullyParsed) {
-            return targetModel;
         }
         throw new IOException("Could not parse string as any supported RDF format (JSON-LD, Turtle/N-Triple, RDF-XML).");
     }
 
+    /**
+     * Reads a message into an Apache Jena model, guessing the input language.
+     * Note: Guessing the language may cause some error messages during parsing attempts
+     *
+     * @param message Message to be read
+     * @param language The RDF serialization of the input. Supported formats are JSON-LD, N-Triple, Turtle, and RDF-XML
+     * @return The model of the message
+     */
+    private Model readMessage(String message, Lang language) throws IOException {
+
+        Model targetModel = ModelFactory.createDefaultModel();
+
+        try {
+            RDFDataMgr.read(targetModel, new ByteArrayInputStream(message.getBytes()), language);
+        }
+        catch (RiotException e)
+        {
+            throw new IOException("Failed to parse input as " + language, e);
+        }
+        return targetModel;
+    }
 
     /**
      * Get a list of all subclasses (by JsonSubTypes annotation) which can be instantiated
@@ -1080,9 +1127,28 @@ class Parser {
                 result.addAll(getImplementingClasses(type.value()));
             }
         }
-        if (!someClass.isInterface() && !Modifier.isAbstract(someClass.getModifiers()))
-            result.add(someClass);
+        if (!someClass.isInterface() && !Modifier.isAbstract(someClass.getModifiers())) {
+            result.add(Serializer.customImplementationMap.getOrDefault(someClass, someClass));
+        }
         return result;
+    }
+
+    private void addArtificialBlankNodeLabels(Model m)
+    {
+        //Get all blank nodes
+        Query q = QueryFactory.create("SELECT DISTINCT ?s { ?s ?p ?o . FILTER(isBlank(?s)) } ");
+        QueryExecution qe = QueryExecutionFactory.create(q, m);
+        ResultSet rs = qe.execSelect();
+        List<Statement> statementsToAdd = new ArrayList<>();
+        while(rs.hasNext())
+        {
+            QuerySolution qs = rs.next();
+            statementsToAdd.add(ResourceFactory.createStatement(qs.get("?s").asResource(),
+                    ResourceFactory.createProperty(blankNodeIdPropertyUri.toString()),
+                    ResourceFactory.createStringLiteral(qs.get("?s").toString())));
+        }
+        qe.close();
+        m.add(statementsToAdd);
     }
 
 }

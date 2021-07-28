@@ -35,6 +35,8 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer, D
     public static String implementingClassesNamePrefix = "Default";
     public static String implementingClassesNameSuffix = "";
 
+    static Map<Class<?>, Class<?>> customImplementationMap = new HashMap<>();
+
     private static boolean charsetWarningPrinted = false;
 
     public Serializer() {
@@ -129,8 +131,33 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer, D
      * @param <T>           deserialized type
      * @return an object representing the provided JSON(-LD) structure
      */
-    public <T> T deserialize(String serialization, Class<T> valueType) throws IOException {
-        return new Parser().parseMessage(serialization, valueType);
+    public <T> T deserialize(String serialization, Class<T> valueType) throws DeserializationException {
+        try {
+            return new Parser().parseMessage(serialization, valueType);
+        }
+        catch (IOException e)
+        {
+            throw new DeserializationException("Failed to deserialize input.", e);
+        }
+    }
+
+    /**
+     * Inverse method of "serialize"
+     *
+     * @param serialization JSON(-LD) string
+     * @param valueType     class of top level type
+     * @param serializationFormat RDF input format
+     * @param <T>           deserialized type
+     * @return an object representing the provided JSON(-LD) structure
+     */
+    public <T> T deserialize(String serialization, Class<T> valueType, Lang serializationFormat) throws DeserializationException {
+        try {
+            return new Parser().parseMessage(serialization, valueType, serializationFormat);
+        }
+        catch (IOException e)
+        {
+            throw new DeserializationException("Failed to deserialize input.", e);
+        }
     }
 
     /**
@@ -141,8 +168,14 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer, D
      * @param <T>           deserialized type
      * @return an object representing the provided JSON(-LD) structure
      */
-    public <T> T deserialize(Model rdfModel, Class<T> valueType) throws IOException {
-        return new Parser().parseMessage(rdfModel, valueType);
+    public <T> T deserialize(Model rdfModel, Class<T> valueType) throws DeserializationException {
+        try {
+            return new Parser().parseMessage(rdfModel, valueType);
+        }
+        catch (IOException e)
+        {
+            throw new DeserializationException("Failed to deserialize input.", e);
+        }
     }
 
     /**
@@ -224,8 +257,19 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer, D
         }
     }
 
+    public AssetAdministrationShellEnvironment read(String value, Lang serializationFormat) throws DeserializationException {
+        try {
+            return new Parser().parseMessage(value, AssetAdministrationShellEnvironment.class, serializationFormat);
+        }
+        catch (IOException e)
+        {
+            throw new DeserializationException("Could not deserialize to environment.", e);
+        }
+    }
+
     @Override
     public <T> void useImplementation(Class<T> aasInterface, Class<? extends T> implementation) {
-        throw new NotImplementedException("Custom implementation support not yet implemented"); //TODO
+        customImplementationMap.put(aasInterface, implementation);
+        //throw new NotImplementedException("Custom implementation support not yet implemented");
     }
 }
