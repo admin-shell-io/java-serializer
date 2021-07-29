@@ -63,27 +63,39 @@ public class AASXSerializer {
 
     private Serializer xmlSerializer = new XmlSerializer();
 
-    public AASXSerializer(Serializer xmlSerializer) {
-        this.xmlSerializer = xmlSerializer;
+    /**
+     * Default constructor
+     */
+    public AASXSerializer() {
     }
 
-    public AASXSerializer() {
-
+    /**
+     * Constructor with a custom serializer for serializing the aas environment
+     * 
+     * @param xmlSerializer a custom serializer used for serializing the aas environment
+     */
+    public AASXSerializer(Serializer xmlSerializer) {
+        this.xmlSerializer = xmlSerializer;
     }
 
     /**
      * Generates the .aasx file and writes it to the given OutputStream
      * 
-     * @throws SerializationException
-     * @throws IOException
+     * @param environment the aas environment that will be included in the aasx package as an xml serialization
+     * @param files related inMemory files that belong to the given aas environment
+     * @param os an output stream for writing the aasx package
+     * @throws SerializationException if serializing the given elements fails
+     * @throws IOException if creating output streams for aasx fails
      */
-    public void write(AssetAdministrationShellEnvironment environment, Collection<InMemoryFile> files, OutputStream os) throws SerializationException, IOException {
+    public void write(AssetAdministrationShellEnvironment environment, Collection<InMemoryFile> files, OutputStream os)
+            throws SerializationException, IOException {
         prepareFilePaths(environment.getSubmodels());
 
         OPCPackage rootPackage = OPCPackage.create(os);
 
         // Create the empty aasx-origin file
-        PackagePart origin = createAASXPart(rootPackage, rootPackage, ORIGIN_PATH, MIME_PLAINTXT, ORIGIN_RELTYPE, ORIGIN_CONTENT.getBytes());
+        PackagePart origin = createAASXPart(rootPackage, rootPackage, ORIGIN_PATH, MIME_PLAINTXT, ORIGIN_RELTYPE,
+                ORIGIN_CONTENT.getBytes());
 
         // Convert the given Metamodels to XML
         String xml = xmlSerializer.write(environment);
@@ -99,16 +111,13 @@ public class AASXSerializer {
     /**
      * Stores the files from the Submodels in the .aasx file
      * 
-     * @param submodelList
-     *            the Submodels
-     * @param files
-     *            the content of the files
-     * @param rootPackage
-     *            the OPCPackage
-     * @param xmlPart
-     *            the Part the files should be related to
+     * @param submodelList the Submodels
+     * @param files the content of the files
+     * @param rootPackage the OPCPackage
+     * @param xmlPart the Part the files should be related to
      */
-    private void storeFilesInAASX(List<Submodel> submodelList, Collection<InMemoryFile> files, OPCPackage rootPackage, PackagePart xmlPart) {
+    private void storeFilesInAASX(List<Submodel> submodelList, Collection<InMemoryFile> files, OPCPackage rootPackage,
+            PackagePart xmlPart) {
 
         for (Submodel sm : submodelList) {
             for (File file : findFileElements(sm.getSubmodelElements())) {
@@ -128,11 +137,9 @@ public class AASXSerializer {
     /**
      * Saves the OPCPackage to the given OutputStream
      * 
-     * @param os
-     *            the Stream to be saved to
-     * @param rootPackage
-     *            the Package to be saved
-     * @throws IOException
+     * @param os the Stream to be saved to
+     * @param rootPackage the Package to be saved
+     * @throws IOException if creating output streams for aasx fails
      */
     private void saveAASX(OutputStream os, OPCPackage rootPackage) throws IOException {
         rootPackage.flush();
@@ -152,23 +159,16 @@ public class AASXSerializer {
     /**
      * Creates a Part (a file in the .aasx) of the .aasx and adds it to the Package
      * 
-     * @param root
-     *            the OPCPackage
-     * @param relateTo
-     *            the Part of the OPC the relationship of the new Part should be
-     *            added to
-     * @param path
-     *            the path inside the .aasx where the new Part should be created
-     * @param mimeType
-     *            the mime-type of the file
-     * @param relType
-     *            the type of the Relationship
-     * @param content
-     *            the data the new part should contain
-     * @return the created PackagePart; Returned in case it is needed late as a Part
-     *         to relate to
+     * @param root the OPCPackage
+     * @param relateTo the Part of the OPC the relationship of the new Part should be added to
+     * @param path the path inside the .aasx where the new Part should be created
+     * @param mimeType the mime-type of the file
+     * @param relType the type of the Relationship
+     * @param content the data the new part should contain
+     * @return the created PackagePart; Returned in case it is needed late as a Part to relate to
      */
-    private PackagePart createAASXPart(OPCPackage root, RelationshipSource relateTo, String path, String mimeType, String relType, byte[] content) {
+    private PackagePart createAASXPart(OPCPackage root, RelationshipSource relateTo, String path, String mimeType, String relType,
+            byte[] content) {
         if (mimeType == null || mimeType.equals("")) {
             throw new RuntimeException("Could not create AASX Part '" + path + "'. No MIME_TYPE specified.");
         }
@@ -191,10 +191,8 @@ public class AASXSerializer {
     /**
      * Writes the content of a byte[] to a Part
      * 
-     * @param part
-     *            the Part to be written to
-     * @param content
-     *            the content to be written to the part
+     * @param part the Part to be written to
+     * @param content the content to be written to the part
      */
     private void writeDataToPart(PackagePart part, byte[] content) {
         try (OutputStream ostream = part.getOutputStream();) {
@@ -209,8 +207,7 @@ public class AASXSerializer {
      * Gets the File elements from a collection of elements Also recursively
      * searches in SubmodelElementCollections
      * 
-     * @param elements
-     *            the Elements to be searched for File elements
+     * @param elements the Elements to be searched for File elements
      * @return the found Files
      */
     private Collection<File> findFileElements(Collection<SubmodelElement> elements) {
@@ -231,20 +228,18 @@ public class AASXSerializer {
     /**
      * Replaces the path in all File Elements with the result of preparePath
      * 
-     * @param submodels
-     *            the Submodels
+     * @param submodels the Submodels
      */
     private void prepareFilePaths(Collection<Submodel> submodels) {
-        submodels.stream().forEach(sm -> findFileElements(sm.getSubmodelElements()).stream().forEach(f -> f.setValue(preparePath(f.getValue()))));
+        submodels.stream()
+                .forEach(sm -> findFileElements(sm.getSubmodelElements()).stream().forEach(f -> f.setValue(preparePath(f.getValue()))));
     }
 
     /**
      * Finds an InMemoryFile by its path
      * 
-     * @param files
-     *            the InMemoryFiles
-     * @param path
-     *            the path of the wanted file
+     * @param files the InMemoryFiles
+     * @param path the path of the wanted file
      * @return the InMemoryFile if it was found; else null
      */
     private InMemoryFile findFileByPath(Collection<InMemoryFile> files, String path) {
@@ -259,8 +254,7 @@ public class AASXSerializer {
     /**
      * Removes the serverpart from a path and ensures it starts with a slash
      * 
-     * @param path
-     *            the path to be prepared
+     * @param path the path to be prepared
      * @return the prepared path
      */
     private String preparePath(String path) {
