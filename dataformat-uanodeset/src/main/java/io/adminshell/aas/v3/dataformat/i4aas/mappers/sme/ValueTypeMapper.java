@@ -22,7 +22,7 @@ import javax.xml.bind.JAXBElement;
 import org.opcfoundation.ua._2008._02.types.ObjectFactory;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Builder;
-import org.opcfoundation.ua.i4aas.types.AASValueTypeDataType;
+import org.opcfoundation.ua.i4aas.v3.types.AASValueTypeDataType;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.I4AASMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;

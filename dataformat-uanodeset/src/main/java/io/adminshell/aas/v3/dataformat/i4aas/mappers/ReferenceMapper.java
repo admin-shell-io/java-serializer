@@ -24,9 +24,9 @@ import org.opcfoundation.ua._2008._02.types.NodeId;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Value;
-import org.opcfoundation.ua.i4aas.types.AASKeyDataType;
-import org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType;
-import org.opcfoundation.ua.i4aas.types.AASKeyTypeDataType;
+import org.opcfoundation.ua.i4aas.v3.types.AASKeyDataType;
+import org.opcfoundation.ua.i4aas.v3.types.AASKeyElementsDataType;
+import org.opcfoundation.ua.i4aas.v3.types.AASKeyTypeDataType;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
@@ -39,7 +39,7 @@ public class ReferenceMapper extends I4AASMapper<Reference, UAObject> {
 	private String browseName;
 
 	org.opcfoundation.ua._2008._02.types.ObjectFactory extensionObjectFactory = new org.opcfoundation.ua._2008._02.types.ObjectFactory();
-	org.opcfoundation.ua.i4aas.types.ObjectFactory i4aasTypesObjectFactory = new org.opcfoundation.ua.i4aas.types.ObjectFactory();
+	org.opcfoundation.ua.i4aas.v3.types.ObjectFactory i4aasTypesObjectFactory = new org.opcfoundation.ua.i4aas.v3.types.ObjectFactory();
 
 	public ReferenceMapper(Reference src, MappingContext ctx, String browseName) {
 		super(src, ctx);

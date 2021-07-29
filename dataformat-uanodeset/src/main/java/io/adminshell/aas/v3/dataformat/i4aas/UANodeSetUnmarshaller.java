@@ -26,7 +26,7 @@ import javax.xml.bind.Unmarshaller;
 
 import org.opcfoundation.ua._2008._02.types.ListOfExtensionObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
-import org.opcfoundation.ua.i4aas.types.AASKeyDataType;
+import org.opcfoundation.ua.i4aas.v3.types.AASKeyDataType;
 
 public class UANodeSetUnmarshaller {
 

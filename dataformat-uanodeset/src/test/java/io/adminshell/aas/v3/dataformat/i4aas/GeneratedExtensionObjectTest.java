@@ -33,9 +33,9 @@ import org.opcfoundation.ua._2011._03.uanodeset.UANode;
 import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable.Value;
-import org.opcfoundation.ua.i4aas.types.AASKeyDataType;
-import org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType;
-import org.opcfoundation.ua.i4aas.types.AASKeyTypeDataType;
+import org.opcfoundation.ua.i4aas.v3.types.AASKeyDataType;
+import org.opcfoundation.ua.i4aas.v3.types.AASKeyElementsDataType;
+import org.opcfoundation.ua.i4aas.v3.types.AASKeyTypeDataType;
 import org.w3c.dom.Node;
 
 /**
@@ -94,7 +94,7 @@ public class GeneratedExtensionObjectTest {
 		Body body = new Body();
 		
 		//build custom type AAS Key
-		org.opcfoundation.ua.i4aas.types.ObjectFactory i4aasTypesObjectFactory = new org.opcfoundation.ua.i4aas.types.ObjectFactory();
+		org.opcfoundation.ua.i4aas.v3.types.ObjectFactory i4aasTypesObjectFactory = new org.opcfoundation.ua.i4aas.v3.types.ObjectFactory();
 		AASKeyDataType aasKey = new AASKeyDataType();
 		aasKey.setIdType(AASKeyTypeDataType.ID_SHORT_0);
 		aasKey.setType(AASKeyElementsDataType.ACCESS_PERMISSION_RULE_0);
@@ -134,7 +134,7 @@ public class GeneratedExtensionObjectTest {
 		Body body = new Body();
 		
 		//build custom type AAS Key
-		org.opcfoundation.ua.i4aas.types.ObjectFactory i4aasTypesObjectFactory = new org.opcfoundation.ua.i4aas.types.ObjectFactory();
+		org.opcfoundation.ua.i4aas.v3.types.ObjectFactory i4aasTypesObjectFactory = new org.opcfoundation.ua.i4aas.v3.types.ObjectFactory();
 		AASKeyDataType aasKey = new AASKeyDataType();
 		aasKey.setIdType(AASKeyTypeDataType.ID_SHORT_0);
 		aasKey.setType(AASKeyElementsDataType.ACCESS_PERMISSION_RULE_0);

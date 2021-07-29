@@ -31,31 +31,31 @@ public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
 
 	static {
 		enum2enumMap.put(io.adminshell.aas.v3.model.KeyElements.class,
-				org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType.class);
+				org.opcfoundation.ua.i4aas.v3.types.AASKeyElementsDataType.class);
 		enum2enumMap.put(io.adminshell.aas.v3.model.KeyType.class,
-				org.opcfoundation.ua.i4aas.types.AASKeyTypeDataType.class);
+				org.opcfoundation.ua.i4aas.v3.types.AASKeyTypeDataType.class);
 		enum2enumMap.put(io.adminshell.aas.v3.model.AssetKind.class,
-				org.opcfoundation.ua.i4aas.types.AASAssetKindDataType.class);
+				org.opcfoundation.ua.i4aas.v3.types.AASAssetKindDataType.class);
 		enum2enumMap.put(io.adminshell.aas.v3.model.Category.class,
-				org.opcfoundation.ua.i4aas.types.AASCategoryDataType.class);
+				org.opcfoundation.ua.i4aas.v3.types.AASCategoryDataType.class);
 		enum2enumMap.put(io.adminshell.aas.v3.model.DataTypeIEC61360.class,
-				org.opcfoundation.ua.i4aas.types.AASDataTypeIEC61360DataType.class);
+				org.opcfoundation.ua.i4aas.v3.types.AASDataTypeIEC61360DataType.class);
 		enum2enumMap.put(io.adminshell.aas.v3.model.EntityType.class,
-				org.opcfoundation.ua.i4aas.types.AASEntityTypeDataType.class);
+				org.opcfoundation.ua.i4aas.v3.types.AASEntityTypeDataType.class);
 		enum2enumMap.put(io.adminshell.aas.v3.model.IdentifiableElements.class,
-				org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType.class);
+				org.opcfoundation.ua.i4aas.v3.types.AASKeyElementsDataType.class);
 		enum2enumMap.put(io.adminshell.aas.v3.model.IdentifierType.class,
-				org.opcfoundation.ua.i4aas.types.AASIdentifierTypeDataType.class);
+				org.opcfoundation.ua.i4aas.v3.types.AASIdentifierTypeDataType.class);
 		enum2enumMap.put(io.adminshell.aas.v3.model.LevelType.class,
-				org.opcfoundation.ua.i4aas.types.AASLevelTypeDataType.class);
+				org.opcfoundation.ua.i4aas.v3.types.AASLevelTypeDataType.class);
 		enum2enumMap.put(io.adminshell.aas.v3.model.LocalKeyType.class,
-				org.opcfoundation.ua.i4aas.types.AASKeyTypeDataType.class);
+				org.opcfoundation.ua.i4aas.v3.types.AASKeyTypeDataType.class);
 		enum2enumMap.put(io.adminshell.aas.v3.model.ModelingKind.class,
-				org.opcfoundation.ua.i4aas.types.AASModelingKindDataType.class);
+				org.opcfoundation.ua.i4aas.v3.types.AASModelingKindDataType.class);
 		// enum2enumMap.put(io.adminshell.aas.v3.model.PermissionKind.class, null);//no
 		// match, since it is from security part
 		enum2enumMap.put(io.adminshell.aas.v3.model.ReferableElements.class,
-				org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType.class);
+				org.opcfoundation.ua.i4aas.v3.types.AASKeyElementsDataType.class);
 	}
 
 	public I4AASEnumMapper(Enum<?> src, MappingContext ctx) {
@@ -116,7 +116,7 @@ public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
 	public static void main(String[] args) {
 		// quick test
 		System.out.println(
-				Arrays.toString(org.opcfoundation.ua.i4aas.types.AASKeyElementsDataType.class.getEnumConstants()));
+				Arrays.toString(org.opcfoundation.ua.i4aas.v3.types.AASKeyElementsDataType.class.getEnumConstants()));
 	}
 
 }
