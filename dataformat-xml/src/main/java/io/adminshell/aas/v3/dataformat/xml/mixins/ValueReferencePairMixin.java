@@ -16,18 +16,15 @@
 package io.adminshell.aas.v3.dataformat.xml.mixins;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import io.adminshell.aas.v3.dataformat.xml.AasXmlNamespaceContext;
-import io.adminshell.aas.v3.dataformat.xml.serialization.ReferenceSerializer;
 import io.adminshell.aas.v3.model.Reference;
 
-@JsonPropertyOrder({ "valueId", "value" })
+@JsonPropertyOrder({"valueId", "value"})
 public interface ValueReferencePairMixin {
 
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.IEC61360_URI, localName = "valueId")
-    @JsonSerialize(using = ReferenceSerializer.class)
     public Reference getValueId();
 
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.IEC61360_URI, localName = "value")

@@ -25,7 +25,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import io.adminshell.aas.v3.dataformat.xml.AasXmlNamespaceContext;
 import io.adminshell.aas.v3.dataformat.xml.deserialization.LangStringsDeserializer;
 import io.adminshell.aas.v3.dataformat.xml.serialization.LangStringsSerializer;
-import io.adminshell.aas.v3.dataformat.xml.serialization.ReferenceSerializer;
 import io.adminshell.aas.v3.model.DataTypeIEC61360;
 import io.adminshell.aas.v3.model.LangString;
 import io.adminshell.aas.v3.model.LevelType;
@@ -33,7 +32,7 @@ import io.adminshell.aas.v3.model.Reference;
 import io.adminshell.aas.v3.model.ValueList;
 
 @JsonPropertyOrder({"preferredName", "shortName", "unit", "unitId", "sourceOfDefinition", "symbol", "dataType",
-    "definition", "valueFormat", "valueList", "value", "valueId", "leyelTypes"})
+        "definition", "valueFormat", "valueList", "value", "valueId", "leyelTypes"})
 public interface DataSpecificationIEC61360Mixin {
 
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.IEC61360_URI, localName = "preferredName")
@@ -50,7 +49,6 @@ public interface DataSpecificationIEC61360Mixin {
     public String getUnit();
 
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.IEC61360_URI, localName = "unitId")
-    @JsonSerialize(using = ReferenceSerializer.class)
     public Reference getUnitId();
 
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.IEC61360_URI, localName = "sourceOfDefinition")
@@ -77,7 +75,6 @@ public interface DataSpecificationIEC61360Mixin {
     public String getValue();
 
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.IEC61360_URI, localName = "valueId")
-    @JsonSerialize(using = ReferenceSerializer.class)
     public Reference getValueId();
 
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.IEC61360_URI, localName = "levelType")
