@@ -15,12 +15,6 @@
  */
 package io.adminshell.aas.v3.dataformat.core;
 
-import io.adminshell.aas.v3.model.Constraint;
-import io.adminshell.aas.v3.model.Referable;
-import io.github.classgraph.ClassGraph;
-import io.github.classgraph.ClassInfo;
-import io.github.classgraph.ClassInfoList;
-import io.github.classgraph.ScanResult;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -28,8 +22,16 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import io.adminshell.aas.v3.model.Constraint;
+import io.adminshell.aas.v3.model.Referable;
+import io.github.classgraph.ClassGraph;
+import io.github.classgraph.ClassInfo;
+import io.github.classgraph.ClassInfoList;
+import io.github.classgraph.ScanResult;
 
 /**
  * Helper class to collect relevant data needed for
@@ -49,10 +51,15 @@ public class ReflectionHelper {
      */
     public static final String DEFAULT_IMPLEMENTATION_PACKAGE_NAME = MODEL_PACKAGE_NAME + ".impl";
     /**
-     * Name of package where the mixins are defined. These mixins are
+     * Name of package where the json mixins are defined. These mixins are
      * automatically added to JsonSerializer and JsonDeserializer.
      */
-    public static final String MIXINS_PACKAGE_NAME = ROOT_PACKAGE_NAME + ".dataformat.json.mixins";
+    public static final String JSON_MIXINS_PACKAGE_NAME = ROOT_PACKAGE_NAME + ".dataformat.json.mixins";
+    /**
+     * Name of package where the xml mixins are defined. These mixins are
+     * automatically added to XmlSerializer and XmlDeserializer.
+     */
+    public static final String XML_MIXINS_PACKAGE_NAME = ROOT_PACKAGE_NAME + ".dataformat.xml.mixins";
     /**
      * Suffix that identifies a class as a mixin.
      */
@@ -77,10 +84,15 @@ public class ReflectionHelper {
      */
     public static final Map<Class<?>, Set<Class<?>>> SUBTYPES;
     /**
-     * Expanded list of all mixin classes defined in the MIXINS_PACKAGE_NAME
+     * Expanded list of all mixin classes defined in the JSON_MIXINS_PACKAGE_NAME
      * package together with the corresponding class they should be applied to.
      */
-    public static final Map<Class<?>, Class<?>> MIXINS;
+    public static final Map<Class<?>, Class<?>> JSON_MIXINS;
+    /**
+     * Expanded list of all mixin classes defined in the XML_MIXINS_PACKAGE_NAME
+     * package together with the corresponding class they should be applied to.
+     */
+    public static final Map<Class<?>, Class<?>> XML_MIXINS;
     /**
      * Expanded list of all default implementations in the
      * DEFAULT_IMPLEMENTATION_PACKAGE_NAME package together with the interface
@@ -123,7 +135,7 @@ public class ReflectionHelper {
      *
      * @param type the class to check
      * @return whether the given class is an interface and from within the
-     * MODEL_PACKAGE_NAME package
+     *         MODEL_PACKAGE_NAME package
      */
     public static boolean isModelInterface(Class<?> type) {
         return type.isInterface() && MODEL_PACKAGE_NAME.equals(type.getPackageName());
@@ -155,7 +167,7 @@ public class ReflectionHelper {
      *
      * @param type the class to check
      * @return whether the given class is an interface from within the
-     * MODEL_PACKAGE_NAME package as well as a default implementation or not
+     *         MODEL_PACKAGE_NAME package as well as a default implementation or not
      */
     public static boolean isModelInterfaceOrDefaultImplementation(Class<?> type) {
         return isModelInterface(type) || isDefaultImplementation(type);
@@ -167,7 +179,7 @@ public class ReflectionHelper {
      *
      * @param clazz the class to find the type information for
      * @return the type information for the given class or null if there is no
-     * type information or type information should not be included
+     *         type information or type information should not be included
      */
     public static String getModelType(Class<?> clazz) {
         Class<?> type = getMostSpecificTypeWithModelType(clazz);
@@ -193,7 +205,7 @@ public class ReflectionHelper {
      *
      * @param clazz the class to find the type for
      * @return the most specific supertype of given class that contains some AAS
-     * type information or null if there is none
+     *         type information or null if there is none
      */
     public static Class<?> getMostSpecificTypeWithModelType(Class<?> clazz) {
         return TYPES_WITH_MODEL_TYPE.stream()
@@ -224,7 +236,8 @@ public class ReflectionHelper {
                 .scan();
         TYPES_WITH_MODEL_TYPE = scanModelTypes(modelScan);
         SUBTYPES = scanSubtypes(modelScan);
-        MIXINS = scanMixins(modelScan);
+        JSON_MIXINS = scanMixins(modelScan, JSON_MIXINS_PACKAGE_NAME);
+        XML_MIXINS = scanMixins(modelScan, XML_MIXINS_PACKAGE_NAME);
         DEFAULT_IMPLEMENTATIONS = scanDefaultImplementations(modelScan);
         ENUMS = modelScan.getAllEnums().loadClasses(Enum.class);
         INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION = getInterfacesWithoutDefaultImplementation(modelScan);
@@ -247,7 +260,7 @@ public class ReflectionHelper {
                 .loadClasses()
                 .stream()
                 .forEach(x -> {
-                    String interfaceName = x.getSimpleName().substring(DEFAULT_IMPLEMENTATION_PREFIX.length());//using conventions
+                    String interfaceName = x.getSimpleName().substring(DEFAULT_IMPLEMENTATION_PREFIX.length());// using conventions
                     ClassInfoList interfaceClassInfos = modelScan.getAllClasses().filter(y -> y.isInterface() && Objects.equals(y.getSimpleName(), interfaceName));
                     if (interfaceClassInfos.isEmpty()) {
                         logger.warn("could not find interface realized by default implementation class '{}'", x.getSimpleName());
@@ -263,10 +276,10 @@ public class ReflectionHelper {
         return defaultImplementations;
     }
 
-    private static Map<Class<?>, Class<?>> scanMixins(ScanResult modelScan) {
+    private static Map<Class<?>, Class<?>> scanMixins(ScanResult modelScan, String packageName) {
         ScanResult mixinScan = new ClassGraph()
                 .enableClassInfo()
-                .acceptPackagesNonRecursive(MIXINS_PACKAGE_NAME)
+                .acceptPackagesNonRecursive(packageName)
                 .scan();
         Map<Class<?>, Class<?>> mixins = new HashMap<>();
         mixinScan.getAllClasses()
@@ -290,13 +303,13 @@ public class ReflectionHelper {
     private static Map<Class<?>, Set<Class<?>>> scanSubtypes(ScanResult modelScan) {
         return modelScan.getAllInterfaces().stream()
                 .filter(ReflectionHelper::hasSubclass)
-                .collect(Collectors.toMap(x -> x.loadClass(), ReflectionHelper::getSubclasses));
+                .collect(Collectors.toMap(ClassInfo::loadClass, ReflectionHelper::getSubclasses));
     }
 
     private static Set<Class<?>> getSubclasses(ClassInfo clazzInfo) {
         return clazzInfo.getClassesImplementing()
                 .directOnly()
-                .filter(x -> x.isInterface())
+                .filter(ClassInfo::isInterface)
                 .loadClasses()
                 .stream()
                 .collect(Collectors.toSet());
