@@ -18,11 +18,9 @@ package io.adminshell.aas.v3.dataformat.xml.mixins;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import io.adminshell.aas.v3.model.Reference;
 
-@JsonPropertyOrder({"revision", "version"})
 public interface AdministrativeInformationMixin {
     @JsonIgnore
     public List<Reference> getDataSpecifications();

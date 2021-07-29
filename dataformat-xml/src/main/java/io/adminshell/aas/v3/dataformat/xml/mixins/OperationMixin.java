@@ -17,14 +17,11 @@ package io.adminshell.aas.v3.dataformat.xml.mixins;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import io.adminshell.aas.v3.dataformat.xml.AasXmlNamespaceContext;
 import io.adminshell.aas.v3.model.OperationVariable;
 
-@JsonPropertyOrder({"extensions", "idShort", "displayNames", "category", "descriptions", "kind", "semanticId",
-    "qualifiers", "dataSpecifications", "inoutputVariables", "inputVariables", "outputVariables"})
 public interface OperationMixin {
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "inputVariable")
     public List<OperationVariable> getInputVariables();

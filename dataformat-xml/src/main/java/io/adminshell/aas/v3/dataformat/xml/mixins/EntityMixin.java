@@ -17,7 +17,6 @@ package io.adminshell.aas.v3.dataformat.xml.mixins;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -28,10 +27,7 @@ import io.adminshell.aas.v3.dataformat.xml.serialization.SubmodelElementsSeriali
 import io.adminshell.aas.v3.model.IdentifierKeyValuePair;
 import io.adminshell.aas.v3.model.SubmodelElement;
 
-@JsonPropertyOrder({"extensions", "idShort", "displayNames", "category", "descriptions", "kind", "semanticId",
-    "qualifiers", "dataSpecifications", "globalAssetId", "externalAssetId", "entityType", "statements"})
 public interface EntityMixin {
-
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "specificAssetId")
     public IdentifierKeyValuePair getExternalAssetId();
 

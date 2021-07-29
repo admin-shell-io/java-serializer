@@ -16,12 +16,13 @@
 package io.adminshell.aas.v3.dataformat.xml;
 
 import com.fasterxml.jackson.databind.introspect.Annotated;
+import com.fasterxml.jackson.databind.introspect.AnnotatedClass;
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector;
 
 /**
  * This class helps to dynamically decide how to de-/serialize classes and
  * properties defined in the AAS model library. It will automatically add a default namespace
- * to property names.
+ * to property names and set a default property order for contained elements.
  */
 public class XmlDataformatAnnotationIntrospector extends JacksonXmlAnnotationIntrospector {
     private static final long serialVersionUID = 1L;
@@ -41,5 +42,19 @@ public class XmlDataformatAnnotationIntrospector extends JacksonXmlAnnotationInt
         } else {
             return ns;
         }
+    }
+
+    @Override
+    public String[] findSerializationPropertyOrder(AnnotatedClass ac) {
+        String[] order = super.findSerializationPropertyOrder(ac);
+        if (order == null) {
+            order = new String[] {
+                "extensions", "idShort", "displayNames", "category", "descriptions", "administration", "identification", "kind", "semanticId",
+                "qualifiers", "embeddedDataSpecification", "dataSpecifications", "isCaseOf", "security", "derivedFrom", "submodels", "assetInformation", "views", "externalSubjectId", "key", "allowDuplicates", "ordered", "valueId", "value",
+                "max", "min", "type", "valueType", "mimeType", "first", "second", "annotations", "revision", "version", "defaultThumbnail", "globalAssetId", "externalAssetId", "entityType", "statements", "assetKind", "billOfMaterials",
+                "specificAssetIds", "observed", "inoutputVariables", "inputVariables", "outputVariables", "submodelElements", "containedElements"
+            };
+        }
+        return order;
     }
 }

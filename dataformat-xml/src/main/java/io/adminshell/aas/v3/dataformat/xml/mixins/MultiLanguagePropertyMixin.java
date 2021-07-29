@@ -17,7 +17,6 @@ package io.adminshell.aas.v3.dataformat.xml.mixins;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -27,8 +26,6 @@ import io.adminshell.aas.v3.dataformat.xml.deserialization.LangStringsDeserializ
 import io.adminshell.aas.v3.dataformat.xml.serialization.LangStringsSerializer;
 import io.adminshell.aas.v3.model.LangString;
 
-@JsonPropertyOrder({"extensions", "idShort", "displayNames", "category", "descriptions", "kind", "semanticId",
-    "qualifiers", "dataSpecifications", "valueId", "value"})
 public interface MultiLanguagePropertyMixin {
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "value")
     @JsonSerialize(using = LangStringsSerializer.class)

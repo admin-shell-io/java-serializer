@@ -17,7 +17,6 @@ package io.adminshell.aas.v3.dataformat.xml.mixins;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
@@ -25,8 +24,6 @@ import io.adminshell.aas.v3.dataformat.xml.AasXmlNamespaceContext;
 import io.adminshell.aas.v3.model.Reference;
 import io.adminshell.aas.v3.model.View;
 
-@JsonPropertyOrder({"extensions", "idShort", "displayNames", "category", "descriptions", "administration",
-    "identification", "dataSpecifications", "security", "derivedFrom", "submodels", "assetInformation", "views"})
 public interface AssetAdministrationShellMixin {
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "submodelRef")
     @JacksonXmlElementWrapper(namespace = AasXmlNamespaceContext.AAS_URI, localName = "submodelRefs")

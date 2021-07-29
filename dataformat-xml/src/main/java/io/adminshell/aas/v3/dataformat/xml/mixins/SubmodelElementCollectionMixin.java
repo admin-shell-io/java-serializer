@@ -17,7 +17,6 @@ package io.adminshell.aas.v3.dataformat.xml.mixins;
 
 import java.util.Collection;
 
-import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
@@ -27,8 +26,6 @@ import io.adminshell.aas.v3.dataformat.xml.deserialization.SubmodelElementsDeser
 import io.adminshell.aas.v3.dataformat.xml.serialization.SubmodelElementsSerializer;
 import io.adminshell.aas.v3.model.SubmodelElement;
 
-@JsonPropertyOrder({"extensions", "idShort", "displayNames", "category", "descriptions", "kind", "semanticId",
-    "qualifiers", "dataSpecifications", "allowDuplicates", "ordered", "value"})
 public interface SubmodelElementCollectionMixin {
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "value")
     @JsonSerialize(using = SubmodelElementsSerializer.class)
