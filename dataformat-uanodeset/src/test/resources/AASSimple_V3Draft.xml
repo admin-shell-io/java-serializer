@@ -5,7 +5,7 @@
       <Uri>http://opcfoundation.org/UA/I4AAS/V3/</Uri>
    </NamespaceUris>
    <Models>
-      <Model ModelUri="http://example.org/SerializerTest" Version="1.0.0" PublicationDate="2021-07-28T09:46:55.837552400">
+      <Model ModelUri="http://example.org/SerializerTest" Version="1.0.0" PublicationDate="2021-07-29T09:18:37.095581700">
          <RequiredModel ModelUri="http://opcfoundation.org/UA/" Version="1.04.7" PublicationDate="2020-07-15T00:00:00Z"/>
          <RequiredModel ModelUri="http://opcfoundation.org/UA/I4AAS/V3/" Version="1.0.0" PublicationDate="2021-06-04T00:00:00Z"/>
       </Model>
@@ -594,7 +594,7 @@
                   <uax:Identifier>ns=2;i=5039</uax:Identifier>
                </uax:TypeId>
                <uax:Body>
-                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/Types.xsd">
+                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/V3/Types.xsd">
                      <ns0:Type>GlobalReference_13</ns0:Type>
                      <ns0:Value>0173-1#05-AAA650#002</ns0:Value>
                      <ns0:IdType>IRDI_3</ns0:IdType>
@@ -791,7 +791,7 @@
                   <uax:Identifier>ns=2;i=5039</uax:Identifier>
                </uax:TypeId>
                <uax:Body>
-                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/Types.xsd">
+                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/V3/Types.xsd">
                      <ns0:Type>GlobalReference_13</ns0:Type>
                      <ns0:Value>0173-1#05-AAA650#002</ns0:Value>
                      <ns0:IdType>IRDI_3</ns0:IdType>
@@ -1784,7 +1784,7 @@
                   <uax:Identifier>ns=2;i=5039</uax:Identifier>
                </uax:TypeId>
                <uax:Body>
-                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/Types.xsd">
+                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/V3/Types.xsd">
                      <ns0:Type>Asset_2</ns0:Type>
                      <ns0:Value>http://customer.com/assets/KHBVZJSQKIY</ns0:Value>
                      <ns0:IdType>IRI_4</ns0:IdType>
@@ -1901,7 +1901,7 @@
                   <uax:Identifier>ns=2;i=5039</uax:Identifier>
                </uax:TypeId>
                <uax:Body>
-                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/Types.xsd">
+                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/V3/Types.xsd">
                      <ns0:Type>GlobalReference_13</ns0:Type>
                      <ns0:Value>http://customer.com/Systems/ERP/012</ns0:Value>
                      <ns0:IdType>IRI_4</ns0:IdType>
@@ -1962,7 +1962,7 @@
                   <uax:Identifier>ns=2;i=5039</uax:Identifier>
                </uax:TypeId>
                <uax:Body>
-                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/Types.xsd">
+                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/V3/Types.xsd">
                      <ns0:Type>GlobalReference_13</ns0:Type>
                      <ns0:Value>http://customer.com/Systems/IoT/1</ns0:Value>
                      <ns0:IdType>IRI_4</ns0:IdType>
@@ -2023,7 +2023,7 @@
                   <uax:Identifier>ns=2;i=5039</uax:Identifier>
                </uax:TypeId>
                <uax:Body>
-                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/Types.xsd">
+                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/V3/Types.xsd">
                      <ns0:Type>Submodel_20</ns0:Type>
                      <ns0:Value>http://i40.customer.com/type/1/1/7A7104BDAB57E184</ns0:Value>
                      <ns0:IdType>IRI_4</ns0:IdType>
@@ -2054,7 +2054,7 @@
                   <uax:Identifier>ns=2;i=5039</uax:Identifier>
                </uax:TypeId>
                <uax:Body>
-                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/Types.xsd">
+                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/V3/Types.xsd">
                      <ns0:Type>Submodel_20</ns0:Type>
                      <ns0:Value>http://i40.customer.com/instance/1/1/AC69B1CB44F07935</ns0:Value>
                      <ns0:IdType>IRI_4</ns0:IdType>
@@ -2085,7 +2085,7 @@
                   <uax:Identifier>ns=2;i=5039</uax:Identifier>
                </uax:TypeId>
                <uax:Body>
-                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/Types.xsd">
+                  <ns0:AASKeyDataType xmlns:ns0="http://opcfoundation.org/UA/I4AAS/V3/Types.xsd">
                      <ns0:Type>Submodel_20</ns0:Type>
                      <ns0:Value>http://i40.customer.com/type/1/1/1A7B62B529F19152</ns0:Value>
                      <ns0:IdType>IRI_4</ns0:IdType>

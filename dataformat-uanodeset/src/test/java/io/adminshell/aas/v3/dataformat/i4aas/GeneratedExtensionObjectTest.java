@@ -54,11 +54,11 @@ public class GeneratedExtensionObjectTest {
 		JAXBContext jaxbCtx = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(new Class[] {UANodeSet.class, ListOfExtensionObject.class, AASKeyDataType.class}, null);
 		
 		InputStream resourceAsStream = GeneratedExtensionObjectTest.class
-				.getResourceAsStream("/aasdatatypekey_example.xml");
+				.getResourceAsStream("/AASSimple_v3Draft.xml");
 		UANodeSet uanodeset = (UANodeSet) jaxbCtx.createUnmarshaller().unmarshal(resourceAsStream);
 		List<UANode> uaObjectOrUAVariableOrUAMethod = uanodeset.getUAObjectOrUAVariableOrUAMethod();
 		for (UANode uaNode : uaObjectOrUAVariableOrUAMethod) {
-			if (uaNode.getNodeId().equals("ns=1;i=6002")) {
+			if (uaNode.getNodeId().equals("ns=1;i=162")) {
 				UAVariable uaNodeAsVar = (UAVariable) uaNode;
 				Object genericExtension = uaNodeAsVar.getValue().getAny();
 				
@@ -71,7 +71,7 @@ public class GeneratedExtensionObjectTest {
 				
 				JAXBElement<AASKeyDataType> aasKey = jaxbCtx.createUnmarshaller().unmarshal((Node) anyAASDataTypeKey, AASKeyDataType.class);
 				
-				Assert.assertEquals(AASKeyTypeDataType.ID_SHORT_0, aasKey.getValue().getIdType());
+				Assert.assertEquals(AASKeyTypeDataType.IRI_4, aasKey.getValue().getIdType());
 			}
 		}
 	}
