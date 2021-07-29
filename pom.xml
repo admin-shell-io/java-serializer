@@ -13,6 +13,7 @@
         <module>dataformat-json</module>
         <module>dataformat-xml</module>
         <!-- <module>dataformat-jsonld</module> -->
+        <module>dataformat-uanodeset</module>
     </modules>
     <properties>
         <revision>1.0.0</revision>
@@ -61,6 +62,10 @@
                             <includes>
                                 <include>**/src/**/*.java</include>
                             </includes>
+                            <excludes>
+                            	<exclude>**/target/generated/**/*.java</exclude>
+                            	<exclude>**/src/main/java/org/opcfoundation/ua/_2008/_02/types/*.java</exclude>
+                            </excludes>
                         </licenseSet>
                     </licenseSets>
                 </configuration>
