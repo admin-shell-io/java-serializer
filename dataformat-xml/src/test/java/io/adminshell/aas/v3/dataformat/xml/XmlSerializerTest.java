@@ -57,7 +57,7 @@ public class XmlSerializerTest {
     public void testSerializeMinimal() throws IOException, SerializationException, SAXException {
         File file = new File("src/test/resources/minimum.xml");
         AssetAdministrationShellEnvironment environment = new DefaultAssetAdministrationShellEnvironment.Builder()
-                .build();
+            .build();
         validateXmlSerializer(file, environment);
     }
 
@@ -80,19 +80,19 @@ public class XmlSerializerTest {
     }
 
     private void validateXmlSerializer(File expectedFile, AssetAdministrationShellEnvironment environment)
-            throws IOException, SerializationException, SAXException {
+        throws IOException, SerializationException, SAXException {
         validateXmlSerializer(expectedFile, environment, new XmlSerializer());
     }
 
     private void validateXmlSerializer(File expectedFile, AssetAdministrationShellEnvironment environment, XmlSerializer xmlSerializer)
-            throws SerializationException, SAXException {
+        throws SerializationException, SAXException {
         String actual = xmlSerializer.write(environment);
         Set<String> errors = new XmlSchemaValidator().validateSchema(actual);
         logger.info(actual);
         logErrors(expectedFile.getName(), errors);
         assertTrue(errors.isEmpty());
         CompareMatcher xmlTestMatcher = CompareMatcher.isSimilarTo(expectedFile).normalizeWhitespace().ignoreComments()
-                .withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byNameAndAllAttributes));
+            .withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byNameAndAllAttributes));
         MatcherAssert.assertThat(actual, xmlTestMatcher);
     }
 

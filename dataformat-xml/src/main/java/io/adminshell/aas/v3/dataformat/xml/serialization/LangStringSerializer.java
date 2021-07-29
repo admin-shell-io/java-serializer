@@ -16,7 +16,8 @@
 package io.adminshell.aas.v3.dataformat.xml.serialization;
 
 import java.io.IOException;
-import java.util.List;
+
+import javax.xml.stream.XMLStreamException;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonSerializer;
@@ -25,33 +26,24 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 
 import io.adminshell.aas.v3.model.LangString;
 
-public class LangStringsAASSerializer extends JsonSerializer<List<LangString>> {
+public class LangStringSerializer extends JsonSerializer<LangString> {
 
-	@Override
-	public void serialize(List<LangString> value, JsonGenerator gen, SerializerProvider serializers)
-			throws IOException {
-		
-		ToXmlGenerator xgen = (ToXmlGenerator) gen;
-        xgen.writeStartObject();
-        
-        if(value.size() == 0) {
-        	value.add(new LangString());
+    @Override
+    public void serialize(LangString langString, JsonGenerator gen, SerializerProvider serializers) throws IOException {
+        ToXmlGenerator xgen = (ToXmlGenerator) gen;
+        xgen.writeObjectFieldStart("langString");
+
+        try {
+            xgen.getStaxWriter().writeAttribute("lang", langString.getLanguage());
+        } catch (XMLStreamException e) {
+            e.printStackTrace();
         }
-        
-        for (LangString langString : value) {
-            xgen.writeObjectFieldStart("aas:langString");
-            xgen.setNextIsAttribute(true);
-            xgen.writeFieldName("lang");
-            xgen.writeString(langString.getLanguage());
-            xgen.setNextIsAttribute(false);
-            xgen.setNextIsUnwrapped(true);
-            xgen.writeFieldName("value");
-            xgen.writeString(langString.getValue());
-            xgen.writeEndObject();
-		}
-        
+        xgen.setNextIsAttribute(false);
+        xgen.setNextIsUnwrapped(true);
+        xgen.writeFieldName("value");
+        xgen.writeString(langString.getValue());
+
         xgen.writeEndObject();
-		
-	}
+    }
 
 }
