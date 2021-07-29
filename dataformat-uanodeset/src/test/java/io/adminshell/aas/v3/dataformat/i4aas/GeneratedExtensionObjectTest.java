@@ -54,7 +54,7 @@ public class GeneratedExtensionObjectTest {
 		JAXBContext jaxbCtx = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(new Class[] {UANodeSet.class, ListOfExtensionObject.class, AASKeyDataType.class}, null);
 		
 		InputStream resourceAsStream = GeneratedExtensionObjectTest.class
-				.getResourceAsStream("/AASSimple_v3Draft.xml");
+				.getResourceAsStream("/AASSimple_V3Draft.xml");
 		UANodeSet uanodeset = (UANodeSet) jaxbCtx.createUnmarshaller().unmarshal(resourceAsStream);
 		List<UANode> uaObjectOrUAVariableOrUAMethod = uanodeset.getUAObjectOrUAVariableOrUAMethod();
 		for (UANode uaNode : uaObjectOrUAVariableOrUAMethod) {
