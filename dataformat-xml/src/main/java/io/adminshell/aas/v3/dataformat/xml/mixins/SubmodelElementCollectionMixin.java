@@ -30,15 +30,8 @@ import io.adminshell.aas.v3.model.SubmodelElement;
 @JsonPropertyOrder({"extensions", "idShort", "displayNames", "category", "descriptions", "kind", "semanticId",
     "qualifiers", "dataSpecifications", "allowDuplicates", "ordered", "value"})
 public interface SubmodelElementCollectionMixin {
-
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "value")
     @JsonSerialize(using = SubmodelElementsSerializer.class)
     @JsonDeserialize(using = SubmodelElementsDeserializer.class)
     public Collection<SubmodelElement> getValues();
-
-    @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "allowDuplicates")
-    public boolean getAllowDuplicates();
-
-    @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "ordered")
-    public boolean getOrdered();
 }

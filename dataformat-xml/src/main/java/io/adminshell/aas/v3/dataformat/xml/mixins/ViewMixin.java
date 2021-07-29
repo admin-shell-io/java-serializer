@@ -28,7 +28,6 @@ import io.adminshell.aas.v3.model.Reference;
 @JsonPropertyOrder({"extensions", "idShort", "displayNames", "category", "descriptions", "administration",
     "identification", "semanticId", "dataSpecifications", "containedElements"})
 public interface ViewMixin {
-
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "containedElementRef")
     @JacksonXmlElementWrapper(namespace = AasXmlNamespaceContext.AAS_URI, localName = "containedElements")
     @JsonInclude(JsonInclude.Include.ALWAYS)

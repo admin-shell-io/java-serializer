@@ -25,7 +25,6 @@ import io.adminshell.aas.v3.dataformat.xml.deserialization.EmbeddedDataSpecifica
 import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
 
 public interface HasDataSpecificationMixin {
-
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "embeddedDataSpecification")
     @JsonDeserialize(using = EmbeddedDataSpecificationsDeserializer.class)
     public List<EmbeddedDataSpecification> getEmbeddedDataSpecifications();

@@ -28,7 +28,6 @@ import io.adminshell.aas.v3.model.Reference;
 @JsonPropertyOrder({"extensions", "idShort", "displayNames", "category", "descriptions", "administration",
     "identification", "embeddedDataSpecifications", "isCaseOf"})
 public interface ConceptDescriptionMixin {
-
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "isCaseOf")
     @JsonDeserialize(using = ReferencesDeserializer.class)
     public List<Reference> getIsCaseOfs();

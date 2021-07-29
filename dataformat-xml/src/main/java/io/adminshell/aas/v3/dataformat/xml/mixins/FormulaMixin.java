@@ -24,7 +24,6 @@ import io.adminshell.aas.v3.dataformat.xml.AasXmlNamespaceContext;
 import io.adminshell.aas.v3.model.Reference;
 
 public interface FormulaMixin {
-
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "reference")
     @JacksonXmlElementWrapper(namespace = AasXmlNamespaceContext.AAS_URI, localName = "dependsOnRefs")
     public List<Reference> getDependsOns();

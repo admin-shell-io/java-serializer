@@ -21,7 +21,6 @@ import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlText;
 import io.adminshell.aas.v3.model.IdentifierType;
 
 public interface IdentifierMixin {
-
     @JacksonXmlText
     public String getIdentifier();
 

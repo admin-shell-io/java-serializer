@@ -26,7 +26,6 @@ import io.adminshell.aas.v3.model.OperationVariable;
 @JsonPropertyOrder({"extensions", "idShort", "displayNames", "category", "descriptions", "kind", "semanticId",
     "qualifiers", "dataSpecifications", "inoutputVariables", "inputVariables", "outputVariables"})
 public interface OperationMixin {
-
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "inputVariable")
     public List<OperationVariable> getInputVariables();
 

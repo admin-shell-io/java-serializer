@@ -26,15 +26,10 @@ import io.adminshell.aas.v3.dataformat.xml.AasXmlNamespaceContext;
 import io.adminshell.aas.v3.dataformat.xml.deserialization.LangStringsDeserializer;
 import io.adminshell.aas.v3.dataformat.xml.serialization.LangStringsSerializer;
 import io.adminshell.aas.v3.model.LangString;
-import io.adminshell.aas.v3.model.Reference;
 
 @JsonPropertyOrder({"extensions", "idShort", "displayNames", "category", "descriptions", "kind", "semanticId",
     "qualifiers", "dataSpecifications", "valueId", "value"})
 public interface MultiLanguagePropertyMixin {
-
-    @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "valueId")
-    public Reference getValueId();
-
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "value")
     @JsonSerialize(using = LangStringsSerializer.class)
     @JsonDeserialize(using = LangStringsDeserializer.class)

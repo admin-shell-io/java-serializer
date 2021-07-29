@@ -22,7 +22,6 @@ import io.adminshell.aas.v3.model.KeyElements;
 import io.adminshell.aas.v3.model.KeyType;
 
 public interface KeyMixin {
-
     @JacksonXmlText
     public String getValue();
 

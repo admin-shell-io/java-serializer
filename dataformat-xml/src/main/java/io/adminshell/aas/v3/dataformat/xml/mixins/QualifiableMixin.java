@@ -27,7 +27,6 @@ import io.adminshell.aas.v3.dataformat.xml.serialization.ConstraintsSerializer;
 import io.adminshell.aas.v3.model.Constraint;
 
 public interface QualifiableMixin {
-
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "qualifiers")
     @JsonSerialize(using = ConstraintsSerializer.class)
     @JsonDeserialize(using = ConstraintsDeserializer.class)

@@ -30,7 +30,6 @@ import io.adminshell.aas.v3.model.SubmodelElement;
 @JsonPropertyOrder({"extensions", "idShort", "displayNames", "category", "descriptions", "administration",
     "identification", "kind", "semanticId", "qualifiers", "dataSpecifications", "submodelElements"})
 public interface SubmodelMixin {
-
     @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "submodelElements")
     @JsonSerialize(using = SubmodelElementsSerializer.class)
     @JsonDeserialize(using = SubmodelElementsDeserializer.class)

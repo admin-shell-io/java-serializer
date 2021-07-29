@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2021 Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e. V.
+* Copyright (c) 2021 Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e. V.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,15 +17,16 @@ package io.adminshell.aas.v3.dataformat.xml.mixins;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
+import io.adminshell.aas.v3.dataformat.xml.AasXmlNamespaceContext;
 import io.adminshell.aas.v3.model.AccessPermissionRule;
 
 public interface AccessControlMixin {
-    @JsonProperty("accessPermissionRule")
+    @JacksonXmlProperty(namespace = AasXmlNamespaceContext.ABAC_PREFERRED_PREFIX, localName = "accessPermissionRule")
     public List<AccessPermissionRule> getAccessPermissionRules();
 
-    @JsonProperty("accessPermissionRule")
+    @JacksonXmlProperty(namespace = AasXmlNamespaceContext.ABAC_PREFERRED_PREFIX, localName = "accessPermissionRule")
     public void setAccessPermissionRules(List<AccessPermissionRule> accessPermissionRules);
 
 }
