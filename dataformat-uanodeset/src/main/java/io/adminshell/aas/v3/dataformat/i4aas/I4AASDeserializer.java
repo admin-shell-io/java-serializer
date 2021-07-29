@@ -15,42 +15,22 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas;
 
-import java.util.List;
-
-import javax.xml.bind.JAXBException;
-
-import org.opcfoundation.ua._2011._03.uanodeset.UANode;
-import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
-
 import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.Deserializer;
-import io.adminshell.aas.v3.dataformat.i4aas.parsers.EnvironmentParser;
-import io.adminshell.aas.v3.dataformat.i4aas.parsers.ParserContext;
-import io.adminshell.aas.v3.dataformat.i4aas.parsers.UANodeWrapper;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 
+/**
+ * Deserializer Implementation for I4AAS
+ *
+ */
 public class I4AASDeserializer implements Deserializer {
 
+	/**
+	 * reads a I4AAS as string and return the model object
+	 */
 	@Override
 	public AssetAdministrationShellEnvironment read(String value) throws DeserializationException {
-		try {
-			UANodeSet uaNodeSet = new UANodeSetUnmarshaller().unmarshall(value);
-			ParserContext parserContext = new ParserContext(uaNodeSet);
-			UANodeWrapper environment = parserContext.getPreparsedEnvironment();
-			return new EnvironmentParser(environment, new ParserContext(uaNodeSet)).parse();
-		} catch (JAXBException e) {
-			throw new DeserializationException("Deserialization failed due to a JAXBException.", e);
-		}
-	}
-
-	protected UANode findAASEnvironment(UANodeSet nodeSet) throws DeserializationException {
-		List<UANode> uaObjectOrUAVariableOrUAMethod = nodeSet.getUAObjectOrUAVariableOrUAMethod();
-		for (UANode uaNode : uaObjectOrUAVariableOrUAMethod) {
-			if (uaNode.getBrowseName().contains("AASEnvironment")) {
-				return uaNode;
-			}
-		}
-		throw new DeserializationException("No AASEnvironment found.");
+		throw new UnsupportedOperationException("Not Implemented yet.");
 	}
 
 	@Override

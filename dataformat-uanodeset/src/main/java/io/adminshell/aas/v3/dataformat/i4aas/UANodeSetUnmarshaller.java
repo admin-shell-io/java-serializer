@@ -28,21 +28,39 @@ import org.opcfoundation.ua._2008._02.types.ListOfExtensionObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
 import org.opcfoundation.ua.i4aas.v3.types.AASKeyDataType;
 
+
+/**
+ * Unmarshaller with predefined context and properties relevant for deserialization.
+ *
+ */
 public class UANodeSetUnmarshaller {
 
 	private JAXBContext jaxbCtx;
 	private Unmarshaller unmarshaller;
 
+	/**
+	 * @throws JAXBException if the internal creation of a context based unmarshaller failed
+	 */
 	public UANodeSetUnmarshaller() throws JAXBException {
 		jaxbCtx = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(
 				new Class[] { UANodeSet.class, ListOfExtensionObject.class, AASKeyDataType.class }, null);
 		unmarshaller = jaxbCtx.createUnmarshaller();
 	}
 
+	/**
+	 * @param input UANodeSet as XML string
+	 * @return unmarshalled UANodeSet
+	 * @throws JAXBException if action failed
+	 */
 	public UANodeSet unmarshall(String input) throws JAXBException {
 		return (UANodeSet) unmarshaller.unmarshal(new StringReader(input));
 	}
 
+	/**
+	 * @param input UANodeSet as XML inputstream
+	 * @return unmarshalled UANodeSet
+	 * @throws JAXBException if action failed
+	 */
 	public UANodeSet unmarshall(InputStream input) throws JAXBException {
 		return (UANodeSet) unmarshaller.unmarshal(input);
 	}

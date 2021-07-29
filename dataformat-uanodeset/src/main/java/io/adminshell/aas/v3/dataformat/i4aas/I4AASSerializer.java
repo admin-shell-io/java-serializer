@@ -25,8 +25,15 @@ import io.adminshell.aas.v3.dataformat.i4aas.mappers.EnvironmentMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 
+/**
+ * Serializer Implementation for I4AAS
+ *
+ */
 public class I4AASSerializer implements Serializer {
 
+	/**
+	 * takes a AAS model and returns a I4AAS as string.
+	 */
 	@Override
 	public String write(AssetAdministrationShellEnvironment aasEnvironment) throws SerializationException {
 		MappingContext mappingContext = new MappingContext(aasEnvironment);

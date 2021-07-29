@@ -28,17 +28,30 @@ import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.LangString;
 
+/**
+ * Generic base class used for all mapper implementation. 
+ *
+ * @param <SOURCE> mapping source
+ * @param <TARGET> mapping target
+ */
 public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 
 	protected MappingContext ctx;
 	protected SOURCE source;
 	protected TARGET target;
 
+	/**
+	 * @param src
+	 * @param ctx
+	 */
 	public I4AASMapper(SOURCE src, MappingContext ctx) {
 		this.source = src;
 		this.ctx = ctx;
 	}
 
+	/**
+	 * @return the mapping complete target object with all children attached
+	 */
 	public final TARGET map() {
 		target = createTargetObject();
 		addToNodeset();
@@ -46,8 +59,14 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 		return target;
 	}
 
+	/**
+	 * @return return the object filled with attributes directly bound to the target.
+	 */
 	protected abstract TARGET createTargetObject();
 
+	/**
+	 *  action to be called when the children objects must be mapped and attached to the target.
+	 */
 	protected abstract void mapAndAttachChildren();
 
 	private void addToNodeset() {

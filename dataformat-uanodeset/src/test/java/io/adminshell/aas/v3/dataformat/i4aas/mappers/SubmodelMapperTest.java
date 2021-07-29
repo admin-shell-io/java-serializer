@@ -36,7 +36,7 @@ public class SubmodelMapperTest {
 		UAObject map = tesling.map();
 		UANodeSet nodeSet = tesling.ctx.getNodeSet();
 		String marshallAsString = new UANodeSetMarshaller(nodeSet).marshallAsString();
-		System.out.println(marshallAsString);
+		//System.out.println(marshallAsString);
 	}
 
 }

@@ -25,14 +25,25 @@ import org.opcfoundation.ua._2008._02.types.ListOfExtensionObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
 import org.opcfoundation.ua.i4aas.v3.types.AASKeyDataType;
 
+/**
+ * Marshaller with predefined context and properties relevant for serialization.
+ *
+ */
 public class UANodeSetMarshaller {
 
 	private UANodeSet nodeset;
 
+	/**
+	 * @param nodeset the nodeset to be marshalled
+	 */
 	public UANodeSetMarshaller(UANodeSet nodeset) {
 		this.nodeset = nodeset;
 	}
 
+	/**
+	 * @return marshalled UANodeSet given in constructor
+	 * @throws JAXBException if action failed
+	 */
 	public String marshallAsString() throws JAXBException {
 		JAXBContext jaxbCtx = org.eclipse.persistence.jaxb.JAXBContextFactory.createContext(new Class[] {UANodeSet.class, ListOfExtensionObject.class, AASKeyDataType.class}, null);
 		Marshaller marshaller = jaxbCtx.createMarshaller();

@@ -149,6 +149,14 @@
 					</execution>
 				</executions>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<!-- excluding generated classes and mappers which are not meant to be used directly -->
+					<excludePackageNames>com.kscs.util.*:org.opcfoundation.*:io.adminshell.aas.v3.dataformat.i4aas.mappers:io.adminshell.aas.v3.dataformat.i4aas.mappers.*</excludePackageNames>
+				</configuration>
+			</plugin>
 		</plugins>
 	</build>
 </project>

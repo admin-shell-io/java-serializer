@@ -38,7 +38,7 @@ public class SerializerTest {
 	public void testEmpty() throws SerializationException {
 		I4AASSerializer i4aasSerializer = new I4AASSerializer();
 		String write = i4aasSerializer.write(new DefaultAssetAdministrationShellEnvironment());
-		System.out.println(write);
+		//System.out.println(write);
 	}
 
 	@Test
@@ -56,7 +56,7 @@ public class SerializerTest {
 			}
 			Assert.assertTrue("contains " + toCheck, write.contains(toCheck));
 		}
-		System.out.println(write);
+		//System.out.println(write);
 	}
 
 	@Test
@@ -64,14 +64,14 @@ public class SerializerTest {
 		Path createTempFile = Files.createTempFile("testSimpleToFile", ".xml");
 		I4AASSerializer i4aasSerializer = new I4AASSerializer();
 		i4aasSerializer.write(createTempFile.toFile(), AASSimple.ENVIRONMENT);
-		System.out.println(createTempFile.toAbsolutePath().toString());
+		//System.out.println(createTempFile.toAbsolutePath().toString());
 	}
 
 	@Test
 	public void testFull() throws SerializationException {
 		I4AASSerializer i4aasSerializer = new I4AASSerializer();
 		String write = i4aasSerializer.write(AASFull.ENVIRONMENT);
-		System.out.println(write);
+		//System.out.println(write);
 	}
 
 }
