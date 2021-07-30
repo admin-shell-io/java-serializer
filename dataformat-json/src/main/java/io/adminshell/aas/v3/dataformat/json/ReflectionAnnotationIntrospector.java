@@ -40,12 +40,15 @@ import java.util.stream.Collectors;
  * <ul>
  * <li> @JsonTypeName([interface name])
  * <li> @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "modelType")
- * <li> @JsonSubTypes({@Type(value = [sub-interface].class, name = "[sub-interface name]"), ...})
+ * <li> @JsonSubTypes({
+ *
+ * \@Type(value = [sub-interface].class, name = "[sub-interface name]"), ...})
  * for each sub-interface
  * </ul>
- * <li> to all getter methods returning any type of Collection<?> defined in the
+ * <li> to all getter methods returning any type of Collection&lt;?&gt; defined in the
  * AAS model:
- * <ul> @JsonInclude(JsonInclude.Include.NON_EMPTY)
+ * <ul>
+ *     <li>@JsonInclude(JsonInclude.Include.NON_EMPTY)</li>
  * </ul>
  * </ul>
  */

@@ -34,6 +34,7 @@ The project contains several modules:
 - `dataformat-aasx` AASX de-/serializer
 - `dataformat-json` JSON de-/serializer
 - `dataformat-xml` XML de-/serializer
+- `dataformat-uanodeset` OPC UA I4AAS NodeSet de-/serializer
 
 
 

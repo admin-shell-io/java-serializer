@@ -81,7 +81,6 @@ public class AASXDeserializer {
     /**
      * Return the Content of the xml file in the aasx-package as String
      * 
-     * @param aasxPackage - the root package of the AASX
      * @return Content of XML as String
      * @throws InvalidFormatException
      * @throws IOException
