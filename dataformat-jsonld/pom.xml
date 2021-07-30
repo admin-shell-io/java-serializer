@@ -12,8 +12,8 @@
     <artifactId>dataformat-jsonld</artifactId>
 
     <properties>
-        <maven.compiler.source>12</maven.compiler.source>
-        <maven.compiler.target>12</maven.compiler.target>
+        <!--<maven.compiler.source>12</maven.compiler.source>
+        <maven.compiler.target>12</maven.compiler.target>-->
     </properties>
 
     <dependencies>

@@ -20,7 +20,7 @@ import java.util.List;
 
 public class PathHandling {
     /**
-     * Returns the last element of path separated by "/", e.g. a/b/c -> c
+     * Returns the last element of path separated by "/", e.g. a/b/c -&gt; c
      * 
      * @param path
      * @return
@@ -40,7 +40,7 @@ public class PathHandling {
     }
 
     /**
-     * Removes the last element from the path, e.g. a/b/c -> a/b
+     * Removes the last element from the path, e.g. a/b/c -&gt; a/b
      * 
      * @param path
      * @return
