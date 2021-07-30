@@ -19,13 +19,18 @@ import java.util.Arrays;
 
 /**
  * Container class for the content of a File and its Path
- *
  */
 public class InMemoryFile {
 
     private byte[] fileContent;
     private String path;
 
+    /**
+     * Constructor for directly setting the InMemoryFile contents
+     * 
+     * @param fileContent byte-array content of the represented file
+     * @param path relative or absolute path of the represented file
+     */
     public InMemoryFile(byte[] fileContent, String path) {
         this.fileContent = fileContent;
         this.path = path;

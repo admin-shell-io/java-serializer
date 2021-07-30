@@ -23,15 +23,12 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import javax.xml.parsers.ParserConfigurationException;
-
 import org.apache.commons.io.IOUtils;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.openxml4j.opc.OPCPackage;
 import org.apache.poi.openxml4j.opc.PackagePart;
 import org.apache.poi.openxml4j.opc.PackageRelationshipCollection;
 import org.apache.poi.openxml4j.opc.PackagingURIHelper;
-import org.xml.sax.SAXException;
 
 import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.xml.XmlDeserializer;
@@ -44,11 +41,6 @@ import io.adminshell.aas.v3.model.SubmodelElementCollection;
 /**
  * The AASX package converter converts a aasx package into a list of aas, a list
  * of submodels a list of assets, a list of Concept descriptions
- * 
- * The aas provides the references to the submodels and assets
- * 
- * @author zhangzai, conradi
- *
  */
 public class AASXDeserializer {
 
@@ -60,15 +52,39 @@ public class AASXDeserializer {
     private AssetAdministrationShellEnvironment environment;
     private final OPCPackage aasxRoot;
 
+    /**
+     * Constructor that takes the aasx package for this deserializer
+     * 
+     * @param inputStream an input stream to an aasx package that can be read with this instance
+     * @throws InvalidFormatException if aasx package format is invalid
+     * @throws IOException if creating input streams for aasx fails
+     */
     public AASXDeserializer(InputStream inputStream) throws InvalidFormatException, IOException {
         aasxRoot = OPCPackage.open(inputStream);
     }
 
+    /**
+     * Constructor for custom XML deserialization
+     * 
+     * @param deserializer a custom deserializer used for deserializing the aas environment
+     * @param inputStream an input stream to an aasx package that can be read with this instance
+     * @throws InvalidFormatException if aasx package format is invalid
+     * @throws IOException if creating input streams for aasx fails
+     */
     public AASXDeserializer(XmlDeserializer deserializer, InputStream inputStream) throws InvalidFormatException, IOException {
         aasxRoot = OPCPackage.open(inputStream);
         this.deserializer = deserializer;
     }
 
+    /**
+     * Reads the AASX package that belongs to this deserializer
+     * 
+     * @return The deserialized aas environment from the aasx package given in the constructor
+     * 
+     * @throws InvalidFormatException if aasx package format is invalid
+     * @throws IOException if creating input streams for aasx fails
+     * @throws DeserializationException if deserialization of the serialized aas environment fails
+     */
     public AssetAdministrationShellEnvironment read() throws InvalidFormatException, IOException, DeserializationException {
         // If the XML was already parsed return cached environment
         if (environment != null) {
@@ -81,9 +97,8 @@ public class AASXDeserializer {
     /**
      * Return the Content of the xml file in the aasx-package as String
      * 
-     * @return Content of XML as String
-     * @throws InvalidFormatException
-     * @throws IOException
+     * @throws InvalidFormatException if aasx package format is invalid
+     * @throws IOException if creating input streams for aasx fails
      */
     public String getXMLResourceString() throws InvalidFormatException, IOException {
         return getXMLResourceString(this.aasxRoot);
@@ -119,11 +134,9 @@ public class AASXDeserializer {
      * the package
      * 
      * @return a map of the folder name and folder path, the folder holds the files
-     * @throws IOException
-     * @throws SAXException
-     * @throws ParserConfigurationException
-     * @throws InvalidFormatException
-     * @throws DeserializationException
+     * @throws IOException if creating input streams for aasx fails
+     * @throws InvalidFormatException if aasx package format is invalid
+     * @throws DeserializationException if deserialization of the serialized aas environment fails
      * 
      */
     private List<String> parseReferencedFilePathsFromAASX() throws IOException, InvalidFormatException, DeserializationException {
@@ -137,9 +150,9 @@ public class AASXDeserializer {
     }
 
     /**
-     * Gets the paths from a collection of ISubmodelElement
+     * Gets the file paths from a collection of ISubmodelElement
      * 
-     * @param elements
+     * @param elements the submodel elements to process
      * @return the Paths from the File elements
      */
     private List<String> parseElements(Collection<SubmodelElement> elements) {
@@ -161,6 +174,14 @@ public class AASXDeserializer {
         return paths;
     }
 
+    /**
+     * Retrieves a list of related files from the deserialized aasx package
+     * 
+     * @return the list of file in memory
+     * @throws InvalidFormatException if aasx package format is invalid
+     * @throws IOException if creating input streams for aasx fails
+     * @throws DeserializationException if deserialization of the serialized aas environment fails
+     */
     public List<InMemoryFile> getRelatedFiles() throws InvalidFormatException, IOException, DeserializationException {
         List<String> filePaths = parseReferencedFilePathsFromAASX();
         List<InMemoryFile> files = new ArrayList<>();
