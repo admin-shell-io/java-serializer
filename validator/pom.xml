@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>dataformat-jsonld</artifactId>
+    <artifactId>validator</artifactId>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -19,12 +19,12 @@
     <dependencies>
         <dependency>
             <groupId>io.admin-shell.aas</groupId>
-            <artifactId>dataformat-core</artifactId>
+            <artifactId>dataformat-jsonld</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.jena</groupId>
-            <artifactId>jena-arq</artifactId>
+            <artifactId>jena-shacl</artifactId>
             <version>${jena.version}</version>
         </dependency>
         <dependency>
@@ -39,8 +39,6 @@
             <version>1.7.30</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
-
 
 </project>
