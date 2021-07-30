@@ -176,7 +176,14 @@ aas:AssetShape a sh:NodeShape ;
   sh:targetClass aas:Asset ;
   rdfs:subClassOf aas:HasDataSpecificationShape ;
   rdfs:subClassOf aas:IdentifiableShape ;
-
+  #sh:property [
+  #    a sh:PropertyShape ;
+  #    sh:path <https://admin-shell.io/aas/3/0/RC01/Asset/identification> ;
+  #    sh:class aas:Identifier ;
+  #    sh:maxCount 1 ;
+  #    sh:minCount 1 ;
+  #    sh:message "(Asset.identification): The <i>identification</i> attribute points to exactly one <i>Identifier</i> entity."^^xsd:string ;
+  #  ] ;
 .
 
 aas:AssetInformationShape a sh:NodeShape ;
@@ -316,6 +323,14 @@ aas:AssetAdministrationShellEnvironmentShape a sh:NodeShape ;
     ] ;
   sh:property [
       a sh:PropertyShape ;
+      sh:path <https://admin-shell.io/aas/3/0/RC01/AssetAdministrationShellEnvironment/assets> ;
+      sh:class aas:Asset;
+      sh:message "(AssetAdministrationShellEnvironment.assets): The <i>assets</i> attribute points to an <i>Asset</i> entity."^^xsd:string ;
+      # sh:minCount 1 ;
+      # sh:maxCount 1 ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
       sh:path <https://admin-shell.io/aas/3/0/RC01/AssetAdministrationShellEnvironment/conceptDescriptions> ;
       sh:class aas:ConceptDescription ;
       sh:message "(AssetAdministrationShellEnvironment.conceptDescriptions): At least one <i>conceptDescriptions</i> attribute having a <i>ConceptDescription</i> entity is required."^^xsd:string ;
@@ -405,8 +420,8 @@ aas:CertificateShape  a sh:NodeShape ;
 		sh:select """
 			SELECT ?this ?type
 			WHERE {
-				?this a ?type .
-				FILTER (?type = aas:Certificate)
+				?this <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ?type .
+				FILTER (?type = <https://admin-shell.io/aas/3/0/RC01/Certificate>)
 			}
 		""" ;
 	] ;
@@ -445,8 +460,8 @@ aas:ConstraintShape a sh:NodeShape ;
 		sh:select """
 			SELECT ?this ?type
 			WHERE {
-				?this a ?type .
-				FILTER (?type = aas:Constraint)
+				?this <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ?type .
+				FILTER (?type = <https://admin-shell.io/aas/3/0/RC01/Constraint>)
 			}
 		""" ;
 	] ;
@@ -463,8 +478,8 @@ aas:DataElementShape a sh:NodeShape ;
 		sh:select """
 			SELECT ?this ?type
 			WHERE {
-				?this a ?type .
-				FILTER (?type = aas:DataElement)
+				?this <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ?type .
+				FILTER (?type = <https://admin-shell.io/aas/3/0/RC01/DataElement>)
 			}
 		""" ;
 	] ;
@@ -480,8 +495,8 @@ aas:DataSpecificationContentShape  a sh:NodeShape ;
 		sh:select """
 			SELECT ?this ?type
 			WHERE {
-				?this a ?type .
-				FILTER (?type = aas:DataSpecificationContent)
+				?this <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ?type .
+				FILTER (?type = <https://admin-shell.io/aas/3/0/RC01/DataSpecificationContent>)
 			}
 		""" ;
 	] ;
@@ -783,8 +798,8 @@ aas:EventShape a sh:NodeShape ;
 		sh:select """
 			SELECT ?this ?type
 			WHERE {
-				?this a ?type .
-				FILTER (?type = aas:Event)
+				?this <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ?type .
+				FILTER (?type = <https://admin-shell.io/aas/3/0/RC01/Event>)
 			}
 		""" ;
 	] ;
@@ -846,8 +861,8 @@ aas:HasDataSpecificationShape a sh:NodeShape ;
 		sh:select """
 			SELECT ?this ?type
 			WHERE {
-				?this a ?type .
-				FILTER (?type = aas:HasDataSpecification)
+				?this <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ?type .
+				FILTER (?type = <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification>)
 			}
 		""" ;
 	] ;
@@ -871,8 +886,8 @@ aas:HasKindShape a sh:NodeShape ;
   		sh:select """
   			SELECT ?this ?type
   			WHERE {
-  				?this a ?type .
-  				FILTER (?type = aas:HasKind)
+  				?this <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ?type .
+  				FILTER (?type = <https://admin-shell.io/aas/3/0/RC01/HasKind>)
   			}
   		""" ;
   	] ;
@@ -897,8 +912,8 @@ aas:HasSemanticsShape a sh:NodeShape ;
 		sh:select """
 			SELECT ?this ?type
 			WHERE {
-				?this a ?type .
-				FILTER (?type = aas:HasSemantics)
+				?this <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ?type .
+				FILTER (?type = <https://admin-shell.io/aas/3/0/RC01/HasSemantics>)
 			}
 		""" ;
 	] ;
@@ -924,8 +939,8 @@ aas:IdentifiableShape  a sh:NodeShape ;
 		sh:select """
 			SELECT ?this ?type
 			WHERE {
-				?this a ?type .
-				FILTER (?type = aas:Identifiable)
+				?this <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ?type .
+				FILTER (?type = <https://admin-shell.io/aas/3/0/RC01/Identifiable>)
 			}
 		""" ;
 	] ;
@@ -1217,8 +1232,8 @@ aas:QualifiableShape  a sh:NodeShape ;
 		sh:select """
 			SELECT ?this ?type
 			WHERE {
-				?this a ?type .
-				FILTER (?type = aas:Qualifiable)
+				?this <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ?type .
+				FILTER (?type = <https://admin-shell.io/aas/3/0/RC01/Qualifiable>)
 			}
 		""" ;
 	] ;
@@ -1308,8 +1323,8 @@ aas:HasExtensionsShape a sh:NodeShape ;
 		sh:select """
 			SELECT ?this ?type
 			WHERE {
-				?this a ?type .
-				FILTER (?type = aas:HasExtensions)
+				?this <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ?type .
+				FILTER (?type = <https://admin-shell.io/aas/3/0/RC01/HasExtensions>)
 			}
 		""" ;
 	] ;
@@ -1372,8 +1387,8 @@ aas:ReferableShape  a sh:NodeShape ;
 		sh:select """
 			SELECT ?this ?type
 			WHERE {
-				?this a ?type .
-				FILTER (?type = aas:Referable)
+				?this <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ?type .
+				FILTER (?type = <https://admin-shell.io/aas/3/0/RC01/Referable>)
 			}
 		""" ;
 	] ;
@@ -1526,8 +1541,8 @@ aas:SubmodelElementShape  a sh:NodeShape ;
 		sh:select """
 			SELECT ?this ?type
 			WHERE {
-				?this a ?type .
-				FILTER (?type = aas:SubmodelElement)
+				?this <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ?type .
+				FILTER (?type = <https://admin-shell.io/aas/3/0/RC01/SubmodelElement>)
 			}
 		""" ;
 	] ;

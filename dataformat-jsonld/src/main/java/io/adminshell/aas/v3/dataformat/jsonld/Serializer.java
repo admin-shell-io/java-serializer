@@ -84,6 +84,7 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer, D
      *
      * @param instance the instance to be serialized
      * @return RDF serialization of the provided object graph
+     * @throws IOException if the serialization fails
      */
     public String serialize(Object instance) throws IOException {
         return serialize(instance, RDFLanguages.JSONLD, new HashMap<>());
@@ -145,6 +146,7 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer, D
      * @param valueType     class of top level type
      * @param <T>           deserialized type
      * @return an object representing the provided JSON(-LD) structure
+     * @throws DeserializationException thrown, if deserialization fails, e.g. because the input is not valid RDF
      */
     public <T> T deserialize(String serialization, Class<T> valueType) throws DeserializationException {
         try {
@@ -164,6 +166,7 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer, D
      * @param serializationFormat RDF input format
      * @param <T>           deserialized type
      * @return an object representing the provided JSON(-LD) structure
+     * @throws DeserializationException thrown, if deserialization fails, e.g. because the input is not valid RDF
      */
     public <T> T deserialize(String serialization, Class<T> valueType, Lang serializationFormat) throws DeserializationException {
         try {
@@ -182,6 +185,7 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer, D
      * @param valueType     class of top level type
      * @param <T>           deserialized type
      * @return an object representing the provided JSON(-LD) structure
+     * @throws DeserializationException thrown, if deserialization fails, e.g. because the input is not valid RDF
      */
     public <T> T deserialize(Model rdfModel, Class<T> valueType) throws DeserializationException {
         try {

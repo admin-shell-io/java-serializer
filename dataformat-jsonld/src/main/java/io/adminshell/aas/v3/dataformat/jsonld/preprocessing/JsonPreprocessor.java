@@ -29,6 +29,7 @@ public interface JsonPreprocessor {
      * preprocessing method
      * @param input of the transformation, the original JSON-LD
      * @return the transformation´s result
+     * @throws IOException if preprocessing fails, e.g. because the input is not valid RDF
      */
     public String preprocess(String input) throws IOException;
 
