@@ -34,7 +34,7 @@ import java.util.stream.Collectors;
  * This class helps to dynamically decide how to de-/serialize classes and
  * properties defined in the AAS model library.
  *
- * This is equivialent to adding the following annotations
+ * This is equivalent to adding the following annotations
  * <ul>
  * <li> to all interfaces defined in the AAS model:
  * <ul>
