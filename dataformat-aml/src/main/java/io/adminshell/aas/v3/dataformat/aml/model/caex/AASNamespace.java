@@ -43,6 +43,9 @@ public enum AASNamespace {
     Qualifier_ValueId("Qualifier/valueId"),
     AssetAdministrationShell_DerivedFrom("AssetAdministrationShell/derivedFrom"),
     Asset_AssetIdentificationModel("Asset/assetIdentificationModel"),
+    AssetAdministrationShell_AssetInformation("AssetAdministrationShell/assetInformation"),
+    AssetInformation_AssetKind("AssetInformation/assetKind"),
+    AssetInformation_GlobalAssetId("AssetInformation/globalAssetId"),
     AssetAdministrationShell_Submodels("AssetAdministrationShell/submodels"),
     Property_Value("Property/value"),
     MultiLanguageProperty_Value("MultiLanguageProperty/value"),
@@ -62,7 +65,11 @@ public enum AASNamespace {
     RelationshipElement_Second("RelationshipElement/second"),
     IdentifierKeyValuePair_Key("IdentifierKeyValuePair/key"),
     IdentifierKeyValuePair_Value("IdentifierKeyValuePair/value"),
-    BillOfMaterial_Reference("BillOfMaterial/reference");
+    BillOfMaterial_Reference("BillOfMaterial/reference"),
+    // View
+    AssetAdministrationShell_View("AssetAdministrationShell/view"),
+    View_ContainedElement("View/containedElement"),
+    View_IdShort("View/idShort");
 
     private String refSemantic;
 

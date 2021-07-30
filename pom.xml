@@ -17,11 +17,11 @@
     </modules>
     <properties>
         <revision>1.0.0</revision>
-        <model.version>1.1.2</model.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <plugin.cxf.version>3.3.1</plugin.cxf.version>
         <plugin.flatten.version>1.2.2</plugin.flatten.version>
         <plugin.javadoc.version>3.2.0</plugin.javadoc.version>
         <plugin.license.version>4.1</plugin.license.version>
@@ -30,11 +30,15 @@
         <commons-io.version>2.6</commons-io.version>
         <jackson.version>2.12.3</jackson.version>
         <javax-validation.version>2.0.1.Final</javax-validation.version>
+        <jaxb.version>2.3.1</jaxb.version>
+        <jaxb-rich-contract.version>2.1.0</jaxb-rich-contract.version>
         <jena.version>4.1.0</jena.version>
         <jsonassert.version>1.5.0</jsonassert.version>
         <json-schema-validator.version>1.0.56</json-schema-validator.version>
         <junit.version>4.13</junit.version>
         <junit-params.version>1.1.1</junit-params.version>
+        <mapstruct.version>1.4.2.Final</mapstruct.version>
+        <moxy.version>2.7.8</moxy.version>
         <orika.version>1.5.4</orika.version>
         <poi.version>4.1.2</poi.version>
         <slf4j.version>1.7.31</slf4j.version>

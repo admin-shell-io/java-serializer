@@ -15,25 +15,24 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.deserialize;
 
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
+import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.aml.AmlDeserializer;
+import io.adminshell.aas.v3.dataformat.aml.fixtures.FullExample;
+import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
+import java.io.FileNotFoundException;
+import static org.junit.Assert.assertEquals;
 
-import java.io.*;
+import org.junit.Ignore;
+import org.junit.Test;
 
 public class AmlDeserializerTest {
 
     private final AmlDeserializer deserializer = new AmlDeserializer();
 
-    private final XmlMapper xmlMapper = new XmlMapper();
-
-    private String inputStreamToString(InputStream inputStream) throws IOException {
-        StringBuilder stringBuilder = new StringBuilder();
-        String line;
-        BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
-        while ((line = reader.readLine()) != null) {
-            stringBuilder.append(line);
-        }
-        reader.close();
-        return stringBuilder.toString();
+    @Test
+    @Ignore
+    public void testSAPFullExample() throws DeserializationException, FileNotFoundException {
+        AssetAdministrationShellEnvironment actual = deserializer.read(FullExample.FILE);
+        assertEquals(FullExample.ENVIRONMENT, actual);
     }
 }

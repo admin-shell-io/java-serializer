@@ -1,0 +1,14 @@
+<InterfaceClassLib
+    Name="AutomationMLBPRInterfaceClassLib">
+    <Version>1.0.0</Version>
+    <InterfaceClass
+            Name="ExternalDataReference"
+            RefBaseClassPath="AutomationMLInterfaceClassLib/AutomationMLBaseInterface/ExternalDataConnector"
+            ID="{320f7f3a-6df8-4ccd-af35-a4367b37eb7a}">
+        <Attribute
+                Name="MIMEType"
+                AttributeDataType="xs:string">
+            <Description>Mime type of the content of the File.</Description>
+        </Attribute>
+    </InterfaceClass>
+</InterfaceClassLib>

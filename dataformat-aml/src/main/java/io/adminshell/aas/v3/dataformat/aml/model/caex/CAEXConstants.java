@@ -20,4 +20,6 @@ public class CAEXConstants {
     public final static String XMLNS = "http://www.w3.org/2001/XMLSchema-instance";
     public final static String XSI = "CAEX_ClassModel_V2.15.xsd";
     public final static String AUTOMATION_ML_VERSION = "2.0";
+    public final static String AAS_INSTANCE_HIERARCHY = "AssetAdministrationShellInstanceHierarchy";
+    public final static String AAS_INSTANCE_HIERARCHY_VERSION = "0";
 }

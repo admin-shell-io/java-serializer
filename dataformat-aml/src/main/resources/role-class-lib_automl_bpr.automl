@@ -1,0 +1,7 @@
+<RoleClassLib
+    Name="AutomationMLBPRRoleClassLib">
+    <Version>1.0.0</Version>
+    <RoleClass
+            Name="ExternalData"
+            RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole"/>
+</RoleClassLib>

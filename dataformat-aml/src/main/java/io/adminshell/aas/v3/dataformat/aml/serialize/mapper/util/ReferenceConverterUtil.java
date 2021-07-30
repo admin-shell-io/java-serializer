@@ -24,7 +24,7 @@ import java.util.Iterator;
 public class ReferenceConverterUtil {
 
     public static String convert(Reference reference) {
-        if(reference == null) {
+        if (reference == null) {
             return null;
         }
 
@@ -41,7 +41,6 @@ public class ReferenceConverterUtil {
 //            builder.append("(");
 //            builder.append(key.isLocal() ? "local" : "no-local");
 //            builder.append(")");
-
             builder.append("[");
             builder.append(key.getIdType());
             builder.append("]");

@@ -51,7 +51,6 @@ import io.adminshell.aas.v3.dataformat.aml.serialize.mapper.mapper.RelationshipE
 import io.adminshell.aas.v3.dataformat.aml.serialize.mapper.mapper.SubmodelElementCollectionMapper;
 import io.adminshell.aas.v3.dataformat.aml.serialize.mapper.mapper.SubmodelElementMapper;
 import io.adminshell.aas.v3.dataformat.aml.serialize.mapper.mapper.SubmodelMapper;
-import io.adminshell.aas.v3.dataformat.aml.serialize.mapper.mapper.ViewMapper;
 import io.adminshell.aas.v3.model.*;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.ConfigurableMapper;
@@ -130,15 +129,6 @@ public class AASEnvironmentMapper extends ConfigurableMapper {
                 .converter(DerivedFromToAttributeConverter.class.getName()).add()
                 .byDefault()
                 .customize(new AssetAdministrationShellMapper())
-                .register();
-
-        // View mapping
-        factory.classMap(View.class, InternalElement.class)
-                .mapNulls(true)
-                .fieldMap("semanticId", "attributes[0]")
-                .converter(SemanticIdToAttributeConverter.class.getName()).add()
-                .byDefault()
-                .customize(new ViewMapper())
                 .register();
 
 //        // Asset information mapping

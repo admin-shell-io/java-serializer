@@ -15,7 +15,10 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.model.mixin;
 
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
 import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
+import java.util.List;
 
 public class CAEXMixin {
 
@@ -48,6 +51,18 @@ public class CAEXMixin {
 
     @JacksonXmlProperty(localName = "InstanceHierarchy")
     private InstanceHierarchyMixin instanceHierarchy;
+
+    @JacksonXmlProperty(localName = "InterfaceClassLib")
+    @JacksonXmlElementWrapper(useWrapping = false)
+    private List<String> interfaceClassLibs;
+
+    @JacksonXmlProperty(localName = "RoleClassLib")
+    @JacksonXmlElementWrapper(useWrapping = false)
+    private List<String> roleClassLibs;
+
+    @JacksonXmlProperty(localName = "SystemUnitClassLib")
+    @JacksonXmlElementWrapper(useWrapping = false)
+    private List<String> systemUnitClassLibs;
 
     public String getXmlns() {
         return xmlns;
@@ -95,5 +110,29 @@ public class CAEXMixin {
 
     public void setInstanceHierarchy(InstanceHierarchyMixin instanceHierarchy) {
         this.instanceHierarchy = instanceHierarchy;
+    }
+
+    public List<String> getInterfaceClassLibs() {
+        return interfaceClassLibs;
+    }
+
+    public void setInterfaceClassLibs(List<String> interfaceClassLibs) {
+        this.interfaceClassLibs = interfaceClassLibs;
+    }
+
+    public List<String> getRoleClassLibs() {
+        return roleClassLibs;
+    }
+
+    public void setRoleClassLibs(List<String> roleClassLibs) {
+        this.roleClassLibs = roleClassLibs;
+    }
+
+    public List<String> getSystemUnitClassLibs() {
+        return systemUnitClassLibs;
+    }
+
+    public void setSystemUnitClassLibs(List<String> systemUnitClassLibs) {
+        this.systemUnitClassLibs = systemUnitClassLibs;
     }
 }
