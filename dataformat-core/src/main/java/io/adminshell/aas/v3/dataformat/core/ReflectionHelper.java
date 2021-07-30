@@ -23,11 +23,14 @@ import io.github.classgraph.ClassInfoList;
 import io.github.classgraph.ScanResult;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+import org.apache.commons.lang3.ClassUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -76,6 +79,10 @@ public class ReflectionHelper {
      * MODEL_PACKAGE_NAME package.
      */
     public static final Map<Class<?>, Set<Class<?>>> SUBTYPES;
+    /**
+     * List of all interfaces classes defined by the AAS
+     */
+    public static final Set<Class> INTERFACES;
     /**
      * Expanded list of all mixin classes defined in the MIXINS_PACKAGE_NAME
      * package together with the corresponding class they should be applied to.
@@ -161,6 +168,28 @@ public class ReflectionHelper {
         return isModelInterface(type) || isDefaultImplementation(type);
     }
 
+    public static Class<?> getAasInterface(Class<?> type) {
+        Set<Class<?>> implementedAasInterfaces = getAasInterfaces(type);
+        if (implementedAasInterfaces.isEmpty()) {
+            return null;
+        }
+        if (implementedAasInterfaces.size() == 1) {
+            logger.warn("class '{}' implements more than one AAS interface, but only first one is used", type.getName());
+        }
+        return implementedAasInterfaces.iterator().next();
+    }
+
+    public static Set<Class<?>> getAasInterfaces(Class<?> type) {
+        Set<Class<?>> result = new HashSet<>();
+        if (type != null) {
+            if (INTERFACES.contains(type)) {
+                result.add(type);
+            }
+            result.addAll(ClassUtils.getAllInterfaces(type).stream().filter(x -> INTERFACES.contains(x)).collect(Collectors.toSet()));
+        }
+        return result;
+    }
+
     /**
      * Returns the AAS type information used for de-/serialization for a given
      * class or null if type information should not be included
@@ -196,6 +225,9 @@ public class ReflectionHelper {
      * type information or null if there is none
      */
     public static Class<?> getMostSpecificTypeWithModelType(Class<?> clazz) {
+        if(clazz == null) {
+            return null;
+        }
         return TYPES_WITH_MODEL_TYPE.stream()
                 .filter(x -> clazz.isInterface() ? x.equals(clazz) : x.isAssignableFrom(clazz))
                 .sorted((Class<?> o1, Class<?> o2) -> {
@@ -226,6 +258,7 @@ public class ReflectionHelper {
         SUBTYPES = scanSubtypes(modelScan);
         MIXINS = scanMixins(modelScan);
         DEFAULT_IMPLEMENTATIONS = scanDefaultImplementations(modelScan);
+        INTERFACES = scanAasInterfaces();
         ENUMS = modelScan.getAllEnums().loadClasses(Enum.class);
         INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION = getInterfacesWithoutDefaultImplementation(modelScan);
     }
@@ -234,6 +267,19 @@ public class ReflectionHelper {
         return modelScan.getAllInterfaces().loadClasses().stream()
                 .filter(x -> !hasDefaultImplementation(x))
                 .collect(Collectors.toSet());
+    }
+
+    public static Set<Class<?>> getSuperTypes(Class<?> clazz, boolean recursive) {
+        Set<Class<?>> result = SUBTYPES.entrySet().stream()
+                .filter(x -> x.getValue().contains(clazz))
+                .map(x -> x.getKey())
+                .collect(Collectors.toSet());
+        if (recursive) {
+            result.addAll(result.stream()
+                    .flatMap(x -> getSuperTypes(x, true).stream())
+                    .collect(Collectors.toSet()));
+        }
+        return result;
     }
 
     private static List<ImplementationInfo> scanDefaultImplementations(ScanResult modelScan) {
@@ -261,6 +307,10 @@ public class ReflectionHelper {
                     }
                 });
         return defaultImplementations;
+    }
+
+    private static Set<Class> scanAasInterfaces() {
+        return DEFAULT_IMPLEMENTATIONS.stream().map(x -> x.interfaceType).collect(Collectors.toSet());
     }
 
     private static Map<Class<?>, Class<?>> scanMixins(ScanResult modelScan) {

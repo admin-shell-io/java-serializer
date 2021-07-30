@@ -18,29 +18,29 @@ package io.adminshell.aas.v3.dataformat.aml.serialize;
 import io.adminshell.aas.v3.dataformat.aml.fixtures.FullExample;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.aml.AmlSerializer;
+import io.adminshell.aas.v3.dataformat.aml.fixtures.TestExample;
+import io.adminshell.aas.v3.dataformat.aml.util.ReferencedReferableCollector;
+import io.adminshell.aas.v3.model.Referable;
+import java.util.Set;
+import org.junit.Ignore;
 import org.junit.Test;
-
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
 
 public class AmlSerializerTest {
 
     private final AmlSerializer serializer = new AmlSerializer();
+    
+        @Test
+//    @Ignore
+    public void testExample() throws SerializationException {
+        String actual = serializer.write(TestExample.ENVIRONMENT, true);
+        System.out.println(actual);
+    }
 
     @Test
+    @Ignore
     public void testSAPFullExample() throws SerializationException {
-        String aml = serializer.write(FullExample.ENVIRONMENT);
-
-        try {
-            File xmlOutput = new File("src/test/resources/amlfile/full-example.xml");
-            FileWriter fileWriter = new FileWriter(xmlOutput);
-            fileWriter.write(aml);
-            fileWriter.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        // System.err.println(actual);
+        String actual = serializer.write(FullExample.ENVIRONMENT);
+        System.out.println(actual);
     }
+
 }

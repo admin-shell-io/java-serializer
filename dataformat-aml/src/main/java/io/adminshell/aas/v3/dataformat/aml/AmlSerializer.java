@@ -15,125 +15,81 @@
  */
 package io.adminshell.aas.v3.dataformat.aml;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.SerializationFeature;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.Serializer;
-import io.adminshell.aas.v3.dataformat.aml.model.caex.*;
-import io.adminshell.aas.v3.dataformat.aml.model.mixin.*;
-import io.adminshell.aas.v3.dataformat.aml.serialize.mapper.AASEnvironmentMapper;
-import io.adminshell.aas.v3.model.AssetAdministrationShell;
+import io.adminshell.aas.v3.dataformat.aml.header.AutomationMLVersion;
+import io.adminshell.aas.v3.dataformat.aml.header.WriterHeader;
+import io.adminshell.aas.v3.dataformat.aml.mapper.MappingException;
+import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
-import io.adminshell.aas.v3.model.Submodel;
-import ma.glasnost.orika.MapperFacade;
+import java.io.IOException;
+import java.io.StringWriter;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import org.eclipse.persistence.jaxb.JAXBContextFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.List;
-
 public class AmlSerializer implements Serializer {
 
+    private static final String AAS_LIB_SOURCE = "/AssetAdministrationShellLib.aml";
     private static final Logger log = LoggerFactory.getLogger(AmlSerializer.class);
+    private AasToAmlMapper mapper = new AasToAmlMapper();
 
-    private final MapperFacade mapper = new AASEnvironmentMapper();
+    private boolean enableClassLibs = false;
+
+    public AmlSerializer() {
+    }
+
+    public AmlSerializer(boolean enableClassLibs) {
+        this.enableClassLibs = enableClassLibs;
+    }
 
     @Override
     public String write(AssetAdministrationShellEnvironment aasEnvironment) throws SerializationException {
+        return write(aasEnvironment, true);
+    }
+
+    public String write(AssetAdministrationShellEnvironment aasEnvironment, boolean withLibraries) throws SerializationException {
         try {
-            CAEXFile caexFile = modelTransformation(aasEnvironment);
-            String xml = convertXml(caexFile);
-            String result = cleanUpXml(xml);
-            return result;
-        } catch (JsonProcessingException ex) {
+            CAEXFile aml = mapper.map(aasEnvironment);
+            if (withLibraries) {
+                aml = addAASLibrary(aml);
+            }
+            Marshaller marshaller = JAXBContextFactory.createContext(
+                    new Class[]{
+                        CAEXFile.class,
+                        AutomationMLVersion.class,
+                        WriterHeader.class,
+                        WriterHeader.Wrapper.class
+                    },
+                    null).createMarshaller();
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+            StringWriter writer = new StringWriter();
+            marshaller.marshal(aml, writer);
+            return writer.toString();
+        } catch (JAXBException ex) {
             throw new SerializationException("error serializing AssetAdministrationShellEnvironment", ex);
+        } catch (MappingException ex) {
+            throw new SerializationException("error serializing AssetAdministrationShellEnvironment, mapping to AML failed", ex);
+        } catch (IOException ex) {
+            throw new SerializationException("error serializing AssetAdministrationShellEnvironment, AAS library could not be loaded", ex);
         }
     }
 
-    private CAEXFile modelTransformation(AssetAdministrationShellEnvironment environment) {
-        // Map environment to CAEX file
-        CAEXFile caexFile = mapper.map(environment, CAEXFile.class);
-        caexFile.setSchemaVersion(CAEXConstants.SCHEMA_VERSION);
-        caexFile.setXmlns(CAEXConstants.XMLNS);
-        caexFile.setXsi(CAEXConstants.XSI);
-
-        // Add additional information to CAEX
-        AdditionalInformation additionalInformation = new AdditionalInformation();
-        additionalInformation.setAutomationMLVersion(CAEXConstants.AUTOMATION_ML_VERSION);
-        caexFile.setAdditionalInformation(additionalInformation);
-
-        // Add AssetAdministrationShell instance hierarchy to CAEX
-        InstanceHierarchy instanceHierarchy = new InstanceHierarchy();
-        instanceHierarchy.setName(CAEXConstants.AAS_INSTANCE_HIERARCHY);
-        instanceHierarchy.setVersion(CAEXConstants.AAS_INSTANCE_HIERARCHY_VERSION);
-        caexFile.setInstanceHierarchy(instanceHierarchy);
-
-        // Map all asset administration shells to internal elements
-        List<AssetAdministrationShell> administrationShells = new ArrayList<>(environment.getAssetAdministrationShells());
-        List<InternalElement> shellInternalElements = mapper.mapAsList(administrationShells, InternalElement.class);
-        instanceHierarchy.setInternalElements(shellInternalElements);
-
-        // Map all submodels to internal elements
-        List<Submodel> submodels = new ArrayList<>(environment.getSubmodels());
-        List<InternalElement> submodelInternalElements = mapper.mapAsList(submodels, InternalElement.class);
-        instanceHierarchy.getInternalElements().addAll(submodelInternalElements);
-
-        return caexFile;
-    }
-
-    private String convertXml(CAEXFile caexFile) throws JsonProcessingException {
-        caexFile.setInterfaceClassLibs(new ArrayList<>(){{
-            add(readClassLib("interface-class-lib_aas.automl"));
-            add(readClassLib("interface-class-lib_automl_interface.automl"));
-            add(readClassLib("interface-class-lib_automl_bpr.automl"));
-        }});
-
-        caexFile.setRoleClassLibs(new ArrayList<>(){{
-            add(readClassLib("role-class-lib_aas.automl"));
-            add(readClassLib("role-class-lib_automl_base.automl"));
-            add(readClassLib("role-class-lib_automl_bpr.automl"));
-        }});
-
-        caexFile.setSystemUnitClassLibs(new ArrayList<>(){{
-            add(readClassLib("system-unit-class-lib_aas.automl"));
-            add(readClassLib("system-unit-class-lib_aas_data_specification_templates.automl"));
-        }});
-
-        XmlMapper xmlMapper = XmlMapper.builder()
-                .disable(SerializationFeature.FAIL_ON_EMPTY_BEANS)
-                .enable(SerializationFeature.INDENT_OUTPUT)
-                .addMixIn(CAEXFile.class, CAEXMixin.class)
-                .addMixIn(ExternalInterface.class, ExternalInterfaceMixin.class)
-                .addMixIn(AdditionalInformation.class, AdditionalInformationMixin.class)
-                .addMixIn(InstanceHierarchy.class, InstanceHierarchyMixin.class)
-                .addMixIn(InternalElement.class, InternalElementMixin.class)
-                .addMixIn(Attribute.class, AttributeMixin.class)
-                .addMixIn(RefSemantic.class, RefSemanticMixin.class)
-                .addMixIn(RoleRequirements.class, RoleRequirementsMixin.class)
+    private CAEXFile addAASLibrary(CAEXFile file) throws JAXBException, IOException {
+        // potential issue: when dynamically adding custom DataSpecificationTemplates this won't work
+        CAEXFile aasLib = loadAASLibrary();
+        return CAEXFile.copyOf(file)
+                .addInterfaceClassLib(aasLib.getInterfaceClassLib())
+                .addRoleClassLib(aasLib.getRoleClassLib())
+                .addSystemUnitClassLib(aasLib.getSystemUnitClassLib())
                 .build();
-
-        return xmlMapper.writeValueAsString(caexFile);
     }
 
-    private String readClassLib(String fileName) {
-        ClassLoader classLoader = getClass().getClassLoader();
-        File file = new File(classLoader.getResource(fileName).getFile());
-        String content = null;
-        try {
-            content = new String(Files.readAllBytes(file.toPath()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return content;
-    }
-
-    private String cleanUpXml(String xml) {
-        String withoutEmptyAttributes = xml.replaceAll("<Attribute/>", "");
-        String withoutEmptyLines = withoutEmptyAttributes.replaceAll("(?m)^[ \t]*\r?\n", "");
-        return withoutEmptyLines;
+    private CAEXFile loadAASLibrary() throws JAXBException, IOException {
+        Unmarshaller unmarshaller = JAXBContextFactory.createContext(new Class[]{CAEXFile.class}, null).createUnmarshaller();
+        return (CAEXFile) unmarshaller.unmarshal(getClass().getResource(AAS_LIB_SOURCE).openStream());
     }
 }
