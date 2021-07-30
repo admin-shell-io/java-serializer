@@ -148,7 +148,6 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 	}
 
 	protected static void attachAsType(UAInstance parent, UAInstance child, BasicIdentifier typeId) {
-		child.setParentNodeId(parent.getNodeId());
 		if (child.getReferences() == null) {
 			child.setReferences(new ListOfReferences());
 		}
@@ -164,14 +163,17 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 	}
 
 	protected static final void attachAsProperty(UAObject parent, UAVariable child) {
+		child.setParentNodeId(parent.getNodeId());
 		attachAsType(parent, child, UaIdentifier.HasProperty);
 	}
 	
 	protected static final void attachAsComponent(UAObject parent, UAObject child) {
+		child.setParentNodeId(parent.getNodeId());
 		attachAsType(parent, child, UaIdentifier.HasComponent);
 	}
 
 	protected static final void attachAsOrderedComponent(UAObject parent, UAObject child) {
+		child.setParentNodeId(parent.getNodeId());
 		attachAsType(parent, child, UaIdentifier.HasOrderedComponent);
 
 	}
