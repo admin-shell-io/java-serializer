@@ -19,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.TreeMap;
 import java.util.function.Function;
 
@@ -31,6 +32,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.ModelTableEntry;
 import org.opcfoundation.ua._2011._03.uanodeset.NodeIdAlias;
 import org.opcfoundation.ua._2011._03.uanodeset.UANode;
 import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
+import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UriTable;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASConstants;
@@ -41,6 +43,7 @@ import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.Identifier;
 import io.adminshell.aas.v3.model.Key;
 import io.adminshell.aas.v3.model.KeyElements;
+import io.adminshell.aas.v3.model.Reference;
 import io.adminshell.aas.v3.model.Submodel;
 
 public class MappingContext {
@@ -158,35 +161,44 @@ public class MappingContext {
 		return i4aasNsIndex;
 	}
 
-//	public Submodel resolveSubmodelReference(io.adminshell.aas.v3.model.Reference aasRef) {
-//		List<Key> keys = aasRef.getKeys();
-//		if (keys.get(0).getType() == KeyElements.SUBMODEL) {
-//			List<Submodel> submodels = aasEnvironment.getSubmodels();
-//			for (Submodel submodel : submodels) {
-//				Identifier ident = submodel.getIdentification();
-//				if (ident != null && ident.getIdentifier() != null
-//						&& ident.getIdentifier().equals(keys.get(0).getValue())) {
-//					return submodel;
-//				}
-//			}
-//		}
-//		return null;
-//	}
+	private Map<Identifier, UAObject> sourceIdentifierToTargetIdentifier = new HashMap<>();
+	private Map<UAObject, Reference> targetReferenceToSourceReference = new HashMap<>();
 
-	private Map<String, UANode> identificationToNodeMap = new TreeMap<>();
-	private Map<UANode, String> node2IdentificationMap = new HashMap<>();
-
-	public void addIdentificationWithNodeId(String sourceIdentifierValue, UANode node) {
-		identificationToNodeMap.put(sourceIdentifierValue, node);
-		node2IdentificationMap.put(node, sourceIdentifierValue);
+	public void addIdentifierUaObject(Identifier identifier, UAObject identifiable) {
+		sourceIdentifierToTargetIdentifier.put(identifier, identifiable);
+		// try a local, native UA reference binding
+		for (Entry<UAObject, Reference> entry : targetReferenceToSourceReference.entrySet()) {
+			if (match(identifier, entry.getValue())) {
+				I4AASMapper.attachAsAddIn(entry.getKey(), identifiable);
+			}
+		}
 	}
 
-	public UANode getNodeIdForIdentification(String identification) {
-		return identificationToNodeMap.get(identification);
+	public void addAASReferenceType(UAObject reference, Reference source) {
+		targetReferenceToSourceReference.put(reference, source);
+		// try a local, native UA reference binding
+		UAObject targetNodeForReference = getTargetNodeForReference(source);
+		if (targetNodeForReference != null) {
+			I4AASMapper.attachAsAddIn(reference, targetNodeForReference);
+		}
 	}
 
-	public String getIdentificationForNodeId(String nodeId) {
-		return node2IdentificationMap.get(nodeId);
+	public final UAObject getTargetNodeForReference(Reference semanticId) {
+		for (Entry<Identifier, UAObject> entry : sourceIdentifierToTargetIdentifier.entrySet()) {
+			if (match(entry.getKey(), semanticId)) {
+				return entry.getValue();
+			}
+		}
+		return null;
+	}
+	
+	private boolean match(Identifier identifier, Reference reference) {
+		try {
+			String firstReferenceEntry = reference.getKeys().get(0).getValue();
+			return firstReferenceEntry.equals(identifier.getIdentifier());
+		} catch (NullPointerException npe) {
+			return false;
+		}
 	}
 
 }

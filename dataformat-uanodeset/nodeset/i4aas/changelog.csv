@@ -9,7 +9,8 @@ note: SubmodelReferences and AssetReferences can contain the optional and native
 6;ConceptDictionary;Bugfix;OPC UA Dictionary is used as ConceptDictionary, thus the dedicated Types AASConceptDictionaryType is not needed anymore. ;AASConceptDictionaryType removed. Also legacy references are removed;ok;
 7;AssetInformation;V3 Change;introduced;AASAssetInformationType introduced;ok;
 8;AASReference;Bugfix;"AASReference is non-hierarchical. Also See: https://reference.opcfoundation.org/v104/Core/docs/Part3/7.4/
-""The semantic of NonHierarchicalReferences is to denote that its subtypes do not span a hierarchy and should not be followed when trying to present a hierarchy."" But this is the whole point of the AASReference, to follow the hierarchy which could be denoted by the AASReferenceType.";"removed AASReference and uses the hierachical reference HasAddIn to avoid confusion about ""a AASRerence Type which has a component referenced by a AASReference"". ";ok;
+""The semantic of NonHierarchicalReferences is to denote that its subtypes do not span a hierarchy and should not be followed when trying to present a hierarchy."" But this is the whole point of the AASReference, to follow the hierarchy which could be denoted by the AASReferenceType.";"removed AASReference and uses the hierachical reference HasAddIn to avoid confusion about ""a AASRerence Type which has a component referenced by a AASReference"". 
+Also this can only happen for an object instance at runtime, when the referable exists. Thus it is not possible to add this with modeling rules because this will predefine some attribtues like browsename, which is IdShort of the actual Referable.";ok;
 9;AASReferenceType;Bugfix;OptionalPlaceholder Referable is a BaseObjectType and as HasComponent defined, but it should be used the AASReference Type with Target AASReferableType.;using AASReference Type with Target AASReferableType. Removed legacy, non-hierachical Reference, see #8.;ok;
 10;HasInterface;Bugfix;HasInterface already exists in OPC UA Standard but has been introduced within the I4AAS Namespace;removed proprietary HasInterface Reference Type;ok;
 11;AASKeyDataType;V3 Change;"""local"" Attribute has been removed";"removed ""local"" attribute";ok;
@@ -23,7 +24,7 @@ changed Modeling Rule for Value";ok;
 added specificAssetId
 removed ""Asset""";;ok;
 17;IdentifierKeyValuePair;added in V3;completely new type;added as AASIdentifierKeyValuePairType;ok;
-18;AASDataTypeIEC62â€¦;Bugfix;messed up, INTEGER_MEASURE missing;rearranged as in the AAS Meta Model Spec;ok;
+18;AASDataTypeIEC62…;Bugfix;messed up, INTEGER_MEASURE missing;rearranged as in the AAS Meta Model Spec;ok;
 19;Identifier;Enhancement;modeled as Type, but could be Structure;just proposed since issues with structures are known;;should be considered in an updated version
 20;HasExtension / Extension;added in V3;new Class and Type Defintion;;;
 21;AssetAdministrationShell/conceptDictionaries;changed in V3;;removed;ok;
@@ -35,7 +36,7 @@ removed ""Asset""";;ok;
 ""The identifier in the respective external dictionary shall be a unique URI string. This identifier is used for the NodeId and the BrowseName Attributes of instances of the DictionaryEntryType. The IdentifierType of the NodeId shall be STRING_1 with the identifier from the external dictionary as the value.""
 
 Currently the NodeId does not follow this convention.";no action, see #27;ok;
-26;General;Design Flaw;Many list are modeled as optional placeholder. Therefore, the attribute name of such a list given by the AAS Spec gets lost. It will lead to inconsistencies, e.g. when the order of such a list matters, if there are two list of the same type but with different attribute names, â€¦;"affected attribtues:
+26;General;Design Flaw;Many list are modeled as optional placeholder. Therefore, the attribute name of such a list given by the AAS Spec gets lost. It will lead to inconsistencies, e.g. when the order of such a list matters, if there are two list of the same type but with different attribute names, …;"affected attribtues:
 AssetInformation/specificAssetId
 HasDataSpecification/dataSpecification
 AnnotatedRelationshipElement/annotation
@@ -54,6 +55,6 @@ fix by using introducing a (mandatory) folder which contains the list element (a
 29;AASDataSpecificationIEC61360Type;Bugfix;contains Administraton and Category;must be removed;ok;
 30;Qualifiable;Bugfix;not implemented in I4AAS;introduce Interface?;;
 31;AASQualifierType;Bugfix;some attribute types do not fit;changed according to AAS V4;ok;
-;;;;;;
+32;BillOfMaterial;V3 Changes;The definition for BillOfMaterial was not that clear. It seems like BillOfMaterial is a List of References, no a single Reference.;should be solved by using a AASReferenceList;ok;
 ;;;;;;
 ;;;;;;

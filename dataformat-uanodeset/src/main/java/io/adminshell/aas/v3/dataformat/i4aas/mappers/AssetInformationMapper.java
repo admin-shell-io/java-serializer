@@ -15,6 +15,8 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 
+import java.util.List;
+
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
@@ -37,7 +39,8 @@ public class AssetInformationMapper extends I4AASMapper<AssetInformation, UAObje
 	@Override
 	protected UAObject createTargetObject() {
 		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(createI4AASBrowseName("AssetInformation")).withDisplayName(createLocalizedText("AssetInformation")).build();
+				.withBrowseName(createI4AASBrowseName("AssetInformation"))
+				.withDisplayName(createLocalizedText("AssetInformation")).build();
 		addTypeReference(I4AASIdentifier.AASAssetInformationType);
 		return target;
 	}
@@ -54,10 +57,12 @@ public class AssetInformationMapper extends I4AASMapper<AssetInformation, UAObje
 			attachAsComponent(target, uaIdentification);
 		}
 
-		if (!source.getBillOfMaterials().isEmpty()) {
-			Reference bom = source.getBillOfMaterials().get(0); // workaround, should be just one entry
-			UAObject uaBom = new ReferenceMapper(bom, ctx, "BillOfMaterial").map();
-			attachAsComponent(target, uaBom);
+		UAObject uaBomList = createReferenceList("BillOfMaterial");
+		List<Reference> billOfMaterials = source.getBillOfMaterials();
+		for (int i = 0; i < billOfMaterials.size(); i++) {
+			Reference reference = billOfMaterials.get(i);
+			UAObject uaBomListEntry = new ReferenceMapper(reference, ctx, "BillOfMaterial_" + i).map();
+			attachAsComponent(uaBomList, uaBomListEntry);
 		}
 
 		File defaultThumbnail = source.getDefaultThumbnail();

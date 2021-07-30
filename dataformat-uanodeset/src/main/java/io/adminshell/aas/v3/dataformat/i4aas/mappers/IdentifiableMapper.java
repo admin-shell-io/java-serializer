@@ -61,7 +61,7 @@ public class IdentifiableMapper<T extends Identifiable> extends ReferableMapper<
 		UAVariable mappedEnum = new I4AASEnumMapper(sourceIdType, ctx).map();
 		attachAsProperty(uaObject, mappedEnum);
 
-		ctx.addIdentificationWithNodeId(sourceIdentifierValue, target);
+		ctx.addIdentifierUaObject(source.getIdentification(), target);
 	}
 
 	private void mapAdministration() {

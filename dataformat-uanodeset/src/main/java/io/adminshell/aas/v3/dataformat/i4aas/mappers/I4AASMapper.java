@@ -178,6 +178,10 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 	protected static final void attachAsDictionaryEntry(UAObject parent, UAObject child) {
 		attachAsType(parent, child, UaIdentifier.HasDictionaryEntry);
 	}
+	
+	protected static final void attachAsAddIn(UAObject parent, UAObject child) {
+		attachAsType(parent, child, UaIdentifier.HasAddIn);
+	}
 
 	protected static final LocalizedText mapLangString(LangString description) {
 		return LocalizedText.builder().withLocale(description.getLanguage()).withValue(description.getValue()).build();
