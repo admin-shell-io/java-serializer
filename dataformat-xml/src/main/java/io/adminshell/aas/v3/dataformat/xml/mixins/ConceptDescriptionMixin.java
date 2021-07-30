@@ -13,12 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.xml.deserialization;
+package io.adminshell.aas.v3.dataformat.xml.mixins;
 
-import io.adminshell.aas.v3.model.LangString;
+import java.util.List;
 
-public class LangStringsDeserializer extends NoEntryWrapperListDeserializer<LangString> {
-    public LangStringsDeserializer() {
-        super("langString", new LangStringNodeDeserializer());
-    }
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
+import io.adminshell.aas.v3.dataformat.xml.AasXmlNamespaceContext;
+import io.adminshell.aas.v3.dataformat.xml.deserialization.ReferencesDeserializer;
+import io.adminshell.aas.v3.model.Reference;
+
+public interface ConceptDescriptionMixin {
+    @JacksonXmlProperty(namespace = AasXmlNamespaceContext.AAS_URI, localName = "isCaseOf")
+    @JsonDeserialize(using = ReferencesDeserializer.class)
+    public List<Reference> getIsCaseOfs();
 }

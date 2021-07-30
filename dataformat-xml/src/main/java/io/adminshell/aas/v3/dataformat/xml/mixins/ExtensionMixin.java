@@ -13,12 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.xml.deserialization;
+package io.adminshell.aas.v3.dataformat.xml.mixins;
 
-import io.adminshell.aas.v3.model.LangString;
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
-public class LangStringsDeserializer extends NoEntryWrapperListDeserializer<LangString> {
-    public LangStringsDeserializer() {
-        super("langString", new LangStringNodeDeserializer());
-    }
+@JsonPropertyOrder({"semanticId", "name", "valueType", "value", "refersTo"})
+public interface ExtensionMixin {
 }

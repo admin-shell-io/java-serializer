@@ -15,6 +15,8 @@
  */
 package io.adminshell.aas.v3.dataformat.json;
 
+import java.util.Map;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
@@ -29,7 +31,6 @@ import io.adminshell.aas.v3.dataformat.core.deserialization.EnumDeserializer;
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
-import java.util.Map;
 
 /**
  * Class for deserializing/parsing AAS JSON documents.
@@ -55,12 +56,12 @@ public class JsonDeserializer implements Deserializer {
                 .addModule(buildImplementationModule())
                 .addModule(buildCustomDeserializerModule())
                 .build();
-        ReflectionHelper.MIXINS.entrySet().forEach(x -> mapper.addMixIn(x.getKey(), x.getValue()));
+        ReflectionHelper.JSON_MIXINS.entrySet().forEach(x -> mapper.addMixIn(x.getKey(), x.getValue()));
     }
 
     protected SimpleModule buildCustomDeserializerModule() {
         SimpleModule module = new SimpleModule();
-        customDeserializers.forEach((k, v) -> module.addDeserializer(k, v));
+        customDeserializers.forEach(module::addDeserializer);
         return module;
     }
 

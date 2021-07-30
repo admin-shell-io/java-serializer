@@ -13,12 +13,19 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.xml.deserialization;
+package io.adminshell.aas.v3.dataformat.xml.mixins;
 
-import io.adminshell.aas.v3.model.LangString;
+import java.util.List;
 
-public class LangStringsDeserializer extends NoEntryWrapperListDeserializer<LangString> {
-    public LangStringsDeserializer() {
-        super("langString", new LangStringNodeDeserializer());
-    }
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+
+import io.adminshell.aas.v3.dataformat.xml.deserialization.DataElementsDeserializer;
+import io.adminshell.aas.v3.dataformat.xml.serialization.DataElementsSerializer;
+import io.adminshell.aas.v3.model.DataElement;
+
+public interface AnnotatedRelationshipElementMixin {
+    @JsonSerialize(using = DataElementsSerializer.class)
+    @JsonDeserialize(using = DataElementsDeserializer.class)
+    public List<DataElement> getAnnotations();
 }

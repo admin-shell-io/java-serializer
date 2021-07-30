@@ -48,13 +48,13 @@ public class JsonSerializer implements Serializer {
                 .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
                 .serializationInclusion(JsonInclude.Include.NON_NULL)
                 .addModule(buildEnumModule())
-                .addModule(buildCustomDeserializerModule())
+                .addModule(buildCustomSerializerModule())
                 .annotationIntrospector(new ReflectionAnnotationIntrospector())
                 .build();
-        ReflectionHelper.MIXINS.entrySet().forEach(x -> mapper.addMixIn(x.getKey(), x.getValue()));
+        ReflectionHelper.JSON_MIXINS.entrySet().forEach(x -> mapper.addMixIn(x.getKey(), x.getValue()));
     }
 
-    protected SimpleModule buildCustomDeserializerModule() {
+    protected SimpleModule buildCustomSerializerModule() {
         SimpleModule module = new SimpleModule();
         module.addSerializer(EmbeddedDataSpecification.class, new EmbeddedDataSpecificationSerializer());
         return module;

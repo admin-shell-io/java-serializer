@@ -13,12 +13,14 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.xml.deserialization;
+package io.adminshell.aas.v3.dataformat.xml.mixins;
 
-import io.adminshell.aas.v3.model.LangString;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-public class LangStringsDeserializer extends NoEntryWrapperListDeserializer<LangString> {
-    public LangStringsDeserializer() {
-        super("langString", new LangStringNodeDeserializer());
-    }
+import io.adminshell.aas.v3.dataformat.xml.serialization.SubmodelElementSerializer;
+import io.adminshell.aas.v3.model.SubmodelElement;
+
+public interface OperationVariableMixin {
+    @JsonSerialize(using = SubmodelElementSerializer.class)
+    public SubmodelElement getValue();
 }

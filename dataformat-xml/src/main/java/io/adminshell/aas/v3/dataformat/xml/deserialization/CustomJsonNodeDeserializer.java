@@ -15,10 +15,8 @@
  */
 package io.adminshell.aas.v3.dataformat.xml.deserialization;
 
-import io.adminshell.aas.v3.model.LangString;
+import com.fasterxml.jackson.databind.JsonNode;
 
-public class LangStringsDeserializer extends NoEntryWrapperListDeserializer<LangString> {
-    public LangStringsDeserializer() {
-        super("langString", new LangStringNodeDeserializer());
-    }
+public interface CustomJsonNodeDeserializer<T extends Object> {
+    public T readValue(JsonNode node);
 }

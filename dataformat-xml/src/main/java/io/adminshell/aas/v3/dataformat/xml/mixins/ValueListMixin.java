@@ -13,12 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.xml.deserialization;
+package io.adminshell.aas.v3.dataformat.xml.mixins;
 
-import io.adminshell.aas.v3.model.LangString;
+import java.util.List;
 
-public class LangStringsDeserializer extends NoEntryWrapperListDeserializer<LangString> {
-    public LangStringsDeserializer() {
-        super("langString", new LangStringNodeDeserializer());
-    }
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
+
+import io.adminshell.aas.v3.dataformat.xml.AasXmlNamespaceContext;
+import io.adminshell.aas.v3.model.ValueReferencePair;
+
+public interface ValueListMixin {
+    @JacksonXmlProperty(namespace = AasXmlNamespaceContext.IEC61360_URI, localName = "valueReferencePair")
+    public List<ValueReferencePair> getValueReferencePairTypes();
 }

@@ -13,12 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.xml.deserialization;
+package io.adminshell.aas.v3.dataformat.xml.mixins;
 
-import io.adminshell.aas.v3.model.LangString;
+import java.util.List;
 
-public class LangStringsDeserializer extends NoEntryWrapperListDeserializer<LangString> {
-    public LangStringsDeserializer() {
-        super("langString", new LangStringNodeDeserializer());
-    }
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import io.adminshell.aas.v3.model.Reference;
+
+public interface AdministrativeInformationMixin {
+    @JsonIgnore
+    public List<Reference> getDataSpecifications();
 }
