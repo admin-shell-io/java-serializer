@@ -5,7 +5,7 @@
       <Uri>http://opcfoundation.org/UA/I4AAS/V3/</Uri>
    </NamespaceUris>
    <Models>
-      <Model ModelUri="http://example.org/SerializerTest" Version="1.0.0" PublicationDate="2021-07-29T09:18:37.095581700">
+      <Model ModelUri="http://example.org/SerializerTest" Version="1.0.0" PublicationDate="2021-07-30T10:36:33.540407800">
          <RequiredModel ModelUri="http://opcfoundation.org/UA/" Version="1.04.7" PublicationDate="2020-07-15T00:00:00Z"/>
          <RequiredModel ModelUri="http://opcfoundation.org/UA/I4AAS/V3/" Version="1.0.0" PublicationDate="2021-06-04T00:00:00Z"/>
       </Model>
@@ -25,6 +25,7 @@
       <Alias Alias="PropertyType">i=68</Alias>
       <Alias Alias="IdType">i=256</Alias>
       <Alias Alias="NumericRange">i=291</Alias>
+      <Alias Alias="HasAddIn">i=17604</Alias>
       <Alias Alias="HasDictionaryEntry">i=17597</Alias>
       <Alias Alias="AASAssetAdministrationShellType">ns=2;i=1002</Alias>
       <Alias Alias="AASReferableType">ns=2;i=1003</Alias>
@@ -92,7 +93,7 @@
          <Reference ReferenceType="HasComponent">ns=1;i=153</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=2" BrowseName="1:Title">
+   <UAObject NodeId="ns=1;i=2" BrowseName="1:Title" ParentNodeId="ns=1;i=120">
       <DisplayName>Title</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1025</Reference>
@@ -262,7 +263,7 @@
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=2</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=17" BrowseName="1:DigitalFile">
+   <UAObject NodeId="ns=1;i=17" BrowseName="1:DigitalFile" ParentNodeId="ns=1;i=127">
       <DisplayName>DigitalFile</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1025</Reference>
@@ -432,7 +433,7 @@
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=17</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=32" BrowseName="1:MaxRotationSpeed">
+   <UAObject NodeId="ns=1;i=32" BrowseName="1:MaxRotationSpeed" ParentNodeId="ns=1;i=99">
       <DisplayName>MaxRotationSpeed</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1024</Reference>
@@ -659,7 +660,7 @@
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=32</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=52" BrowseName="1:RotationSpeed">
+   <UAObject NodeId="ns=1;i=52" BrowseName="1:RotationSpeed" ParentNodeId="ns=1;i=144">
       <DisplayName>RotationSpeed</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1025</Reference>
@@ -865,7 +866,7 @@
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=52</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=69" BrowseName="1:Document">
+   <UAObject NodeId="ns=1;i=69" BrowseName="1:Document" ParentNodeId="ns=1;i=115">
       <DisplayName>Document</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1025</Reference>
@@ -1026,7 +1027,7 @@
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=69</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=84" BrowseName="1:TechnicalData" ParentNodeId="ns=1;i=1">
+   <UAObject NodeId="ns=1;i=84" BrowseName="1:TechnicalData" ParentNodeId="ns=1;i=183">
       <DisplayName>Submodel:TechnicalData</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1006</Reference>
@@ -1039,6 +1040,7 @@
          <Reference ReferenceType="HasComponent">ns=1;i=106</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=107</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=1</Reference>
+         <Reference ReferenceType="HasAddIn" IsForward="false">ns=1;i=183</Reference>
       </References>
    </UAObject>
    <UAVariable NodeId="ns=1;i=85" BrowseName="2:Category" ParentNodeId="ns=1;i=84" DataType="String" AccessLevel="3">
@@ -1097,7 +1099,7 @@
          <ns0:Int32 xmlns:ns0="http://opcfoundation.org/UA/2008/02/Types.xsd">1</ns0:Int32>
       </Value>
    </UAVariable>
-   <UAObject NodeId="ns=1;i=91" BrowseName="1:0173-1#01-AFZ615#016">
+   <UAObject NodeId="ns=1;i=91" BrowseName="1:0173-1#01-AFZ615#016" ParentNodeId="ns=1;i=84">
       <DisplayName>0173-1#01-AFZ615#016</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1024</Reference>
@@ -1252,7 +1254,7 @@
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=84</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=108" BrowseName="1:Documentation" ParentNodeId="ns=1;i=1">
+   <UAObject NodeId="ns=1;i=108" BrowseName="1:Documentation" ParentNodeId="ns=1;i=187">
       <DisplayName>Submodel:Documentation</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1006</Reference>
@@ -1264,6 +1266,7 @@
          <Reference ReferenceType="HasComponent">ns=1;i=135</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=136</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=1</Reference>
+         <Reference ReferenceType="HasAddIn" IsForward="false">ns=1;i=187</Reference>
       </References>
    </UAObject>
    <UAVariable NodeId="ns=1;i=109" BrowseName="2:Category" ParentNodeId="ns=1;i=108" DataType="String" AccessLevel="3">
@@ -1531,7 +1534,7 @@
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=108</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=137" BrowseName="1:OperationalData" ParentNodeId="ns=1;i=1">
+   <UAObject NodeId="ns=1;i=137" BrowseName="1:OperationalData" ParentNodeId="ns=1;i=185">
       <DisplayName>Submodel:OperationalData</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1006</Reference>
@@ -1543,6 +1546,7 @@
          <Reference ReferenceType="HasComponent">ns=1;i=151</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=152</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=1</Reference>
+         <Reference ReferenceType="HasAddIn" IsForward="false">ns=1;i=185</Reference>
       </References>
    </UAObject>
    <UAVariable NodeId="ns=1;i=138" BrowseName="2:Category" ParentNodeId="ns=1;i=137" DataType="String" AccessLevel="3">
@@ -1691,8 +1695,8 @@
          <Reference ReferenceType="HasComponent">ns=1;i=155</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=158</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=159</Reference>
-         <Reference ReferenceType="HasComponent">ns=1;i=181</Reference>
-         <Reference ReferenceType="HasComponent">ns=1;i=188</Reference>
+         <Reference ReferenceType="HasComponent">ns=1;i=182</Reference>
+         <Reference ReferenceType="HasComponent">ns=1;i=189</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=1</Reference>
       </References>
    </UAObject>
@@ -1749,7 +1753,8 @@
          <Reference ReferenceType="HasProperty">ns=1;i=160</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=161</Reference>
          <Reference ReferenceType="HasComponent">ns=1;i=163</Reference>
-         <Reference ReferenceType="HasComponent">ns=1;i=170</Reference>
+         <Reference ReferenceType="HasComponent">ns=1;i=164</Reference>
+         <Reference ReferenceType="HasComponent">ns=1;i=171</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=153</Reference>
       </References>
    </UAObject>
@@ -1794,105 +1799,112 @@
          </uax:ListOfExtensionObject>
       </Value>
    </UAVariable>
-   <UAObject NodeId="ns=1;i=163" BrowseName="2:DefaultThumbnail" ParentNodeId="ns=1;i=159">
-      <DisplayName>DefaultThumbnail</DisplayName>
+   <UAObject NodeId="ns=1;i=163" BrowseName="2:BillOfMaterial" ParentNodeId="ns=1;i=159">
+      <DisplayName>BillOfMaterial</DisplayName>
       <References>
-         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1017</Reference>
-         <Reference ReferenceType="HasProperty">ns=1;i=164</Reference>
-         <Reference ReferenceType="HasProperty">ns=1;i=165</Reference>
-         <Reference ReferenceType="HasComponent">ns=1;i=166</Reference>
-         <Reference ReferenceType="HasComponent">ns=1;i=167</Reference>
-         <Reference ReferenceType="HasProperty">ns=1;i=168</Reference>
-         <Reference ReferenceType="HasProperty">ns=1;i=169</Reference>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=159</Reference>
       </References>
    </UAObject>
-   <UAVariable NodeId="ns=1;i=164" BrowseName="2:Category" ParentNodeId="ns=1;i=163" DataType="String" AccessLevel="3">
+   <UAObject NodeId="ns=1;i=164" BrowseName="2:DefaultThumbnail" ParentNodeId="ns=1;i=159">
+      <DisplayName>DefaultThumbnail</DisplayName>
+      <References>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1017</Reference>
+         <Reference ReferenceType="HasProperty">ns=1;i=165</Reference>
+         <Reference ReferenceType="HasProperty">ns=1;i=166</Reference>
+         <Reference ReferenceType="HasComponent">ns=1;i=167</Reference>
+         <Reference ReferenceType="HasComponent">ns=1;i=168</Reference>
+         <Reference ReferenceType="HasProperty">ns=1;i=169</Reference>
+         <Reference ReferenceType="HasProperty">ns=1;i=170</Reference>
+         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=159</Reference>
+      </References>
+   </UAObject>
+   <UAVariable NodeId="ns=1;i=165" BrowseName="2:Category" ParentNodeId="ns=1;i=164" DataType="String" AccessLevel="3">
       <DisplayName>Category</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=163</Reference>
+         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=164</Reference>
       </References>
       <Value>
          <ns0:String xmlns:ns0="http://opcfoundation.org/UA/2008/02/Types.xsd"></ns0:String>
       </Value>
    </UAVariable>
-   <UAVariable NodeId="ns=1;i=165" BrowseName="2:ModelingKind" ParentNodeId="ns=1;i=163" DataType="AASModelingKindDataType" AccessLevel="3">
+   <UAVariable NodeId="ns=1;i=166" BrowseName="2:ModelingKind" ParentNodeId="ns=1;i=164" DataType="AASModelingKindDataType" AccessLevel="3">
       <DisplayName>ModelingKind</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=163</Reference>
+         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=164</Reference>
       </References>
       <Value>
          <ns0:Int32 xmlns:ns0="http://opcfoundation.org/UA/2008/02/Types.xsd">1</ns0:Int32>
       </Value>
    </UAVariable>
-   <UAObject NodeId="ns=1;i=166" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=163">
+   <UAObject NodeId="ns=1;i=167" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=164">
       <DisplayName>DataSpecification</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
-         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=163</Reference>
+         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=164</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=167" BrowseName="2:Qualifier" ParentNodeId="ns=1;i=163">
+   <UAObject NodeId="ns=1;i=168" BrowseName="2:Qualifier" ParentNodeId="ns=1;i=164">
       <DisplayName>Qualifier</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1037</Reference>
-         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=163</Reference>
+         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=164</Reference>
       </References>
    </UAObject>
-   <UAVariable NodeId="ns=1;i=168" BrowseName="2:MimeType" ParentNodeId="ns=1;i=163" DataType="AASMimeDataType" AccessLevel="3">
+   <UAVariable NodeId="ns=1;i=169" BrowseName="2:MimeType" ParentNodeId="ns=1;i=164" DataType="AASMimeDataType" AccessLevel="3">
       <DisplayName>MimeType</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=163</Reference>
+         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=164</Reference>
       </References>
       <Value>
          <ns0:String xmlns:ns0="http://opcfoundation.org/UA/2008/02/Types.xsd">image/png</ns0:String>
       </Value>
    </UAVariable>
-   <UAVariable NodeId="ns=1;i=169" BrowseName="2:Value" ParentNodeId="ns=1;i=163" DataType="AASPathDataType" AccessLevel="3">
+   <UAVariable NodeId="ns=1;i=170" BrowseName="2:Value" ParentNodeId="ns=1;i=164" DataType="AASPathDataType" AccessLevel="3">
       <DisplayName>Value</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=163</Reference>
+         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=164</Reference>
       </References>
       <Value>
          <ns0:String xmlns:ns0="http://opcfoundation.org/UA/2008/02/Types.xsd">https://github.com/admin-shell/io/blob/master/verwaltungsschale-detail-part1.png</ns0:String>
       </Value>
    </UAVariable>
-   <UAObject NodeId="ns=1;i=170" BrowseName="2:SpecificAssetId" ParentNodeId="ns=1;i=159">
+   <UAObject NodeId="ns=1;i=171" BrowseName="2:SpecificAssetId" ParentNodeId="ns=1;i=159">
       <DisplayName>SpecificAssetId</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1039</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=159</Reference>
-         <Reference ReferenceType="HasComponent">ns=1;i=171</Reference>
-         <Reference ReferenceType="HasComponent">ns=1;i=176</Reference>
+         <Reference ReferenceType="HasComponent">ns=1;i=172</Reference>
+         <Reference ReferenceType="HasComponent">ns=1;i=177</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=171" BrowseName="1:EquipmentID" ParentNodeId="ns=1;i=170">
+   <UAObject NodeId="ns=1;i=172" BrowseName="1:EquipmentID" ParentNodeId="ns=1;i=171">
       <DisplayName>EquipmentID</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1035</Reference>
-         <Reference ReferenceType="HasComponent">ns=1;i=172</Reference>
-         <Reference ReferenceType="HasProperty">ns=1;i=174</Reference>
+         <Reference ReferenceType="HasComponent">ns=1;i=173</Reference>
          <Reference ReferenceType="HasProperty">ns=1;i=175</Reference>
-         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=170</Reference>
-      </References>
-   </UAObject>
-   <UAObject NodeId="ns=1;i=172" BrowseName="2:ExternalSubjectId" ParentNodeId="ns=1;i=171">
-      <DisplayName>ExternalSubjectId</DisplayName>
-      <References>
-         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1004</Reference>
-         <Reference ReferenceType="HasProperty">ns=1;i=173</Reference>
+         <Reference ReferenceType="HasProperty">ns=1;i=176</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=171</Reference>
       </References>
    </UAObject>
-   <UAVariable NodeId="ns=1;i=173" BrowseName="2:Keys" ParentNodeId="ns=1;i=172" DataType="AASKeyDataType" ValueRank="1" ArrayDimensions="0" AccessLevel="3">
+   <UAObject NodeId="ns=1;i=173" BrowseName="2:ExternalSubjectId" ParentNodeId="ns=1;i=172">
+      <DisplayName>ExternalSubjectId</DisplayName>
+      <References>
+         <Reference ReferenceType="HasTypeDefinition">ns=2;i=1004</Reference>
+         <Reference ReferenceType="HasProperty">ns=1;i=174</Reference>
+         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=172</Reference>
+      </References>
+   </UAObject>
+   <UAVariable NodeId="ns=1;i=174" BrowseName="2:Keys" ParentNodeId="ns=1;i=173" DataType="AASKeyDataType" ValueRank="1" ArrayDimensions="0" AccessLevel="3">
       <DisplayName>Keys</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=172</Reference>
+         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=173</Reference>
       </References>
       <Value>
          <uax:ListOfExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
@@ -1911,49 +1923,49 @@
          </uax:ListOfExtensionObject>
       </Value>
    </UAVariable>
-   <UAVariable NodeId="ns=1;i=174" BrowseName="2:Key" ParentNodeId="ns=1;i=171" DataType="String" AccessLevel="3">
+   <UAVariable NodeId="ns=1;i=175" BrowseName="2:Key" ParentNodeId="ns=1;i=172" DataType="String" AccessLevel="3">
       <DisplayName>Key</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=171</Reference>
+         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=172</Reference>
       </References>
       <Value>
          <ns0:String xmlns:ns0="http://opcfoundation.org/UA/2008/02/Types.xsd">EquipmentID</ns0:String>
       </Value>
    </UAVariable>
-   <UAVariable NodeId="ns=1;i=175" BrowseName="2:Value" ParentNodeId="ns=1;i=171" DataType="String" AccessLevel="3">
+   <UAVariable NodeId="ns=1;i=176" BrowseName="2:Value" ParentNodeId="ns=1;i=172" DataType="String" AccessLevel="3">
       <DisplayName>Value</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=171</Reference>
+         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=172</Reference>
       </References>
       <Value>
          <ns0:String xmlns:ns0="http://opcfoundation.org/UA/2008/02/Types.xsd">538fd1b3-f99f-4a52-9c75-72e9fa921270</ns0:String>
       </Value>
    </UAVariable>
-   <UAObject NodeId="ns=1;i=176" BrowseName="1:DeviceID" ParentNodeId="ns=1;i=170">
+   <UAObject NodeId="ns=1;i=177" BrowseName="1:DeviceID" ParentNodeId="ns=1;i=171">
       <DisplayName>DeviceID</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1035</Reference>
-         <Reference ReferenceType="HasComponent">ns=1;i=177</Reference>
-         <Reference ReferenceType="HasProperty">ns=1;i=179</Reference>
+         <Reference ReferenceType="HasComponent">ns=1;i=178</Reference>
          <Reference ReferenceType="HasProperty">ns=1;i=180</Reference>
-         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=170</Reference>
+         <Reference ReferenceType="HasProperty">ns=1;i=181</Reference>
+         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=171</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=177" BrowseName="2:ExternalSubjectId" ParentNodeId="ns=1;i=176">
+   <UAObject NodeId="ns=1;i=178" BrowseName="2:ExternalSubjectId" ParentNodeId="ns=1;i=177">
       <DisplayName>ExternalSubjectId</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1004</Reference>
-         <Reference ReferenceType="HasProperty">ns=1;i=178</Reference>
-         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=176</Reference>
+         <Reference ReferenceType="HasProperty">ns=1;i=179</Reference>
+         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=177</Reference>
       </References>
    </UAObject>
-   <UAVariable NodeId="ns=1;i=178" BrowseName="2:Keys" ParentNodeId="ns=1;i=177" DataType="AASKeyDataType" ValueRank="1" ArrayDimensions="0" AccessLevel="3">
+   <UAVariable NodeId="ns=1;i=179" BrowseName="2:Keys" ParentNodeId="ns=1;i=178" DataType="AASKeyDataType" ValueRank="1" ArrayDimensions="0" AccessLevel="3">
       <DisplayName>Keys</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=177</Reference>
+         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=178</Reference>
       </References>
       <Value>
          <uax:ListOfExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
@@ -1972,49 +1984,50 @@
          </uax:ListOfExtensionObject>
       </Value>
    </UAVariable>
-   <UAVariable NodeId="ns=1;i=179" BrowseName="2:Key" ParentNodeId="ns=1;i=176" DataType="String" AccessLevel="3">
+   <UAVariable NodeId="ns=1;i=180" BrowseName="2:Key" ParentNodeId="ns=1;i=177" DataType="String" AccessLevel="3">
       <DisplayName>Key</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=176</Reference>
+         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=177</Reference>
       </References>
       <Value>
          <ns0:String xmlns:ns0="http://opcfoundation.org/UA/2008/02/Types.xsd">DeviceID</ns0:String>
       </Value>
    </UAVariable>
-   <UAVariable NodeId="ns=1;i=180" BrowseName="2:Value" ParentNodeId="ns=1;i=176" DataType="String" AccessLevel="3">
+   <UAVariable NodeId="ns=1;i=181" BrowseName="2:Value" ParentNodeId="ns=1;i=177" DataType="String" AccessLevel="3">
       <DisplayName>Value</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=176</Reference>
+         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=177</Reference>
       </References>
       <Value>
          <ns0:String xmlns:ns0="http://opcfoundation.org/UA/2008/02/Types.xsd">QjYgPggjwkiHk4RrQiYSLg==</ns0:String>
       </Value>
    </UAVariable>
-   <UAObject NodeId="ns=1;i=181" BrowseName="2:Submodel" ParentNodeId="ns=1;i=153">
+   <UAObject NodeId="ns=1;i=182" BrowseName="2:Submodel" ParentNodeId="ns=1;i=153">
       <DisplayName>Submodel</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=153</Reference>
-         <Reference ReferenceType="HasComponent">ns=1;i=182</Reference>
-         <Reference ReferenceType="HasComponent">ns=1;i=184</Reference>
-         <Reference ReferenceType="HasComponent">ns=1;i=186</Reference>
+         <Reference ReferenceType="HasComponent">ns=1;i=183</Reference>
+         <Reference ReferenceType="HasComponent">ns=1;i=185</Reference>
+         <Reference ReferenceType="HasComponent">ns=1;i=187</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=182" BrowseName="2:Submodel:http://i40.customer.com/type/1/1/7A7104BDAB57E184" ParentNodeId="ns=1;i=181">
+   <UAObject NodeId="ns=1;i=183" BrowseName="2:Submodel:http://i40.customer.com/type/1/1/7A7104BDAB57E184" ParentNodeId="ns=1;i=182">
       <DisplayName>Submodel:http://i40.customer.com/type/1/1/7A7104BDAB57E184</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1004</Reference>
-         <Reference ReferenceType="HasProperty">ns=1;i=183</Reference>
-         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=181</Reference>
+         <Reference ReferenceType="HasAddIn">ns=1;i=84</Reference>
+         <Reference ReferenceType="HasProperty">ns=1;i=184</Reference>
+         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=182</Reference>
       </References>
    </UAObject>
-   <UAVariable NodeId="ns=1;i=183" BrowseName="2:Keys" ParentNodeId="ns=1;i=182" DataType="AASKeyDataType" ValueRank="1" ArrayDimensions="0" AccessLevel="3">
+   <UAVariable NodeId="ns=1;i=184" BrowseName="2:Keys" ParentNodeId="ns=1;i=183" DataType="AASKeyDataType" ValueRank="1" ArrayDimensions="0" AccessLevel="3">
       <DisplayName>Keys</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=182</Reference>
+         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=183</Reference>
       </References>
       <Value>
          <uax:ListOfExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
@@ -2033,19 +2046,20 @@
          </uax:ListOfExtensionObject>
       </Value>
    </UAVariable>
-   <UAObject NodeId="ns=1;i=184" BrowseName="2:Submodel:http://i40.customer.com/instance/1/1/AC69B1CB44F07935" ParentNodeId="ns=1;i=181">
+   <UAObject NodeId="ns=1;i=185" BrowseName="2:Submodel:http://i40.customer.com/instance/1/1/AC69B1CB44F07935" ParentNodeId="ns=1;i=182">
       <DisplayName>Submodel:http://i40.customer.com/instance/1/1/AC69B1CB44F07935</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1004</Reference>
-         <Reference ReferenceType="HasProperty">ns=1;i=185</Reference>
-         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=181</Reference>
+         <Reference ReferenceType="HasAddIn">ns=1;i=137</Reference>
+         <Reference ReferenceType="HasProperty">ns=1;i=186</Reference>
+         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=182</Reference>
       </References>
    </UAObject>
-   <UAVariable NodeId="ns=1;i=185" BrowseName="2:Keys" ParentNodeId="ns=1;i=184" DataType="AASKeyDataType" ValueRank="1" ArrayDimensions="0" AccessLevel="3">
+   <UAVariable NodeId="ns=1;i=186" BrowseName="2:Keys" ParentNodeId="ns=1;i=185" DataType="AASKeyDataType" ValueRank="1" ArrayDimensions="0" AccessLevel="3">
       <DisplayName>Keys</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=184</Reference>
+         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=185</Reference>
       </References>
       <Value>
          <uax:ListOfExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
@@ -2064,19 +2078,20 @@
          </uax:ListOfExtensionObject>
       </Value>
    </UAVariable>
-   <UAObject NodeId="ns=1;i=186" BrowseName="2:Submodel:http://i40.customer.com/type/1/1/1A7B62B529F19152" ParentNodeId="ns=1;i=181">
+   <UAObject NodeId="ns=1;i=187" BrowseName="2:Submodel:http://i40.customer.com/type/1/1/1A7B62B529F19152" ParentNodeId="ns=1;i=182">
       <DisplayName>Submodel:http://i40.customer.com/type/1/1/1A7B62B529F19152</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1004</Reference>
-         <Reference ReferenceType="HasProperty">ns=1;i=187</Reference>
-         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=181</Reference>
+         <Reference ReferenceType="HasAddIn">ns=1;i=108</Reference>
+         <Reference ReferenceType="HasProperty">ns=1;i=188</Reference>
+         <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=182</Reference>
       </References>
    </UAObject>
-   <UAVariable NodeId="ns=1;i=187" BrowseName="2:Keys" ParentNodeId="ns=1;i=186" DataType="AASKeyDataType" ValueRank="1" ArrayDimensions="0" AccessLevel="3">
+   <UAVariable NodeId="ns=1;i=188" BrowseName="2:Keys" ParentNodeId="ns=1;i=187" DataType="AASKeyDataType" ValueRank="1" ArrayDimensions="0" AccessLevel="3">
       <DisplayName>Keys</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=186</Reference>
+         <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=187</Reference>
       </References>
       <Value>
          <uax:ListOfExtensionObject xmlns:uax="http://opcfoundation.org/UA/2008/02/Types.xsd">
@@ -2095,7 +2110,7 @@
          </uax:ListOfExtensionObject>
       </Value>
    </UAVariable>
-   <UAObject NodeId="ns=1;i=188" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=153">
+   <UAObject NodeId="ns=1;i=189" BrowseName="2:DataSpecification" ParentNodeId="ns=1;i=153">
       <DisplayName>DataSpecification</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1036</Reference>
@@ -2103,3 +2118,4 @@
       </References>
    </UAObject>
 </UANodeSet>
+
