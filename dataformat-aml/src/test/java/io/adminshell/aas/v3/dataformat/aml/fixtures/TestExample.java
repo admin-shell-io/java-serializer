@@ -25,7 +25,7 @@ import java.util.Base64;
 
 public class TestExample {
 
-    public static final java.io.File FILE = new java.io.File("src/test/resources/test_demo_full_example.json");
+    public static final java.io.File FILE = new java.io.File("src/test/resources/amlfile/example_test.aml");
 
     private static KeyElements resolveKeyElement(Class<?> type) {
         String potentialEnumName = EnumDeserializer.translate(ReflectionHelper.getAasInterface(type).getSimpleName());

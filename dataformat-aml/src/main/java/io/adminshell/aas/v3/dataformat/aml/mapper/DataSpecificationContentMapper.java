@@ -15,9 +15,9 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
-import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import io.adminshell.aas.v3.model.DataSpecificationContent;
 
 public class DataSpecificationContentMapper extends BaseMapper<DataSpecificationContent> {
@@ -26,21 +26,21 @@ public class DataSpecificationContentMapper extends BaseMapper<DataSpecification
     }
 
     @Override
-    public void map(DataSpecificationContent content, MappingContext context) throws MappingException {
-        toInternalElement(content, context);
+    public void map(DataSpecificationContent content, AmlGenerator generator, MappingContext context) throws MappingException {
+        toInternalElement(content, generator, context);
     }
 
     @Override
-    protected void toInternalElement(DataSpecificationContent value, MappingContext context) throws MappingException {
+    protected void toInternalElement(DataSpecificationContent value, AmlGenerator generator, MappingContext context) throws MappingException {
         InternalElementType.Builder builder = InternalElementType.builder();
-        builder = builder.withID(context.getIdentityProvider().getId(value))
+        builder = builder.withID(context.generateId())
                 .withName(context.getMappingProvider().getInternalElementNamingStrategy().getName(
                         value.getClass(),
                         value,
                         null))
                 .withRoleRequirements(roleRequirement(DataSpecificationContent.class.getSimpleName()));
-        mapProperties(value, context.with(builder));
-        context.with(builder).appendReferenceTargetInterfaceIfRequired(value);
-        context.addInternalElement(builder.build());
+        mapProperties(value, generator.with(builder), context);
+        generator.with(builder).appendReferenceTargetInterfaceIfRequired(value, context);
+        generator.addInternalElement(builder.build());
     }
 }

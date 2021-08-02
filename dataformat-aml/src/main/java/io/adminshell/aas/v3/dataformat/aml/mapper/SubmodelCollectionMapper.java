@@ -15,20 +15,19 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
-import io.adminshell.aas.v3.model.ModelingKind;
 import io.adminshell.aas.v3.model.Submodel;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 public class SubmodelCollectionMapper extends BaseMapper<Collection<Submodel>> {
 
     @Override
-    public void map(Collection<Submodel> value, MappingContext context) throws MappingException {
+    public void map(Collection<Submodel> value, AmlGenerator generator, MappingContext context) throws MappingException {
         if (value == null || context == null) {
             return;
         }
-        super.map(value, context);
+        super.map(value, generator, context);
 //        super.map(value.stream()
 //                .filter(x -> x.getKind() == ModelingKind.INSTANCE)
 //                .collect(Collectors.toList()),

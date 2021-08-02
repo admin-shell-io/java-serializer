@@ -16,6 +16,7 @@
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
 import com.google.inject.util.Types;
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.IdentityProvider;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.MappingProvider;
@@ -39,65 +40,46 @@ import java.util.stream.Collectors;
 public class AssetAdministrationShellEnvironmentMapper extends BaseMapper<AssetAdministrationShellEnvironment> {
 
     @Override
-    public void map(AssetAdministrationShellEnvironment value, MappingContext context) throws MappingException {
+    public void map(AssetAdministrationShellEnvironment value, AmlGenerator generator, MappingContext context) throws MappingException {
         List<AssetAdministrationShell> assetAdministrationShells = value.getAssetAdministrationShells().stream()
                 .filter(x -> x.getSubmodels().stream()
                 .anyMatch(sm -> AASUtils.resolveSubmodelReference(sm, value).get().getKind() == ModelingKind.INSTANCE))
                 .collect(Collectors.toList());
-        toHierarchy(AssetAdministrationShell.class, assetAdministrationShells, context);
-        toHierarchy(ConceptDescription.class, value.getConceptDescriptions(), context);
-        mapTemplates(value, context);
+        toHierarchy(AssetAdministrationShell.class, assetAdministrationShells, generator, context);
+        toHierarchy(ConceptDescription.class, value.getConceptDescriptions(), generator, context);
+        mapTemplates(value, generator, context);
     }
 
-    protected <T> void toHierarchy(Class<T> type, Collection<T> value, MappingContext context) throws MappingException {
+    protected <T> void toHierarchy(Class<T> type, Collection<T> value, AmlGenerator generator, MappingContext context) throws MappingException {
         CAEXFile.InstanceHierarchy.Builder builder = CAEXFile.InstanceHierarchy.builder()
                 .withName(type.getSimpleName() + "InstanceHierarchy");
-        context.with(builder).map(Types.newParameterizedType(Collection.class, type), value);
-        context.getFileBuilder().addInstanceHierarchy(builder.build());
+        context.map(Types.newParameterizedType(Collection.class, type), value, generator.with(builder));
+        generator.addInstanceHierarchy(builder.build());
     }
 
-    protected void mapTemplates(AssetAdministrationShellEnvironment env, MappingContext context) throws MappingException {
-        context.resetIdentityProvider();
+    protected void mapTemplates(AssetAdministrationShellEnvironment env, AmlGenerator generator, MappingContext context) throws MappingException {
         boolean empty = true;
         SystemUnitClassLib.Builder builder = SystemUnitClassLib.builder()
                 .withName("AssetAdministrationShellSystemUnitClasses");
         // generate SystemUnitClass for each AAS with at least 1 Submodel with kind == TEMPLATE
         // generate SystemUnitClass for each Submodel with king == TEMPLATE
+        MappingContext subContext = context.withoutIdCache().withoutProperty();
         for (AssetAdministrationShell aas : env.getAssetAdministrationShells()) {
             List<Submodel> submodelTemplates = AASUtils.getSubmodelTemplates(aas, env);
             if (!submodelTemplates.isEmpty()) {
                 empty = false;
                 InternalElementType.Builder temp = InternalElementType.builder();
-                MappingContext subContext = new MappingContext(
-                        context.getMappingProvider(),
-                        new IdentityProvider(),
-                        env,
-                        context.getReferecedReferableIDs(),
-                        null,
-                        temp,
-                        null,
-                        null);
-                subContext.map(aas);
+                subContext.map(aas, generator.with(temp));
                 builder.addSystemUnitClass(internalElementToSystemUnitClass(temp.build().getInternalElement().get(0)));
             }
             for (Submodel submodel : submodelTemplates) {
                 InternalElementType.Builder temp = InternalElementType.builder();
-                MappingContext subContext = new MappingContext(
-                        context.getMappingProvider(),
-                        new IdentityProvider(),
-                        env,
-                        context.getReferecedReferableIDs(),
-                        null,
-                        temp,
-                        null,
-                        null);
-                subContext.map(submodel);
+                subContext.map(submodel, generator.with(temp));
                 builder.addSystemUnitClass(internalElementToSystemUnitClass(temp.build().getInternalElement().get(0)));
             }
         }
         if (!empty) {
-            context.addSystemUnitClassLib(builder.build());
-//            context.getFileBuilder().addSystemUnitClassLib(builder.build());
+            generator.addSystemUnitClassLib(builder.build());
         }
     }
 

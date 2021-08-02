@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
 import io.adminshell.aas.v3.model.Operation;
@@ -25,10 +26,10 @@ public class OperationMapper implements Mapper<Operation> {
     }
 
     @Override
-    public void map(Operation operation, MappingContext context) {
+    public void map(Operation operation, AmlGenerator generator, MappingContext context) {
         InternalElementType.Builder builder = InternalElementType.builder()
                 .withName(context.getMappingProvider().getInternalElementNamingStrategy().getName(Operation.class, operation, null));
-        context.with(builder).appendReferenceTargetInterfaceIfRequired(operation);
-        context.addInternalElement(builder.build());
+        generator.with(builder).appendReferenceTargetInterfaceIfRequired(operation, context);
+        generator.addInternalElement(builder.build());
     }
 }

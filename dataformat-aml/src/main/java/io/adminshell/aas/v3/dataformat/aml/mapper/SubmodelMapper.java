@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
@@ -28,9 +29,9 @@ public class SubmodelMapper extends BaseMapper<Submodel> {
     }
 
     @Override
-    protected void toInternalElement(Submodel value, MappingContext context) throws MappingException {
+    protected void toInternalElement(Submodel value, AmlGenerator generator, MappingContext context) throws MappingException {
         InternalElementType.Builder builder = InternalElementType.builder();
-        builder = builder.withID(context.getIdentityProvider().getCachedId(value))
+        builder = builder.withID(context.getCachedId(value))
                 .withName(context.getMappingProvider().getInternalElementNamingStrategy().getName(
                         value.getClass(),
                         value,
@@ -42,8 +43,8 @@ public class SubmodelMapper extends BaseMapper<Submodel> {
                     value,
                     null));
         }
-        mapProperties(value, context.with(builder));
-        context.with(builder).appendReferenceTargetInterfaceIfRequired(value);
-        context.addInternalElement(builder.build());
+        mapProperties(value, generator.with(builder), context);
+        generator.with(builder).appendReferenceTargetInterfaceIfRequired(value, context);
+        generator.addInternalElement(builder.build());
     }
 }

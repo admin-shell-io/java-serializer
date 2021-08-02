@@ -15,9 +15,9 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
-import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import io.adminshell.aas.v3.model.DataSpecificationContent;
 import io.adminshell.aas.v3.model.DataSpecificationIEC61360;
 import java.beans.PropertyDescriptor;
@@ -25,24 +25,25 @@ import java.beans.PropertyDescriptor;
 public class DataSpecificationIEC61360Mapper extends BaseMapper<DataSpecificationIEC61360> {
 
     @Override
-    public void map(DataSpecificationIEC61360 content, MappingContext context) throws MappingException {
-        toInternalElement(content, context);
+    public void map(DataSpecificationIEC61360 content, AmlGenerator generator, MappingContext context) throws MappingException {
+        toInternalElement(content, generator, context);
     }
 
     @Override
-    protected void toInternalElement(DataSpecificationIEC61360 value, MappingContext context) throws MappingException {
+    protected void toInternalElement(DataSpecificationIEC61360 value, AmlGenerator generator, MappingContext context) throws MappingException {
         InternalElementType.Builder builder = InternalElementType.builder();
-        builder = builder.withID(context.getIdentityProvider().getId(value))
+        builder = builder.withID(context.generateId())
                 .withName(context.getMappingProvider().getInternalElementNamingStrategy().getName(
                         value.getClass(),
                         value,
                         null))
                 .withRoleRequirements(roleRequirement(DataSpecificationContent.class.getSimpleName()));
-        mapProperties(value, context.with(builder));
-        context.with(builder).appendReferenceTargetInterfaceIfRequired(value);
-        context.addInternalElement(builder.build());
+        mapProperties(value, generator.with(builder), context);
+        generator.with(builder).appendReferenceTargetInterfaceIfRequired(value, context);
+        generator.addInternalElement(builder.build());
     }
 
+    @Override
     protected Object getPropertyValue(DataSpecificationIEC61360 value, PropertyDescriptor property, MappingContext context) throws MappingException {
         if (property.getName().equals("levelTypes") || property.getName().equals("valueList")) {
             return null;

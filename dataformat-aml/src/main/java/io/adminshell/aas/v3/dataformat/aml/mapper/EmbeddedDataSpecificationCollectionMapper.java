@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
@@ -28,7 +29,7 @@ import java.util.List;
 public class EmbeddedDataSpecificationCollectionMapper extends BaseMapper<Collection<EmbeddedDataSpecification>> {
 
     @Override
-    public void map(Collection<EmbeddedDataSpecification> value, MappingContext context) throws MappingException {
+    public void map(Collection<EmbeddedDataSpecification> value, AmlGenerator generator, MappingContext context) throws MappingException {
         if (value == null || context == null || value.isEmpty()) {
             return;
         }
@@ -48,27 +49,19 @@ public class EmbeddedDataSpecificationCollectionMapper extends BaseMapper<Collec
                 // idea: get current attribute path via context?
                 // for now do not care about correct attribute path
                 InternalElementType.Builder temp = InternalElementType.builder();
-                MappingContext subContext = new MappingContext(
-                        context.getMappingProvider(),
-                        context.getIdentityProvider(),
-                        context.getEnvironment(),
-                        context.getReferecedReferableIDs(),
-                        null,
-                        temp,
-                        null,
-                        null);
-                subContext.map(element.getDataSpecificationContent());
+                AmlGenerator subGenerator = generator.with(temp);                
+                context.map(element.getDataSpecificationContent(), subGenerator);
                 InternalElementType.Builder builder = InternalElementType.copyOf(temp.build().getInternalElement().get(0))
                         .withName("EmbeddedDataSpecification" + (countInternalElement > 1 ? "_" + (internalElements.size() + 1) : ""))
-                        .withID(context.getIdentityProvider().getId(element))
+                        .withID(context.generateId())
                         .withRefBaseSystemUnitPath("AssetAdministrationShellDataSpecificationTemplates/"
                                 + getDataSpecificationContentType(element.getDataSpecificationContent().getClass()) + "Template/"
                                 + getDataSpecificationContentType(element.getDataSpecificationContent().getClass()));
                 internalElements.add(builder.build());
             }
         }
-        attributes.forEach(x -> context.addAttribute(x));
-        internalElements.forEach(x -> context.addInternalElement(x));
+        attributes.forEach(x -> generator.addAttribute(x));
+        internalElements.forEach(x -> generator.addInternalElement(x));
     }
 
     private String getDataSpecificationContentType(Class<?> type) {

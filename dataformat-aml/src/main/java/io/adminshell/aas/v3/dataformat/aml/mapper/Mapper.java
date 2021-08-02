@@ -15,9 +15,10 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 
 public interface Mapper<T> {
 
-    public void map(T value, MappingContext context) throws MappingException;
+    public void map(T value, AmlGenerator generator, MappingContext context) throws MappingException;
 }

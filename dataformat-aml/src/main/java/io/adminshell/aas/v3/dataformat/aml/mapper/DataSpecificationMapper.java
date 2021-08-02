@@ -15,13 +15,9 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
-import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
-import io.adminshell.aas.v3.dataformat.aml.model.caex.RoleClassType;
-import io.adminshell.aas.v3.dataformat.aml.model.caex.SystemUnitClassType.InternalLink;
-import io.adminshell.aas.v3.dataformat.aml.util.AASUtils;
-import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import io.adminshell.aas.v3.model.DataSpecificationContent;
 import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
 
@@ -31,13 +27,13 @@ public class DataSpecificationMapper extends BaseMapper<EmbeddedDataSpecificatio
     }
 
     @Override
-    public void map(EmbeddedDataSpecification value, MappingContext context) throws MappingException {
+    public void map(EmbeddedDataSpecification value, AmlGenerator generator, MappingContext context) throws MappingException {
         if (value.getDataSpecificationContent() != null) {
             //embedded
             DataSpecificationContent content = value.getDataSpecificationContent();
             String refSystemUnitPath = "AssetAdministrationShellDataSpecificationTemplates/" + content.getClass().getSimpleName() + "Template/" + content.getClass().getSimpleName();
             InternalElementType.Builder builder = InternalElementType.builder()
-                    .withID(context.getIdentityProvider().getId(value))
+                    .withID(context.generateId())
                     .withRefBaseSystemUnitPath(refSystemUnitPath)
                     .withName("EmbeddedDataSpecification");
             // serialize properties, but with different attribute path ("IEC:DataSpecificationIEC63360/[propertyName])

@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.model.OperationVariable;
 
@@ -24,10 +25,10 @@ public class OperationVariableMapper extends BaseMapper<OperationVariable> {
     }
 
     @Override
-    public void map(OperationVariable operationVariable, MappingContext context) throws MappingException {
+    public void map(OperationVariable operationVariable, AmlGenerator generator, MappingContext context) throws MappingException {
 //        toInternalElement(operationVariable, context);
         if (operationVariable != null && operationVariable.getValue() != null) {
-            context.withoutProperty().map(operationVariable.getValue());
+            context.withoutProperty().map(operationVariable.getValue(), generator);
         }
     }
 }

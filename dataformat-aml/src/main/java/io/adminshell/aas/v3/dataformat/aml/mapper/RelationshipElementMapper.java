@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
@@ -33,27 +34,28 @@ public class RelationshipElementMapper extends BaseMapper<RelationshipElement> {
     }
 
     @Override
-    public void map(RelationshipElement element, MappingContext context) throws MappingException {
+    public void map(RelationshipElement element, AmlGenerator generator, MappingContext context) throws MappingException {
         if (element == null) {
             return;
         }
         // regular mapping        
         InternalElementType.Builder builder = InternalElementType.builder()
-                .withID(context.getIdentityProvider().getCachedId(element))
+                .withID(context.getCachedId(element))
                 .withName(context.getMappingProvider().getInternalElementNamingStrategy().getName(
                         element.getClass(),
                         element,
                         null))
                 .withRoleRequirements(roleRequirement(ReflectionHelper.getModelType(element.getClass())));
-        mapProperties(element, context.with(builder), "first", "second");
+        AmlGenerator subGenerator = generator.with(builder);
+        mapProperties(element, subGenerator, context, "first", "second");
         // add special mapping for first, second
-        mapProperty(element, element.getFirst(), "first", context.with(builder));
-        mapProperty(element, element.getSecond(), "second", context.with(builder));
-        context.with(builder).appendReferenceTargetInterfaceIfRequired(element);
-        context.addInternalElement(builder.build());
+        mapProperty(element, element.getFirst(), "first", subGenerator, context);
+        mapProperty(element, element.getSecond(), "second", subGenerator, context);
+        generator.with(builder).appendReferenceTargetInterfaceIfRequired(element, context);
+        generator.addInternalElement(builder.build());
     }
 
-    private void mapProperty(RelationshipElement element, Reference reference, String name, MappingContext context) {
+    private void mapProperty(RelationshipElement element, Reference reference, String name, AmlGenerator generator, MappingContext context) {
         RoleClassType.ExternalInterface.Builder builder = RoleClassType.ExternalInterface.builder()
                 .withName(name)
                 .withRefBaseClassPath("AssetAdministrationShellInterfaceClassLib/ReferableReference");
@@ -63,13 +65,12 @@ public class RelationshipElementMapper extends BaseMapper<RelationshipElement> {
             // check if it can also be added on higher levels as this would make things easier
             // !!! neither CAEXFile nor InstanceHierarchy allow definition of internalLinks which 
             // !!! contradicts CAEX meta model as depicted on slide 13 https://www.plt.rwth-aachen.de/global/show_document.asp?id=aaaaaaaaaatmalk
-            context.getInternalElementBuilder()
-                    .addInternalLink(InternalLink.builder()
-                            .withName(name)
-                            .withID(context.getIdentityProvider().generateId())
-                            .withRefPartnerSideA(context.getIdentityProvider().getCachedId(element) + ":name")
-                            .withRefPartnerSideB(context.getInternalLinkTargetId(resolvedReference) + ":externalReferenceTarget")
-                            .build());
+            generator.addInternalLink(InternalLink.builder()
+                    .withName(name)
+                    .withID(context.generateId())
+                    .withRefPartnerSideA(context.getCachedId(element) + ":name")
+                    .withRefPartnerSideB(context.getInternalLinkTargetId(resolvedReference) + ":externalReferenceTarget")
+                    .build());
         } else {
             builder = builder.addAttribute(AttributeType.builder()
                     .withName("value")
@@ -77,6 +78,6 @@ public class RelationshipElementMapper extends BaseMapper<RelationshipElement> {
                     .withValue(ReferenceConverterUtil.convert(reference))
                     .build());
         }
-        context.getInternalElementBuilder().addExternalInterface(builder.build());
+        generator.addExternalInterface(builder.build());
     }
 }

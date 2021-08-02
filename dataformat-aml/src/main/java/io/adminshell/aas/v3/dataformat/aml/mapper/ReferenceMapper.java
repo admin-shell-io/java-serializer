@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.serialize.mapper.util.ReferenceConverterUtil;
 import io.adminshell.aas.v3.dataformat.aml.util.AASUtils;
@@ -26,17 +27,17 @@ import java.util.Optional;
 public class ReferenceMapper extends ToAttributeMapper<Reference> {
 
     @Override
-    public void map(Reference reference, MappingContext context) throws MappingException {
+    public void map(Reference reference, AmlGenerator generator, MappingContext context) throws MappingException {
         if (reference != null && !reference.getKeys().isEmpty()) {
             KeyElements referencedType = reference.getKeys().get(reference.getKeys().size() - 1).getType();
             if (referencedType == KeyElements.SUBMODEL) {
                 Optional<Submodel> resolvedSubmodel = AASUtils.resolveSubmodelReference(reference, context.getEnvironment());
                 if (resolvedSubmodel.isPresent()) {
-                    context.withoutIdentidyProvider().map(resolvedSubmodel.get());
+                    context.withoutIdCache().map(resolvedSubmodel.get(), generator);
                     return;
                 }
             }
         }
-        mapAsAttribute(ReferenceConverterUtil.convert(reference), context);
+        mapAsAttribute(ReferenceConverterUtil.convert(reference), generator, context);
     }
 }

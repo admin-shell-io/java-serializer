@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
 import io.adminshell.aas.v3.model.OperationVariable;
@@ -23,7 +24,7 @@ import java.util.Collection;
 public class OperationVariableCollectionMapper extends AbstractCollectionMapper<OperationVariable> {
 
     @Override
-    public void map(Collection<OperationVariable> value, MappingContext context) throws MappingException {
+    public void map(Collection<OperationVariable> value, AmlGenerator generator, MappingContext context) throws MappingException {
         if (value == null || value.isEmpty()) {
             return;
         }
@@ -34,15 +35,14 @@ public class OperationVariableCollectionMapper extends AbstractCollectionMapper<
         name = name.substring(0, 1).toUpperCase() + name.substring(1);
         InternalElementType.Builder builder = InternalElementType.builder()
                 .withName(name)
-                .withID(context.getIdentityProvider().getId(value))
+                .withID(context.generateId())
                 .withRoleRequirements(roleRequirement("Operation" + name));
         for (OperationVariable element : value) {
             context
-                    .with(builder)
                     .withoutProperty()
-                    .withoutIdentidyProvider()
-                    .map(element);
+                    .withoutIdCache()
+                    .map(element, generator.with(builder));
         }
-        context.addInternalElement(builder.build());
+        generator.addInternalElement(builder.build());
     }
 }

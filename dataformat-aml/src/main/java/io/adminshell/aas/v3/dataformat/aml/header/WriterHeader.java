@@ -17,9 +17,11 @@ package io.adminshell.aas.v3.dataformat.aml.header;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+//@XmlType(name = EmployeeDesiredSkill.class)
 public class WriterHeader {
 
     @XmlElement(name = "WriterName")
@@ -50,7 +52,7 @@ public class WriterHeader {
         return name;
     }
 
-//    @XmlType(name = "xs:string")
+    @XmlType(name = "xs:anyType")
     public static class Wrapper {
 
         @XmlElement(name = "WriterHeader")
@@ -141,4 +143,6 @@ public class WriterHeader {
     public void setProjectID(String projectID) {
         this.projectID = projectID;
     }
+    
+    
 }

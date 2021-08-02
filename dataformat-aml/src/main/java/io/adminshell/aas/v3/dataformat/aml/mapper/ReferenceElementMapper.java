@@ -15,17 +15,16 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.RoleClassType;
-import io.adminshell.aas.v3.dataformat.aml.model.caex.SystemUnitClassType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.SystemUnitClassType.InternalLink;
 import io.adminshell.aas.v3.dataformat.aml.serialize.mapper.util.ReferenceConverterUtil;
 import io.adminshell.aas.v3.dataformat.aml.util.AASUtils;
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import io.adminshell.aas.v3.model.Referable;
-import io.adminshell.aas.v3.model.Reference;
 import io.adminshell.aas.v3.model.ReferenceElement;
 
 public class ReferenceElementMapper extends BaseMapper<ReferenceElement> {
@@ -34,22 +33,22 @@ public class ReferenceElementMapper extends BaseMapper<ReferenceElement> {
     }
 
     @Override
-    public void map(ReferenceElement element, MappingContext context) throws MappingException {
+    public void map(ReferenceElement element, AmlGenerator generator, MappingContext context) throws MappingException {
         if (element == null) {
             return;
         }
         // regular mapping
         InternalElementType.Builder builder = InternalElementType.builder()
-                .withID(context.getIdentityProvider().getCachedId(element))
+                .withID(context.getCachedId(element))
                 .withName(context.getMappingProvider().getInternalElementNamingStrategy().getName(
                         element.getClass(),
                         element,
                         null))
                 .withRoleRequirements(roleRequirement(ReflectionHelper.getModelType(element.getClass())));
-        mapProperties(element, context.with(builder), "value");
+        mapProperties(element, generator.with(builder), context, "value");
         // add interface
         RoleClassType.ExternalInterface.Builder interfaceBuilder = RoleClassType.ExternalInterface.builder()
-                .withID(context.getIdentityProvider().generateId())
+                .withID(context.generateId())
                 .withName("ReferableReference")
                 .withRefBaseClassPath("AssetAdministrationShellInterfaceClassLib/ReferableReference");
         Referable resolvedReference = AASUtils.resolve(element.getValue(), context.getEnvironment());
@@ -60,22 +59,22 @@ public class ReferenceElementMapper extends BaseMapper<ReferenceElement> {
             // !!! contradicts CAEX meta model as depicted on slide 13 https://www.plt.rwth-aachen.de/global/show_document.asp?id=aaaaaaaaaatmalk
             builder = builder.withInternalLink(InternalLink.builder()
                     .withName("value")
-                    .withID(context.getIdentityProvider().generateId())
-                    .withRefPartnerSideA(context.getIdentityProvider().getCachedId(element) + ":ReferableReference")
+                    .withID(context.generateId())
+                    .withRefPartnerSideA(context.getCachedId(element) + ":ReferableReference")
                     .withRefPartnerSideB(context.getInternalLinkTargetId(resolvedReference) + ":externalReferenceTarget")
                     .build());
         } else {
             interfaceBuilder = interfaceBuilder
                     .addAttribute(AttributeType.builder()
                             .withName("value")
-                            .withID(context.getIdentityProvider().generateId())
+                            .withID(context.generateId())
                             .withAttributeDataType("xs:string")
                             .withValue(ReferenceConverterUtil.convert(element.getValue()))
                             .build());
         }
         builder.withExternalInterface(interfaceBuilder.build());
-        context.with(builder).appendReferenceTargetInterfaceIfRequired(element);
-        context.addInternalElement(builder.build());
+        generator.with(builder).appendReferenceTargetInterfaceIfRequired(element, context);
+        generator.addInternalElement(builder.build());
     }
 
 }

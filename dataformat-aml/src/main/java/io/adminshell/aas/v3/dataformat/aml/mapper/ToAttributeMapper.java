@@ -15,14 +15,15 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 
 public abstract class ToAttributeMapper<T> implements Mapper<T> {
 
-    protected void mapAsAttribute(Object value, MappingContext context) {
+    protected void mapAsAttribute(Object value, AmlGenerator generator, MappingContext context) {
         if (value != null && context.getProperty() != null) {
-            context.addAttribute(AttributeType.builder()
+            generator.addAttribute(AttributeType.builder()
                     .withName(context.getProperty().getName())
                     .withValue(value)
                     .withRefSemantic(AttributeType.RefSemantic.builder()

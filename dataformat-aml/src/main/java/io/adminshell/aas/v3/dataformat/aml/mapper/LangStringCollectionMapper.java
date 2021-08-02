@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.model.LangString;
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 public class LangStringCollectionMapper extends BaseMapper<Collection<LangString>> {
 
     @Override
-    public void map(Collection<LangString> value, MappingContext context) {
+    public void map(Collection<LangString> value, AmlGenerator generator, MappingContext context) {
         if (context == null || context.getProperty() == null) {
             throw new IllegalArgumentException("context.property must be non-null");
         }
@@ -33,7 +34,7 @@ public class LangStringCollectionMapper extends BaseMapper<Collection<LangString
             return;
         }
         Object t = (Class<?>) ((ParameterizedType) context.getProperty().getReadMethod().getGenericReturnType()).getActualTypeArguments()[0];
-        context.addAttribute(AttributeType.builder()
+        generator.addAttribute(AttributeType.builder()
                 // für collections funktioniert getName so nicht weil value.class == Collection + type erasure
                 .withName(context.getMappingProvider().getAttributeNamingStrategy().getName(
                         context.getProperty().getReadMethod().getDeclaringClass(),

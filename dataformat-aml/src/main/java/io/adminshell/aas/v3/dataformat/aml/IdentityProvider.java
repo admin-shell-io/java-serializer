@@ -17,35 +17,35 @@ package io.adminshell.aas.v3.dataformat.aml;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.UUID;
 
 public class IdentityProvider {
 
-    private Map<Object, String> ids = new HashMap<>();
+    private final Map<Object, String> cache;
+    private final IdGenerator idGenerator;
 
-    public String getId(Object obj) {
-//        if (ids.containsKey(obj)) {
-//            return ids.get(obj);
-//        }
-        String result = generateId();
-//        ids.put(obj, result);
-        return result;
+    public IdentityProvider(IdGenerator idGenerator) {
+        this.cache = new HashMap<>();
+        this.idGenerator = idGenerator;
     }
 
     public String getCachedId(Object obj) {
-        if (ids.containsKey(obj)) {
-            return ids.get(obj);
+        if (cache.containsKey(obj)) {
+            return cache.get(obj);
         }
         String result = generateId();
-        ids.put(obj, result);
+        cache.put(obj, result);
         return result;
     }
 
     public String generateId() {
         String result = null;
         do {
-            result = UUID.randomUUID().toString();
-        } while (ids.entrySet().contains(result));
+            result = idGenerator.generateId();
+        } while (cache.values().contains(result));
         return result;
+    }
+
+    public IdGenerator getIdGenerator() {
+        return idGenerator;
     }
 }

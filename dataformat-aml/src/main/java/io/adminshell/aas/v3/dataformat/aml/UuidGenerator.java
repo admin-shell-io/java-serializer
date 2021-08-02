@@ -13,19 +13,15 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.aml.mapper;
+package io.adminshell.aas.v3.dataformat.aml;
 
-import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
-import io.adminshell.aas.v3.dataformat.aml.MappingContext;
-import io.adminshell.aas.v3.model.Constraint;
-import java.util.Collection;
+import java.util.UUID;
 
-public class ConstraintCollectionMapper implements CollectionMapper<Constraint> {
+public class UuidGenerator implements IdGenerator {
 
     @Override
-    public void map(Collection<Constraint> value, AmlGenerator generator, MappingContext context) throws MappingException {
-        for (Constraint element : value) {
-            context.map(element, generator);
-        }
+    public String generateId() {
+        return UUID.randomUUID().toString();
     }
+
 }

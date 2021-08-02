@@ -15,12 +15,11 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
-import io.adminshell.aas.v3.dataformat.aml.model.caex.RoleClassType;
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
-import io.adminshell.aas.v3.model.Referable;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -30,8 +29,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public abstract class BaseMapper<T> implements Mapper<T> {
 
@@ -44,33 +41,33 @@ public abstract class BaseMapper<T> implements Mapper<T> {
     }
 
     @Override
-    public void map(T value, MappingContext context) throws MappingException {
+    public void map(T value, AmlGenerator generator, MappingContext context) throws MappingException {
         if (value == null || context == null) {
             return;
         }
         Class<?> aasType = getValueType(value, context);
         Class<?> aasTypeInfo = ReflectionHelper.getMostSpecificTypeWithModelType(aasType);
         if (aasTypeInfo != null) {
-            toInternalElement(value, context);
+            toInternalElement(value, generator, context);
         } else {
-            toAttribute(value, context);
+            toAttribute(value, generator, context);
         }
     }
 
-    protected void toInternalElement(T value, MappingContext context) throws MappingException {
+    protected void toInternalElement(T value, AmlGenerator generator, MappingContext context) throws MappingException {
         InternalElementType.Builder builder = InternalElementType.builder();
-        builder = builder.withID(context.getIdentityProvider().getCachedId(value))
+        builder = builder.withID(context.getCachedId(value))
                 .withName(context.getMappingProvider().getInternalElementNamingStrategy().getName(
                         value.getClass(),
                         value,
                         null))
                 .withRoleRequirements(roleRequirement(ReflectionHelper.getModelType(value.getClass())));
-        mapProperties(value, context.with(builder));
-        context.with(builder).appendReferenceTargetInterfaceIfRequired(value);
-        context.addInternalElement(builder.build());
+        mapProperties(value, generator.with(builder), context);
+        generator.with(builder).appendReferenceTargetInterfaceIfRequired(value, context);
+        generator.addInternalElement(builder.build());
     }
 
-    protected void toAttribute(T value, MappingContext context) throws MappingException {
+    protected void toAttribute(T value, AmlGenerator generator, MappingContext context) throws MappingException {
         Class<?> aasType = ReflectionHelper.getAasInterface(value.getClass());
         AttributeType.Builder builder = AttributeType.builder();
         if (context.getProperty() != null) {
@@ -84,14 +81,14 @@ public abstract class BaseMapper<T> implements Mapper<T> {
                             context.getProperty().getName()));
         }
         if (aasType != null) {
-            mapProperties(value, context.with(builder));
+            mapProperties(value, generator.with(builder), context);
         } else {
             builder = builder.withValue(value);
         }
-        context.addAttribute(builder.build());
+        generator.addAttribute(builder.build());
     }
 
-    protected void mapProperties(T value, MappingContext context, String... ignoreProperties) throws MappingException {
+    protected void mapProperties(T value, AmlGenerator generator, MappingContext context, String... ignoreProperties) throws MappingException {
         List<String> ignored = Arrays.asList(ignoreProperties);
         Class<?> aasType = ReflectionHelper.getAasInterface(value.getClass());
         Set<Class<?>> types = new HashSet<>();
@@ -103,8 +100,10 @@ public abstract class BaseMapper<T> implements Mapper<T> {
             try {
                 for (PropertyDescriptor property : Introspector.getBeanInfo(type).getPropertyDescriptors()) {
                     if (!ignored.contains(property.getName())) {
-                        context.with(property).map(property.getReadMethod().getGenericReturnType(),
-                                getPropertyValue(value, property, context));
+                        context.with(property)
+                                .map(property.getReadMethod().getGenericReturnType(),
+                                        getPropertyValue(value, property, context),
+                                        generator);
                     }
                 }
             } catch (IntrospectionException ex) {

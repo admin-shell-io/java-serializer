@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
@@ -35,14 +36,14 @@ public class AbstractCollectionMapper<T> extends BaseMapper<Collection<T>> {
     }
 
     @Override
-    protected void toInternalElement(Collection<T> collection, MappingContext context) throws MappingException {
+    protected void toInternalElement(Collection<T> collection, AmlGenerator generator, MappingContext context) throws MappingException {
         for (T element : collection) {
-            context.withoutProperty().map(element);
+            context.withoutProperty().map(element, generator);
         }
     }
 
     @Override
-    protected void toAttribute(Collection<T> collection, MappingContext context) throws MappingException {
+    protected void toAttribute(Collection<T> collection, AmlGenerator generator, MappingContext context) throws MappingException {
         Class<?> aasType = context.getProperty().getReadMethod().getDeclaringClass();
         AttributeType.Builder builder = AttributeType.builder()
                 .withName(context.getMappingProvider().getAttributeNamingStrategy().getName(
@@ -52,10 +53,9 @@ public class AbstractCollectionMapper<T> extends BaseMapper<Collection<T>> {
                 .withRefSemantic(refSemantic(
                         aasType.getSimpleName(),
                         context.getProperty().getName()));
-        MappingContext subContext = context.with(builder).withoutProperty();
         for (T element : collection) {
-            subContext.map(element);
+            context.map(element, generator.with(builder));
         }
-        context.addAttribute(builder.build());
+        generator.addAttribute(builder.build());
     }
 }

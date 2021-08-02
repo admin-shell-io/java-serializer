@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType.RefSemantic;
@@ -23,13 +24,13 @@ import io.adminshell.aas.v3.model.Qualifier;
 public class QualifierMapper extends BaseMapper<Qualifier> {
 
     @Override
-    public void map(Qualifier qualifier, MappingContext context) throws MappingException {
+    public void map(Qualifier qualifier, AmlGenerator generator, MappingContext context) throws MappingException {
         AttributeType.Builder builder = AttributeType.builder()
                 .withName("qualifier:" + qualifier.getType() + "=" + qualifier.getValue())
                 .addRefSemantic(RefSemantic.builder()
                         .withCorrespondingAttributePath("AAS:" + context.getProperty().getReadMethod().getDeclaringClass().getSimpleName() + "/" + context.getProperty().getName())
                         .build());
-        mapProperties(qualifier, context.with(builder));
-        context.addAttribute(builder.build());
+        mapProperties(qualifier, generator.with(builder), context);
+        generator.addAttribute(builder.build());
     }
 }

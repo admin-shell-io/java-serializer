@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.model.Reference;
 import java.util.Collection;
@@ -22,12 +23,12 @@ import java.util.Collection;
 public class ReferenceCollectionMapper implements CollectionMapper<Reference> {
 
     @Override
-    public void map(Collection<Reference> value, MappingContext context) throws MappingException {
+    public void map(Collection<Reference> value, AmlGenerator generator, MappingContext context) throws MappingException {
         if (value == null || value.isEmpty()) {
             return;
         }
         for (Reference element : value) {
-            context.withoutProperty().map(element);
+            context.withoutProperty().map(element, generator);
         }
     }
 }

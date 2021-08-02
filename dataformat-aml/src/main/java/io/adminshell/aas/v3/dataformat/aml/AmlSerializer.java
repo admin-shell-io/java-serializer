@@ -35,26 +35,20 @@ public class AmlSerializer implements Serializer {
 
     private static final String AAS_LIB_SOURCE = "/AssetAdministrationShellLib.aml";
     private static final Logger log = LoggerFactory.getLogger(AmlSerializer.class);
-    private AasToAmlMapper mapper = new AasToAmlMapper();
-
-    private boolean enableClassLibs = false;
 
     public AmlSerializer() {
     }
 
-    public AmlSerializer(boolean enableClassLibs) {
-        this.enableClassLibs = enableClassLibs;
-    }
-
     @Override
     public String write(AssetAdministrationShellEnvironment aasEnvironment) throws SerializationException {
-        return write(aasEnvironment, true);
+        return write(aasEnvironment, AmlSerializationConfig.DEFAULT);
     }
 
-    public String write(AssetAdministrationShellEnvironment aasEnvironment, boolean withLibraries) throws SerializationException {
+    public String write(AssetAdministrationShellEnvironment aasEnvironment, AmlSerializationConfig config) throws SerializationException {
+        AasToAmlMapper mapper = new AasToAmlMapper(config);
         try {
             CAEXFile aml = mapper.map(aasEnvironment);
-            if (withLibraries) {
+            if (config.isIncludeLibraries()) {
                 aml = addAASLibrary(aml);
             }
             Marshaller marshaller = JAXBContextFactory.createContext(

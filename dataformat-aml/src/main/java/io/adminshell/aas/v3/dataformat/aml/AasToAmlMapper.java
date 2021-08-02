@@ -51,6 +51,11 @@ public class AasToAmlMapper {
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(AasToAmlMapper.class);
     private static final String DEFAULT_LANGUAGE = "EN";
     private CAEXFile result;
+    private final AmlSerializationConfig config;
+
+    public AasToAmlMapper(AmlSerializationConfig config) {
+        this.config = config;
+    }
 
     public CAEXFile map(AssetAdministrationShellEnvironment env) throws MappingException {
         return map(env, DEFAULT_SCHEMA_VERSION, DEFAULT_FILENAME);
@@ -95,15 +100,17 @@ public class AasToAmlMapper {
         // NOTE
         // This has implications on ID generator and requires additional lookup table
         // for Referable --> AML ID of ExternalInterface
-        MappingContext context = new MappingContext(mappingProvider, env);
-        context.getFileBuilder().withSchemaVersion(schemaVersion);
-        context.getFileBuilder().withFileName(filename);
-        context.getFileBuilder().withAdditionalInformation(new AutomationMLVersion("2.0"));
+        MappingContext context = new MappingContext(mappingProvider, config.getIdGenerator(), env);
         WriterHeader writerHeader = new WriterHeader();
         writerHeader.setName("foo");
         writerHeader.setId("bar");
-        context.getFileBuilder().withAdditionalInformation(writerHeader.wrap());
-        context.map(env);
-        return context.getFileBuilder().build();
+        CAEXFile.Builder builder = CAEXFile.builder()
+                .withSchemaVersion(schemaVersion)
+                .withFileName(filename)
+                .addAdditionalInformation(new AutomationMLVersion("2.0"))
+                .addAdditionalInformation(writerHeader.wrap());
+        AmlGenerator generator = new AmlGenerator(builder);
+        context.map(env, generator);
+        return builder.build();
     }
 }

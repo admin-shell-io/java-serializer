@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
@@ -28,12 +29,12 @@ public class FileMapper extends BaseMapper<File> {
     }
 
     @Override
-    public void map(File file, MappingContext context) throws MappingException {
+    public void map(File file, AmlGenerator generator, MappingContext context) throws MappingException {
         if (file == null) {
             return;
         }
         InternalElementType.Builder builder = InternalElementType.builder();
-        builder = builder.withID(context.getIdentityProvider().getCachedId(file))
+        builder = builder.withID(context.getCachedId(file))
                 .withName(context.getMappingProvider().getInternalElementNamingStrategy().getName(
                         file.getClass(),
                         file,
@@ -41,7 +42,7 @@ public class FileMapper extends BaseMapper<File> {
                 .withRoleRequirements(roleRequirement(ReflectionHelper.getModelType(file.getClass())))
                 .withExternalInterface(RoleClassType.ExternalInterface.builder()
                         .withName("FileDataReference")
-                        .withID(context.getIdentityProvider().generateId())
+                        .withID(context.generateId())
                         .withRefBaseClassPath("AssetAdministrationShellInterfaceClassLib/FileDataReference")
                         .addAttribute(AttributeType.builder()
                                 .withName("MIMEType")
@@ -54,8 +55,8 @@ public class FileMapper extends BaseMapper<File> {
                                 .withAttributeDataType("xs:anyURI")
                                 .build())
                         .build());
-        mapProperties(file, context.with(builder));
-        context.with(builder).appendReferenceTargetInterfaceIfRequired(file);
-        context.addInternalElement(builder.build());
+        mapProperties(file, generator.with(builder), context);
+        generator.with(builder).appendReferenceTargetInterfaceIfRequired(file, context);
+        generator.addInternalElement(builder.build());
     }
 }

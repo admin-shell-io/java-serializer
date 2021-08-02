@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.mapper;
 
+import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
@@ -23,12 +24,12 @@ import io.adminshell.aas.v3.model.View;
 public class ViewMapper extends BaseMapper<View> {
 
     @Override
-    public void map(View view, MappingContext context) throws MappingException {
+    public void map(View view, AmlGenerator generator, MappingContext context) throws MappingException {
         if (view == null || view.getContainedElements() == null || view.getContainedElements().isEmpty()) {
             return;
         }
         InternalElementType.Builder builder = InternalElementType.builder();
-        builder = builder.withID(context.getIdentityProvider().getCachedId(view))
+        builder = builder.withID(context.getCachedId(view))
                 .withName(context.getMappingProvider().getInternalElementNamingStrategy().getName(
                         view.getClass(),
                         view,
@@ -38,7 +39,7 @@ public class ViewMapper extends BaseMapper<View> {
                 //                                view.getContainedElements().get(0), 
                 //                                context.getEnvironment())))
                 .withRoleRequirements(roleRequirement(ReflectionHelper.getModelType(view.getClass())));
-        context.with(builder).appendReferenceTargetInterfaceIfRequired(view);
-        context.addInternalElement(builder.build());
+        generator.with(builder).appendReferenceTargetInterfaceIfRequired(view, context);
+        generator.addInternalElement(builder.build());
     }
 }

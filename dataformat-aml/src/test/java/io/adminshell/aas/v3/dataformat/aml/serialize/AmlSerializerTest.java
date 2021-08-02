@@ -17,30 +17,62 @@ package io.adminshell.aas.v3.dataformat.aml.serialize;
 
 import io.adminshell.aas.v3.dataformat.aml.fixtures.FullExample;
 import io.adminshell.aas.v3.dataformat.SerializationException;
+import io.adminshell.aas.v3.dataformat.aml.AmlSerializationConfig;
 import io.adminshell.aas.v3.dataformat.aml.AmlSerializer;
+import io.adminshell.aas.v3.dataformat.aml.IntegerIdGenerator;
 import io.adminshell.aas.v3.dataformat.aml.fixtures.TestExample;
-import io.adminshell.aas.v3.dataformat.aml.util.ReferencedReferableCollector;
-import io.adminshell.aas.v3.model.Referable;
-import java.util.Set;
+import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Iterator;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.xml.sax.SAXException;
+import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.Diff;
+import org.xmlunit.diff.Difference;
 
 public class AmlSerializerTest {
 
     private final AmlSerializer serializer = new AmlSerializer();
-    
-        @Test
+
+    @Test
 //    @Ignore
-    public void testExample() throws SerializationException {
-        String actual = serializer.write(TestExample.ENVIRONMENT, true);
-        System.out.println(actual);
+    public void testExample() throws SerializationException, SAXException, IOException {
+        validateAmlSerializer(TestExample.FILE, TestExample.ENVIRONMENT);
+
     }
 
     @Test
     @Ignore
     public void testSAPFullExample() throws SerializationException {
         String actual = serializer.write(FullExample.ENVIRONMENT);
+    }
+
+    private void validateAmlSerializer(File expectedFile, AssetAdministrationShellEnvironment environment)
+            throws SerializationException, SAXException, IOException {
+        String expected = Files.readString(expectedFile.toPath());
+        String actual = new AmlSerializer().write(environment, AmlSerializationConfig.builder()
+                .idGenerator(new IntegerIdGenerator())
+                .build());
         System.out.println(actual);
+        Diff diff = DiffBuilder
+                .compare(actual)
+                .withTest(expected)
+                .checkForSimilar().checkForIdentical()
+                .normalizeWhitespace()
+                .ignoreComments()
+                .ignoreWhitespace()
+                .withNodeFilter(node -> !node.getNodeName().equals("LastWritingDateTime"))
+                .build();
+        Iterator<Difference> iter = diff.getDifferences().iterator();
+        int size = 0;
+        while (iter.hasNext()) {
+            System.out.println(iter.next());            
+            size++;
+        }
+        assert (size == 0);
     }
 
 }
