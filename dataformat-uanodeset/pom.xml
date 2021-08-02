@@ -9,6 +9,8 @@
 		<version>${revision}</version>
 	</parent>
 	<artifactId>dataformat-uanodeset</artifactId>
+	<name>Asset Administration Shell UA-Nodeset-Serializer</name>
+
 	<properties>
 		<jaxb-rich-contract.version>2.1.0</jaxb-rich-contract.version>
 	</properties>
@@ -61,30 +63,6 @@
 					<source>11</source>
 					<target>11</target>
 				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>flatten-maven-plugin</artifactId>
-				<version>${plugin.flatten.version}</version>
-				<configuration>
-					<updatePomFile>true</updatePomFile>
-				</configuration>
-				<executions>
-					<execution>
-						<id>flatten</id>
-						<phase>process-resources</phase>
-						<goals>
-							<goal>flatten</goal>
-						</goals>
-					</execution>
-					<execution>
-						<id>flatten.clean</id>
-						<phase>clean</phase>
-						<goals>
-							<goal>clean</goal>
-						</goals>
-					</execution>
-				</executions>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.cxf</groupId>
