@@ -68,7 +68,7 @@ public class ShaclValidator implements Validator{
             ValidationReport report = validateGetReport(obj);
 
             if (!report.conforms()) {
-                throw new ValidationException(report.getEntries().stream().map(ReportEntry::toString).collect(Collectors.joining()));
+                throw new ValidationException(report.getEntries().stream().map(ReportEntry::toString).collect(Collectors.joining("\n")));
             }
         }
         catch (IOException e)

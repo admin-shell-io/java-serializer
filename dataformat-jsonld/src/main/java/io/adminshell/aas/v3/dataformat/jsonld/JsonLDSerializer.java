@@ -73,7 +73,7 @@ public class JsonLDSerializer extends BeanSerializer {
         }
         else
         {
-            String randomUri = "https://admin-shell.io/autogen/" + UUID.randomUUID();
+            String randomUri = "https://admin-shell.io/autogen/" + bean.getClass().getSimpleName() + "/" + UUID.randomUUID();
             idMap.put(bean, randomUri);
             gen.writeStringField("@id", randomUri);
         }

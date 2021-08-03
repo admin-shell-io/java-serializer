@@ -30,7 +30,19 @@ public class JsonLdEnumSerializer extends JsonSerializer<Enum<?>> {
     public void serialize(Enum value, JsonGenerator gen, SerializerProvider provider) throws IOException {
         if(value.getClass().isEnum() && value.getClass().getName().startsWith("io.adminshell.aas."))
         {
-            gen.writeString(translate(value.getClass(), value.name()));
+            if(value.getClass().getAnnotation(IRI.class) != null && value.getClass().getAnnotation(IRI.class).value().length > 0)
+            {
+                gen.writeStartObject();
+                gen.writeStringField("@type", value.getClass().getAnnotation(IRI.class).value()[0]);
+                gen.writeStringField("@id", translate(value.getClass(), value.name()));
+                gen.writeEndObject();
+            }
+            else
+            {
+                gen.writeString(translate(value.getClass(), value.name()));
+            }
+
+
         } else {
             provider.findValueSerializer(Enum.class).serialize(value, gen, provider);
         }

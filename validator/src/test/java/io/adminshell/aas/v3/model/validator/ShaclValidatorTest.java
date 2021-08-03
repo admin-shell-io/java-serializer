@@ -17,13 +17,16 @@ package io.adminshell.aas.v3.model.validator;
 
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetKind;
+import io.adminshell.aas.v3.model.IdentifierType;
 import io.adminshell.aas.v3.model.LangString;
 import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShell;
 import io.adminshell.aas.v3.model.impl.DefaultAssetInformation;
+import io.adminshell.aas.v3.model.impl.DefaultIdentifier;
 import org.junit.Assert;
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 
 
 public class ShaclValidatorTest {
@@ -39,6 +42,7 @@ public class ShaclValidatorTest {
 
         AssetAdministrationShell aas = new DefaultAssetAdministrationShell.Builder()
                 .description(new LangString("TestDescription"))
+                .identification(new DefaultIdentifier.Builder().identifier("test1234").idType(IdentifierType.CUSTOM).build())
                 .build();
 
         logger.info("Done. Starting validation.");
@@ -56,16 +60,10 @@ public class ShaclValidatorTest {
 
         aas.setIdShort("test");
 
+
         aas.setAssetInformation(new DefaultAssetInformation.Builder()
                 .assetKind(AssetKind.INSTANCE)
                 .build());
-        try {
-            validator.validate(aas);
-        }
-        catch (ValidationException e)
-        {
-            e.printStackTrace();
-            //TODO: The AssetKind.INSTANCE is not yet recognized properly. Either the serialization is not correct, or the shape has an error
-        }
+        validator.validate(aas);
     }
 }
