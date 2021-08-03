@@ -160,7 +160,6 @@
                     <keyname>${gpg.keyname}</keyname>
                     <passphraseServerId>${gpg.keyname}</passphraseServerId>
                 </configuration>
-                <!-- No automated execution for now to make sure that the build succeeds on all machines
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -170,7 +169,6 @@
                         </goals>
                     </execution>
                 </executions>
-                -->
             </plugin>
         </plugins>
     </build>
