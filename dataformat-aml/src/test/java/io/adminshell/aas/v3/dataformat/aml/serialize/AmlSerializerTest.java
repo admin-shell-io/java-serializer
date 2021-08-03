@@ -19,7 +19,7 @@ import io.adminshell.aas.v3.dataformat.aml.fixtures.FullExample;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.aml.AmlSerializationConfig;
 import io.adminshell.aas.v3.dataformat.aml.AmlSerializer;
-import io.adminshell.aas.v3.dataformat.aml.IntegerIdGenerator;
+import io.adminshell.aas.v3.dataformat.aml.id.IntegerIdGenerator;
 import io.adminshell.aas.v3.dataformat.aml.fixtures.TestExample;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import java.io.File;
@@ -30,8 +30,10 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.xml.sax.SAXException;
 import org.xmlunit.builder.DiffBuilder;
+import org.xmlunit.diff.DefaultNodeMatcher;
 import org.xmlunit.diff.Diff;
 import org.xmlunit.diff.Difference;
+import org.xmlunit.diff.ElementSelectors;
 
 public class AmlSerializerTest {
 
@@ -60,8 +62,10 @@ public class AmlSerializerTest {
         Diff diff = DiffBuilder
                 .compare(actual)
                 .withTest(expected)
-                .checkForSimilar().checkForIdentical()
+//                .checkForSimilar()
+//                .checkForIdentical()
                 .normalizeWhitespace()
+                .withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byNameAndText))
                 .ignoreComments()
                 .ignoreWhitespace()
                 .withNodeFilter(node -> !node.getNodeName().equals("LastWritingDateTime"))

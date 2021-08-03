@@ -15,12 +15,13 @@
  */
 package io.adminshell.aas.v3.dataformat.aml;
 
+import io.adminshell.aas.v3.dataformat.aml.aas2aml.AasToAmlMapper;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.Serializer;
 import io.adminshell.aas.v3.dataformat.aml.header.AutomationMLVersion;
 import io.adminshell.aas.v3.dataformat.aml.header.WriterHeader;
-import io.adminshell.aas.v3.dataformat.aml.mapper.MappingException;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
+import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import java.io.IOException;
 import java.io.StringWriter;

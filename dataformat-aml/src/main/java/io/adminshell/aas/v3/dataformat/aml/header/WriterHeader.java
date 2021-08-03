@@ -143,6 +143,5 @@ public class WriterHeader {
     public void setProjectID(String projectID) {
         this.projectID = projectID;
     }
-    
-    
+
 }

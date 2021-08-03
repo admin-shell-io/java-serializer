@@ -225,7 +225,7 @@ public class ReflectionHelper {
      * type information or null if there is none
      */
     public static Class<?> getMostSpecificTypeWithModelType(Class<?> clazz) {
-        if(clazz == null) {
+        if (clazz == null) {
             return null;
         }
         return TYPES_WITH_MODEL_TYPE.stream()

@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml;
 
+import io.adminshell.aas.v3.dataformat.aml.aas2aml.Aas2AmlMappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXObject;
@@ -22,6 +23,7 @@ import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.RoleClassType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.SystemUnitClassType;
 import io.adminshell.aas.v3.model.Referable;
+import java.beans.PropertyDescriptor;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,28 +31,74 @@ import org.slf4j.LoggerFactory;
 public class AmlGenerator {
 
     private static final Logger log = LoggerFactory.getLogger(AmlGenerator.class);
+    private static final String DEFAULT_REF_SEMANTIC_PREFIX = "AAS:";
+    private final String refSemanticPrefix;
     private CAEXObject.Builder current;
     private CAEXFile.Builder fileBuilder;
+    private final AmlDocumentInfo documentInfo;
 
-    public AmlGenerator() {
-        this.fileBuilder = CAEXFile.builder();
-    }
-
-    public AmlGenerator(CAEXFile.Builder fileBuilder) {
-        this.fileBuilder = fileBuilder;
-    }
-
-    private AmlGenerator(CAEXFile.Builder fileBuilder, CAEXObject.Builder current) {
+    private AmlGenerator(AmlDocumentInfo documentInfo, String refSemanticPrefix, CAEXFile.Builder fileBuilder, CAEXObject.Builder current) {
+        this.documentInfo = documentInfo;
+        this.refSemanticPrefix = refSemanticPrefix;
         this.fileBuilder = fileBuilder;
         this.current = current;
     }
 
     public AmlGenerator with(CAEXObject.Builder current) {
-        return new AmlGenerator(fileBuilder, current);
+        return new AmlGenerator(documentInfo, refSemanticPrefix, fileBuilder, current);
     }
 
     public void addAdditionalInformation(List<Object> additionalInformation) {
         fileBuilder.addAdditionalInformation(additionalInformation);
+    }
+
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    public static class Builder {
+
+        private String refSemanticPrefix = DEFAULT_REF_SEMANTIC_PREFIX;
+        private CAEXObject.Builder current;
+        private CAEXFile.Builder fileBuilder = CAEXFile.builder();
+        private AmlDocumentInfo documentInfo = new AmlDocumentInfo();
+
+        public AmlGenerator build() {
+            return new AmlGenerator(documentInfo, refSemanticPrefix, fileBuilder, current);
+        }
+
+        public Builder refSemanticPrefix(String value) {
+            this.refSemanticPrefix = value;
+            return this;
+        }
+
+        public Builder current(CAEXObject.Builder value) {
+            this.current = value;
+            return this;
+        }
+
+        public Builder file(CAEXFile.Builder value) {
+            this.fileBuilder = value;
+            return this;
+        }
+
+        public Builder documentInfo(AmlDocumentInfo value) {
+            this.documentInfo = value;
+            return this;
+        }
+    }
+
+    public void add(CAEXObject caexObject) {
+        if (caexObject == null) {
+            return;
+        }
+        if (AttributeType.class.isAssignableFrom(caexObject.getClass())) {
+            addAttribute((AttributeType) caexObject);
+        } else if (InternalElementType.class.isAssignableFrom(caexObject.getClass())) {
+            addInternalElement((InternalElementType) caexObject);
+        } else {
+            log.warn("adding caex object failed because unsupported type '{}'", caexObject.getClass());
+        }
     }
 
     public void addAttribute(AttributeType attribute) {
@@ -125,14 +173,14 @@ public class AmlGenerator {
         }
     }
 
-    public void appendReferenceTargetInterfaceIfRequired(Object obj, MappingContext context) {
+    public void appendReferenceTargetInterfaceIfRequired(Object obj, Aas2AmlMappingContext context) {
         RoleClassType.ExternalInterface referenceTargetInterface = getReferenceTargetInterface(obj, context);
         if (referenceTargetInterface != null) {
             addExternalInterface(referenceTargetInterface);
         }
     }
 
-    public RoleClassType.ExternalInterface getReferenceTargetInterface(Object obj, MappingContext context) {
+    public RoleClassType.ExternalInterface getReferenceTargetInterface(Object obj, Aas2AmlMappingContext context) {
         RoleClassType.ExternalInterface result = null;
         if (obj != null && Referable.class.isAssignableFrom(obj.getClass())) {
             Referable referable = (Referable) obj;
@@ -145,5 +193,33 @@ public class AmlGenerator {
             }
         }
         return result;
+    }
+
+    public InternalElementType.RoleRequirements roleRequirement(String value) {
+        return InternalElementType.RoleRequirements.builder()
+                .withRefBaseRoleClassPath(documentInfo.getAssetAdministrationShellRoleClassLib() + "/" + value)
+                .build();
+    }
+
+    public AttributeType.RefSemantic refSemantic(Class<?> type, String propertyName) {
+        return AttributeType.RefSemantic.builder()
+                .withCorrespondingAttributePath(refSemanticPrefix + type.getSimpleName() + "/" + propertyName)
+                .build();
+    }
+
+    public AttributeType.RefSemantic refSemantic(PropertyDescriptor property) {
+        return refSemantic(property.getReadMethod().getDeclaringClass(), property.getName());
+    }
+
+    public String refBaseSystemUnitPath(Object value, Aas2AmlMappingContext context) {
+        return documentInfo.getAssetAdministrationShellSystemUnitClassLib()
+                + "/" + context.getInternalElementNamingStrategy().getName(
+                        value.getClass(),
+                        value,
+                        null);
+    }
+
+    public AmlDocumentInfo getDocumentInfo() {
+        return documentInfo;
     }
 }

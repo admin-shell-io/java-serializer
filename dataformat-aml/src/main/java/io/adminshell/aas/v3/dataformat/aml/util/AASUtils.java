@@ -31,6 +31,7 @@ import io.adminshell.aas.v3.model.Submodel;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,6 +39,15 @@ import java.util.stream.Collectors;
 public class AASUtils {
 
     private AASUtils() {
+    }
+
+    public static String asString(Reference reference) {
+        if (reference == null) {
+            return null;
+        }
+        return reference.getKeys().stream()
+                .map(x -> String.format("(%s)[%s]%s", x.getType(), x.getIdType(), x.getValue()))
+                .collect(Collectors.joining(","));
     }
 
     public static Optional<Submodel> resolveSubmodelReference(Reference reference, AssetAdministrationShellEnvironment environment) {

@@ -15,6 +15,8 @@
  */
 package io.adminshell.aas.v3.dataformat.aml;
 
+import io.adminshell.aas.v3.dataformat.aml.id.UuidGenerator;
+import io.adminshell.aas.v3.dataformat.aml.id.IdGenerator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

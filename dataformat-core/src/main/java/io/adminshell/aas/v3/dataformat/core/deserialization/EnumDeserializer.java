@@ -44,6 +44,7 @@ public class EnumDeserializer<T extends Enum> extends JsonDeserializer<T> {
 
     /**
      * Translates an enum value from CamelCase to SCREAMING_SNAKE_CASE
+     *
      * @param input input name in CamelCase
      * @return name in SCREAMING_SNAKE_CASE
      */

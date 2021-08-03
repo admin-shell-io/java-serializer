@@ -5,11 +5,37 @@
       <WriterHeader>
          <WriterName>foo</WriterName>
          <WriterID>bar</WriterID>
-         <LastWritingDateTime>02-08-2021 16:45:44</LastWritingDateTime>
+         <LastWritingDateTime>03-08-2021 15:40:37</LastWritingDateTime>
       </WriterHeader>
    </AdditionalInformation>
    <InstanceHierarchy Name="AssetAdministrationShellInstanceHierarchy">
       <InternalElement ID="1" Name="TestAssetAdministrationShell">
+         <Attribute Name="administration">
+            <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
+            <Attribute Name="revision">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/revision"/>
+            </Attribute>
+            <Attribute Name="version">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
+            </Attribute>
+         </Attribute>
+         <Attribute Name="assetInformation">
+            <RefSemantic CorrespondingAttributePath="AAS:AssetAdministrationShell/assetInformation"/>
+            <Attribute Name="assetKind">
+               <Value>INSTANCE</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:AssetInformation/assetKind"/>
+            </Attribute>
+            <Attribute Name="globalAssetId">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ASSET)[IRI]https://acplt.org/Test_Asset</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:AssetInformation/globalAssetId"/>
+            </Attribute>
+         </Attribute>
+         <Attribute Name="derivedFrom">
+            <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ASSET_ADMINISTRATION_SHELL)[IRI]https://acplt.org/TestAssetAdministrationShell2</Value>
+            <RefSemantic CorrespondingAttributePath="AAS:AssetAdministrationShell/derivedFrom"/>
+         </Attribute>
          <Attribute Name="description">
             <RefSemantic CorrespondingAttributePath="AAS:Referable/descriptions"/>
             <Attribute Name="aml-lang=en-us">
@@ -23,35 +49,6 @@
             <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">TestAssetAdministrationShell</Value>
             <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
          </Attribute>
-         <Attribute Name="assetInformation">
-            <RefSemantic CorrespondingAttributePath="AAS:AssetAdministrationShell/assetInformation"/>
-            <Attribute Name="assetKind">
-               <Value>INSTANCE</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:AssetInformation/assetKind"/>
-            </Attribute>
-            <Attribute Name="globalAssetId">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ASSET)[IRI]https://acplt.org/Test_Asset</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:AssetInformation/globalAssetId"/>
-            </Attribute>
-            <Attribute Name="specificAssetIds">
-               <RefSemantic CorrespondingAttributePath="AAS:AssetInformation/specificAssetIds"/>
-            </Attribute>
-         </Attribute>
-         <Attribute Name="derivedFrom">
-            <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ASSET_ADMINISTRATION_SHELL)[IRI]https://acplt.org/TestAssetAdministrationShell2</Value>
-            <RefSemantic CorrespondingAttributePath="AAS:AssetAdministrationShell/derivedFrom"/>
-         </Attribute>
-         <Attribute Name="administration">
-            <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
-            <Attribute Name="revision">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/revision"/>
-            </Attribute>
-            <Attribute Name="version">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
-            </Attribute>
-         </Attribute>
          <Attribute Name="identification">
             <RefSemantic CorrespondingAttributePath="AAS:Identifiable/identification"/>
             <Attribute Name="idType">
@@ -64,6 +61,17 @@
             </Attribute>
          </Attribute>
          <InternalElement ID="2" Name="Identification">
+            <Attribute Name="administration">
+               <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
+               <Attribute Name="revision">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/revision"/>
+               </Attribute>
+               <Attribute Name="version">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
+               </Attribute>
+            </Attribute>
             <Attribute Name="description">
                <RefSemantic CorrespondingAttributePath="AAS:Referable/descriptions"/>
                <Attribute Name="aml-lang=en-us">
@@ -76,17 +84,6 @@
             <Attribute Name="idShort">
                <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Identification</Value>
                <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
-            </Attribute>
-            <Attribute Name="administration">
-               <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
-               <Attribute Name="revision">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/revision"/>
-               </Attribute>
-               <Attribute Name="version">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
-               </Attribute>
             </Attribute>
             <Attribute Name="identification">
                <RefSemantic CorrespondingAttributePath="AAS:Identifiable/identification"/>
@@ -134,14 +131,6 @@
                <RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/ReferenceElement"/>
             </InternalElement>
             <InternalElement ID="7" Name="ExampleFile">
-               <Attribute Name="mimeType">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">application/pdf</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:File/mimeType"/>
-               </Attribute>
-               <Attribute Name="value">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">/TestFile.pdf</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:File/value"/>
-               </Attribute>
                <Attribute Name="category">
                   <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Parameter</Value>
                   <RefSemantic CorrespondingAttributePath="AAS:Referable/category"/>
@@ -159,9 +148,17 @@
                   <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleFile</Value>
                   <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
                </Attribute>
+               <Attribute Name="mimeType">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">application/pdf</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:File/mimeType"/>
+               </Attribute>
                <Attribute Name="semanticId">
                   <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GLOBAL_REFERENCE)[IRI]http://acplt.org/Files/ExampleFile</Value>
                   <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
+               </Attribute>
+               <Attribute Name="value">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">/TestFile.pdf</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:File/value"/>
                </Attribute>
                <ExternalInterface ID="8" Name="FileDataReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/FileDataReference">
                   <Attribute Name="MIMEType" AttributeDataType="xs:string">
@@ -318,6 +315,41 @@
             <RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Submodel"/>
          </InternalElement>
          <InternalElement ID="16" Name="BillOfMaterial" RefBaseSystemUnitPath="AssetAdministrationShellSystemUnitClasses/BillOfMaterial">
+            <Attribute Name="administration">
+               <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
+               <Attribute Name="version">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
+               </Attribute>
+            </Attribute>
+            <Attribute Name="description">
+               <RefSemantic CorrespondingAttributePath="AAS:Referable/descriptions"/>
+               <Attribute Name="aml-lang=en-us">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">An example bill of material submodel for the test application</Value>
+               </Attribute>
+               <Attribute Name="aml-lang=de">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Ein Beispiel-BillofMaterial-Submodel für eine Test-Anwendung</Value>
+               </Attribute>
+            </Attribute>
+            <Attribute Name="idShort">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">BillOfMaterial</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+            </Attribute>
+            <Attribute Name="identification">
+               <RefSemantic CorrespondingAttributePath="AAS:Identifiable/identification"/>
+               <Attribute Name="idType">
+                  <Value>IRI</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:Identifier/idType"/>
+               </Attribute>
+               <Attribute Name="identifier">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:Identifier/identifier"/>
+               </Attribute>
+            </Attribute>
+            <Attribute Name="kind">
+               <Value>TEMPLATE</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
+            </Attribute>
             <Attribute Name="qualifier:http://acplt.org/Qualifier/ExampleQualifier=100">
                <RefSemantic CorrespondingAttributePath="AAS:Qualifiable/qualifiers"/>
                <Attribute Name="type">
@@ -356,41 +388,6 @@
                   <RefSemantic CorrespondingAttributePath="AAS:Qualifier/valueType"/>
                </Attribute>
             </Attribute>
-            <Attribute Name="description">
-               <RefSemantic CorrespondingAttributePath="AAS:Referable/descriptions"/>
-               <Attribute Name="aml-lang=en-us">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">An example bill of material submodel for the test application</Value>
-               </Attribute>
-               <Attribute Name="aml-lang=de">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Ein Beispiel-BillofMaterial-Submodel für eine Test-Anwendung</Value>
-               </Attribute>
-            </Attribute>
-            <Attribute Name="idShort">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">BillOfMaterial</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
-            </Attribute>
-            <Attribute Name="administration">
-               <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
-               <Attribute Name="version">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
-               </Attribute>
-            </Attribute>
-            <Attribute Name="identification">
-               <RefSemantic CorrespondingAttributePath="AAS:Identifiable/identification"/>
-               <Attribute Name="idType">
-                  <Value>IRI</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:Identifier/idType"/>
-               </Attribute>
-               <Attribute Name="identifier">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:Identifier/identifier"/>
-               </Attribute>
-            </Attribute>
-            <Attribute Name="kind">
-               <Value>TEMPLATE</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
-            </Attribute>
             <Attribute Name="semanticId">
                <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(SUBMODEL)[IRI]http://acplt.org/SubmodelTemplates/BillOfMaterial</Value>
                <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
@@ -405,6 +402,10 @@
                      <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist</Value>
                   </Attribute>
                </Attribute>
+               <Attribute Name="entityType">
+                  <Value>CO_MANAGED_ENTITY</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:Entity/entityType"/>
+               </Attribute>
                <Attribute Name="idShort">
                   <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleEntity</Value>
                   <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
@@ -412,10 +413,6 @@
                <Attribute Name="semanticId">
                   <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GLOBAL_REFERENCE)[IRI]http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber</Value>
                   <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
-               </Attribute>
-               <Attribute Name="entityType">
-                  <Value>CO_MANAGED_ENTITY</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:Entity/entityType"/>
                </Attribute>
                <InternalElement ID="18" Name="ExampleProperty2">
                   <Attribute Name="category">
@@ -501,14 +498,6 @@
                      <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist</Value>
                   </Attribute>
                </Attribute>
-               <Attribute Name="idShort">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleEntity2</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
-               </Attribute>
-               <Attribute Name="semanticId">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GLOBAL_REFERENCE)[IRI]http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
-               </Attribute>
                <Attribute Name="entityType">
                   <Value>SELF_MANAGED_ENTITY</Value>
                   <RefSemantic CorrespondingAttributePath="AAS:Entity/entityType"/>
@@ -516,6 +505,14 @@
                <Attribute Name="globalAssetId">
                   <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ASSET)[IRI]https://acplt.org/Test_Asset2</Value>
                   <RefSemantic CorrespondingAttributePath="AAS:Entity/globalAssetId"/>
+               </Attribute>
+               <Attribute Name="idShort">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleEntity2</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+               </Attribute>
+               <Attribute Name="semanticId">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GLOBAL_REFERENCE)[IRI]http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
                </Attribute>
                <RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Entity"/>
             </InternalElement>
@@ -526,6 +523,17 @@
    </InstanceHierarchy>
    <InstanceHierarchy Name="ConceptDescriptionInstanceHierarchy">
       <InternalElement ID="21" Name="TestConceptDescription">
+         <Attribute Name="administration">
+            <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
+            <Attribute Name="revision">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/revision"/>
+            </Attribute>
+            <Attribute Name="version">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
+            </Attribute>
+         </Attribute>
          <Attribute Name="description">
             <RefSemantic CorrespondingAttributePath="AAS:Referable/descriptions"/>
             <Attribute Name="aml-lang=en-us">
@@ -539,17 +547,6 @@
             <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">TestConceptDescription</Value>
             <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
          </Attribute>
-         <Attribute Name="administration">
-            <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
-            <Attribute Name="revision">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/revision"/>
-            </Attribute>
-            <Attribute Name="version">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
-            </Attribute>
-         </Attribute>
          <Attribute Name="identification">
             <RefSemantic CorrespondingAttributePath="AAS:Identifiable/identification"/>
             <Attribute Name="idType">
@@ -560,6 +557,10 @@
                <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">https://acplt.org/Test_ConceptDescription</Value>
                <RefSemantic CorrespondingAttributePath="AAS:Identifier/identifier"/>
             </Attribute>
+         </Attribute>
+         <Attribute Name="isCaseOfs">
+            <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GLOBAL_REFERENCE)[IRI]http://acplt.org/DataSpecifications/ConceptDescriptions/TestConceptDescription</Value>
+            <RefSemantic CorrespondingAttributePath="AAS:ConceptDescription/isCaseOfs"/>
          </Attribute>
          <InternalElement ID="23" Name="EmbeddedDataSpecification_1" RefBaseSystemUnitPath="AssetAdministrationShellDataSpecificationTemplates/DataSpecificationIEC61360Template/DataSpecificationIEC61360">
             <Attribute Name="dataType">
@@ -1782,6 +1783,32 @@
    </RoleClassLib>
    <SystemUnitClassLib Name="AssetAdministrationShellSystemUnitClasses">
       <SystemUnitClass ID="26" Name="TestAssetAdministrationShell">
+         <Attribute Name="administration">
+            <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
+            <Attribute Name="revision">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/revision"/>
+            </Attribute>
+            <Attribute Name="version">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
+            </Attribute>
+         </Attribute>
+         <Attribute Name="assetInformation">
+            <RefSemantic CorrespondingAttributePath="AAS:AssetAdministrationShell/assetInformation"/>
+            <Attribute Name="assetKind">
+               <Value>INSTANCE</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:AssetInformation/assetKind"/>
+            </Attribute>
+            <Attribute Name="globalAssetId">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ASSET)[IRI]https://acplt.org/Test_Asset</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:AssetInformation/globalAssetId"/>
+            </Attribute>
+         </Attribute>
+         <Attribute Name="derivedFrom">
+            <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ASSET_ADMINISTRATION_SHELL)[IRI]https://acplt.org/TestAssetAdministrationShell2</Value>
+            <RefSemantic CorrespondingAttributePath="AAS:AssetAdministrationShell/derivedFrom"/>
+         </Attribute>
          <Attribute Name="description">
             <RefSemantic CorrespondingAttributePath="AAS:Referable/descriptions"/>
             <Attribute Name="aml-lang=en-us">
@@ -1795,35 +1822,6 @@
             <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">TestAssetAdministrationShell</Value>
             <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
          </Attribute>
-         <Attribute Name="assetInformation">
-            <RefSemantic CorrespondingAttributePath="AAS:AssetAdministrationShell/assetInformation"/>
-            <Attribute Name="assetKind">
-               <Value>INSTANCE</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:AssetInformation/assetKind"/>
-            </Attribute>
-            <Attribute Name="globalAssetId">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ASSET)[IRI]https://acplt.org/Test_Asset</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:AssetInformation/globalAssetId"/>
-            </Attribute>
-            <Attribute Name="specificAssetIds">
-               <RefSemantic CorrespondingAttributePath="AAS:AssetInformation/specificAssetIds"/>
-            </Attribute>
-         </Attribute>
-         <Attribute Name="derivedFrom">
-            <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ASSET_ADMINISTRATION_SHELL)[IRI]https://acplt.org/TestAssetAdministrationShell2</Value>
-            <RefSemantic CorrespondingAttributePath="AAS:AssetAdministrationShell/derivedFrom"/>
-         </Attribute>
-         <Attribute Name="administration">
-            <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
-            <Attribute Name="revision">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/revision"/>
-            </Attribute>
-            <Attribute Name="version">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
-            </Attribute>
-         </Attribute>
          <Attribute Name="identification">
             <RefSemantic CorrespondingAttributePath="AAS:Identifiable/identification"/>
             <Attribute Name="idType">
@@ -1836,6 +1834,17 @@
             </Attribute>
          </Attribute>
          <InternalElement ID="27" Name="Identification">
+            <Attribute Name="administration">
+               <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
+               <Attribute Name="revision">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/revision"/>
+               </Attribute>
+               <Attribute Name="version">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
+               </Attribute>
+            </Attribute>
             <Attribute Name="description">
                <RefSemantic CorrespondingAttributePath="AAS:Referable/descriptions"/>
                <Attribute Name="aml-lang=en-us">
@@ -1848,17 +1857,6 @@
             <Attribute Name="idShort">
                <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Identification</Value>
                <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
-            </Attribute>
-            <Attribute Name="administration">
-               <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
-               <Attribute Name="revision">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/revision"/>
-               </Attribute>
-               <Attribute Name="version">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
-               </Attribute>
             </Attribute>
             <Attribute Name="identification">
                <RefSemantic CorrespondingAttributePath="AAS:Identifiable/identification"/>
@@ -1906,14 +1904,6 @@
                <RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/ReferenceElement"/>
             </InternalElement>
             <InternalElement ID="31" Name="ExampleFile">
-               <Attribute Name="mimeType">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">application/pdf</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:File/mimeType"/>
-               </Attribute>
-               <Attribute Name="value">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">/TestFile.pdf</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:File/value"/>
-               </Attribute>
                <Attribute Name="category">
                   <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Parameter</Value>
                   <RefSemantic CorrespondingAttributePath="AAS:Referable/category"/>
@@ -1931,9 +1921,17 @@
                   <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleFile</Value>
                   <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
                </Attribute>
+               <Attribute Name="mimeType">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">application/pdf</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:File/mimeType"/>
+               </Attribute>
                <Attribute Name="semanticId">
                   <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GLOBAL_REFERENCE)[IRI]http://acplt.org/Files/ExampleFile</Value>
                   <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
+               </Attribute>
+               <Attribute Name="value">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">/TestFile.pdf</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:File/value"/>
                </Attribute>
                <ExternalInterface ID="32" Name="FileDataReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/FileDataReference">
                   <Attribute Name="MIMEType" AttributeDataType="xs:string">
@@ -2090,6 +2088,41 @@
             <RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Submodel"/>
          </InternalElement>
          <InternalElement ID="41" Name="BillOfMaterial" RefBaseSystemUnitPath="AssetAdministrationShellSystemUnitClasses/BillOfMaterial">
+            <Attribute Name="administration">
+               <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
+               <Attribute Name="version">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
+               </Attribute>
+            </Attribute>
+            <Attribute Name="description">
+               <RefSemantic CorrespondingAttributePath="AAS:Referable/descriptions"/>
+               <Attribute Name="aml-lang=en-us">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">An example bill of material submodel for the test application</Value>
+               </Attribute>
+               <Attribute Name="aml-lang=de">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Ein Beispiel-BillofMaterial-Submodel für eine Test-Anwendung</Value>
+               </Attribute>
+            </Attribute>
+            <Attribute Name="idShort">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">BillOfMaterial</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+            </Attribute>
+            <Attribute Name="identification">
+               <RefSemantic CorrespondingAttributePath="AAS:Identifiable/identification"/>
+               <Attribute Name="idType">
+                  <Value>IRI</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:Identifier/idType"/>
+               </Attribute>
+               <Attribute Name="identifier">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:Identifier/identifier"/>
+               </Attribute>
+            </Attribute>
+            <Attribute Name="kind">
+               <Value>TEMPLATE</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
+            </Attribute>
             <Attribute Name="qualifier:http://acplt.org/Qualifier/ExampleQualifier=100">
                <RefSemantic CorrespondingAttributePath="AAS:Qualifiable/qualifiers"/>
                <Attribute Name="type">
@@ -2128,41 +2161,6 @@
                   <RefSemantic CorrespondingAttributePath="AAS:Qualifier/valueType"/>
                </Attribute>
             </Attribute>
-            <Attribute Name="description">
-               <RefSemantic CorrespondingAttributePath="AAS:Referable/descriptions"/>
-               <Attribute Name="aml-lang=en-us">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">An example bill of material submodel for the test application</Value>
-               </Attribute>
-               <Attribute Name="aml-lang=de">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Ein Beispiel-BillofMaterial-Submodel für eine Test-Anwendung</Value>
-               </Attribute>
-            </Attribute>
-            <Attribute Name="idShort">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">BillOfMaterial</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
-            </Attribute>
-            <Attribute Name="administration">
-               <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
-               <Attribute Name="version">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
-               </Attribute>
-            </Attribute>
-            <Attribute Name="identification">
-               <RefSemantic CorrespondingAttributePath="AAS:Identifiable/identification"/>
-               <Attribute Name="idType">
-                  <Value>IRI</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:Identifier/idType"/>
-               </Attribute>
-               <Attribute Name="identifier">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:Identifier/identifier"/>
-               </Attribute>
-            </Attribute>
-            <Attribute Name="kind">
-               <Value>TEMPLATE</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
-            </Attribute>
             <Attribute Name="semanticId">
                <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(SUBMODEL)[IRI]http://acplt.org/SubmodelTemplates/BillOfMaterial</Value>
                <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
@@ -2177,6 +2175,10 @@
                      <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist</Value>
                   </Attribute>
                </Attribute>
+               <Attribute Name="entityType">
+                  <Value>CO_MANAGED_ENTITY</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:Entity/entityType"/>
+               </Attribute>
                <Attribute Name="idShort">
                   <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleEntity</Value>
                   <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
@@ -2184,10 +2186,6 @@
                <Attribute Name="semanticId">
                   <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GLOBAL_REFERENCE)[IRI]http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber</Value>
                   <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
-               </Attribute>
-               <Attribute Name="entityType">
-                  <Value>CO_MANAGED_ENTITY</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:Entity/entityType"/>
                </Attribute>
                <InternalElement ID="43" Name="ExampleProperty2">
                   <Attribute Name="category">
@@ -2273,14 +2271,6 @@
                      <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist</Value>
                   </Attribute>
                </Attribute>
-               <Attribute Name="idShort">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleEntity2</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
-               </Attribute>
-               <Attribute Name="semanticId">
-                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GLOBAL_REFERENCE)[IRI]http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber</Value>
-                  <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
-               </Attribute>
                <Attribute Name="entityType">
                   <Value>SELF_MANAGED_ENTITY</Value>
                   <RefSemantic CorrespondingAttributePath="AAS:Entity/entityType"/>
@@ -2289,6 +2279,14 @@
                   <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ASSET)[IRI]https://acplt.org/Test_Asset2</Value>
                   <RefSemantic CorrespondingAttributePath="AAS:Entity/globalAssetId"/>
                </Attribute>
+               <Attribute Name="idShort">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleEntity2</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+               </Attribute>
+               <Attribute Name="semanticId">
+                  <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GLOBAL_REFERENCE)[IRI]http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber</Value>
+                  <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
+               </Attribute>
                <RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Entity"/>
             </InternalElement>
             <RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Submodel"/>
@@ -2296,6 +2294,41 @@
          <SupportedRoleClass RefRoleClassPath="AssetAdministrationShellRoleClassLib/AssetAdministrationShell"/>
       </SystemUnitClass>
       <SystemUnitClass ID="46" Name="BillOfMaterial">
+         <Attribute Name="administration">
+            <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
+            <Attribute Name="version">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
+            </Attribute>
+         </Attribute>
+         <Attribute Name="description">
+            <RefSemantic CorrespondingAttributePath="AAS:Referable/descriptions"/>
+            <Attribute Name="aml-lang=en-us">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">An example bill of material submodel for the test application</Value>
+            </Attribute>
+            <Attribute Name="aml-lang=de">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Ein Beispiel-BillofMaterial-Submodel für eine Test-Anwendung</Value>
+            </Attribute>
+         </Attribute>
+         <Attribute Name="idShort">
+            <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">BillOfMaterial</Value>
+            <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+         </Attribute>
+         <Attribute Name="identification">
+            <RefSemantic CorrespondingAttributePath="AAS:Identifiable/identification"/>
+            <Attribute Name="idType">
+               <Value>IRI</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:Identifier/idType"/>
+            </Attribute>
+            <Attribute Name="identifier">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:Identifier/identifier"/>
+            </Attribute>
+         </Attribute>
+         <Attribute Name="kind">
+            <Value>TEMPLATE</Value>
+            <RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
+         </Attribute>
          <Attribute Name="qualifier:http://acplt.org/Qualifier/ExampleQualifier=100">
             <RefSemantic CorrespondingAttributePath="AAS:Qualifiable/qualifiers"/>
             <Attribute Name="type">
@@ -2334,41 +2367,6 @@
                <RefSemantic CorrespondingAttributePath="AAS:Qualifier/valueType"/>
             </Attribute>
          </Attribute>
-         <Attribute Name="description">
-            <RefSemantic CorrespondingAttributePath="AAS:Referable/descriptions"/>
-            <Attribute Name="aml-lang=en-us">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">An example bill of material submodel for the test application</Value>
-            </Attribute>
-            <Attribute Name="aml-lang=de">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Ein Beispiel-BillofMaterial-Submodel für eine Test-Anwendung</Value>
-            </Attribute>
-         </Attribute>
-         <Attribute Name="idShort">
-            <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">BillOfMaterial</Value>
-            <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
-         </Attribute>
-         <Attribute Name="administration">
-            <RefSemantic CorrespondingAttributePath="AAS:Identifiable/administration"/>
-            <Attribute Name="version">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">0.9</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:AdministrativeInformation/version"/>
-            </Attribute>
-         </Attribute>
-         <Attribute Name="identification">
-            <RefSemantic CorrespondingAttributePath="AAS:Identifiable/identification"/>
-            <Attribute Name="idType">
-               <Value>IRI</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:Identifier/idType"/>
-            </Attribute>
-            <Attribute Name="identifier">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:Identifier/identifier"/>
-            </Attribute>
-         </Attribute>
-         <Attribute Name="kind">
-            <Value>TEMPLATE</Value>
-            <RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
-         </Attribute>
          <Attribute Name="semanticId">
             <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(SUBMODEL)[IRI]http://acplt.org/SubmodelTemplates/BillOfMaterial</Value>
             <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
@@ -2383,6 +2381,10 @@
                   <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist</Value>
                </Attribute>
             </Attribute>
+            <Attribute Name="entityType">
+               <Value>CO_MANAGED_ENTITY</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:Entity/entityType"/>
+            </Attribute>
             <Attribute Name="idShort">
                <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleEntity</Value>
                <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
@@ -2390,10 +2392,6 @@
             <Attribute Name="semanticId">
                <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GLOBAL_REFERENCE)[IRI]http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber</Value>
                <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
-            </Attribute>
-            <Attribute Name="entityType">
-               <Value>CO_MANAGED_ENTITY</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:Entity/entityType"/>
             </Attribute>
             <InternalElement ID="48" Name="ExampleProperty2">
                <Attribute Name="category">
@@ -2479,14 +2477,6 @@
                   <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist</Value>
                </Attribute>
             </Attribute>
-            <Attribute Name="idShort">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleEntity2</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
-            </Attribute>
-            <Attribute Name="semanticId">
-               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GLOBAL_REFERENCE)[IRI]http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber</Value>
-               <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
-            </Attribute>
             <Attribute Name="entityType">
                <Value>SELF_MANAGED_ENTITY</Value>
                <RefSemantic CorrespondingAttributePath="AAS:Entity/entityType"/>
@@ -2494,6 +2484,14 @@
             <Attribute Name="globalAssetId">
                <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ASSET)[IRI]https://acplt.org/Test_Asset2</Value>
                <RefSemantic CorrespondingAttributePath="AAS:Entity/globalAssetId"/>
+            </Attribute>
+            <Attribute Name="idShort">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleEntity2</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+            </Attribute>
+            <Attribute Name="semanticId">
+               <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GLOBAL_REFERENCE)[IRI]http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber</Value>
+               <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
             </Attribute>
             <RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Entity"/>
          </InternalElement>
