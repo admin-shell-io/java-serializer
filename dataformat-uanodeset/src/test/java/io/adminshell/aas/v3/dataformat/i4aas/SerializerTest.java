@@ -56,7 +56,7 @@ public class SerializerTest {
 			}
 			Assert.assertTrue("contains " + toCheck, write.contains(toCheck));
 		}
-		//System.out.println(write);
+		System.out.println(write);
 	}
 
 	@Test

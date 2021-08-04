@@ -15,8 +15,6 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 
-import org.opcfoundation.ua._2011._03.uanodeset.ListOfReferences;
-import org.opcfoundation.ua._2011._03.uanodeset.UANode;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
@@ -24,8 +22,6 @@ import io.adminshell.aas.v3.model.HasSemantics;
 import io.adminshell.aas.v3.model.Identifier;
 import io.adminshell.aas.v3.model.IdentifierType;
 import io.adminshell.aas.v3.model.Key;
-import io.adminshell.aas.v3.model.KeyType;
-import io.adminshell.aas.v3.model.Reference;
 import io.adminshell.aas.v3.model.impl.DefaultConceptDescription;
 
 public interface HasSemanticsMapper {
@@ -35,37 +31,20 @@ public interface HasSemanticsMapper {
 		if (semanticId != null && !semanticId.getKeys().isEmpty()) {
 						
 			// get Dictionary Entry based on first key
+			UAObject nodeForIdentification = ctx.getTargetNodeForReference(semanticId);			
+			
 			Key key = semanticId.getKeys().get(0);
-			
-			UANode nodeForIdentification = ctx.getNodeIdForIdentification(key.getValue());
-			
-			
 			if (nodeForIdentification == null && key.getValue() != null && !key.getValue().isBlank()) {
-				nodeForIdentification = fixedConceptDescription(ctx, key);
+				nodeForIdentification = fixConceptDescription(ctx, key);
 			}
 
-			
 			if (nodeForIdentification != null) {
-				// add HasDictionaryEntry reference
-				if (nodeForIdentification.getReferences() == null) {
-					nodeForIdentification.setReferences(new ListOfReferences());
-				}
-				org.opcfoundation.ua._2011._03.uanodeset.Reference parentRef = org.opcfoundation.ua._2011._03.uanodeset.Reference
-						.builder().withIsForward(false).withReferenceType(UaIdentifier.HasDictionaryEntry.getName())
-						.withValue(target.getNodeId()).build();
-				nodeForIdentification.getReferences().getReference().add(parentRef);
-				if (target.getReferences() == null) {
-					target.setReferences(new ListOfReferences());
-				}
-				org.opcfoundation.ua._2011._03.uanodeset.Reference childRef = org.opcfoundation.ua._2011._03.uanodeset.Reference
-						.builder().withReferenceType(UaIdentifier.HasDictionaryEntry.getName()).withValue(nodeForIdentification.getNodeId())
-						.build();
-				target.getReferences().getReference().add(childRef);
+				I4AASMapper.attachAsDictionaryEntry(target, nodeForIdentification);
 			}
 		}
 	}
 
-	default UAObject fixedConceptDescription(MappingContext ctx, Key key) {
+	default UAObject fixConceptDescription(MappingContext ctx, Key key) {
 		//if not found, a concept description must be created and added
 		DefaultConceptDescription virtualCD = new DefaultConceptDescription();
 		virtualCD.setIdShort(key.getValue());

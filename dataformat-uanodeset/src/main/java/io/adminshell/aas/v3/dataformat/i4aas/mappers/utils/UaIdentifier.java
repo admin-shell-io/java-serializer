@@ -31,6 +31,7 @@ public enum UaIdentifier implements BasicIdentifier  {
 	PropertyType("PropertyType", 68),
 	IdType("IdType", 256),
 	NumericRange("NumericRange", 291),
+	HasAddIn("HasAddIn", 17604),
 	HasDictionaryEntry("HasDictionaryEntry", 17597);
 	
 	private String name;
