@@ -74,18 +74,17 @@ public class AssetAdministrationShellEnvironmentMapper extends DefaultMapper<Ass
                 .withName(generator.getDocumentInfo().getAssetAdministrationShellSystemUnitClassLib());
         // generate SystemUnitClass for each AAS with at least 1 Submodel with kind == TEMPLATE
         // generate SystemUnitClass for each Submodel with king == TEMPLATE
-        Aas2AmlMappingContext subContext = context.withoutIdCache().withoutProperty();
         for (AssetAdministrationShell aas : env.getAssetAdministrationShells()) {
             List<Submodel> submodelTemplates = AASUtils.getSubmodelTemplates(aas, env);
             if (!submodelTemplates.isEmpty()) {
                 empty = false;
                 InternalElementType.Builder temp = InternalElementType.builder();
-                subContext.map(aas, generator.with(temp));
+                context.withoutIdCache().withoutProperty().map(aas, generator.with(temp));
                 builder.addSystemUnitClass(internalElementToSystemUnitClass(temp.build().getInternalElement().get(0)));
             }
             for (Submodel submodel : submodelTemplates) {
                 InternalElementType.Builder temp = InternalElementType.builder();
-                subContext.map(submodel, generator.with(temp));
+                context.withoutIdCache().withoutProperty().map(submodel, generator.with(temp));
                 builder.addSystemUnitClass(internalElementToSystemUnitClass(temp.build().getInternalElement().get(0)));
             }
         }

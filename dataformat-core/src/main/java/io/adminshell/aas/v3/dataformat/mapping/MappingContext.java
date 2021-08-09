@@ -18,12 +18,16 @@ package io.adminshell.aas.v3.dataformat.mapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public abstract class MappingContext {
+public abstract class MappingContext<T extends Mapper> {
 
     protected static final Logger log = LoggerFactory.getLogger(MappingContext.class);
-    protected final MappingProvider mappingProvider;
+    protected final MappingProvider<T> mappingProvider;
 
-    public MappingContext(MappingProvider mappingProvider) {
+    public MappingContext(MappingProvider<T> mappingProvider) {
         this.mappingProvider = mappingProvider;
+    }
+
+    public MappingProvider<T> getMappingProvider() {
+        return mappingProvider;
     }
 }

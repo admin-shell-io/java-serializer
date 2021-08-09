@@ -15,8 +15,8 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.aas2aml;
 
+import io.adminshell.aas.v3.dataformat.aml.Aas2AmlConfig;
 import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
-import io.adminshell.aas.v3.dataformat.aml.AmlSerializationConfig;
 import io.adminshell.aas.v3.dataformat.aml.naming.PropertyNamingStrategy;
 import io.adminshell.aas.v3.dataformat.aml.naming.AbstractClassNamingStrategy;
 import io.adminshell.aas.v3.dataformat.aml.naming.NumberingClassNamingStrategy;
@@ -39,8 +39,8 @@ import io.adminshell.aas.v3.dataformat.aml.aas2aml.mapper.ReferenceElementMapper
 import io.adminshell.aas.v3.dataformat.aml.aas2aml.mapper.ReferenceMapper;
 import io.adminshell.aas.v3.dataformat.aml.aas2aml.mapper.RelationshipElementMapper;
 import io.adminshell.aas.v3.dataformat.aml.aas2aml.mapper.SubmodelMapper;
+import io.adminshell.aas.v3.dataformat.aml.aas2aml.mapper.ViewMapper;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
-import io.adminshell.aas.v3.dataformat.mapping.Mapper;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.dataformat.mapping.MappingProvider;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
@@ -49,21 +49,22 @@ import io.adminshell.aas.v3.model.LangString;
 import io.adminshell.aas.v3.model.Qualifier;
 import io.adminshell.aas.v3.model.Referable;
 import org.slf4j.LoggerFactory;
+import io.adminshell.aas.v3.dataformat.mapping.SourceBasedMapper;
 
-public class AasToAmlMapper extends Mapper<AssetAdministrationShellEnvironment, CAEXFile, AmlSerializationConfig> {
+public class AasToAmlMapper {
 
     public static final String DEFAULT_SCHEMA_VERSION = "2.15";
     public static final String DEFAULT_AML_VERSION = "2.0";
     public static final String DEFAULT_FILENAME = "AssetAdministrationShellEnvironment.aml";
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(AasToAmlMapper.class);
     private static final String DEFAULT_LANGUAGE = "EN";
+    private final Aas2AmlConfig config;
     private CAEXFile result;
 
-    public AasToAmlMapper(AmlSerializationConfig config) {
-        super(config);
+    public AasToAmlMapper(Aas2AmlConfig config) {
+        this.config = config;
     }
 
-    @Override
     public CAEXFile map(AssetAdministrationShellEnvironment env) throws MappingException {
         return map(env, DEFAULT_SCHEMA_VERSION, DEFAULT_FILENAME);
     }
@@ -75,7 +76,8 @@ public class AasToAmlMapper extends Mapper<AssetAdministrationShellEnvironment, 
         propertyNamingStrategy.registerCustomNaming(Referable.class, "descriptions", "description");
         propertyNamingStrategy.registerCustomNaming(Qualifier.class, x -> "qualifier:" + x.getType() + "=" + x.getValue());
         propertyNamingStrategy.registerCustomNaming(ConceptDescription.class, "isCaseOfs", "isCaseOf");
-        MappingProvider mappingProvider = new MappingProvider(
+        MappingProvider<SourceBasedMapper> mappingProvider = new MappingProvider<>(
+                SourceBasedMapper.class,
                 new DefaultMapper(),
                 new DefaultCollectionMapper());
 
@@ -94,6 +96,7 @@ public class AasToAmlMapper extends Mapper<AssetAdministrationShellEnvironment, 
         mappingProvider.register(new ReferenceElementMapper());
         mappingProvider.register(new RelationshipElementMapper());
         mappingProvider.register(new DataSpecificationIEC61360Mapper());
+        mappingProvider.register(new ViewMapper());
         // FIX
         // ReferenceElement and RelationshipElement reference other Referables.
         // Each such reference is represented as an InternalLink in AML.

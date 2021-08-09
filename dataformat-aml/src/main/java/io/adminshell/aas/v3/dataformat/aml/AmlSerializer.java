@@ -42,10 +42,10 @@ public class AmlSerializer implements Serializer {
 
     @Override
     public String write(AssetAdministrationShellEnvironment aasEnvironment) throws SerializationException {
-        return write(aasEnvironment, AmlSerializationConfig.DEFAULT);
+        return write(aasEnvironment, Aas2AmlConfig.DEFAULT);
     }
 
-    public String write(AssetAdministrationShellEnvironment aasEnvironment, AmlSerializationConfig config) throws SerializationException {
+    public String write(AssetAdministrationShellEnvironment aasEnvironment, Aas2AmlConfig config) throws SerializationException {
         AasToAmlMapper mapper = new AasToAmlMapper(config);
         try {
             CAEXFile aml = mapper.map(aasEnvironment);

@@ -40,7 +40,7 @@ public class FileMapper extends DefaultMapper<File> {
         if (builder != null) {
             builder.withExternalInterface(RoleClassType.ExternalInterface.builder()
                     .withName(FILE_INTERFACE_NAME)
-                    .withID(context.generateId())
+                    .withID(getId(value, generator, context))
                     .withRefBaseClassPath(generator.getDocumentInfo().getAssetAdministrationShellInterfaceClassLib() + "/" + FILE_INTERFACE_NAME)
                     .addAttribute(AttributeType.builder()
                             .withName(ATTRIBUTE_MIMETYPE_NAME)

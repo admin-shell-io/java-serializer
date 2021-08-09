@@ -21,18 +21,18 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class AmlSerializationConfig {
+public class Aas2AmlConfig {
 
     private final boolean includeLibraries;
     private final IdGenerator idGenerator;
     private final List<Object> additionalInformation;
-    public static final AmlSerializationConfig DEFAULT = new Builder().build();
+    public static final Aas2AmlConfig DEFAULT = new Builder().build();
 
     public static Builder builder() {
         return new Builder();
     }
 
-    private AmlSerializationConfig(boolean includeLibraries, IdGenerator idGenerator, List<Object> additionalInformation) {
+    private Aas2AmlConfig(boolean includeLibraries, IdGenerator idGenerator, List<Object> additionalInformation) {
         this.includeLibraries = includeLibraries;
         this.idGenerator = idGenerator;
         this.additionalInformation = additionalInformation;
@@ -56,8 +56,8 @@ public class AmlSerializationConfig {
         private IdGenerator idGenerator = new UuidGenerator();
         private List<Object> additionalInformation = new ArrayList<>();
 
-        public AmlSerializationConfig build() {
-            return new AmlSerializationConfig(includeLibraries, idGenerator, additionalInformation);
+        public Aas2AmlConfig build() {
+            return new Aas2AmlConfig(includeLibraries, idGenerator, additionalInformation);
         }
 
         public Builder includeLibraries() {

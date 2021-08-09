@@ -36,7 +36,7 @@ public class OperationVariableCollectionMapper extends DefaultCollectionMapper<O
         name = name.substring(0, 1).toUpperCase() + name.substring(1);
         InternalElementType.Builder builder = InternalElementType.builder()
                 .withName(name)
-                .withID(context.generateId())
+                .withID(getId(value, generator, context))
                 .withRoleRequirements(generator.roleRequirement("Operation" + name));
         for (OperationVariable element : value) {
             context

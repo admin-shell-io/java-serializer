@@ -20,18 +20,19 @@ import io.adminshell.aas.v3.model.Referable;
 import io.adminshell.aas.v3.model.Reference;
 import io.adminshell.aas.v3.model.ReferenceElement;
 import io.adminshell.aas.v3.model.RelationshipElement;
+import io.adminshell.aas.v3.model.View;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ReferencedReferableCollector {
+public class ReferencedByViewCollector {
 
     private AssetAdministrationShellEnvironment env;
 
-    public ReferencedReferableCollector(AssetAdministrationShellEnvironment env) {
+    public ReferencedByViewCollector(AssetAdministrationShellEnvironment env) {
         this.env = env;
     }
 
-    public Set<Reference> collect() {
+    public Set<Referable> collect() {
         Visitor visitor = new Visitor();
         visitor.visit(env);
         return visitor.referencedElements;
@@ -39,26 +40,20 @@ public class ReferencedReferableCollector {
 
     private class Visitor implements AssetAdministrationShellElementWalkerVisitor {
 
-        Set<Reference> referencedElements = new HashSet<>();
+        Set<Referable> referencedElements = new HashSet<>();
 
         @Override
-        public void visit(ReferenceElement referenceElement) {
-            handleReference(referenceElement.getValue());
-            AssetAdministrationShellElementWalkerVisitor.super.visit(referenceElement);
+        public void visit(View view) {
+            view.getContainedElements().forEach(x -> handleReference(x));
+            AssetAdministrationShellElementWalkerVisitor.super.visit(view);
         }
 
         private void handleReference(Reference reference) {
             Referable target = AASUtils.resolve(reference, env);
             if (target != null) {
-                referencedElements.add(reference);
+                referencedElements.add(target);
             }
         }
 
-        @Override
-        public void visit(RelationshipElement relationshipElement) {
-            handleReference(relationshipElement.getFirst());
-            handleReference(relationshipElement.getSecond());
-            AssetAdministrationShellElementWalkerVisitor.super.visit(relationshipElement);
-        }
     }
 }

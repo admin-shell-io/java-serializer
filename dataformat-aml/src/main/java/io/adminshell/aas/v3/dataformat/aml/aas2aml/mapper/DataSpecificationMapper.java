@@ -36,7 +36,7 @@ public class DataSpecificationMapper extends DefaultMapper<EmbeddedDataSpecifica
                     + "/" + content.getClass().getSimpleName() + "Template/"
                     + content.getClass().getSimpleName();
             InternalElementType.Builder builder = InternalElementType.builder()
-                    .withID(context.generateId())
+                    .withID(getId(value, generator, context))
                     .withRefBaseSystemUnitPath(refSystemUnitPath)
                     .withName("EmbeddedDataSpecification");
             // serialize properties, but with different attribute path ("IEC:DataSpecificationIEC63360/[propertyName])

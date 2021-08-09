@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.mapping;
 
-public interface Mapper<T> {
+public interface TargetBasedMapper<T, P, C extends MappingContext> extends Mapper<T> {
 
+    public T map(P parser, C context) throws MappingException;
 }

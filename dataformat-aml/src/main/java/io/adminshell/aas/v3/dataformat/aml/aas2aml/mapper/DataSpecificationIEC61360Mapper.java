@@ -30,11 +30,10 @@ public class DataSpecificationIEC61360Mapper extends DefaultMapper<DataSpecifica
         asInternalElement(content, generator, context);
     }
 
-    @Override
-    protected String getId(DataSpecificationIEC61360 value, Aas2AmlMappingContext context) {
-        return context.generateId();
-    }
-
+//    @Override
+//    protected String getId(DataSpecificationIEC61360 value, AmlGenerator generator, Aas2AmlMappingContext context) {
+//        return context.generateId();
+//    }
     @Override
     protected InternalElementType.RoleRequirements getRoleRequirementClass(DataSpecificationIEC61360 value, AmlGenerator generator, Aas2AmlMappingContext context) {
         return generator.roleRequirement(DataSpecificationContent.class.getSimpleName());

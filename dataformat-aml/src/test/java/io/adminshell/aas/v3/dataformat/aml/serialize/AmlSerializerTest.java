@@ -17,7 +17,7 @@ package io.adminshell.aas.v3.dataformat.aml.serialize;
 
 import io.adminshell.aas.v3.dataformat.aml.fixtures.FullExample;
 import io.adminshell.aas.v3.dataformat.SerializationException;
-import io.adminshell.aas.v3.dataformat.aml.AmlSerializationConfig;
+import io.adminshell.aas.v3.dataformat.aml.Aas2AmlConfig;
 import io.adminshell.aas.v3.dataformat.aml.AmlSerializer;
 import io.adminshell.aas.v3.dataformat.aml.id.IntegerIdGenerator;
 import io.adminshell.aas.v3.dataformat.aml.fixtures.TestExample;
@@ -55,15 +55,15 @@ public class AmlSerializerTest {
     private void validateAmlSerializer(File expectedFile, AssetAdministrationShellEnvironment environment)
             throws SerializationException, SAXException, IOException {
         String expected = Files.readString(expectedFile.toPath());
-        String actual = new AmlSerializer().write(environment, AmlSerializationConfig.builder()
+        String actual = new AmlSerializer().write(environment, Aas2AmlConfig.builder()
                 .idGenerator(new IntegerIdGenerator())
                 .build());
         System.out.println(actual);
         Diff diff = DiffBuilder
                 .compare(actual)
                 .withTest(expected)
-//                .checkForSimilar()
-//                .checkForIdentical()
+                //                .checkForSimilar()
+                //                .checkForIdentical()
                 .normalizeWhitespace()
                 .withNodeMatcher(new DefaultNodeMatcher(ElementSelectors.byNameAndText))
                 .ignoreComments()
@@ -73,7 +73,7 @@ public class AmlSerializerTest {
         Iterator<Difference> iter = diff.getDifferences().iterator();
         int size = 0;
         while (iter.hasNext()) {
-            System.out.println(iter.next());            
+            System.out.println(iter.next());
             size++;
         }
         assert (size == 0);

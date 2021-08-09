@@ -40,7 +40,7 @@ public class ReferenceElementMapper extends DefaultMapper<ReferenceElement> {
         }
         // regular mapping
         InternalElementType.Builder builder = InternalElementType.builder()
-                .withID(context.getCachedId(element))
+                .withID(getId(element, generator, context))
                 .withName(context.getInternalElementNamingStrategy().getName(
                         element.getClass(),
                         element,
@@ -49,7 +49,7 @@ public class ReferenceElementMapper extends DefaultMapper<ReferenceElement> {
         mapProperties(element, generator.with(builder), context);
         // add interface
         RoleClassType.ExternalInterface.Builder interfaceBuilder = RoleClassType.ExternalInterface.builder()
-                .withID(context.generateId())
+                .withID(context.getId(null))
                 .withName("ReferableReference")
                 .withRefBaseClassPath("AssetAdministrationShellInterfaceClassLib/ReferableReference");
         Referable resolvedReference = AASUtils.resolve(element.getValue(), context.getEnvironment());
@@ -60,15 +60,15 @@ public class ReferenceElementMapper extends DefaultMapper<ReferenceElement> {
             // !!! contradicts CAEX meta model as depicted on slide 13 https://www.plt.rwth-aachen.de/global/show_document.asp?id=aaaaaaaaaatmalk
             builder = builder.withInternalLink(InternalLink.builder()
                     .withName("value")
-                    .withID(context.generateId())
-                    .withRefPartnerSideA(context.getCachedId(element) + ":ReferableReference")
-                    .withRefPartnerSideB(context.getInternalLinkTargetId(resolvedReference) + ":externalReferenceTarget")
+                    .withID(getId(element, generator, context))
+                    .withRefPartnerSideA(getId(element, generator, context) + ":ReferableReference")
+                    .withRefPartnerSideB(context.getId(element.getValue()) + ":ReferableReference")
                     .build());
         } else {
             interfaceBuilder = interfaceBuilder
                     .addAttribute(AttributeType.builder()
                             .withName("value")
-                            .withID(context.generateId())
+                            .withID(getId(element, generator, context))
                             .withAttributeDataType("xs:string")
                             .withValue(AASUtils.asString(element.getValue()))
                             .build());

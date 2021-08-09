@@ -55,7 +55,7 @@ public class EmbeddedDataSpecificationCollectionMapper extends DefaultMapper<Col
                 context.map(element.getDataSpecificationContent(), subGenerator);
                 InternalElementType.Builder builder = InternalElementType.copyOf(temp.build().getInternalElement().get(0))
                         .withName("EmbeddedDataSpecification" + (countInternalElement > 1 ? "_" + (internalElements.size() + 1) : ""))
-                        .withID(context.generateId())
+                        .withID(getId(value, generator, context))
                         .withRefBaseSystemUnitPath(generator.getDocumentInfo().getDataSpecificationTemplatesSystemUnitClassLib()
                                 + "/" + getDataSpecificationContentType(element.getDataSpecificationContent().getClass()) + "Template/"
                                 + getDataSpecificationContentType(element.getDataSpecificationContent().getClass()));

@@ -17,10 +17,8 @@ package io.adminshell.aas.v3.dataformat.aml.aas2aml.mapper;
 
 import io.adminshell.aas.v3.dataformat.aml.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.aas2aml.Aas2AmlMappingContext;
-import io.adminshell.aas.v3.dataformat.mapping.ElementMapper;
-import io.adminshell.aas.v3.dataformat.mapping.MappingException;
+import io.adminshell.aas.v3.dataformat.mapping.SourceBasedMapper;
 
-public interface Aas2AmlElementMapper<T> extends ElementMapper<T, AmlGenerator, Aas2AmlMappingContext> {
+public interface Aas2AmlElementMapper<T> extends SourceBasedMapper<T, AmlGenerator, Aas2AmlMappingContext> {
 
-    public void map(T value, AmlGenerator generator, Aas2AmlMappingContext context) throws MappingException;
 }

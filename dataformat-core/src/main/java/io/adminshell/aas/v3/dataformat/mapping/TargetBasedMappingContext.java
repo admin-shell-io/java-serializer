@@ -15,6 +15,10 @@
  */
 package io.adminshell.aas.v3.dataformat.mapping;
 
-public interface Mapper<T> {
+public abstract class TargetBasedMappingContext extends MappingContext<TargetBasedMapper> {
+
+    public TargetBasedMappingContext(MappingProvider<TargetBasedMapper> mappingProvider) {
+        super(mappingProvider);
+    }
 
 }

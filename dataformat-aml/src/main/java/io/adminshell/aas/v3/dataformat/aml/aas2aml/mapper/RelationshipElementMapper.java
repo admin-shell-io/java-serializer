@@ -41,7 +41,7 @@ public class RelationshipElementMapper extends DefaultMapper<RelationshipElement
         }
         // regular mapping        
         InternalElementType.Builder builder = InternalElementType.builder()
-                .withID(context.getCachedId(element))
+                .withID(getId(element, generator, context))
                 .withName(context.getInternalElementNamingStrategy().getName(
                         element.getClass(),
                         element,
@@ -68,9 +68,9 @@ public class RelationshipElementMapper extends DefaultMapper<RelationshipElement
             // !!! contradicts CAEX meta model as depicted on slide 13 https://www.plt.rwth-aachen.de/global/show_document.asp?id=aaaaaaaaaatmalk
             generator.addInternalLink(InternalLink.builder()
                     .withName(name)
-                    .withID(context.generateId())
-                    .withRefPartnerSideA(context.getCachedId(element) + ":name")
-                    .withRefPartnerSideB(context.getInternalLinkTargetId(resolvedReference) + ":externalReferenceTarget")
+                    .withID(context.newId())
+                    .withRefPartnerSideA(getId(element, generator, context) + ":name")
+                    .withRefPartnerSideB(context.getId(reference) + ":ReferableReference")
                     .build());
         } else {
             builder = builder.addAttribute(AttributeType.builder()

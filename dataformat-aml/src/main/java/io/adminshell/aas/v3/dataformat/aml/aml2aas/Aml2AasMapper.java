@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.mapping;
+package io.adminshell.aas.v3.dataformat.aml.aml2aas;
 
-public interface Mapper<T> {
+import io.adminshell.aas.v3.dataformat.mapping.TargetBasedMapper;
 
+public interface Aml2AasMapper<T> extends TargetBasedMapper<T, AmlParser, Aml2AasMappingContext> {
 }

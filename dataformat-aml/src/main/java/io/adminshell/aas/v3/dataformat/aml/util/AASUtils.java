@@ -17,6 +17,7 @@ package io.adminshell.aas.v3.dataformat.aml.util;
 
 import com.google.common.base.Objects;
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
+import io.adminshell.aas.v3.dataformat.core.deserialization.EnumDeserializer;
 import io.adminshell.aas.v3.dataformat.core.serialization.EnumSerializer;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
@@ -28,6 +29,8 @@ import io.adminshell.aas.v3.model.ModelingKind;
 import io.adminshell.aas.v3.model.Referable;
 import io.adminshell.aas.v3.model.Reference;
 import io.adminshell.aas.v3.model.Submodel;
+import io.adminshell.aas.v3.model.impl.DefaultKey;
+import io.adminshell.aas.v3.model.impl.DefaultReference;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -35,6 +38,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class AASUtils {
 
@@ -74,8 +78,119 @@ public class AASUtils {
         return !getSubmodelTemplates(aas, environment).isEmpty();
     }
 
-    public static Referable resolve(Reference reference, AssetAdministrationShellEnvironment env) {
+    public static Reference identifiableToReference(Identifiable identifiable) {
+        return new DefaultReference.Builder()
+                .key(new DefaultKey.Builder()
+                        .type(referableToKeyType(identifiable))
+                        .idType(KeyType.valueOf(identifiable.getIdentification().getIdType().toString()))
+                        .value(identifiable.getIdentification().getIdentifier())
+                        .build())
+                .build();
+    }
 
+    public static KeyElements referableToKeyType(Referable referable) {
+        Class<?> aasInterface = ReflectionHelper.getAasInterface(referable.getClass());
+        if (aasInterface != null) {
+            return KeyElements.valueOf(EnumDeserializer.translate(aasInterface.getSimpleName()));
+        }
+        return null;
+    }
+
+    public static Optional<Class> keyTypeToClass(KeyElements key) {
+        return Stream.concat(ReflectionHelper.INTERFACES.stream(), ReflectionHelper.INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION.stream())
+                .filter(x -> x.getSimpleName().equals(EnumSerializer.translate(key.name())))
+                .findAny();
+    }
+
+    public static Reference asReference(Reference parent, Referable element) {
+//        if (element == null) {
+//            return null;
+//        }
+//        Reference result = AASUtils.cloneReference(parent);
+//        if (result == null && Identifiable.class.isAssignableFrom(element.getClass())) {
+//            return AASUtils.identifiableToReference((Identifiable) element);
+//        }
+//        if (result != null) {
+//            result.getKeys().add(new DefaultKey.Builder()
+//                    .type(AASUtils.referableToKeyType(element))
+//                    .idType(KeyType.ID_SHORT)
+//                    .value(element.getIdShort())
+//                    .build());
+//        }
+//        return result;
+
+        if (element == null) {
+            return null;
+        } else if (Identifiable.class.isAssignableFrom(element.getClass())) {
+            return AASUtils.identifiableToReference((Identifiable) element);
+        } else {
+            Reference result = AASUtils.cloneReference(parent);
+            if (result != null) {
+                result.getKeys().add(new DefaultKey.Builder()
+                        .type(AASUtils.referableToKeyType(element))
+                        .idType(KeyType.ID_SHORT)
+                        .value(element.getIdShort())
+                        .build());
+            }
+            return result;
+        }
+    }
+
+    public static boolean equals(Reference ref1, Reference ref2) {
+        boolean ref1Empty = ref1 == null || ref1.getKeys() == null || ref1.getKeys().isEmpty();
+        boolean ref2Empty = ref2 == null || ref2.getKeys() == null || ref2.getKeys().isEmpty();
+        if (ref1Empty && ref2Empty) {
+            return true;
+        }
+        if (ref1Empty != ref2Empty) {
+            return false;
+        }
+        int keyLength = Math.min(ref1.getKeys().size(), ref2.getKeys().size());
+        for (int i = 0; i < keyLength; i++) {
+            Key ref1Key = ref1.getKeys().get(ref1.getKeys().size() - (i + 1));
+            Key ref2Key = ref2.getKeys().get(ref2.getKeys().size() - (i + 1));
+            Optional<Class> ref1Type = keyTypeToClass(ref1Key.getType());
+            Optional<Class> ref2Type = keyTypeToClass(ref2Key.getType());
+            if (ref1Type.isPresent() != ref2Type.isPresent()) {
+                return false;
+            }
+            if (ref1Type.isPresent()) {
+                if (!(ref1Type.get().isAssignableFrom(ref2Type.get())
+                        || ref2Type.get().isAssignableFrom(ref1Type.get()))) {
+                    return false;
+                }
+            }
+            if (!(Objects.equal(ref1Key.getIdType(), ref2Key.getIdType())
+                    && Objects.equal(ref1Key.getValue(), ref2Key.getValue()))) {
+                return false;
+            }
+            if ((ref1Key.getIdType() == KeyType.IRI)
+                    || (ref1Key.getIdType() == KeyType.IRDI)
+                    || (ref1Key.getIdType() == KeyType.CUSTOM)) {
+                return true;
+            }
+        }
+        return true;
+    }
+
+    public static Reference cloneReference(Reference reference) {
+        if (reference == null || reference.getKeys() == null || reference.getKeys().isEmpty()) {
+            return null;
+        }
+        return new DefaultReference.Builder()
+                .keys(reference.getKeys().stream().map(x -> new DefaultKey.Builder()
+                .idType(x.getIdType())
+                .type(x.getType())
+                .value(x.getValue())
+                .build())
+                        .collect(Collectors.toList()))
+                .build();
+    }
+
+    public static Referable resolve(Reference reference, AssetAdministrationShellEnvironment env) {
+        if (reference == null || reference.getKeys() == null || reference.getKeys().isEmpty()) {
+            return null;
+        }
         List<Key> keys = reference.getKeys();
 
         //get reduced Key list from last identifiable key to end

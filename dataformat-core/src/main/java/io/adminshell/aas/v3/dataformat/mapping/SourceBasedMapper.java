@@ -15,7 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.mapping;
 
-public interface ElementMapper<T, G, C extends MappingContext> {
+public interface SourceBasedMapper<T, G, C extends SourceBasedMappingContext> extends Mapper<T> {
 
     public void map(T value, G generator, C context) throws MappingException;
 }

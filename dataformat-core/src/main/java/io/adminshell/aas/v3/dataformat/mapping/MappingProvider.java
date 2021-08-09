@@ -28,21 +28,37 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MappingProvider<G, C extends MappingContext> {
+public class MappingProvider<T extends Mapper> {
 
     private static final Logger log = LoggerFactory.getLogger(MappingProvider.class);
 
-    private final ElementMapper<Object, G, C> defaultMapper;
-    private final ElementMapper<Collection<Object>, G, C> defaultCollectionMapper;
-    private Map<TypeToken<?>, List<ElementMapper>> mappings = new HashMap<>();
+    private final T defaultMapper;
+    private final T defaultCollectionMapper;
+    private final Map<TypeToken<?>, List<T>> mappings = new HashMap<>();
 
-    public MappingProvider(ElementMapper<Object, G, C> defaultMapper,
-            ElementMapper<Collection<Object>, G, C> defaultCollectionMapper) {
-        this.defaultMapper = defaultMapper;
-        this.defaultCollectionMapper = defaultCollectionMapper;
+    public MappingProvider(Class<T> type,
+            Mapper<Object> defaultMapper,
+            Mapper<Collection<Object>> defaultCollectionMapper) {
+        if (type == null) {
+            throw new IllegalArgumentException("type must be non-null");
+        }
+        if (defaultMapper == null) {
+            throw new IllegalArgumentException("defaultMapper must be non-null");
+        }
+        if (defaultCollectionMapper == null) {
+            throw new IllegalArgumentException("defaultCollectionMapper must be non-null");
+        }
+        if (!type.isAssignableFrom(defaultMapper.getClass())) {
+            throw new IllegalArgumentException("defaultMapper must be of type " + type);
+        }
+        if (!type.isAssignableFrom(defaultCollectionMapper.getClass())) {
+            throw new IllegalArgumentException("defaultCollectionMapper must be of type " + type);
+        }
+        this.defaultMapper = (T) defaultMapper;
+        this.defaultCollectionMapper = (T) defaultCollectionMapper;
     }
 
-    public void register(ElementMapper<?, G, C> mapper) {
+    public void register(T mapper) {
         TypeToken<?> key = getMappedType(mapper.getClass());
         if (!mappings.containsKey(key)) {
             mappings.put(key, new ArrayList<>());
@@ -53,13 +69,13 @@ public class MappingProvider<G, C extends MappingContext> {
     private TypeToken<?> getMappedType(Class<?> type) {
         return TypeToken.of(type)
                 .getTypes().stream()
-                .filter(y -> ElementMapper.class.equals(y.getRawType()))
+                .filter(y -> Mapper.class.equals(y.getRawType()))
                 .findFirst()
                 .get()
-                .resolveType(ElementMapper.class.getTypeParameters()[0]);
+                .resolveType(Mapper.class.getTypeParameters()[0]);
     }
 
-    public ElementMapper<Object, G, C> getMapper(Object obj) {
+    public T getMapper(Object obj) {
         if (obj == null) {
             return getMapper(Object.class);
         }
@@ -69,15 +85,15 @@ public class MappingProvider<G, C extends MappingContext> {
         return getMapper(obj.getClass());
     }
 
-    public ElementMapper<Object, G, C> getMapper(Type type) {
-        Optional<List<ElementMapper>> customMapper = mappings.entrySet().stream()
+    public T getMapper(Type type) {
+        Optional<List<T>> customMapper = mappings.entrySet().stream()
                 .filter(x -> x.getKey().isSupertypeOf(type))
                 .sorted((x, y) -> Objects.compare(x.getKey(), y.getKey(), new TypeUtils.TypeTokenComparator()))
                 .map(x -> x.getValue())
                 .findFirst();
         if (!customMapper.isPresent() || customMapper.get().isEmpty()) {
             if (TypeToken.of(Collection.class).isSupertypeOf(type) && defaultCollectionMapper != null) {
-                return (ElementMapper) defaultCollectionMapper;
+                return defaultCollectionMapper;
             }
             return defaultMapper;
         }

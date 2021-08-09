@@ -13,14 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.aml;
+package io.adminshell.aas.v3.dataformat.mapping;
 
-import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
-import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
+public abstract class SourceBasedMappingContext extends MappingContext<SourceBasedMapper> {
 
-public class AmlToAasMapper {
-
-    public AssetAdministrationShellEnvironment map(CAEXFile aml) {
-        throw new UnsupportedOperationException();
+    public SourceBasedMappingContext(MappingProvider<SourceBasedMapper> mappingProvider) {
+        super(mappingProvider);
     }
+
 }

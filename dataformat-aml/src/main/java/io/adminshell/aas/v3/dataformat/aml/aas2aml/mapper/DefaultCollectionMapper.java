@@ -33,7 +33,7 @@ public class DefaultCollectionMapper<T> extends DefaultMapper<Collection<T>> {
         if (collection != null && !collection.isEmpty()) {
             return (Class<T>) ReflectionHelper.getAasInterface(collection.iterator().next().getClass());
         }
-        return (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+        return null;
     }
 
     @Override

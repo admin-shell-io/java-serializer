@@ -22,9 +22,17 @@ import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXObject;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.RoleClassType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.SystemUnitClassType;
+import io.adminshell.aas.v3.dataformat.aml.util.AASUtils;
+import io.adminshell.aas.v3.model.Identifiable;
+import io.adminshell.aas.v3.model.KeyType;
 import io.adminshell.aas.v3.model.Referable;
+import io.adminshell.aas.v3.model.Reference;
+import io.adminshell.aas.v3.model.impl.DefaultKey;
+import io.adminshell.aas.v3.model.impl.DefaultReference;
 import java.beans.PropertyDescriptor;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -36,16 +44,32 @@ public class AmlGenerator {
     private CAEXObject.Builder current;
     private CAEXFile.Builder fileBuilder;
     private final AmlDocumentInfo documentInfo;
+    private final Reference reference;
 
-    private AmlGenerator(AmlDocumentInfo documentInfo, String refSemanticPrefix, CAEXFile.Builder fileBuilder, CAEXObject.Builder current) {
+    private AmlGenerator(
+            AmlDocumentInfo documentInfo,
+            String refSemanticPrefix,
+            CAEXFile.Builder fileBuilder,
+            CAEXObject.Builder current,
+            Reference reference) {
         this.documentInfo = documentInfo;
         this.refSemanticPrefix = refSemanticPrefix;
         this.fileBuilder = fileBuilder;
         this.current = current;
+        this.reference = reference;
     }
 
     public AmlGenerator with(CAEXObject.Builder current) {
-        return new AmlGenerator(documentInfo, refSemanticPrefix, fileBuilder, current);
+        return new AmlGenerator(documentInfo, refSemanticPrefix, fileBuilder, current, reference);
+    }
+
+    public AmlGenerator with(Referable parent) {
+        return new AmlGenerator(
+                documentInfo,
+                refSemanticPrefix,
+                fileBuilder,
+                current,
+                AASUtils.asReference(reference, parent));
     }
 
     public void addAdditionalInformation(List<Object> additionalInformation) {
@@ -64,7 +88,7 @@ public class AmlGenerator {
         private AmlDocumentInfo documentInfo = new AmlDocumentInfo();
 
         public AmlGenerator build() {
-            return new AmlGenerator(documentInfo, refSemanticPrefix, fileBuilder, current);
+            return new AmlGenerator(documentInfo, refSemanticPrefix, fileBuilder, current, new DefaultReference.Builder().build());
         }
 
         public Builder refSemanticPrefix(String value) {
@@ -184,11 +208,12 @@ public class AmlGenerator {
         RoleClassType.ExternalInterface result = null;
         if (obj != null && Referable.class.isAssignableFrom(obj.getClass())) {
             Referable referable = (Referable) obj;
-            if (context.isTargetOfInternalLink(referable)) {
+            Reference targetRef = AASUtils.asReference(reference, referable);
+            if (context.isTargetOfInternalLink(targetRef)) {
                 result = RoleClassType.ExternalInterface.builder()
-                        .withID(context.generateId())
-                        .withName("externalReferenceTarget")
-                        .withRefBaseClassPath("AutomationMLInterfaceClassLib/AutomationMLBaseInterface")
+                        .withID(context.newId())
+                        .withName("ReferableReference")
+                        .withRefBaseClassPath(documentInfo.getAssetAdministrationShellInterfaceClassLib() + "/ReferableReference")
                         .build();
             }
         }
@@ -221,5 +246,9 @@ public class AmlGenerator {
 
     public AmlDocumentInfo getDocumentInfo() {
         return documentInfo;
+    }
+
+    public Reference getReference() {
+        return reference;
     }
 }

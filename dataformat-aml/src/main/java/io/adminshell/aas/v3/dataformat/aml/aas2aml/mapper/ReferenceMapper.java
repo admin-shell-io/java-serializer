@@ -35,7 +35,11 @@ public class ReferenceMapper extends DefaultMapper<Reference> {
         if (referencedType == KeyElements.SUBMODEL) {
             Optional<Submodel> resolvedSubmodel = AASUtils.resolveSubmodelReference(reference, context.getEnvironment());
             if (resolvedSubmodel.isPresent()) {
-                context.withoutIdCache().map(resolvedSubmodel.get(), generator);
+                context
+                        // not having this causes duplicate IDs
+                        // maybe this can be "fixed" by not shortening References
+                        //                        .withoutIdCache()
+                        .map(resolvedSubmodel.get(), generator);
                 return;
             }
         }

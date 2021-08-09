@@ -31,11 +31,10 @@ public class DataSpecificationContentMapper extends DefaultMapper<DataSpecificat
         toInternalElement(content, generator, context);
     }
 
-    @Override
-    protected String getId(DataSpecificationContent value, Aas2AmlMappingContext context) {
-        return context.generateId();
-    }
-
+//    @Override
+//    protected String getId(DataSpecificationContent value, AmlGenerator generator, Aas2AmlMappingContext context) {
+//        return context.generateId();
+//    }
     @Override
     protected InternalElementType.RoleRequirements getRoleRequirementClass(DataSpecificationContent value, AmlGenerator generator, Aas2AmlMappingContext context) {
         return generator.roleRequirement(DataSpecificationContent.class.getSimpleName());

@@ -17,7 +17,9 @@ package io.adminshell.aas.v3.dataformat.aml;
 
 import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.Deserializer;
+import io.adminshell.aas.v3.dataformat.aml.aml2aas.Aml2AasObjectMapper;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
+import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import java.io.StringReader;
 import javax.xml.bind.JAXBException;
@@ -29,7 +31,6 @@ import org.slf4j.LoggerFactory;
 public class AmlDeserializer implements Deserializer {
 
     private static final Logger log = LoggerFactory.getLogger(AmlDeserializer.class);
-    private AmlToAasMapper mapper = new AmlToAasMapper();
 
     @Override
     public AssetAdministrationShellEnvironment read(String value) throws DeserializationException {
@@ -37,9 +38,12 @@ public class AmlDeserializer implements Deserializer {
             Unmarshaller unmarshaller = JAXBContextFactory.createContext(new Class[]{CAEXFile.class}, null).createUnmarshaller();
             StringReader reader = new StringReader(value);
             CAEXFile aml = (CAEXFile) unmarshaller.unmarshal(reader);
+            Aml2AasObjectMapper mapper = new Aml2AasObjectMapper(new Aml2AasConfig());
             return mapper.map(aml);
         } catch (JAXBException ex) {
             throw new DeserializationException("error deserializing AssetAdministrationShellEnvironment", ex);
+        } catch (MappingException ex) {
+            throw new DeserializationException("error mapping AML document to AssetAdministrationShellEnvironment", ex);
         }
     }
 

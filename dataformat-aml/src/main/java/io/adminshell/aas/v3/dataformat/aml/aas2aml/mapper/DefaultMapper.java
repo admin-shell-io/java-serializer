@@ -20,9 +20,11 @@ import io.adminshell.aas.v3.dataformat.aml.aas2aml.Aas2AmlMappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXObject;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
+import io.adminshell.aas.v3.dataformat.aml.util.AASUtils;
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.dataformat.mapping.util.TypeUtils;
+import io.adminshell.aas.v3.model.Referable;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 
@@ -38,6 +40,9 @@ public class DefaultMapper<T> implements Aas2AmlElementMapper<T> {
             return;
         }
         Class<?> aasType = getType(value, context);
+        if (aasType == null) {
+            return;
+        }
         Class<?> aasTypeInfo = ReflectionHelper.getMostSpecificTypeWithModelType(aasType);
         if (aasTypeInfo != null) {
             asInternalElement(value, generator, context);
@@ -64,10 +69,14 @@ public class DefaultMapper<T> implements Aas2AmlElementMapper<T> {
     protected InternalElementType.Builder toInternalElement(T value, AmlGenerator generator, Aas2AmlMappingContext context) throws MappingException {
         InternalElementType.Builder builder = InternalElementType.builder();
         builder = builder
-                .withID(getId(value, context))
+                .withID(getId(value, generator, context))
                 .withName(getInternalElementName(value, context))
                 .withRoleRequirements(getRoleRequirementClass(value, generator, context));
-        mapProperties(value, generator.with(builder), context);
+        AmlGenerator subGenerator = generator;
+        if (Referable.class.isAssignableFrom(value.getClass())) {
+            subGenerator = generator.with((Referable) value);
+        }
+        mapProperties(value, subGenerator.with(builder), context);
         return builder;
     }
 
@@ -79,15 +88,18 @@ public class DefaultMapper<T> implements Aas2AmlElementMapper<T> {
         return generator.refSemantic(context.getProperty());
     }
 
-    protected String getInternalElementName(T value, Aas2AmlMappingContext context) {
+    protected String getInternalElementName(Object value, Aas2AmlMappingContext context) {
         return context.getInternalElementNamingStrategy().getName(
                 value.getClass(),
                 value,
                 null);
     }
 
-    protected String getId(T value, Aas2AmlMappingContext context) {
-        return context.getCachedId(value);
+    protected String getId(T value, AmlGenerator generator, Aas2AmlMappingContext context) {
+        if (value != null && Referable.class.isAssignableFrom(value.getClass())) {
+            return context.getId(AASUtils.asReference(generator.getReference(), (Referable) value));
+        }
+        return context.getId(null);
     }
 
     protected String getAttributeName(T value, Aas2AmlMappingContext context) {
@@ -108,6 +120,7 @@ public class DefaultMapper<T> implements Aas2AmlElementMapper<T> {
         if (aasType != null) {
             mapProperties(value, generator.with(builder), context);
         } else {
+
             builder = builder.withValue(value);
         }
         return builder;
