@@ -19,7 +19,7 @@ import io.adminshell.aas.v3.dataformat.aml.aas2aml.AasToAmlMapper;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.Serializer;
 import io.adminshell.aas.v3.dataformat.aml.header.AutomationMLVersion;
-import io.adminshell.aas.v3.dataformat.aml.header.WriterHeader;
+import io.adminshell.aas.v3.dataformat.aml.header.WriterInfo;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
@@ -42,23 +42,21 @@ public class AmlSerializer implements Serializer {
 
     @Override
     public String write(AssetAdministrationShellEnvironment aasEnvironment) throws SerializationException {
-        return write(aasEnvironment, Aas2AmlConfig.DEFAULT);
+        return write(aasEnvironment, AmlSerializationConfig.DEFAULT);
     }
 
-    public String write(AssetAdministrationShellEnvironment aasEnvironment, Aas2AmlConfig config) throws SerializationException {
-        AasToAmlMapper mapper = new AasToAmlMapper(config);
+    public String write(AssetAdministrationShellEnvironment aasEnvironment, AmlSerializationConfig config) throws SerializationException {
         try {
-            CAEXFile aml = mapper.map(aasEnvironment);
+            CAEXFile aml = new AasToAmlMapper().map(aasEnvironment, config);
             if (config.isIncludeLibraries()) {
                 aml = addAASLibrary(aml);
             }
-            Marshaller marshaller = JAXBContextFactory.createContext(
-                    new Class[]{
-                        CAEXFile.class,
-                        AutomationMLVersion.class,
-                        WriterHeader.class,
-                        WriterHeader.Wrapper.class
-                    },
+            Marshaller marshaller = JAXBContextFactory.createContext(new Class[]{
+                CAEXFile.class,
+                AutomationMLVersion.class,
+                WriterInfo.class,
+                WriterInfo.Wrapper.class
+            },
                     null).createMarshaller();
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             StringWriter writer = new StringWriter();

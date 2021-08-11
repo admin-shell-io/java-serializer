@@ -18,20 +18,17 @@ package io.adminshell.aas.v3.dataformat.aml.header;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(namespace = "http://www.w3.org/2001/XMLSchema", name = "string")
 public class AutomationMLVersion {
 
-    public static final String DEFAULT_VERSION = "2.0";
-
     @XmlAttribute(name = "AutomationMLVersion")
     private final String value;
 
     public AutomationMLVersion() {
-        value = DEFAULT_VERSION;
+        this.value = "";
     }
 
     public AutomationMLVersion(String value) {

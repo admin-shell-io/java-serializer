@@ -13,15 +13,10 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.aml.id;
+package io.adminshell.aas.v3.dataformat.aml.aas2aml;
 
-import java.util.UUID;
+import io.adminshell.aas.v3.dataformat.mapping.SourceBasedMapper;
 
-public class UuidGenerator implements IdGenerator {
-
-    @Override
-    public String next() {
-        return UUID.randomUUID().toString();
-    }
+public interface Mapper<T> extends SourceBasedMapper<T, AmlGenerator, MappingContext> {
 
 }

@@ -20,7 +20,7 @@ public class IntegerIdGenerator implements IdGenerator {
     private int id = 1;
 
     @Override
-    public String generateId() {
+    public String next() {
         return Integer.toString(id++);
     }
 

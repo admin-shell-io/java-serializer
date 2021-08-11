@@ -17,5 +17,5 @@ package io.adminshell.aas.v3.dataformat.aml.id;
 
 public interface IdGenerator {
 
-    public String generateId();
+    public String next();
 }

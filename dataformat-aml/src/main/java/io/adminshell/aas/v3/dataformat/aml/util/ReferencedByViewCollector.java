@@ -15,11 +15,11 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.util;
 
+import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
+import io.adminshell.aas.v3.dataformat.core.visitor.AssetAdministrationShellElementWalkerVisitor;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.Referable;
 import io.adminshell.aas.v3.model.Reference;
-import io.adminshell.aas.v3.model.ReferenceElement;
-import io.adminshell.aas.v3.model.RelationshipElement;
 import io.adminshell.aas.v3.model.View;
 import java.util.HashSet;
 import java.util.Set;
@@ -49,7 +49,7 @@ public class ReferencedByViewCollector {
         }
 
         private void handleReference(Reference reference) {
-            Referable target = AASUtils.resolve(reference, env);
+            Referable target = AasUtils.resolve(reference, env);
             if (target != null) {
                 referencedElements.add(target);
             }

@@ -21,6 +21,7 @@ import io.adminshell.aas.v3.dataformat.aml.fixtures.TestExample;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import java.io.FileNotFoundException;
 import static org.junit.Assert.assertEquals;
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class AmlDeserializerTest {
@@ -28,7 +29,7 @@ public class AmlDeserializerTest {
     private final AmlDeserializer deserializer = new AmlDeserializer();
 
     @Test
-//    @Ignore
+    @Ignore
     public void testExample() throws FileNotFoundException, DeserializationException {
         AssetAdministrationShellEnvironment actual = deserializer.read(TestExample.FILE);
         assertEquals(TestExample.ENVIRONMENT, actual);

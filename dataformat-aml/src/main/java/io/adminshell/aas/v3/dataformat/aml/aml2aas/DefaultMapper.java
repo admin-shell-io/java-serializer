@@ -1,3 +1,18 @@
+/*
+ * Copyright (c) 2021 Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e. V.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package io.adminshell.aas.v3.dataformat.aml.aml2aas;
 
 import com.google.common.reflect.TypeToken;
@@ -18,10 +33,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
-public class DefaultMapper implements Aml2AasMapper<Object> {
+public class DefaultMapper implements Mapper<Object> {
 
     @Override
-    public Object map(AmlParser parser, Aml2AasMappingContext context) throws MappingException {
+    public Object map(AmlParser parser, MappingContext context) throws MappingException {
         if (parser.getCurrent() == null) {
             return null;
         }
@@ -33,7 +48,7 @@ public class DefaultMapper implements Aml2AasMapper<Object> {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
-    protected Object handleInternalElement(AmlParser parser, Aml2AasMappingContext context) {
+    protected Object handleInternalElement(AmlParser parser, MappingContext context) {
         Object result = null;
         InternalElementType current = (InternalElementType) parser.getCurrent();
         String role = current.getRoleRequirements().getRefBaseRoleClassPath();
@@ -158,7 +173,7 @@ public class DefaultMapper implements Aml2AasMapper<Object> {
         return result;
     }
 
-    protected Object handleAttribute(AmlParser parser, Aml2AasMappingContext context) throws MappingException {
+    protected Object handleAttribute(AmlParser parser, MappingContext context) throws MappingException {
         AttributeType current = (AttributeType) parser.getCurrent();
         if (context.getType() == null) {
             throw new MappingException(String.format("error processing Attribute '%s', missing type information in context", current.getName()));

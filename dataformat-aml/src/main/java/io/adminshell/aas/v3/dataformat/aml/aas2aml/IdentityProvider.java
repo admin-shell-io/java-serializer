@@ -41,7 +41,7 @@ public class IdentityProvider {
     public String generateId() {
         String result = null;
         do {
-            result = idGenerator.generateId();
+            result = idGenerator.next();
         } while (cache.values().contains(result));
         return result;
     }

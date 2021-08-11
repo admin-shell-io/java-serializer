@@ -15,7 +15,34 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.aml2aas;
 
-import io.adminshell.aas.v3.dataformat.mapping.TargetBasedMapper;
+import io.adminshell.aas.v3.dataformat.aml.aml2aas.custom.AssetAdministrationShellEnvironmentMapper;
+import io.adminshell.aas.v3.dataformat.aml.AmlDeserializationConfig;
+import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
+import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
+import io.adminshell.aas.v3.dataformat.mapping.MappingException;
+import io.adminshell.aas.v3.dataformat.mapping.MappingProvider;
+import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
+import java.util.List;
 
-public interface Aml2AasMapper<T> extends TargetBasedMapper<T, AmlParser, Aml2AasMappingContext> {
+public class Aml2AasMapper {
+
+    private AmlDeserializationConfig config;
+
+    public Aml2AasMapper(AmlDeserializationConfig config) {
+        this.config = config;
+    }
+
+    public AssetAdministrationShellEnvironment map(CAEXFile aml) throws MappingException {
+        // unclear how to handle additional information
+        List<Object> additionalInformation = aml.getAdditionalInformation();
+        // find AAS elements throughout all instance hierarchies
+        AmlParser parser = new AmlParser(aml);
+        MappingProvider mappingProvider = new MappingProvider(Mapper.class, new DefaultMapper(), new DefaultMapper());
+        mappingProvider.register(new AssetAdministrationShellEnvironmentMapper());
+        AasTypeFactory typeFactory = new AasTypeFactory();
+        MappingContext context = new MappingContext(mappingProvider, typeFactory);
+        Object result = context.getMappingProvider().getMapper(AssetAdministrationShellEnvironment.class).map(parser, context);
+        String foo = "";
+        return (AssetAdministrationShellEnvironment) result;
+    }
 }

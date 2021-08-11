@@ -51,7 +51,7 @@ public class DataSpecificationDeserializer extends JsonDeserializer<EmbeddedData
 		JsonParser parserReference = parser.getCodec().getFactory().getCodec().treeAsTokens(nodeDataSpecification);
 		parserReference.nextToken();
 		Reference reference = parserReference.readValueAs(Reference.class);
-		Class<? extends DataSpecificationContent> targetClass = DataSpecificationManager.getImplementation(reference);
+                Class<? extends DataSpecificationContent> targetClass = DataSpecificationManager.getDataSpecification(reference).getType();
 		JsonNode nodeContent = node.get(PROP_DATA_SPECIFICATION_CONTENT);
 		if (nodeContent == null) {
 			context.reportInputMismatch(targetClass, "property {} must not be empty", PROP_DATA_SPECIFICATION_CONTENT);
