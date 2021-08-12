@@ -15,13 +15,37 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas;
 
-import io.adminshell.aas.v3.model.*;
-import io.adminshell.aas.v3.model.impl.*;
-
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import io.adminshell.aas.v3.model.AssetAdministrationShell;
+import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
+import io.adminshell.aas.v3.model.AssetKind;
+import io.adminshell.aas.v3.model.ConceptDescription;
+import io.adminshell.aas.v3.model.DataTypeIEC61360;
+import io.adminshell.aas.v3.model.IdentifierType;
+import io.adminshell.aas.v3.model.KeyElements;
+import io.adminshell.aas.v3.model.KeyType;
+import io.adminshell.aas.v3.model.LangString;
+import io.adminshell.aas.v3.model.ModelingKind;
+import io.adminshell.aas.v3.model.Submodel;
+import io.adminshell.aas.v3.model.impl.DefaultAdministrativeInformation;
+import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShell;
+import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShellEnvironment;
+import io.adminshell.aas.v3.model.impl.DefaultAssetInformation;
+import io.adminshell.aas.v3.model.impl.DefaultConceptDescription;
+import io.adminshell.aas.v3.model.impl.DefaultDataSpecificationIEC61360;
+import io.adminshell.aas.v3.model.impl.DefaultEmbeddedDataSpecification;
+import io.adminshell.aas.v3.model.impl.DefaultFile;
+import io.adminshell.aas.v3.model.impl.DefaultIdentifier;
+import io.adminshell.aas.v3.model.impl.DefaultIdentifierKeyValuePair;
+import io.adminshell.aas.v3.model.impl.DefaultKey;
+import io.adminshell.aas.v3.model.impl.DefaultProperty;
+import io.adminshell.aas.v3.model.impl.DefaultReference;
+import io.adminshell.aas.v3.model.impl.DefaultSubmodel;
+import io.adminshell.aas.v3.model.impl.DefaultSubmodelElementCollection;
 
 public class AASSimple {
 

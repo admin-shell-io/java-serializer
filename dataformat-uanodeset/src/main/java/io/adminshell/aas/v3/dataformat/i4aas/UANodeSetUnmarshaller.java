@@ -17,11 +17,9 @@ package io.adminshell.aas.v3.dataformat.i4aas;
 
 import java.io.InputStream;
 import java.io.StringReader;
-import java.io.StringWriter;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
 import org.opcfoundation.ua._2008._02.types.ListOfExtensionObject;

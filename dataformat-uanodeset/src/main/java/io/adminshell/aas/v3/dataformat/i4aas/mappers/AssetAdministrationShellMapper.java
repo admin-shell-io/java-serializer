@@ -18,12 +18,10 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 import java.util.List;
 
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
+
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetInformation;
-import io.adminshell.aas.v3.model.DataTypeIEC61360;
-import io.adminshell.aas.v3.model.HasDataSpecification;
-import io.adminshell.aas.v3.model.Submodel;
 
 public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdministrationShell> implements HasDataSpecificationMapper {
 
@@ -49,17 +47,19 @@ public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdmi
 
 	private void mapAsset() {
 		AssetInformation assetInformation = source.getAssetInformation();
-		UAObject uaAsset = new AssetInformationMapper(assetInformation, ctx).map();
-		attachAsComponent(target, uaAsset);
+		if (assetInformation != null) {			
+			UAObject uaAsset = new AssetInformationMapper(assetInformation, ctx).map();
+			attachAsComponent(target, uaAsset);
+		}
 	}
 
 	private void mapSubmodels() {
-		UAObject smFolder = createReferenceList("Submodel");
+		UAObject smFolder = createReferenceList(AAS_SUBMODELREFERENCES_LIST_BROWSENAME);
 		List<io.adminshell.aas.v3.model.Reference> submodels = source.getSubmodels();
 		for (int i = 0; i < submodels.size(); i++) {
 			io.adminshell.aas.v3.model.Reference reference = submodels.get(i);
 			UAObject createSubmodelReferenceUaObject = new ReferenceMapper(reference, ctx,
-					"Submodel:" + reference.getKeys().get(0).getValue()).map();
+					SM_DISPLAYNAME_PREFIX + reference.getKeys().get(0).getValue()).map();
 			attachAsComponent(smFolder, createSubmodelReferenceUaObject);
 		}
 	}
@@ -67,7 +67,7 @@ public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdmi
 	private void mapDerivedFrom() {
 		io.adminshell.aas.v3.model.Reference derivedFrom = source.getDerivedFrom();
 		if (derivedFrom != null) {
-			UAObject uaDerivedFrom = new ReferenceMapper(derivedFrom, ctx, "DerivedFrom").map();
+			UAObject uaDerivedFrom = new ReferenceMapper(derivedFrom, ctx, AAS_DERIVEDFROM_BROWSENAME).map();
 			attachAsComponent(target, uaDerivedFrom);
 		}
 	}

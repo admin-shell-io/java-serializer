@@ -18,11 +18,12 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.xml.bind.JAXBElement;
 
 import org.opcfoundation.ua._2008._02.types.ObjectFactory;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
+
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 
 public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
@@ -82,13 +83,15 @@ public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
 
 	protected String deriveDefaultName() {
 		if (source instanceof io.adminshell.aas.v3.model.IdentifierType) {
-			return "IdType";
+			return IDENTIFICATION_IDTYPE_BROWSENAME;
 		}
 		return source.getClass().getSimpleName();
 	}
 
 	public static Enum findMatch(Enum<?> src) {
-
+		if (src == null) {
+			return null;
+		}
 		if (!enum2enumMap.containsKey(src.getClass())) {
 			throw new IllegalArgumentException("Class " + src.getClass() + " is not supported by I4AASEnumMapper");
 		}

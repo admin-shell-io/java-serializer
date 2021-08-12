@@ -19,13 +19,11 @@ import java.util.UUID;
 
 import org.opcfoundation.ua._2011._03.uanodeset.LocalizedText;
 import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
-import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
 import io.adminshell.aas.v3.model.Asset;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.Referable;
 import io.adminshell.aas.v3.model.Submodel;
-import io.adminshell.aas.v3.model.View;
 
 public class I4AASUtils {
 

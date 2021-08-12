@@ -28,7 +28,6 @@ import org.opcfoundation.ua.i4aas.v3.types.AASKeyDataType;
 import org.opcfoundation.ua.i4aas.v3.types.AASKeyElementsDataType;
 import org.opcfoundation.ua.i4aas.v3.types.AASKeyTypeDataType;
 
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.Key;
@@ -59,8 +58,8 @@ public class ReferenceMapper extends I4AASMapper<Reference, UAObject> {
 	protected void mapAndAttachChildren() {
 		UAVariable UAKeyVariable = UAVariable.builder().withNodeId(ctx.newModelNodeIdAsString())
 				.withDataType(I4AASIdentifier.AASKeyDataType.getName()).withValueRank(1).withArrayDimensions("0")
-				.withAccessLevel(3L).withDisplayName(createLocalizedText("Keys"))
-				.withBrowseName(createI4AASBrowseName("Keys")).build();
+				.withAccessLevel(3L).withDisplayName(createLocalizedText(REFERENCE_KEYS_BROWSENAME))
+				.withBrowseName(createI4AASBrowseName(REFERENCE_KEYS_BROWSENAME)).build();
 		addTypeReferenceFor(UAKeyVariable, UaIdentifier.PropertyType);
 		attachAsProperty(target, UAKeyVariable);
 		addToNodeset(UAKeyVariable);

@@ -18,7 +18,6 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.model.AdministrativeInformation;
 
@@ -32,8 +31,8 @@ public class AdministrationMapper extends I4AASMapper<AdministrativeInformation,
 	@Override
 	protected UAObject createTargetObject() {
 		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(createI4AASBrowseName("Administration"))
-				.withDisplayName(createLocalizedText("Administration")).build();
+				.withBrowseName(createI4AASBrowseName(ADMINISTRATION_BROWSENAME))
+				.withDisplayName(createLocalizedText(ADMINISTRATION_BROWSENAME)).build();
 		addTypeReference(I4AASIdentifier.AASAdministrativeInformationType);
 		return target;
 	}
@@ -43,13 +42,13 @@ public class AdministrationMapper extends I4AASMapper<AdministrativeInformation,
 		if (source != null) {
 			String revision = source.getRevision();
 			if (revision != null) {
-				UAVariable revisionStringProperty = new StringPropertyMapper("Revision", revision, ctx,
+				UAVariable revisionStringProperty = new StringPropertyMapper(ADMINISTRATION_REVISION_BROWSENAME, revision, ctx,
 						ctx.getI4aasNsIndex()).map();
 				attachAsProperty(target, revisionStringProperty);
 			}
 			String version = source.getVersion();
 			if (version != null) {
-				UAVariable versionStringProperty = new StringPropertyMapper("Version", version, ctx,
+				UAVariable versionStringProperty = new StringPropertyMapper(ADMINISTRATION_VERSION_BROWSENAME, version, ctx,
 						ctx.getI4aasNsIndex()).map();
 				attachAsProperty(target, versionStringProperty);
 			}

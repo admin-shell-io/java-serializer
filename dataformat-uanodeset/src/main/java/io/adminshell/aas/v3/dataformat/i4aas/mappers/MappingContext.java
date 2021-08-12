@@ -20,7 +20,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 import java.util.function.Function;
 
 import javax.xml.datatype.DatatypeFactory;
@@ -30,7 +29,6 @@ import org.opcfoundation.ua._2011._03.uanodeset.AliasTable;
 import org.opcfoundation.ua._2011._03.uanodeset.ModelTable;
 import org.opcfoundation.ua._2011._03.uanodeset.ModelTableEntry;
 import org.opcfoundation.ua._2011._03.uanodeset.NodeIdAlias;
-import org.opcfoundation.ua._2011._03.uanodeset.UANode;
 import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UriTable;
@@ -41,10 +39,7 @@ import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.Identifier;
-import io.adminshell.aas.v3.model.Key;
-import io.adminshell.aas.v3.model.KeyElements;
 import io.adminshell.aas.v3.model.Reference;
-import io.adminshell.aas.v3.model.Submodel;
 
 public class MappingContext {
 
@@ -60,6 +55,7 @@ public class MappingContext {
 	private int nodeIdCounter = 1;
 
 	private static Function<UANodeSet, String> modelNamespaceNamingStrategy = I4AASUtils::generateRandomNamespace;
+	private boolean addMissingSemanticIdsToDictionary = true;
 
 	public static void setModelNamespaceNamingStrategy(Function<UANodeSet, String> strategy) {
 		modelNamespaceNamingStrategy = strategy;
@@ -199,6 +195,15 @@ public class MappingContext {
 		} catch (NullPointerException npe) {
 			return false;
 		}
+	}
+
+
+	public void setAddMissingSemanticIdsToDictionary(boolean addMissingSemanticIdsToDictionary) {
+		this.addMissingSemanticIdsToDictionary = addMissingSemanticIdsToDictionary;
+	}
+
+	public boolean isAddMissingSemanticIdsToDictionary() {
+		return addMissingSemanticIdsToDictionary;
 	}
 
 }

@@ -29,7 +29,6 @@ import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 public class DeserializerTest {
 
 	@Test
-	@Ignore
 	public void testAASSimple()
 			throws SerializationException, IllegalArgumentException, IllegalAccessException, DeserializationException, IOException {
 		//arrange

@@ -17,6 +17,7 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers.sme;
 
 import java.util.Map;
 import java.util.TreeMap;
+
 import javax.xml.bind.JAXBElement;
 
 import org.opcfoundation.ua._2008._02.types.ObjectFactory;
@@ -26,7 +27,6 @@ import org.opcfoundation.ua.i4aas.v3.types.AASValueTypeDataType;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.I4AASMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 
 public class ValueTypeMapper extends I4AASMapper<String, UAVariable> {

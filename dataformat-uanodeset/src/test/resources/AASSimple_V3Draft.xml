@@ -5,7 +5,7 @@
       <Uri>http://opcfoundation.org/UA/I4AAS/V3/</Uri>
    </NamespaceUris>
    <Models>
-      <Model ModelUri="http://example.org/SerializerTest" Version="1.0.0" PublicationDate="2021-07-30T10:36:33.540407800">
+      <Model ModelUri="http://example.org/SerializerTest" Version="1.0.0" PublicationDate="2021-08-10T08:48:22.167518400">
          <RequiredModel ModelUri="http://opcfoundation.org/UA/" Version="1.04.7" PublicationDate="2020-07-15T00:00:00Z"/>
          <RequiredModel ModelUri="http://opcfoundation.org/UA/I4AAS/V3/" Version="1.0.0" PublicationDate="2021-06-04T00:00:00Z"/>
       </Model>
@@ -93,7 +93,7 @@
          <Reference ReferenceType="HasComponent">ns=1;i=153</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=2" BrowseName="1:Title" ParentNodeId="ns=1;i=120">
+   <UAObject NodeId="ns=1;i=2" BrowseName="1:Title">
       <DisplayName>Title</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1025</Reference>
@@ -160,8 +160,8 @@
          <Reference ReferenceType="HasComponent">ns=1;i=9</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=9" BrowseName="1:embedded_0" ParentNodeId="ns=1;i=8">
-      <DisplayName>embedded_0</DisplayName>
+   <UAObject NodeId="ns=1;i=9" BrowseName="1:Content_0" ParentNodeId="ns=1;i=8">
+      <DisplayName>Content_0</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1028</Reference>
          <Reference ReferenceType="HasProperty">ns=1;i=10</Reference>
@@ -263,7 +263,7 @@
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=2</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=17" BrowseName="1:DigitalFile" ParentNodeId="ns=1;i=127">
+   <UAObject NodeId="ns=1;i=17" BrowseName="1:DigitalFile">
       <DisplayName>DigitalFile</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1025</Reference>
@@ -330,8 +330,8 @@
          <Reference ReferenceType="HasComponent">ns=1;i=24</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=24" BrowseName="1:embedded_0" ParentNodeId="ns=1;i=23">
-      <DisplayName>embedded_0</DisplayName>
+   <UAObject NodeId="ns=1;i=24" BrowseName="1:Content_0" ParentNodeId="ns=1;i=23">
+      <DisplayName>Content_0</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1028</Reference>
          <Reference ReferenceType="HasProperty">ns=1;i=25</Reference>
@@ -433,7 +433,7 @@
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=17</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=32" BrowseName="1:MaxRotationSpeed" ParentNodeId="ns=1;i=99">
+   <UAObject NodeId="ns=1;i=32" BrowseName="1:MaxRotationSpeed">
       <DisplayName>MaxRotationSpeed</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1024</Reference>
@@ -530,8 +530,8 @@
          <Reference ReferenceType="HasComponent">ns=1;i=42</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=42" BrowseName="1:embedded_0" ParentNodeId="ns=1;i=41">
-      <DisplayName>embedded_0</DisplayName>
+   <UAObject NodeId="ns=1;i=42" BrowseName="1:Content_0" ParentNodeId="ns=1;i=41">
+      <DisplayName>Content_0</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1028</Reference>
          <Reference ReferenceType="HasProperty">ns=1;i=43</Reference>
@@ -660,7 +660,7 @@
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=32</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=52" BrowseName="1:RotationSpeed" ParentNodeId="ns=1;i=144">
+   <UAObject NodeId="ns=1;i=52" BrowseName="1:RotationSpeed">
       <DisplayName>RotationSpeed</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1025</Reference>
@@ -727,8 +727,8 @@
          <Reference ReferenceType="HasComponent">ns=1;i=59</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=59" BrowseName="1:embedded_0" ParentNodeId="ns=1;i=58">
-      <DisplayName>embedded_0</DisplayName>
+   <UAObject NodeId="ns=1;i=59" BrowseName="1:Content_0" ParentNodeId="ns=1;i=58">
+      <DisplayName>Content_0</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1028</Reference>
          <Reference ReferenceType="HasProperty">ns=1;i=60</Reference>
@@ -866,7 +866,7 @@
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=52</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=69" BrowseName="1:Document" ParentNodeId="ns=1;i=115">
+   <UAObject NodeId="ns=1;i=69" BrowseName="1:Document">
       <DisplayName>Document</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1025</Reference>
@@ -933,8 +933,8 @@
          <Reference ReferenceType="HasComponent">ns=1;i=76</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=76" BrowseName="1:embedded_0" ParentNodeId="ns=1;i=75">
-      <DisplayName>embedded_0</DisplayName>
+   <UAObject NodeId="ns=1;i=76" BrowseName="1:Content_0" ParentNodeId="ns=1;i=75">
+      <DisplayName>Content_0</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1028</Reference>
          <Reference ReferenceType="HasProperty">ns=1;i=77</Reference>
@@ -1027,7 +1027,7 @@
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=69</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=84" BrowseName="1:TechnicalData" ParentNodeId="ns=1;i=183">
+   <UAObject NodeId="ns=1;i=84" BrowseName="1:TechnicalData" ParentNodeId="ns=1;i=1">
       <DisplayName>Submodel:TechnicalData</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1006</Reference>
@@ -1099,7 +1099,7 @@
          <ns0:Int32 xmlns:ns0="http://opcfoundation.org/UA/2008/02/Types.xsd">1</ns0:Int32>
       </Value>
    </UAVariable>
-   <UAObject NodeId="ns=1;i=91" BrowseName="1:0173-1#01-AFZ615#016" ParentNodeId="ns=1;i=84">
+   <UAObject NodeId="ns=1;i=91" BrowseName="1:0173-1#01-AFZ615#016">
       <DisplayName>0173-1#01-AFZ615#016</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1024</Reference>
@@ -1254,7 +1254,7 @@
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=84</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=108" BrowseName="1:Documentation" ParentNodeId="ns=1;i=187">
+   <UAObject NodeId="ns=1;i=108" BrowseName="1:Documentation" ParentNodeId="ns=1;i=1">
       <DisplayName>Submodel:Documentation</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1006</Reference>
@@ -1534,7 +1534,7 @@
          <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=108</Reference>
       </References>
    </UAObject>
-   <UAObject NodeId="ns=1;i=137" BrowseName="1:OperationalData" ParentNodeId="ns=1;i=185">
+   <UAObject NodeId="ns=1;i=137" BrowseName="1:OperationalData" ParentNodeId="ns=1;i=1">
       <DisplayName>Submodel:OperationalData</DisplayName>
       <References>
          <Reference ReferenceType="HasTypeDefinition">ns=2;i=1006</Reference>

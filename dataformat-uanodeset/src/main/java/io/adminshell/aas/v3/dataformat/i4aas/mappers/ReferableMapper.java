@@ -40,7 +40,7 @@ public class ReferableMapper<T extends Referable> extends I4AASMapper<T, UAObjec
 	protected void mapAndAttachChildren() {
 		
 		String category = source.getCategory() == null ? "" : source.getCategory();
-		UAVariable categoryProperty = new StringPropertyMapper("Category", category, ctx, ctx.getI4aasNsIndex()).map();
+		UAVariable categoryProperty = new StringPropertyMapper(CATEGORY_BROWSENAME, category, ctx, ctx.getI4aasNsIndex()).map();
 		attachAsProperty(target, categoryProperty);
 		
 		for (LangString description : source.getDescriptions()) {
