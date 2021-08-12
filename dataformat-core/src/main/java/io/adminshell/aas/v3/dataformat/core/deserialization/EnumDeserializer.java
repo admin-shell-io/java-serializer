@@ -21,6 +21,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
+import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 
 /**
  * Deserializes enum values converting element names from UpperCamelCase to
@@ -30,7 +31,6 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
  */
 public class EnumDeserializer<T extends Enum> extends JsonDeserializer<T> {
 
-    protected static final char UNDERSCORE = '_';
     protected final Class<T> type;
 
     public EnumDeserializer(Class<T> type) {
@@ -39,28 +39,7 @@ public class EnumDeserializer<T extends Enum> extends JsonDeserializer<T> {
 
     @Override
     public T deserialize(JsonParser parser, DeserializationContext context) throws IOException, JsonProcessingException {
-        return (T) Enum.valueOf(type, translate(parser.getText()));
+        return (T) Enum.valueOf(type, AasUtils.deserializeEnumName(parser.getText()));
     }
 
-    /**
-     * Translates an enum value from CamelCase to SCREAMING_SNAKE_CASE
-     *
-     * @param input input name in CamelCase
-     * @return name in SCREAMING_SNAKE_CASE
-     */
-    public static String translate(String input) {
-        String result = "";
-        if (input == null || input.isEmpty()) {
-            return result;
-        }
-        result += input.charAt(0);
-        for (int i = 1; i < input.length(); i++) {
-            char currentChar = input.charAt(i);
-            if (Character.isUpperCase(currentChar)) {
-                result += UNDERSCORE;
-            }
-            result += Character.toUpperCase(currentChar);
-        }
-        return result;
-    }
 }

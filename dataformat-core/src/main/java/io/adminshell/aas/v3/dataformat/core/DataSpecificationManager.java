@@ -33,18 +33,20 @@ import java.util.function.Predicate;
 
 /**
  * This class is used to manage supported data specification templates. Each
- * template is identified through a reference and provides a corresponding Java
- * class.
+ * template is identified through a reference and a prefix and provides a
+ * corresponding Java class.
  */
 public class DataSpecificationManager {
 
     public static final String PROP_DATA_SPECIFICATION = "dataSpecification";
     public static final String PROP_DATA_SPECIFICATION_CONTENT = "dataSpecificationContent";
+    public static final String DATA_SPECIFICATION_IEC61360_IRI = "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0";
+    public static final String DATA_SPECIFICATION_IEC61360_PREFIX = "IEC";
 
     private static final Set<DataSpecificationInfo> KNOWN_IMPLEMENTATIONS = new HashSet<>(Arrays.asList(
             new DataSpecificationInfo(DataSpecificationIEC61360.class,
-                    createGlobalIri("http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0"),
-                    "IEC")));
+                    createGlobalIri(DATA_SPECIFICATION_IEC61360_IRI),
+                    DATA_SPECIFICATION_IEC61360_PREFIX)));
 
     /**
      * Allows to register an additional data specification template

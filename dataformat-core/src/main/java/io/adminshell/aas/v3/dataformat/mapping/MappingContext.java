@@ -18,6 +18,12 @@ package io.adminshell.aas.v3.dataformat.mapping;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Abstract super-class for a MappingContext that already provides a
+ * MappingProvider
+ *
+ * @param <T> Type of mapper the the MappingProvider can operate on
+ */
 public abstract class MappingContext<T extends Mapper> {
 
     protected static final Logger log = LoggerFactory.getLogger(MappingContext.class);

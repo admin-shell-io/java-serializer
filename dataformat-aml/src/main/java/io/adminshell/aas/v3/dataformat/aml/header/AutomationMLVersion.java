@@ -22,6 +22,9 @@ import javax.xml.bind.annotation.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(namespace = "http://www.w3.org/2001/XMLSchema", name = "string")
+/**
+ * Utility class to represent AutomationML version in an AML document
+ */
 public class AutomationMLVersion {
 
     @XmlAttribute(name = "AutomationMLVersion")

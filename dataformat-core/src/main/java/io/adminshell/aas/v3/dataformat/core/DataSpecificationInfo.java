@@ -18,6 +18,9 @@ package io.adminshell.aas.v3.dataformat.core;
 import io.adminshell.aas.v3.model.DataSpecificationContent;
 import io.adminshell.aas.v3.model.Reference;
 
+/**
+ * Class representing all information required for a (custom) data specification
+ */
 public class DataSpecificationInfo {
 
     private final Class<? extends DataSpecificationContent> type;

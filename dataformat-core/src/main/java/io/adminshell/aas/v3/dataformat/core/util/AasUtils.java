@@ -18,10 +18,6 @@ package io.adminshell.aas.v3.dataformat.core.util;
 import com.google.common.base.Objects;
 import com.google.common.reflect.TypeToken;
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
-import io.adminshell.aas.v3.dataformat.core.deserialization.EnumDeserializer;
-import io.adminshell.aas.v3.dataformat.core.serialization.EnumSerializer;
-import io.adminshell.aas.v3.dataformat.core.visitor.IdentifiableCollector;
-import io.adminshell.aas.v3.dataformat.mapping.util.TypeUtils;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.Identifiable;
@@ -33,28 +29,41 @@ import io.adminshell.aas.v3.model.Operation;
 import io.adminshell.aas.v3.model.Referable;
 import io.adminshell.aas.v3.model.Reference;
 import io.adminshell.aas.v3.model.Submodel;
-import io.adminshell.aas.v3.model.SubmodelElement;
 import io.adminshell.aas.v3.model.impl.DefaultKey;
 import io.adminshell.aas.v3.model.impl.DefaultReference;
+import java.beans.IntrospectionException;
+import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
+import java.util.Comparator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
+/**
+ * Provides utility functions related to AAS
+ */
 public class AasUtils {
+
+    private static final Logger log = LoggerFactory.getLogger(AasUtils.class);
+
+    private static final char UNDERSCORE = '_';
 
     private AasUtils() {
     }
 
+    /**
+     * Formats a Reference as string
+     *
+     * @param reference Reference to serialize
+     * @return string representation of the reference for serialization, null if
+     * reference is null
+     */
     public static String asString(Reference reference) {
         if (reference == null) {
             return null;
@@ -64,23 +73,30 @@ public class AasUtils {
                 .collect(Collectors.joining(","));
     }
 
-    public static Optional<Submodel> resolveSubmodelReference(Reference reference, AssetAdministrationShellEnvironment environment) {
-        return environment.getSubmodels().stream()
-                .filter(sm -> Objects.equal(sm.getIdentification().getIdentifier(), reference.getKeys().get(0).getValue()))
-                .findAny();
-    }
-
+    /**
+     * Checks if a reference is a local reference or not. This functionality may
+     * not be 100% correct as since v3.0RC01 of the AAS specification there no
+     * longer is an isLocal property to check this and no alternative way to
+     * determine whether a reference is local or not is introduced. This method
+     * only checks for the presence of any Key with type GLOBAL_REFERENCE.
+     * Another approach would be to actually try resolving the reference
+     * locally.
+     *
+     * @param reference The reference to check
+     * @param environment The environment context the reference resides. In
+     * current implementation this is not used
+     * @return true if the reference is a local reference to the given
+     * environment, false otherwise
+     */
     public static boolean isLocal(Reference reference, AssetAdministrationShellEnvironment environment) {
-        // could/should additionally try resolving it
         return !reference.getKeys().stream().anyMatch(x -> x.getType() == KeyElements.GLOBAL_REFERENCE);
     }
 
     public static List<Submodel> getSubmodelTemplates(AssetAdministrationShell aas, AssetAdministrationShellEnvironment environment) {
         return aas.getSubmodels().stream()
-                .map(ref -> resolveSubmodelReference(ref, environment))
-                .filter(sm -> sm.isPresent())
-                .map(sm -> sm.get())
-                .filter(sm -> sm.getKind() == ModelingKind.TEMPLATE)
+                .map(ref -> resolve(ref, environment, Submodel.class))
+                .filter(sm -> sm != null)
+                .filter(sm -> sm.getKind() != ModelingKind.INSTANCE)
                 .collect(Collectors.toList());
     }
 
@@ -88,7 +104,13 @@ public class AasUtils {
         return !getSubmodelTemplates(aas, environment).isEmpty();
     }
 
-    public static Reference identifiableToReference(Identifiable identifiable) {
+    /**
+     * Creates a reference for an Identifiable instance
+     *
+     * @param identifiable the identifiable to create the reference for
+     * @return a reference representing the identifiable
+     */
+    public static Reference toReference(Identifiable identifiable) {
         return new DefaultReference.Builder()
                 .key(new DefaultKey.Builder()
                         .type(referableToKeyType(identifiable))
@@ -98,43 +120,100 @@ public class AasUtils {
                 .build();
     }
 
+    /**
+     * Gets the KeyElements type matching the provided Referable
+     *
+     * @param referable The referable to convert to KeyElements type
+     * @return the most specific KeyElements type representing the Referable,
+     * i.e. abstract types like SUBMODEL_ELEMENT or DATA_ELEMENT are never
+     * returned; null if there is no corresponding KeyElements type
+     */
     public static KeyElements referableToKeyType(Referable referable) {
         Class<?> aasInterface = ReflectionHelper.getAasInterface(referable.getClass());
         if (aasInterface != null) {
-            return KeyElements.valueOf(EnumDeserializer.translate(aasInterface.getSimpleName()));
+            return KeyElements.valueOf(deserializeEnumName(aasInterface.getSimpleName()));
         }
         return null;
     }
 
-    public static Optional<Class> keyTypeToClass(KeyElements key) {
-        return Stream.concat(ReflectionHelper.INTERFACES.stream(), ReflectionHelper.INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION.stream())
-                .filter(x -> x.getSimpleName().equals(EnumSerializer.translate(key.name())))
-                .findAny();
+    /**
+     * Translates an enum value from SCREAMING_SNAKE_CASE to CamelCase
+     *
+     * @param input input name in SCREAMING_SNAKE_CASE
+     * @return name in CamelCase
+     */
+    public static String serializeEnumName(String input) {
+        String result = "";
+        boolean capitalize = true;
+        for (int i = 0; i < input.length(); i++) {
+            char currentChar = input.charAt(i);
+            if (UNDERSCORE == currentChar) {
+                capitalize = true;
+            } else {
+                result += capitalize
+                        ? currentChar
+                        : Character.toLowerCase(currentChar);
+                capitalize = false;
+            }
+        }
+        return result;
     }
 
-    public static Reference asReference(Reference parent, Referable element) {
-//        if (element == null) {
-//            return null;
-//        }
-//        Reference result = AASUtils.cloneReference(parent);
-//        if (result == null && Identifiable.class.isAssignableFrom(element.getClass())) {
-//            return AASUtils.identifiableToReference((Identifiable) element);
-//        }
-//        if (result != null) {
-//            result.getKeys().add(new DefaultKey.Builder()
-//                    .type(AASUtils.referableToKeyType(element))
-//                    .idType(KeyType.ID_SHORT)
-//                    .value(element.getIdShort())
-//                    .build());
-//        }
-//        return result;
+    /**
+     * Translates an enum value from CamelCase to SCREAMING_SNAKE_CASE
+     *
+     * @param input input name in CamelCase
+     * @return name in SCREAMING_SNAKE_CASE
+     */
+    public static String deserializeEnumName(String input) {
+        String result = "";
+        if (input == null || input.isEmpty()) {
+            return result;
+        }
+        result += input.charAt(0);
+        for (int i = 1; i < input.length(); i++) {
+            char currentChar = input.charAt(i);
+            if (Character.isUpperCase(currentChar)) {
+                result += UNDERSCORE;
+            }
+            result += Character.toUpperCase(currentChar);
+        }
+        return result;
+    }
 
+    /**
+     * Gets a Java interface representing the type provided by key.
+     *
+     * @param key The KeyElements type
+     * @return a Java interface representing the provided KeyElements type or
+     * null if no matching Class/interface could be found. It also returns
+     * abstract types like SUBMODEL_ELEMENT or DATA_ELEMENT
+     */
+    public static Class<?> keyTypeToClass(KeyElements key) {
+        return Stream.concat(ReflectionHelper.INTERFACES.stream(), ReflectionHelper.INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION.stream())
+                .filter(x -> x.getSimpleName().equals(serializeEnumName(key.name())))
+                .findAny()
+                .orElse(null);
+    }
+
+    /**
+     * Creates a reference for an element given a potential parent
+     *
+     * @param parent Reference to the parent. Can only be null when element is
+     * instance of Identifiable, otherwise result will always be null
+     * @param element the element to create a reference for
+     * @return A reference representing the element or null if either element is
+     * null or parent is null and element not an instance of Identifiable. In
+     * case element is an instance of Identifiable, the returned reference will
+     * only contain one key pointing directly to the element.
+     */
+    public static Reference toReference(Reference parent, Referable element) {
         if (element == null) {
             return null;
         } else if (Identifiable.class.isAssignableFrom(element.getClass())) {
-            return AasUtils.identifiableToReference((Identifiable) element);
+            return toReference((Identifiable) element);
         } else {
-            Reference result = AasUtils.cloneReference(parent);
+            Reference result = clone(parent);
             if (result != null) {
                 result.getKeys().add(new DefaultKey.Builder()
                         .type(AasUtils.referableToKeyType(element))
@@ -146,6 +225,14 @@ public class AasUtils {
         }
     }
 
+    /**
+     * Checks if two references are refering to the same element
+     *
+     * @param ref1 reference 1
+     * @param ref2 reference 2
+     * @return returns true if both references are refering to the same element,
+     * otherwise false
+     */
     public static boolean sameAs(Reference ref1, Reference ref2) {
         boolean ref1Empty = ref1 == null || ref1.getKeys() == null || ref1.getKeys().isEmpty();
         boolean ref2Empty = ref2 == null || ref2.getKeys() == null || ref2.getKeys().isEmpty();
@@ -159,14 +246,14 @@ public class AasUtils {
         for (int i = 0; i < keyLength; i++) {
             Key ref1Key = ref1.getKeys().get(ref1.getKeys().size() - (i + 1));
             Key ref2Key = ref2.getKeys().get(ref2.getKeys().size() - (i + 1));
-            Optional<Class> ref1Type = keyTypeToClass(ref1Key.getType());
-            Optional<Class> ref2Type = keyTypeToClass(ref2Key.getType());
-            if (ref1Type.isPresent() != ref2Type.isPresent()) {
+            Class<?> ref1Type = keyTypeToClass(ref1Key.getType());
+            Class<?> ref2Type = keyTypeToClass(ref2Key.getType());
+            if (ref1Type != ref2Type) {
                 return false;
             }
-            if (ref1Type.isPresent()) {
-                if (!(ref1Type.get().isAssignableFrom(ref2Type.get())
-                        || ref2Type.get().isAssignableFrom(ref1Type.get()))) {
+            if (ref1Type != null) {
+                if (!(ref1Type.isAssignableFrom(ref2Type)
+                        || ref2Type.isAssignableFrom(ref1Type))) {
                     return false;
                 }
             }
@@ -183,7 +270,13 @@ public class AasUtils {
         return true;
     }
 
-    public static Reference cloneReference(Reference reference) {
+    /**
+     * Creates a deep-copy clone of a reference
+     *
+     * @param reference the reference to clone
+     * @return the cloned reference
+     */
+    public static Reference clone(Reference reference) {
         if (reference == null || reference.getKeys() == null || reference.getKeys().isEmpty()) {
             return null;
         }
@@ -197,19 +290,58 @@ public class AasUtils {
                 .build();
     }
 
+    /**
+     * Resolves a Reference within an AssetAdministrationShellEnvironment and
+     * returns the targeted object if available, null otherwise
+     *
+     *
+     * @param reference The reference to resolve
+     * @param env The AssetAdministrationShellEnvironment to resolve the
+     * reference against
+     * @return returns an instance of T if the reference could successfully be
+     * resolved, otherwise null
+     * @throws IllegalArgumentException if something goes wrong while resolving
+     */
     public static Referable resolve(Reference reference, AssetAdministrationShellEnvironment env) {
+        return resolve(reference, env, Referable.class);
+    }
+
+    /**
+     * Resolves a Reference within an AssetAdministrationShellEnvironment and
+     * returns the targeted object if available, null otherwise
+     *
+     * @param <T> sub-type of Referable of the targeted type. If unknown use
+     * Referable.class
+     * @param reference The reference to resolve
+     * @param env The AssetAdministrationShellEnvironment to resolve the
+     * reference against
+     * @param type desired return type, use Referable.class is unknwon/not
+     * needed
+     * @return returns an instance of T if the reference could successfully be
+     * resolved, otherwise null
+     * @throws IllegalArgumentException if something goes wrong while resolving
+     */
+    public static <T extends Referable> T resolve(Reference reference, AssetAdministrationShellEnvironment env, Class<T> type) {
         if (reference == null || reference.getKeys() == null || reference.getKeys().isEmpty()) {
             return null;
         }
         Set<Identifiable> identifiables = new IdentifiableCollector(env).collect();
         Object current = null;
         int i = reference.getKeys().size() - 1;
+        if (type != null) {
+            Class<?> actualType = keyTypeToClass(reference.getKeys().get(i).getType());
+            if (!type.isAssignableFrom(actualType)) {
+                log.warn("reference {} could not be resolved as target type is not assignable from actual type (target: {}, actual: {})",
+                        asString(reference), type.getName(), actualType.getName());
+                return null;
+            }
+        }
         for (; i >= 0; i--) {
             Key key = reference.getKeys().get(i);
-            Optional<Class> referencedType = keyTypeToClass(key.getType());
-            if (referencedType.isPresent()) {
+            Class<?> referencedType = keyTypeToClass(key.getType());
+            if (referencedType != null) {
                 List<Identifiable> matchingIdentifiables = identifiables.stream()
-                        .filter(x -> referencedType.get().isAssignableFrom(x.getClass()))
+                        .filter(x -> referencedType.isAssignableFrom(x.getClass()))
                         .filter(x -> key.getIdType().name().equals(x.getIdentification().getIdType().name()))
                         .filter(x -> x.getIdentification().getIdentifier().equals(key.getValue()))
                         .collect(Collectors.toList());
@@ -227,14 +359,13 @@ public class AasUtils {
         }
         i++;
         if (i == reference.getKeys().size()) {
-            return (Referable) current;
+            return (T) current;
         }
-
         // follow idShort path until target
         for (; i < reference.getKeys().size(); i++) {
             Key key = reference.getKeys().get(i);
-            Optional<Class> keyType = keyTypeToClass(key.getType());
-            if (keyType.isPresent()) {
+            Class<?> keyType = keyTypeToClass(key.getType());
+            if (keyType != null) {
                 Collection collection;
                 // operation needs special handling because of nested values               
                 if (Operation.class.isAssignableFrom(current.getClass())) {
@@ -246,15 +377,15 @@ public class AasUtils {
                             .flatMap(x -> x.map(y -> y.getValue()))
                             .collect(Collectors.toSet());
                 } else {
-                    List<PropertyDescriptor> matchingProperties = TypeUtils.getAASProperties(current.getClass()).stream()
+                    List<PropertyDescriptor> matchingProperties = getAasProperties(current.getClass()).stream()
                             .filter(x -> Collection.class.isAssignableFrom(x.getReadMethod().getReturnType()))
                             .filter(x -> TypeToken.of(x.getReadMethod().getGenericReturnType())
                             .resolveType(Collection.class.getTypeParameters()[0])
-                            .isSupertypeOf(keyType.get()))
+                            .isSupertypeOf(keyType))
                             .collect(Collectors.toList());
                     if (matchingProperties.isEmpty()) {
                         throw new IllegalArgumentException(String.format("error resolving reference - could not find matching property for type %s in class %s",
-                                keyType.get().getSimpleName(),
+                                keyType.getSimpleName(),
                                 current.getClass().getSimpleName()));
                     }
                     if (matchingProperties.size() > 1) {
@@ -268,7 +399,7 @@ public class AasUtils {
                     try {
                         collection = (Collection) matchingProperties.get(0).getReadMethod().invoke(current);
                     } catch (Exception ex) {
-                        throw new RuntimeException("error resolving reference", ex);
+                        throw new IllegalArgumentException("error resolving reference", ex);
                     }
                     Optional next = collection.stream()
                             .filter(x -> ((Referable) x).getIdShort().equals(key.getValue()))
@@ -280,117 +411,36 @@ public class AasUtils {
                 }
             }
         }
-        return (Referable) current;
-
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        
-//        List<Key> keys = reference.getKeys();
-//
-//        //get reduced Key list from last identifiable key to end
-//        List<Key> reducedKeyList = new ArrayList<>();
-//        reduceKeyList(keys, reducedKeyList);
-//
-//        //resolve the reference
-//        Referable searchedReferable = null;
-//        for (int i = 0; i < reducedKeyList.size(); i++) {
-//
-//            Key actualKey = reducedKeyList.get(i);
-//            String className = EnumSerializer.translate(actualKey.getType().name());
-//            try {
-//
-//                //get class from the key type and calculate the method name for getting a list of the elements
-//                //e.g. "getSubmodelElements"
-//                Class c = Class.forName(ReflectionHelper.MODEL_PACKAGE_NAME + "." + className);
-//
-//                TypeUtils.getAASProperties(value.getClass())
-//                //TODO: visitor pattern? e.g. for Operation Variables
-//                String methodName = "get" + className + "s";
-//
-//                Method method = null;
-//
-//                if (i == 0) {
-//                    //first Key is identifiable
-//
-//                    //get list of elements due to the key type
-//                    method = env.getClass().getMethod(methodName);
-//                    List<Object> list = (List<Object>) method.invoke(env);
-//                    searchedReferable = getIdentifiable(actualKey, c, list);
-//
-//                } else {
-//
-//                    //if searchedReferable is null then the first identifiable could not be found
-//                    if (searchedReferable == null) {
-//                        return null;
-//                    }
-//
-//                    //get list of elements due to the key type
-//                    method = searchedReferable.getClass().getMethod(methodName);
-//                    List<Object> list = (List<Object>) method.invoke(searchedReferable);
-//                    searchedReferable = getReferable(actualKey, list);
-//                }
-//
-//            } catch (ClassNotFoundException | NoSuchMethodException e) {
-//                e.printStackTrace();
-//                return null;
-//            } catch (InvocationTargetException | IllegalAccessException e) {
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        return searchedReferable;
+        return (T) current;
     }
 
-    private static void reduceKeyList(List<Key> keys, List<Key> reducedKeyList) {
-        for (int i = keys.size() - 1; i >= 0; i--) {
-            Key k = keys.get(i);
-            reducedKeyList.add(0, k);
-            String className = EnumSerializer.translate(k.getType().name());
-            Class c = null;
-            try {
-                c = Class.forName(ReflectionHelper.MODEL_PACKAGE_NAME + "." + className);
-            } catch (ClassNotFoundException e) {
-                e.printStackTrace();
-            }
-            if (Identifiable.class.isAssignableFrom(c)) {
-                break;
-            }
+    /**
+     * Gets a list of all properties defined for a class implementing at least
+     * one AAS interface.
+     *
+     * @param type A class implementing at least one AAS interface. If it is
+     * does not implement any AAS interface the result will be an empty list
+     * @return a list of all properties defined in any of AAS interface
+     * implemented by type. If type does not implement any AAS interface an
+     * empty list is returned.
+     */
+    public static List<PropertyDescriptor> getAasProperties(Class<?> type) {
+        Class<?> aasType = ReflectionHelper.getAasInterface(type);
+        Set<Class<?>> types = new HashSet<>();
+        if (aasType != null) {
+            types.add(aasType);
+            types.addAll(ReflectionHelper.getSuperTypes(aasType, true));
         }
-    }
-
-    private static Referable getReferable(Key actualKey, List<Object> list) {
-        Referable searchedReferable = null;
-        for (Object e : list) {
-            Referable element = (Referable) e;
-            if (actualKey.getIdType() == KeyType.ID_SHORT) {
-                if (element.getIdShort().equals(actualKey.getValue())) {
-                    searchedReferable = element;
-                }
-            }
-        }
-        return searchedReferable;
-    }
-
-    private static Identifiable getIdentifiable(Key lastKey, Class c, List<Object> list) {
-        if (Identifiable.class.isAssignableFrom(c)) {
-            for (Object e : list) {
-                Identifiable element = (Identifiable) e;
-                if (lastKey.getIdType() == KeyType.ID_SHORT) {
-                    if (element.getIdShort().equals(lastKey.getValue())) {
-                        return element;
+        return types.stream()
+                .flatMap(x -> {
+                    try {
+                        return Stream.of(Introspector.getBeanInfo(x).getPropertyDescriptors());
+                    } catch (IntrospectionException ex) {
+                        log.warn("error finding properties of class '{}'", type, ex);
                     }
-                } else if (lastKey.getIdType() == KeyType.IRI || lastKey.getIdType() == KeyType.IRDI || lastKey.getIdType() == KeyType.CUSTOM) {
-                    if (element.getIdentification().getIdentifier().equals(lastKey.getValue())) {
-                        return element;
-                    }
-                }
-            }
-        }
-        return null;
+                    return Stream.empty();
+                })
+                .sorted(Comparator.comparing(x -> x.getName()))
+                .collect(Collectors.toList());
     }
 }

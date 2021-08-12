@@ -16,7 +16,7 @@
 package io.adminshell.aas.v3.dataformat.mapping;
 
 import com.google.common.reflect.TypeToken;
-import io.adminshell.aas.v3.dataformat.mapping.util.TypeUtils;
+import io.adminshell.aas.v3.dataformat.core.util.MostSpecificTypeTokenComparator;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -28,6 +28,12 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Manages a set of mappers and allows finding them by type. This is the
+ * cornerstone functionality of the mapping framework.
+ *
+ * @param <T> Type of mappers that are supported
+ */
 public class MappingProvider<T extends Mapper> {
 
     private static final Logger log = LoggerFactory.getLogger(MappingProvider.class);
@@ -75,6 +81,13 @@ public class MappingProvider<T extends Mapper> {
                 .resolveType(Mapper.class.getTypeParameters()[0]);
     }
 
+    /**
+     * Find the most specific mapper for a given object.
+     *
+     * @param obj The object to find a suitable mapper for. If this is an
+     * instance of Type (e.g. a Class) type information for that is returned.
+     * @return The most specific mapper for the given object
+     */
     public T getMapper(Object obj) {
         if (obj == null) {
             return getMapper(Object.class);
@@ -85,10 +98,16 @@ public class MappingProvider<T extends Mapper> {
         return getMapper(obj.getClass());
     }
 
+    /**
+     * Find the most specific mapper for a given type.
+     *
+     * @param type The type to find a suitable mapper for.
+     * @return The most specific mapper for the given type
+     */
     public T getMapper(Type type) {
         Optional<List<T>> customMapper = mappings.entrySet().stream()
                 .filter(x -> x.getKey().isSupertypeOf(type))
-                .sorted((x, y) -> Objects.compare(x.getKey(), y.getKey(), new TypeUtils.TypeTokenComparator()))
+                .sorted((x, y) -> Objects.compare(x.getKey(), y.getKey(), new MostSpecificTypeTokenComparator()))
                 .map(x -> x.getValue())
                 .findFirst();
         if (!customMapper.isPresent() || customMapper.get().isEmpty()) {

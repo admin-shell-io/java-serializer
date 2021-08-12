@@ -20,6 +20,9 @@ import java.util.Date;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
+/**
+ * Utility class to represent the WriterInfo section in an AML document
+ */
 public class WriterInfo {
 
     @XmlElement(name = "WriterName")

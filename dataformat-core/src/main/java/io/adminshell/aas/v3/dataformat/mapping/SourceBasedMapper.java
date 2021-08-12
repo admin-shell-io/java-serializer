@@ -15,7 +15,22 @@
  */
 package io.adminshell.aas.v3.dataformat.mapping;
 
+/**
+ * A mapper that when mapping from A -> B allows to write mappers based on the
+ * classes of A (the source of the mapping)
+ *
+ * @param <T> type that the mapper accepts, here: any class of A
+ * @param <G> the generator type, here: to generate instances of B
+ * @param <C> the type of mapping context
+ */
 public interface SourceBasedMapper<T, G, C extends SourceBasedMappingContext> extends Mapper<T> {
 
+    /**
+     * Maps the given value to target format via the generator.
+     * @param value the value to map
+     * @param generator the generator to write the mapping result to
+     * @param context the context of the mapping
+     * @throws MappingException 
+     */
     public void map(T value, G generator, C context) throws MappingException;
 }

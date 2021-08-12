@@ -15,6 +15,34 @@
  */
 package io.adminshell.aas.v3.dataformat.aml;
 
+import io.adminshell.aas.v3.dataformat.aml.deserialization.AasTypeFactory;
+
 public class AmlDeserializationConfig {
+    public static Builder builder() {
+        return new Builder();
+    }
+
+    private final AasTypeFactory typeFactory;
+
+    private AmlDeserializationConfig(AasTypeFactory typeFactory) {
+        this.typeFactory = typeFactory;
+    }
+    public AasTypeFactory getTypeFactory() {
+        return typeFactory;
+    }
+
+    public static class Builder {
+
+        private AasTypeFactory typeFactory = new AasTypeFactory();
+
+        public AmlDeserializationConfig build() {
+            return new AmlDeserializationConfig(typeFactory);
+        }
+
+        public Builder typeFactory(AasTypeFactory value) {
+            this.typeFactory = value;
+            return this;
+        }
+    }
 
 }

@@ -15,7 +15,23 @@
  */
 package io.adminshell.aas.v3.dataformat.mapping;
 
+/**
+ * A mapper that when mapping from A -> B allows to write mappers based on the
+ * classes of B (the target of the mapping)
+ *
+ * @param <T> type that the mapper accepts, here: any class of B
+ * @param <P> the parser type, here: to parse data of A
+ * @param <C> the type of mapping context
+ */
 public interface TargetBasedMapper<T, P, C extends MappingContext> extends Mapper<T> {
 
+    /**
+     * Reads from the parser and returns the mapping result.
+     *
+     * @param parser the parser to read the actual input
+     * @param context the context
+     * @return a new instance of T created by mapping data given by the parser
+     * @throws MappingException
+     */
     public T map(P parser, C context) throws MappingException;
 }

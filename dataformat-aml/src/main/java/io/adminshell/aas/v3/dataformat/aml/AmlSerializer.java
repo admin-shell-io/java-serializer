@@ -15,7 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml;
 
-import io.adminshell.aas.v3.dataformat.aml.aas2aml.AasToAmlMapper;
+import io.adminshell.aas.v3.dataformat.aml.serialization.AasToAmlMapper;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.Serializer;
 import io.adminshell.aas.v3.dataformat.aml.header.AutomationMLVersion;
@@ -32,19 +32,30 @@ import org.eclipse.persistence.jaxb.JAXBContextFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Class for serializing an instance of AssetAdministrationShellEnvironment to
+ * AML.
+ */
 public class AmlSerializer implements Serializer {
 
     private static final String AAS_LIB_SOURCE = "/AssetAdministrationShellLib.aml";
     private static final Logger log = LoggerFactory.getLogger(AmlSerializer.class);
-
-    public AmlSerializer() {
-    }
 
     @Override
     public String write(AssetAdministrationShellEnvironment aasEnvironment) throws SerializationException {
         return write(aasEnvironment, AmlSerializationConfig.DEFAULT);
     }
 
+    /**
+     * Serializes a given instance of AssetAdministrationShellEnvironment to
+     * string
+     *
+     * @param aasEnvironment the AssetAdministrationShellEnvironment to
+     * serialize
+     * @param config serialization configuration
+     * @return the string representation of the environment
+     * @throws SerializationException if serialization fails
+     */
     public String write(AssetAdministrationShellEnvironment aasEnvironment, AmlSerializationConfig config) throws SerializationException {
         try {
             CAEXFile aml = new AasToAmlMapper().map(aasEnvironment, config);
@@ -72,7 +83,6 @@ public class AmlSerializer implements Serializer {
     }
 
     private CAEXFile addAASLibrary(CAEXFile file) throws JAXBException, IOException {
-        // potential issue: when dynamically adding custom DataSpecificationTemplates this won't work
         CAEXFile aasLib = loadAASLibrary();
         return CAEXFile.copyOf(file)
                 .addInterfaceClassLib(aasLib.getInterfaceClassLib())

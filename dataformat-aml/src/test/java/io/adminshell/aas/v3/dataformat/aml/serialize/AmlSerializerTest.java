@@ -19,7 +19,7 @@ import io.adminshell.aas.v3.dataformat.aml.fixtures.FullExample;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.aml.AmlSerializationConfig;
 import io.adminshell.aas.v3.dataformat.aml.AmlSerializer;
-import io.adminshell.aas.v3.dataformat.aml.id.IntegerIdGenerator;
+import io.adminshell.aas.v3.dataformat.aml.serialization.id.IntegerIdGenerator;
 import io.adminshell.aas.v3.dataformat.aml.fixtures.TestExample;
 import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
@@ -136,7 +136,7 @@ public class AmlSerializerTest {
                                 .identifier("iri:AAS1")
                                 .build())
                         .idShort("AAS1")
-                        .submodel(AasUtils.identifiableToReference(submodel))
+                        .submodel(AasUtils.toReference(submodel))
                         .build())
                 .submodels(submodel)
                 .build();
@@ -184,7 +184,7 @@ public class AmlSerializerTest {
                                 .identifier("iri:AAS1")
                                 .build())
                         .idShort("AAS1")
-                        .submodel(AasUtils.identifiableToReference(submodel))
+                        .submodel(AasUtils.toReference(submodel))
                         .build())
                 .submodels(submodel)
                 .build();
@@ -196,9 +196,9 @@ public class AmlSerializerTest {
     }
 
     @Test
-    @Ignore
-    public void testSAPFullExample() throws SerializationException {
-        String actual = serializer.write(FullExample.ENVIRONMENT);
+//    @Ignore
+    public void testSAPFullExample() throws SerializationException, SAXException, IOException {
+        validateAmlSerializer(FullExample.FILE, FullExample.ENVIRONMENT);
     }
 
     private void validateAmlSerializer(File expectedFile, AssetAdministrationShellEnvironment environment)

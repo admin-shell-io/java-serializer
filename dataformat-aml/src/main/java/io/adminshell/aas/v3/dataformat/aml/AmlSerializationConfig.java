@@ -16,12 +16,15 @@
 package io.adminshell.aas.v3.dataformat.aml;
 
 import io.adminshell.aas.v3.dataformat.aml.header.WriterInfo;
-import io.adminshell.aas.v3.dataformat.aml.id.UuidGenerator;
-import io.adminshell.aas.v3.dataformat.aml.id.IdGenerator;
+import io.adminshell.aas.v3.dataformat.aml.serialization.id.UuidGenerator;
+import io.adminshell.aas.v3.dataformat.aml.serialization.id.IdGenerator;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Configuration class for AML serialization. This class is immutable.
+ */
 public class AmlSerializationConfig {
 
     public static final String DEFAULT_SCHEMA_VERSION = "2.15";
@@ -34,7 +37,7 @@ public class AmlSerializationConfig {
     }
 
     private final IdGenerator idGenerator;
-    private final String schemaVersion;
+    private final String caexSchemaVersion;
     private final String amlVersion;
     private final String filename;
     private final boolean includeLibraries;
@@ -50,7 +53,7 @@ public class AmlSerializationConfig {
             WriterInfo writerInfo,
             List<Object> additionalInformation) {
         this.idGenerator = idGenerator;
-        this.schemaVersion = schemaVersion;
+        this.caexSchemaVersion = schemaVersion;
         this.amlVersion = amlVersion;
         this.filename = filename;
         this.includeLibraries = includeLibraries;
@@ -58,26 +61,58 @@ public class AmlSerializationConfig {
         this.additionalInformation = additionalInformation;
     }
 
+    /**
+     * Indicates if the predefined AAS libraries should be included in the
+     * result or not
+     *
+     * @return true is they should be included, otherwise false
+     */
     public boolean isIncludeLibraries() {
         return includeLibraries;
     }
 
+    /**
+     * The IdGenerator used for AML creation. Default are UUID-based IDs but
+     * custom IdGenerator can be used.
+     *
+     * @return the IdGenerator to use
+     */
     public IdGenerator getIdGenerator() {
         return idGenerator;
     }
 
+    /**
+     * Gets additional information that should be included in the file header
+     *
+     * @return list of additional information objects
+     */
     public List<Object> getAdditionalInformation() {
         return additionalInformation;
     }
 
-    public String getSchemaVersion() {
-        return schemaVersion;
+    /**
+     * Gets the CAEX schema version
+     *
+     * @return the CAEX schema version
+     */
+    public String getCaexSchemaVersion() {
+        return caexSchemaVersion;
     }
 
+    /**
+     * Gets the AML version
+     *
+     * @return the AML version
+     */
     public String getAmlVersion() {
         return amlVersion;
     }
 
+    /**
+     * Gets the WriterInfo header to include in AML
+     *
+     * @return the WriterInfo
+     */
     public WriterInfo getWriterInfo() {
         return writerInfo;
     }
@@ -90,7 +125,7 @@ public class AmlSerializationConfig {
         private String filename = DEFAULT_FILENAME;
         private boolean includeLibraries = true;
         private WriterInfo writerInfo = null;
-        private List<Object> additionalInformation = new ArrayList<>();
+        private final List<Object> additionalInformation = new ArrayList<>();
 
         public AmlSerializationConfig build() {
             return new AmlSerializationConfig(

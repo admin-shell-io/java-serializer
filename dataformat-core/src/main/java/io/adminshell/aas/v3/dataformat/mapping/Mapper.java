@@ -15,6 +15,12 @@
  */
 package io.adminshell.aas.v3.dataformat.mapping;
 
+/**
+ * Generic interface used by MappingProvider to infere generic arguments. This
+ * is used to automatically determine best-matching mapper
+ *
+ * @param <T> The type that this Mapper can process
+ */
 public interface Mapper<T> {
 
 }

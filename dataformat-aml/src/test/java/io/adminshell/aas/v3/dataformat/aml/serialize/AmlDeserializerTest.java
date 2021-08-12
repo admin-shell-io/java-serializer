@@ -29,7 +29,6 @@ public class AmlDeserializerTest {
     private final AmlDeserializer deserializer = new AmlDeserializer();
 
     @Test
-    @Ignore
     public void testExample() throws FileNotFoundException, DeserializationException {
         AssetAdministrationShellEnvironment actual = deserializer.read(TestExample.FILE);
         assertEquals(TestExample.ENVIRONMENT, actual);

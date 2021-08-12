@@ -16,7 +16,7 @@
 package io.adminshell.aas.v3.dataformat.aml.fixtures;
 
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
-import io.adminshell.aas.v3.dataformat.core.deserialization.EnumDeserializer;
+import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.model.*;
 import io.adminshell.aas.v3.model.impl.*;
 
@@ -27,7 +27,7 @@ public class TestExample {
     public static final java.io.File FILE = new java.io.File("src/test/resources/amlfile/example_test.aml");
 
     private static KeyElements resolveKeyElement(Class<?> type) {
-        String potentialEnumName = EnumDeserializer.translate(ReflectionHelper.getAasInterface(type).getSimpleName());
+        String potentialEnumName = AasUtils.deserializeEnumName(ReflectionHelper.getAasInterface(type).getSimpleName());
         return KeyElements.valueOf(potentialEnumName);
     }
 

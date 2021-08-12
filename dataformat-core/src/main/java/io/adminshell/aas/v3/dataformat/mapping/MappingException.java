@@ -15,6 +15,9 @@
  */
 package io.adminshell.aas.v3.dataformat.mapping;
 
+/**
+ * Exception throw upon any error on mapping
+ */
 public class MappingException extends Exception {
 
     public MappingException(String msg) {
