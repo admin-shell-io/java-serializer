@@ -196,7 +196,7 @@ public class UANodeWrapper {
 	 *         matches the given type
 	 */
 	public List<UANodeWrapper> getComponentsOfType(BasicIdentifier filterType) {
-		return getComponents().stream().filter(c -> c.getType() == filterType).toList();
+		return getComponents().stream().filter(c -> c.getType() == filterType).collect(Collectors.toList());
 	}
 
 	/**
@@ -205,7 +205,7 @@ public class UANodeWrapper {
 	 *         matches the given type
 	 */
 	public List<UANodeWrapper> getPropertiesOfType(BasicIdentifier filterType) {
-		return getProperties().stream().filter(c -> c.getType() == filterType).toList();
+		return getProperties().stream().filter(c -> c.getType() == filterType).collect(Collectors.toList());
 	}
 
 	public UANode getNode() {
