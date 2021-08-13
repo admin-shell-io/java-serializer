@@ -69,7 +69,7 @@ public class AasUtils {
             return null;
         }
         return reference.getKeys().stream()
-                .map(x -> String.format("(%s)[%s]%s", x.getType(), x.getIdType(), x.getValue()))
+                .map(x -> String.format("(%s)[%s]%s", serializeEnumName(x.getType().name()), x.getIdType(), x.getValue()))
                 .collect(Collectors.joining(","));
     }
 
@@ -248,10 +248,11 @@ public class AasUtils {
             Key ref2Key = ref2.getKeys().get(ref2.getKeys().size() - (i + 1));
             Class<?> ref1Type = keyTypeToClass(ref1Key.getType());
             Class<?> ref2Type = keyTypeToClass(ref2Key.getType());
-            if (ref1Type != ref2Type) {
+            if ((ref1Type == null && ref2Type != null)
+                    || (ref1Type != null && ref2Type == null)) {
                 return false;
             }
-            if (ref1Type != null) {
+            if (ref1Type != ref2Type) {
                 if (!(ref1Type.isAssignableFrom(ref2Type)
                         || ref2Type.isAssignableFrom(ref1Type))) {
                     return false;

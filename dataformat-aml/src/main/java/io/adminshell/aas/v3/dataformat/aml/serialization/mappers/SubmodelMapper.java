@@ -32,7 +32,8 @@ public class SubmodelMapper extends DefaultMapper<Submodel> {
     protected InternalElementType.Builder toInternalElement(Submodel value, AmlGenerator generator, MappingContext context) throws MappingException {
         InternalElementType.Builder builder = super.toInternalElement(value, generator, context);
         if (value.getKind() == ModelingKind.TEMPLATE) {
-            builder = builder.withRefBaseSystemUnitPath(generator.refBaseSystemUnitPath(value, context));
+            builder = builder.withRefBaseSystemUnitPath(generator.getDocumentInfo().getAssetAdministrationShellSystemUnitClassLib()
+                    + "/" + context.getInternalElementNamingStrategy().getName(value.getClass(), value, null));
         }
         return builder;
     }

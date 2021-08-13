@@ -1,5 +1,5 @@
-﻿
-<CAEXFile FileName="AssetAdministrationShellLib  - Full.aml" SchemaVersion="2.15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CAEX_ClassModel_V2.15.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<CAEXFile FileName="AssetAdministrationShellLib.aml" SchemaVersion="2.15" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="CAEX_ClassModel_V2.15.xsd">
     <AdditionalInformation AutomationMLVersion="2.0"/>
     <AdditionalInformation DocumentVersions="Recommendations">
         <Document DocumentIdentifier="AR AAS" Version="1.0.0"/>

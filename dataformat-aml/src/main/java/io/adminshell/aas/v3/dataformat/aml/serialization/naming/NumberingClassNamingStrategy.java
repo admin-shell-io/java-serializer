@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.serialization.naming;
 
+import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,11 +33,15 @@ public class NumberingClassNamingStrategy extends AbstractClassNamingStrategy {
 
     @Override
     protected String generateName(Object obj) {
-        if (!counter.containsKey(obj.getClass())) {
-            counter.put(obj.getClass(), 0);
+        if (obj == null) {
+            return null;
         }
-        counter.put(obj.getClass(), counter.get(obj.getClass()) + 1);
-        return obj.getClass().getSimpleName() + "_" + counter.get(obj.getClass());
+        Class<?> type = ReflectionHelper.getAasInterface(obj.getClass());
+        if (!counter.containsKey(type)) {
+            counter.put(type, 0);
+        }
+        counter.put(type, counter.get(type) + 1);
+        return type.getSimpleName() + "_" + counter.get(type);
     }
 
 }

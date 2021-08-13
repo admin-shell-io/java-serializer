@@ -22,10 +22,10 @@ import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
 import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
+import io.adminshell.aas.v3.model.ModelingKind;
 import io.adminshell.aas.v3.model.Reference;
 import io.adminshell.aas.v3.model.Submodel;
 import java.beans.PropertyDescriptor;
-import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -44,16 +44,24 @@ public class AssetAdministrationShellMapper extends DefaultMapper<AssetAdministr
             return;
         }
         InternalElementType.Builder builder = toInternalElement(aas, generator, context);
+        boolean hasTemplateSubmodel = false;
         for (Reference reference : aas.getSubmodels()) {
             Submodel resolvedSubmodel = AasUtils.resolve(reference, context.getEnvironment(), Submodel.class);
             if (resolvedSubmodel != null) {
                 context.map(resolvedSubmodel, generator.with(builder));
+                if (resolvedSubmodel.getKind() == ModelingKind.TEMPLATE) {
+                    hasTemplateSubmodel = true;
+                }
             } else {
                 log.warn("unresolvable submodel reference '{}' found in AssetAdministrationShell '{}'",
                         AasUtils.asString(reference),
                         aas.getIdentification().getIdentifier());
                 context.map(AasUtils.asString(reference), generator);
             }
+        }
+        if (hasTemplateSubmodel) {
+            builder = builder.withRefBaseSystemUnitPath(generator.getDocumentInfo().getAssetAdministrationShellSystemUnitClassLib()
+                    + "/" + context.getInternalElementNamingStrategy().getName(aas.getClass(), aas, null));
         }
         generator.with(builder).appendReferenceTargetInterfaceIfRequired(aas, context);
         generator.add(builder.build());

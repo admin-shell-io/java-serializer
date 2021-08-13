@@ -57,10 +57,10 @@ public class RelationshipElementMapper extends DefaultMapper<RelationshipElement
     private void mapProperty(RelationshipElement element, Reference reference, String name, AmlGenerator generator, MappingContext context) {
         Referable resolvedReference = AasUtils.resolve(reference, context.getEnvironment());
         if (resolvedReference != null) {
-            generator.addExternalInterfaceForReference(context);
+            generator.addExternalInterfaceForReference();
             generator.addInternalLink(name, element, reference);
         } else {
-            generator.addExternalInterfaceForUnresolvableReference(name, reference, context);
+            generator.addExternalInterfaceForUnresolvableReference(name, reference);
         }
     }
 }

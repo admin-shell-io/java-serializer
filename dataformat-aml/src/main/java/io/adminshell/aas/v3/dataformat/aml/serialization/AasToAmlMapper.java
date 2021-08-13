@@ -56,7 +56,9 @@ public class AasToAmlMapper {
     private static final org.slf4j.Logger log = LoggerFactory.getLogger(AasToAmlMapper.class);
 
     /**
-     * Maps an AssetAdministrationShellEnvironment to an AML file (represented by a CAEXFile)
+     * Maps an AssetAdministrationShellEnvironment to an AML file (represented
+     * by a CAEXFile)
+     *
      * @param env the AssetAdministrationShellEnvironment to map
      * @param config the serialization conig
      * @return an AML representation of the AssetAdministrationShellEnvironment

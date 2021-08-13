@@ -20,12 +20,15 @@ import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
+import io.adminshell.aas.v3.model.MultiLanguageProperty;
 import io.adminshell.aas.v3.model.Referable;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 public class DefaultMapper<T> implements Mapper<T> {
 
@@ -137,6 +140,7 @@ public class DefaultMapper<T> implements Mapper<T> {
     }
 
     protected void mapProperties(T value, AmlGenerator generator, MappingContext context) throws MappingException {
+        List<String> collect = AasUtils.getAasProperties(value.getClass()).stream().map(x -> x.getName()).collect(Collectors.toList());
         for (PropertyDescriptor property : AasUtils.getAasProperties(value.getClass())) {
             if (!skipProperty(property)) {
                 context.with(property)

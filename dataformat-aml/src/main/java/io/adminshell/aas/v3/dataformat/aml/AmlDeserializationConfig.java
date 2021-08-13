@@ -18,6 +18,7 @@ package io.adminshell.aas.v3.dataformat.aml;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.AasTypeFactory;
 
 public class AmlDeserializationConfig {
+
     public static Builder builder() {
         return new Builder();
     }
@@ -27,6 +28,7 @@ public class AmlDeserializationConfig {
     private AmlDeserializationConfig(AasTypeFactory typeFactory) {
         this.typeFactory = typeFactory;
     }
+
     public AasTypeFactory getTypeFactory() {
         return typeFactory;
     }

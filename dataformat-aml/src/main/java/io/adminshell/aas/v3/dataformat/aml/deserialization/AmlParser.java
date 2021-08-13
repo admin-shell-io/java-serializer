@@ -53,7 +53,7 @@ public class AmlParser {
     }
 
     /**
-     * Sets the CAEXObject that currently is being processed. 
+     * Sets the CAEXObject that currently is being processed.
      *
      * @param current the object currently being processed
      */

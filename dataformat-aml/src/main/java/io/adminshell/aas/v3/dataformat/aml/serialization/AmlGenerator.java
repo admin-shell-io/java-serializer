@@ -36,11 +36,20 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * Immutable class supporting creation of AML file by encalsulating different
+ * common tasks and functionality, e.g. id generation and caching. To create new
+ * instances with modified properties use provided with...(...) functions.
+ */
 public class AmlGenerator {
 
     private static final Logger log = LoggerFactory.getLogger(AmlGenerator.class);
     public static final String REFERABLE_REFERENCE_INTERFACE_CLASS = "ReferableReference";
     private static final String DEFAULT_REF_SEMANTIC_PREFIX = "AAS";
+
+    public static Builder builder() {
+        return new Builder();
+    }
     private final String refSemanticPrefix;
     private final CAEXObject.Builder current;
     private final AmlDocumentInfo documentInfo;
@@ -66,6 +75,12 @@ public class AmlGenerator {
         this.reference = reference;
     }
 
+    /**
+     * Creates a new instance with new current CAEXObject.Builder
+     *
+     * @param current new current CAEXObject.Builder
+     * @return new immutable instance with CAEXObject.Builder
+     */
     public AmlGenerator with(CAEXObject.Builder current) {
         return new AmlGenerator(documentInfo,
                 idGenerator,
@@ -76,6 +91,12 @@ public class AmlGenerator {
                 reference);
     }
 
+    /**
+     * Creates a new instance with reference to new parent object in AAS
+     *
+     * @param parent reference to new parent element
+     * @return new immutable instance with new parent
+     */
     public AmlGenerator with(Referable parent) {
         return new AmlGenerator(
                 documentInfo,
@@ -87,6 +108,12 @@ public class AmlGenerator {
                 AasUtils.toReference(reference, parent));
     }
 
+    /**
+     * Creates a new instance with given prefix for refSemantic tags
+     *
+     * @param value new prefix for refSemantic tags
+     * @return new immutable instance given refSemantic prefix
+     */
     public AmlGenerator withRefSemanticPrefix(String value) {
         return new AmlGenerator(
                 documentInfo,
@@ -98,62 +125,36 @@ public class AmlGenerator {
                 reference);
     }
 
+    /**
+     * Adds additional information to the AML file
+     *
+     * @param additionalInformation additional information to add
+     */
     public void addAdditionalInformation(List<Object> additionalInformation) {
         fileBuilder.addAdditionalInformation(additionalInformation);
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static class Builder {
-
-        private String refSemanticPrefix = DEFAULT_REF_SEMANTIC_PREFIX;
-        private CAEXObject.Builder current;
-        private CAEXFile.Builder fileBuilder = CAEXFile.builder();
-        private AmlDocumentInfo documentInfo = new AmlDocumentInfo();
-        private IdGenerator idGenerator = new UuidGenerator();
-
-        public AmlGenerator build() {
-            return new AmlGenerator(documentInfo,
-                    idGenerator,
-                    new HashMap<>(),
-                    refSemanticPrefix,
-                    fileBuilder,
-                    current,
-                    new DefaultReference.Builder().build());
-        }
-
-        public Builder refSemanticPrefix(String value) {
-            this.refSemanticPrefix = value;
-            return this;
-        }
-
-        public Builder current(CAEXObject.Builder value) {
-            this.current = value;
-            return this;
-        }
-
-        public Builder idGenerator(IdGenerator value) {
-            this.idGenerator = value;
-            return this;
-        }
-
-        public Builder file(CAEXFile.Builder value) {
-            this.fileBuilder = value;
-            return this;
-        }
-
-        public Builder documentInfo(AmlDocumentInfo value) {
-            this.documentInfo = value;
-            return this;
-        }
-    }
-
+    /**
+     * Generates a new ID without caching it.
+     *
+     * @return a new ID
+     */
     public String newId() {
         return idGenerator.next();
     }
 
+    /**
+     * Gets the ID for given object. If obj is an instance of Referable it is
+     * first converted to reference pointing to that element. In that case, or
+     * if the obj is already an instance of Reference, an already existing ID
+     * will be returned if available, otherwise a new one is created and cached.
+     * If obj is neither an instance of Reference nor Referable, a new ID is
+     * generated and not cached.
+     *
+     * @param obj object to generate an ID for
+     * @return an ID that might or might not be cached (depending of type of
+     * obj)
+     */
     public String getId(Object obj) {
         if (obj == null) {
             return idGenerator.next();
@@ -177,6 +178,11 @@ public class AmlGenerator {
         return result;
     }
 
+    /**
+     * Adds an object to the current element of the AML document
+     *
+     * @param caexObject the object to add
+     */
     public void add(CAEXObject caexObject) {
         if (caexObject == null) {
             return;
@@ -190,6 +196,11 @@ public class AmlGenerator {
         }
     }
 
+    /**
+     * Adds an attribute to the current element of the AML document
+     *
+     * @param attribute the attribute to add
+     */
     public void addAttribute(AttributeType attribute) {
         if (attribute == null) {
             return;
@@ -221,7 +232,11 @@ public class AmlGenerator {
         }
     }
 
-    public void addExternalInterfaceForReference(MappingContext context) {
+    /**
+     * Adds an external interface with name and roleCall ReferableReference to
+     * the current element of the AML document
+     */
+    public void addExternalInterfaceForReference() {
         addExternalInterface(RoleClassType.ExternalInterface.builder()
                 .withID(newId())
                 .withName(REFERABLE_REFERENCE_INTERFACE_CLASS)
@@ -229,6 +244,14 @@ public class AmlGenerator {
                 .build(), false);
     }
 
+    /**
+     * Adds an internal link with given namen pointing from source to target to
+     * the current element of the AML document
+     *
+     * @param name name if the link
+     * @param source source element of the link
+     * @param target reference pointing to the target element
+     */
     public void addInternalLink(String name, Referable source, Reference target) {
         if (InternalElementType.Builder.class.isAssignableFrom(current.getClass())) {
             InternalElementType.Builder builder = (InternalElementType.Builder) current;
@@ -243,7 +266,15 @@ public class AmlGenerator {
         }
     }
 
-    public void addExternalInterfaceForUnresolvableReference(String name, Reference reference, MappingContext context) {
+    /**
+     * Adds an external interface of type ReferableReference with given name
+     * with unresolvabled reference as value to the current element of the AML
+     * document
+     *
+     * @param name name of the interface
+     * @param reference unresolvable target reference
+     */
+    public void addExternalInterfaceForUnresolvableReference(String name, Reference reference) {
         addExternalInterface(RoleClassType.ExternalInterface.builder()
                 .withID(idGenerator.next())
                 .withName(name)
@@ -258,6 +289,12 @@ public class AmlGenerator {
                 false);
     }
 
+    /**
+     * Clears the ID cache. This should be used with caution as it may cause
+     * reference resolution mechanism to fail. Typically it will only be called
+     * after processing the InstanceHierarchy elements and before creating
+     * custom SystemUnitClasses
+     */
     public void clearIdCache() {
         idCache.clear();
     }
@@ -344,23 +381,66 @@ public class AmlGenerator {
                 .build();
     }
 
+    /**
+     * Creates a refSemantic object for a given property
+     *
+     * @param property the property
+     * @return the generated refSemantic object
+     */
     public AttributeType.RefSemantic refSemantic(PropertyDescriptor property) {
         return refSemantic(property.getReadMethod().getDeclaringClass(), property.getName());
     }
 
-    public String refBaseSystemUnitPath(Object value, MappingContext context) {
-        return documentInfo.getAssetAdministrationShellSystemUnitClassLib()
-                + "/" + context.getInternalElementNamingStrategy().getName(
-                        value.getClass(),
-                        value,
-                        null);
-    }
-
+    /**
+     * Gets to AML document info
+     *
+     * @return the AML document info
+     */
     public AmlDocumentInfo getDocumentInfo() {
         return documentInfo;
     }
 
-    public Reference getReference() {
-        return reference;
+    public static class Builder {
+
+        private String refSemanticPrefix = DEFAULT_REF_SEMANTIC_PREFIX;
+        private CAEXObject.Builder current;
+        private CAEXFile.Builder fileBuilder = CAEXFile.builder();
+        private AmlDocumentInfo documentInfo = new AmlDocumentInfo();
+        private IdGenerator idGenerator = new UuidGenerator();
+
+        public AmlGenerator build() {
+            return new AmlGenerator(documentInfo,
+                    idGenerator,
+                    new HashMap<>(),
+                    refSemanticPrefix,
+                    fileBuilder,
+                    current,
+                    new DefaultReference.Builder().build());
+        }
+
+        public Builder refSemanticPrefix(String value) {
+            this.refSemanticPrefix = value;
+            return this;
+        }
+
+        public Builder current(CAEXObject.Builder value) {
+            this.current = value;
+            return this;
+        }
+
+        public Builder idGenerator(IdGenerator value) {
+            this.idGenerator = value;
+            return this;
+        }
+
+        public Builder file(CAEXFile.Builder value) {
+            this.fileBuilder = value;
+            return this;
+        }
+
+        public Builder documentInfo(AmlDocumentInfo value) {
+            this.documentInfo = value;
+            return this;
+        }
     }
 }

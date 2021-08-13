@@ -27,10 +27,11 @@ public interface SourceBasedMapper<T, G, C extends SourceBasedMappingContext> ex
 
     /**
      * Maps the given value to target format via the generator.
+     *
      * @param value the value to map
      * @param generator the generator to write the mapping result to
      * @param context the context of the mapping
-     * @throws MappingException 
+     * @throws MappingException
      */
     public void map(T value, G generator, C context) throws MappingException;
 }

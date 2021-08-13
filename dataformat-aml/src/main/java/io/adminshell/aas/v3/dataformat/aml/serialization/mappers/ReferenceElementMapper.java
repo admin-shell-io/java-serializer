@@ -49,10 +49,12 @@ public class ReferenceElementMapper extends DefaultMapper<ReferenceElement> {
         mapProperties(element, subGenerator, context);
         Referable resolvedReference = AasUtils.resolve(element.getValue(), context.getEnvironment());
         if (resolvedReference != null) {
-            subGenerator.addExternalInterfaceForReference(context);
+            subGenerator.addExternalInterfaceForReference();
             subGenerator.addInternalLink(PROPERTY_VALUE_NAME, element, element.getValue());
         } else {
-            subGenerator.addExternalInterfaceForUnresolvableReference(PROPERTY_VALUE_NAME, element.getValue(), context);
+            if (element.getValue() != null) {
+                subGenerator.addExternalInterfaceForUnresolvableReference(PROPERTY_VALUE_NAME, element.getValue());
+            }
         }
         subGenerator.appendReferenceTargetInterfaceIfRequired(element, context);
         generator.addInternalElement(builder.build(), element);

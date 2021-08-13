@@ -36,7 +36,7 @@ public class ViewMapper extends DefaultMapper<View> {
 
     @Override
     public void map(View view, AmlGenerator generator, MappingContext context) throws MappingException {
-        if (view == null || view.getContainedElements() == null || view.getContainedElements().isEmpty()) {
+        if (view == null) {
             return;
         }
         InternalElementType.Builder builder = InternalElementType.builder();
@@ -44,10 +44,6 @@ public class ViewMapper extends DefaultMapper<View> {
                 view.getClass(),
                 view,
                 null))
-                //                .withRefBaseSystemUnitPath(context.getIdentityProvider().getId(
-                //                        AASUtils.resolve(
-                //                                view.getContainedElements().get(0), 
-                //                                context.getEnvironment())))
                 .withRoleRequirements(generator.roleRequirement(ReflectionHelper.getModelType(view.getClass())));
         generator.with(builder).appendReferenceTargetInterfaceIfRequired(view, context);
         for (Reference reference : view.getContainedElements()) {
@@ -59,9 +55,6 @@ public class ViewMapper extends DefaultMapper<View> {
                     .build());
 
         }
-
         generator.addInternalElement(builder.build(), view);
     }
-
-    // <InternalElement Name="Identification1" ID="4b5433fe-f47a-439f-a999-c1267f4e01f1" RefBaseSystemUnitPath="2" />
 }

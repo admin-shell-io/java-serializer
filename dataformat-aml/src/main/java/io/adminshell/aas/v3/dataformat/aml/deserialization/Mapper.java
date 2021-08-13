@@ -16,8 +16,10 @@
 package io.adminshell.aas.v3.dataformat.aml.deserialization;
 
 import io.adminshell.aas.v3.dataformat.mapping.TargetBasedMapper;
+
 /**
  * Utility interface for all AML to AAS mappers
+ *
  * @param <T> type to be deserialized
  */
 public interface Mapper<T> extends TargetBasedMapper<T, AmlParser, MappingContext> {

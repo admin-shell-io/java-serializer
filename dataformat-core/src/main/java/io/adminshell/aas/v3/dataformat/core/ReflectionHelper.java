@@ -15,6 +15,8 @@
  */
 package io.adminshell.aas.v3.dataformat.core;
 
+import com.google.common.reflect.TypeToken;
+import io.adminshell.aas.v3.dataformat.core.util.MostSpecificTypeTokenComparator;
 import io.adminshell.aas.v3.model.Constraint;
 import io.adminshell.aas.v3.model.Referable;
 import io.github.classgraph.ClassGraph;
@@ -174,9 +176,13 @@ public class ReflectionHelper {
             return null;
         }
         if (implementedAasInterfaces.size() == 1) {
-            logger.warn("class '{}' implements more than one AAS interface, but only first one is used", type.getName());
+            return implementedAasInterfaces.iterator().next();
         }
-        return implementedAasInterfaces.iterator().next();
+        logger.warn("class '{}' implements more than one AAS interface, but only most specific one is returned", type.getName());
+        return implementedAasInterfaces.stream().map(x -> TypeToken.of(x))
+                .sorted(new MostSpecificTypeTokenComparator())
+                .findFirst().get()
+                .getRawType();
     }
 
     public static Set<Class<?>> getAasInterfaces(Class<?> type) {

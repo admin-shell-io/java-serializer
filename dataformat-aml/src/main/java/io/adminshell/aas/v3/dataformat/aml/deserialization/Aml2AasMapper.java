@@ -36,7 +36,9 @@ public class Aml2AasMapper {
     }
 
     /**
-     * Maps an AML file (represented by a CAEXFile) to an AssetAdministrationShellEnvironment
+     * Maps an AML file (represented by a CAEXFile) to an
+     * AssetAdministrationShellEnvironment
+     *
      * @param aml the AML source file to map
      * @return AssetAdministrationShellEnvironment representation
      * @throws MappingException if the mapping fails
