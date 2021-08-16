@@ -19,6 +19,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.model.ConceptDescription;
+import io.adminshell.aas.v3.model.Identifier;
 import io.adminshell.aas.v3.model.IdentifierType;
 import io.adminshell.aas.v3.model.Reference;
 
@@ -32,14 +33,22 @@ public class ConceptDescriptionMapper extends IdentifiableMapper<ConceptDescript
 	protected UAObject createTargetObject() {
 		target = super.createTargetObject();
 
-		IdentifierType idType = source.getIdentification().getIdType();
-		if (IdentifierType.IRI == idType) {
-			addTypeReference(I4AASIdentifier.AASIriConceptDescriptionType);
-		} else if (IdentifierType.IRDI == idType) {
-			addTypeReference(I4AASIdentifier.AASIrdiConceptDescriptionType);
-		} else if (IdentifierType.CUSTOM == idType) {
-			addTypeReference(I4AASIdentifier.AASCustomConceptDescriptionType);
+		Identifier identification = source.getIdentification();
+		if (identification != null) {
+			IdentifierType idType = identification.getIdType();
+			if (IdentifierType.IRI == idType) {
+				addTypeReference(I4AASIdentifier.AASIriConceptDescriptionType);
+			} else if (IdentifierType.IRDI == idType) {
+				addTypeReference(I4AASIdentifier.AASIrdiConceptDescriptionType);
+			} else if (IdentifierType.CUSTOM == idType) {
+				addTypeReference(I4AASIdentifier.AASCustomConceptDescriptionType);
+			}
+			if (identification.getIdentifier() != null) {
+				//conflict: I4AAS says idshort, OPC UA says value
+				target.setBrowseName(createModelBrowseName(identification.getIdentifier()));
+			}
 		}
+		
 		return target;
 	}
 

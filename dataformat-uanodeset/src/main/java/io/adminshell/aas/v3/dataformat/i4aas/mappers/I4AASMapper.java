@@ -22,8 +22,9 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAInstance;
 import org.opcfoundation.ua._2011._03.uanodeset.UANode;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
+
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.BasicIdentifier;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASConstants;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.LangString;
@@ -34,7 +35,7 @@ import io.adminshell.aas.v3.model.LangString;
  * @param <SOURCE> mapping source
  * @param <TARGET> mapping target
  */
-public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
+public abstract class I4AASMapper<SOURCE, TARGET extends UANode> implements I4AASConstants{
 
 	protected MappingContext ctx;
 	protected SOURCE source;
@@ -175,8 +176,8 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> {
 	protected static final void attachAsOrderedComponent(UAObject parent, UAObject child) {
 		child.setParentNodeId(parent.getNodeId());
 		attachAsType(parent, child, UaIdentifier.HasOrderedComponent);
-
 	}
+	
 	protected static final void attachAsDictionaryEntry(UAObject parent, UAObject child) {
 		attachAsType(parent, child, UaIdentifier.HasDictionaryEntry);
 	}

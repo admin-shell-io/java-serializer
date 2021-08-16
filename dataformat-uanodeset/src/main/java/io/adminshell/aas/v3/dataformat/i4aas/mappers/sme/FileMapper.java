@@ -19,8 +19,6 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.StringPropertyMapper;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.model.File;
 

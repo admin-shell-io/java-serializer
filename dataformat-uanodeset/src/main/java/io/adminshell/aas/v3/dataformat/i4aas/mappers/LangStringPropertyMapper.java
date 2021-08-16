@@ -23,7 +23,6 @@ import org.opcfoundation.ua._2008._02.types.ListOfLocalizedText;
 import org.opcfoundation.ua._2008._02.types.ObjectFactory;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.LangString;
 

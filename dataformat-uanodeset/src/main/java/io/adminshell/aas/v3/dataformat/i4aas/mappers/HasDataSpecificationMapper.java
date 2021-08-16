@@ -17,11 +17,10 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 
 import java.util.List;
 
-import org.opcfoundation.ua._2011._03.uanodeset.ListOfReferences;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASConstants;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.DataSpecificationContent;
 import io.adminshell.aas.v3.model.DataSpecificationIEC61360;
 import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
@@ -32,23 +31,26 @@ public interface HasDataSpecificationMapper {
 
 	public default void mapDataSpecification(HasDataSpecification source, UAObject target, MappingContext ctx) {
 
-		UAObject folder = I4AASMapper.createFolder(target, "DataSpecification", ctx, I4AASIdentifier.AASReferenceList);
+		UAObject folder = I4AASMapper.createFolder(target, I4AASConstants.DATASPECIFICATION_BROWSENAME, ctx,
+				I4AASIdentifier.AASReferenceList);
 
 		List<EmbeddedDataSpecification> embeddedDataSpecifications = source.getEmbeddedDataSpecifications();
 		for (int i = 0; i < embeddedDataSpecifications.size(); i++) {
 			EmbeddedDataSpecification embeddedDataSpecification = embeddedDataSpecifications.get(i);
 			Reference dataSpecification = embeddedDataSpecification.getDataSpecification();
 
+			// TODO The embedding is not uniquely bound to the reference. Naming convention
+			// fixes this partially, but a wrapper object should be specified in I4AAS.
 			if (dataSpecification != null) {
-				String dataSpecKey = dataSpecification.getKeys().get(0).getValue();
-				UAObject uaObject = new ReferenceMapper(dataSpecification, ctx, dataSpecKey).map();
+				UAObject uaObject = new ReferenceMapper(dataSpecification, ctx, "Reference_" + i).map();
 				I4AASMapper.attachAsComponent(folder, uaObject);
 			}
 
 			DataSpecificationContent dataSpecificationContent = embeddedDataSpecification.getDataSpecificationContent();
 			if (dataSpecificationContent instanceof DataSpecificationIEC61360) {
 				UAObject uaIEC61360 = new DataSpecificationIEC61360Mapper(
-						(DataSpecificationIEC61360) dataSpecificationContent, ctx, "embedded_" + i, ctx.getModelNsIndex()).map();
+						(DataSpecificationIEC61360) dataSpecificationContent, ctx, "Content_" + i,
+						ctx.getModelNsIndex()).map();
 				I4AASMapper.attachAsComponent(folder, uaIEC61360);
 			}
 		}

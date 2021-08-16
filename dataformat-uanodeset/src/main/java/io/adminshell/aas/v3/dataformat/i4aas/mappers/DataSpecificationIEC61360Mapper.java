@@ -18,7 +18,6 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.model.DataSpecificationIEC61360;
 import io.adminshell.aas.v3.model.DataTypeIEC61360;
@@ -47,7 +46,7 @@ public class DataSpecificationIEC61360Mapper extends I4AASMapper<DataSpecificati
 
 	@Override
 	protected void mapAndAttachChildren() {
-		
+				
 		DataTypeIEC61360 dataType = source.getDataType();
 		if (dataType != null) {
 			UAVariable uaDataType = new I4AASEnumMapper(dataType, ctx).map();
@@ -56,53 +55,53 @@ public class DataSpecificationIEC61360Mapper extends I4AASMapper<DataSpecificati
 
 		String sourceOfDefinition = source.getSourceOfDefinition();
 		if (sourceOfDefinition != null) {
-			UAVariable uaVariable = new StringPropertyMapper("SourceOfDefinition", sourceOfDefinition, ctx, ctx.getI4aasNsIndex()).map();
+			UAVariable uaVariable = new StringPropertyMapper(IEC61360_SOURCE_OF_DEFINITION_BROWSENAME, sourceOfDefinition, ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, uaVariable);
 		}
 
 		String symbol = source.getSymbol();
 		if (symbol != null) {
-			UAVariable uaVariable = new StringPropertyMapper("Symbol", symbol, ctx, ctx.getI4aasNsIndex()).map();
+			UAVariable uaVariable = new StringPropertyMapper(IEC61360_SYMBOL_BROWSENAME, symbol, ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, uaVariable);
 		}
 
 		String unit = source.getUnit();
 		if (unit != null) {
-			UAVariable uaVariable = new StringPropertyMapper("Unit", unit, ctx, ctx.getI4aasNsIndex()).map();
+			UAVariable uaVariable = new StringPropertyMapper(IEC61360_UNIT_BROWSENAME, unit, ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, uaVariable);
 		}
 
 		String valueFormat = source.getValueFormat();
 		if (valueFormat != null) {
-			UAVariable uaVariable = new StringPropertyMapper("ValueFormat", valueFormat, ctx, ctx.getI4aasNsIndex()).map();
+			UAVariable uaVariable = new StringPropertyMapper(IEC61360_VALUE_FORMAT_BROWSENAME, valueFormat, ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, uaVariable);
 		}
 
 		String value = source.getValue();
 		if (value != null) {
-			UAVariable uaVariable = new StringPropertyMapper("Value", value, ctx, ctx.getI4aasNsIndex()).map();
+			UAVariable uaVariable = new StringPropertyMapper(IEC61360_VALUE_BROWSENAME, value, ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, uaVariable);
 		}
 
 		Reference unitId = source.getUnitId();
 		if (unitId != null) {
-			UAObject uaRef = new ReferenceMapper(unitId, ctx, "UnitId").map();
+			UAObject uaRef = new ReferenceMapper(unitId, ctx, IEC61360_UNIT_ID_BROWSENAME).map();
 			attachAsComponent(target, uaRef);
 		}
 
 		Reference valueId = source.getValueId();
 		if (valueId != null) {
-			UAObject uaRef = new ReferenceMapper(valueId, ctx, "ValueId").map();
+			UAObject uaRef = new ReferenceMapper(valueId, ctx, IEC61360_VALUE_ID_BROWSENAME).map();
 			attachAsComponent(target, uaRef);
 		}
 		
-		UAVariable uaDefinition = new LangStringPropertyMapper("Definition", source.getDefinitions(), ctx, ctx.getI4aasNsIndex()).map();
+		UAVariable uaDefinition = new LangStringPropertyMapper(IEC61360_DEFINITION_BROWSENAME, source.getDefinitions(), ctx, ctx.getI4aasNsIndex()).map();
 		attachAsProperty(target, uaDefinition);
 
-		UAVariable uaPreferredNames = new LangStringPropertyMapper("PreferredName", source.getPreferredNames(), ctx, ctx.getI4aasNsIndex()).map();
+		UAVariable uaPreferredNames = new LangStringPropertyMapper(IEC61360_PREFERRED_NAME_BROWSENAME, source.getPreferredNames(), ctx, ctx.getI4aasNsIndex()).map();
 		attachAsProperty(target, uaPreferredNames);
 
-		UAVariable uaShortName = new LangStringPropertyMapper("ShortName", source.getShortNames(), ctx, ctx.getI4aasNsIndex()).map();
+		UAVariable uaShortName = new LangStringPropertyMapper(IEC61360_SHORT_NAME_BROWSENAME, source.getShortNames(), ctx, ctx.getI4aasNsIndex()).map();
 		attachAsProperty(target, uaShortName);
 
 	}

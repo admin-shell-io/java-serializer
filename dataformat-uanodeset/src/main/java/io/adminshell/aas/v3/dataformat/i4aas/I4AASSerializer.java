@@ -16,6 +16,7 @@
 package io.adminshell.aas.v3.dataformat.i4aas;
 
 import javax.xml.bind.JAXBException;
+
 import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
@@ -30,6 +31,22 @@ import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
  *
  */
 public class I4AASSerializer implements Serializer {
+	
+	private boolean addMissingSemanticIdsToDictionary;
+
+	/**
+	 * I4AASSerializer with addMissingSemanticIdsToDictionary defaults to true
+	 */
+	public I4AASSerializer() {
+		this(true);
+	}
+	
+	/**
+	 * @param addMissingSemanticIdsToDictionary handles missing semanticIds in OPC UA Dictionary (caused by missing AAS Concept Description) by adding them automatically
+	 */
+	public I4AASSerializer(boolean addMissingSemanticIdsToDictionary) {
+		this.addMissingSemanticIdsToDictionary = addMissingSemanticIdsToDictionary;
+	}
 
 	/**
 	 * takes a AAS model and returns a I4AAS as string.
@@ -37,8 +54,8 @@ public class I4AASSerializer implements Serializer {
 	@Override
 	public String write(AssetAdministrationShellEnvironment aasEnvironment) throws SerializationException {
 		MappingContext mappingContext = new MappingContext(aasEnvironment);
+		mappingContext.setAddMissingSemanticIdsToDictionary(addMissingSemanticIdsToDictionary);
 		UAObject uaEnv = new EnvironmentMapper(mappingContext.getEnvironment(), mappingContext).map();
-		
 		//map action
 		UANodeSet nodeset = mappingContext.getNodeSet();
 		
