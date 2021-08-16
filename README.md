@@ -34,6 +34,7 @@ The project contains several modules:
 - `dataformat-aasx` AASX de-/serializer
 - `dataformat-json` JSON de-/serializer
 - `dataformat-xml` XML de-/serializer
+- `dataformat-aml` AutomationML de-/serializer
 
 
 
@@ -44,15 +45,16 @@ We always look for contributions, bug reports, feature requests etc. Simply open
 
 # Contributors
 
-| Name        | Affiliation           | Github Account | parent | core  | aasx | json | xml |
---- | --- | --- | :---: | :---: | :---: | :---: | :---:
-| Mohammad Alreeni | Fraunhofer IWU | []() |  |  |  |  | x |
-| Sebastian Bader | Fraunhofer IAIS | [sebbader](https://github.com/sebbader) | x |  |  |  |  |
-| Matthias Böckmann | Fraunhofer IAIS | [maboeckmann](https://github.com/maboeckmann) | x |  |  |  |  |
-| Maximilian Conradi | Fraunhofer IESE | []() |  |  | x |  | x |
-| Daniel Espen | Fraunhofer IESE | [daespen](https://github.com/daespen) |  | x | x | x | x |
-| Michael Jacoby | Fraunhofer IOSB| [mjacoby](https://github.com/mjacoby) | x | x |  | x | x |
-| Jens Müller | Fraunhofer IOSB | [JensMueller2709](https://github.com/JensMueller2709) |  |  |  | x |  |
-| Bastian Rössl | Fraunhofer IOSB-INA | [br-iosb](https://github.com/br-iosb) |  |  |  | x |  |
-| Frank Schnicke | Fraunhofer IESE | [frankschnicke](https://github.com/frankschnicke) |  |  | x |  | x |
-| Arno Weiss | Fraunhofer IWU | []() |  |  |  | x |  |
+| Name        | Affiliation           | Github Account | parent | core  | aasx | json | xml | aml |
+--- | --- | --- | :---: | :---: | :---: | :---: | :---: | :---:
+| Mohammad Alreeni | Fraunhofer IWU | []() |  |  |  |  | x |  |
+| Sebastian Bader | Fraunhofer IAIS | [sebbader](https://github.com/sebbader) | x |  |  |  |  |  |
+| Matthias Böckmann | Fraunhofer IAIS | [maboeckmann](https://github.com/maboeckmann) | x |  |  |  |  |  |
+| Maximilian Conradi | Fraunhofer IESE | []() |  |  | x |  | x |  |
+| Daniel Espen | Fraunhofer IESE | [daespen](https://github.com/daespen) |  | x | x | x | x |  |
+| Michael Jacoby | Fraunhofer IOSB| [mjacoby](https://github.com/mjacoby) | x | x |  | x | x | x |
+| Jens Müller | Fraunhofer IOSB | [JensMueller2709](https://github.com/JensMueller2709) |  |  |  | x |  | x |
+| Bastian Rössl | Fraunhofer IOSB-INA | [br-iosb](https://github.com/br-iosb) |  |  |  | x |  |  |
+| Frank Schnicke | Fraunhofer IESE | [frankschnicke](https://github.com/frankschnicke) |  |  | x |  | x |  |
+| Arno Weiss | Fraunhofer IWU | []() |  |  |  | x |  |  |
+| Jan-Wilhelm Blume | Fraunhofer IOSB | []() |  |  |  |  |  | x |
