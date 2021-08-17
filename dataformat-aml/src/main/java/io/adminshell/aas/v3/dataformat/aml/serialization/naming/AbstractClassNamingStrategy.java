@@ -67,6 +67,7 @@ public abstract class AbstractClassNamingStrategy implements NamingStrategy {
         this.preferIdShort = preferIdShort;
     }
 
+    @Override
     public String getName(Type type, Object obj, String property) {
         if (cache.containsKey(obj)) {
             return cache.get(obj);
@@ -89,6 +90,11 @@ public abstract class AbstractClassNamingStrategy implements NamingStrategy {
         }
         cache.put(obj, result);
         return result;
+    }
+
+    @Override
+    public String getNameForRefSemantic(Type type, Object obj, String property) {
+        return getName(type, obj, property);
     }
 
     protected abstract String generateName(Object obj);

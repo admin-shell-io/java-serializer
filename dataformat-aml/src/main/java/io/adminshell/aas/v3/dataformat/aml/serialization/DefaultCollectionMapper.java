@@ -55,4 +55,12 @@ public class DefaultCollectionMapper<T> extends DefaultMapper<Collection<T>> {
             generator.add(builder.build());
         }
     }
+
+    @Override
+    protected String getAttributeName(Collection<T> value, MappingContext context) {
+        return context.getAttributeNamingStrategy().getName(
+                context.getProperty().getReadMethod().getDeclaringClass(),
+                value,
+                context.getProperty().getName());
+    }
 }

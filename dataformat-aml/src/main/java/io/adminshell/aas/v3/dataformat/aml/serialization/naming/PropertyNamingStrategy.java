@@ -31,36 +31,50 @@ public class PropertyNamingStrategy implements NamingStrategy {
 
     protected class TypeSafeFunction<T> {
 
-        public TypeSafeFunction(Class<T> inputType, BiFunction<T, String, String> provider) {
+        public TypeSafeFunction(Class<T> inputType, BiFunction<T, String, String> provider, boolean applyToRefSemantic) {
             this.inputType = TypeToken.of(inputType);
             this.provider = provider;
+            this.applyToRefSemantic = applyToRefSemantic;
         }
         TypeToken inputType;
         BiFunction<T, String, String> provider;
+        boolean applyToRefSemantic;
     }
 
-    public <T> void registerCustomNaming(Class<T> type, BiFunction<T, String, String> provider) {
-        customNamings.add(new TypeSafeFunction(type, provider));
+    public <T> void registerCustomNaming(Class<T> type, BiFunction<T, String, String> provider, boolean applyToRefSemantic) {
+        customNamings.add(new TypeSafeFunction(type, provider, applyToRefSemantic));
     }
 
-    public void registerCustomNaming(Class<?> type, String oldName, String newName) {
-        customNamings.add(new TypeSafeFunction(type, (obj, property) -> Objects.equals(oldName, property) ? newName : null));
+    public void registerCustomNaming(Class<?> type, String oldName, String newName, boolean applyToRefSemantic) {
+        customNamings.add(new TypeSafeFunction(type, (obj, property) -> Objects.equals(oldName, property) ? newName : null, applyToRefSemantic));
     }
 
-    public <T> void registerCustomNaming(Class<T> type, Function<T, String> provider) {
-        customNamings.add(new TypeSafeFunction(type, (x, y) -> provider.apply((T) x)));
+    public <T> void registerCustomNaming(Class<T> type, Function<T, String> provider, boolean applyToRefSemantic) {
+        customNamings.add(new TypeSafeFunction(type, (x, y) -> provider.apply((T) x), applyToRefSemantic));
     }
 
-    private List<TypeSafeFunction> getCustomNaming(Type type, String property) {
+    private List<TypeSafeFunction> getCustomNaming(Type type, String property, boolean applyToRefSemantic) {
         return customNamings.stream()
                 .filter(x -> x.inputType.isSupertypeOf(type))
+                .filter(x -> !applyToRefSemantic || x.applyToRefSemantic)
                 .sorted((x, y) -> Objects.compare(x.inputType, y.inputType, new MostSpecificTypeTokenComparator()))
                 .collect(Collectors.toList());
     }
 
     @Override
     public String getName(Type type, Object obj, String property) {
-        for (TypeSafeFunction customNaming : getCustomNaming(type, property)) {
+        for (TypeSafeFunction customNaming : getCustomNaming(type, property, false)) {
+            String result = (String) customNaming.provider.apply(obj, property);
+            if (result != null) {
+                return result;
+            }
+        }
+        return property;
+    }
+
+    @Override
+    public String getNameForRefSemantic(Type type, Object obj, String property) {
+        for (TypeSafeFunction customNaming : getCustomNaming(type, property, true)) {
             String result = (String) customNaming.provider.apply(obj, property);
             if (result != null) {
                 return result;

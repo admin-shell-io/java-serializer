@@ -19,12 +19,13 @@ import io.adminshell.aas.v3.dataformat.aml.serialization.DefaultMapper;
 import io.adminshell.aas.v3.dataformat.aml.serialization.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.serialization.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
+import io.adminshell.aas.v3.dataformat.aml.serialization.DefaultCollectionMapper;
 import io.adminshell.aas.v3.model.LangString;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
-public class LangStringCollectionMapper extends DefaultMapper<Collection<LangString>> {
+public class LangStringCollectionMapper extends DefaultCollectionMapper<LangString> {
 
     private static final String NAME_PREFIX = "aml-lang=";
 
@@ -43,7 +44,12 @@ public class LangStringCollectionMapper extends DefaultMapper<Collection<LangStr
                         context.getProperty().getReadMethod().getDeclaringClass(),
                         value,
                         context.getProperty().getName()))
-                .withRefSemantic(generator.refSemantic(context.getProperty()))
+                .withRefSemantic(generator.refSemantic(
+                        context.getProperty(),
+                        context.getAttributeNamingStrategy().getNameForRefSemantic(
+                                context.getProperty().getReadMethod().getDeclaringClass(),
+                                value,
+                                context.getProperty().getName())))
                 .addAttribute(value.stream()
                         .map(x -> AttributeType.builder()
                         .withName(NAME_PREFIX + x.getLanguage())

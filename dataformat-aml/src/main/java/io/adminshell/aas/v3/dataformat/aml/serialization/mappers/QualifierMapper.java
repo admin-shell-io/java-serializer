@@ -15,13 +15,12 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.serialization.mappers;
 
-import io.adminshell.aas.v3.dataformat.aml.serialization.DefaultMapper;
 import io.adminshell.aas.v3.dataformat.aml.serialization.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.serialization.MappingContext;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.model.Qualifier;
 
-public class QualifierMapper extends DefaultMapper<Qualifier> {
+public class QualifierMapper extends AbstractElementMapperWithValueType<Qualifier> {
 
     @Override
     public void map(Qualifier value, AmlGenerator generator, MappingContext context) throws MappingException {

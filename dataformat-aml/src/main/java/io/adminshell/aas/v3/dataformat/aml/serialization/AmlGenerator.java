@@ -382,13 +382,14 @@ public class AmlGenerator {
     }
 
     /**
-     * Creates a refSemantic object for a given property
+     * Creates a refSemantic object for a given property and property name.
      *
      * @param property the property
+     * @param propertyName the property name to use in the refSemantic.
      * @return the generated refSemantic object
      */
-    public AttributeType.RefSemantic refSemantic(PropertyDescriptor property) {
-        return refSemantic(property.getReadMethod().getDeclaringClass(), property.getName());
+    public AttributeType.RefSemantic refSemantic(PropertyDescriptor property, String propertyName) {
+        return refSemantic(property.getReadMethod().getDeclaringClass(), propertyName);
     }
 
     /**

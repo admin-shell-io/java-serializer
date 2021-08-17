@@ -20,4 +20,6 @@ import java.lang.reflect.Type;
 public interface NamingStrategy {
 
     public String getName(Type type, Object obj, String property);
+
+    public String getNameForRefSemantic(Type type, Object obj, String property);
 }

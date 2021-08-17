@@ -15,14 +15,14 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.serialization.mappers;
 
-import io.adminshell.aas.v3.dataformat.aml.serialization.Mapper;
 import io.adminshell.aas.v3.dataformat.aml.serialization.AmlGenerator;
+import io.adminshell.aas.v3.dataformat.aml.serialization.DefaultCollectionMapper;
 import io.adminshell.aas.v3.dataformat.aml.serialization.MappingContext;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.model.Reference;
 import java.util.Collection;
 
-public class ReferenceCollectionMapper implements Mapper<Collection<Reference>> {
+public class ReferenceCollectionMapper extends DefaultCollectionMapper<Reference> {
 
     @Override
     public void map(Collection<Reference> value, AmlGenerator generator, MappingContext context) throws MappingException {

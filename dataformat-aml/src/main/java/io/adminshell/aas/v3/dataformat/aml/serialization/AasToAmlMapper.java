@@ -37,16 +37,20 @@ import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.RelationshipEle
 import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.SubmodelMapper;
 import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.ViewMapper;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
+import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.ConceptDescriptionMapper;
+import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.PropertyMapper;
+import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.RangeMapper;
 import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.ReferenceMapper;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.dataformat.mapping.MappingProvider;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
-import io.adminshell.aas.v3.model.ConceptDescription;
 import io.adminshell.aas.v3.model.LangString;
 import io.adminshell.aas.v3.model.Qualifier;
 import io.adminshell.aas.v3.model.Referable;
 import org.slf4j.LoggerFactory;
 import io.adminshell.aas.v3.dataformat.mapping.SourceBasedMapper;
+import io.adminshell.aas.v3.model.MultiLanguageProperty;
+import io.adminshell.aas.v3.model.Reference;
 
 /**
  * Maps an AssetAdministrationShellEnvironment to an AML file
@@ -68,9 +72,9 @@ public class AasToAmlMapper {
         AbstractClassNamingStrategy classNamingStrategy = new NumberingClassNamingStrategy();
         classNamingStrategy.registerCustomNaming(LangString.class, x -> "aml-lang=" + x.getLanguage());
         PropertyNamingStrategy propertyNamingStrategy = new PropertyNamingStrategy();
-        propertyNamingStrategy.registerCustomNaming(Referable.class, "descriptions", "description");
-        propertyNamingStrategy.registerCustomNaming(Qualifier.class, x -> "qualifier:" + x.getType() + "=" + x.getValue());
-        propertyNamingStrategy.registerCustomNaming(ConceptDescription.class, "isCaseOfs", "isCaseOf");
+        propertyNamingStrategy.registerCustomNaming(Referable.class, "descriptions", "description", true);
+        propertyNamingStrategy.registerCustomNaming(MultiLanguageProperty.class, "values", "value", true);
+        propertyNamingStrategy.registerCustomNaming(Qualifier.class, x -> "qualifier:" + x.getType() + "=" + x.getValue(), false);
         MappingProvider<SourceBasedMapper> mappingProvider = new MappingProvider<>(
                 SourceBasedMapper.class,
                 new DefaultMapper(),
@@ -93,6 +97,9 @@ public class AasToAmlMapper {
         mappingProvider.register(new RelationshipElementMapper());
         mappingProvider.register(new DataSpecificationIEC61360Mapper());
         mappingProvider.register(new ViewMapper());
+        mappingProvider.register(new PropertyMapper());
+        mappingProvider.register(new RangeMapper());
+        mappingProvider.register(new ConceptDescriptionMapper());
         MappingContext context = new MappingContext(
                 mappingProvider,
                 classNamingStrategy,

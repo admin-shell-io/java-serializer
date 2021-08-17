@@ -21,6 +21,7 @@ import io.adminshell.aas.v3.dataformat.aml.serialization.DefaultMapper;
 import io.adminshell.aas.v3.dataformat.aml.serialization.MappingContext;
 import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
+import io.adminshell.aas.v3.model.Qualifier;
 import io.adminshell.aas.v3.model.Reference;
 
 public class ReferenceMapper extends DefaultMapper<Reference> {
@@ -35,5 +36,13 @@ public class ReferenceMapper extends DefaultMapper<Reference> {
                     .withRefSemantic(getRefSemantic(value, generator, context));
         }
         return builder;
+    }
+
+    @Override
+    protected String getAttributeName(Reference value, MappingContext context) {
+        return context.getAttributeNamingStrategy().getName(
+                Reference.class,
+                value,
+                context.getProperty().getName());
     }
 }

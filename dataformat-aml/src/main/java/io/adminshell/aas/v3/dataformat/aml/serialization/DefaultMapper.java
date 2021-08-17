@@ -20,7 +20,6 @@ import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
-import io.adminshell.aas.v3.model.MultiLanguageProperty;
 import io.adminshell.aas.v3.model.Referable;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
@@ -95,7 +94,12 @@ public class DefaultMapper<T> implements Mapper<T> {
     }
 
     protected AttributeType.RefSemantic getRefSemantic(T value, AmlGenerator generator, MappingContext context) {
-        return generator.refSemantic(context.getProperty());
+        return generator.refSemantic(
+                context.getProperty(),
+                context.getAttributeNamingStrategy().getNameForRefSemantic(
+                        context.getProperty().getReadMethod().getGenericReturnType(),
+                        value,
+                        context.getProperty().getName()));
     }
 
     protected String getInternalElementName(Object value, MappingContext context) {
@@ -105,12 +109,6 @@ public class DefaultMapper<T> implements Mapper<T> {
                 null);
     }
 
-//    protected String getId(T value, AmlGenerator generator, MappingContext context) {
-//        if (value != null && Referable.class.isAssignableFrom(value.getClass())) {
-//            return context.getId(AasUtils.asReference(generator.getReference(), (Referable) value));
-//        }
-//        return context.getId(null);
-//    }
     protected String getAttributeName(T value, MappingContext context) {
         return context.getAttributeNamingStrategy().getName(
                 context.getProperty().getReadMethod().getGenericReturnType(),

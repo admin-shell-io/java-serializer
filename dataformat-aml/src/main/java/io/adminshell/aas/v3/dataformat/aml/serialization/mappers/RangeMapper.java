@@ -13,22 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.aml.serialization.naming;
+package io.adminshell.aas.v3.dataformat.aml.serialization.mappers;
 
-import java.util.UUID;
+import io.adminshell.aas.v3.model.Range;
 
-public class IdClassNamingStrategy extends AbstractClassNamingStrategy {
+public class RangeMapper extends AbstractElementMapperWithValueType<Range> {
 
-    public IdClassNamingStrategy() {
-        super();
-    }
+    protected static final String PROPERTY_MIN_NAME = "min";
+    protected static final String PROPERTY_MAX_NAME = "max";
 
-    public IdClassNamingStrategy(boolean preferIdShort) {
-        super(preferIdShort);
-    }
-
-    @Override
-    protected String generateName(Object obj) {
-        return UUID.randomUUID().toString();
+    public RangeMapper() {
+        super(PROPERTY_MIN_NAME, PROPERTY_MAX_NAME);
     }
 }
