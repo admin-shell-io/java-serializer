@@ -15,7 +15,7 @@
  */
 package io.adminshell.aas.v3.model.dataformat.jsonld;
 
-import io.adminshell.aas.v3.dataformat.jsonld.Serializer;
+import io.adminshell.aas.v3.dataformat.rdf.Serializer;
 import io.adminshell.aas.v3.model.*;
 import io.adminshell.aas.v3.model.impl.*;
 import org.junit.Assert;
