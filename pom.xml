@@ -34,12 +34,12 @@
         <module>dataformat-core</module>
         <module>dataformat-json</module>
         <module>dataformat-xml</module>
-        <module>dataformat-jsonld</module>
+        <module>dataformat-rdf</module>
         <module>dataformat-uanodeset</module>
         <module>validator</module>
     </modules>
     <properties>
-        <revision>1.0.2</revision>
+        <revision>1.0.3</revision>
         <model.version>${revision}</model.version>
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
