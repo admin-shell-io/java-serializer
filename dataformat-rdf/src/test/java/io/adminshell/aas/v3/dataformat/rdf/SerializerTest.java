@@ -13,11 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.model.dataformat.rdf;
+package io.adminshell.aas.v3.dataformat.rdf;
 
 import io.adminshell.aas.v3.dataformat.rdf.Serializer;
 import io.adminshell.aas.v3.model.*;
 import io.adminshell.aas.v3.model.impl.*;
+import org.apache.jena.riot.RDFLanguages;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -65,7 +66,7 @@ public class SerializerTest {
                 .assetAdministrationShells(aasList)
                 .submodels(submodel)
                 .build();
-        String output = new Serializer().serialize(aasEnv);
+        String output = new Serializer().serialize(aasEnv, RDFLanguages.JSONLD);
         //System.out.println(output);
         Assert.assertTrue(output.contains("@context"));
         Assert.assertTrue(output.contains("rdf:"));
