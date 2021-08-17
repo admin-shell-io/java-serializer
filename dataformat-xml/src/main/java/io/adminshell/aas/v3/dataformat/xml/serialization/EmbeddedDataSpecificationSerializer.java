@@ -26,6 +26,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.databind.jsontype.TypeSerializer;
+import io.adminshell.aas.v3.dataformat.core.DataSpecificationInfo;
 import static io.adminshell.aas.v3.dataformat.core.DataSpecificationManager.PROP_DATA_SPECIFICATION;
 import static io.adminshell.aas.v3.dataformat.core.DataSpecificationManager.PROP_DATA_SPECIFICATION_CONTENT;
 
@@ -52,7 +53,8 @@ public class EmbeddedDataSpecificationSerializer extends JsonSerializer<Embedded
         Reference reference = null;
         DataSpecificationContent content = data.getDataSpecificationContent();
         if (content != null) {
-            Reference implicitType = DataSpecificationManager.getReferenceSafe(content.getClass());
+            DataSpecificationInfo implicitDataSpecification = DataSpecificationManager.getDataSpecification(content.getClass());
+            Reference implicitType = implicitDataSpecification != null ? implicitDataSpecification.getReference() : null;
             Reference explicitType = data.getDataSpecification();
             if (implicitType == null) {
                 logger.warn("Trying to serialize unknown implementation of DataSpecificationContent ({}). "
