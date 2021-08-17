@@ -21,9 +21,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.sme.FileMapper;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.AssetInformation;
 import io.adminshell.aas.v3.model.AssetKind;
 import io.adminshell.aas.v3.model.File;
@@ -39,8 +37,8 @@ public class AssetInformationMapper extends I4AASMapper<AssetInformation, UAObje
 	@Override
 	protected UAObject createTargetObject() {
 		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(createI4AASBrowseName("AssetInformation"))
-				.withDisplayName(createLocalizedText("AssetInformation")).build();
+				.withBrowseName(createI4AASBrowseName(AAS_ASSETINFORMATION_BROWSENAME))
+				.withDisplayName(createLocalizedText(AAS_ASSETINFORMATION_BROWSENAME)).build();
 		addTypeReference(I4AASIdentifier.AASAssetInformationType);
 		return target;
 	}
@@ -53,26 +51,26 @@ public class AssetInformationMapper extends I4AASMapper<AssetInformation, UAObje
 
 		Reference globalAssetId = source.getGlobalAssetId();
 		if (globalAssetId != null) {
-			UAObject uaIdentification = new ReferenceMapper(globalAssetId, ctx, "GlobalAssetId").map();
+			UAObject uaIdentification = new ReferenceMapper(globalAssetId, ctx, ASSETINFO_GLOBAL_ASSET_ID_BROWSENAME).map();
 			attachAsComponent(target, uaIdentification);
 		}
 
-		UAObject uaBomList = createReferenceList("BillOfMaterial");
+		UAObject uaBomList = createReferenceList(ASSETINFO_BILL_OF_MATERIAL_BROWSENAME);
 		List<Reference> billOfMaterials = source.getBillOfMaterials();
 		for (int i = 0; i < billOfMaterials.size(); i++) {
 			Reference reference = billOfMaterials.get(i);
-			UAObject uaBomListEntry = new ReferenceMapper(reference, ctx, "BillOfMaterial_" + i).map();
+			UAObject uaBomListEntry = new ReferenceMapper(reference, ctx, ASSETINFO_BILL_OF_MATERIAL_BROWSENAME + "_" + i).map();
 			attachAsComponent(uaBomList, uaBomListEntry);
 		}
 
 		File defaultThumbnail = source.getDefaultThumbnail();
 		if (defaultThumbnail != null) {
-			UAObject uaThumbnail = new FileMapper(defaultThumbnail, ctx, "DefaultThumbnail", ctx.getI4aasNsIndex())
+			UAObject uaThumbnail = new FileMapper(defaultThumbnail, ctx, ASSETINFO_DEFAULT_THUMBNAIL_BROWSENAME, ctx.getI4aasNsIndex())
 					.map();
 			attachAsComponent(target, uaThumbnail);
 		}
 
-		UAObject folder = createIdentifierKeyValuePairList("SpecificAssetId");
+		UAObject folder = createIdentifierKeyValuePairList(ASSETINFO_SPECIFIC_ASSET_ID_BROWSENAME);
 		for (IdentifierKeyValuePair identifierKeyValuePair : source.getSpecificAssetIds()) {
 			UAObject uaIdKVP = new IdentifierKeyValuePairMapper(identifierKeyValuePair, ctx).map();
 			attachAsComponent(folder, uaIdKVP);

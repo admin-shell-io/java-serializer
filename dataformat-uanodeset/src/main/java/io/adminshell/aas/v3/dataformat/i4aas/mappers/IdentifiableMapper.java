@@ -16,12 +16,12 @@
 package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
-import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject.Builder;
+import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.model.Identifiable;
+import io.adminshell.aas.v3.model.Identifier;
 import io.adminshell.aas.v3.model.IdentifierType;
 
 public class IdentifiableMapper<T extends Identifiable> extends ReferableMapper<T> {
@@ -43,23 +43,24 @@ public class IdentifiableMapper<T extends Identifiable> extends ReferableMapper<
 	}
 
 	private void mapIdentification() {
-		IdentifierType sourceIdType = source.getIdentification().getIdType();
-		String sourceIdentifierValue = source.getIdentification().getIdentifier();
-
 		Builder<Void> coreUAObject = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
-				.withDisplayName(createLocalizedText("Identification"))
-				.withBrowseName(createI4AASBrowseName("Identification"));
+				.withDisplayName(createLocalizedText(IDENTIFICATION_BROWSENAME))
+				.withBrowseName(createI4AASBrowseName(IDENTIFICATION_BROWSENAME));
 		UAObject uaObject = coreUAObject.build();
 		addTypeReferenceFor(uaObject, I4AASIdentifier.AASIdentifierType);
 		addToNodeset(uaObject);
 		attachAsComponent(target, uaObject);
 
-		UAVariable targetIdVar = new StringPropertyMapper("Id", sourceIdentifierValue, ctx, ctx.getI4aasNsIndex())
-				.map();
-		attachAsProperty(uaObject, targetIdVar);
-
-		UAVariable mappedEnum = new I4AASEnumMapper(sourceIdType, ctx).map();
-		attachAsProperty(uaObject, mappedEnum);
+		Identifier identification = source.getIdentification();
+		if (identification != null) {
+			IdentifierType sourceIdType = identification.getIdType();
+			String sourceIdentifierValue = identification.getIdentifier();
+			UAVariable targetIdVar = new StringPropertyMapper(IDENTIFICATION_ID_BROWSENAME, sourceIdentifierValue, ctx,
+					ctx.getI4aasNsIndex()).map();
+			attachAsProperty(uaObject, targetIdVar);
+			UAVariable mappedEnum = new I4AASEnumMapper(sourceIdType, ctx).map();
+			attachAsProperty(uaObject, mappedEnum);
+		}
 
 		ctx.addIdentifierUaObject(source.getIdentification(), target);
 	}

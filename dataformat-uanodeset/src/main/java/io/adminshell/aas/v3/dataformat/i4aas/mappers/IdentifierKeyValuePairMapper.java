@@ -18,7 +18,6 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.model.IdentifierKeyValuePair;
 import io.adminshell.aas.v3.model.Reference;
@@ -42,17 +41,17 @@ public class IdentifierKeyValuePairMapper extends I4AASMapper<IdentifierKeyValue
 	protected void mapAndAttachChildren() {
 		Reference externalSubjectId = source.getExternalSubjectId();
 		if (externalSubjectId != null) {
-			UAObject uaExtSubId = new ReferenceMapper(externalSubjectId, ctx, "ExternalSubjectId").map();
+			UAObject uaExtSubId = new ReferenceMapper(externalSubjectId, ctx, IKVP_EXTERNAL_SUBJECT_ID_BROWSENAME).map();
 			attachAsComponent(target, uaExtSubId);
 		}
 		String key = source.getKey();
 		if (key != null) {
-			UAVariable uaKey = new StringPropertyMapper("Key", key, ctx, ctx.getI4aasNsIndex()).map();
+			UAVariable uaKey = new StringPropertyMapper(IKVP_KEY_BROWSENAME, key, ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, uaKey);
 		}
 		String value = source.getValue();
 		if (value != null) {
-			UAVariable uaValue = new StringPropertyMapper("Value", value, ctx, ctx.getI4aasNsIndex()).map();
+			UAVariable uaValue = new StringPropertyMapper(IKVP_VALUE_BROWSENAME, value, ctx, ctx.getI4aasNsIndex()).map();
 			attachAsProperty(target, uaValue);
 		}
 	}

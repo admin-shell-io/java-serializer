@@ -35,7 +35,11 @@ public interface HasSemanticsMapper {
 			
 			Key key = semanticId.getKeys().get(0);
 			if (nodeForIdentification == null && key.getValue() != null && !key.getValue().isBlank()) {
-				nodeForIdentification = fixConceptDescription(ctx, key);
+				if (ctx.isAddMissingSemanticIdsToDictionary()) {					
+					nodeForIdentification = fixConceptDescription(ctx, key);
+				} else {
+					return;
+				}
 			}
 
 			if (nodeForIdentification != null) {

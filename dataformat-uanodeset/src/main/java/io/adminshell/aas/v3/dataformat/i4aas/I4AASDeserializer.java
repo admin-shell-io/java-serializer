@@ -15,8 +15,14 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas;
 
+import javax.xml.bind.JAXBException;
+
+import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
+
 import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.Deserializer;
+import io.adminshell.aas.v3.dataformat.i4aas.parsers.EnvironmentParser;
+import io.adminshell.aas.v3.dataformat.i4aas.parsers.ParserContext;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 
 /**
@@ -29,8 +35,15 @@ public class I4AASDeserializer implements Deserializer {
 	 * reads a I4AAS as string and return the model object
 	 */
 	@Override
-	public AssetAdministrationShellEnvironment read(String value) throws DeserializationException {
-		throw new UnsupportedOperationException("Not Implemented yet.");
+	public AssetAdministrationShellEnvironment read(String input) throws DeserializationException {
+		try {
+			UANodeSet unmarshall = new UANodeSetUnmarshaller().unmarshall(input);
+			ParserContext parserContext = new ParserContext(unmarshall);
+			AssetAdministrationShellEnvironment parsedEnvironment = new EnvironmentParser(parserContext.getEnvironment(), parserContext).parse();
+			return parsedEnvironment;
+		} catch (JAXBException e) {
+			throw new DeserializationException("Deserialization failed on unmarshalling.", e);
+		}
 	}
 
 	@Override

@@ -19,9 +19,9 @@ import javax.xml.bind.JAXBElement;
 
 import org.opcfoundation.ua._2008._02.types.ObjectFactory;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
+
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.I4AASMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 

@@ -17,11 +17,8 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 
 import org.opcfoundation.ua._2011._03.uanodeset.ListOfReferences;
 import org.opcfoundation.ua._2011._03.uanodeset.Reference;
-import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASConstants;
-import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
