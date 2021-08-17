@@ -44,7 +44,7 @@ import java.util.*;
 public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer, Deserializer {
 
     private static final ObjectMapper mapper = new ObjectMapper();
-    private final List<JsonPreprocessor> preprocessors; //TODO: It seems like this list is never used...
+    private final List<JsonPreprocessor> preprocessors;
     private final Logger logger = LoggerFactory.getLogger(Serializer.class);
 
     public static String implementingClassesNamePrefix = "Default";
@@ -79,16 +79,30 @@ public class Serializer implements io.adminshell.aas.v3.dataformat.Serializer, D
     }
 
     /**
-     * Serializes an object to JSON-LD representation. In order to support JSON-LD, the input instance must be
-     * annotated using IDS Infomodel annotations
+     * Serializes an object to an RDF representation. In order to support RDF, the input instance must be
+     * annotated using AAS Metamodel annotations. Default format is Turtle (TTL).
      *
      * @param instance the instance to be serialized
      * @return RDF serialization of the provided object graph
      * @throws IOException if the serialization fails
      */
     public String serialize(Object instance) throws IOException {
-        return serialize(instance, RDFLanguages.JSONLD, new HashMap<>());
+        return serialize(instance, RDFLanguages.TTL, new HashMap<>());
     }
+
+    /**
+     * Serializes an object to an RDF representation of a given RDF serialization format. In order to support RDF, the
+     * input instance must be annotated using AAS Metamodel annotations.
+     *
+     * @param instance the instance to be serialized
+     * @param format the RDF format to be returned (only RDFLanguages.TTL, RDFLanguages.JSONLD, RDFLanguages.RDFXML)
+     * @return RDF serialization of the provided object graph
+     * @throws IOException if the serialization fails
+     */
+    public synchronized String serialize(Object instance, Lang format) throws IOException {
+        return serialize(instance, format, new HashMap<>() );
+    }
+
 
     //Synchronized is required for thread safety. Without it, context elements might be missing in case of multiple simultaneous calls to this function
     public synchronized String serialize(Object instance, Lang format, Map<Object, String> idMap) throws IOException {

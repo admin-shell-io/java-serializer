@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>dataformat-jsonld</artifactId>
-    <name>Asset Administration Shell JSON-LD-Serializer</name>
+    <artifactId>dataformat-rdf</artifactId>
+    <name>Asset Administration Shell RDF-Serializer</name>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
