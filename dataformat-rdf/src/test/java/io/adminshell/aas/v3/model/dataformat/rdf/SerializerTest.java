@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.model.dataformat.jsonld;
+package io.adminshell.aas.v3.model.dataformat.rdf;
 
 import io.adminshell.aas.v3.dataformat.rdf.Serializer;
 import io.adminshell.aas.v3.model.*;
