@@ -9,8 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>validator</artifactId>
-    <name>Asset Administration Shell Validator</name>
+    <artifactId>dataformat-rdf</artifactId>
+    <name>Asset Administration Shell RDF-Serializer</name>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
@@ -20,12 +20,12 @@
     <dependencies>
         <dependency>
             <groupId>io.admin-shell.aas</groupId>
-            <artifactId>dataformat-rdf</artifactId>
+            <artifactId>dataformat-core</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>
             <groupId>org.apache.jena</groupId>
-            <artifactId>jena-shacl</artifactId>
+            <artifactId>jena-arq</artifactId>
             <version>${jena.version}</version>
         </dependency>
         <dependency>
@@ -40,6 +40,8 @@
             <version>1.7.30</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
+
 
 </project>

@@ -15,7 +15,7 @@
  */
 package io.adminshell.aas.v3.model.validator;
 
-import io.adminshell.aas.v3.dataformat.jsonld.Serializer;
+import io.adminshell.aas.v3.dataformat.rdf.Serializer;
 import org.apache.jena.graph.compose.Union;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;

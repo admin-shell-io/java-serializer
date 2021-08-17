@@ -35,7 +35,7 @@
         <module>dataformat-core</module>
         <module>dataformat-json</module>
         <module>dataformat-xml</module>
-        <module>dataformat-jsonld</module>
+        <module>dataformat-rdf</module>
         <module>dataformat-uanodeset</module>
         <module>validator</module>
     </modules>

@@ -32,8 +32,10 @@ The project contains several modules:
 - `dataformat-core` Location of the general classes and interfaces that are used by more than one de-/serializer.
 - `dataformat-aasx` AASX de-/serializer
 - `dataformat-json` JSON de-/serializer
+- `dataformat-rdf` RDF de-/serializer
 - `dataformat-xml` XML de-/serializer
 - `dataformat-uanodeset` OPC UA I4AAS NodeSet de-/serializer
+- `dataformat-aml` AutomationML serializer (deserializer is currently under development)
 
 
 
@@ -44,8 +46,8 @@ We always look for contributions, bug reports, feature requests etc. Simply open
 
 # Contributors
 
-| Name        | Affiliation           | Github Account | parent | core  | aasx | json | xml | json-ld | ua-nodeset | validator| aml
---- | --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---:| :---:| :---:
+| Name        | Affiliation           | Github Account | Parent | Core  | AASX | JSON | XML | RDF | UA-Nodeset | Validator| AutomationML
+--- | --- | --- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---:
 | Mohammad Alreeni | Fraunhofer IWU | []() |  |  |  |  | x |  |  |  |
 | Sebastian Bader | Fraunhofer IAIS | [sebbader](https://github.com/sebbader) | x |  |  |  |  | x |  | x |  |
 | Matthias Böckmann | Fraunhofer IAIS | [maboeckmann](https://github.com/maboeckmann) | x |  |  |  |  | x |  | x |  |
