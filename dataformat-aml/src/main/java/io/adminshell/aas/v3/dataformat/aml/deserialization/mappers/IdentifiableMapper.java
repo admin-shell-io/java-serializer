@@ -24,6 +24,7 @@ import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.model.Identifiable;
 import io.adminshell.aas.v3.model.Identifier;
+import io.adminshell.aas.v3.model.Key;
 import io.adminshell.aas.v3.model.Reference;
 import java.beans.PropertyDescriptor;
 
@@ -49,7 +50,9 @@ public class IdentifiableMapper<T extends Identifiable> extends DefaultMapper<T>
         Identifier identification = context.map(Identifier.class, parser);
         parser.setCurrent(temp);
         ((Identifiable) parent).setIdentification(identification);
-        Reference reference = AasUtils.toReference((Identifiable) parent);
+        Reference reference = AasUtils.toReference((Identifiable) parent,
+                context.getTypeFactory().getImplementationType(Reference.class),
+                context.getTypeFactory().getImplementationType(Key.class));
         parser.collectIdMapping(parser.getCurrent().getID(), reference);
         super.mapProperties(parent, parser, context.with(reference));
     }

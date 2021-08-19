@@ -79,7 +79,7 @@ public class Aml2AasMapper {
 //        propertyNamingStrategy.registerCustomNaming(Qualifier.class, x -> "qualifier:" + x.getType() + "=" + x.getValue(), false);
         MappingContext context = new MappingContext(mappingProvider, classNamingStrategy, propertyNamingStrategy, config.getTypeFactory());
         context.setDocumentInfo(AmlDocumentInfo.fromFile(aml));
-        AssetAdministrationShellEnvironment result = (AssetAdministrationShellEnvironment) context.getMappingProvider().getMapper(AssetAdministrationShellEnvironment.class).map(parser, context);
+        AssetAdministrationShellEnvironment result = context.map(AssetAdministrationShellEnvironment.class, parser);
         parser.resolveIdsToReferences(result);
         return (AssetAdministrationShellEnvironment) result;
     }
