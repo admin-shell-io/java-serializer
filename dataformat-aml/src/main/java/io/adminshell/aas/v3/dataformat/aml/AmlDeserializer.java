@@ -17,6 +17,7 @@ package io.adminshell.aas.v3.dataformat.aml;
 
 import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.Deserializer;
+import io.adminshell.aas.v3.dataformat.aml.deserialization.AasTypeFactory;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.Aml2AasMapper;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
@@ -34,6 +35,7 @@ import org.slf4j.LoggerFactory;
 public class AmlDeserializer implements Deserializer {
 
     private static final Logger log = LoggerFactory.getLogger(AmlDeserializer.class);
+    private AasTypeFactory typeFactory = new AasTypeFactory();
 
     @Override
     public AssetAdministrationShellEnvironment read(String value) throws DeserializationException {
@@ -41,7 +43,9 @@ public class AmlDeserializer implements Deserializer {
             Unmarshaller unmarshaller = JAXBContextFactory.createContext(new Class[]{CAEXFile.class}, null).createUnmarshaller();
             StringReader reader = new StringReader(value);
             CAEXFile aml = (CAEXFile) unmarshaller.unmarshal(reader);
-            Aml2AasMapper mapper = new Aml2AasMapper(new AmlDeserializationConfig.Builder().build());
+            Aml2AasMapper mapper = new Aml2AasMapper(new AmlDeserializationConfig.Builder()
+                    .typeFactory(typeFactory)
+                    .build());
             return mapper.map(aml);
         } catch (JAXBException ex) {
             throw new DeserializationException("error deserializing AssetAdministrationShellEnvironment", ex);
@@ -52,6 +56,6 @@ public class AmlDeserializer implements Deserializer {
 
     @Override
     public <T> void useImplementation(Class<T> aasInterface, Class<? extends T> implementation) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        typeFactory.useImplementation(aasInterface, implementation);
     }
 }

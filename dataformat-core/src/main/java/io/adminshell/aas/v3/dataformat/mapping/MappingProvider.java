@@ -16,6 +16,7 @@
 package io.adminshell.aas.v3.dataformat.mapping;
 
 import com.google.common.reflect.TypeToken;
+import io.adminshell.aas.v3.dataformat.core.util.MostSpecificClassComparator;
 import io.adminshell.aas.v3.dataformat.core.util.MostSpecificTypeTokenComparator;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -25,8 +26,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -115,7 +114,7 @@ public class MappingProvider<T extends Mapper> {
         if (customMapper.isEmpty() && !TypeToken.of(Collection.class).isSupertypeOf(type)) {
             customMapper = mappings.entrySet().stream()
                     .filter(x -> x.getKey().getRawType().isAssignableFrom(TypeToken.of(type).getRawType()))
-                    .sorted((x, y) -> Objects.compare(x.getKey(), y.getKey(), new MostSpecificTypeTokenComparator()))
+                    .sorted((x, y) -> Objects.compare(x.getKey().getRawType(), y.getKey().getRawType(), new MostSpecificClassComparator()))
                     .map(x -> x.getValue())
                     .findFirst();
         }
