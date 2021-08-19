@@ -16,32 +16,133 @@
 package io.adminshell.aas.v3.dataformat.aml.deserialization;
 
 import io.adminshell.aas.v3.dataformat.aml.AmlDocumentInfo;
+import io.adminshell.aas.v3.dataformat.aml.common.AbstractMappingContext;
+import io.adminshell.aas.v3.dataformat.aml.serialization.naming.NamingStrategy;
+import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.dataformat.mapping.MappingProvider;
-import io.adminshell.aas.v3.dataformat.mapping.TargetBasedMappingContext;
+import io.adminshell.aas.v3.model.Reference;
+import java.beans.PropertyDescriptor;
+import java.lang.reflect.Type;
 
 /**
  * Mapping Context for mapping AML to AAS
  */
-public class MappingContext extends TargetBasedMappingContext {
+public class MappingContext extends AbstractMappingContext<Mapper> {
 
     private AmlDocumentInfo documentInfo;
     private AasTypeFactory typeFactory;
-    private Class<?> type;
+    private Object parent;
+    private Reference parentRef;
+    private Type type;
 
-    public MappingContext(MappingProvider mappingProvider, AasTypeFactory typeFactory) {
-        super(mappingProvider);
+    public MappingContext(MappingProvider<Mapper> mappingProvider,
+            NamingStrategy classNamingStrategy,
+            NamingStrategy propertyNamingStrategy,
+            AasTypeFactory typeFactory) {
+        super(mappingProvider, classNamingStrategy, propertyNamingStrategy, null);
         this.typeFactory = typeFactory;
         this.type = null;
     }
 
-    private MappingContext(MappingProvider mappingProvider, AasTypeFactory typeFactory, Class<?> type) {
-        super(mappingProvider);
+    private MappingContext(MappingProvider<Mapper> mappingProvider,
+            NamingStrategy classNamingStrategy,
+            NamingStrategy propertyNamingStrategy,
+            PropertyDescriptor property,
+            AasTypeFactory typeFactory,
+            AmlDocumentInfo documentInfo,
+            Object parent,
+            Reference parentRef,
+            Type type) {
+        super(mappingProvider, classNamingStrategy, propertyNamingStrategy, property);
         this.typeFactory = typeFactory;
+        this.documentInfo = documentInfo;
+        this.parent = parent;
+        this.parentRef = parentRef;
         this.type = type;
     }
 
-    public MappingContext with(Class<?> type) {
-        return new MappingContext(mappingProvider, typeFactory, type);
+    public MappingContext with(Type type) {
+        return new MappingContext(mappingProvider,
+                classNamingStrategy,
+                propertyNamingStrategy,
+                property,
+                typeFactory,
+                documentInfo,
+                parent,
+                parentRef,
+                type);
+    }
+
+    public MappingContext with(PropertyDescriptor property) {
+        return new MappingContext(mappingProvider,
+                classNamingStrategy,
+                propertyNamingStrategy,
+                property,
+                typeFactory,
+                documentInfo,
+                parent,
+                parentRef,
+                type);
+    }
+
+    public MappingContext with(Object parent) {
+        return new MappingContext(mappingProvider,
+                classNamingStrategy,
+                propertyNamingStrategy,
+                property,
+                typeFactory,
+                documentInfo,
+                parent,
+                parentRef,
+                type);
+    }
+
+    public MappingContext with(Reference parentRef) {
+        return new MappingContext(mappingProvider,
+                classNamingStrategy,
+                propertyNamingStrategy,
+                property,
+                typeFactory,
+                documentInfo,
+                parent,
+                parentRef,
+                type);
+    }
+
+    public MappingContext withoutProperty() {
+        return new MappingContext(mappingProvider,
+                classNamingStrategy,
+                propertyNamingStrategy,
+                null,
+                typeFactory,
+                documentInfo,
+                parent,
+                parentRef,
+                type);
+    }
+
+    public MappingContext withoutParent() {
+        return new MappingContext(mappingProvider,
+                classNamingStrategy,
+                propertyNamingStrategy,
+                property,
+                typeFactory,
+                documentInfo,
+                null,
+                parentRef,
+                type);
+    }
+
+    public MappingContext withoutType() {
+        return new MappingContext(mappingProvider,
+                classNamingStrategy,
+                propertyNamingStrategy,
+                property,
+                typeFactory,
+                documentInfo,
+                parent,
+                parentRef,
+                null);
     }
 
     public AmlDocumentInfo getDocumentInfo() {
@@ -52,7 +153,15 @@ public class MappingContext extends TargetBasedMappingContext {
         this.documentInfo = documentInfo;
     }
 
-    public Class<?> getType() {
+    public Object map(Type type, AmlParser parser) throws MappingException {
+        return mappingProvider.getMapper(type).map(parser, this);
+    }
+
+    public <T> T map(Class<T> type, AmlParser parser) throws MappingException {
+        return (T) mappingProvider.getMapper(type).map(parser, this);
+    }
+
+    public Type getType() {
         return type;
     }
 
@@ -60,4 +169,15 @@ public class MappingContext extends TargetBasedMappingContext {
         return typeFactory;
     }
 
+    public Object getParent() {
+        return parent;
+    }
+
+    public Reference getParentRef() {
+        return parentRef;
+    }
+
+    public void setParentRef(Reference parentRef) {
+        this.parentRef = parentRef;
+    }
 }

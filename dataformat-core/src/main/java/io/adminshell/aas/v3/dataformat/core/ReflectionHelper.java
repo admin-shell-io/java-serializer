@@ -170,6 +170,27 @@ public class ReflectionHelper {
     }
 
     /**
+     * Returns the default implementation for an aas interface or null if the
+     * class is no aas interface or does not have default implementation
+     *
+     * @param interfaceType the interface to check
+     * @return the default implementation type for given interfaceType or null
+     * if the class is no aas interface or does not have default implementation
+     */
+    public static <T> Class<? extends T> getDefaultImplementation(Class<T> interfaceType) {
+        if (isDefaultImplementation(interfaceType)) {
+            return interfaceType;
+        }
+        if (hasDefaultImplementation(interfaceType)) {
+            return DEFAULT_IMPLEMENTATIONS.stream()
+                    .filter(x -> x.getInterfaceType().equals(interfaceType))
+                    .findFirst().get()
+                    .getImplementationType();
+        }
+        return null;
+    }
+
+    /**
      * Returns whether the given class is an interface from within the
      * MODEL_PACKAGE_NAME package as well as a default implementation or not
      *

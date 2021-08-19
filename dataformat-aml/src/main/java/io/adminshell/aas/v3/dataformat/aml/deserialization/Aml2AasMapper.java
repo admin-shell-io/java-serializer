@@ -18,10 +18,24 @@ package io.adminshell.aas.v3.dataformat.aml.deserialization;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.AssetAdministrationShellEnvironmentMapper;
 import io.adminshell.aas.v3.dataformat.aml.AmlDeserializationConfig;
 import io.adminshell.aas.v3.dataformat.aml.AmlDocumentInfo;
+import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.AssetAdministrationShellMapper;
+import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.EnumMapper;
+import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.IdentifiableMapper;
+import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.LangStringCollectionMapper;
+import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.ReferableMapper;
+import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.ReferenceElementMapper;
+import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.ReferenceMapper;
+import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.RelationshipElementMapper;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
+import io.adminshell.aas.v3.dataformat.aml.serialization.naming.AbstractClassNamingStrategy;
+import io.adminshell.aas.v3.dataformat.aml.serialization.naming.NumberingClassNamingStrategy;
+import io.adminshell.aas.v3.dataformat.aml.serialization.naming.PropertyNamingStrategy;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.dataformat.mapping.MappingProvider;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
+import io.adminshell.aas.v3.model.Identifiable;
+import io.adminshell.aas.v3.model.MultiLanguageProperty;
+import io.adminshell.aas.v3.model.Referable;
 import java.util.List;
 
 /**
@@ -49,9 +63,24 @@ public class Aml2AasMapper {
         AmlParser parser = new AmlParser(aml);
         MappingProvider mappingProvider = new MappingProvider(Mapper.class, new DefaultMapper(), new DefaultMapper());
         mappingProvider.register(new AssetAdministrationShellEnvironmentMapper());
-        MappingContext context = new MappingContext(mappingProvider, config.getTypeFactory());
+        mappingProvider.register(new EnumMapper());
+        mappingProvider.register(new ReferenceMapper());
+        mappingProvider.register(new AssetAdministrationShellMapper());
+        mappingProvider.register(new LangStringCollectionMapper());
+        mappingProvider.register(new RelationshipElementMapper());
+        mappingProvider.register(new ReferenceElementMapper());
+        mappingProvider.register(new ReferableMapper<Referable>());
+        mappingProvider.register(new IdentifiableMapper<Identifiable>());
+        AbstractClassNamingStrategy classNamingStrategy = new NumberingClassNamingStrategy();
+
+        PropertyNamingStrategy propertyNamingStrategy = new PropertyNamingStrategy();
+        propertyNamingStrategy.registerCustomNaming(Referable.class, "descriptions", "description", true);
+        propertyNamingStrategy.registerCustomNaming(MultiLanguageProperty.class, "values", "value", true);
+//        propertyNamingStrategy.registerCustomNaming(Qualifier.class, x -> "qualifier:" + x.getType() + "=" + x.getValue(), false);
+        MappingContext context = new MappingContext(mappingProvider, classNamingStrategy, propertyNamingStrategy, config.getTypeFactory());
         context.setDocumentInfo(AmlDocumentInfo.fromFile(aml));
-        Object result = context.getMappingProvider().getMapper(AssetAdministrationShellEnvironment.class).map(parser, context);
+        AssetAdministrationShellEnvironment result = (AssetAdministrationShellEnvironment) context.getMappingProvider().getMapper(AssetAdministrationShellEnvironment.class).map(parser, context);
+        parser.resolveIdsToReferences(result);
         return (AssetAdministrationShellEnvironment) result;
     }
 }

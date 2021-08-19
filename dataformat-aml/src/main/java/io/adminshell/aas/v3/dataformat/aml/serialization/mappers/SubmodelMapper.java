@@ -33,7 +33,7 @@ public class SubmodelMapper extends DefaultMapper<Submodel> {
         InternalElementType.Builder builder = super.toInternalElement(value, generator, context);
         if (value.getKind() == ModelingKind.TEMPLATE) {
             builder = builder.withRefBaseSystemUnitPath(generator.getDocumentInfo().getAssetAdministrationShellSystemUnitClassLib()
-                    + "/" + context.getInternalElementNamingStrategy().getName(value.getClass(), value, null));
+                    + "/" + context.getClassNamingStrategy().getName(value.getClass(), value, null));
         }
         return builder;
     }
