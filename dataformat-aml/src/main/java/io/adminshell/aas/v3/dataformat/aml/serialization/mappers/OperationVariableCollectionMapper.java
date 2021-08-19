@@ -30,7 +30,7 @@ public class OperationVariableCollectionMapper extends DefaultCollectionMapper<O
         if (value == null || value.isEmpty()) {
             return;
         }
-        String name = context.getAttributeNamingStrategy().getName(
+        String name = context.getPropertyNamingStrategy().getName(
                 value.getClass(),
                 value,
                 context.getProperty().getName());

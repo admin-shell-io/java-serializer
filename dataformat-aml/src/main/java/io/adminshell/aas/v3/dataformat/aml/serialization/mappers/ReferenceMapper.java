@@ -40,7 +40,7 @@ public class ReferenceMapper extends DefaultMapper<Reference> {
 
     @Override
     protected String getAttributeName(Reference value, MappingContext context) {
-        return context.getAttributeNamingStrategy().getName(
+        return context.getPropertyNamingStrategy().getName(
                 Reference.class,
                 value,
                 context.getProperty().getName());

@@ -29,7 +29,7 @@ public class QualifierMapper extends AbstractElementMapperWithValueType<Qualifie
 
     @Override
     protected String getAttributeName(Qualifier value, MappingContext context) {
-        return context.getAttributeNamingStrategy().getName(
+        return context.getPropertyNamingStrategy().getName(
                 Qualifier.class,
                 value,
                 context.getProperty().getName());

@@ -34,6 +34,7 @@ public class AssetAdministrationShellEnvironmentMapper implements Mapper<AssetAd
 
     @Override
     public AssetAdministrationShellEnvironment map(AmlParser parser, MappingContext context) throws MappingException {
+        // TODO use typeFactory instead of explicitly using Default... classes
         AssetAdministrationShellEnvironment result = new DefaultAssetAdministrationShellEnvironment.Builder().build();
         List<InternalElementType> shells = parser.getContent().getInstanceHierarchy().stream()
                 .flatMap(x -> x.getInternalElement().stream().filter(filterByRole(AssetAdministrationShell.class)))
@@ -41,12 +42,14 @@ public class AssetAdministrationShellEnvironmentMapper implements Mapper<AssetAd
         shells.forEach(x -> {
             parser.setCurrent(x);
             try {
-                AssetAdministrationShell aas = (AssetAdministrationShell) context.getMappingProvider().getMapper(AssetAdministrationShell.class).map(parser, context);
+                AssetAdministrationShell aas = context.with(result).map(AssetAdministrationShell.class, parser);
                 result.getAssetAdministrationShells().add(aas);
             } catch (MappingException ex) {
                 Logger.getLogger(AssetAdministrationShellEnvironmentMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+        // TODO parse SystemUnitClasses
+        // add template AAS and Submodels (only if not already present)
         return result;
     }
 

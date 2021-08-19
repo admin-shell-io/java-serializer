@@ -21,8 +21,8 @@ import io.adminshell.aas.v3.dataformat.aml.fixtures.FullExample;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import java.io.FileNotFoundException;
 import static org.junit.Assert.assertEquals;
-
 import org.junit.Ignore;
+
 import org.junit.Test;
 
 public class AmlDeserializerTest {

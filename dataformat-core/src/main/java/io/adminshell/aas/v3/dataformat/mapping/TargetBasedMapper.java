@@ -23,7 +23,7 @@ package io.adminshell.aas.v3.dataformat.mapping;
  * @param <P> the parser type, here: to parse data of A
  * @param <C> the type of mapping context
  */
-public interface TargetBasedMapper<T, P, C extends MappingContext> extends Mapper<T> {
+public interface TargetBasedMapper<T, P, C extends MappingContext<? extends TargetBasedMapper>> extends Mapper<T> {
 
     /**
      * Reads from the parser and returns the mapping result.
