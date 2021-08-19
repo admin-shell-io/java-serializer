@@ -29,6 +29,7 @@
             <version>${jena.version}</version>
             <exclusions>
                 <exclusion>
+                    <!-- exclusion is necessary due to an unresolved vulnarability in the version used by Jena 3.x. Needs to be removed as soon as Jena has upgraded to a later version of the dependency. -->
                     <groupId>org.apache.commons</groupId>
                     <artifactId>commons-compress</artifactId>
                 </exclusion>
