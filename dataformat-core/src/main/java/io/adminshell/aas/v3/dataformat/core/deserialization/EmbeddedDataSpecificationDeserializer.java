@@ -60,7 +60,7 @@ public class EmbeddedDataSpecificationDeserializer extends JsonDeserializer<Embe
         Reference reference = parserReference.readValueAs(Reference.class);
         JsonNode nodeContent = node.get(PROP_DATA_SPECIFICATION_CONTENT);
         if (nodeContent != null) {
-            Class<? extends DataSpecificationContent> targetClass = DataSpecificationManager.getImplementation(reference);
+            Class<? extends DataSpecificationContent> targetClass = DataSpecificationManager.getDataSpecification(reference).getType();
             JsonParser parserContent = parser.getCodec().getFactory().getCodec().treeAsTokens(nodeContent);
             parserContent.nextToken();
             DataSpecificationContent content = parserContent.readValueAs(targetClass);
