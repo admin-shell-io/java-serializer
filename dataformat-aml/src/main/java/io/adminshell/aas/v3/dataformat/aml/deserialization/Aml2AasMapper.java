@@ -74,8 +74,8 @@ public class Aml2AasMapper {
         AbstractClassNamingStrategy classNamingStrategy = new NumberingClassNamingStrategy();
 
         PropertyNamingStrategy propertyNamingStrategy = new PropertyNamingStrategy();
-        propertyNamingStrategy.registerCustomNaming(Referable.class, "descriptions", "description", true);
-        propertyNamingStrategy.registerCustomNaming(MultiLanguageProperty.class, "values", "value", true);
+        propertyNamingStrategy.registerCustomNaming(Referable.class, "descriptions", "description");
+        propertyNamingStrategy.registerCustomNaming(MultiLanguageProperty.class, "values", "value");
 //        propertyNamingStrategy.registerCustomNaming(Qualifier.class, x -> "qualifier:" + x.getType() + "=" + x.getValue(), false);
         MappingContext context = new MappingContext(mappingProvider, classNamingStrategy, propertyNamingStrategy, config.getTypeFactory());
         context.setDocumentInfo(AmlDocumentInfo.fromFile(aml));
