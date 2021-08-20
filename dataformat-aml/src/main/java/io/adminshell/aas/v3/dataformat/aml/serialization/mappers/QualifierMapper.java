@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.serialization.mappers;
 
+import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.dataformat.aml.serialization.AmlGenerator;
 import io.adminshell.aas.v3.dataformat.aml.serialization.MappingContext;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
@@ -33,5 +34,15 @@ public class QualifierMapper extends AbstractElementMapperWithValueType<Qualifie
                 Qualifier.class,
                 value,
                 context.getProperty().getName());
+    }
+
+    @Override
+    protected AttributeType.RefSemantic getRefSemantic(Qualifier value, AmlGenerator generator, MappingContext context) {
+        return generator.refSemantic(
+                context.getProperty(),
+                context.getAttributeNamingStrategy().getNameForRefSemantic(
+                        Qualifier.class,
+                        value,
+                        context.getProperty().getName()));
     }
 }

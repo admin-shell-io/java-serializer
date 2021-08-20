@@ -839,7 +839,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
 					<Attribute Name="qualifier:http://acplt.org/Qualifier/ExampleQualifier=100">
-						<RefSemantic CorrespondingAttributePath="AAS:Qualifiable/qualifiers"/>
+						<RefSemantic CorrespondingAttributePath="AAS:Qualifiable/qualifier"/>
 						<Attribute Name="type">
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>
@@ -854,7 +854,7 @@
 						</Attribute>
 					</Attribute>
 					<Attribute Name="qualifier:http://acplt.org/Qualifier/ExampleQualifier2=50">
-						<RefSemantic CorrespondingAttributePath="AAS:Qualifiable/qualifiers"/>
+						<RefSemantic CorrespondingAttributePath="AAS:Qualifiable/qualifier"/>
 						<Attribute Name="type">
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier2</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>
@@ -1348,7 +1348,7 @@
 								<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 							</Attribute>
 							<Attribute Name="qualifier:http://acplt.org/Qualifier/ExampleQualifier=null">
-								<RefSemantic CorrespondingAttributePath="AAS:Qualifiable/qualifiers"/>
+								<RefSemantic CorrespondingAttributePath="AAS:Qualifiable/qualifier"/>
 								<Attribute Name="type">
 									<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier</Value>
 									<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>
@@ -1386,7 +1386,7 @@
 								<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 							</Attribute>
 							<Attribute Name="qualifier:http://acplt.org/Qualifier/ExampleQualifier=null">
-								<RefSemantic CorrespondingAttributePath="AAS:Qualifiable/qualifiers"/>
+								<RefSemantic CorrespondingAttributePath="AAS:Qualifiable/qualifier"/>
 								<Attribute Name="type">
 									<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier</Value>
 									<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>
@@ -1424,7 +1424,7 @@
 								<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 							</Attribute>
 							<Attribute Name="qualifier:http://acplt.org/Qualifier/ExampleQualifier=null">
-								<RefSemantic CorrespondingAttributePath="AAS:Qualifiable/qualifiers"/>
+								<RefSemantic CorrespondingAttributePath="AAS:Qualifiable/qualifier"/>
 								<Attribute Name="type">
 									<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier</Value>
 									<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>
@@ -1545,7 +1545,7 @@
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 						</Attribute>
 						<Attribute Name="qualifier:http://acplt.org/Qualifier/ExampleQualifier=null">
-							<RefSemantic CorrespondingAttributePath="AAS:Qualifiable/qualifiers"/>
+							<RefSemantic CorrespondingAttributePath="AAS:Qualifiable/qualifier"/>
 							<Attribute Name="type">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier</Value>
 								<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>

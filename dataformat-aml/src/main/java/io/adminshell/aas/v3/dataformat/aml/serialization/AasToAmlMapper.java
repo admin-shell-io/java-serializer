@@ -72,9 +72,9 @@ public class AasToAmlMapper {
         AbstractClassNamingStrategy classNamingStrategy = new NumberingClassNamingStrategy();
         classNamingStrategy.registerCustomNaming(LangString.class, x -> "aml-lang=" + x.getLanguage());
         PropertyNamingStrategy propertyNamingStrategy = new PropertyNamingStrategy();
-        propertyNamingStrategy.registerCustomNaming(Referable.class, "descriptions", "description", true);
-        propertyNamingStrategy.registerCustomNaming(MultiLanguageProperty.class, "values", "value", true);
-        propertyNamingStrategy.registerCustomNaming(Qualifier.class, x -> "qualifier:" + x.getType() + "=" + x.getValue(), false);
+        propertyNamingStrategy.registerCustomNaming(Referable.class, "descriptions", "description");
+        propertyNamingStrategy.registerCustomNaming(MultiLanguageProperty.class, "values", "value");
+        propertyNamingStrategy.registerCustomNaming(Qualifier.class, x -> "qualifier:" + x.getType() + "=" + x.getValue(), x -> "qualifier");
         MappingProvider<SourceBasedMapper> mappingProvider = new MappingProvider<>(
                 SourceBasedMapper.class,
                 new DefaultMapper(),
