@@ -237,8 +237,9 @@ public class DefaultMapper<T> implements Mapper<T> {
         // alternative way to discover property but more expensive as all properties are considered and not only those defined on class
         // Optional<PropertyDescriptor> property = AasUtils.getAasProperties(type.get()).stream().filter(x -> x.getName().equals(type)).findFirst();        
         try {
+            //TODO: equals instead of contains. Use old name of PropertyNamingStrategy
             Optional<PropertyDescriptor> property = Stream.of(Introspector.getBeanInfo(type).getPropertyDescriptors())
-                    .filter(x -> x.getName().equals(attributePathElements[1])).findFirst();
+                    .filter(x -> x.getName().contains(attributePathElements[1])).findFirst();
             if (property.isPresent()) {
                 return property.get().getReadMethod().getReturnType();
             } else {

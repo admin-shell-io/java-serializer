@@ -15,17 +15,9 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.deserialization;
 
-import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.AssetAdministrationShellEnvironmentMapper;
+import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.*;
 import io.adminshell.aas.v3.dataformat.aml.AmlDeserializationConfig;
 import io.adminshell.aas.v3.dataformat.aml.AmlDocumentInfo;
-import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.AssetAdministrationShellMapper;
-import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.EnumMapper;
-import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.IdentifiableMapper;
-import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.LangStringCollectionMapper;
-import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.ReferableMapper;
-import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.ReferenceElementMapper;
-import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.ReferenceMapper;
-import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.RelationshipElementMapper;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
 import io.adminshell.aas.v3.dataformat.aml.serialization.naming.AbstractClassNamingStrategy;
 import io.adminshell.aas.v3.dataformat.aml.serialization.naming.NumberingClassNamingStrategy;
@@ -36,6 +28,9 @@ import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.Identifiable;
 import io.adminshell.aas.v3.model.MultiLanguageProperty;
 import io.adminshell.aas.v3.model.Referable;
+import io.adminshell.aas.v3.model.Qualifiable;
+
+
 import java.util.List;
 
 /**
@@ -71,12 +66,15 @@ public class Aml2AasMapper {
         mappingProvider.register(new ReferenceElementMapper());
         mappingProvider.register(new ReferableMapper<Referable>());
         mappingProvider.register(new IdentifiableMapper<Identifiable>());
+        mappingProvider.register(new ConstraintCollectionMapper());
+        mappingProvider.register(new QualifierMapper());
         AbstractClassNamingStrategy classNamingStrategy = new NumberingClassNamingStrategy();
 
         PropertyNamingStrategy propertyNamingStrategy = new PropertyNamingStrategy();
         propertyNamingStrategy.registerCustomNaming(Referable.class, "descriptions", "description");
         propertyNamingStrategy.registerCustomNaming(MultiLanguageProperty.class, "values", "value");
-//        propertyNamingStrategy.registerCustomNaming(Qualifier.class, x -> "qualifier:" + x.getType() + "=" + x.getValue(), false);
+        //propertyNamingStrategy.registerCustomNaming(Qualifier.class, x -> "qualifier:" + x.getType() + "=" + x.getValue(), false);
+        propertyNamingStrategy.registerCustomNaming(Qualifiable.class, "qualifiers", "qualifier","qualifier");
         MappingContext context = new MappingContext(mappingProvider, classNamingStrategy, propertyNamingStrategy, config.getTypeFactory());
         context.setDocumentInfo(AmlDocumentInfo.fromFile(aml));
         AssetAdministrationShellEnvironment result = context.map(AssetAdministrationShellEnvironment.class, parser);
