@@ -1,0 +1,386 @@
+#@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+#@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+#@prefix xs:   <http://www.w3.org/2001/XMLSchema#> .
+
+@prefix phys_unit: <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationPhysicalUnit/3/0/RC01/> .
+@prefix dash: <http://datashapes.org/dash#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix vann: <http://purl.org/vocab/vann/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix sh: <http://www.w3.org/ns/shacl#> .
+@prefix aas: <https://admin-shell.io/aas/3/0/RC01/> .
+@prefix iec61360: <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/> .
+@prefix iecType: <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/> .
+@base <https://admin-shell.io/aas/3/0/RC01/> .
+
+
+aas:AdministrativeInformationShape  a sh:NodeShape ;
+  sh:targetClass aas:AdministrativeInformation ;
+  rdfs:subClassOf aas:HasDataSpecificationShape ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path <https://admin-shell.io/aas/3/0/RC01/AdministrativeInformation/revision> ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 0 ;
+      sh:message "(AdministrativeInformation.revision):<i>AdministrativeInformationShape</i>: Only one value for <i>revision</i> is allowed."^^xsd:string ;
+    ] ;
+  sh:property [
+	  a sh:PropertyShape ;
+	  sh:path <https://admin-shell.io/aas/3/0/RC01/AdministrativeInformation/revision> ;
+	  sh:datatype xsd:string ;
+	  sh:pattern "^(\\w+\\S+)$" ;
+	  sh:message "(AdministrativeInformation.revision):<i>AdministrativeInformationShape</i>: The value of <i>revision</i> is not allowed to be empty."^^xsd:string ;
+	  sh:nodeKind sh:Literal ;
+	] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path <https://admin-shell.io/aas/3/0/RC01/AdministrativeInformation/version> ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 0 ;
+      sh:message "(AdministrativeInformation.version):Only one value for <i>version</i> is allowed."^^xsd:string ;
+    ] ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path <https://admin-shell.io/aas/3/0/RC01/AdministrativeInformation/version> ;
+      sh:datatype xsd:string ;
+      sh:pattern "^(\\w+\\S+)$" ;
+      sh:message "(AdministrativeInformation.version):The value of <i>version</i> is not allowed to be empty."^^xsd:string ;
+      sh:nodeKind sh:Literal ;
+    ] ;
+.
+
+# AASd-005
+aas:RevisionRequiresVersionShape
+	a sh:NodeShape ;
+	sh:targetClass aas:AdministrativeInformation ;
+	sh:message "(RevisionRequiresVersionShape): AASd-005 - A revision requires a version." ^^xsd:string ;
+	sh:or (
+		[
+			sh:property [
+				sh:path <https://admin-shell.io/aas/3/0/RC01/AdministrativeInformation/revision> ;
+				sh:minCount 0 ;
+				sh:maxCount 0 ;
+			]
+		]
+		[
+			sh:and (
+				sh:property [
+					sh:path <https://admin-shell.io/aas/3/0/RC01/AdministrativeInformation/revision> ;
+					sh:minCount 1 ;
+					sh:maxCount 1 ;
+				] 
+				sh:property [
+					sh:path <https://admin-shell.io/aas/3/0/RC01/AdministrativeInformation/version> ;
+					sh:minCount 1 ;
+					sh:maxCount 1 ;
+				]
+			)
+		]
+	) 
+.
+
+# AASd-014
+aas:SelfManagedEntityRequiresAssetIdShape a sh:NodeShape ;
+  rdfs:subClassOf aas:SubmodelElementShape ;
+  sh:targetClass aas:Entity ;
+  sh:message "(SelfManagedEntityRequiresAssetIdShape): AASd-014 - Either the attribute globalAssetId or specificAssetId of an Entity must be set if Entity/entityType is set to “SelfManagedEntity”. They are not existing otherwise. " ^^xsd:string ;
+  
+  sh:xone(
+	[
+		sh:and([
+			sh:property [
+				a sh:PropertyShape ;
+				sh:path <https://admin-shell.io/aas/3/0/RC01/Entity/entityType> ;
+				sh:minCount 1;
+				sh:maxCount 1;
+				sh:pattern "SELF_MANAGED_ENTITY";
+			];
+			]
+			[
+			sh:or(
+					[
+						sh:property [
+							sh:path <https://admin-shell.io/aas/3/0/RC01/Entity/globalAssetId>;
+							sh:minCount 1;
+							sh:maxCount 1;
+						];
+					]
+					[
+						sh:property [
+							sh:path <https://admin-shell.io/aas/3/0/RC01/Entity/specificAssetId>;
+							sh:minCount 1;
+							sh:maxCount 1;
+						];
+					]	
+				)
+			]
+		)
+	]
+	[
+	sh:and(
+			[
+			sh:property [
+				a sh:PropertyShape ;
+				sh:path <https://admin-shell.io/aas/3/0/RC01/Entity/entityType> ;
+				sh:minCount 1;
+				sh:maxCount 1;
+				sh:pattern "CO_MANAGED_ENTITY";
+			];
+			]
+			[
+				sh:property [
+					sh:path <https://admin-shell.io/aas/3/0/RC01/Entity/globalAssetId>;
+					sh:minCount 0;
+					sh:maxCount 0;
+			];
+			]
+			[
+				sh:property [
+					sh:path <https://admin-shell.io/aas/3/0/RC01/Entity/specificAssetId>;
+					sh:minCount 0;
+					sh:maxCount 0;
+				];
+			]
+		)
+	]
+)
+.
+
+# AASd-051
+aas:ConceptDescriptionAllowedCategories a sh:NodeShape ;
+  sh:targetClass aas:ConceptDescription ;
+  rdfs:subClassOf aas:HasDataSpecificationShape ;
+  rdfs:subClassOf aas:IdentifiableShape ;
+  
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 0 ;
+      sh:pattern "^VALUE|^PROPERTY|^REFERENCE|^DOCUMENT|^CAPABILITY|^RELATIONSHIP|^COLLECTION|^FUNCTION|^EVENT|^ENTITY|^APPLICATION_CLASS|^QUALIFIER|^VIEW";
+	  sh:message "(ConceptDescriptionAllowedCategories) : AASd-051 - A ConceptDescription shall have one of the following categories: VALUE, PROPERTY, REFERENCE, DOCUMENT, CAPABILITY, RELATIONSHIP, COLLECTION, FUNCTION, EVENT, ENTITY, APPLICATION_CLASS, QUALIFIER, VIEW " ^^xsd:string ;
+    ] ;
+.
+
+# AASd-070 # AASd-073
+aas:ConceptDataSpecificationIEC61360PropertyQaulifierValue a sh:NodeShape ;
+  sh:targetClass aas:ConceptDescription ;
+  rdfs:subClassOf aas:HasDataSpecificationShape ;
+  rdfs:subClassOf aas:IdentifiableShape ;
+  sh:message "(ConceptDataSpecificationIEC61360PropertyQualifierValue) : AASd-073 - For a ConceptDescription with category PROPERTY or VALUE using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/dataType is mandatory and shall be defined." ^^xsd:string ;
+  sh:or(
+	  	sh:not[
+	  		sh:property [
+	  		a sh:PropertyShape ;
+	  		sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
+	  		sh:datatype xsd:string ;
+	  		sh:maxCount 1 ;
+	  		sh:minCount 0 ;
+	  		sh:pattern "^VALUE|^PROPERTY|^QUALIFIER";
+	  		];
+	  	]
+  	[
+  		sh:property [
+  		a sh:PropertyShape ;
+  		sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
+  		sh:class aas:EmbeddedDataSpecification ;
+  		sh:minCount 1 ;
+  		sh:property [
+  			a sh:PropertyShape ;
+  			sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
+  			sh:class aas:DataSpecificationContent ;
+  			sh:minCount 1 ;
+  				sh:property [
+  				a sh:PropertyShape ;
+  				sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/dataType> ;
+  				sh:minCount 1 ;
+  				] ;
+  			] ;
+  		];
+  	]
+  )
+.
+
+# AASd-071
+aas:ConceptDataSpecificationIEC61360Reference a sh:NodeShape ;
+  sh:targetClass aas:ConceptDescription ;
+  rdfs:subClassOf aas:HasDataSpecificationShape ;
+  rdfs:subClassOf aas:IdentifiableShape ;
+  sh:message "(ConceptDataSpecificationIEC61360Reference) : AASd-071 - For a ConceptDescription with category REFERENCE using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/dataType is STRING by default." ^^xsd:string ;
+  sh:or(
+	sh:not[
+		sh:property [
+			a sh:PropertyShape ;
+			sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
+			sh:datatype xsd:string ;
+			sh:maxCount 1 ;
+			sh:minCount 0 ;
+			sh:pattern "^REFERENCE";
+		];
+	]
+  	[
+  		sh:property [
+  		a sh:PropertyShape ;
+  		sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
+  		sh:class aas:EmbeddedDataSpecification ;
+  		sh:minCount 1 ;
+  		sh:property [
+  			a sh:PropertyShape ;
+  			sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
+  			sh:class aas:DataSpecificationContent ;
+  			sh:minCount 1 ;
+  				sh:property [
+					a sh:PropertyShape ;
+					sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/dataType> ;
+					sh:minCount 1 ;
+					sh:in (iecType:STRING);
+					#sh: iec61360:String;
+  				] ;
+  			] ;
+  		];
+  	]
+  )
+.
+# AASd-072
+aas:ConceptDataSpecificationIEC61360Document a sh:NodeShape ;
+  sh:targetClass aas:ConceptDescription ;
+  rdfs:subClassOf aas:HasDataSpecificationShape ;
+  rdfs:subClassOf aas:IdentifiableShape ;
+  sh:message "(ConceptDataSpecificationIEC61360Document) : AASd-072 - For a ConceptDescription with category DOCUMENT using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/dataType shall be one of the following values: STRING or URL." ^^xsd:string ;
+  sh:or(
+	  	sh:not[
+	  		sh:property [
+				a sh:PropertyShape ;
+				sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
+				sh:datatype xsd:string ;
+				sh:maxCount 1 ;
+				sh:minCount 0 ;
+				sh:pattern "^DOCUMENT";
+	  		];
+	  	]
+  	[
+  		sh:property [
+  		a sh:PropertyShape ;
+  		sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
+  		sh:class aas:EmbeddedDataSpecification ;
+  		sh:minCount 1 ;
+  		sh:property [
+  			a sh:PropertyShape ;
+  			sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
+  			sh:class aas:DataSpecificationContent ;
+  			sh:minCount 1 ;
+  				sh:property [
+					a sh:PropertyShape ;
+					sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/dataType> ;
+					sh:maxCount 1 ;
+					sh:pattern "STRING|URL";
+  				] ;
+  			] ;
+  		];
+  	]
+  )
+.
+
+# AASd-074 AASd-076
+aas:ConceptDataSpecificationIEC61360Value2 a sh:NodeShape ;
+  sh:targetClass aas:ConceptDescription ;
+  rdfs:subClassOf aas:HasDataSpecificationShape ;
+  rdfs:subClassOf aas:IdentifiableShape ;
+  sh:message "(ConceptDataSpecificationIEC61360Value2) : AASd-074 AASd-076 - For all ConceptDescriptions using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) at least a preferred name in English shall be defined." ^^xsd:string ;
+  
+	sh:or(
+	[
+		sh:and(
+				[
+					sh:property [
+						a sh:PropertyShape ;
+						sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
+						sh:datatype xsd:string ;
+						sh:maxCount 1 ;
+						sh:minCount 0 ;
+					];
+				]
+			[
+				sh:property [
+				a sh:PropertyShape ;
+				sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
+				sh:class aas:EmbeddedDataSpecification ;
+				sh:minCount 1 ;
+				sh:property [
+					a sh:PropertyShape ;
+					sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
+					sh:class aas:DataSpecificationContent ;
+					sh:minCount 1 ;
+						sh:property [
+							a sh:PropertyShape ;
+							sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/definition> ;
+							sh:minCount 1 ;
+							sh:languageIn ("en");
+							sh:pattern "(.*?)"
+						] ;
+					] ;
+				];
+			]
+		)
+	]
+	[
+		sh:property [
+			a sh:PropertyShape ;
+			sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
+			sh:datatype xsd:string ;
+			sh:maxCount 0 ;
+			sh:minCount 0 ;
+			#sh:pattern "^VALUE";
+		];
+	]
+)
+.
+
+#AASd-071
+aas:ConceptDataSpecificationIEC61360ReferenceDataType a sh:NodeShape ;
+  sh:targetClass aas:ConceptDescription ;
+  rdfs:subClassOf aas:HasDataSpecificationShape ;
+  rdfs:subClassOf aas:IdentifiableShape ;
+  sh:message "(ConceptDataSpecificationIEC61360ReferenceDataType) : For a ConceptDescription with category REFERENCE using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/dataType is STRING by default." ^^xsd:string ;
+  sh:or(
+  	sh:not[
+  		sh:property [
+  		a sh:PropertyShape ;
+  		sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
+  		sh:datatype xsd:string ;
+  		sh:maxCount 1 ;
+  		sh:minCount 1 ;
+  		sh:pattern "^REFERENCE";
+
+  		];
+  	]
+  	[
+  		sh:property [
+  		a sh:PropertyShape ;
+  		sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
+  		sh:class aas:EmbeddedDataSpecification ;
+  		sh:minCount 1 ;
+  		sh:property [
+  			a sh:PropertyShape ;
+  			sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
+  			sh:class aas:DataSpecificationContent ;
+  			sh:minCount 1 ;
+  				sh:property [
+					a sh:PropertyShape ;
+					sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/dataType> ;
+					sh:minCount 1 ;
+					sh:pattern "STRING$";
+  				] ;
+  			] ;
+  		];
+  	]
+  )
+.

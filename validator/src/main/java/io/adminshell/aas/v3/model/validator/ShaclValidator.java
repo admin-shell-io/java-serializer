@@ -150,8 +150,10 @@ public class ShaclValidator implements Validator{
         //All loaded, let's parse!
         //shapes = Shapes.parse(shapesModel);
         InputStream shapesInputStream = getClass().getClassLoader().getResourceAsStream("shapes.ttl");
+        InputStream constraintShapesInputStream = getClass().getClassLoader().getResourceAsStream("constraint_shapes.ttl");
         InputStream ontologyInputStream = getClass().getClassLoader().getResourceAsStream("ontology.ttl");
         shapesModel.read(shapesInputStream, null, FileUtils.langTurtle);
+        shapesModel.read(constraintShapesInputStream, null, FileUtils.langTurtle);
         shapes = Shapes.parse(shapesModel);
         ontologyModel = ModelFactory.createDefaultModel();
 
