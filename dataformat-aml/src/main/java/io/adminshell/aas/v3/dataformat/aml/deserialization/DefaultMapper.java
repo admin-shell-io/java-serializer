@@ -413,6 +413,13 @@ public class DefaultMapper<T> implements Mapper<T> {
         });
     }
 
+    protected List<InternalElementType> findInternalElements(CAEXObject parent, Predicate<InternalElementType> filter) {
+        if (parent == null || !InternalElementType.class.isAssignableFrom(parent.getClass())) {
+            return List.of();
+        }
+        return findInternalElements((InternalElementType) parent, filter);
+    }
+
     protected List<InternalElementType> findInternalElements(InternalElementType parent, Predicate<InternalElementType> filter) {
         if (parent == null || filter == null) {
             return List.of();

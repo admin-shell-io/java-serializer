@@ -68,6 +68,7 @@ public class Aml2AasMapper {
         mappingProvider.register(new IdentifiableMapper<Identifiable>());
         mappingProvider.register(new ConstraintCollectionMapper());
         mappingProvider.register(new QualifierMapper());
+        mappingProvider.register(new OperationCollectionMapper());
         AbstractClassNamingStrategy classNamingStrategy = new NumberingClassNamingStrategy();
 
         PropertyNamingStrategy propertyNamingStrategy = new PropertyNamingStrategy();
