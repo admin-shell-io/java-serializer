@@ -27,8 +27,7 @@ public class EnumMapper extends DefaultMapper<Enum> {
     public Enum map(AmlParser parser, MappingContext context) throws MappingException {
         if (parser == null
                 || parser.getCurrent() == null
-                || context.getProperty() == null
-                || !AttributeType.class.isAssignableFrom(parser.getCurrent().getClass())) {
+                || context.getProperty() == null) {
             return null;
         }
         AttributeType attribute = findAttribute(parser.getCurrent(), context.getProperty(), context);
