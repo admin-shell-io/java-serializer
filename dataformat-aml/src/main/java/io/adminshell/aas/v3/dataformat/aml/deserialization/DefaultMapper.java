@@ -19,6 +19,7 @@ import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXObject;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.SystemUnitClassType;
+import io.adminshell.aas.v3.dataformat.aml.model.caex.InterfaceClassType;
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
@@ -425,5 +426,16 @@ public class DefaultMapper<T> implements Mapper<T> {
             return List.of();
         }
         return parent.getInternalElement().stream().filter(filter).collect(Collectors.toList());
+    }
+
+    protected List<InterfaceClassType> findExternalInterface(CAEXObject parent, Predicate<InterfaceClassType> filter) {
+        if (parent == null || filter == null) {
+            return List.of();
+        }
+        if (InternalElementType.class.isAssignableFrom(parent.getClass())) {
+            return ((InternalElementType) parent).getExternalInterface().stream().filter(filter).collect(Collectors.toList());
+        }
+        return List.of();
+
     }
 }
