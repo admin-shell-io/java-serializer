@@ -338,6 +338,14 @@ public class DefaultMapper<T> implements Mapper<T> {
         return result;
     }
 
+    protected String getDataTypeFromAttribute(AttributeType attributeType){
+        if(attributeType == null || attributeType.getAttributeDataType() == null){
+            return null;
+        }
+        String attributeDataType = attributeType.getAttributeDataType();
+        return attributeDataType.substring(attributeDataType.lastIndexOf(":") + 1);
+    }
+
     protected boolean skipProperty(PropertyDescriptor property) {
         return ignoredProperties.contains(property.getName());
     }
@@ -436,6 +444,5 @@ public class DefaultMapper<T> implements Mapper<T> {
             return ((InternalElementType) parent).getExternalInterface().stream().filter(filter).collect(Collectors.toList());
         }
         return List.of();
-
     }
 }
