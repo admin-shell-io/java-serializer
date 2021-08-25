@@ -19,43 +19,6 @@
 @base <https://admin-shell.io/aas/3/0/RC01/> .
 
 
-aas:AdministrativeInformationShape  a sh:NodeShape ;
-  sh:targetClass aas:AdministrativeInformation ;
-  rdfs:subClassOf aas:HasDataSpecificationShape ;
-  sh:property [
-      a sh:PropertyShape ;
-      sh:path <https://admin-shell.io/aas/3/0/RC01/AdministrativeInformation/revision> ;
-      sh:datatype xsd:string ;
-      sh:maxCount 1 ;
-      sh:minCount 0 ;
-      sh:message "(AdministrativeInformation.revision):<i>AdministrativeInformationShape</i>: Only one value for <i>revision</i> is allowed."^^xsd:string ;
-    ] ;
-  sh:property [
-	  a sh:PropertyShape ;
-	  sh:path <https://admin-shell.io/aas/3/0/RC01/AdministrativeInformation/revision> ;
-	  sh:datatype xsd:string ;
-	  sh:pattern "^(\\w+\\S+)$" ;
-	  sh:message "(AdministrativeInformation.revision):<i>AdministrativeInformationShape</i>: The value of <i>revision</i> is not allowed to be empty."^^xsd:string ;
-	  sh:nodeKind sh:Literal ;
-	] ;
-  sh:property [
-      a sh:PropertyShape ;
-      sh:path <https://admin-shell.io/aas/3/0/RC01/AdministrativeInformation/version> ;
-      sh:datatype xsd:string ;
-      sh:maxCount 1 ;
-      sh:minCount 0 ;
-      sh:message "(AdministrativeInformation.version):Only one value for <i>version</i> is allowed."^^xsd:string ;
-    ] ;
-  sh:property [
-      a sh:PropertyShape ;
-      sh:path <https://admin-shell.io/aas/3/0/RC01/AdministrativeInformation/version> ;
-      sh:datatype xsd:string ;
-      sh:pattern "^(\\w+\\S+)$" ;
-      sh:message "(AdministrativeInformation.version):The value of <i>version</i> is not allowed to be empty."^^xsd:string ;
-      sh:nodeKind sh:Literal ;
-    ] ;
-.
-
 # AASd-005
 aas:RevisionRequiresVersionShape
 	a sh:NodeShape ;
@@ -90,36 +53,37 @@ aas:RevisionRequiresVersionShape
 aas:SelfManagedEntityRequiresAssetIdShape a sh:NodeShape ;
   rdfs:subClassOf aas:SubmodelElementShape ;
   sh:targetClass aas:Entity ;
-  sh:message "(SelfManagedEntityRequiresAssetIdShape): AASd-014 - Either the attribute globalAssetId or specificAssetId of an Entity must be set if Entity/entityType is set to “SelfManagedEntity”. They are not existing otherwise. " ^^xsd:string ;
+  sh:message "(SelfManagedEntityRequiresAssetIdShape): AASd-014 - Either the attribute globalAssetId or specificAssetId of an Entity must be set if Entity/entityType is set to “SelfManagedEntity”. They are not existing otherwise." ^^xsd:string ;
   
   sh:xone(
 	[
-		sh:and([
-			sh:property [
-				a sh:PropertyShape ;
-				sh:path <https://admin-shell.io/aas/3/0/RC01/Entity/entityType> ;
-				sh:minCount 1;
-				sh:maxCount 1;
-				sh:pattern "SELF_MANAGED_ENTITY";
-			];
+		sh:and(
+			[
+				sh:property [
+					a sh:PropertyShape ;
+					sh:path <https://admin-shell.io/aas/3/0/RC01/Entity/entityType> ;
+					sh:minCount 1;
+					sh:maxCount 1;
+					sh:pattern "SELF_MANAGED_ENTITY";
+				];
 			]
 			[
-			sh:or(
-					[
-						sh:property [
-							sh:path <https://admin-shell.io/aas/3/0/RC01/Entity/globalAssetId>;
-							sh:minCount 1;
-							sh:maxCount 1;
-						];
-					]
-					[
-						sh:property [
-							sh:path <https://admin-shell.io/aas/3/0/RC01/Entity/specificAssetId>;
-							sh:minCount 1;
-							sh:maxCount 1;
-						];
-					]	
-				)
+				sh:xone(
+						[
+							sh:property [
+								sh:path <https://admin-shell.io/aas/3/0/RC01/Entity/globalAssetId>;
+								sh:minCount 1;
+								sh:maxCount 1;
+							];
+						]
+						[
+							sh:property [
+								sh:path <https://admin-shell.io/aas/3/0/RC01/Entity/specificAssetId>;
+								sh:minCount 1;
+								sh:maxCount 1;
+							];
+						]	
+					)
 			]
 		)
 	]
@@ -156,8 +120,6 @@ aas:SelfManagedEntityRequiresAssetIdShape a sh:NodeShape ;
 # AASd-051
 aas:ConceptDescriptionAllowedCategories a sh:NodeShape ;
   sh:targetClass aas:ConceptDescription ;
-  rdfs:subClassOf aas:HasDataSpecificationShape ;
-  rdfs:subClassOf aas:IdentifiableShape ;
   
   sh:property [
       a sh:PropertyShape ;
@@ -166,168 +128,404 @@ aas:ConceptDescriptionAllowedCategories a sh:NodeShape ;
       sh:maxCount 1 ;
       sh:minCount 0 ;
       sh:pattern "^VALUE|^PROPERTY|^REFERENCE|^DOCUMENT|^CAPABILITY|^RELATIONSHIP|^COLLECTION|^FUNCTION|^EVENT|^ENTITY|^APPLICATION_CLASS|^QUALIFIER|^VIEW";
-	  sh:message "(ConceptDescriptionAllowedCategories) : AASd-051 - A ConceptDescription shall have one of the following categories: VALUE, PROPERTY, REFERENCE, DOCUMENT, CAPABILITY, RELATIONSHIP, COLLECTION, FUNCTION, EVENT, ENTITY, APPLICATION_CLASS, QUALIFIER, VIEW " ^^xsd:string ;
+	  sh:message "A ConceptDescription shall have one of the following categories: VALUE, PROPERTY, REFERENCE, DOCUMENT, CAPABILITY, RELATIONSHIP, COLLECTION, FUNCTION, EVENT, ENTITY, APPLICATION_CLASS, QUALIFIER, VIEW." ^^xsd:string ;
     ] ;
 .
 
-# AASd-070 # AASd-073
-aas:ConceptDataSpecificationIEC61360PropertyQaulifierValue a sh:NodeShape ;
-  sh:targetClass aas:ConceptDescription ;
-  rdfs:subClassOf aas:HasDataSpecificationShape ;
-  rdfs:subClassOf aas:IdentifiableShape ;
-  sh:message "(ConceptDataSpecificationIEC61360PropertyQualifierValue) : AASd-073 - For a ConceptDescription with category PROPERTY or VALUE using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/dataType is mandatory and shall be defined." ^^xsd:string ;
-  sh:or(
-	  	sh:not[
-	  		sh:property [
-	  		a sh:PropertyShape ;
-	  		sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
-	  		sh:datatype xsd:string ;
-	  		sh:maxCount 1 ;
-	  		sh:minCount 0 ;
-	  		sh:pattern "^VALUE|^PROPERTY|^QUALIFIER";
-	  		];
-	  	]
-  	[
-  		sh:property [
-  		a sh:PropertyShape ;
-  		sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
-  		sh:class aas:EmbeddedDataSpecification ;
-  		sh:minCount 1 ;
-  		sh:property [
-  			a sh:PropertyShape ;
-  			sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
-  			sh:class aas:DataSpecificationContent ;
-  			sh:minCount 1 ;
-  				sh:property [
-  				a sh:PropertyShape ;
-  				sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/dataType> ;
-  				sh:minCount 1 ;
-  				] ;
-  			] ;
-  		];
-  	]
-  )
-.
+# AASd-052a
+aas:ConceptDescriptionReferencedFromPropertyAllowedCategories a sh:NodeShape ;
+  sh:targetClass aas:Property ;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "If the semanticId of a Property references a ConceptDescription then the ConceptDescription/category shall be one of following values: VALUE, PROPERTY." ;
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?conceptDescription 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/Property> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "VALUE" && ?category != "PROPERTY")
+		}
+        """ ;
+] .
 
-# AASd-071
-aas:ConceptDataSpecificationIEC61360Reference a sh:NodeShape ;
-  sh:targetClass aas:ConceptDescription ;
-  rdfs:subClassOf aas:HasDataSpecificationShape ;
-  rdfs:subClassOf aas:IdentifiableShape ;
-  sh:message "(ConceptDataSpecificationIEC61360Reference) : AASd-071 - For a ConceptDescription with category REFERENCE using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/dataType is STRING by default." ^^xsd:string ;
-  sh:or(
-	sh:not[
-		sh:property [
-			a sh:PropertyShape ;
-			sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
-			sh:datatype xsd:string ;
-			sh:maxCount 1 ;
-			sh:minCount 0 ;
-			sh:pattern "^REFERENCE";
-		];
-	]
-  	[
-  		sh:property [
-  		a sh:PropertyShape ;
-  		sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
-  		sh:class aas:EmbeddedDataSpecification ;
-  		sh:minCount 1 ;
-  		sh:property [
-  			a sh:PropertyShape ;
-  			sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
-  			sh:class aas:DataSpecificationContent ;
-  			sh:minCount 1 ;
-  				sh:property [
-					a sh:PropertyShape ;
-					sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/dataType> ;
-					sh:minCount 1 ;
-					sh:in (iecType:STRING);
-					#sh: iec61360:String;
-  				] ;
-  			] ;
-  		];
-  	]
-  )
-.
+# AASd-053
+aas:ConceptDescriptionReferencedFromRangeAllowedCategories a sh:NodeShape ;
+  sh:targetClass aas:Range ;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "If the semanticId of a Range submodel element references a ConceptDescription then the ConceptDescription/category shall be one of following values: PROPERTY." ;
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?conceptDescription 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/Range> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "PROPERTY")
+		}
+        """ ;
+] .
+
+# AASd-054
+aas:ConceptDescriptionReferencedFromReferenceElementAllowedCategories a sh:NodeShape ;
+  sh:targetClass aas:ReferenceElement ;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "If the semanticId of a ReferenceElement submodel element references a ConceptDescription then the ConceptDescription/category shall be one of following values: REFERENCE." ;
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?conceptDescription 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/ReferenceElement> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "REFERENCE")
+		}
+        """ ;
+] .
+
+# AASd-055-RelationshipElement
+aas:ConceptDescriptionReferencedFromRelationshipElementAllowedCategories a sh:NodeShape ;
+  sh:targetClass aas:RelationshipElement ;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "If the semanticId of a RelationshipElement or an AnnotatedRelationshipElement submodel element references a ConceptDescription then the ConceptDescription/category shall be one of following values: RELATIONSHIP." ;
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?conceptDescription 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/RelationshipElement> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "RELATIONSHIP")
+		}
+        """ ;
+] .
+
+# AASd-055-AnnotatedRelationshipElement
+aas:ConceptDescriptionReferencedFromAnnotatedRelationshipElementAllowedCategories a sh:NodeShape ;
+  sh:targetClass aas:AnnotatedRelationshipElement ;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "If the semanticId of a RelationshipElement or an AnnotatedRelationshipElement submodel element references a ConceptDescription then the ConceptDescription/category shall be one of following values: RELATIONSHIP." ;
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?conceptDescription 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/AnnotatedRelationshipElement> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "RELATIONSHIP")
+		}
+        """ ;
+] .
+
+# AASd-056
+aas:ConceptDescriptionReferencedFromEntityAllowedCategories a sh:NodeShape ;
+  sh:targetClass aas:Entity ;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "If the semanticId of a Entity submodel element references a ConceptDescription then the ConceptDescription/category shall be one of following values: ENTITY." ;
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?conceptDescription 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/Entity> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "ENTITY")
+		}
+        """ ;
+] .
+
+# AASd-057-File
+aas:ConceptDescriptionReferencedFromFileAllowedCategories a sh:NodeShape ;
+  sh:targetClass aas:File ;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "The semanticId of a File or Blob submodel element shall only reference a ConceptDescription with the category DOCUMENT." ;
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?conceptDescription 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/File> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "DOCUMENT")
+		}
+        """ ;
+] .
+
+# AASd-057-Blob
+aas:ConceptDescriptionReferencedFromFileAllowedCategories a sh:NodeShape ;
+  sh:targetClass aas:Blob ;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "The semanticId of a File or Blob submodel element shall only reference a ConceptDescription with the category DOCUMENT." ;
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?conceptDescription 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/Blob> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "DOCUMENT")
+		}
+        """ ;
+] .
+
+# AASd-058
+aas:ConceptDescriptionReferencedFromCapabilityAllowedCategories a sh:NodeShape ;
+  sh:targetClass aas:Capability ;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "If the semanticId of a Capability submodel element references a ConceptDescription then the ConceptDescription/category shall be CAPABILITY." ;
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?conceptDescription 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/Capability> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "CAPABILITY")
+		}
+        """ ;
+] .
+
+
+# AASd-060
+aas:ConceptDescriptionReferencedFromSubmodelElementCollectionAllowedCategories a sh:NodeShape ;
+  sh:targetClass aas:Operation ;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "If the semanticId of a Operation submodel element references a ConceptDescription then the category of the ConceptDescription shall be one of the following values: FUNCTION." ;
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?conceptDescription 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/Operation> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "FUNCTION")
+		}
+        """ ;
+] .
+
+# AASd-061
+aas:ConceptDescriptionReferencedFromEventAllowedCategories a sh:NodeShape ;
+  sh:targetClass aas:Operation ;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "If the semanticId of a Event submodel element references a ConceptDescription then the category of the ConceptDescription shall be one of the following: EVENT." ;
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?conceptDescription 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/Event> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "EVENT")
+		}
+        """ ;
+] .
+
+
+# AASd-063
+aas:ConceptDescriptionReferencedFromQualifierAllowedCategories a sh:NodeShape ;
+  sh:targetClass aas:Qualifier ;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "If the semanticId of a Qualifier references a ConceptDescription then the ConceptDescription/category shall be one of following values: QUALIFIER." ;
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?conceptDescription 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/Qualifier> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "QUALIFIER")
+		}
+        """ ;
+] .
+
+# AASd-064
+aas:ConceptDescriptionReferencedFromViewAllowedCategories a sh:NodeShape ;
+  sh:targetClass aas:View ;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "If the semanticId of a View references a ConceptDescription then the category of the ConceptDescription shall be VIEW." ;
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?conceptDescription 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/View> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "VIEW")
+		}
+        """ ;
+] .
+
+# AASd-069
+aas:ConceptDescriptionReferencedFromRangeCorrectLevelType a sh:NodeShape ;
+  sh:targetClass aas:Range ;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "If the semanticId of a Range references a ConceptDescription then DataSpecificationIEC61360/levelType shall be identical to the set {Min, Max}." ;
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?conceptDescription 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/Range> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecification .
+			?embeddedDataSpecification <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecificationContent .
+			?dataSpecificationContent <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/levelType> ?levelType .
+			FILTER(?levelType NOT IN (<https://admin-shell.io/aas/3/0/RC01/LevelType/MAX>, <https://admin-shell.io/aas/3/0/RC01/LevelType/MIN>))
+		}
+        """ ;
+] .
+
 # AASd-072
-aas:ConceptDataSpecificationIEC61360Document a sh:NodeShape ;
-  sh:targetClass aas:ConceptDescription ;
-  rdfs:subClassOf aas:HasDataSpecificationShape ;
-  rdfs:subClassOf aas:IdentifiableShape ;
-  sh:message "(ConceptDataSpecificationIEC61360Document) : AASd-072 - For a ConceptDescription with category DOCUMENT using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/dataType shall be one of the following values: STRING or URL." ^^xsd:string ;
-  sh:or(
-	  	sh:not[
-	  		sh:property [
-				a sh:PropertyShape ;
-				sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
-				sh:datatype xsd:string ;
-				sh:maxCount 1 ;
-				sh:minCount 0 ;
-				sh:pattern "^DOCUMENT";
-	  		];
-	  	]
-  	[
-  		sh:property [
-  		a sh:PropertyShape ;
-  		sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
-  		sh:class aas:EmbeddedDataSpecification ;
-  		sh:minCount 1 ;
-  		sh:property [
-  			a sh:PropertyShape ;
-  			sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
-  			sh:class aas:DataSpecificationContent ;
-  			sh:minCount 1 ;
-  				sh:property [
-					a sh:PropertyShape ;
-					sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/dataType> ;
-					sh:maxCount 1 ;
-					sh:pattern "STRING|URL";
-  				] ;
-  			] ;
-  		];
-  	]
-  )
-.
-
-# AASd-074 AASd-076
-aas:ConceptDataSpecificationIEC61360Value2 a sh:NodeShape ;
-  sh:targetClass aas:ConceptDescription ;
-  rdfs:subClassOf aas:HasDataSpecificationShape ;
-  rdfs:subClassOf aas:IdentifiableShape ;
-  sh:message "(ConceptDataSpecificationIEC61360Value2) : AASd-074 AASd-076 - For all ConceptDescriptions using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) at least a preferred name in English shall be defined." ^^xsd:string ;
+aas:ConceptDescriptionWithCategoryDocumentAndIEC61360CorrectDataType a sh:NodeShape ;
+  sh:targetClass aas:ConceptDescription;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "For a ConceptDescription with category DOCUMENT using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/dataType shall be one of the following values: STRING or URL." ;
   
+  sh:select """
+  	SELECT ?conceptDescription 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> "DOCUMENT" .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecification .
+			?embeddedDataSpecification <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecificationContent .
+			?dataSpecificationContent <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/dataType> ?dataType .
+			FILTER(?dataType != <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/URL> && ?dataType != <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/STRING>)
+		}
+        """ ;
+] .
+
+# AASd-074
+aas:ConceptDescriptionDefinitionInEnglishIfNotValueCategory a sh:NodeShape ;
+  sh:targetClass aas:ConceptDescription ;
+  sh:message "For all ConceptDescriptions except for ConceptDescriptions of category VALUE using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/definition is mandatory and shall be defined at least in English." ^^xsd:string ;
 	sh:or(
 	[
-		sh:and(
-				[
+		sh:or(
+			[
+			sh:property [
+			a sh:PropertyShape ;
+			sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
+			sh:class aas:EmbeddedDataSpecification ;
+			sh:minCount 1 ;
+			sh:property [
+				a sh:PropertyShape ;
+				sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
+				sh:class aas:DataSpecificationContent ;
+				sh:minCount 1 ;
 					sh:property [
 						a sh:PropertyShape ;
-						sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
-						sh:datatype xsd:string ;
-						sh:maxCount 1 ;
-						sh:minCount 0 ;
-					];
-				]
+						sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/definition> ;
+						sh:minCount 1 ;
+						sh:languageIn ("en");
+					] ;
+				] ;
+			];
+			]
 			[
 				sh:property [
 				a sh:PropertyShape ;
 				sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
 				sh:class aas:EmbeddedDataSpecification ;
-				sh:minCount 1 ;
-				sh:property [
-					a sh:PropertyShape ;
-					sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
-					sh:class aas:DataSpecificationContent ;
-					sh:minCount 1 ;
-						sh:property [
-							a sh:PropertyShape ;
-							sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/definition> ;
-							sh:minCount 1 ;
-							sh:languageIn ("en");
-							sh:pattern "(.*?)"
-						] ;
-					] ;
-				];
+				sh:maxCount 0 ;
+				]
 			]
 		)
 	]
@@ -336,51 +534,159 @@ aas:ConceptDataSpecificationIEC61360Value2 a sh:NodeShape ;
 			a sh:PropertyShape ;
 			sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
 			sh:datatype xsd:string ;
-			sh:maxCount 0 ;
-			sh:minCount 0 ;
-			#sh:pattern "^VALUE";
+			sh:maxCount 1 ;
+			sh:minCount 1 ;
+			sh:pattern "^VALUE";
 		];
 	]
 )
 .
 
-#AASd-071
-aas:ConceptDataSpecificationIEC61360ReferenceDataType a sh:NodeShape ;
-  sh:targetClass aas:ConceptDescription ;
-  rdfs:subClassOf aas:HasDataSpecificationShape ;
-  rdfs:subClassOf aas:IdentifiableShape ;
-  sh:message "(ConceptDataSpecificationIEC61360ReferenceDataType) : For a ConceptDescription with category REFERENCE using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/dataType is STRING by default." ^^xsd:string ;
-  sh:or(
-  	sh:not[
-  		sh:property [
-  		a sh:PropertyShape ;
-  		sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
-  		sh:datatype xsd:string ;
-  		sh:maxCount 1 ;
-  		sh:minCount 1 ;
-  		sh:pattern "^REFERENCE";
 
-  		];
-  	]
+# AASd-076
+aas:ConceptDescriptionPreferredNameInEnglish a sh:NodeShape ;
+  sh:targetClass aas:ConceptDescription ;
+  sh:message "For all ConceptDescriptions using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) at least a preferred name in English shall be defined." ^^xsd:string ;		
+  sh:or(
   	[
-  		sh:property [
-  		a sh:PropertyShape ;
-  		sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
-  		sh:class aas:EmbeddedDataSpecification ;
-  		sh:minCount 1 ;
-  		sh:property [
-  			a sh:PropertyShape ;
-  			sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
-  			sh:class aas:DataSpecificationContent ;
-  			sh:minCount 1 ;
-  				sh:property [
-					a sh:PropertyShape ;
-					sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/dataType> ;
-					sh:minCount 1 ;
-					sh:pattern "STRING$";
-  				] ;
-  			] ;
-  		];
-  	]
-  )
-.
+	  	sh:property [
+			a sh:PropertyShape ;
+			sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
+			sh:class aas:EmbeddedDataSpecification ;
+			sh:minCount 1 ;
+			sh:property [
+				a sh:PropertyShape ;
+				sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
+				sh:class aas:DataSpecificationContent ;
+				sh:minCount 1 ;
+					sh:property [
+						a sh:PropertyShape ;
+						sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/preferredName> ;
+						sh:minCount 1 ;
+						sh:languageIn ("en");
+					] ;
+				] ;
+		] 
+	]
+	[
+		sh:property [
+			a sh:PropertyShape ;
+			sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
+			sh:class aas:EmbeddedDataSpecification ;
+			sh:maxCount 0 ;
+		];
+	]
+) .
+	
+
+# AASd-080
+aas:KeyWithGlobalReferenceTypeCorrectIdType a sh:NodeShape ;
+  sh:targetClass aas:Key;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "In case Key/type == GlobalReference idType shall not be any LocalKeyType (IdShort, FragmentId)." ;
+  
+  sh:select """
+  	SELECT ?element 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/Key> .
+			?element <https://admin-shell.io/aas/3/0/RC01/Key/type> ?keyType .
+			FILTER(?keyType = <https://admin-shell.io/aas/3/0/RC01/KeyElements/GLOBAL_REFERENCE>)
+			?element <https://admin-shell.io/aas/3/0/RC01/Key/idType> ?keyIdType .
+			FILTER(?keyIdType = <https://admin-shell.io/aas/3/0/RC01/KeyType/ID_SHORT> || ?keyIdType =  <https://admin-shell.io/aas/3/0/RC01/KeyType/FRAGMENT_ID>)
+		}
+        """ ;
+] .
+
+# AASd-081
+aas:KeyWithAssetAdministrationShellTypeCorrectIdType a sh:NodeShape ;
+  sh:targetClass aas:Key;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "In case Key/type==AssetAdministrationShell Key/idType shall not be any LocalKeyType (IdShort, FragmentId)." ;
+  
+  sh:select """
+  	SELECT ?element 
+  		WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/Key> .
+			?element <https://admin-shell.io/aas/3/0/RC01/Key/type> ?keyType .
+			FILTER(?keyType = <https://admin-shell.io/aas/3/0/RC01/KeyElements/ASSET_ADMINISTRATION_SHELL>)
+			?element <https://admin-shell.io/aas/3/0/RC01/Key/idType> ?keyIdType .
+			FILTER(?keyIdType = <https://admin-shell.io/aas/3/0/RC01/KeyType/ID_SHORT> || ?keyIdType =  <https://admin-shell.io/aas/3/0/RC01/KeyType/FRAGMENT_ID>)
+		}
+        """ ;
+] .
+
+# AASd-090
+aas:DataElementExcludingFileAndBlobCorrectCategory a sh:NodeShape ;
+  sh:targetClass aas:DataElement;
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "For data elements DataElement/category shall be one of the following values: CONSTANT, PARAMETER or VARIABLE. Exception: File and Blob data elements." ;
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?element 
+  		WHERE {
+  		 	?subclass <http://www.w3.org/2000/01/rdf-schema#subClassOf>+  <https://admin-shell.io/aas/3/0/RC01/DataElement> .
+			FILTER(?subclass != <https://admin-shell.io/aas/3/0/RC01/File> && ?subclass != <https://admin-shell.io/aas/3/0/RC01/Blob>)
+			?element a ?subclass .
+			?element <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER(?category != "CONSTANT" && ?category != "PARAMETER" && ?category != "VARIABLE")
+		}
+        """ ;
+] .
+
+
+# AASd-092
+# Also covers part of AASd-059. Full coverage is achieved in combination with AASd-093
+aas:ConceptDescriptionReferencedFromSubmodelElementCollectionNoDuplicates  a sh:NodeShape ;
+  sh:targetClass aas:SubmodelElementCollection;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "If the semanticId of a SubmodelElementCollection with SubmodelElementCollection/allowDuplicates == false references a ConceptDescription then the ConceptDescription/category shall be ENTITY." ;
+    sh:prefixes rdf: ;
+    sh:select """
+      SELECT ?element
+         WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/SubmodelElementCollection> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "ENTITY")
+			?element <https://admin-shell.io/aas/3/0/RC01/SubmodelElementCollection/allowDuplicates> ?duplicates .
+			FILTER(?duplicates != "false")			
+      }
+          """ ;
+] .
+
+# AASd-093
+# Also covers part of AASd-059. Full coverage is achieved in combination with AASd-092
+aas:ConceptDescriptionReferencedFromSubmodelElementCollectionAllowedDuplicates  a sh:NodeShape ;
+  sh:targetClass aas:SubmodelElementCollection;
+  sh:sparql [
+    a sh:SPARQLConstraint ;
+    sh:message "If the semanticId of a SubmodelElementCollection with SubmodelElementCollection/allowDuplicates == true references a ConceptDescription then the ConceptDescription/category shall be COLLECTION." ;
+    sh:prefixes rdf: ;
+    sh:select """
+      SELECT ?element
+         WHERE {
+			?element a <https://admin-shell.io/aas/3/0/RC01/SubmodelElementCollection> .
+			?element <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticIdReference .
+			?semanticIdReference <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdKey .
+			?semanticIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?semanticIdKeyValue .
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Identifiable/identification> ?conceptDescriptionId .
+			?conceptDescriptionId <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?conceptDescriptionIdValue .
+			FILTER (?conceptDescriptionIdValue = ?semanticIdKeyValue)
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "COLLECTION")
+			?element <https://admin-shell.io/aas/3/0/RC01/SubmodelElementCollection/allowDuplicates> ?duplicates .
+			FILTER(?duplicates != "true")			
+      }
+          """ ;
+] .
