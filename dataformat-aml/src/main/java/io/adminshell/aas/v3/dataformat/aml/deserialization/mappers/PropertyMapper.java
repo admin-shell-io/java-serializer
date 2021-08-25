@@ -19,28 +19,23 @@ import io.adminshell.aas.v3.dataformat.aml.deserialization.AmlParser;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.DefaultMapper;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.Mapper;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.MappingContext;
-import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
-
 import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
-import io.adminshell.aas.v3.model.*;
-import io.adminshell.aas.v3.model.impl.DefaultQualifier;
+import io.adminshell.aas.v3.model.Property;
+import io.adminshell.aas.v3.model.Referable;
 
 import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 
 /**
  *
  */
-public class QualifierMapper extends DefaultMapper<Qualifier> {
-
-    protected static PropertyDescriptor PROPERTY_VALUE_TYPE = AasUtils.getProperty(Property.class, "valueType");
+public class PropertyMapper extends DefaultMapper<Property> {
 
     public static final String VALUE_ATTRIBUTE_NAME = "value";
 
-    public QualifierMapper() {
+    protected static PropertyDescriptor PROPERTY_VALUE_TYPE = AasUtils.getProperty(Property.class, "valueType");
+
+    public PropertyMapper() {
         super(PROPERTY_VALUE_TYPE.getName());
     }
 
@@ -49,19 +44,13 @@ public class QualifierMapper extends DefaultMapper<Qualifier> {
         if (parent == null || context == null) {
             return;
         }
-        setValueDataTypeFromAttributeDataType(parser,parent,VALUE_ATTRIBUTE_NAME,Qualifier.class);
+
+        setValueDataTypeFromAttributeDataType(parser,parent,VALUE_ATTRIBUTE_NAME,Property.class);
+
+        Mapper<?> mapper = context.getMappingProvider().getMapper(Referable.class);
+        mapper.map(parser,context);
+
         super.mapProperties(parent, parser, context);
     }
 
-
-    @Override
-    protected Qualifier fromAttribute(AmlParser parser, AttributeType attribute, MappingContext context) throws MappingException {
-        if (parser == null || attribute == null || context == null) {
-            return null;
-        }
-        Qualifier result = (Qualifier) newInstance(DefaultQualifier.class, context);
-        mapProperties(result, parser, context);
-        return result;
-
-    }
 }

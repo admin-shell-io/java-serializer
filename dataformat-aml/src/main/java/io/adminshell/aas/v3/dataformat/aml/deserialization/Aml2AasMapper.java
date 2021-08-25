@@ -72,6 +72,7 @@ public class Aml2AasMapper {
         mappingProvider.register(new FileMapper());
         mappingProvider.register(new RangeMapper());
         mappingProvider.register(new ViewMapper());
+        mappingProvider.register(new PropertyMapper());
         AbstractClassNamingStrategy classNamingStrategy = new NumberingClassNamingStrategy();
 
         PropertyNamingStrategy propertyNamingStrategy = new PropertyNamingStrategy();

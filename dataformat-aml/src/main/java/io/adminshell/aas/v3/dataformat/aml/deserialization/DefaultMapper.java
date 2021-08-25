@@ -27,6 +27,7 @@ import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -344,6 +345,24 @@ public class DefaultMapper<T> implements Mapper<T> {
         }
         String attributeDataType = attributeType.getAttributeDataType();
         return attributeDataType.substring(attributeDataType.lastIndexOf(":") + 1);
+    }
+
+    protected void setValueDataTypeFromAttributeDataType(AmlParser parser, Object parent, String attributeNameWithAttributeDataType, Class aasClazz) throws MappingException {
+        if(parser == null || parent == null)return;
+
+        AttributeType attributeType = findAttributes(parser.getCurrent(),
+                x -> x.getName().equalsIgnoreCase(attributeNameWithAttributeDataType)).stream().findFirst().orElse(null);
+        if(attributeType != null){
+            try {
+                String dataType = getDataTypeFromAttribute(attributeType);
+                List<Method> methods = List.of(aasClazz.getMethods());
+                Method method = methods.stream().filter(x->x.getName().contains("setValueType")).findFirst().orElse(null);
+                if(method == null)return;
+                method.invoke(parent,dataType);
+            } catch (InvocationTargetException | IllegalAccessException ex) {
+                throw new MappingException(String.format("error setting value type for property with ID=%s and Name=%s", parser.getCurrent().getID(), parser.getCurrent().getName()), ex);
+            }
+        }
     }
 
     protected boolean skipProperty(PropertyDescriptor property) {

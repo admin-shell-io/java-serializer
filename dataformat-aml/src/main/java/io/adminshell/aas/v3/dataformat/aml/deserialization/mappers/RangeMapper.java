@@ -51,17 +51,16 @@ public class RangeMapper extends DefaultMapper<Range> {
         AttributeType attributeTypeMax = findAttributes(parser.getCurrent(),
                 x -> x.getName().equalsIgnoreCase(MAX_ATTRIBUTE_NAME)).stream().findFirst().orElse(null);
 
-        if (attributeTypeMax == null || attributeTypeMin == null)
-            throw new MappingException(String.format("no min/max attributes are found in range %s %s", parser.getCurrent().getID(), parser.getCurrent().getName()));
+        if (attributeTypeMax != null || attributeTypeMin != null){
+            String dataTypeMin = getDataTypeFromAttribute(attributeTypeMin);
+            String dataTypeMax = getDataTypeFromAttribute(attributeTypeMax);
 
-        String dataTypeMin = getDataTypeFromAttribute(attributeTypeMin);
-        String dataTypeMax = getDataTypeFromAttribute(attributeTypeMax);
+            //TODO: is that a constraint?
+            if (!dataTypeMax.equalsIgnoreCase(dataTypeMin))
+                throw new MappingException(String.format("min/max attributes in range %s %s has different attribute datatypes", parser.getCurrent().getID(), parser.getCurrent().getName()));
 
-        //TODO: is that a constraint?
-        if (!dataTypeMax.equalsIgnoreCase(dataTypeMin))
-            throw new MappingException(String.format("min/max attributes in range %s %s has different attribute datatypes", parser.getCurrent().getID(), parser.getCurrent().getName()));
-
-        ((Range) parent).setValueType(dataTypeMax);
+            ((Range) parent).setValueType(dataTypeMax);
+        }
 
         super.mapProperties(parent, parser, context);
     }
