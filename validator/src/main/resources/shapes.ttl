@@ -1422,9 +1422,7 @@ aas:ReferableShape  a sh:NodeShape ;
       sh:datatype xsd:string ;
       sh:maxCount 1 ;
       sh:minCount 1 ;
-      sh:pattern ".+" ;
       sh:message "(Referable.idShort): Exactly one <id>idShort</id> is required."^^xsd:string ;
-      sh:pattern "^[a-zA-Z]\\w*$"^^xsd:string ;
     ] ;
 .
 
