@@ -18,11 +18,8 @@ package io.adminshell.aas.v3.dataformat.aml.deserialization.mappers;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.AmlParser;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.DefaultMapper;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.MappingContext;
-import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXObject;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
-import io.adminshell.aas.v3.dataformat.core.DataSpecificationInfo;
-import io.adminshell.aas.v3.dataformat.core.DataSpecificationManager;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.model.*;
 import io.adminshell.aas.v3.model.impl.DefaultDataSpecificationIEC61360;
@@ -34,7 +31,6 @@ import java.util.Collection;
 import java.util.List;
 
 public class EmbeddedDataSpecificationCollectionMapper extends DefaultMapper<Collection<EmbeddedDataSpecification>> {
-
 
     @Override
     protected Collection mapCollectionValueProperty(AmlParser parser, MappingContext context) throws MappingException {
@@ -55,19 +51,11 @@ public class EmbeddedDataSpecificationCollectionMapper extends DefaultMapper<Col
                 embeddedDataSpecification.setDataSpecificationContent(dataspecification);
                 result.add(embeddedDataSpecification);
 
-            } catch (NoSuchMethodException e) {
-                e.printStackTrace();
-            } catch (InstantiationException e) {
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                e.printStackTrace();
-            } catch (InvocationTargetException e) {
-                e.printStackTrace();
+            } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | InvocationTargetException e) {
+                throw new MappingException("error mapping Collection<EmbeddedDataSpecification>");
             }
         }
-
         parser.setCurrent(current);
-
         return result;
     }
 

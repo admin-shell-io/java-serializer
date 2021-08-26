@@ -38,6 +38,8 @@ import java.util.Set;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import io.adminshell.aas.v3.model.Reference;
 import org.apache.xerces.dom.ElementNSImpl;
 
 /**
@@ -197,9 +199,13 @@ public class DefaultMapper<T> implements Mapper<T> {
     }
 
     protected boolean isAasType(Class<?> type) {
-        return Stream.concat(ReflectionHelper.INTERFACES.stream(),
-                ReflectionHelper.INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION.stream())
+        boolean is_interface;
+        boolean is_enum;
+        is_interface = Stream.concat(ReflectionHelper.INTERFACES.stream(),
+                        ReflectionHelper.INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION.stream())
                 .anyMatch(x -> x.equals(type));
+        is_enum = ReflectionHelper.ENUMS.stream().anyMatch(x -> x.equals(type));
+        return is_interface || is_enum;
     }
 
     /**
@@ -283,8 +289,7 @@ public class DefaultMapper<T> implements Mapper<T> {
         if (parser == null || context == null || context.getProperty() == null) {
             return null;
         }
-        // There is no default behavior for de-/serializing collections as attributes.
-        // If this occurs it is a special case and must be handled explicitely with custom mapper.
+
         Class<?> contentType
                 = context.getType() != null
                 ? AasUtils.getCollectionContentType(context.getType())
@@ -296,8 +301,27 @@ public class DefaultMapper<T> implements Mapper<T> {
                 result.add(propertyFromInternalElement(parser, internalElement, context));
             }
             return result;
+        } else {
+            AttributeType attribute = findAttribute(parser.getCurrent(), context.getProperty(), context, parser.getRefSemanticPrefix());
+            if(attribute==null)return null;
+            List<AttributeType> attributeTypes = attribute.getAttribute();
+            Collection result = new ArrayList<>();
+            CAEXObject current = parser.getCurrent();
+            if(!attributeTypes.isEmpty()){
+                for(AttributeType attributeType : attributeTypes){
+                    parser.setCurrent(attributeType);
+                    Object object = context.withoutProperty().map(contentType,parser);
+                    result.add(object);
+                }
+            } else {
+                parser.setCurrent(attribute);
+                Object object = context.withoutProperty().map(contentType,parser);
+                result.add(object);
+            }
+            parser.setCurrent(current);
+            return result.isEmpty() ? null : result;
         }
-        return null;
+
     }
 
     protected Object mapSingleValueProperty(AmlParser parser, MappingContext context) throws MappingException {

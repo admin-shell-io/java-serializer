@@ -20,27 +20,17 @@ import io.adminshell.aas.v3.dataformat.aml.deserialization.DefaultMapper;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXObject;
-import io.adminshell.aas.v3.dataformat.aml.model.caex.InterfaceClassType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
 import io.adminshell.aas.v3.dataformat.core.DataSpecificationManager;
-import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
-import io.adminshell.aas.v3.model.DataSpecificationContent;
 import io.adminshell.aas.v3.model.DataSpecificationIEC61360;
 import io.adminshell.aas.v3.model.DataTypeIEC61360;
-import io.adminshell.aas.v3.model.File;
 import io.adminshell.aas.v3.model.impl.DefaultDataSpecificationIEC61360;
 
-import java.beans.IntrospectionException;
-import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Type;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /**
  *
@@ -63,20 +53,20 @@ public class DataSpecificationIEC61360Mapper extends DefaultMapper<DataSpecifica
 
         CAEXObject current = parser.getCurrent();
 
-        List<AttributeType> attributeTypes = findAttributes(parser.getCurrent(), x->true);
+        List<AttributeType> attributeTypes = findAttributes(parser.getCurrent(), x -> true);
         List<PropertyDescriptor> propertyDescriptors = AasUtils.getAasProperties(DefaultDataSpecificationIEC61360.class);
 
         parser.setRefSemanticPrefix(DataSpecificationManager.DATA_SPECIFICATION_IEC61360_PREFIX);
 
-        for(AttributeType attributeType : attributeTypes){
+        for (AttributeType attributeType : attributeTypes) {
             PropertyDescriptor propertyDescriptor = propertyDescriptors.stream().filter(x -> x.getName().contains(attributeType.getName())).findFirst().orElse(null);
-            if(propertyDescriptor != null){
+            if (propertyDescriptor != null) {
                 try {
                     Object o;
                     Class type = propertyDescriptor.getReadMethod().getReturnType();
-                    if(DataTypeIEC61360.class.isAssignableFrom(type) ||
-                            List.class.isAssignableFrom(type)){
-                        o = context.with(propertyDescriptor).map(propertyDescriptor.getReadMethod().getGenericReturnType(),parser);
+                    if (DataTypeIEC61360.class.isAssignableFrom(type) ||
+                            List.class.isAssignableFrom(type)) {
+                        o = context.with(propertyDescriptor).map(propertyDescriptor.getReadMethod().getGenericReturnType(), parser);
                     } else {
                         parser.setCurrent(attributeType);
                         o = map(parser, context);
@@ -98,21 +88,10 @@ public class DataSpecificationIEC61360Mapper extends DefaultMapper<DataSpecifica
         List<PropertyDescriptor> propertyDescriptors = AasUtils.getAasProperties(DefaultDataSpecificationIEC61360.class);
         PropertyDescriptor propertyDescriptor = propertyDescriptors.stream().filter(x -> x.getName().contains(attribute.getName())).findFirst().orElse(null);
 
-        if(propertyDescriptor != null){
+        if (propertyDescriptor != null) {
             return propertyDescriptor.getReadMethod().getReturnType();
         }
         return null;
-    }
-
-    @Override
-    protected boolean isAasType(Class<?> type) {
-        boolean is_interface=false;
-        boolean is_enum=false;
-        is_interface = Stream.concat(ReflectionHelper.INTERFACES.stream(),
-                        ReflectionHelper.INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION.stream())
-                .anyMatch(x -> x.equals(type));
-        is_enum = ReflectionHelper.ENUMS.stream().anyMatch(x->x.equals(type));
-        return is_interface || is_enum;
     }
 
     @Override
@@ -122,7 +101,7 @@ public class DataSpecificationIEC61360Mapper extends DefaultMapper<DataSpecifica
         }
         Class<?> type = typeFromAttribute(attribute);
         if (isAasType(type)) {
-            return context.getMappingProvider().getMapper(type).map(parser,context);
+            return context.getMappingProvider().getMapper(type).map(parser, context);
         }
         return attribute.getValue();
     }
