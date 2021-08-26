@@ -239,7 +239,7 @@ public class DefaultMapper<T> implements Mapper<T> {
         // alternative way to discover property but more expensive as all properties are considered and not only those defined on class
         // Optional<PropertyDescriptor> property = AasUtils.getAasProperties(type.get()).stream().filter(x -> x.getName().equals(type)).findFirst();        
         try {
-            //TODO: equals instead of contains. Use old name of PropertyNamingStrategy
+            //TODO: use equals instead of contains. Use old name of PropertyNamingStrategy
             Optional<PropertyDescriptor> property = Stream.of(Introspector.getBeanInfo(type).getPropertyDescriptors())
                     .filter(x -> x.getName().contains(attributePathElements[1])).findFirst();
             if (property.isPresent()) {
@@ -369,17 +369,6 @@ public class DefaultMapper<T> implements Mapper<T> {
         return ignoredProperties.contains(property.getName());
     }
 
-    protected AttributeType findAttribute(CAEXObject parent, PropertyDescriptor property, MappingContext context) throws MappingException {
-        List<AttributeType> attributes = findAttributes(parent, property, context);
-        if (attributes.isEmpty()) {
-            return null;
-        }
-        if (attributes.size() == 1) {
-            return attributes.get(0);
-        }
-        throw new MappingException(String.format("found multiple Attribute for property %s in element with name: %s", property.getName(), parent.getName()));
-    }
-
     protected String findInternalLinkTarget(InternalElementType internalElement, PropertyDescriptor property) throws MappingException {
         Optional<SystemUnitClassType.InternalLink> internalLink = internalElement.getInternalLink().stream()
                 .filter(x -> x.getName().equals(property.getName()))
@@ -390,13 +379,33 @@ public class DefaultMapper<T> implements Mapper<T> {
         return null;
     }
 
+    protected AttributeType findAttribute(CAEXObject parent, PropertyDescriptor property, MappingContext context) throws MappingException {
+       return findAttribute(parent, property,context,AmlParser.DEFAULT_REFSEMANTIC_PREFIX);
+    }
+
+    protected AttributeType findAttribute(CAEXObject parent, PropertyDescriptor property, MappingContext context, String refSemanticPrefix) throws MappingException {
+        List<AttributeType> attributes = findAttributes(parent, property, context, refSemanticPrefix);
+        if (attributes.isEmpty()) {
+            return null;
+        }
+        if (attributes.size() == 1) {
+            return attributes.get(0);
+        }
+        throw new MappingException(String.format("found multiple Attribute for property %s in element with name: %s", property.getName(), parent.getName()));
+    }
+
+
+
     // TODO not working because of missing property renaming strategy
     protected List<AttributeType> findAttributes(CAEXObject parent, PropertyDescriptor property, MappingContext context) {
+        return findAttributes(parent, property,context, AmlParser.DEFAULT_REFSEMANTIC_PREFIX);
+    }
+
+    protected List<AttributeType> findAttributes(CAEXObject parent, PropertyDescriptor property, MappingContext context, String refSemanticPrefix) {
         if (property == null) {
             return List.of();
         }
-
-        String refSemantic = "AAS:" + property.getReadMethod().getDeclaringClass().getSimpleName() + "/"
+        String refSemantic = refSemanticPrefix + ":" + property.getReadMethod().getDeclaringClass().getSimpleName() + "/"
                 + context.getPropertyNamingStrategy().getNameForRefSemantic(property.getReadMethod().getDeclaringClass(), null, property.getName());
         return findAttributes(parent, x -> x.getRefSemantic().stream()
                 .anyMatch(y -> y.getCorrespondingAttributePath().equals(refSemantic)));

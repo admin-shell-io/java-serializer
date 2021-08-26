@@ -23,6 +23,7 @@ import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
+import io.adminshell.aas.v3.model.ConceptDescription;
 import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShellEnvironment;
 import java.util.List;
 import java.util.function.Predicate;
@@ -48,6 +49,20 @@ public class AssetAdministrationShellEnvironmentMapper implements Mapper<AssetAd
                 Logger.getLogger(AssetAdministrationShellEnvironmentMapper.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
+
+        List<InternalElementType> conceptDescriptions = parser.getContent().getInstanceHierarchy().stream()
+                .flatMap(x -> x.getInternalElement().stream().filter(filterByRole(ConceptDescription.class)))
+                .collect(Collectors.toList());
+        conceptDescriptions.forEach(x-> {
+            parser.setCurrent(x);
+            try {
+                ConceptDescription conceptDescription = context.with(result).map(ConceptDescription.class, parser);
+                result.getConceptDescriptions().add(conceptDescription);
+            } catch (MappingException ex){
+                Logger.getLogger(AssetAdministrationShellEnvironmentMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        });
+
         // TODO parse SystemUnitClasses
         // add template AAS and Submodels (only if not already present)
         return result;

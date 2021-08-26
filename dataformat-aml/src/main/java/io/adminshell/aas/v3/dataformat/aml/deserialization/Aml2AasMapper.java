@@ -73,6 +73,10 @@ public class Aml2AasMapper {
         mappingProvider.register(new RangeMapper());
         mappingProvider.register(new ViewMapper());
         mappingProvider.register(new PropertyMapper());
+        mappingProvider.register(new ConceptDescriptionMapper());
+        mappingProvider.register(new EmbeddedDataSpecificationCollectionMapper());
+        mappingProvider.register(new DataSpecificationIEC61360Mapper());
+        mappingProvider.register(new EnumDataTypeIEC61360Mapper());
         AbstractClassNamingStrategy classNamingStrategy = new NumberingClassNamingStrategy();
 
         PropertyNamingStrategy propertyNamingStrategy = new PropertyNamingStrategy();

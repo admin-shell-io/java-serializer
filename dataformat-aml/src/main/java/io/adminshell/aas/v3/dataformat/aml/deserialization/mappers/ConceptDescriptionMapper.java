@@ -17,28 +17,29 @@ package io.adminshell.aas.v3.dataformat.aml.deserialization.mappers;
 
 import io.adminshell.aas.v3.dataformat.aml.deserialization.AmlParser;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.DefaultMapper;
-import io.adminshell.aas.v3.dataformat.aml.deserialization.Mapper;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
-
+import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXObject;
 import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
-import io.adminshell.aas.v3.model.*;
-import io.adminshell.aas.v3.model.impl.DefaultQualifier;
+import io.adminshell.aas.v3.model.ConceptDescription;
+import io.adminshell.aas.v3.model.Identifier;
+import io.adminshell.aas.v3.model.Property;
+import io.adminshell.aas.v3.model.Reference;
 
 import java.beans.PropertyDescriptor;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
  */
-public class QualifierMapper extends DefaultMapper<Qualifier> {
+public class ConceptDescriptionMapper extends DefaultMapper<ConceptDescription> {
 
-    protected static PropertyDescriptor PROPERTY_VALUE_TYPE = AasUtils.getProperty(Property.class, "valueType");
+    protected static PropertyDescriptor PROPERTY_ISCASEOF = AasUtils.getProperty(ConceptDescription.class, "isCaseOfs");
 
-    public static final String VALUE_ATTRIBUTE_NAME = "value";
-
-    public QualifierMapper() {
-        super(PROPERTY_VALUE_TYPE.getName());
+    public ConceptDescriptionMapper() {
+        super(PROPERTY_ISCASEOF.getName());
     }
 
     @Override
@@ -46,20 +47,22 @@ public class QualifierMapper extends DefaultMapper<Qualifier> {
         if (parent == null || context == null) {
             return;
         }
-        setValueDataTypeFromAttributeDataType(parser,parent,VALUE_ATTRIBUTE_NAME,Qualifier.class);
+
+        CAEXObject temp = parser.getCurrent();
+        List<AttributeType> attributeTypeList = findAttributes(parser.getCurrent(), x->x.getName().equalsIgnoreCase("isCaseOf"));
+        List<Reference> referenceList = new ArrayList<>();
+        if(!attributeTypeList.isEmpty()){
+            //TODO How to handle multiple references in isCaseOf?
+            AttributeType attribute = attributeTypeList.get(0);
+            parser.setCurrent(attribute);
+            Reference reference = context.map(Reference.class, parser);
+            parser.setCurrent(temp);
+            referenceList.add(reference);
+        }
+
+        ((ConceptDescription) parent).setIsCaseOfs(referenceList);
+
         super.mapProperties(parent, parser, context);
     }
 
-
-    @Override
-    protected Qualifier fromAttribute(AmlParser parser, AttributeType attribute, MappingContext context) throws MappingException {
-        if (parser == null || attribute == null || context == null) {
-            return null;
-        }
-        //TODO use Type Factory instead of hardcoded DefaultQualifier.class
-        Qualifier result = (Qualifier) newInstance(DefaultQualifier.class, context);
-        mapProperties(result, parser, context);
-        return result;
-
-    }
 }

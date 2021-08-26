@@ -30,7 +30,7 @@ public class LangStringCollectionMapper extends DefaultMapper<Collection<LangStr
 
     @Override
     protected Collection mapCollectionValueProperty(AmlParser parser, MappingContext context) throws MappingException {
-        AttributeType attribute = findAttribute(parser.getCurrent(), context.getProperty(), context);
+        AttributeType attribute = findAttribute(parser.getCurrent(), context.getProperty(), context, parser.getRefSemanticPrefix());
         List<AttributeType> values = findAttributes(attribute, x -> x.getName().startsWith("aml-lang="));
         List<LangString> result = new ArrayList<>();
         for (AttributeType value : values) {
