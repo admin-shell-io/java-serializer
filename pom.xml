@@ -70,9 +70,11 @@
         <commons-codec.version>1.15</commons-codec.version>
         <commons-io.version>2.6</commons-io.version>
         <commons-compress.version>1.21</commons-compress.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
         <shacl.version>1.3.2</shacl.version>
         <commons-lang3.version>3.8.1</commons-lang3.version>
         <gpg.keyname>0xDFCC34A6</gpg.keyname>
+        <guava.version>30.1.1-jre</guava.version>
     </properties>
     <build>
         <plugins>
