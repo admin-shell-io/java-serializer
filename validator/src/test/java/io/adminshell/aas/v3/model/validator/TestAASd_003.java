@@ -20,6 +20,7 @@ package io.adminshell.aas.v3.model.validator;
 
 import io.adminshell.aas.v3.model.Referable;
 import io.adminshell.aas.v3.model.impl.DefaultSubmodel;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -38,6 +39,7 @@ import static org.junit.Assert.fail;
  */
 public class TestAASd_003 {
 	@Test
+	@Ignore
 	public void idShortMatchCaseInsensitive() throws ValidationException {
 		DefaultSubmodel smA = (DefaultSubmodel) ConstraintTestHelper.createSubmodel(new ArrayList<>());
 		smA.setIdShort("idShort");
@@ -45,7 +47,7 @@ public class TestAASd_003 {
 		Referable smB = (DefaultSubmodel) ConstraintTestHelper.createSubmodel(new ArrayList<>());
 		smB.setIdShort("IDSHORT");
 
-		// assertTrue(smA.equals(smB)); // TODO: should be true but requires adjustments in the Java Model
+		assertTrue(smA.equals(smB)); // TODO: should be true but requires adjustments in the Java Model
 
 	}
 
