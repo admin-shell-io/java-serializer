@@ -76,7 +76,7 @@ aas:RevisionRequiresVersionShape
 .
 
 # AASd-006
-aas:# AASd-006Shape  a sh:NodeShape ;
+aas:AASd-006Shape  a sh:NodeShape ;
   sh:targetClass aas:Qualifier ;
   sh:sparql [
     a sh:SPARQLConstraint ;
