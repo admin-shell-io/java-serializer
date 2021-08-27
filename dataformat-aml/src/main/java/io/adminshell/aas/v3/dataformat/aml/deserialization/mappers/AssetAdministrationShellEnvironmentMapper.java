@@ -19,7 +19,9 @@ import io.adminshell.aas.v3.dataformat.aml.AmlDocumentInfo;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.AmlParser;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.Mapper;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.MappingContext;
+import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
+import io.adminshell.aas.v3.dataformat.aml.model.caex.SystemUnitFamilyType;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
@@ -32,6 +34,9 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 
 public class AssetAdministrationShellEnvironmentMapper implements Mapper<AssetAdministrationShellEnvironment> {
+
+    private final String ASSET_ADMINISTRATION_SHELL_SYSTEM_UNIT_CLASSES = "AssetAdministrationShellSystemUnitClasses";
+    private final String ROLE_CLASS_LIB_ASSET_ADMINISTRATION_SHELL = "AssetAdministrationShellRoleClassLib/AssetAdministrationShell";
 
     @Override
     public AssetAdministrationShellEnvironment map(AmlParser parser, MappingContext context) throws MappingException {
@@ -63,8 +68,42 @@ public class AssetAdministrationShellEnvironmentMapper implements Mapper<AssetAd
             }
         });
 
-        // TODO parse SystemUnitClasses
+
         // add template AAS and Submodels (only if not already present)
+        CAEXFile.SystemUnitClassLib systemUnitClassLib = parser.getContent().getSystemUnitClassLib().stream()
+                .filter(x -> x.getName().equalsIgnoreCase(ASSET_ADMINISTRATION_SHELL_SYSTEM_UNIT_CLASSES))
+                .findFirst()
+                .orElse(null);
+
+        List<SystemUnitFamilyType> systemUnitFamilyTypeShells = systemUnitClassLib.getSystemUnitClass().stream()
+                .filter(x ->x.getSupportedRoleClass().get(0).getRefRoleClassPath().equalsIgnoreCase(ROLE_CLASS_LIB_ASSET_ADMINISTRATION_SHELL))
+                .collect(Collectors.toList());
+
+        AssetAdministrationShellEnvironment resultTemplatesAASEnvironments = new DefaultAssetAdministrationShellEnvironment.Builder().build();
+        for(SystemUnitFamilyType systemUnitFamilyTypeShell : systemUnitFamilyTypeShells){
+                parser.setCurrent(systemUnitFamilyTypeShell);
+            try {
+                AssetAdministrationShell aas = context.with(resultTemplatesAASEnvironments).map(AssetAdministrationShell.class, parser);
+                resultTemplatesAASEnvironments.getAssetAdministrationShells().add(aas);
+            } catch (MappingException ex) {
+                Logger.getLogger(AssetAdministrationShellEnvironmentMapper.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+        //add submodel templates to environment if not already exists
+        resultTemplatesAASEnvironments.getSubmodels().stream().forEach(x -> {
+            if(!result.getSubmodels().contains(x)){
+                result.getSubmodels().add(x);
+            }
+        });
+
+        //add aas templates to environment if not already exists
+        resultTemplatesAASEnvironments.getAssetAdministrationShells().stream().forEach(x -> {
+            if(!result.getAssetAdministrationShells().contains(x)){
+                result.getAssetAdministrationShells().add(x);
+            }
+        });
+
         return result;
     }
 
