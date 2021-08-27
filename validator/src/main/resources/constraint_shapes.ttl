@@ -1,7 +1,18 @@
-#@prefix rdf:  <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
-#@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
-#@prefix xs:   <http://www.w3.org/2001/XMLSchema#> .
-
+#
+# Copyright (c) 2021 Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e. V.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 @prefix phys_unit: <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationPhysicalUnit/3/0/RC01/> .
 @prefix dash: <http://datashapes.org/dash#> .
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
@@ -92,8 +103,7 @@ sh:sparql [
   sh:message "If both, the Property/value and the Property/valueId are present then the value of Property/value needs to be identical to the value of the referenced coded value in Property/valueId." ;
   sh:prefixes rdf: ;
   sh:select """
-    SELECT ?property ?value
-       WHERE {
+    SELECT ?property ?value WHERE {
          ?property a <https://admin-shell.io/aas/3/0/RC01/Property> .
          ?property <https://admin-shell.io/aas/3/0/RC01/Property/value> ?value .
          ?property <https://admin-shell.io/aas/3/0/RC01/Property/valueId> ?valueId .
@@ -101,8 +111,7 @@ sh:sparql [
          ?key <https://admin-shell.io/aas/3/0/RC01/Key/value> ?keyValue .
 
          FILTER (?value != ?keyValue)
-    }
-        """ ;
+    }""" ;
 ] .
 
 # AASd-008
@@ -192,17 +201,16 @@ aas:AASd-015Shape  a sh:NodeShape ;
   sh:targetClass aas:AccessControl;
   sh:sparql [
     a sh:SPARQLConstraint ;
-    sh:message "The data element SubjectAttributes/subjectAttribute shall be part of the submodel that is referenced within the “selectableSubjectAttributes” attribute of “AccessControl”" ;
+    sh:message "(AASd-015Shape) - The data element SubjectAttributes/subjectAttribute shall be part of the submodel that is referenced within the “selectableSubjectAttributes” attribute of “AccessControl”" ;
     sh:select """
-      SELECT ?submodelElement
-         WHERE {
+      SELECT ?submodelElement WHERE {
            ?accessControl  <https://admin-shell.io/aas/3/0/RC01/AccessControl/selectableSubjectAttributes> ?submodel .
            ?submodel  <https://admin-shell.io/aas/3/0/RC01/Submodel/submodelElement> ?submodelElement .
 		       ?submodelElement <https://admin-shell.io/aas/3/0/RC01/AccessPermissionRule/targetSubjectAttributes> ?subjectAttribute .
 		       ?subjectAttribute  <https://admin-shell.io/aas/3/0/RC01/SubjectAttributes/subjectAttribute> ?dataElement .
-      }
-     """ ;
-] .
+    }"""
+  ] ;
+.
 
 # AASd-020
 aas:AASd-020Shape  a sh:NodeShape ;
@@ -213,19 +221,8 @@ aas:AASd-020Shape  a sh:NodeShape ;
       sh:sparql [
       	a sh:SPARQLConstraint ;
       	sh:message "The value of Qualifier/value shall be consistent to the data type as defined in Qualifier/valueType." ;
-      	sh:prefixes [
-          sh:declare [
-            sh:prefix "aas";
-            sh:namespace "https://admin-shell.io/aas/3/0/RC01/"^^xsd:anyURI ;
-          ];
-          sh:declare [
-            sh:prefix "xsd";
-            sh:namespace "http://www.w3.org/2001/XMLSchema#"^^xsd:anyURI ;
-          ]
-        ] ;
       	sh:select """
-      	  SELECT ?this ?value
-      	   WHERE {
+      	  SELECT ?this ?value WHERE {
       		  ?this <https://admin-shell.io/aas/3/0/RC01/Qualifier/value> ?value .
             ?this <https://admin-shell.io/aas/3/0/RC01/Qualifier/valueType> ?valueType .
       		  FILTER (DATATYPE(?value) != URI(?valueType) )

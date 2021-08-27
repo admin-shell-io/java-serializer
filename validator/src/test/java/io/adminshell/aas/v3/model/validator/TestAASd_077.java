@@ -13,6 +13,7 @@ package io.adminshell.aas.v3.model.validator;
 
 import io.adminshell.aas.v3.model.*;
 import io.adminshell.aas.v3.model.impl.*;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -31,7 +32,11 @@ import static org.junit.Assert.fail;
  *
  */
 public class TestAASd_077 {
+
+	// TODO: Add HasExtensions to Referables in the Java Model and then uncomment the lines in the tests.
+
 	@Test
+	@Ignore
 	public void repeatingExtensionName() throws ValidationException {
 
 		Extension extension1 = new DefaultExtension.Builder()
@@ -50,7 +55,7 @@ public class TestAASd_077 {
 
 		try {
 			ShaclValidator.getInstance().validate(referable);
-			//fail(); // TODO Add HasExtensions to Referables
+			fail();
 		} catch (ValidationException e) {
 			assertTrue(e.getMessage().endsWith(
 					"The name of an extension within HasExtensions needs to be unique."));
