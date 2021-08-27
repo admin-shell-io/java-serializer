@@ -19,23 +19,38 @@ import io.adminshell.aas.v3.dataformat.aml.deserialization.AmlParser;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.DefaultMapper;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
+import io.adminshell.aas.v3.dataformat.core.DataSpecificationManager;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
+import io.adminshell.aas.v3.model.DataTypeIEC61360;
+import org.apache.xerces.dom.ElementNSImpl;
+import org.apache.xerces.dom.TextImpl;
 
-public class EnumMapper extends DefaultMapper<Enum> {
+public class EnumDataTypeIEC61360Mapper extends DefaultMapper<DataTypeIEC61360> {
 
     @Override
-    public Enum map(AmlParser parser, MappingContext context) throws MappingException {
+    public DataTypeIEC61360 map(AmlParser parser, MappingContext context) throws MappingException {
         if (parser == null
                 || parser.getCurrent() == null
                 || context.getProperty() == null) {
             return null;
         }
-        AttributeType attribute = findAttribute(parser.getCurrent(), context.getProperty(), context);
+        AttributeType attribute = null;
+        if(AttributeType.class.isAssignableFrom(parser.getCurrent().getClass())){
+            attribute = (AttributeType) parser.getCurrent();
+        } else {
+            attribute = findAttribute(parser.getCurrent(),context.getProperty(),context, parser.getRefSemanticPrefix());
+        }
+
         if (attribute != null) {
             Class type = context.getProperty().getReadMethod().getReturnType();
-            String value = String.valueOf(getValue(attribute));
+            String value="";
+            if(DataTypeIEC61360.class.isAssignableFrom(type)){
+                ElementNSImpl elementNS = (ElementNSImpl) attribute.getValue();
+                value = ((TextImpl)elementNS.getFirstChild()).getData();
+            }
+
             if (Enum.class.isAssignableFrom(type) && !value.isBlank()) {
-                return Enum.valueOf(type, value);
+                return DataTypeIEC61360.valueOf(value);
             }
         }
         return null;

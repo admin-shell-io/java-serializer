@@ -42,6 +42,9 @@ public class AmlParser {
     private final Map<String, Reference> idToReference = new HashMap<>();
     private final Map<ObjectLocationByProperty, List<String>> idsToResolve = new HashMap<>();
 
+    public static final String DEFAULT_REFSEMANTIC_PREFIX = "AAS";
+    private String refSemanticPrefix = DEFAULT_REFSEMANTIC_PREFIX;
+
     public AmlParser(CAEXFile content) {
         this.content = content;
     }
@@ -177,4 +180,31 @@ public class AmlParser {
     public Map<String, Reference> getIdToReference() {
         return idToReference;
     }
+
+    /**
+     * Gets the prefix for the RefSemantic
+     *
+     * @return
+     */
+    public String getRefSemanticPrefix() {
+        return refSemanticPrefix;
+    }
+
+    /**
+     * Sets the prefix for the RefSemantic
+     *
+     * @param refSemanticPrefix
+     */
+    public void setRefSemanticPrefix(String refSemanticPrefix) {
+        this.refSemanticPrefix = refSemanticPrefix;
+    }
+
+    /**
+     * Sets the prefix for the RefSemantic to the default value
+     *
+     */
+    public void setRefSemanticPrefixToDefault() {
+        this.refSemanticPrefix = DEFAULT_REFSEMANTIC_PREFIX;
+    }
+
 }

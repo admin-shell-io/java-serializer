@@ -19,30 +19,39 @@ import io.adminshell.aas.v3.dataformat.aml.deserialization.AmlParser;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.DefaultMapper;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
+import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXObject;
+import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
+import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
-import io.adminshell.aas.v3.model.LangString;
+import io.adminshell.aas.v3.model.*;
+
+import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-public class LangStringCollectionMapper extends DefaultMapper<Collection<LangString>> {
+public class ConstraintCollectionMapper extends DefaultMapper<Collection<Constraint>> {
+
 
     @Override
     protected Collection mapCollectionValueProperty(AmlParser parser, MappingContext context) throws MappingException {
-        AttributeType attribute = findAttribute(parser.getCurrent(), context.getProperty(), context, parser.getRefSemanticPrefix());
-        List<AttributeType> values = findAttributes(attribute, x -> x.getName().startsWith("aml-lang="));
-        List<LangString> result = new ArrayList<>();
-        for (AttributeType value : values) {
-            try {
-                LangString newElement = context.getTypeFactory().newInstance(LangString.class);
-                newElement.setLanguage(value.getName().substring(value.getName().indexOf("=") + 1));
-                newElement.setValue(String.valueOf(getValue(value)));
-                result.add(newElement);
-            } catch (NoSuchMethodException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                throw new MappingException("error mapping Collection<LangString> - could not create new instance for interface LangString");
-            }
+
+        //TODO: Need to register specific type Qualifiable
+        if (!context.getProperty().getName().equalsIgnoreCase("Qualifiers")) {
+            return super.mapCollectionValueProperty(parser, context);
         }
+
+        List<AttributeType> values = findAttributes(parser.getCurrent(), x -> x.getRefSemantic().get(0).getCorrespondingAttributePath().contains("AAS:Qualifiable"));
+
+        CAEXObject current = parser.getCurrent();
+        Collection result = new ArrayList<>();
+        for (AttributeType value : values) {
+            parser.setCurrent(value);
+            Object o = context.withoutProperty().map(Qualifier.class, parser);
+            result.add(o);
+        }
+        parser.setCurrent(current);
         return result;
     }
 
