@@ -105,9 +105,6 @@ public class PropertyNamingStrategy implements NamingStrategy {
 
     @Override
     public String getNameForRefSemantic(Type type, Object obj, String property) {
-        if (Qualifier.class.equals(type) || property.startsWith("qualifier")) {
-            String d = "";
-        }
         for (TypeSafeFunction customNaming : getCustomNaming(type, property)) {
             String result = (String) customNaming.refSemanticProvider.apply(obj, property);
             if (result != null) {

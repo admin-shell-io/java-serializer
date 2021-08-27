@@ -40,13 +40,13 @@ public class LangStringCollectionMapper extends DefaultCollectionMapper<LangStri
         Object t = (Class<?>) ((ParameterizedType) context.getProperty().getReadMethod().getGenericReturnType()).getActualTypeArguments()[0];
 
         generator.addAttribute(AttributeType.builder()
-                .withName(context.getAttributeNamingStrategy().getName(
+                .withName(context.getPropertyNamingStrategy().getName(
                         context.getProperty().getReadMethod().getDeclaringClass(),
                         value,
                         context.getProperty().getName()))
                 .withRefSemantic(generator.refSemantic(
                         context.getProperty(),
-                        context.getAttributeNamingStrategy().getNameForRefSemantic(
+                        context.getPropertyNamingStrategy().getNameForRefSemantic(
                                 context.getProperty().getReadMethod().getDeclaringClass(),
                                 value,
                                 context.getProperty().getName())))

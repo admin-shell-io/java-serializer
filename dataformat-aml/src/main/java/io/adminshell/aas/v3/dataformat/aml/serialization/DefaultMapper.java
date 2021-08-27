@@ -96,21 +96,21 @@ public class DefaultMapper<T> implements Mapper<T> {
     protected AttributeType.RefSemantic getRefSemantic(T value, AmlGenerator generator, MappingContext context) {
         return generator.refSemantic(
                 context.getProperty(),
-                context.getAttributeNamingStrategy().getNameForRefSemantic(
+                context.getPropertyNamingStrategy().getNameForRefSemantic(
                         context.getProperty().getReadMethod().getGenericReturnType(),
                         value,
                         context.getProperty().getName()));
     }
 
     protected String getInternalElementName(Object value, MappingContext context) {
-        return context.getInternalElementNamingStrategy().getName(
+        return context.getClassNamingStrategy().getName(
                 value.getClass(),
                 value,
                 null);
     }
 
     protected String getAttributeName(T value, MappingContext context) {
-        return context.getAttributeNamingStrategy().getName(
+        return context.getPropertyNamingStrategy().getName(
                 context.getProperty().getReadMethod().getGenericReturnType(),
                 value,
                 context.getProperty().getName());

@@ -40,7 +40,7 @@ public class ReferenceElementMapper extends DefaultMapper<ReferenceElement> {
             return;
         }
         InternalElementType.Builder builder = InternalElementType.builder()
-                .withName(context.getInternalElementNamingStrategy().getName(
+                .withName(context.getClassNamingStrategy().getName(
                         element.getClass(),
                         element,
                         null))

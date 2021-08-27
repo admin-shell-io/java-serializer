@@ -16,6 +16,7 @@
 package io.adminshell.aas.v3.dataformat.mapping;
 
 import com.google.common.reflect.TypeToken;
+import io.adminshell.aas.v3.dataformat.core.util.MostSpecificClassComparator;
 import io.adminshell.aas.v3.dataformat.core.util.MostSpecificTypeTokenComparator;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -110,7 +111,14 @@ public class MappingProvider<T extends Mapper> {
                 .sorted((x, y) -> Objects.compare(x.getKey(), y.getKey(), new MostSpecificTypeTokenComparator()))
                 .map(x -> x.getValue())
                 .findFirst();
-        if (!customMapper.isPresent() || customMapper.get().isEmpty()) {
+        if (customMapper.isEmpty() && !TypeToken.of(Collection.class).isSupertypeOf(type)) {
+            customMapper = mappings.entrySet().stream()
+                    .filter(x -> x.getKey().getRawType().isAssignableFrom(TypeToken.of(type).getRawType()))
+                    .sorted((x, y) -> Objects.compare(x.getKey().getRawType(), y.getKey().getRawType(), new MostSpecificClassComparator()))
+                    .map(x -> x.getValue())
+                    .findFirst();
+        }
+        if (customMapper.isEmpty() || customMapper.get().isEmpty()) {
             if (TypeToken.of(Collection.class).isSupertypeOf(type) && defaultCollectionMapper != null) {
                 return defaultCollectionMapper;
             }

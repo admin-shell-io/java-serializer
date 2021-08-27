@@ -58,7 +58,7 @@ public class DefaultCollectionMapper<T> extends DefaultMapper<Collection<T>> {
 
     @Override
     protected String getAttributeName(Collection<T> value, MappingContext context) {
-        return context.getAttributeNamingStrategy().getName(
+        return context.getPropertyNamingStrategy().getName(
                 context.getProperty().getReadMethod().getDeclaringClass(),
                 value,
                 context.getProperty().getName());

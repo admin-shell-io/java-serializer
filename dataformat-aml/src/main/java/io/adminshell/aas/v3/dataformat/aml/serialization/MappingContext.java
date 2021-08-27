@@ -20,8 +20,8 @@ import io.adminshell.aas.v3.dataformat.aml.util.ReferencedReferableCollector;
 import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.dataformat.mapping.MappingProvider;
-import io.adminshell.aas.v3.dataformat.mapping.SourceBasedMappingContext;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
+import io.adminshell.aas.v3.dataformat.aml.common.AbstractMappingContext;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Type;
 import org.slf4j.Logger;
@@ -29,14 +29,10 @@ import org.slf4j.LoggerFactory;
 import io.adminshell.aas.v3.model.Reference;
 import java.util.Set;
 
-public class MappingContext extends SourceBasedMappingContext {
+public class MappingContext extends AbstractMappingContext<Mapper> {
 
     private static final Logger log = LoggerFactory.getLogger(MappingContext.class);
     private final AssetAdministrationShellEnvironment environment;
-    private final NamingStrategy internalElementNamingStrategy;
-    private final NamingStrategy attributeNamingStrategy;
-
-    private final PropertyDescriptor property;
     private final Set<Reference> referencedReferables;
 
     public MappingContext(MappingProvider mappingProvider,
@@ -51,25 +47,14 @@ public class MappingContext extends SourceBasedMappingContext {
                 null);
     }
 
-    public NamingStrategy getInternalElementNamingStrategy() {
-        return internalElementNamingStrategy;
-    }
-
-    public NamingStrategy getAttributeNamingStrategy() {
-        return attributeNamingStrategy;
-    }
-
     private MappingContext(MappingProvider mappingProvider,
-            NamingStrategy internalElementNamingStrategy,
-            NamingStrategy attributeNamingStrategy,
+            NamingStrategy classNamingStrategy,
+            NamingStrategy propertyNamingStrategy,
             AssetAdministrationShellEnvironment environment,
             Set<Reference> referencedReferables,
             PropertyDescriptor property) {
-        super(mappingProvider);
-        this.internalElementNamingStrategy = internalElementNamingStrategy;
-        this.attributeNamingStrategy = attributeNamingStrategy;
+        super(mappingProvider, classNamingStrategy, propertyNamingStrategy, property);
         this.environment = environment;
-        this.property = property;
         if (referencedReferables == null) {
             this.referencedReferables = new ReferencedReferableCollector(environment).collect();
         } else {
@@ -92,8 +77,8 @@ public class MappingContext extends SourceBasedMappingContext {
     public MappingContext with(PropertyDescriptor property) {
         return new MappingContext(
                 getMappingProvider(),
-                internalElementNamingStrategy,
-                attributeNamingStrategy,
+                classNamingStrategy,
+                propertyNamingStrategy,
                 environment,
                 referencedReferables,
                 property);
@@ -101,9 +86,9 @@ public class MappingContext extends SourceBasedMappingContext {
 
     public MappingContext withoutProperty() {
         return new MappingContext(
-                getMappingProvider(),
-                internalElementNamingStrategy,
-                attributeNamingStrategy,
+                mappingProvider,
+                classNamingStrategy,
+                propertyNamingStrategy,
                 environment,
                 referencedReferables,
                 null);

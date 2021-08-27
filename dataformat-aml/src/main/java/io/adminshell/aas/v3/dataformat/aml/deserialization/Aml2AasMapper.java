@@ -15,13 +15,22 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.deserialization;
 
-import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.AssetAdministrationShellEnvironmentMapper;
+import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.*;
 import io.adminshell.aas.v3.dataformat.aml.AmlDeserializationConfig;
 import io.adminshell.aas.v3.dataformat.aml.AmlDocumentInfo;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
+import io.adminshell.aas.v3.dataformat.aml.serialization.naming.AbstractClassNamingStrategy;
+import io.adminshell.aas.v3.dataformat.aml.serialization.naming.NumberingClassNamingStrategy;
+import io.adminshell.aas.v3.dataformat.aml.serialization.naming.PropertyNamingStrategy;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.dataformat.mapping.MappingProvider;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
+import io.adminshell.aas.v3.model.Identifiable;
+import io.adminshell.aas.v3.model.MultiLanguageProperty;
+import io.adminshell.aas.v3.model.Referable;
+import io.adminshell.aas.v3.model.Qualifiable;
+
+
 import java.util.List;
 
 /**
@@ -49,9 +58,36 @@ public class Aml2AasMapper {
         AmlParser parser = new AmlParser(aml);
         MappingProvider mappingProvider = new MappingProvider(Mapper.class, new DefaultMapper(), new DefaultMapper());
         mappingProvider.register(new AssetAdministrationShellEnvironmentMapper());
-        MappingContext context = new MappingContext(mappingProvider, config.getTypeFactory());
+        mappingProvider.register(new EnumMapper());
+        mappingProvider.register(new ReferenceMapper());
+        mappingProvider.register(new AssetAdministrationShellMapper());
+        mappingProvider.register(new LangStringCollectionMapper());
+        mappingProvider.register(new RelationshipElementMapper());
+        mappingProvider.register(new ReferenceElementMapper());
+        mappingProvider.register(new ReferableMapper<Referable>());
+        mappingProvider.register(new IdentifiableMapper<Identifiable>());
+        mappingProvider.register(new ConstraintCollectionMapper());
+        mappingProvider.register(new QualifierMapper());
+        mappingProvider.register(new OperationCollectionMapper());
+        mappingProvider.register(new FileMapper());
+        mappingProvider.register(new RangeMapper());
+        mappingProvider.register(new ViewMapper());
+        mappingProvider.register(new PropertyMapper());
+        mappingProvider.register(new ConceptDescriptionMapper());
+        mappingProvider.register(new EmbeddedDataSpecificationCollectionMapper());
+        mappingProvider.register(new DataSpecificationIEC61360Mapper());
+        mappingProvider.register(new EnumDataTypeIEC61360Mapper());
+        AbstractClassNamingStrategy classNamingStrategy = new NumberingClassNamingStrategy();
+
+        PropertyNamingStrategy propertyNamingStrategy = new PropertyNamingStrategy();
+        propertyNamingStrategy.registerCustomNaming(Referable.class, "descriptions", "description");
+        propertyNamingStrategy.registerCustomNaming(MultiLanguageProperty.class, "values", "value");
+        //propertyNamingStrategy.registerCustomNaming(Qualifier.class, x -> "qualifier:" + x.getType() + "=" + x.getValue(), false);
+        propertyNamingStrategy.registerCustomNaming(Qualifiable.class, "qualifiers", "qualifier","qualifier");
+        MappingContext context = new MappingContext(mappingProvider, classNamingStrategy, propertyNamingStrategy, config.getTypeFactory());
         context.setDocumentInfo(AmlDocumentInfo.fromFile(aml));
-        Object result = context.getMappingProvider().getMapper(AssetAdministrationShellEnvironment.class).map(parser, context);
+        AssetAdministrationShellEnvironment result = context.map(AssetAdministrationShellEnvironment.class, parser);
+        parser.resolveIdsToReferences(result);
         return (AssetAdministrationShellEnvironment) result;
     }
 }

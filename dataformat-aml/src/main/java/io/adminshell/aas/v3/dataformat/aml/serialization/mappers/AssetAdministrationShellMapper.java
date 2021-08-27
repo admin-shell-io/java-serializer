@@ -61,7 +61,7 @@ public class AssetAdministrationShellMapper extends DefaultMapper<AssetAdministr
         }
         if (hasTemplateSubmodel) {
             builder = builder.withRefBaseSystemUnitPath(generator.getDocumentInfo().getAssetAdministrationShellSystemUnitClassLib()
-                    + "/" + context.getInternalElementNamingStrategy().getName(aas.getClass(), aas, null));
+                    + "/" + context.getClassNamingStrategy().getName(aas.getClass(), aas, null));
         }
         generator.with(builder).appendReferenceTargetInterfaceIfRequired(aas, context);
         generator.add(builder.build());
