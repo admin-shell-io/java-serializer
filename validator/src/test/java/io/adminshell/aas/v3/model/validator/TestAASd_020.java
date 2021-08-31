@@ -81,13 +81,13 @@ public class TestAASd_020 {
 	@Test
 	public void correctString() throws ValidationException {
 
-		Qualifier wrongQualifier = new DefaultQualifier.Builder()
+		Qualifier qualifier = new DefaultQualifier.Builder()
 				.valueType("http://www.w3.org/2001/XMLSchema#string")
 				.value("a string")
 				.type("string")
 				.build();
 
-		ShaclValidator.getInstance().validate(wrongQualifier);
+		ShaclValidator.getInstance().validate(qualifier);
 
 	}
 }

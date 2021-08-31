@@ -50,7 +50,7 @@ public class AasTypeFactory {
      * Creates a new instance for a given aasInterface. If the
      *
      * @param <T> type to create
-     * @param aasInterface class to find instantiate
+     * @param aasInterfaceType class to find instantiate
      * @return an instance of aasInterface
      * @throws NoSuchMethodException
      * @throws InstantiationException
@@ -59,19 +59,34 @@ public class AasTypeFactory {
      * concrete type to instantiate could be found
      * @throws InvocationTargetException
      */
-    public <T> T newInstance(Class<T> aasInterface) throws NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-        if (aasInterface == null) {
-            throw new IllegalArgumentException("aasInterface must be non-null");
-        }
-        Class<?> classToInstantiate = aasInterface;
-        if (typeMapping.containsKey(aasInterface)) {
-            classToInstantiate = typeMapping.get(aasInterface);
-        }
-        if (classToInstantiate.isInterface()) {
-            throw new IllegalArgumentException("could not resolve type for interface " + classToInstantiate.getName());
-        }
-        Constructor<?> constructor = classToInstantiate.getConstructor();
+    public <T> T newInstance(Class<T> aasInterfaceType) throws NoSuchMethodException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+        Constructor<?> constructor = getImplementationType(aasInterfaceType).getConstructor();
         constructor.setAccessible(true);
         return (T) constructor.newInstance();
+    }
+
+    /**
+     * Gets the concrete implementation type to use for a given type. If there
+     * is no explicit type mapping and the provided type is concrete, the type
+     * itself is returned.
+     *
+     * @param <T> type information
+     * @param aasInterfaceType the type to find a concrete implementation type
+     * for
+     * @throws IllegalArgumentException if there is no type mapping for the
+     * provided type and the type is not concrete
+     * @return a concrete implementation type for the given type
+     */
+    public <T> Class<? extends T> getImplementationType(Class<T> aasInterfaceType) {
+        if (aasInterfaceType == null) {
+            throw new IllegalArgumentException("aasInterface must be non-null");
+        }
+        if (typeMapping.containsKey(aasInterfaceType)) {
+            return (Class<? extends T>) typeMapping.get(aasInterfaceType);
+        }
+        if (aasInterfaceType.isInterface()) {
+            throw new IllegalArgumentException("could not resolve type for interface " + aasInterfaceType.getName());
+        }
+        return aasInterfaceType;
     }
 }

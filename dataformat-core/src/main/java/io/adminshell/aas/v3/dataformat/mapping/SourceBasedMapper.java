@@ -23,7 +23,7 @@ package io.adminshell.aas.v3.dataformat.mapping;
  * @param <G> the generator type, here: to generate instances of B
  * @param <C> the type of mapping context
  */
-public interface SourceBasedMapper<T, G, C extends SourceBasedMappingContext> extends Mapper<T> {
+public interface SourceBasedMapper<T, G, C extends MappingContext> extends Mapper<T> {
 
     /**
      * Maps the given value to target format via the generator.

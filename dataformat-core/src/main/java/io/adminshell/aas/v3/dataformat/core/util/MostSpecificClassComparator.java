@@ -13,12 +13,23 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.mapping;
+package io.adminshell.aas.v3.dataformat.core.util;
 
-public abstract class SourceBasedMappingContext extends MappingContext<SourceBasedMapper> {
+import java.util.Comparator;
 
-    public SourceBasedMappingContext(MappingProvider<SourceBasedMapper> mappingProvider) {
-        super(mappingProvider);
+/**
+ * Comparator comparing two classes regarding which type is more specific.
+ */
+public class MostSpecificClassComparator implements Comparator<Class<?>> {
+
+    @Override
+    public int compare(Class<?> x, Class<?> y) {
+        if (y.isAssignableFrom(x)) {
+            if (x.isAssignableFrom(y)) {
+                return 0;
+            }
+            return -1;
+        }
+        return 1;
     }
-
 }

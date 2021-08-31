@@ -40,7 +40,7 @@ public class ViewMapper extends DefaultMapper<View> {
             return;
         }
         InternalElementType.Builder builder = InternalElementType.builder();
-        builder = builder.withName(context.getInternalElementNamingStrategy().getName(
+        builder = builder.withName(context.getClassNamingStrategy().getName(
                 view.getClass(),
                 view,
                 null))

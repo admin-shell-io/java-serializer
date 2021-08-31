@@ -220,13 +220,35 @@ aas:AASd-020Shape  a sh:NodeShape ;
       sh:path <https://admin-shell.io/aas/3/0/RC01/Qualifier/value> ;
       sh:sparql [
       	a sh:SPARQLConstraint ;
-      	sh:message "The value of Qualifier/value shall be consistent to the data type as defined in Qualifier/valueType." ;
+      	sh:message "(AASd-020Shape) - The value of Qualifier/value shall be consistent to the data type as defined in Qualifier/valueType." ;
       	sh:select """
       	  SELECT ?this ?value WHERE {
-      		  ?this <https://admin-shell.io/aas/3/0/RC01/Qualifier/value> ?value .
+      		?this <https://admin-shell.io/aas/3/0/RC01/Qualifier/value> ?value .
             ?this <https://admin-shell.io/aas/3/0/RC01/Qualifier/valueType> ?valueType .
-      		  FILTER (DATATYPE(?value) != URI(?valueType) )
-      	   }
+      		FILTER (DATATYPE(?value) != URI(?valueType) ) # TODO only works with complete URIs, for instance ?valueType:='http://www.w3.org/2001/XMLSchema#string' works but ?valueType:='string' fails.
+      	  }
+      	"""
+     ]
+    ];
+.
+
+# AASd-021
+aas:AASd-021Shape  a sh:NodeShape ;
+  sh:targetClass aas:Qualifiable ;
+  sh:property [
+      a sh:PropertyShape ;
+      #sh:path <https://admin-shell.io/aas/3/0/RC01/Qualifiable/valueType> ;
+      sh:sparql [
+      	a sh:SPARQLConstraint ;
+      	sh:message "(AASd-021Shape) - Every Qualifiable can only have one Qualifier with the same Qualifier/type." ;
+      	sh:select """
+      	  SELECT ?this ?valueType WHERE {
+      	    ?qualifiable <https://admin-shell.io/aas/3/0/RC01/Qualifiable/qualifier> ?qualifier1 .
+      	    ?qualifiable <https://admin-shell.io/aas/3/0/RC01/Qualifiable/qualifier> ?qualifier2 .
+            ?qualifier1 <https://admin-shell.io/aas/3/0/RC01/Qualifier/valueType> ?valueType1 .
+            ?qualifier2 <https://admin-shell.io/aas/3/0/RC01/Qualifier/valueType> ?valueType2 .
+      		FILTER (str(?valueType1) = str(?valueType2) )
+      	  }
       	"""
      ]
     ];

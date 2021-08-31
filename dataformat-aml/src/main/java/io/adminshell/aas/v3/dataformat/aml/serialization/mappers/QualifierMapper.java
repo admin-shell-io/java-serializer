@@ -30,7 +30,7 @@ public class QualifierMapper extends AbstractElementMapperWithValueType<Qualifie
 
     @Override
     protected String getAttributeName(Qualifier value, MappingContext context) {
-        return context.getAttributeNamingStrategy().getName(
+        return context.getPropertyNamingStrategy().getName(
                 Qualifier.class,
                 value,
                 context.getProperty().getName());
@@ -40,7 +40,7 @@ public class QualifierMapper extends AbstractElementMapperWithValueType<Qualifie
     protected AttributeType.RefSemantic getRefSemantic(Qualifier value, AmlGenerator generator, MappingContext context) {
         return generator.refSemantic(
                 context.getProperty(),
-                context.getAttributeNamingStrategy().getNameForRefSemantic(
+                context.getPropertyNamingStrategy().getNameForRefSemantic(
                         Qualifier.class,
                         value,
                         context.getProperty().getName()));
