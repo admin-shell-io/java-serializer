@@ -16,14 +16,19 @@
 package io.adminshell.aas.v3.dataformat.i4aas;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
 import io.adminshell.aas.v3.dataformat.SerializationException;
+import io.adminshell.aas.v3.dataformat.core.AASFull;
+import io.adminshell.aas.v3.dataformat.core.AASSimple;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
 import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShellEnvironment;
 
@@ -38,14 +43,13 @@ public class SerializerTest {
 	public void testEmpty() throws SerializationException {
 		I4AASSerializer i4aasSerializer = new I4AASSerializer();
 		String write = i4aasSerializer.write(new DefaultAssetAdministrationShellEnvironment());
-		//System.out.println(write);
 	}
 
 	@Test
 	public void testSimple() throws SerializationException, IllegalArgumentException, IllegalAccessException {
 		I4AASSerializer i4aasSerializer = new I4AASSerializer();
 		String write = i4aasSerializer.write(AASSimple.ENVIRONMENT);
-		for (String toCheck : AASSimple.getContainedStrings()) {
+        for (String toCheck : getContainedStrings(AASSimple.class)) {
 			if (toCheck.toLowerCase().contains("thumbnail")) {
 				//gets remapped to DefaultThumbnail
 				toCheck = "DefaultThumbnail";
@@ -64,14 +68,23 @@ public class SerializerTest {
 		Path createTempFile = Files.createTempFile("testSimpleToFile", ".xml");
 		I4AASSerializer i4aasSerializer = new I4AASSerializer();
 		i4aasSerializer.write(createTempFile.toFile(), AASSimple.ENVIRONMENT);
-		//System.out.println(createTempFile.toAbsolutePath().toString());
 	}
 
 	@Test
 	public void testFull() throws SerializationException {
 		I4AASSerializer i4aasSerializer = new I4AASSerializer();
 		String write = i4aasSerializer.write(AASFull.ENVIRONMENT);
-		//System.out.println(write);
 	}
 
+    private static List<String> getContainedStrings(Class<?> testModelClass) throws IllegalArgumentException, IllegalAccessException {
+        List<String> results = new ArrayList<>();
+        for (Field field : AASSimple.class.getDeclaredFields()) {
+            field.setAccessible(true);
+            if (field.getType() == String.class) {
+                Object object = field.get(null);
+                results.add((String) object);
+            }
+        }
+        return results;
+    }
 }

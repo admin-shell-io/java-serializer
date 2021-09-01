@@ -10,7 +10,7 @@
             <test:submodelRefs>
                 <test:submodelRef>
                     <test:keys>
-                        <test:key idType="Iri" type="Submodel">http.//i40.customer.com/type/1/1/7A7104BDAB57E184</test:key>
+                        <test:key idType="Iri" type="Submodel">http://i40.customer.com/type/1/1/7A7104BDAB57E184</test:key>
                     </test:keys>
                 </test:submodelRef>
                 <test:submodelRef>
@@ -60,6 +60,16 @@
             </test:assetInformation>
         </test:assetAdministrationShell>
     </test:assetAdministrationShells>
+    <test:assets>
+        <test:asset>
+            <test:idShort>
+                ServoDCMotor
+            </test:idShort>
+            <test:identification idType="Iri">
+                http://customer.com/assets/KHBVZJSQKIY
+            </test:identification>
+        </test:asset>
+    </test:assets>
     <test:conceptDescriptions>
         <test:conceptDescription>
             <test:idShort>Title</test:idShort>
