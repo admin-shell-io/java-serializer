@@ -21,6 +21,7 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
+import io.adminshell.aas.v3.model.Asset;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.ConceptDescription;
@@ -64,6 +65,10 @@ public class EnvironmentMapper extends I4AASMapper<AssetAdministrationShellEnvir
 		}
 		for (AssetAdministrationShell assetAdministrationShell : source.getAssetAdministrationShells()) {
 			UAObject aasUaObject = new AssetAdministrationShellMapper(assetAdministrationShell, ctx).map();
+			attachAsComponent(target, aasUaObject);
+		}
+		for (Asset asset : source.getAssets()) {
+			UAObject aasUaObject = new AssetMapper(asset, ctx).map();
 			attachAsComponent(target, aasUaObject);
 		}
 	}
