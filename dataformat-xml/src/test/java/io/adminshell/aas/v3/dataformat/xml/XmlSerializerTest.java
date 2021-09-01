@@ -37,10 +37,16 @@ import org.xmlunit.matchers.CompareMatcher;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import io.adminshell.aas.v3.dataformat.SerializationException;
+import io.adminshell.aas.v3.dataformat.core.AASFull;
+import io.adminshell.aas.v3.dataformat.core.AASSimple;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShellEnvironment;
 
 public class XmlSerializerTest {
+    public static final java.io.File AASFULL_FILE = new java.io.File("src/test/resources/test_demo_full_example.xml");
+    public static final java.io.File AASSIMPLE_FILE = new java.io.File("src/test/resources/xmlExample.xml");
+    public static final java.io.File AASSIMPLE_FILE_WITH_TEST_NAMESPACE = new java.io.File("src/test/resources/xmlExampleWithModifiedPrefix.xml");
+
     private static final Logger logger = LoggerFactory.getLogger(XmlSerializerTest.class);
 
     @Rule
@@ -66,17 +72,17 @@ public class XmlSerializerTest {
         Map<String, String> nsPrefixes = new HashMap<>(AasXmlNamespaceContext.PREFERRED_PREFIX_CONTEXT);
         nsPrefixes.put("test", nsPrefixes.get("aas"));
         nsPrefixes.remove("aas");
-        validateXmlSerializer(AASSimple.FILE_WITH_TEST_NAMESPACE, AASSimple.ENVIRONMENT, new XmlSerializer(nsPrefixes));
+        validateXmlSerializer(AASSIMPLE_FILE_WITH_TEST_NAMESPACE, AASSimple.ENVIRONMENT, new XmlSerializer(nsPrefixes));
     }
 
     @Test
     public void testSerializeSimple() throws IOException, SerializationException, SAXException {
-        validateXmlSerializer(AASSimple.FILE, AASSimple.ENVIRONMENT);
+        validateXmlSerializer(AASSIMPLE_FILE, AASSimple.ENVIRONMENT);
     }
 
     @Test
     public void testSerializeFull() throws IOException, SerializationException, SAXException {
-        validateXmlSerializer(AASFull.FILE, AASFull.ENVIRONMENT);
+        validateXmlSerializer(AASFULL_FILE, AASFull.ENVIRONMENT);
     }
 
     private void validateXmlSerializer(File expectedFile, AssetAdministrationShellEnvironment environment)

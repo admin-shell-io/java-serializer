@@ -25,6 +25,13 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
+            <groupId>io.admin-shell.aas</groupId>
+            <artifactId>dataformat-core</artifactId>
+            <version>${revision}</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>

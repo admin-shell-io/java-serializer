@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.xml;
+package io.adminshell.aas.v3.dataformat.core;
 
 import java.util.Arrays;
 
@@ -47,10 +47,6 @@ import io.adminshell.aas.v3.model.impl.DefaultSubmodel;
 import io.adminshell.aas.v3.model.impl.DefaultSubmodelElementCollection;
 
 public class AASSimple {
-
-    public static final java.io.File FILE = new java.io.File("src/test/resources/xmlExample.xml");
-    public static final java.io.File FILE_WITH_TEST_NAMESPACE = new java.io.File("src/test/resources/xmlExampleWithModifiedPrefix.xml");
-
     //AAS
     public static final String AAS_ID = "ExampleMotor";
     public static final String AAS_IDENTIFIER = "http://customer.com/aas/9175_7013_7091_9168";

@@ -15,8 +15,12 @@
  */
 package io.adminshell.aas.v3.dataformat.json;
 
-import io.adminshell.aas.v3.dataformat.SerializationException;
-import io.adminshell.aas.v3.model.*;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.util.Arrays;
+import java.util.List;
+
 import org.json.JSONException;
 import org.junit.Test;
 import org.skyscreamer.jsonassert.JSONAssert;
@@ -24,11 +28,13 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.util.Arrays;
-import java.util.List;
+import io.adminshell.aas.v3.dataformat.SerializationException;
+import io.adminshell.aas.v3.dataformat.core.AASFull;
+import io.adminshell.aas.v3.model.AssetAdministrationShell;
+import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
+import io.adminshell.aas.v3.model.Referable;
+import io.adminshell.aas.v3.model.Submodel;
+import io.adminshell.aas.v3.model.SubmodelElement;
 
 public class JsonReferableSerializerTest {
 
