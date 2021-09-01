@@ -15,18 +15,28 @@
  */
 package io.adminshell.aas.v3.dataformat.xml;
 
+import java.util.Collection;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.introspect.Annotated;
 import com.fasterxml.jackson.databind.introspect.AnnotatedClass;
+import com.fasterxml.jackson.databind.introspect.AnnotatedMethod;
 import com.fasterxml.jackson.dataformat.xml.JacksonXmlAnnotationIntrospector;
+
+import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 
 /**
  * This class helps to dynamically decide how to de-/serialize classes and
  * properties defined in the AAS model library. It will automatically add a default namespace
  * to property names and set a default property order for contained elements.
+ * 
+ * Will also add @JsonInclude(JsonInclude.Include.NON_EMPTY) to all getter methods returning any type of
+ * Collection&lt;?&gt; defined in the AAS model
  */
 public class XmlDataformatAnnotationIntrospector extends JacksonXmlAnnotationIntrospector {
     private static final long serialVersionUID = 1L;
 
+    private static final String GETTER_PREFIX = "get";
     protected String myDefaultNamespace = "";
 
     public XmlDataformatAnnotationIntrospector() {
@@ -56,5 +66,23 @@ public class XmlDataformatAnnotationIntrospector extends JacksonXmlAnnotationInt
             };
         }
         return order;
+    }
+
+    @Override
+    public JsonInclude.Value findPropertyInclusion(Annotated a) {
+        JsonInclude.Value result = super.findPropertyInclusion(a);
+        if (result != JsonInclude.Value.empty()) {
+            return result;
+        }
+        if (AnnotatedMethod.class.isAssignableFrom(a.getClass())) {
+            AnnotatedMethod method = (AnnotatedMethod) a;
+            if (method.getParameterCount() == 0
+                    && method.getName().startsWith(GETTER_PREFIX)
+                    && Collection.class.isAssignableFrom(method.getRawReturnType())
+                    && ReflectionHelper.isModelInterfaceOrDefaultImplementation(method.getDeclaringClass())) {
+                return result.withValueInclusion(JsonInclude.Include.NON_EMPTY);
+            }
+        }
+        return result;
     }
 }

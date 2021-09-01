@@ -29,7 +29,6 @@ import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
  * @param <T> serialized class within the list
  */
 public class NoEntryWrapperListSerializer<T extends Object> extends JsonSerializer<List<T>> {
-    protected T placeholderEntry;
     private String outerWrapperName;
 
     /**
@@ -41,19 +40,9 @@ public class NoEntryWrapperListSerializer<T extends Object> extends JsonSerializ
         this.outerWrapperName = outerWrapper;
     }
 
-    /**
-     * Sets an empty object that is used for serialized lists with minimum cardinality of 1
-     * 
-     * @param emptyOject The placeholder in case the list is empty, but needs to have a size of 1.
-     */
-    public void setObjectForMinCardinality(T emptyOject) {
-        this.placeholderEntry = emptyOject;
-    }
-
     @Override
     public void serialize(List<T> list, JsonGenerator gen, SerializerProvider serializers)
-        throws IOException {
-        addOptionalPlaceholder(list);
+            throws IOException {
         writeList(list, (ToXmlGenerator) gen);
     }
 
@@ -82,12 +71,6 @@ public class NoEntryWrapperListSerializer<T extends Object> extends JsonSerializ
     private void writeOuterWrapperEnd(ToXmlGenerator xgen) throws IOException {
         if (outerWrapperName != null && !outerWrapperName.isEmpty()) {
             xgen.writeEndObject();
-        }
-    }
-
-    private void addOptionalPlaceholder(List<T> list) {
-        if (list.isEmpty() && placeholderEntry != null) {
-            list.add(placeholderEntry);
         }
     }
 
