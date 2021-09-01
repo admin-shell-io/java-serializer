@@ -58,7 +58,7 @@ public class XmlSerializer implements Serializer {
         mapper = XmlMapper.builder()
                 .enable(SerializationFeature.INDENT_OUTPUT)
                 .enable(DeserializationFeature.ACCEPT_SINGLE_VALUE_AS_ARRAY)
-                .serializationInclusion(JsonInclude.Include.NON_EMPTY)
+                .serializationInclusion(JsonInclude.Include.NON_NULL)
                 .annotationIntrospector(new XmlDataformatAnnotationIntrospector())
                 .defaultUseWrapper(false)
                 .addModule(buildEnumModule())
