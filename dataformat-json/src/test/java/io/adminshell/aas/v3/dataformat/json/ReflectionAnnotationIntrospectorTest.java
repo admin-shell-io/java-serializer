@@ -15,6 +15,17 @@
  */
 package io.adminshell.aas.v3.dataformat.json;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
+import java.util.List;
+import java.util.Map;
+
+import org.junit.Before;
+import org.junit.Test;
+
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.introspect.AnnotatedClass;
@@ -23,6 +34,11 @@ import com.fasterxml.jackson.databind.jsontype.NamedType;
 import com.fasterxml.jackson.databind.jsontype.TypeDeserializer;
 import com.fasterxml.jackson.databind.jsontype.TypeResolverBuilder;
 import com.fasterxml.jackson.databind.jsontype.impl.TypeNameIdResolver;
+
+import io.adminshell.aas.v3.dataformat.core.CustomProperty;
+import io.adminshell.aas.v3.dataformat.core.CustomSubProperty;
+import io.adminshell.aas.v3.dataformat.core.CustomSubmodel;
+import io.adminshell.aas.v3.dataformat.core.CustomSubmodel2;
 import io.adminshell.aas.v3.dataformat.json.mixins.ReferenceMixin;
 import io.adminshell.aas.v3.model.ClassA;
 import io.adminshell.aas.v3.model.ClassB;
@@ -33,17 +49,8 @@ import io.adminshell.aas.v3.model.Property;
 import io.adminshell.aas.v3.model.Referable;
 import io.adminshell.aas.v3.model.Submodel;
 import io.adminshell.aas.v3.model.SubmodelElement;
-import java.util.List;
-import java.util.Map;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import org.junit.Before;
-import org.junit.Test;
 import io.adminshell.aas.v3.model.TypedProperty;
 import io.adminshell.aas.v3.model.TypedSubProperty;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
-import org.junit.Ignore;
 
 //review AAS-134: some basic, rather simple tests would be helpful to understand/document the cases for which the introspector is build for
 //also some javadoc could help

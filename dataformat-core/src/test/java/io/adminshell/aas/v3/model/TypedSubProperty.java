@@ -13,10 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.xml;
+package io.adminshell.aas.v3.model;
 
-import io.adminshell.aas.v3.model.impl.DefaultSubmodel;
-
-public class CustomSubmodel extends DefaultSubmodel {
-
+public interface TypedSubProperty extends TypedProperty {
+    
 }

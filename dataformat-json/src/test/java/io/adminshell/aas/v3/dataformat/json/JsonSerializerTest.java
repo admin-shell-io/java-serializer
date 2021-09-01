@@ -20,6 +20,7 @@ import static org.junit.Assert.assertTrue;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.Set;
 
 import org.json.JSONException;
@@ -34,11 +35,14 @@ import org.slf4j.LoggerFactory;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 import io.adminshell.aas.v3.dataformat.SerializationException;
+import io.adminshell.aas.v3.dataformat.core.AASFull;
+import io.adminshell.aas.v3.dataformat.core.AASSimple;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShellEnvironment;
-import java.nio.file.Files;
 
 public class JsonSerializerTest {
+    public static final java.io.File AASSIMPLE_FILE = new java.io.File("src/test/resources/jsonExample.json");
+    public static final java.io.File AASFULL_FILE = new java.io.File("src/test/resources/test_demo_full_example.json");
 
     private static final Logger logger = LoggerFactory.getLogger(JsonSerializerTest.class);
 
@@ -64,12 +68,12 @@ public class JsonSerializerTest {
 
     @Test
     public void testSerializeSimpleExample() throws SerializationException, JSONException, IOException {
-        validateAndCompare(AASSimple.FILE, AASSimple.ENVIRONMENT);
+        validateAndCompare(AASSIMPLE_FILE, AASSimple.ENVIRONMENT);
     }
 
     @Test
     public void testSerializeFullExample() throws SerializationException, JSONException, IOException {
-        validateAndCompare(AASFull.FILE, AASFull.ENVIRONMENT);
+        validateAndCompare(AASFULL_FILE, AASFull.ENVIRONMENT);
     }
 
     private void validateAndCompare(File expectedFile, AssetAdministrationShellEnvironment environment) throws IOException, SerializationException, JSONException {

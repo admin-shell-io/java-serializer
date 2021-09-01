@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.xml;
+package io.adminshell.aas.v3.dataformat.core;
 
 import java.util.List;
 import java.util.Objects;

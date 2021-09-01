@@ -16,26 +16,30 @@
 package io.adminshell.aas.v3.dataformat.aasx.deserialization;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
-import io.adminshell.aas.v3.dataformat.DeserializationException;
-import io.adminshell.aas.v3.dataformat.SerializationException;
-import io.adminshell.aas.v3.dataformat.aasx.AASXDeserializer;
-import io.adminshell.aas.v3.dataformat.aasx.AASXSerializer;
-import io.adminshell.aas.v3.dataformat.aasx.AASXValidator;
-import io.adminshell.aas.v3.dataformat.aasx.InMemoryFile;
-import io.adminshell.aas.v3.dataformat.aasx.serialization.AASSimple;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
+import javax.xml.parsers.ParserConfigurationException;
+
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.TemporaryFolder;
 import org.xml.sax.SAXException;
 
-import javax.xml.parsers.ParserConfigurationException;
-import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Set;
+import io.adminshell.aas.v3.dataformat.DeserializationException;
+import io.adminshell.aas.v3.dataformat.SerializationException;
+import io.adminshell.aas.v3.dataformat.aasx.AASXSerializer;
+import io.adminshell.aas.v3.dataformat.aasx.AASXValidator;
+import io.adminshell.aas.v3.dataformat.aasx.InMemoryFile;
+import io.adminshell.aas.v3.dataformat.core.AASSimple;
 
 public class ValidationTest {
 
