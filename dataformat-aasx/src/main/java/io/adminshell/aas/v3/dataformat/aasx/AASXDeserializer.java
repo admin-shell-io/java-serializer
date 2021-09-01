@@ -18,7 +18,6 @@ package io.adminshell.aas.v3.dataformat.aasx;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -31,6 +30,7 @@ import org.apache.poi.openxml4j.opc.PackageRelationshipCollection;
 import org.apache.poi.openxml4j.opc.PackagingURIHelper;
 
 import io.adminshell.aas.v3.dataformat.DeserializationException;
+import io.adminshell.aas.v3.dataformat.Serializer;
 import io.adminshell.aas.v3.dataformat.xml.XmlDeserializer;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.File;
@@ -125,7 +125,7 @@ public class AASXDeserializer {
         // Read the content from the PackagePart
         InputStream stream = xmlPart.getInputStream();
         StringWriter writer = new StringWriter();
-        IOUtils.copy(stream, writer, StandardCharsets.UTF_8);
+        IOUtils.copy(stream, writer, Serializer.DEFAULT_CHARSET);
         return writer.toString();
     }
 
