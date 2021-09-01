@@ -30,6 +30,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 
 import io.adminshell.aas.v3.dataformat.xml.AasXmlNamespaceContext;
+import io.adminshell.aas.v3.model.Asset;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.ConceptDescription;
@@ -47,6 +48,8 @@ public class AssetAdministrationShellEnvironmentSerializer extends JsonSerialize
     private static final QName CONCEPTDICTIONARY_TAGNAME = new QName(AasXmlNamespaceContext.AAS_URI, "conceptDescription");
     private static final QName SUBMODELLIST_TAGNAME = new QName(AasXmlNamespaceContext.AAS_URI, "submodels");
     private static final QName SUBMODEL_TAGNAME = new QName(AasXmlNamespaceContext.AAS_URI, "submodel");
+    private static final QName ASSETLIST_TAGNAME = new QName(AasXmlNamespaceContext.AAS_URI, "assets");
+    private static final QName ASSET_TAGNAME = new QName(AasXmlNamespaceContext.AAS_URI, "asset");
 
     private Map<String, String> namespacePrefixes;
 
@@ -94,8 +97,16 @@ public class AssetAdministrationShellEnvironmentSerializer extends JsonSerialize
 
     private void writeContent(AssetAdministrationShellEnvironment value, ToXmlGenerator xgen) throws IOException {
         writeAssetAdministrationShells(xgen, value.getAssetAdministrationShells());
+        writeAssets(xgen, value.getAssets());
         writeConceptDescriptions(xgen, value.getConceptDescriptions());
         writeSubmodels(xgen, value.getSubmodels());
+    }
+
+    private void writeAssets(ToXmlGenerator xgen, List<Asset> assets) throws IOException {
+        if (assets.isEmpty()) {
+            return;
+        }
+        writeWrappedArray(xgen, ASSETLIST_TAGNAME, ASSET_TAGNAME, assets);
     }
 
     private void writeAssetAdministrationShells(ToXmlGenerator xgen, List<AssetAdministrationShell> aasList)

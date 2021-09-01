@@ -10,7 +10,7 @@
             <aas:submodelRefs>
                 <aas:submodelRef>
                     <aas:keys>
-                        <aas:key idType="Iri" type="Submodel">http.//i40.customer.com/type/1/1/7A7104BDAB57E184</aas:key>
+                        <aas:key idType="Iri" type="Submodel">http://i40.customer.com/type/1/1/7A7104BDAB57E184</aas:key>
                     </aas:keys>
                 </aas:submodelRef>
                 <aas:submodelRef>
@@ -60,6 +60,12 @@
             </aas:assetInformation>
         </aas:assetAdministrationShell>
     </aas:assetAdministrationShells>
+    <aas:assets>
+        <aas:asset>
+            <aas:idShort>ServoDCMotor</aas:idShort>
+            <aas:identification idType="Iri">http://customer.com/assets/KHBVZJSQKIY</aas:identification>
+        </aas:asset>
+    </aas:assets>
     <aas:conceptDescriptions>
         <aas:conceptDescription>
             <aas:idShort>Title</aas:idShort>
