@@ -66,7 +66,7 @@ public class SerializerTest {
                 .submodels(submodel)
                 .build();
         String output = new Serializer().serialize(aasEnv, RDFLanguages.JSONLD);
-        System.out.println(output);
+        //System.out.println(output);
         Assert.assertTrue(output.contains("@context"));
         Assert.assertTrue(output.contains("rdf:"));
 
