@@ -273,6 +273,41 @@ aas:AASd-023Shape  a sh:NodeShape ;
           """ ;
 ] .
 
+# AASd-026
+aas:AASd-026Shape a sh:NodeShape ;
+    sh:targetClass aas:SubmodelElementCollection ;
+    sh:prefixes xsd: ;
+    sh:sparql [
+       a sh:SPARQLConstraint ;
+       sh:message "If allowDuplicates==false then it is not allowed that the collection contains several elements with the same semantics (i.e. the same semanticId)." ;
+       sh:select """
+         SELECT ?keyType
+            WHERE {
+              ?SubmodelElementCollection a <https://admin-shell.io/aas/3/0/RC01/SubmodelElementCollection> .
+              ?SubmodelElementCollection  <https://admin-shell.io/aas/3/0/RC01/Referable/idShort> ?SubmodelElementCollectionIdShort .
+              ?SubmodelElementCollection <https://admin-shell.io/aas/3/0/RC01/SubmodelElementCollection/allowDuplicates> "False"^^xsd:boolean.
+
+              ?SubmodelElementCollection <https://admin-shell.io/aas/3/0/RC01/SubmodelElementCollection/value> ?Value1 .
+              ?Value1 <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?Value1SemanticId .
+              ?Value1SemanticId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?Value1Key .
+              ?Value1Key <https://admin-shell.io/aas/3/0/RC01/Key/type> ?Value1KeyType .
+              ?Value1Key <https://admin-shell.io/aas/3/0/RC01/Key/value> ?Value1KeyValue .
+              ?Value1Key <https://admin-shell.io/aas/3/0/RC01/Key/idType> ?Value1KeyIdType .
+
+              ?SubmodelElementCollection <https://admin-shell.io/aas/3/0/RC01/SubmodelElementCollection/value> ?Value2 .
+              ?Value2 <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?Value2SemanticId .
+              ?Value2SemanticId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?Value2Key .
+              ?Value2Key <https://admin-shell.io/aas/3/0/RC01/Key/type> ?Value2KeyType .
+              ?Value2Key <https://admin-shell.io/aas/3/0/RC01/Key/value> ?Value2KeyValue .
+              ?Value2Key <https://admin-shell.io/aas/3/0/RC01/Key/idType> ?Value2KeyIdType .
+
+
+              FILTER (?Value1SemanticId = ?Value2SemanticId )
+
+         }
+             """ ;
+    ] .
+
 # AASd-051
 aas:ConceptDescriptionAllowedCategories a sh:NodeShape ;
   sh:targetClass aas:ConceptDescription ;
