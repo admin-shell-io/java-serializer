@@ -18,6 +18,7 @@ package io.adminshell.aas.v3.dataformat.json;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationFeature;
+import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
@@ -30,12 +31,15 @@ import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
 import io.adminshell.aas.v3.dataformat.core.serialization.EmbeddedDataSpecificationSerializer;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
+import io.adminshell.aas.v3.model.Referable;
+
+import java.util.List;
 
 /**
- * Class for serializing an instance of AssetAdministrationShellEnvironment to
+ * Class for serializing an instance of AssetAdministrationShellEnvironment or Referables to
  * JSON.
  */
-public class JsonSerializer implements Serializer {
+public class JsonSerializer implements Serializer, ReferableSerializer {
 
     protected JsonMapper mapper;
 
@@ -72,6 +76,29 @@ public class JsonSerializer implements Serializer {
             return mapper.writeValueAsString(ModelTypeProcessor.postprocess(mapper.valueToTree(aasEnvironment)));
         } catch (JsonProcessingException ex) {
             throw new SerializationException("error serializing AssetAdministrationShellEnvironment", ex);
+        }
+    }
+
+    @Override
+    public String write(Referable referable) throws SerializationException {
+        try {
+            return mapper.writeValueAsString(ModelTypeProcessor.postprocess(mapper.valueToTree(referable)));
+        } catch (JsonProcessingException ex) {
+            throw new SerializationException("error serializing Referable", ex);
+        }
+    }
+
+    @Override
+    public String write(List<Referable> referables) throws SerializationException {
+        if(referables.isEmpty()){
+            return null;
+        }
+        try {
+            ObjectWriter objectWriter = mapper.writerFor(mapper.getTypeFactory().constructCollectionType(List.class, referables.get(0).getClass()));
+            String json = objectWriter.writeValueAsString(referables);
+            return mapper.writeValueAsString(ModelTypeProcessor.postprocess(this.mapper.readTree(json)));
+        } catch (JsonProcessingException ex) {
+            throw new SerializationException("error serializing list of Referables", ex);
         }
     }
 }

@@ -1,0 +1,157 @@
+{
+  "idShort": "Identification",
+  "description": [
+    {
+      "language": "en-us",
+      "text": "An example asset identification submodel for the test application"
+    },
+    {
+      "language": "de",
+      "text": "Ein Beispiel-Identifikations-Submodel für eine Test-Anwendung"
+    }
+  ],
+  "modelType":
+  {
+    "name": "Submodel"
+  },
+  "identification":
+  {
+    "id": "http://acplt.org/Submodels/Assets/TestAsset/Identification",
+    "idType": "Iri"
+  },
+  "administration":
+  {
+    "version": "0.9",
+    "revision": "0"
+  },
+  "semanticId":
+  {
+    "keys": [
+      {
+        "type": "Submodel",
+        "idType": "Iri",
+        "value": "http://acplt.org/SubmodelTemplates/AssetIdentification"
+      }
+    ]
+  },
+  "submodelElements": [
+    {
+      "idShort": "ManufacturerName",
+      "description": [
+        {
+          "language": "en-us",
+          "text": "Legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation."
+        },
+        {
+          "language": "de",
+          "text": "Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist"
+        }
+      ],
+      "modelType":
+      {
+        "name": "Property"
+      },
+      "semanticId":
+      {
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "idType": "Iri",
+            "value": "0173-1#02-AAO677#002"
+          }
+        ]
+      },
+      "qualifiers": [
+        {
+          "modelType":
+          {
+            "name": "Qualifier"
+          },
+          "value": "100",
+          "valueId":
+          {
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "idType": "Iri",
+                "value": "http://acplt.org/ValueId/ExampleValueId"
+              }
+            ]
+          },
+          "valueType": "int",
+          "type": "http://acplt.org/Qualifier/ExampleQualifier"
+        },
+        {
+          "modelType":
+          {
+            "name": "Qualifier"
+          },
+          "value": "50",
+          "valueId":
+          {
+            "keys": [
+              {
+                "type": "GlobalReference",
+                "idType": "Iri",
+                "value": "http://acplt.org/ValueId/ExampleValueId"
+              }
+            ]
+          },
+          "valueType": "int",
+          "type": "http://acplt.org/Qualifier/ExampleQualifier2"
+        }
+      ],
+      "value": "ACPLT",
+      "valueId":
+      {
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "idType": "Iri",
+            "value": "http://acplt.org/ValueId/ExampleValueId"
+          }
+        ]
+      },
+      "valueType": "string"
+    },
+    {
+      "idShort": "InstanceId",
+      "description": [
+        {
+          "language": "en-us",
+          "text": "Legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation."
+        },
+        {
+          "language": "de",
+          "text": "Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist"
+        }
+      ],
+      "modelType":
+      {
+        "name": "Property"
+      },
+      "semanticId":
+      {
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "idType": "Iri",
+            "value": "http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber"
+          }
+        ]
+      },
+      "value": "978-8234-234-342",
+      "valueId":
+      {
+        "keys": [
+          {
+            "type": "GlobalReference",
+            "idType": "Iri",
+            "value": "http://acplt.org/ValueId/ExampleValueId"
+          }
+        ]
+      },
+      "valueType": "string"
+    }
+  ]
+}
