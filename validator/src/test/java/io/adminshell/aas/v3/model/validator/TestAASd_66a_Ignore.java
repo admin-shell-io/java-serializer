@@ -20,7 +20,7 @@ import static org.junit.Assert.fail;
  *
  */
 
-public class TestAASd_66a {
+public class TestAASd_66a_Ignore {
 
     @Test
     public void wrongValueReferencePairTypesValue() throws ValidationException {

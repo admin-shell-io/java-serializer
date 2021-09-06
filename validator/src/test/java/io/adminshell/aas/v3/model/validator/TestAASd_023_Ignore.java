@@ -17,11 +17,11 @@ import static org.junit.Assert.*;
  * <i> AssetInformation/globalAssetId either is a reference to an Asset object or a global reference. </i>
  * </p>
  *
- * @author schnicke
+ * @author bader, chang
  *
  */
 
-public class TestAASd_023 {
+public class TestAASd_023_Ignore {
     @Test
     public void correctReferenceToAsset() throws ValidationException, IOException {
         AssetInformation assetInformation = createAssetInformation(KeyElements.ASSET);

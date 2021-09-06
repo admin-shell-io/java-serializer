@@ -19,7 +19,7 @@ import java.util.*;
  *
  */
 
-public class TestAASd_026 {
+public class TestAASd_026_Ignore {
 
 
     private SubmodelElementCollection createSubmodelElementCollection(Collection<SubmodelElement> values) {

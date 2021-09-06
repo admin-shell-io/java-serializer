@@ -16,10 +16,10 @@ import java.util.Arrays;
  * the property is identical to DataSpecificationIEC61360/valueId. </i>
  * </p>
  *
- * @author schnicke
+ * @author bader, chang
  *
  */
-public class TestAASd_65a {
+public class TestAASd_65a_Ignore {
     @Test
     public void missmatchingValueAndValueId() throws ValidationException {
 
