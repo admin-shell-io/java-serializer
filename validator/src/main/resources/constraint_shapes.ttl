@@ -292,7 +292,7 @@ aas:AASd-021Shape  a sh:NodeShape ;
               #?Value1SemanticId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?Value1Key .
               #?Value1Key <https://admin-shell.io/aas/3/0/RC01/Key/type> ?Value1KeyType .
               #?Value1Key <https://admin-shell.io/aas/3/0/RC01/Key/value> ?Value1KeyValue .
-              ?Value1Key <https://admin-shell.io/aas/3/0/RC01/Key/idType> ?Value1KeyIdType .
+              #?Value1Key <https://admin-shell.io/aas/3/0/RC01/Key/idType> ?Value1KeyIdType .
 
               #?SubmodelElementCollection <https://admin-shell.io/aas/3/0/RC01/SubmodelElementCollection/value> ?Value2 .
               #?Value2 <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?Value2SemanticId .
