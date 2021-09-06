@@ -38,13 +38,13 @@ public class JsonReferableSerializerTest {
     public void testSerializeAAS() throws IOException, SerializationException, JSONException {
         AssetAdministrationShellEnvironment environment = AASFull.ENVIRONMENT;
         AssetAdministrationShell assetAdministrationShell = environment.getAssetAdministrationShells().get(0);
-        validateAndCompare("src/test/resources/assetAdministrationShell.json",assetAdministrationShell);
+        compare("src/test/resources/assetAdministrationShell.json",assetAdministrationShell);
     }
 
     @Test
-    public void testSerializeMultipleAAS() throws IOException, SerializationException, JSONException {
+    public void testSerializeAASs() throws IOException, SerializationException, JSONException {
         AssetAdministrationShellEnvironment environment = AASFull.ENVIRONMENT;
-        validateAndCompare("src/test/resources/assetAdministrationShellList.json",
+        compare("src/test/resources/assetAdministrationShellList.json",
                 environment.getAssetAdministrationShells().get(0), environment.getAssetAdministrationShells().get(1));
     }
 
@@ -52,38 +52,38 @@ public class JsonReferableSerializerTest {
     public void testSerializeSubmodel() throws IOException, SerializationException, JSONException {
         AssetAdministrationShellEnvironment environment = AASFull.ENVIRONMENT;
         Submodel submodel = environment.getSubmodels().get(0);
-        validateAndCompare("src/test/resources/submodel.json",submodel);
+        compare("src/test/resources/submodel.json",submodel);
     }
 
     @Test
-    public void testSerializeMultipleSubmodels() throws IOException, SerializationException, JSONException {
+    public void testSerializeSubmodels() throws IOException, SerializationException, JSONException {
         AssetAdministrationShellEnvironment environment = AASFull.ENVIRONMENT;
-        validateAndCompare("src/test/resources/submodelList.json", environment.getSubmodels().get(0), environment.getSubmodels().get(1));
+        compare("src/test/resources/submodelList.json", environment.getSubmodels().get(0), environment.getSubmodels().get(1));
     }
 
     @Test
     public void testSerializeSubmodelelement() throws IOException, SerializationException, JSONException {
         AssetAdministrationShellEnvironment environment = AASFull.ENVIRONMENT;
         SubmodelElement submodelElement = environment.getSubmodels().get(0).getSubmodelElements().get(0);
-        validateAndCompare("src/test/resources/submodelElement.json",submodelElement);
+        compare("src/test/resources/submodelElement.json",submodelElement);
     }
 
     @Test
-    public void testSerializeMultipleSubmodelelements() throws IOException, SerializationException, JSONException {
+    public void testSerializeSubmodelelements() throws IOException, SerializationException, JSONException {
         AssetAdministrationShellEnvironment environment = AASFull.ENVIRONMENT;
         SubmodelElement submodelElement0 = environment.getSubmodels().get(0).getSubmodelElements().get(0);
         SubmodelElement submodelElement1 = environment.getSubmodels().get(0).getSubmodelElements().get(1);
-        validateAndCompare("src/test/resources/submodelElementList.json",submodelElement0,submodelElement1);
+        compare("src/test/resources/submodelElementList.json",submodelElement0,submodelElement1);
     }
 
     @Test
     public void testSerializeSubmodelelementCollection() throws IOException, SerializationException, JSONException {
         AssetAdministrationShellEnvironment environment = AASFull.ENVIRONMENT;
         SubmodelElement submodelElementCollection = environment.getSubmodels().get(6).getSubmodelElements().get(5);
-        validateAndCompare("src/test/resources/submodelElementCollection.json",submodelElementCollection);
+        compare("src/test/resources/submodelElementCollection.json",submodelElementCollection);
     }
 
-    private void validateAndCompare(String filePathForExpected, Referable... referable) throws IOException, SerializationException, JSONException {
+    private void compare(String filePathForExpected, Referable... referable) throws IOException, SerializationException, JSONException {
         File fileExpected = new File(filePathForExpected);
         String expected = Files.readString(fileExpected.toPath());
         String actual;
