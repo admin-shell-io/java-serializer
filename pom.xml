@@ -201,14 +201,6 @@
         </repository>
     </distributionManagement>
 
-    <repositories>
-        <repository>
-            <id>eis-public-repo</id>
-            <name>maven-public</name>
-            <url>https://maven.iais.fraunhofer.de/artifactory/eis-ids-public</url>
-        </repository>
-    </repositories>
-
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
