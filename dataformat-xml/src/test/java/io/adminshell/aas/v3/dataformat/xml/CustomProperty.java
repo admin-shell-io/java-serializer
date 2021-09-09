@@ -18,12 +18,7 @@ package io.adminshell.aas.v3.dataformat.xml;
 import java.util.List;
 import java.util.Objects;
 
-import io.adminshell.aas.v3.model.Constraint;
-import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
-import io.adminshell.aas.v3.model.LangString;
-import io.adminshell.aas.v3.model.ModelingKind;
-import io.adminshell.aas.v3.model.Property;
-import io.adminshell.aas.v3.model.Reference;
+import io.adminshell.aas.v3.model.*;
 
 public class CustomProperty implements Property {
 
@@ -48,6 +43,8 @@ public class CustomProperty implements Property {
 	protected List<LangString> displayNames;
 
 	protected String idShort;
+
+	protected List<Extension> extensions;
 
 	protected CustomProperty() {
 	}
@@ -187,5 +184,15 @@ public class CustomProperty implements Property {
 	@Override
 	final public void setSemanticId(Reference semanticId) {
 		this.semanticId = semanticId;
+	}
+
+	@Override
+	public List<Extension> getExtensions() {
+		return extensions;
+	}
+
+	@Override
+	public void setExtensions(List<Extension> list) {
+		this.extensions = list;
 	}
 }
