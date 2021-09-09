@@ -34,7 +34,7 @@ public class FileMapper extends DefaultMapper<File> {
     protected static PropertyDescriptor PROPERTY_VALUE = AasUtils.getProperty(File.class, "value");
     protected static PropertyDescriptor PROPERTY_MIME_TYPE = AasUtils.getProperty(File.class, "mimeType");
 
-    private static final String FILE_DATA_REFERENCE = "FileDataReference";
+    private static final String FILE_DATA_REFERENCE = "AssetAdministrationShellInterfaceClassLib/FileDataReference";
     private static final String MIME_TYPE_ATTRIBUTE_NAME = "MIMEType";
     private static final String REF_URI_ATTRIBUTE_NAME = "refUri";
 
@@ -48,7 +48,7 @@ public class FileMapper extends DefaultMapper<File> {
             return;
         }
 
-        List<InterfaceClassType> externalInterfaces = findExternalInterface(parser.getCurrent(), x -> x.getName().equalsIgnoreCase(FILE_DATA_REFERENCE));
+        List<InterfaceClassType> externalInterfaces = findExternalInterface(parser.getCurrent(), x -> x.getRefBaseClassPath().equalsIgnoreCase(FILE_DATA_REFERENCE));
         if (externalInterfaces == null || externalInterfaces.size() == 0)
             throw new MappingException(String.format("no external interfaces are found in file %s %s", parser.getCurrent().getID(), parser.getCurrent().getName()));
 

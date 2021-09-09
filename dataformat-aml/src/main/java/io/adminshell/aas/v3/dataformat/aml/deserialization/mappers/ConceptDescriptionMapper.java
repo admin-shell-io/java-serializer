@@ -23,8 +23,6 @@ import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXObject;
 import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.model.ConceptDescription;
-import io.adminshell.aas.v3.model.Identifier;
-import io.adminshell.aas.v3.model.Property;
 import io.adminshell.aas.v3.model.Reference;
 
 import java.beans.PropertyDescriptor;
@@ -36,6 +34,7 @@ import java.util.List;
  */
 public class ConceptDescriptionMapper extends DefaultMapper<ConceptDescription> {
 
+    public static final String ATTRIBUTE_PATH_ISCASEOF = "AAS:ConceptDescription/isCaseOf";
     protected static PropertyDescriptor PROPERTY_ISCASEOF = AasUtils.getProperty(ConceptDescription.class, "isCaseOfs");
 
     public ConceptDescriptionMapper() {
@@ -49,7 +48,7 @@ public class ConceptDescriptionMapper extends DefaultMapper<ConceptDescription> 
         }
 
         CAEXObject temp = parser.getCurrent();
-        List<AttributeType> attributeTypeList = findAttributes(parser.getCurrent(), x->x.getName().equalsIgnoreCase("isCaseOf"));
+        List<AttributeType> attributeTypeList = findAttributesByCorrespondingAttributePath(parser.getCurrent(), ATTRIBUTE_PATH_ISCASEOF);
         List<Reference> referenceList = new ArrayList<>();
         if(!attributeTypeList.isEmpty()){
             //TODO How to handle multiple references in isCaseOf?

@@ -47,6 +47,7 @@ public class ViewMapper extends DefaultMapper<View> {
         if (!InternalElementType.class.isAssignableFrom(parser.getCurrent().getClass())) return;
         InternalElementType internalElementType_View = (InternalElementType) parser.getCurrent();
 
+        //TODO remove after adjustment of serializer
         ((View) parent).setIdShort(internalElementType_View.getName());
 
         List<InternalElementType> internalElementTypeList = internalElementType_View.getInternalElement();

@@ -15,7 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.serialization;
 
-import io.adminshell.aas.v3.dataformat.aml.serialization.naming.NamingStrategy;
+import io.adminshell.aas.v3.dataformat.aml.common.naming.NamingStrategy;
 import io.adminshell.aas.v3.dataformat.aml.util.ReferencedReferableCollector;
 import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;

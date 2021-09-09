@@ -84,7 +84,7 @@ public class DataSpecificationIEC61360Mapper extends DefaultMapper<DataSpecifica
     }
 
     @Override
-    protected Class<?> typeFromAttribute(AttributeType attribute) {
+    protected Class<?> typeFromAttribute(AttributeType attribute, MappingContext context) {
         List<PropertyDescriptor> propertyDescriptors = AasUtils.getAasProperties(DefaultDataSpecificationIEC61360.class);
         PropertyDescriptor propertyDescriptor = propertyDescriptors.stream().filter(x -> x.getName().contains(attribute.getName())).findFirst().orElse(null);
 
@@ -99,7 +99,7 @@ public class DataSpecificationIEC61360Mapper extends DefaultMapper<DataSpecifica
         if (parser == null || attribute == null || context == null) {
             return null;
         }
-        Class<?> type = typeFromAttribute(attribute);
+        Class<?> type = typeFromAttribute(attribute, context);
         if (isAasType(type)) {
             return context.getMappingProvider().getMapper(type).map(parser, context);
         }

@@ -13,11 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.aml.serialization.naming;
+package io.adminshell.aas.v3.dataformat.aml.common.naming;
 
 import com.google.common.reflect.TypeToken;
 import io.adminshell.aas.v3.dataformat.core.util.MostSpecificTypeTokenComparator;
-import io.adminshell.aas.v3.model.Qualifier;
+
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
@@ -32,14 +32,25 @@ public class PropertyNamingStrategy implements NamingStrategy {
 
     protected class TypeSafeFunction<T> {
 
+        public TypeSafeFunction(Class<T> inputType, BiFunction<T, String, String> nameProvider, BiFunction<T, String, String> refSemanticProvider, String oldName, String newName) {
+            this.inputType = TypeToken.of(inputType);
+            this.nameProvider = nameProvider;
+            this.refSemanticProvider = refSemanticProvider;
+            this.oldName = oldName;
+            this.newName = newName;
+        }
+
         public TypeSafeFunction(Class<T> inputType, BiFunction<T, String, String> nameProvider, BiFunction<T, String, String> refSemanticProvider) {
             this.inputType = TypeToken.of(inputType);
             this.nameProvider = nameProvider;
             this.refSemanticProvider = refSemanticProvider;
         }
+
         TypeToken inputType;
         BiFunction<T, String, String> nameProvider;
         BiFunction<T, String, String> refSemanticProvider;
+        String oldName;
+        String newName;
     }
 
     public <T> void registerCustomNaming(Class<T> type,
@@ -58,7 +69,8 @@ public class PropertyNamingStrategy implements NamingStrategy {
             String newName) {
         customNamings.add(new TypeSafeFunction(type,
                 (obj, property) -> Objects.equals(oldName, property) ? newName : null,
-                (obj, property) -> Objects.equals(oldName, property) ? newName : null));
+                (obj, property) -> Objects.equals(oldName, property) ? newName : null,
+                oldName, newName));
     }
 
     public void registerCustomNaming(Class<?> type,
@@ -67,7 +79,8 @@ public class PropertyNamingStrategy implements NamingStrategy {
             String newRefSemantic) {
         customNamings.add(new TypeSafeFunction(type,
                 (obj, property) -> Objects.equals(oldName, property) ? newName : null,
-                (obj, property) -> Objects.equals(oldName, property) ? newRefSemantic : null));
+                (obj, property) -> Objects.equals(oldName, property) ? newRefSemantic : null,
+                oldName,newName));
     }
 
     public <T> void registerCustomNaming(Class<T> type,
@@ -90,6 +103,15 @@ public class PropertyNamingStrategy implements NamingStrategy {
                 .filter(x -> x.inputType.isSupertypeOf(type))
                 .sorted((x, y) -> Objects.compare(x.inputType, y.inputType, new MostSpecificTypeTokenComparator()))
                 .collect(Collectors.toList());
+    }
+
+    public String getOldName(Type type, Object obj, String property){
+       TypeSafeFunction typeSafeFunction = customNamings.stream()
+               .filter(x -> x.inputType.isSupertypeOf(type) && x.newName.equalsIgnoreCase(property))
+               .findFirst()
+               .orElse(null);
+       if(typeSafeFunction==null)return null;
+       return typeSafeFunction.oldName;
     }
 
     @Override

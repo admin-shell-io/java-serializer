@@ -16,6 +16,7 @@
 package io.adminshell.aas.v3.dataformat.aml.deserialization;
 
 import io.adminshell.aas.v3.dataformat.aml.model.caex.*;
+import io.adminshell.aas.v3.dataformat.aml.common.naming.PropertyNamingStrategy;
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
@@ -35,7 +36,6 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import io.adminshell.aas.v3.model.Reference;
 import org.apache.xerces.dom.ElementNSImpl;
 
 /**
@@ -89,7 +89,7 @@ public class DefaultMapper<T> implements Mapper<T> {
         if (parser == null || attribute == null || context == null) {
             return null;
         }
-        Class<?> type = typeFromAttribute(attribute);
+        Class<?> type = typeFromAttribute(attribute, context);
         if (isAasType(type)) {
             Object result = newInstance(type, context);
             mapProperties(result, parser, context);
@@ -234,7 +234,7 @@ public class DefaultMapper<T> implements Mapper<T> {
      * @throws MappingException if type information is missing or invalid or
      * type could not be resolved
      */
-    protected Class<?> typeFromAttribute(AttributeType attribute) throws MappingException {
+    protected Class<?> typeFromAttribute(AttributeType attribute, MappingContext context) throws MappingException {
         if (attribute.getRefSemantic() == null || attribute.getRefSemantic().isEmpty()) {
             throw new MappingException(String.format("missing required refSemantic in attribute %s", attribute.getName()));
         }
@@ -262,9 +262,10 @@ public class DefaultMapper<T> implements Mapper<T> {
         // alternative way to discover property but more expensive as all properties are considered and not only those defined on class
         // Optional<PropertyDescriptor> property = AasUtils.getAasProperties(type.get()).stream().filter(x -> x.getName().equals(type)).findFirst();        
         try {
-            //TODO: use equals instead of contains. Use old name of PropertyNamingStrategy
+
+            String oldPropertyName = ((PropertyNamingStrategy)context.getPropertyNamingStrategy()).getOldName(type, attribute,attributePathElements[1]);
             Optional<PropertyDescriptor> property = Stream.of(Introspector.getBeanInfo(type).getPropertyDescriptors())
-                    .filter(x -> x.getName().contains(attributePathElements[1])).findFirst();
+                    .filter(x -> x.getName().equalsIgnoreCase(oldPropertyName == null ? attributePathElements[1] : oldPropertyName)).findFirst();
             if (property.isPresent()) {
                 return property.get().getReadMethod().getReturnType();
             } else {
@@ -413,11 +414,11 @@ public class DefaultMapper<T> implements Mapper<T> {
         return attributeDataType.substring(attributeDataType.lastIndexOf(":") + 1);
     }
 
-    protected void setValueDataTypeFromAttributeDataType(AmlParser parser, Object parent, String attributeNameWithAttributeDataType, Class aasClazz) throws MappingException {
+    protected void setValueDataTypeFromAttributeDataType(AmlParser parser, Object parent, String attributeRefWithAttributeDataType, Class aasClazz) throws MappingException {
         if(parser == null || parent == null)return;
 
-        AttributeType attributeType = findAttributes(parser.getCurrent(),
-                x -> x.getName().equalsIgnoreCase(attributeNameWithAttributeDataType)).stream().findFirst().orElse(null);
+        AttributeType attributeType = findAttributesByCorrespondingAttributePath(parser.getCurrent(),
+                attributeRefWithAttributeDataType).stream().findFirst().orElse(null);
         if(attributeType != null){
             try {
                 String dataType = getDataTypeFromAttribute(attributeType);
@@ -472,8 +473,12 @@ public class DefaultMapper<T> implements Mapper<T> {
         }
         String refSemantic = refSemanticPrefix + ":" + property.getReadMethod().getDeclaringClass().getSimpleName() + "/"
                 + context.getPropertyNamingStrategy().getNameForRefSemantic(property.getReadMethod().getDeclaringClass(), null, property.getName());
-        return findAttributes(parent, x -> x.getRefSemantic().stream()
-                .anyMatch(y -> y.getCorrespondingAttributePath().equals(refSemantic)));
+        return findAttributesByCorrespondingAttributePath(parent, refSemantic);
+    }
+
+    protected List<AttributeType> findAttributesByCorrespondingAttributePath(CAEXObject parent, String correspondingAttributePath){
+        return findAttributes(parent,
+                x -> x.getRefSemantic().stream().anyMatch(y -> y.getCorrespondingAttributePath().equalsIgnoreCase(correspondingAttributePath)));
     }
 
     protected List<AttributeType> findAttributes(CAEXObject parent, Predicate<AttributeType> filter) {
@@ -556,6 +561,11 @@ public class DefaultMapper<T> implements Mapper<T> {
         }
         return parent.getInternalElement().stream().filter(filter).collect(Collectors.toList());
     }
+
+    private void getAllMatchingInternalElements(Predicate<InternalElementType> filter, List<InternalElementType> resultList){
+
+    }
+
 
     protected List<InterfaceClassType> findExternalInterface(CAEXObject parent, Predicate<InterfaceClassType> filter) {
         if (parent == null || filter == null) {
