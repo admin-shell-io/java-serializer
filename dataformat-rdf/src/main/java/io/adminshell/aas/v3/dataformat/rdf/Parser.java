@@ -223,7 +223,7 @@ class Parser {
                     //Yes, it is assignable multiple times. Concatenate multiple values together using some delimiter
                     try {
                         //ArrayLists are generics. We need to extract the name of the generic parameter as string and interpret that
-                        String typeName = extractTypeNameFromList(value.getGenericParameterTypes()[0]);
+                        String typeName = extractTypeNameFromCollection(value.getGenericParameterTypes()[0]);
 
                         if (typeName.endsWith("LangString"))
                             isTypedLiteral = true;
@@ -549,7 +549,7 @@ class Parser {
                         if (Collection.class.isAssignableFrom(currentType)) {
                             //We are working with ArrayLists.
                             //Here, we need to work with the GenericParameterTypes instead to find out what kind of ArrayList we are dealing with
-                            String typeName = extractTypeNameFromList(entry.getValue().getGenericParameterTypes()[0]);
+                            String typeName = extractTypeNameFromCollection(entry.getValue().getGenericParameterTypes()[0]);
                             if (isArrayListTypePrimitive(entry.getValue().getGenericParameterTypes()[0])) {
                                 if (typeName.endsWith("LangString")) {
                                     try {
@@ -914,7 +914,7 @@ class Parser {
     }
 
     private boolean isArrayListTypePrimitive(Type t) throws IOException {
-        String typeName = extractTypeNameFromList(t);
+        String typeName = extractTypeNameFromCollection(t);
 
         try {
             //Do not try to call Class.forName(primitive) -- that would throw an exception
@@ -925,9 +925,9 @@ class Parser {
         }
     }
 
-    private String extractTypeNameFromList(Type t) throws IOException {
+    private String extractTypeNameFromCollection(Type t) throws IOException {
         String typeName = t.getTypeName();
-        if (!typeName.startsWith("java.util.ArrayList<") && !typeName.startsWith("java.util.List<")) {
+        if (!typeName.startsWith("java.util.ArrayList<") && !typeName.startsWith("java.util.List<") && !typeName.startsWith("java.util.Collection<")) {
             throw new IOException("Illegal argument encountered while interpreting type parameter");
         }
         //"<? extends XYZ>" or super instead of extends
