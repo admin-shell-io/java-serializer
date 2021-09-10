@@ -20,6 +20,7 @@ import io.adminshell.aas.v3.dataformat.aml.common.naming.PropertyNamingStrategy;
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
+
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -63,8 +64,8 @@ public class DefaultMapper<T> implements Mapper<T> {
                 return (T) fromAttribute(parser, (AttributeType) parser.getCurrent(), context);
             } else if (InternalElementType.class.isAssignableFrom(parser.getCurrent().getClass())) {
                 return (T) fromInternalElement(parser, (InternalElementType) parser.getCurrent(), context);
-            } else if(SystemUnitFamilyType.class.isAssignableFrom(parser.getCurrent().getClass())){
-                return (T) fromSystemUnitFamily(parser, (SystemUnitFamilyType) parser.getCurrent(),context);
+            } else if (SystemUnitFamilyType.class.isAssignableFrom(parser.getCurrent().getClass())) {
+                return (T) fromSystemUnitFamily(parser, (SystemUnitFamilyType) parser.getCurrent(), context);
             }
         } else {
             if (Collection.class.isAssignableFrom(context.getProperty().getReadMethod().getReturnType())) {
@@ -79,9 +80,9 @@ public class DefaultMapper<T> implements Mapper<T> {
     /**
      * Reads expected object from given attribute.
      *
-     * @param parser the AML parser
+     * @param parser    the AML parser
      * @param attribute the attribute to read from
-     * @param context the mapping context
+     * @param context   the mapping context
      * @return the read object or null if not present
      * @throws MappingException if reading object fails
      */
@@ -124,9 +125,9 @@ public class DefaultMapper<T> implements Mapper<T> {
     /**
      * Reads expected object from given InternalElement.
      *
-     * @param parser the AML parser
+     * @param parser          the AML parser
      * @param internalElement the InternalElement to read from
-     * @param context the mapping context
+     * @param context         the mapping context
      * @return the read object or null if not present
      * @throws MappingException if reading object fails
      */
@@ -143,9 +144,9 @@ public class DefaultMapper<T> implements Mapper<T> {
     /**
      * Reads expected object from given SystemUnitFamily.
      *
-     * @param parser the AML parser
+     * @param parser               the AML parser
      * @param systemUnitFamilyType the SystemUnitFamily to read from
-     * @param context the mapping context
+     * @param context              the mapping context
      * @return the read object or null if not present
      * @throws MappingException if reading object fails
      */
@@ -163,8 +164,8 @@ public class DefaultMapper<T> implements Mapper<T> {
      * Recursively calls context.map(...) on all properties except those
      * explicitely ignored and sets them on the parent.
      *
-     * @param parent the parent object to read all properties for
-     * @param parser the AMLParser
+     * @param parent  the parent object to read all properties for
+     * @param parser  the AMLParser
      * @param context the MappingContext
      * @throws MappingException if mapping fails
      */
@@ -193,8 +194,8 @@ public class DefaultMapper<T> implements Mapper<T> {
     /**
      * Helper method to create a new instance for a given type.
      *
-     * @param <T> type information
-     * @param type type to instantiate
+     * @param <T>     type information
+     * @param type    type to instantiate
      * @param context the MappingContext
      * @return an instance of the provided type
      * @throws MappingException if instantiation fails
@@ -209,7 +210,7 @@ public class DefaultMapper<T> implements Mapper<T> {
 
     protected Class<?> getAasType(String name) {
         return Stream.concat(ReflectionHelper.INTERFACES.stream(),
-                ReflectionHelper.INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION.stream())
+                        ReflectionHelper.INTERFACES_WITHOUT_DEFAULT_IMPLEMENTATION.stream())
                 .filter(x -> x.getSimpleName().equals(name))
                 .findAny()
                 .orElse(null);
@@ -232,7 +233,7 @@ public class DefaultMapper<T> implements Mapper<T> {
      * @param attribute The attribute to extract the type from
      * @return the type of the attribute
      * @throws MappingException if type information is missing or invalid or
-     * type could not be resolved
+     *                          type could not be resolved
      */
     protected Class<?> typeFromAttribute(AttributeType attribute, MappingContext context) throws MappingException {
         if (attribute.getRefSemantic() == null || attribute.getRefSemantic().isEmpty()) {
@@ -263,7 +264,7 @@ public class DefaultMapper<T> implements Mapper<T> {
         // Optional<PropertyDescriptor> property = AasUtils.getAasProperties(type.get()).stream().filter(x -> x.getName().equals(type)).findFirst();        
         try {
 
-            String oldPropertyName = ((PropertyNamingStrategy)context.getPropertyNamingStrategy()).getOldName(type, attribute,attributePathElements[1]);
+            String oldPropertyName = ((PropertyNamingStrategy) context.getPropertyNamingStrategy()).getOldName(type, attribute, attributePathElements[1]);
             Optional<PropertyDescriptor> property = Stream.of(Introspector.getBeanInfo(type).getPropertyDescriptors())
                     .filter(x -> x.getName().equalsIgnoreCase(oldPropertyName == null ? attributePathElements[1] : oldPropertyName)).findFirst();
             if (property.isPresent()) {
@@ -285,7 +286,7 @@ public class DefaultMapper<T> implements Mapper<T> {
      * @param internalElement The InternalElement to extract the type from
      * @return the type of the attribute
      * @throws MappingException if type information is missing or invalid or
-     * type could not be resolved
+     *                          type could not be resolved
      */
     protected Class<?> typeFromInternalElement(InternalElementType internalElement) throws MappingException {
         if (internalElement.getRoleRequirements() == null || internalElement.getRoleRequirements().getRefBaseRoleClassPath() == null) {
@@ -310,7 +311,7 @@ public class DefaultMapper<T> implements Mapper<T> {
      * @param systemUnitFamilyType The SystemUnitFamily to extract the type from
      * @return the type of the attribute
      * @throws MappingException if type information is missing or invalid or
-     * type could not be resolved
+     *                          type could not be resolved
      */
     protected Class<?> typeFromSystemUnit(SystemUnitFamilyType systemUnitFamilyType) throws MappingException {
         if (systemUnitFamilyType.getSupportedRoleClass() == null || systemUnitFamilyType.getSupportedRoleClass().get(0) == null) {
@@ -346,19 +347,19 @@ public class DefaultMapper<T> implements Mapper<T> {
             return result;
         } else {
             AttributeType attribute = findAttribute(parser.getCurrent(), context.getProperty(), context, parser.getRefSemanticPrefix());
-            if(attribute==null)return null;
+            if (attribute == null) return null;
             List<AttributeType> attributeTypes = attribute.getAttribute();
             Collection result = new ArrayList<>();
             CAEXObject current = parser.getCurrent();
-            if(!attributeTypes.isEmpty()){
-                for(AttributeType attributeType : attributeTypes){
+            if (!attributeTypes.isEmpty()) {
+                for (AttributeType attributeType : attributeTypes) {
                     parser.setCurrent(attributeType);
-                    Object object = context.withoutProperty().map(contentType,parser);
+                    Object object = context.withoutProperty().map(contentType, parser);
                     result.add(object);
                 }
             } else {
                 parser.setCurrent(attribute);
-                Object object = context.withoutProperty().map(contentType,parser);
+                Object object = context.withoutProperty().map(contentType, parser);
                 result.add(object);
             }
             parser.setCurrent(current);
@@ -406,8 +407,8 @@ public class DefaultMapper<T> implements Mapper<T> {
         return result;
     }
 
-    protected String getDataTypeFromAttribute(AttributeType attributeType){
-        if(attributeType == null || attributeType.getAttributeDataType() == null){
+    protected String getDataTypeFromAttribute(AttributeType attributeType) {
+        if (attributeType == null || attributeType.getAttributeDataType() == null) {
             return null;
         }
         String attributeDataType = attributeType.getAttributeDataType();
@@ -415,17 +416,17 @@ public class DefaultMapper<T> implements Mapper<T> {
     }
 
     protected void setValueDataTypeFromAttributeDataType(AmlParser parser, Object parent, String attributeRefWithAttributeDataType, Class aasClazz) throws MappingException {
-        if(parser == null || parent == null)return;
+        if (parser == null || parent == null) return;
 
         AttributeType attributeType = findAttributesByCorrespondingAttributePath(parser.getCurrent(),
                 attributeRefWithAttributeDataType).stream().findFirst().orElse(null);
-        if(attributeType != null){
+        if (attributeType != null) {
             try {
                 String dataType = getDataTypeFromAttribute(attributeType);
                 List<Method> methods = List.of(aasClazz.getMethods());
-                Method method = methods.stream().filter(x->x.getName().contains("setValueType")).findFirst().orElse(null);
-                if(method == null)return;
-                method.invoke(parent,dataType);
+                Method method = methods.stream().filter(x -> x.getName().contains("setValueType")).findFirst().orElse(null);
+                if (method == null) return;
+                method.invoke(parent, dataType);
             } catch (InvocationTargetException | IllegalAccessException ex) {
                 throw new MappingException(String.format("error setting value type for property with ID=%s and Name=%s", parser.getCurrent().getID(), parser.getCurrent().getName()), ex);
             }
@@ -447,7 +448,7 @@ public class DefaultMapper<T> implements Mapper<T> {
     }
 
     protected AttributeType findAttribute(CAEXObject parent, PropertyDescriptor property, MappingContext context) throws MappingException {
-       return findAttribute(parent, property,context,AmlParser.DEFAULT_REFSEMANTIC_PREFIX);
+        return findAttribute(parent, property, context, AmlParser.DEFAULT_REFSEMANTIC_PREFIX);
     }
 
     protected AttributeType findAttribute(CAEXObject parent, PropertyDescriptor property, MappingContext context, String refSemanticPrefix) throws MappingException {
@@ -464,7 +465,7 @@ public class DefaultMapper<T> implements Mapper<T> {
 
     // TODO not working because of missing property renaming strategy
     protected List<AttributeType> findAttributes(CAEXObject parent, PropertyDescriptor property, MappingContext context) {
-        return findAttributes(parent, property,context, AmlParser.DEFAULT_REFSEMANTIC_PREFIX);
+        return findAttributes(parent, property, context, AmlParser.DEFAULT_REFSEMANTIC_PREFIX);
     }
 
     protected List<AttributeType> findAttributes(CAEXObject parent, PropertyDescriptor property, MappingContext context, String refSemanticPrefix) {
@@ -476,7 +477,7 @@ public class DefaultMapper<T> implements Mapper<T> {
         return findAttributesByCorrespondingAttributePath(parent, refSemantic);
     }
 
-    protected List<AttributeType> findAttributesByCorrespondingAttributePath(CAEXObject parent, String correspondingAttributePath){
+    protected List<AttributeType> findAttributesByCorrespondingAttributePath(CAEXObject parent, String correspondingAttributePath) {
         return findAttributes(parent,
                 x -> x.getRefSemantic().stream().anyMatch(y -> y.getCorrespondingAttributePath().equalsIgnoreCase(correspondingAttributePath)));
     }
@@ -489,63 +490,25 @@ public class DefaultMapper<T> implements Mapper<T> {
             return ((AttributeType) parent).getAttribute().stream().filter(filter).collect(Collectors.toList());
         } else if (InternalElementType.class.isAssignableFrom(parent.getClass())) {
             return ((InternalElementType) parent).getAttribute().stream().filter(filter).collect(Collectors.toList());
-        } else if(SystemUnitFamilyType.class.isAssignableFrom(parent.getClass())) {
+        } else if (SystemUnitFamilyType.class.isAssignableFrom(parent.getClass())) {
             return ((SystemUnitFamilyType) parent).getAttribute().stream().filter(filter).collect(Collectors.toList());
         }
         return List.of();
     }
 
     protected List<InternalElementType> findInternalElements(CAEXObject parent, Class desiredType, boolean acceptSubtypes, MappingContext context) {
-        if (parent == null || !(InternalElementType.class.isAssignableFrom(parent.getClass()) || SystemUnitFamilyType.class.isAssignableFrom(parent.getClass()))) {
+        if (parent == null || !(SystemUnitClassType.class.isAssignableFrom(parent.getClass()))) {
             return List.of();
         }
-
-        if(SystemUnitFamilyType.class.isAssignableFrom(parent.getClass())){
-            return findInternalElements((SystemUnitFamilyType) parent, desiredType,acceptSubtypes,context);
-        }
-
-        return findInternalElements((InternalElementType) parent, desiredType, acceptSubtypes, context);
+        return findInternalElements((SystemUnitClassType) parent, desiredType, acceptSubtypes, context);
     }
 
-    protected List<InternalElementType> findInternalElements(SystemUnitFamilyType parent, Class desiredType, boolean acceptSubtypes, MappingContext context) {
-        if (desiredType == null || context == null || parent == null) {
-            return List.of();
-        }
-        Predicate<InternalElementType> filter =  x -> {
-            String role = x.getRoleRequirements() != null ? x.getRoleRequirements().getRefBaseRoleClassPath() : "";
-            if (role.startsWith(context.getDocumentInfo().getAssetAdministrationShellRoleClassLib())) {
-                String actualClassName = role.substring(context.getDocumentInfo().getAssetAdministrationShellRoleClassLib().length() + 1);
-                Optional<Class> actualType = ReflectionHelper.INTERFACES.stream().filter(y -> y.getSimpleName().equals(actualClassName)).findFirst();
-                if (actualType.isPresent()) {
-                    if (acceptSubtypes) {
-                        return desiredType.isAssignableFrom(actualType.get());
-                    }
-                    return desiredType.equals(actualType.get());
-                }
-            }
-            return false;
-        };
-        return parent.getInternalElement().stream().filter(filter).collect(Collectors.toList());
-    }
 
-    protected List<InternalElementType> findInternalElements(InternalElementType parent, Class desiredType, boolean acceptSubtypes, MappingContext context) {
+    protected List<InternalElementType> findInternalElements(SystemUnitClassType parent, Class desiredType, boolean acceptSubtypes, MappingContext context) {
         if (desiredType == null || context == null) {
             return List.of();
         }
-        return findInternalElements(parent, x -> {
-            String role = x.getRoleRequirements() != null ? x.getRoleRequirements().getRefBaseRoleClassPath() : "";
-            if (role.startsWith(context.getDocumentInfo().getAssetAdministrationShellRoleClassLib())) {
-                String actualClassName = role.substring(context.getDocumentInfo().getAssetAdministrationShellRoleClassLib().length() + 1);
-                Optional<Class> actualType = ReflectionHelper.INTERFACES.stream().filter(y -> y.getSimpleName().equals(actualClassName)).findFirst();
-                if (actualType.isPresent()) {
-                    if (acceptSubtypes) {
-                        return desiredType.isAssignableFrom(actualType.get());
-                    }
-                    return desiredType.equals(actualType.get());
-                }
-            }
-            return false;
-        });
+        return getAllMatchingInternalElements(null, parent, desiredType, acceptSubtypes, context);
     }
 
     protected List<InternalElementType> findInternalElements(CAEXObject parent, Predicate<InternalElementType> filter) {
@@ -559,11 +522,45 @@ public class DefaultMapper<T> implements Mapper<T> {
         if (parent == null || filter == null) {
             return List.of();
         }
-        return parent.getInternalElement().stream().filter(filter).collect(Collectors.toList());
+        return getAllInternalElements(null, parent).stream().filter(filter).collect(Collectors.toList());
     }
 
-    private void getAllMatchingInternalElements(Predicate<InternalElementType> filter, List<InternalElementType> resultList){
 
+    //get recursive all internal elements of parent
+    private List<InternalElementType> getAllInternalElements(List<InternalElementType> resultList, SystemUnitClassType parent) {
+        if (resultList == null) resultList = new ArrayList<>();
+        resultList.addAll(parent.getInternalElement());
+        for (InternalElementType internalElementType : parent.getInternalElement()) {
+            getAllInternalElements(resultList, internalElementType);
+        }
+        return resultList;
+    }
+
+    private List<InternalElementType> getAllMatchingInternalElements(List<InternalElementType> resultList,
+                                                                     SystemUnitClassType parent, Class desiredType,
+                                                                     boolean acceptSubtypes, MappingContext context) {
+
+        if(resultList == null)resultList= new ArrayList<>();
+
+        List<InternalElementType> internalElementTypes = parent.getInternalElement();
+        for(InternalElementType internalElement : internalElementTypes){
+            String role = internalElement.getRoleRequirements() != null ? internalElement.getRoleRequirements().getRefBaseRoleClassPath() : "";
+            if (role.startsWith(context.getDocumentInfo().getAssetAdministrationShellRoleClassLib())) {
+                String actualClassName = role.substring(context.getDocumentInfo().getAssetAdministrationShellRoleClassLib().length() + 1);
+                Optional<Class> actualType = ReflectionHelper.INTERFACES.stream().filter(y -> y.getSimpleName().equals(actualClassName)).findFirst();
+                if (actualType.isPresent()) {
+                    if (acceptSubtypes && desiredType.isAssignableFrom(actualType.get())) {
+                        resultList.add(internalElement);
+                    } else if(desiredType.equals(actualType.get())){
+                        resultList.add(internalElement);
+                    }
+                }
+            } else {
+                getAllMatchingInternalElements(resultList, internalElement, desiredType, acceptSubtypes, context);
+            }
+        }
+
+        return resultList;
     }
 
 

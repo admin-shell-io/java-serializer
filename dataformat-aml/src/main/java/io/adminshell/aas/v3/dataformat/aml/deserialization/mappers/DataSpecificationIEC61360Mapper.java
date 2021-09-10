@@ -59,19 +59,23 @@ public class DataSpecificationIEC61360Mapper extends DefaultMapper<DataSpecifica
         parser.setRefSemanticPrefix(DataSpecificationManager.DATA_SPECIFICATION_IEC61360_PREFIX);
 
         for (AttributeType attributeType : attributeTypes) {
-            PropertyDescriptor propertyDescriptor = propertyDescriptors.stream().filter(x -> x.getName().contains(attributeType.getName())).findFirst().orElse(null);
+            PropertyDescriptor propertyDescriptor = propertyDescriptors.stream()
+                    .filter(x -> x.getName().contains(attributeType.getName()))
+                    .findFirst()
+                    .orElse(null);
             if (propertyDescriptor != null) {
                 try {
-                    Object o;
-                    Class type = propertyDescriptor.getReadMethod().getReturnType();
+                    Object createdObject;
+                    Class<?> type = propertyDescriptor.getReadMethod().getReturnType();
                     if (DataTypeIEC61360.class.isAssignableFrom(type) ||
                             List.class.isAssignableFrom(type)) {
-                        o = context.with(propertyDescriptor).map(propertyDescriptor.getReadMethod().getGenericReturnType(), parser);
+                        createdObject = context.with(propertyDescriptor).map(propertyDescriptor.getReadMethod().getGenericReturnType(), parser);
                     } else {
                         parser.setCurrent(attributeType);
-                        o = map(parser, context);
+                        createdObject = map(parser, context);
                     }
-                    propertyDescriptor.getWriteMethod().invoke(parent, o);
+                    if (createdObject != null) propertyDescriptor.getWriteMethod().invoke(parent, createdObject);
+
                 } catch (IllegalAccessException | InvocationTargetException ex) {
                     throw new MappingException(String.format("error setting property value for property %s", propertyDescriptor.getName()), ex);
                 }
