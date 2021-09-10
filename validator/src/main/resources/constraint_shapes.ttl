@@ -237,7 +237,7 @@ aas:AASd-021Shape  a sh:NodeShape ;
   sh:targetClass aas:Qualifiable ;
   sh:property [
       a sh:PropertyShape ;
-      #sh:path <https://admin-shell.io/aas/3/0/RC01/Qualifiable/valueType> ;
+      sh:path <https://admin-shell.io/aas/3/0/RC01/Qualifiable/valueType> ;
       sh:sparql [
       	a sh:SPARQLConstraint ;
       	sh:message "(AASd-021Shape) - Every Qualifiable can only have one Qualifier with the same Qualifier/type." ;
@@ -253,6 +253,60 @@ aas:AASd-021Shape  a sh:NodeShape ;
      ]
     ];
 .
+
+# AASd-023
+#aas:AASd-023Shape  a sh:NodeShape ;
+  #sh:targetClass aas:AssetInformation;
+  #sh:sparql [
+    #a sh:SPARQLConstraint ;
+    #sh:message "AssetInformation/globalAssetId either is a reference to an Asset object or a global reference." ;
+    #sh:select """
+      #SELECT ?keyType
+         #WHERE {
+           #?assetInformation a <https://admin-shell.io/aas/3/0/RC01/AssetInformation> .
+           #?assetInformation  <https://admin-shell.io/aas/3/0/RC01/AssetInformation/globalAssetId> ?globalAssetId .
+           #?globalAssetId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?key .
+           #?key <https://admin-shell.io/aas/3/0/RC01/Key/type> ?keyType .
+           #FILTER (?keyType != <https://admin-shell.io/aas/3/0/RC01/IdentifiableElements/Asset> && ?keyType != <https://admin-shell.io/aas/3/0/RC01/KeyElements/GlobalReference>)
+
+      #}
+          #""" ;
+#] .
+
+# AASd-026
+# aas:AASd-026Shape a sh:NodeShape ;
+    #sh:targetClass aas:SubmodelElementCollection ;
+    #sh:prefixes xsd: ;
+    #sh:sparql [
+       #a sh:SPARQLConstraint ;
+       #sh:message "If allowDuplicates==false then it is not allowed that the collection contains several elements with the same semantics (i.e. the same semanticId)." ;
+       #sh:select """
+         #SELECT ?keyType
+            #WHERE {
+              #?SubmodelElementCollection a <https://admin-shell.io/aas/3/0/RC01/SubmodelElementCollection> .
+              #?SubmodelElementCollection  <https://admin-shell.io/aas/3/0/RC01/Referable/idShort> ?SubmodelElementCollectionIdShort .
+              #?SubmodelElementCollection <https://admin-shell.io/aas/3/0/RC01/SubmodelElementCollection/allowDuplicates> "False"^^xsd:boolean.
+
+              #?SubmodelElementCollection <https://admin-shell.io/aas/3/0/RC01/SubmodelElementCollection/value> ?Value1 .
+              #?Value1 <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?Value1SemanticId .
+              #?Value1SemanticId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?Value1Key .
+              #?Value1Key <https://admin-shell.io/aas/3/0/RC01/Key/type> ?Value1KeyType .
+              #?Value1Key <https://admin-shell.io/aas/3/0/RC01/Key/value> ?Value1KeyValue .
+              #?Value1Key <https://admin-shell.io/aas/3/0/RC01/Key/idType> ?Value1KeyIdType .
+
+              #?SubmodelElementCollection <https://admin-shell.io/aas/3/0/RC01/SubmodelElementCollection/value> ?Value2 .
+              #?Value2 <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?Value2SemanticId .
+              #?Value2SemanticId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?Value2Key .
+              #?Value2Key <https://admin-shell.io/aas/3/0/RC01/Key/type> ?Value2KeyType .
+              #?Value2Key <https://admin-shell.io/aas/3/0/RC01/Key/value> ?Value2KeyValue .
+              #?Value2Key <https://admin-shell.io/aas/3/0/RC01/Key/idType> ?Value2KeyIdType .
+
+
+              #FILTER (?Value1SemanticId = ?Value2SemanticId )
+
+         #}
+          #   """ ;
+    #] .
 
 # AASd-051
 aas:ConceptDescriptionAllowedCategories a sh:NodeShape ;
@@ -582,6 +636,145 @@ aas:ConceptDescriptionReferencedFromViewAllowedCategories a sh:NodeShape ;
 		}
         """ ;
 ] .
+
+# AASd-065-Property
+#aas:AASd-065a-PropertyShape a sh:NodeShape ;
+  #sh:targetClass aas:Property;
+  #sh:sparql [
+  #a sh:SPARQLConstraint ;
+  #sh:message "If the semanticId of a Property references a ConceptDescription with the category VALUE then the value of the property is identical to DataSpecificationIEC61360/value and the valueId of the property is identical to DataSpecificationIEC61360/valueId." ;
+
+  #sh:select """
+  	#SELECT ?propertyValue
+  		#WHERE {
+			#?property a <https://admin-shell.io/aas/3/0/RC01/Property> .
+			#?property <https://admin-shell.io/aas/3/0/RC01/Property/value> ?propertyValue .
+			#?property <https://admin-shell.io/aas/3/0/RC01/Property/valueId> ?propertyValueId .
+
+            #?propertyValueId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?propertyReferenceKey .
+
+			#?propertyReferenceKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?propertyReferenceKeyValue .
+			#?propertyReferenceKey <https://admin-shell.io/aas/3/0/RC01/Key/idType> ?propertyReferenceKeyIdType .
+			#?propertyReferenceKey <https://admin-shell.io/aas/3/0/RC01/Key/type> ?propertyReferenceKeyType .
+
+			#?property <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticId .
+			#?semanticId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdReferenceKey .
+			#?semanticIdReferenceKey <https://admin-shell.io/aas/3/0/RC01/Key/type> <https://admin-shell.io/aas/3/0/RC01/IdentifiableElements/ConceptDescription> .
+
+			#?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> "VALUE" .
+			#?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecification .
+			#?embeddedDataSpecification <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecificationContent .
+			#?dataSpecificationContent <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/value> ?dataSpecificationIEC61360Value .
+
+			#?dataSpecificationContent <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/valueId> ?dataSpecificationIEC61360ValueId .
+
+			#?dataSpecificationIEC61360ValueId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?dataSpecificationIEC61360ValueIdKey .
+
+			#?dataSpecificationIEC61360ValueIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?dataSpecificationIEC61360ValueIdKeyValue .
+			#?dataSpecificationIEC61360ValueIdKey <https://admin-shell.io/aas/3/0/RC01/Key/idType> ?dataSpecificationIEC61360ValueIdKeyIdType .
+            #?dataSpecificationIEC61360ValueIdKey <https://admin-shell.io/aas/3/0/RC01/Key/type> ?dataSpecificationIEC61360ValueIdKeyType .
+			#FILTER(?propertyValue != ?dataSpecificationIEC61360Value && ?propertyValueId != ?dataSpecificationIEC61360ValueId)
+		#}
+       # """ ;
+#] .
+
+# AASd-065-MultilanguageProperty
+#aas:AASd-065b-MultiLanguagePropertyShape a sh:NodeShape ;
+  #sh:targetClass aas:MultiLanguageProperty;
+  #sh:sparql [
+  #a sh:SPARQLConstraint ;
+  #sh:message "If the semanticId of a MultiLanguageProperty references a ConceptDescription with the category VALUE then the value of the  MultiLanguageProperty is identical to DataSpecificationIEC61360/value and the valueId of the  MultiLanguageProperty is identical to DataSpecificationIEC61360/valueId." ;
+
+  #sh:select """
+  	#SELECT ?MultiLanguagePropertyValue
+  		#WHERE {
+			#?MultiLanguageProperty a <https://admin-shell.io/aas/3/0/RC01/MultiLanguageProperty> .
+			#?MultiLanguageProperty <https://admin-shell.io/aas/3/0/RC01/MultiLanguageProperty/value> ?MultiLanguagePropertyValue .
+			#?MultiLanguageProperty <https://admin-shell.io/aas/3/0/RC01/MultiLanguageProperty/valueId> ?MultiLanguagePropertyValueId .
+            #?MultiLanguagePropertyValueId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?MultiLanguagePropertyReferenceKey .
+			#?MultiLanguagePropertyReferenceKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?MultiLanguagePropertyReferenceKeyValue .
+			#?MultiLanguageProperty <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticId .
+			#?semanticId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdReferenceKey .
+			#?semanticIdReferenceKey <https://admin-shell.io/aas/3/0/RC01/Key/type> <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			#?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> "Value" .
+			#?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecification .
+			#?embeddedDataSpecification <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecificationContent .
+			#?dataSpecificationContent <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/value> ?dataSpecificationIEC61360Value .
+			#?dataSpecificationContent <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/valueId> ?dataSpecificationIEC61360ValueId .
+			#?dataSpecificationIEC61360ValueId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?dataSpecificationIEC61360ValueIdKey .
+			#?dataSpecificationIEC61360ValueIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?dataSpecificationIEC61360ValueIdKeyValue .
+
+			#FILTER(?MultiLanguagePropertyValue != ?dataSpecificationIEC61360Value && ?MultiLanguagePropertyValueId != ?dataSpecificationIEC61360ValueIdKeyValue)
+		#}
+        #""" ;
+#] .
+
+# AASd-066-Property
+#aas:AASd-066PropertyShape a sh:NodeShape ;
+  #sh:targetClass aas:Property;
+  #sh:sparql [
+  #a sh:SPARQLConstraint ;
+  #sh:message "If the semanticId of a Property or MultiLanguageProperty references a ConceptDescription with the category PROPERTY and DataSpecificationIEC61360/valueList is defined the value and valueId of the property is identical to one of the value reference pair types references in the value list, i.e. ValueReferencePairType/value or ValueReferencePairType/valueId, resp." ;
+
+  #sh:select """
+  	#SELECT ?propertyValue
+  		#WHERE {
+			#?property a <https://admin-shell.io/aas/3/0/RC01/Property> .
+			#?property <https://admin-shell.io/aas/3/0/RC01/Property/value> ?propertyValue .
+			#?property <https://admin-shell.io/aas/3/0/RC01/Property/valueId> ?propertyValueId .
+            #?propertyValueId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?propertyReferenceKey .
+			#?propertyReferenceKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?propertyReferenceKeyValue .
+			#?property <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticId .
+			#?semanticId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdReferenceKey .
+			#?semanticIdReferenceKey <https://admin-shell.io/aas/3/0/RC01/Key/type> <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			#?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> "Property" .
+			#?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecification .
+			#?embeddedDataSpecification <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecificationContent .
+			#?dataSpecificationContent <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/valueList> ?dataSpecificationIEC61360ValueList .
+			#?dataSpecificationIEC61360ValueList <https://admin-shell.io/aas/3/0/RC01/ValueList/valueReferencePairTypes> ?valueReferencePairTypes .
+			#?valueReferencePairTypes <https://admin-shell.io/aas/3/0/RC01/ValueReferencePair/value> ?valueReferencePairValue .
+			#?valueReferencePairTypes <https://admin-shell.io/aas/3/0/RC01/ValueReferencePair/valueId> ?valueReferencePairValueId .
+			#?valueReferencePairValueId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?valueReferencePairValueIdKey .
+			#?valueReferencePairValueIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?valueReferencePairValueIdKeyValue .
+
+			#FILTER(?propertyValue != ?valueReferencePairValue && ?propertyValueId != ?valueReferencePairValueIdKeyValue)
+		#}
+        #""" ;
+#] .
+
+# AASd-066-MultilanguageProperty
+#aas:AASd-066MultiLanguagePropertyShape a sh:NodeShape ;
+  #sh:targetClass aas:MultiLanguageProperty;
+  #sh:sparql [
+  #a sh:SPARQLConstraint ;
+  #sh:message "If the semanticId of a MultiLanguageProperty or MultiLanguageMultiLanguageProperty references a ConceptDescription with the category MultiLanguageProperty and DataSpecificationIEC61360/valueList is defined the value and valueId of the MultiLanguageProperty is identical to one of the value reference pair types references in the value list, i.e. ValueReferencePairType/value or ValueReferencePairType/valueId, resp." ;
+
+  #sh:select """
+  	#SELECT ?MultiLanguagePropertyValue
+  		#WHERE {
+			#?MultiLanguageProperty a <https://admin-shell.io/aas/3/0/RC01/MultiLanguageProperty> .
+			#?MultiLanguageProperty <https://admin-shell.io/aas/3/0/RC01/MultiLanguageProperty/value> ?MultiLanguagePropertyValue .
+			#?MultiLanguageProperty <https://admin-shell.io/aas/3/0/RC01/MultiLanguageProperty/valueId> ?MultiLanguagePropertyValueId .
+            #?MultiLanguagePropertyValueId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?MultiLanguagePropertyReferenceKey .
+			#?MultiLanguagePropertyReferenceKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?MultiLanguagePropertyReferenceKeyValue .
+			#?MultiLanguageProperty <https://admin-shell.io/aas/3/0/RC01/HasSemantics/semanticId> ?semanticId .
+			#?semanticId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?semanticIdReferenceKey .
+			#?semanticIdReferenceKey <https://admin-shell.io/aas/3/0/RC01/Key/type> <https://admin-shell.io/aas/3/0/RC01/IdentifableElements/ConceptDescription> .
+
+			#?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> "Property" .
+			#?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecification .
+			#?embeddedDataSpecification <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecificationContent .
+			#?dataSpecificationContent <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/valueList> ?dataSpecificationIEC61360ValueList .
+			#?dataSpecificationIEC61360ValueList <https://admin-shell.io/aas/3/0/RC01/ValueList/valueReferencePairTypes> ?valueReferencePairTypes .
+			#?valueReferencePairTypes <https://admin-shell.io/aas/3/0/RC01/ValueReferencePair/value> ?valueReferencePairValue .
+			#?valueReferencePairTypes <https://admin-shell.io/aas/3/0/RC01/ValueReferencePair/valueId> ?valueReferencePairValueId .
+			#?valueReferencePairValueId <https://admin-shell.io/aas/3/0/RC01/Reference/key> ?valueReferencePairValueIdKey .
+			#?valueReferencePairValueIdKey <https://admin-shell.io/aas/3/0/RC01/Key/value> ?valueReferencePairValueIdKeyValue .
+
+			#FILTER(?MultiLanguagePropertyValue != ?valueReferencePairValue && ?MultiLanguagePropertyValueId != ?valueReferencePairValueId)
+		#}
+        #""" ;
+#] .
 
 # AASd-067
 aas:AASd-067Shape  a sh:NodeShape ;
@@ -924,3 +1117,17 @@ aas:ConceptDescriptionReferencedFromSubmodelElementCollectionAllowedDuplicates  
       }
           """ ;
 ] .
+
+# AASd-100
+aas:ReferableShape  a sh:NodeShape ;
+  sh:targetClass aas:Referable ;
+  sh:property [
+      a sh:PropertyShape ;
+      sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
+      sh:datatype xsd:string ;
+      sh:maxCount 1 ;
+      sh:minCount 0 ;
+      sh:pattern "^(?!\\s*$).+" ;
+      sh:message "(Referable.category):An attribute with data type \"string\" is not allowed to be empty."^^xsd:string ;
+    ] ;
+.
