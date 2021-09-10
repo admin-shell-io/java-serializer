@@ -39,7 +39,7 @@ public class ConstraintTestHelper {
 		return new DefaultConceptDescription.Builder()
 				.description(new LangString("TestDescription"))
 				.identification(new DefaultIdentifier.Builder().identifier(identifier)
-						.idType(IdentifierType.CUSTOM).build())
+					.idType(IdentifierType.CUSTOM).build())
 				.category(category).idShort(idShort).build();
 	}
 	

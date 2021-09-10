@@ -123,7 +123,7 @@ aas:AASd-008Shape a sh:NodeShape ;
       sh:class aas:ModelingKind ;
       sh:minCount 1 ;
       sh:minCount 1 ;
-      sh:hasValue <https://admin-shell.io/aas/3/0/RC01/ModelingKind/TEMPLATE> ; # TODO: rewrite to .../Template
+      sh:hasValue <https://admin-shell.io/aas/3/0/RC01/ModelingKind/Template> ;
       sh:message "(Operation.kind = Template):The submodel element value of an operation variable shall be of kind=Template."^^xsd:string ;
     ] ;
 .
@@ -143,7 +143,7 @@ aas:SelfManagedEntityRequiresAssetIdShape a sh:NodeShape ;
 					sh:path <https://admin-shell.io/aas/3/0/RC01/Entity/entityType> ;
 					sh:minCount 1;
 					sh:maxCount 1;
-					sh:pattern "SELF_MANAGED_ENTITY";
+					sh:pattern "SelfManagedEntity";
 				];
 			]
 			[
@@ -890,7 +890,7 @@ aas:ConceptDescriptionWithCategoryDocumentAndIEC61360CorrectDataType a sh:NodeSh
 			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecification .
 			?embeddedDataSpecification <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecificationContent .
 			?dataSpecificationContent <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/dataType> ?dataType .
-			FILTER(?dataType != <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/URL> && ?dataType != <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/STRING>)
+			FILTER(?dataType != <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/Url> && ?dataType != <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/String>)
 		}
         """ ;
 ] .
