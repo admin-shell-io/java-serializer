@@ -20,19 +20,17 @@ import io.adminshell.aas.v3.dataformat.aml.deserialization.DefaultMapper;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXObject;
-import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
-import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.model.*;
 
-import java.beans.PropertyDescriptor;
-import java.lang.reflect.InvocationTargetException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
 public class ConstraintCollectionMapper extends DefaultMapper<Collection<Constraint>> {
 
+
+    public static final String QUALIFIABLE_ATTRIBUTE_PATH = "AAS:Qualifiable";
 
     @Override
     protected Collection mapCollectionValueProperty(AmlParser parser, MappingContext context) throws MappingException {
@@ -42,7 +40,8 @@ public class ConstraintCollectionMapper extends DefaultMapper<Collection<Constra
             return super.mapCollectionValueProperty(parser, context);
         }
 
-        List<AttributeType> values = findAttributes(parser.getCurrent(), x -> x.getRefSemantic().get(0).getCorrespondingAttributePath().contains("AAS:Qualifiable"));
+        List<AttributeType> values = findAttributes(parser.getCurrent(),
+                x -> x.getRefSemantic().stream().anyMatch(y -> y.getCorrespondingAttributePath().contains(QUALIFIABLE_ATTRIBUTE_PATH)));
 
         CAEXObject current = parser.getCurrent();
         Collection result = new ArrayList<>();

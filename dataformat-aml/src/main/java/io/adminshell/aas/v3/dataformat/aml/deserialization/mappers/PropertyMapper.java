@@ -31,7 +31,7 @@ import java.beans.PropertyDescriptor;
  */
 public class PropertyMapper extends DefaultMapper<Property> {
 
-    public static final String VALUE_ATTRIBUTE_NAME = "value";
+    public static final String VALUE_ATTRIBUTE_NAME = "AAS:Property/value";
 
     protected static PropertyDescriptor PROPERTY_VALUE_TYPE = AasUtils.getProperty(Property.class, "valueType");
 

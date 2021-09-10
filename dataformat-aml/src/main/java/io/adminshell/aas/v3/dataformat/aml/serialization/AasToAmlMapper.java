@@ -16,9 +16,9 @@
 package io.adminshell.aas.v3.dataformat.aml.serialization;
 
 import io.adminshell.aas.v3.dataformat.aml.AmlSerializationConfig;
-import io.adminshell.aas.v3.dataformat.aml.serialization.naming.PropertyNamingStrategy;
-import io.adminshell.aas.v3.dataformat.aml.serialization.naming.AbstractClassNamingStrategy;
-import io.adminshell.aas.v3.dataformat.aml.serialization.naming.NumberingClassNamingStrategy;
+import io.adminshell.aas.v3.dataformat.aml.common.naming.PropertyNamingStrategy;
+import io.adminshell.aas.v3.dataformat.aml.common.naming.AbstractClassNamingStrategy;
+import io.adminshell.aas.v3.dataformat.aml.common.naming.NumberingClassNamingStrategy;
 import io.adminshell.aas.v3.dataformat.aml.header.AutomationMLVersion;
 import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.AssetAdministrationShellEnvironmentMapper;
 import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.AssetAdministrationShellMapper;
@@ -50,7 +50,6 @@ import io.adminshell.aas.v3.model.Referable;
 import org.slf4j.LoggerFactory;
 import io.adminshell.aas.v3.dataformat.mapping.SourceBasedMapper;
 import io.adminshell.aas.v3.model.MultiLanguageProperty;
-import io.adminshell.aas.v3.model.Reference;
 
 /**
  * Maps an AssetAdministrationShellEnvironment to an AML file

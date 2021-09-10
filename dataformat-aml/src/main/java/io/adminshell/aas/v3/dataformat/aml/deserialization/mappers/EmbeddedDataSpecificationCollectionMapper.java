@@ -35,7 +35,8 @@ public class EmbeddedDataSpecificationCollectionMapper extends DefaultMapper<Col
     @Override
     protected Collection mapCollectionValueProperty(AmlParser parser, MappingContext context) throws MappingException {
 
-        List<InternalElementType> internalElementTypeList = findInternalElements(parser.getCurrent(), x -> x.getName().equalsIgnoreCase("EmbeddedDataSpecification"));
+        List<InternalElementType> internalElementTypeList = findInternalElements(parser.getCurrent(),
+                x -> x.getName().equalsIgnoreCase("EmbeddedDataSpecification"));
         Collection result = new ArrayList<>();
         CAEXObject current = parser.getCurrent();
 

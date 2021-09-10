@@ -15,7 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.common;
 
-import io.adminshell.aas.v3.dataformat.aml.serialization.naming.NamingStrategy;
+import io.adminshell.aas.v3.dataformat.aml.common.naming.NamingStrategy;
 import io.adminshell.aas.v3.dataformat.mapping.Mapper;
 import io.adminshell.aas.v3.dataformat.mapping.MappingContext;
 import io.adminshell.aas.v3.dataformat.mapping.MappingProvider;

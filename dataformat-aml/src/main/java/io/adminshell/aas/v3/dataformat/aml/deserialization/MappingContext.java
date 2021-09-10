@@ -17,7 +17,7 @@ package io.adminshell.aas.v3.dataformat.aml.deserialization;
 
 import io.adminshell.aas.v3.dataformat.aml.AmlDocumentInfo;
 import io.adminshell.aas.v3.dataformat.aml.common.AbstractMappingContext;
-import io.adminshell.aas.v3.dataformat.aml.serialization.naming.NamingStrategy;
+import io.adminshell.aas.v3.dataformat.aml.common.naming.NamingStrategy;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.dataformat.mapping.MappingProvider;
 import io.adminshell.aas.v3.model.Reference;

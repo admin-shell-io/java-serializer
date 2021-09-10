@@ -35,7 +35,7 @@ public class QualifierMapper extends DefaultMapper<Qualifier> {
 
     protected static PropertyDescriptor PROPERTY_VALUE_TYPE = AasUtils.getProperty(Property.class, "valueType");
 
-    public static final String VALUE_ATTRIBUTE_NAME = "value";
+    public static final String VALUE_ATTRIBUTE_NAME = "AAS:Qualifier/value";
 
     public QualifierMapper() {
         super(PROPERTY_VALUE_TYPE.getName());

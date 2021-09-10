@@ -19,9 +19,9 @@ import io.adminshell.aas.v3.dataformat.aml.deserialization.mappers.*;
 import io.adminshell.aas.v3.dataformat.aml.AmlDeserializationConfig;
 import io.adminshell.aas.v3.dataformat.aml.AmlDocumentInfo;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
-import io.adminshell.aas.v3.dataformat.aml.serialization.naming.AbstractClassNamingStrategy;
-import io.adminshell.aas.v3.dataformat.aml.serialization.naming.NumberingClassNamingStrategy;
-import io.adminshell.aas.v3.dataformat.aml.serialization.naming.PropertyNamingStrategy;
+import io.adminshell.aas.v3.dataformat.aml.common.naming.AbstractClassNamingStrategy;
+import io.adminshell.aas.v3.dataformat.aml.common.naming.NumberingClassNamingStrategy;
+import io.adminshell.aas.v3.dataformat.aml.common.naming.PropertyNamingStrategy;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.dataformat.mapping.MappingProvider;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
@@ -82,12 +82,11 @@ public class Aml2AasMapper {
         PropertyNamingStrategy propertyNamingStrategy = new PropertyNamingStrategy();
         propertyNamingStrategy.registerCustomNaming(Referable.class, "descriptions", "description");
         propertyNamingStrategy.registerCustomNaming(MultiLanguageProperty.class, "values", "value");
-        //propertyNamingStrategy.registerCustomNaming(Qualifier.class, x -> "qualifier:" + x.getType() + "=" + x.getValue(), false);
         propertyNamingStrategy.registerCustomNaming(Qualifiable.class, "qualifiers", "qualifier","qualifier");
         MappingContext context = new MappingContext(mappingProvider, classNamingStrategy, propertyNamingStrategy, config.getTypeFactory());
         context.setDocumentInfo(AmlDocumentInfo.fromFile(aml));
         AssetAdministrationShellEnvironment result = context.map(AssetAdministrationShellEnvironment.class, parser);
         parser.resolveIdsToReferences(result);
-        return (AssetAdministrationShellEnvironment) result;
+        return result;
     }
 }
