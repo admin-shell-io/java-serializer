@@ -55,6 +55,7 @@ import io.adminshell.aas.v3.model.impl.DefaultReference;
  *
  */
 public class TestAASd_069 {
+
 	@Test
 	public void correctLevelTypes() throws ValidationException {
 		String conceptDescriptionId = "conceptDescription";
@@ -70,6 +71,8 @@ public class TestAASd_069 {
 
 		ShaclValidator.getInstance().validate(correctEnv);
 	}
+
+
 	@Test
 	public void wrongLevelTypes() {
 		String conceptDescriptionWrongId = "conceptDescriptionWrong";
@@ -112,7 +115,7 @@ public class TestAASd_069 {
 		DataSpecificationIEC61360 stringDataTypeDS = new DefaultDataSpecificationIEC61360.Builder()
 				.preferredName(new LangString("ds", "EN"))
 				.definition(new LangString("some english definition", "EN"))
-				.dataType(DataTypeIEC61360.STRING)
+				.dataType(DataTypeIEC61360.REAL_MEASURE)
 				.levelTypes(Arrays.asList(LevelType.MIN, LevelType.MAX))
 				.build();
 

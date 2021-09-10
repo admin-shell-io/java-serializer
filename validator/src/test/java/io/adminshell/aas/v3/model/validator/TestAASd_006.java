@@ -48,7 +48,7 @@ public class TestAASd_006 {
 
 		Qualifier wrongQualifier = new DefaultQualifier.Builder()
 				.value("http://example.org")
-				.valueType("string")
+				.valueType("http://www.w3.org/2001/XMLSchema#string")
 				.valueId(reference)
 				.type("REFERENCE")
 				.build();
@@ -72,7 +72,7 @@ public class TestAASd_006 {
 
 		Qualifier qualifier = new DefaultQualifier.Builder()
 				.value("http://example.org")
-				.valueType("string")
+				.valueType("http://www.w3.org/2001/XMLSchema#string")
 				.valueId(reference)
 				.type("REFERENCE")
 				.build();

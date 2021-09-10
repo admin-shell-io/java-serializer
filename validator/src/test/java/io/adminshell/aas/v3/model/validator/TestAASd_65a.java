@@ -3,6 +3,7 @@ package io.adminshell.aas.v3.model.validator;
 
 import io.adminshell.aas.v3.model.*;
 import io.adminshell.aas.v3.model.impl.*;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -19,7 +20,9 @@ import java.util.Arrays;
  * @author bader, chang
  *
  */
-public class TestAASd_65a_Ignore {
+public class TestAASd_65a {
+
+    @Ignore
     @Test
     public void missmatchingValueAndValueId() throws ValidationException {
 
@@ -83,6 +86,7 @@ public class TestAASd_65a_Ignore {
 
     }
 
+    @Ignore
     @Test
     public void matchingValueAndValueId() throws ValidationException {
 

@@ -242,7 +242,7 @@ aas:AASd-021Shape  a sh:NodeShape ;
       	a sh:SPARQLConstraint ;
       	sh:message "(AASd-021Shape) - Every Qualifiable can only have one Qualifier with the same Qualifier/type." ;
       	sh:select """
-      	  SELECT ?this ?valueType WHERE {
+      	  SELECT ?qualifiable WHERE {
       	    ?qualifiable <https://admin-shell.io/aas/3/0/RC01/Qualifiable/qualifier> ?qualifier1 .
       	    ?qualifiable <https://admin-shell.io/aas/3/0/RC01/Qualifiable/qualifier> ?qualifier2 .
             ?qualifier1 <https://admin-shell.io/aas/3/0/RC01/Qualifier/valueType> ?valueType1 .
@@ -840,7 +840,7 @@ aas:AASd-068Shape  a sh:NodeShape ;
            FILTER (?dataType NOT IN (
              <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/REAL_CURRENCY>, # TODO: should be RealCount
              <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/REAL_COUNT>, # TODO: should be RealCount
-             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/REAL_Measure>, # TODO: should be RealMeasure
+             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/REAL_MEASURE>, # TODO: should be RealMeasure
              <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/RATIONAL>, # TODO: should be Rational
              <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/RATIONAL_MEASURE> # TODO: should be RationalMeasure
            ))

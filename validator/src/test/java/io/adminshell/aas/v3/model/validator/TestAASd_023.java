@@ -5,6 +5,7 @@ import io.adminshell.aas.v3.model.*;
 import io.adminshell.aas.v3.model.impl.DefaultAssetInformation;
 import io.adminshell.aas.v3.model.impl.DefaultKey;
 import io.adminshell.aas.v3.model.impl.DefaultReference;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ import static org.junit.Assert.*;
  *
  */
 
-public class TestAASd_023_Ignore {
+public class TestAASd_023 {
     @Test
     public void correctReferenceToAsset() throws ValidationException, IOException {
         AssetInformation assetInformation = createAssetInformation(KeyElements.ASSET);
@@ -38,6 +39,7 @@ public class TestAASd_023_Ignore {
 
     }
 
+    @Ignore
     @Test
     public void wrongReferenceToCD() throws ValidationException {
         AssetInformation assetInformation = createAssetInformation(KeyElements.CONCEPT_DESCRIPTION);

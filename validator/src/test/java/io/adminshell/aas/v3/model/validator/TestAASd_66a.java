@@ -2,6 +2,7 @@ package io.adminshell.aas.v3.model.validator;
 
 import io.adminshell.aas.v3.model.*;
 import io.adminshell.aas.v3.model.impl.*;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -20,9 +21,10 @@ import static org.junit.Assert.fail;
  *
  */
 
-public class TestAASd_66a_Ignore {
+public class TestAASd_66a {
 
     @Test
+    @Ignore
     public void wrongValueReferencePairTypesValue() throws ValidationException {
         Reference multilanguageValueIdReference = new DefaultReference.Builder()
                 .key(new DefaultKey.Builder()

@@ -24,14 +24,9 @@ import static org.junit.Assert.fail;
 
 import java.util.Arrays;
 
+import io.adminshell.aas.v3.model.*;
 import org.junit.Test;
 
-import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
-import io.adminshell.aas.v3.model.ConceptDescription;
-import io.adminshell.aas.v3.model.KeyElements;
-import io.adminshell.aas.v3.model.KeyType;
-import io.adminshell.aas.v3.model.Operation;
-import io.adminshell.aas.v3.model.Submodel;
 import io.adminshell.aas.v3.model.impl.DefaultKey;
 import io.adminshell.aas.v3.model.impl.DefaultOperation;
 import io.adminshell.aas.v3.model.impl.DefaultReference;
@@ -90,6 +85,7 @@ public class TestAASd_060 {
 	private Operation createOperation(String idShort, String conceptDescriptionId) {
 		return new DefaultOperation.Builder()
 				.idShort(idShort)
+				.kind(ModelingKind.TEMPLATE)
 				.semanticId(new DefaultReference.Builder()
 						.key(new DefaultKey.Builder()
 								.idType(KeyType.CUSTOM)
