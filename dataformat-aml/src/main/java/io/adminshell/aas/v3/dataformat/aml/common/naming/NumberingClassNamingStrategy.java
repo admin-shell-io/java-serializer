@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.aml.serialization.naming;
+package io.adminshell.aas.v3.dataformat.aml.common.naming;
 
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import java.util.HashMap;
@@ -43,5 +43,4 @@ public class NumberingClassNamingStrategy extends AbstractClassNamingStrategy {
         counter.put(type, counter.get(type) + 1);
         return type.getSimpleName() + "_" + counter.get(type);
     }
-
 }

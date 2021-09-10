@@ -21,6 +21,7 @@ import io.adminshell.aas.v3.dataformat.aml.deserialization.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXObject;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.InternalElementType;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
+import io.adminshell.aas.v3.model.Operation;
 import io.adminshell.aas.v3.model.OperationVariable;
 import io.adminshell.aas.v3.model.SubmodelElement;
 
@@ -32,6 +33,8 @@ import java.util.List;
 public class OperationCollectionMapper extends DefaultMapper<Collection<OperationVariable>> {
 
 
+    public static final String CLASS_LIB_OPERATION = "AssetAdministrationShellRoleClassLib/Operation";
+
     @Override
     protected Collection mapCollectionValueProperty(AmlParser parser, MappingContext context) throws MappingException {
 
@@ -39,7 +42,9 @@ public class OperationCollectionMapper extends DefaultMapper<Collection<Operatio
             return null;
         }
 
-        List<InternalElementType> variables = findInternalElements(parser.getCurrent(), x -> x.getName().equalsIgnoreCase(context.getProperty().getName()));
+        List<InternalElementType> variables = findInternalElements(parser.getCurrent(),
+                x -> x.getRoleRequirements().getRefBaseRoleClassPath().equalsIgnoreCase(CLASS_LIB_OPERATION + context.getProperty().getName()));
+
         if (variables == null || variables.size() == 0) return null;
         if (variables.size() > 1)
             throw new MappingException(String.format("multiple %s elements are found in %s %s", context.getProperty().getName(), parser.getCurrent().getID(), parser.getCurrent().getName()));

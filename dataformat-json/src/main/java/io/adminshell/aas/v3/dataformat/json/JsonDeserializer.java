@@ -15,9 +15,11 @@
  */
 package io.adminshell.aas.v3.dataformat.json;
 
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
 import com.fasterxml.jackson.databind.module.SimpleAbstractTypeResolver;
@@ -31,11 +33,12 @@ import io.adminshell.aas.v3.dataformat.core.deserialization.EnumDeserializer;
 import io.adminshell.aas.v3.dataformat.json.modeltype.ModelTypeProcessor;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
+import io.adminshell.aas.v3.model.Referable;
 
 /**
  * Class for deserializing/parsing AAS JSON documents.
  */
-public class JsonDeserializer implements Deserializer {
+public class JsonDeserializer implements Deserializer, ReferableDeserializer {
 
     protected JsonMapper mapper;
     protected SimpleAbstractTypeResolver typeResolver;
@@ -98,5 +101,24 @@ public class JsonDeserializer implements Deserializer {
     public <T> void useImplementation(Class<T> aasInterface, Class<? extends T> implementation) {
         typeResolver.addMapping(aasInterface, implementation);
         buildMapper();
+    }
+
+    @Override
+    public <T extends Referable> T readReferable(String referable, Class<T> outputClass) throws DeserializationException {
+        try {
+            return mapper.treeToValue(ModelTypeProcessor.preprocess(referable), outputClass);
+        } catch (JsonProcessingException ex) {
+            throw new DeserializationException("error deserializing Referable", ex);
+        }
+    }
+
+    @Override
+    public <T extends Referable> List<T> readReferables(String referables, Class<T> outputClass) throws DeserializationException {
+        try {
+            String parsed = mapper.writeValueAsString(ModelTypeProcessor.preprocess(referables)) ;
+            return mapper.readValue(parsed,new TypeReference<List<T>>(){});
+        } catch (JsonProcessingException ex) {
+            throw new DeserializationException("error deserializing list of Referable", ex);
+        }
     }
 }

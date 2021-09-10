@@ -31,8 +31,8 @@ import java.util.List;
  */
 public class RangeMapper extends DefaultMapper<Range> {
 
-    public static final String MIN_ATTRIBUTE_NAME = "min";
-    public static final String MAX_ATTRIBUTE_NAME = "max";
+    public static final String MIN_ATTRIBUTE_NAME = "AAS:Range/min";
+    public static final String MAX_ATTRIBUTE_NAME = "AAS:Range/max";
     protected static PropertyDescriptor PROPERTY_VALUE_TYPE = AasUtils.getProperty(Range.class, "valueType");
 
     public RangeMapper() {
@@ -45,17 +45,20 @@ public class RangeMapper extends DefaultMapper<Range> {
             return;
         }
 
-        AttributeType attributeTypeMin = findAttributes(parser.getCurrent(),
-                x -> x.getName().equalsIgnoreCase(MIN_ATTRIBUTE_NAME)).stream().findFirst().orElse(null);
+        AttributeType attributeTypeMin = findAttributesByCorrespondingAttributePath(parser.getCurrent(), MIN_ATTRIBUTE_NAME)
+                .stream()
+                .findFirst()
+                .orElse(null);
 
-        AttributeType attributeTypeMax = findAttributes(parser.getCurrent(),
-                x -> x.getName().equalsIgnoreCase(MAX_ATTRIBUTE_NAME)).stream().findFirst().orElse(null);
+        AttributeType attributeTypeMax = findAttributesByCorrespondingAttributePath(parser.getCurrent(), MAX_ATTRIBUTE_NAME)
+                .stream()
+                .findFirst()
+                .orElse(null);
 
         if (attributeTypeMax != null || attributeTypeMin != null){
             String dataTypeMin = getDataTypeFromAttribute(attributeTypeMin);
             String dataTypeMax = getDataTypeFromAttribute(attributeTypeMax);
 
-            //TODO: is that a constraint?
             if (!dataTypeMax.equalsIgnoreCase(dataTypeMin))
                 throw new MappingException(String.format("min/max attributes in range %s %s has different attribute datatypes", parser.getCurrent().getID(), parser.getCurrent().getName()));
 

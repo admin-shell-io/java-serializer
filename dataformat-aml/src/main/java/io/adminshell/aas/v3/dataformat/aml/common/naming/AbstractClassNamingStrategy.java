@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.aml.serialization.naming;
+package io.adminshell.aas.v3.dataformat.aml.common.naming;
 
 import com.google.common.reflect.TypeToken;
 import io.adminshell.aas.v3.dataformat.core.util.MostSpecificTypeTokenComparator;

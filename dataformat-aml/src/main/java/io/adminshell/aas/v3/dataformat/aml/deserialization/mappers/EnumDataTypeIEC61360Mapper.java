@@ -19,7 +19,6 @@ import io.adminshell.aas.v3.dataformat.aml.deserialization.AmlParser;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.DefaultMapper;
 import io.adminshell.aas.v3.dataformat.aml.deserialization.MappingContext;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.AttributeType;
-import io.adminshell.aas.v3.dataformat.core.DataSpecificationManager;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.model.DataTypeIEC61360;
 import org.apache.xerces.dom.ElementNSImpl;
@@ -42,7 +41,7 @@ public class EnumDataTypeIEC61360Mapper extends DefaultMapper<DataTypeIEC61360> 
         }
 
         if (attribute != null) {
-            Class type = context.getProperty().getReadMethod().getReturnType();
+            Class<?> type = context.getProperty().getReadMethod().getReturnType();
             String value="";
             if(DataTypeIEC61360.class.isAssignableFrom(type)){
                 ElementNSImpl elementNS = (ElementNSImpl) attribute.getValue();
