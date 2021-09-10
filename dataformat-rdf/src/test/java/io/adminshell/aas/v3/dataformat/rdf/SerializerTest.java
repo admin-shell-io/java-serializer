@@ -15,7 +15,6 @@
  */
 package io.adminshell.aas.v3.dataformat.rdf;
 
-import io.adminshell.aas.v3.dataformat.rdf.Serializer;
 import io.adminshell.aas.v3.model.*;
 import io.adminshell.aas.v3.model.impl.*;
 import org.apache.jena.riot.RDFLanguages;
