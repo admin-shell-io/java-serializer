@@ -174,7 +174,7 @@ aas:SelfManagedEntityRequiresAssetIdShape a sh:NodeShape ;
 				sh:path <https://admin-shell.io/aas/3/0/RC01/Entity/entityType> ;
 				sh:minCount 1;
 				sh:maxCount 1;
-				sh:pattern "CO_MANAGED_ENTITY";
+				sh:pattern "CoManagedEntity";
 			];
 			]
 			[
