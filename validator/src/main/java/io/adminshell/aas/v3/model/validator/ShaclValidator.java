@@ -15,7 +15,13 @@
  */
 package io.adminshell.aas.v3.model.validator;
 
-import io.adminshell.aas.v3.dataformat.rdf.Serializer;
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.HashMap;
+import java.util.stream.Collectors;
+
 import org.apache.jena.graph.compose.Union;
 import org.apache.jena.rdf.model.Model;
 import org.apache.jena.rdf.model.ModelFactory;
@@ -27,10 +33,7 @@ import org.apache.jena.shacl.validation.ReportEntry;
 import org.apache.jena.util.FileUtils;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
-import java.util.HashMap;
-import java.util.stream.Collectors;
+import io.adminshell.aas.v3.dataformat.rdf.Serializer;
 
 
 public class ShaclValidator implements Validator{
@@ -124,34 +127,13 @@ public class ShaclValidator implements Validator{
         //Initialize an empty model into which we will be loading the shapes
         Model shapesModel = ModelFactory.createDefaultModel();
 
-        /*
-        //Use resources from zip file
-        //TODO: Will they be compressed?
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("validation.zip");
-
-        //Stream this to some temporary file which will be deleted after program exit
-        if (inputStream == null)
-            throw new IOException("Failed to retrieve validation.zip from resources.");
-
-        File inputStreamToFile = File.createTempFile("validation_zip_file", null);
-        inputStreamToFile.deleteOnExit();
-
-        Files.copy(inputStream, inputStreamToFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
-        ZipFile zipFile = new ZipFile(inputStreamToFile);
-        Enumeration<? extends ZipEntry> entries = zipFile.entries();
-
-        while (entries.hasMoreElements()) {
-            shapesModel.read(zipFile.getInputStream(entries.nextElement()), null, FileUtils.langTurtle);
-        }
-        */
-        //shapesModel.read(Files.readString(Path.of("src/main/resources/shapes.ttl")));
-
-
         //All loaded, let's parse!
         //shapes = Shapes.parse(shapesModel);
         InputStream shapesInputStream = getClass().getClassLoader().getResourceAsStream("shapes.ttl");
+        InputStream constraintShapesInputStream = getClass().getClassLoader().getResourceAsStream("constraint_shapes.ttl");
         InputStream ontologyInputStream = getClass().getClassLoader().getResourceAsStream("ontology.ttl");
         shapesModel.read(shapesInputStream, null, FileUtils.langTurtle);
+        shapesModel.read(constraintShapesInputStream, null, FileUtils.langTurtle);
         shapes = Shapes.parse(shapesModel);
         ontologyModel = ModelFactory.createDefaultModel();
 

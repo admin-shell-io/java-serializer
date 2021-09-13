@@ -1422,9 +1422,7 @@ aas:ReferableShape  a sh:NodeShape ;
       sh:datatype xsd:string ;
       sh:maxCount 1 ;
       sh:minCount 1 ;
-      sh:pattern ".+" ;
       sh:message "(Referable.idShort): Exactly one <id>idShort</id> is required."^^xsd:string ;
-      sh:pattern "^[a-zA-Z]\\w*$"^^xsd:string ;
     ] ;
 .
 
@@ -1602,7 +1600,7 @@ aas:ValueReferencePairShape a sh:NodeShape ;
   sh:property [
       a sh:PropertyShape ;
       sh:path <https://admin-shell.io/aas/3/0/RC01/ValueReferencePair/valueId> ;
-      sh:datatype aas:Reference ;
+      sh:class aas:Reference ;
       sh:minCount 1 ;
       sh:maxCount 1 ;
 	    sh:message "(ValueReferencePair.valueId):Only one <i>Reference</i> is allowed for <i>valueId</i>."^^xsd:string ;
