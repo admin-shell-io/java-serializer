@@ -1018,9 +1018,9 @@ aas:KeyWithGlobalReferenceTypeCorrectIdType a sh:NodeShape ;
   		WHERE {
 			?element a <https://admin-shell.io/aas/3/0/RC01/Key> .
 			?element <https://admin-shell.io/aas/3/0/RC01/Key/type> ?keyType .
-			FILTER(?keyType = <https://admin-shell.io/aas/3/0/RC01/KeyElements/GLOBAL_REFERENCE>)
+			FILTER(?keyType = <https://admin-shell.io/aas/3/0/RC01/KeyElements/GlobalReference>)
 			?element <https://admin-shell.io/aas/3/0/RC01/Key/idType> ?keyIdType .
-			FILTER(?keyIdType = <https://admin-shell.io/aas/3/0/RC01/KeyType/ID_SHORT> || ?keyIdType =  <https://admin-shell.io/aas/3/0/RC01/KeyType/FRAGMENT_ID>)
+			FILTER(?keyIdType = <https://admin-shell.io/aas/3/0/RC01/LocalKeyType/IdShort> || ?keyIdType =  <https://admin-shell.io/aas/3/0/RC01/LocalKeyType/FragmentId>)
 		}
         """ ;
 ] .
