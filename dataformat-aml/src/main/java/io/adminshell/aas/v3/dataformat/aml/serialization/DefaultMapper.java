@@ -25,9 +25,7 @@ import java.beans.PropertyDescriptor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
-import java.util.stream.Collectors;
 
 public class DefaultMapper<T> implements Mapper<T> {
 
@@ -117,7 +115,9 @@ public class DefaultMapper<T> implements Mapper<T> {
     }
 
     protected AttributeType.Builder toAttribute(T value, AmlGenerator generator, MappingContext context) throws MappingException {
-        Class<?> aasType = ReflectionHelper.getAasInterface(value.getClass());
+        Class<?> aasType = value != null
+                ? ReflectionHelper.getAasInterface(value.getClass())
+                : null;
         AttributeType.Builder builder = AttributeType.builder();
         if (context.getProperty() != null) {
             builder = builder
@@ -127,7 +127,6 @@ public class DefaultMapper<T> implements Mapper<T> {
         if (aasType != null) {
             mapProperties(value, generator.with(builder), context);
         } else {
-
             builder = builder.withValue(value);
         }
         return builder;
@@ -138,7 +137,6 @@ public class DefaultMapper<T> implements Mapper<T> {
     }
 
     protected void mapProperties(T value, AmlGenerator generator, MappingContext context) throws MappingException {
-        List<String> collect = AasUtils.getAasProperties(value.getClass()).stream().map(x -> x.getName()).collect(Collectors.toList());
         for (PropertyDescriptor property : AasUtils.getAasProperties(value.getClass())) {
             if (!skipProperty(property)) {
                 context.with(property)

@@ -1789,7 +1789,7 @@
 			<Attribute Name="description">
 				<RefSemantic CorrespondingAttributePath="AAS:Referable/description"/>
 				<Attribute Name="aml-lang=en-us">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">An example concept description  for the test application</Value>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">An example concept description for the test application</Value>
 				</Attribute>
 				<Attribute Name="aml-lang=de">
 					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Ein Beispiel-ConceptDescription für eine Test-Anwendung</Value>
@@ -1849,7 +1849,7 @@
 			<Attribute Name="description">
 				<RefSemantic CorrespondingAttributePath="AAS:Referable/description"/>
 				<Attribute Name="aml-lang=en-us">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">An example concept description  for the test application</Value>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">An example concept description for the test application</Value>
 				</Attribute>
 				<Attribute Name="aml-lang=de">
 					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Ein Beispiel-ConceptDescription für eine Test-Anwendung</Value>
