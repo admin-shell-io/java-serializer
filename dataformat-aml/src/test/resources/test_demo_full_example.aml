@@ -1183,10 +1183,18 @@
 				</Attribute>
 			</Attribute>
 			<InternalElement ID="74" Name="ExampleView">
+				<Attribute Name="idShort">
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleView</Value>
+					<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+				</Attribute>
 				<InternalElement ID="72" Name="TestSubmodel" RefBaseSystemUnitPath="73"/>
 				<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/View"/>
 			</InternalElement>
 			<InternalElement ID="75" Name="ExampleView2">
+				<Attribute Name="idShort">
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleView2</Value>
+					<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+				</Attribute>
 				<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/View"/>
 			</InternalElement>
 			<InternalElement ID="73" Name="TestSubmodel">
