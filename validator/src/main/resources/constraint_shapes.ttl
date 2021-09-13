@@ -880,7 +880,7 @@ aas:ConceptDescriptionWithCategoryDocumentAndIEC61360CorrectDataType a sh:NodeSh
   sh:targetClass aas:ConceptDescription;
   sh:sparql [
   a sh:SPARQLConstraint ;
-  sh:message "For a ConceptDescription with category DOCUMENT using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/dataType shall be one of the following values: STRING or URL." ;
+  sh:message "For a ConceptDescription with category DOCUMENT using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/dataType shall be one of the following values: String or Url." ;
 
   sh:select """
   	SELECT ?conceptDescription
@@ -888,9 +888,9 @@ aas:ConceptDescriptionWithCategoryDocumentAndIEC61360CorrectDataType a sh:NodeSh
 			?element a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
 			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> "DOCUMENT" .
 			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecification .
-			?embeddedDataSpecification <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecificationContent .
-			?dataSpecificationContent <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/dataType> ?dataType .
-			FILTER(?dataType != <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/Url> && ?dataType != <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/String>)
+			?embeddedDataSpecification <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360> .
+			<https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360> <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/dataType> ?dataType .
+			FILTER(?dataType != <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/URL> && ?dataType != <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/String>)
 		}
         """ ;
 ] .
@@ -1018,9 +1018,9 @@ aas:KeyWithGlobalReferenceTypeCorrectIdType a sh:NodeShape ;
   		WHERE {
 			?element a <https://admin-shell.io/aas/3/0/RC01/Key> .
 			?element <https://admin-shell.io/aas/3/0/RC01/Key/type> ?keyType .
-			FILTER(?keyType = <https://admin-shell.io/aas/3/0/RC01/KeyElements/GLOBAL_REFERENCE>)
+			FILTER(?keyType = <https://admin-shell.io/aas/3/0/RC01/KeyElements/GlobalReference>)
 			?element <https://admin-shell.io/aas/3/0/RC01/Key/idType> ?keyIdType .
-			FILTER(?keyIdType = <https://admin-shell.io/aas/3/0/RC01/KeyType/ID_SHORT> || ?keyIdType =  <https://admin-shell.io/aas/3/0/RC01/KeyType/FRAGMENT_ID>)
+			FILTER(?keyIdType = <https://admin-shell.io/aas/3/0/RC01/LocalKeyType/IdShort> || ?keyIdType =  <https://admin-shell.io/aas/3/0/RC01/LocalKeyType/FragmentId>)
 		}
         """ ;
 ] .
@@ -1036,10 +1036,9 @@ aas:KeyWithAssetAdministrationShellTypeCorrectIdType a sh:NodeShape ;
   	SELECT ?element
   		WHERE {
 			?element a <https://admin-shell.io/aas/3/0/RC01/Key> .
-			?element <https://admin-shell.io/aas/3/0/RC01/Key/type> ?keyType .
-			FILTER(?keyType = <https://admin-shell.io/aas/3/0/RC01/KeyElements/ASSET_ADMINISTRATION_SHELL>)
+			?element <https://admin-shell.io/aas/3/0/RC01/Key/type> <https://admin-shell.io/aas/3/0/RC01/IdentifiableElements/AssetAdministrationShell> .
 			?element <https://admin-shell.io/aas/3/0/RC01/Key/idType> ?keyIdType .
-			FILTER(?keyIdType = <https://admin-shell.io/aas/3/0/RC01/KeyType/ID_SHORT> || ?keyIdType =  <https://admin-shell.io/aas/3/0/RC01/KeyType/FRAGMENT_ID>)
+			FILTER(?keyIdType = <https://admin-shell.io/aas/3/0/RC01/LocalKeyType/IdShort> || ?keyIdType =  <https://admin-shell.io/aas/3/0/RC01/LocalKeyType/FragmentId>)
 		}
         """ ;
 ] .
