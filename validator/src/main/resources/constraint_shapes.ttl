@@ -803,7 +803,7 @@ aas:AASd-067Shape  a sh:NodeShape ;
            ?identifier <https://admin-shell.io/aas/3/0/RC01/Identifier/identifier> ?identifierValue .
 
            FILTER ( ?keyValue = ?identifierValue )
-           FILTER (?dataType != <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/STRING_TRANSLATABLE>)
+           FILTER (?dataType != <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/StringTranslatable>)
       }
           """ ;
 ] .
