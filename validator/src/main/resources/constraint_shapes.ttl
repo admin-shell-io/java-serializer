@@ -838,11 +838,11 @@ aas:AASd-068Shape  a sh:NodeShape ;
            FILTER ( ?keyValue = ?identifierValue  )
 
            FILTER (?dataType NOT IN (
-             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/REAL_CURRENCY>, # TODO: should be RealCount
-             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/REAL_COUNT>, # TODO: should be RealCount
-             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/REAL_MEASURE>, # TODO: should be RealMeasure
-             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/RATIONAL>, # TODO: should be Rational
-             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataTypeIEC61360/RATIONAL_MEASURE> # TODO: should be RationalMeasure
+             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/RealCount>, # TODO: should be RealCount
+             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/RealCount>, # TODO: should be RealCount
+             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/RealMeasure>, # TODO: should be RealMeasure
+             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/Rational>, # TODO: should be Rational
+             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/RationalMeasure> # TODO: should be RationalMeasure
            ))
 
       }
