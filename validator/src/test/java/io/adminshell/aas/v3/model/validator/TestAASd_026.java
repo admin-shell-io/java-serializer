@@ -19,7 +19,14 @@ import java.util.*;
  *
  */
 
-public class TestAASd_026_Ignore {
+public class TestAASd_026 {
+
+    @Test
+    public void testAllowDuplicates() {
+
+        // TODO @chang: please write the test.
+
+    }
 
 
     private SubmodelElementCollection createSubmodelElementCollection(Collection<SubmodelElement> values) {
