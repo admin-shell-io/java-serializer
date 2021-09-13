@@ -813,7 +813,7 @@ aas:AASd-068Shape  a sh:NodeShape ;
   sh:targetClass aas:Range;
   sh:sparql [
     a sh:SPARQLConstraint ;
-    sh:message "If the semanticId of a Range submodel element references a ConceptDescription then DataSpecificationIEC61360/dataType shall be a numerical one, i.e. REAL_* or RATIONAL_*." ;
+    sh:message "If the semanticId of a Range submodel element references a ConceptDescription then DataSpecificationIEC61360/dataType shall be a numerical one, i.e. Real* or Rational*." ;
     sh:prefixes [
       sh:declare [
         sh:prefix "iec61360" ;
@@ -838,11 +838,11 @@ aas:AASd-068Shape  a sh:NodeShape ;
            FILTER ( ?keyValue = ?identifierValue  )
 
            FILTER (?dataType NOT IN (
-             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/RealCount>, # TODO: should be RealCount
-             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/RealCount>, # TODO: should be RealCount
-             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/RealMeasure>, # TODO: should be RealMeasure
-             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/Rational>, # TODO: should be Rational
-             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/RationalMeasure> # TODO: should be RationalMeasure
+             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/RealCurrency>,
+             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/RealCount>,
+             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/RealMeasure>,
+             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/Rational>,
+             <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/RationalMeasure>
            ))
 
       }
@@ -870,7 +870,7 @@ aas:ConceptDescriptionReferencedFromRangeCorrectLevelType a sh:NodeShape ;
 			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecification .
 			?embeddedDataSpecification <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecificationContent .
 			?dataSpecificationContent <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/levelType> ?levelType .
-			FILTER(?levelType NOT IN (<https://admin-shell.io/aas/3/0/RC01/LevelType/MAX>, <https://admin-shell.io/aas/3/0/RC01/LevelType/MIN>))
+			FILTER(?levelType NOT IN (<https://admin-shell.io/aas/3/0/RC01/LevelType/Max>, <https://admin-shell.io/aas/3/0/RC01/LevelType/Min>))
 		}
         """ ;
 ] .
