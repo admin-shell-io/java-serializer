@@ -88,7 +88,7 @@ public class TestAASd_068 {
 		} catch (ValidationException e) {
 			assertTrue(e.getMessage().endsWith("If the semanticId of a Range submodel element references a " +
 							"ConceptDescription then DataSpecificationIEC61360/dataType shall be a numerical one, i.e. " +
-							"REAL_* or RATIONAL_*."));
+							"Real* or Rational*."));
 		}
 
 
