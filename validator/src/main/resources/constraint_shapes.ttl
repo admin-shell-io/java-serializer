@@ -1036,10 +1036,9 @@ aas:KeyWithAssetAdministrationShellTypeCorrectIdType a sh:NodeShape ;
   	SELECT ?element
   		WHERE {
 			?element a <https://admin-shell.io/aas/3/0/RC01/Key> .
-			?element <https://admin-shell.io/aas/3/0/RC01/Key/type> ?keyType .
-			FILTER(?keyType = <https://admin-shell.io/aas/3/0/RC01/KeyElements/ASSET_ADMINISTRATION_SHELL>)
+			?element <https://admin-shell.io/aas/3/0/RC01/Key/type> <https://admin-shell.io/aas/3/0/RC01/IdentifiableElements/AssetAdministrationShell> .
 			?element <https://admin-shell.io/aas/3/0/RC01/Key/idType> ?keyIdType .
-			FILTER(?keyIdType = <https://admin-shell.io/aas/3/0/RC01/KeyType/ID_SHORT> || ?keyIdType =  <https://admin-shell.io/aas/3/0/RC01/KeyType/FRAGMENT_ID>)
+			FILTER(?keyIdType = <https://admin-shell.io/aas/3/0/RC01/LocalKeyType/IdShort> || ?keyIdType =  <https://admin-shell.io/aas/3/0/RC01/LocalKeyType/FragmentId>)
 		}
         """ ;
 ] .
