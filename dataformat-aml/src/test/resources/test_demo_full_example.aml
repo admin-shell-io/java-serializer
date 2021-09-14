@@ -584,9 +584,11 @@
 						<ExternalInterface ID="28" Name="FileDataReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/FileDataReference">
 							<Attribute Name="MIMEType" AttributeDataType="xs:string">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">application/pdf</Value>
+								<RefSemantic CorrespondingAttributePath="AAS:File/MIMEType"/>
 							</Attribute>
 							<Attribute Name="refURI" AttributeDataType="xs:anyURI">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">/TestFile.pdf</Value>
+								<RefSemantic CorrespondingAttributePath="AAS:File/refURI"/>
 							</Attribute>
 						</ExternalInterface>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/File"/>
@@ -1080,8 +1082,11 @@
 						<ExternalInterface ID="64" Name="FileDataReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/FileDataReference">
 							<Attribute Name="MIMEType" AttributeDataType="xs:string">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">application/pdf</Value>
+								<RefSemantic CorrespondingAttributePath="AAS:File/MIMEType"/>
 							</Attribute>
-							<Attribute Name="refURI" AttributeDataType="xs:anyURI"/>
+							<Attribute Name="refURI" AttributeDataType="xs:anyURI">
+								<RefSemantic CorrespondingAttributePath="AAS:File/refURI"/>
+							</Attribute>
 						</ExternalInterface>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/File"/>
 					</InternalElement>
@@ -1733,9 +1738,11 @@
 						<ExternalInterface ID="103" Name="FileDataReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/FileDataReference">
 							<Attribute Name="MIMEType" AttributeDataType="xs:string">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">application/pdf</Value>
+								<RefSemantic CorrespondingAttributePath="AAS:File/MIMEType"/>
 							</Attribute>
 							<Attribute Name="refURI" AttributeDataType="xs:anyURI">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">/TestFile.pdf</Value>
+								<RefSemantic CorrespondingAttributePath="AAS:File/refURI"/>
 							</Attribute>
 						</ExternalInterface>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/File"/>
@@ -3423,8 +3430,11 @@
 						<ExternalInterface ID="136" Name="FileDataReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/FileDataReference">
 							<Attribute Name="MIMEType" AttributeDataType="xs:string">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">application/pdf</Value>
+								<RefSemantic CorrespondingAttributePath="AAS:File/MIMEType"/>
 							</Attribute>
-							<Attribute Name="refURI" AttributeDataType="xs:anyURI"/>
+							<Attribute Name="refURI" AttributeDataType="xs:anyURI">
+								<RefSemantic CorrespondingAttributePath="AAS:File/refURI"/>
+							</Attribute>
 						</ExternalInterface>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/File"/>
 					</InternalElement>
@@ -3617,8 +3627,11 @@
 					<ExternalInterface ID="164" Name="FileDataReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/FileDataReference">
 						<Attribute Name="MIMEType" AttributeDataType="xs:string">
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">application/pdf</Value>
+							<RefSemantic CorrespondingAttributePath="AAS:File/MIMEType"/>
 						</Attribute>
-						<Attribute Name="refURI" AttributeDataType="xs:anyURI"/>
+						<Attribute Name="refURI" AttributeDataType="xs:anyURI">
+							<RefSemantic CorrespondingAttributePath="AAS:File/refURI"/>
+						</Attribute>
 					</ExternalInterface>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/File"/>
 				</InternalElement>
