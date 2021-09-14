@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>io.admin-shell.aas</groupId>
-            <artifactId>dataformat-jsonld</artifactId>
+            <artifactId>dataformat-rdf</artifactId>
             <version>${revision}</version>
         </dependency>
         <dependency>

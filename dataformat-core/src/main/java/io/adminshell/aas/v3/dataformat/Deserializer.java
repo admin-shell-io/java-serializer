@@ -27,18 +27,17 @@ import java.util.stream.Collectors;
 import io.adminshell.aas.v3.model.*;
 
 /**
- * * Generic deserializer interface to deserialize a given string, Outputstream
- * or java.io.File into an instance of AssetAdministrationShellEnvironment
+ * Generic deserializer interface to deserialize a given string, Outputstream or
+ * java.io.File into an instance of AssetAdministrationShellEnvironment
  */
 public interface Deserializer {
 
     /**
-     * * Default charset that will be used when no charset is specified
+     * Default charset that will be used when no charset is specified
      */
     Charset DEFAULT_CHARSET = StandardCharsets.UTF_8;
 
     /**
-     * *
      * Deserializes a given string into an instance of
      * AssetAdministrationShellEnvironment
      *
@@ -50,7 +49,6 @@ public interface Deserializer {
     AssetAdministrationShellEnvironment read(String value) throws DeserializationException;
 
     /**
-     * *
      * Deserializes a given InputStream into an instance of
      * AssetAdministrationShellEnvironment using DEFAULT_CHARSET
      *
@@ -64,7 +62,6 @@ public interface Deserializer {
     }
 
     /**
-     * *
      * Deserializes a given InputStream into an instance of
      * AssetAdministrationShellEnvironment using a given charset
      *
@@ -81,9 +78,7 @@ public interface Deserializer {
                 .collect(Collectors.joining(System.lineSeparator())));
     }
 
-    // Note that the AAS also defines a file class
     /**
-     * *
      * Deserializes a given File into an instance of
      * AssetAdministrationShellEnvironment using DEFAULT_CHARSET
      *
@@ -100,7 +95,6 @@ public interface Deserializer {
     }
 
     /**
-     * *
      * Deserializes a given File into an instance of
      * AssetAdministrationShellEnvironment using a given charset
      *
@@ -115,7 +109,6 @@ public interface Deserializer {
     }
 
     /**
-     * *
      * Enables usage of custom implementation to be used for deserialization
      * instead of default implementation, e.g. defining a custom implementation
      * of the Submodel interface {@code class

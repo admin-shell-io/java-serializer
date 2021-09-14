@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import io.adminshell.aas.v3.model.Asset;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.AssetKind;
@@ -32,6 +33,7 @@ import io.adminshell.aas.v3.model.LangString;
 import io.adminshell.aas.v3.model.ModelingKind;
 import io.adminshell.aas.v3.model.Submodel;
 import io.adminshell.aas.v3.model.impl.DefaultAdministrativeInformation;
+import io.adminshell.aas.v3.model.impl.DefaultAsset;
 import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShell;
 import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.impl.DefaultAssetInformation;
@@ -78,7 +80,7 @@ public class AASSimple {
 	private static final String TITEL = "Titel";
 	private static final String WWW_VDI2770_COM_BLATT1_ENTWURF_OKT18_CD_DESCRIPTION_TITLE = "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Description/Title";
 	private static final String TITLE = "Title";
-	//private static final String SERVO_DC_MOTOR = "ServoDCMotor";
+	private static final String SERVO_DC_MOTOR = "ServoDCMotor";
 	private static final String HTTPS_GITHUB_COM_ADMIN_SHELL_IO_BLOB_MASTER_VERWALTUNGSSCHALE_DETAIL_PART1_PNG = "https://github.com/admin-shell/io/blob/master/verwaltungsschale-detail-part1.png";
 	private static final String IMAGE_PNG = "image/png";
 	private static final String THUMBNAIL = "thumbnail";
@@ -165,10 +167,10 @@ public class AASSimple {
 					.value(SUBMODEL_DOCUMENTATION_ID).idType(KeyType.IRI).build()).build())
 			.build();
 
-//	public static final Asset ASSET = new DefaultAsset.Builder().idShort(SERVO_DC_MOTOR)
-//			.identification(new DefaultIdentifier.Builder().idType(IdentifierType.IRI)
-//					.identifier(HTTP_CUSTOMER_COM_ASSETS_KHBVZJSQKIY).build())
-//			.build();
+	public static final Asset ASSET = new DefaultAsset.Builder().idShort(SERVO_DC_MOTOR)
+			.identification(new DefaultIdentifier.Builder().idType(IdentifierType.IRI)
+					.identifier(HTTP_CUSTOMER_COM_ASSETS_KHBVZJSQKIY).build())
+			.build();
 
 	public static final Submodel SUBMODEL_TECHNICAL_DATA = new DefaultSubmodel.Builder()
 			.semanticId(new DefaultReference.Builder().key(new DefaultKey.Builder().type(KeyElements.GLOBAL_REFERENCE)
@@ -328,6 +330,7 @@ public class AASSimple {
 			.conceptDescriptions(CONCEPT_DESCRIPTION_DIGITALFILE)
 			.conceptDescriptions(CONCEPT_DESCRIPTION_MAXROTATIONSPEED)
 			.conceptDescriptions(CONCEPT_DESCRIPTION_ROTATIONSPEED).conceptDescriptions(CONCEPT_DESCRIPTION_DOCUMENT)
+			.assets(ASSET)
 			.build();
 
 	public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException {

@@ -47,7 +47,7 @@ public class JsonSerializerTest {
 
     @Test
     public void testSerializeNull() throws JsonProcessingException, IOException, SerializationException {
-        assertEquals("null", new JsonSerializer().write(null));
+        assertEquals("null", new JsonSerializer().write((AssetAdministrationShellEnvironment) null));
     }
 
     @Test
