@@ -1026,6 +1026,9 @@
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleProperty</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 						</Attribute>
+						<Attribute Name="value" AttributeDataType="xs:string">
+							<RefSemantic CorrespondingAttributePath="AAS:Property/value"/>
+						</Attribute>
 						<ExternalInterface ID="59" Name="ReferableReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/ReferableReference"/>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Property"/>
 					</InternalElement>
@@ -1041,6 +1044,12 @@
 						<Attribute Name="idShort">
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleRange</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+						</Attribute>
+						<Attribute Name="min" AttributeDataType="xs:int">
+							<RefSemantic CorrespondingAttributePath="AAS:Range/min"/>
+						</Attribute>
+						<Attribute Name="max" AttributeDataType="xs:int">
+							<RefSemantic CorrespondingAttributePath="AAS:Range/max"/>
 						</Attribute>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Range"/>
 					</InternalElement>
@@ -1366,6 +1375,9 @@
 									<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier</Value>
 									<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>
 								</Attribute>
+								<Attribute Name="value" AttributeDataType="xs:string">
+									<RefSemantic CorrespondingAttributePath="AAS:Qualifier/value"/>
+								</Attribute>
 							</Attribute>
 							<Attribute Name="semanticId">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Properties/ExampleProperty</Value>
@@ -1404,6 +1416,9 @@
 									<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier</Value>
 									<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>
 								</Attribute>
+								<Attribute Name="value" AttributeDataType="xs:string">
+									<RefSemantic CorrespondingAttributePath="AAS:Qualifier/value"/>
+								</Attribute>
 							</Attribute>
 							<Attribute Name="semanticId">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Properties/ExampleProperty</Value>
@@ -1441,6 +1456,9 @@
 								<Attribute Name="type">
 									<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier</Value>
 									<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>
+								</Attribute>
+								<Attribute Name="value" AttributeDataType="xs:string">
+									<RefSemantic CorrespondingAttributePath="AAS:Qualifier/value"/>
 								</Attribute>
 							</Attribute>
 							<Attribute Name="semanticId">
@@ -1562,6 +1580,9 @@
 							<Attribute Name="type">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier</Value>
 								<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>
+							</Attribute>
+							<Attribute Name="value" AttributeDataType="xs:string">
+								<RefSemantic CorrespondingAttributePath="AAS:Qualifier/value"/>
 							</Attribute>
 						</Attribute>
 						<Attribute Name="semanticId">
@@ -3374,6 +3395,9 @@
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleProperty</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 						</Attribute>
+						<Attribute Name="value" AttributeDataType="xs:string">
+							<RefSemantic CorrespondingAttributePath="AAS:Property/value"/>
+						</Attribute>
 						<ExternalInterface ID="131" Name="ReferableReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/ReferableReference"/>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Property"/>
 					</InternalElement>
@@ -3389,6 +3413,12 @@
 						<Attribute Name="idShort">
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleRange</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+						</Attribute>
+						<Attribute Name="min" AttributeDataType="xs:int">
+							<RefSemantic CorrespondingAttributePath="AAS:Range/min"/>
+						</Attribute>
+						<Attribute Name="max" AttributeDataType="xs:int">
+							<RefSemantic CorrespondingAttributePath="AAS:Range/max"/>
 						</Attribute>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Range"/>
 					</InternalElement>
@@ -3571,6 +3601,9 @@
 						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleProperty</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
+					<Attribute Name="value" AttributeDataType="xs:string">
+						<RefSemantic CorrespondingAttributePath="AAS:Property/value"/>
+					</Attribute>
 					<ExternalInterface ID="159" Name="ReferableReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/ReferableReference"/>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Property"/>
 				</InternalElement>
@@ -3586,6 +3619,12 @@
 					<Attribute Name="idShort">
 						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleRange</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+					</Attribute>
+					<Attribute Name="min" AttributeDataType="xs:int">
+						<RefSemantic CorrespondingAttributePath="AAS:Range/min"/>
+					</Attribute>
+					<Attribute Name="max" AttributeDataType="xs:int">
+						<RefSemantic CorrespondingAttributePath="AAS:Range/max"/>
 					</Attribute>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Range"/>
 				</InternalElement>

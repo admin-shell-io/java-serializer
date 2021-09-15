@@ -103,18 +103,27 @@ public abstract class AbstractElementMapperWithValueType<T> extends DefaultMappe
                 .copyOf(original)
                 .withAttribute(untouchedAttributes);
         for (String property : typedProperties) {
+            AttributeType.Builder typedAttributeBuilder;
             Optional<AttributeType> attributeToType = original.getAttribute().stream()
                     .filter(x -> property.equals(x.getName()))
                     .findFirst();
             if (attributeToType.isPresent()) {
-                AttributeType.Builder typedAttributeBuilder = AttributeType.copyOf(attributeToType.get());
-                if (valueTypeProperty.isPresent()) {
-                    try {
-                        typedAttributeBuilder = typedAttributeBuilder.withAttributeDataType(
-                                PROPERTY_VALUE_TYPE_NAMESPACE_PREFIX + valueTypeProperty.get().getReadMethod().invoke(value));
-                    } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
-                        throw new MappingException(String.format("error reading property %s", PROPERTY_VALUE_TYPE_NAME));
-                    }
+                typedAttributeBuilder = AttributeType.copyOf(attributeToType.get());
+            } else {
+                typedAttributeBuilder = super.toAttribute(null, generator, context
+                        .with(AasUtils.getProperty(value, property)));
+            }
+            Object type = null;
+            if (valueTypeProperty.isPresent()) {
+                try {
+                    type = valueTypeProperty.get().getReadMethod().invoke(value);
+                } catch (IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
+                    throw new MappingException(String.format("error reading property %s", PROPERTY_VALUE_TYPE_NAME));
+                }
+            }
+            if (attributeToType.isPresent() || type != null) {
+                if (type != null) {
+                    typedAttributeBuilder = typedAttributeBuilder.withAttributeDataType(PROPERTY_VALUE_TYPE_NAMESPACE_PREFIX + type);
                 }
                 builder = builder.addAttribute(typedAttributeBuilder.build());
             }
