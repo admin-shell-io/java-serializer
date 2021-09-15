@@ -32,11 +32,6 @@ import java.util.List;
 public class ViewMapper extends DefaultMapper<View> {
 
     private static final String CONTAINED_ELEMENTS = "containedElements";
-    private static final PropertyDescriptor PROPERTY_VALUE_TYPE = AasUtils.getProperty(View.class, "idShort");
-
-    public ViewMapper() {
-        super(PROPERTY_VALUE_TYPE.getName());
-    }
 
     @Override
     protected void mapProperties(Object parent, AmlParser parser, MappingContext context) throws MappingException {
@@ -46,9 +41,6 @@ public class ViewMapper extends DefaultMapper<View> {
 
         if (!InternalElementType.class.isAssignableFrom(parser.getCurrent().getClass())) return;
         InternalElementType internalElementType_View = (InternalElementType) parser.getCurrent();
-
-        //TODO remove after adjustment of serializer
-        ((View) parent).setIdShort(internalElementType_View.getName());
 
         List<InternalElementType> internalElementTypeList = internalElementType_View.getInternalElement();
         internalElementTypeList.stream().forEach(x -> {

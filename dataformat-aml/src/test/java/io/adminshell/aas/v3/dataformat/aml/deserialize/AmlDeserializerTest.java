@@ -74,7 +74,9 @@ public class AmlDeserializerTest {
     private void adaptSubmodels(AssetAdministrationShellEnvironment env) {
         //non referenced submodels are not considered in AML
         List<String> submodelIds = new ArrayList<>();
-        env.getAssetAdministrationShells().stream().forEach(x -> x.getSubmodels().stream().forEach(y -> y.getKeys().stream().forEach(z ->submodelIds.add(z.getValue()))));
+        env.getAssetAdministrationShells().stream().forEach(
+                x -> x.getSubmodels().stream()
+                        .forEach(y -> y.getKeys().stream().forEach(z ->submodelIds.add(z.getValue()))));
 
         List<Submodel> referencedSubmodels = env.getSubmodels().stream().filter(x -> submodelIds.contains(x.getIdentification().getIdentifier())).collect(Collectors.toList());
         env.setSubmodels(referencedSubmodels);
