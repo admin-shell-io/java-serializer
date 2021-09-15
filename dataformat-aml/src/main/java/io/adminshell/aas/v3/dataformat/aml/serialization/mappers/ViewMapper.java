@@ -39,12 +39,7 @@ public class ViewMapper extends DefaultMapper<View> {
         if (view == null) {
             return;
         }
-        InternalElementType.Builder builder = InternalElementType.builder();
-        builder = builder.withName(context.getClassNamingStrategy().getName(
-                view.getClass(),
-                view,
-                null))
-                .withRoleRequirements(generator.roleRequirement(ReflectionHelper.getModelType(view.getClass())));
+        InternalElementType.Builder builder = toInternalElement(view, generator, context);
         generator.with(builder).appendReferenceTargetInterfaceIfRequired(view, context);
         for (Reference reference : view.getContainedElements()) {
             Referable referable = AasUtils.resolve(reference, context.getEnvironment());

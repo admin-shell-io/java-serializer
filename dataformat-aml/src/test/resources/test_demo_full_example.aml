@@ -584,9 +584,11 @@
 						<ExternalInterface ID="28" Name="FileDataReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/FileDataReference">
 							<Attribute Name="MIMEType" AttributeDataType="xs:string">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">application/pdf</Value>
+								<RefSemantic CorrespondingAttributePath="AAS:File/MIMEType"/>
 							</Attribute>
 							<Attribute Name="refURI" AttributeDataType="xs:anyURI">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">/TestFile.pdf</Value>
+								<RefSemantic CorrespondingAttributePath="AAS:File/refURI"/>
 							</Attribute>
 						</ExternalInterface>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/File"/>
@@ -1024,6 +1026,9 @@
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleProperty</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 						</Attribute>
+						<Attribute Name="value" AttributeDataType="xs:string">
+							<RefSemantic CorrespondingAttributePath="AAS:Property/value"/>
+						</Attribute>
 						<ExternalInterface ID="59" Name="ReferableReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/ReferableReference"/>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Property"/>
 					</InternalElement>
@@ -1039,6 +1044,12 @@
 						<Attribute Name="idShort">
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleRange</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+						</Attribute>
+						<Attribute Name="min" AttributeDataType="xs:int">
+							<RefSemantic CorrespondingAttributePath="AAS:Range/min"/>
+						</Attribute>
+						<Attribute Name="max" AttributeDataType="xs:int">
+							<RefSemantic CorrespondingAttributePath="AAS:Range/max"/>
 						</Attribute>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Range"/>
 					</InternalElement>
@@ -1080,8 +1091,11 @@
 						<ExternalInterface ID="64" Name="FileDataReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/FileDataReference">
 							<Attribute Name="MIMEType" AttributeDataType="xs:string">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">application/pdf</Value>
+								<RefSemantic CorrespondingAttributePath="AAS:File/MIMEType"/>
 							</Attribute>
-							<Attribute Name="refURI" AttributeDataType="xs:anyURI"/>
+							<Attribute Name="refURI" AttributeDataType="xs:anyURI">
+								<RefSemantic CorrespondingAttributePath="AAS:File/refURI"/>
+							</Attribute>
 						</ExternalInterface>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/File"/>
 					</InternalElement>
@@ -1183,10 +1197,18 @@
 				</Attribute>
 			</Attribute>
 			<InternalElement ID="74" Name="ExampleView">
+				<Attribute Name="idShort">
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleView</Value>
+					<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+				</Attribute>
 				<InternalElement ID="72" Name="TestSubmodel" RefBaseSystemUnitPath="73"/>
 				<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/View"/>
 			</InternalElement>
 			<InternalElement ID="75" Name="ExampleView2">
+				<Attribute Name="idShort">
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleView2</Value>
+					<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+				</Attribute>
 				<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/View"/>
 			</InternalElement>
 			<InternalElement ID="73" Name="TestSubmodel">
@@ -1353,6 +1375,9 @@
 									<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier</Value>
 									<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>
 								</Attribute>
+								<Attribute Name="value" AttributeDataType="xs:string">
+									<RefSemantic CorrespondingAttributePath="AAS:Qualifier/value"/>
+								</Attribute>
 							</Attribute>
 							<Attribute Name="semanticId">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Properties/ExampleProperty</Value>
@@ -1391,6 +1416,9 @@
 									<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier</Value>
 									<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>
 								</Attribute>
+								<Attribute Name="value" AttributeDataType="xs:string">
+									<RefSemantic CorrespondingAttributePath="AAS:Qualifier/value"/>
+								</Attribute>
 							</Attribute>
 							<Attribute Name="semanticId">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Properties/ExampleProperty</Value>
@@ -1428,6 +1456,9 @@
 								<Attribute Name="type">
 									<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier</Value>
 									<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>
+								</Attribute>
+								<Attribute Name="value" AttributeDataType="xs:string">
+									<RefSemantic CorrespondingAttributePath="AAS:Qualifier/value"/>
 								</Attribute>
 							</Attribute>
 							<Attribute Name="semanticId">
@@ -1549,6 +1580,9 @@
 							<Attribute Name="type">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier</Value>
 								<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>
+							</Attribute>
+							<Attribute Name="value" AttributeDataType="xs:string">
+								<RefSemantic CorrespondingAttributePath="AAS:Qualifier/value"/>
 							</Attribute>
 						</Attribute>
 						<Attribute Name="semanticId">
@@ -1725,9 +1759,11 @@
 						<ExternalInterface ID="103" Name="FileDataReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/FileDataReference">
 							<Attribute Name="MIMEType" AttributeDataType="xs:string">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">application/pdf</Value>
+								<RefSemantic CorrespondingAttributePath="AAS:File/MIMEType"/>
 							</Attribute>
 							<Attribute Name="refURI" AttributeDataType="xs:anyURI">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">/TestFile.pdf</Value>
+								<RefSemantic CorrespondingAttributePath="AAS:File/refURI"/>
 							</Attribute>
 						</ExternalInterface>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/File"/>
@@ -1781,7 +1817,7 @@
 			<Attribute Name="description">
 				<RefSemantic CorrespondingAttributePath="AAS:Referable/description"/>
 				<Attribute Name="aml-lang=en-us">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">An example concept description  for the test application</Value>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">An example concept description for the test application</Value>
 				</Attribute>
 				<Attribute Name="aml-lang=de">
 					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Ein Beispiel-ConceptDescription für eine Test-Anwendung</Value>
@@ -1841,7 +1877,7 @@
 			<Attribute Name="description">
 				<RefSemantic CorrespondingAttributePath="AAS:Referable/description"/>
 				<Attribute Name="aml-lang=en-us">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">An example concept description  for the test application</Value>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">An example concept description for the test application</Value>
 				</Attribute>
 				<Attribute Name="aml-lang=de">
 					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Ein Beispiel-ConceptDescription für eine Test-Anwendung</Value>
@@ -3359,6 +3395,9 @@
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleProperty</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 						</Attribute>
+						<Attribute Name="value" AttributeDataType="xs:string">
+							<RefSemantic CorrespondingAttributePath="AAS:Property/value"/>
+						</Attribute>
 						<ExternalInterface ID="131" Name="ReferableReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/ReferableReference"/>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Property"/>
 					</InternalElement>
@@ -3374,6 +3413,12 @@
 						<Attribute Name="idShort">
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleRange</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+						</Attribute>
+						<Attribute Name="min" AttributeDataType="xs:int">
+							<RefSemantic CorrespondingAttributePath="AAS:Range/min"/>
+						</Attribute>
+						<Attribute Name="max" AttributeDataType="xs:int">
+							<RefSemantic CorrespondingAttributePath="AAS:Range/max"/>
 						</Attribute>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Range"/>
 					</InternalElement>
@@ -3415,8 +3460,11 @@
 						<ExternalInterface ID="136" Name="FileDataReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/FileDataReference">
 							<Attribute Name="MIMEType" AttributeDataType="xs:string">
 								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">application/pdf</Value>
+								<RefSemantic CorrespondingAttributePath="AAS:File/MIMEType"/>
 							</Attribute>
-							<Attribute Name="refURI" AttributeDataType="xs:anyURI"/>
+							<Attribute Name="refURI" AttributeDataType="xs:anyURI">
+								<RefSemantic CorrespondingAttributePath="AAS:File/refURI"/>
+							</Attribute>
 						</ExternalInterface>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/File"/>
 					</InternalElement>
@@ -3553,6 +3601,9 @@
 						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleProperty</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
+					<Attribute Name="value" AttributeDataType="xs:string">
+						<RefSemantic CorrespondingAttributePath="AAS:Property/value"/>
+					</Attribute>
 					<ExternalInterface ID="159" Name="ReferableReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/ReferableReference"/>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Property"/>
 				</InternalElement>
@@ -3568,6 +3619,12 @@
 					<Attribute Name="idShort">
 						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleRange</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+					</Attribute>
+					<Attribute Name="min" AttributeDataType="xs:int">
+						<RefSemantic CorrespondingAttributePath="AAS:Range/min"/>
+					</Attribute>
+					<Attribute Name="max" AttributeDataType="xs:int">
+						<RefSemantic CorrespondingAttributePath="AAS:Range/max"/>
 					</Attribute>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Range"/>
 				</InternalElement>
@@ -3609,8 +3666,11 @@
 					<ExternalInterface ID="164" Name="FileDataReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/FileDataReference">
 						<Attribute Name="MIMEType" AttributeDataType="xs:string">
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">application/pdf</Value>
+							<RefSemantic CorrespondingAttributePath="AAS:File/MIMEType"/>
 						</Attribute>
-						<Attribute Name="refURI" AttributeDataType="xs:anyURI"/>
+						<Attribute Name="refURI" AttributeDataType="xs:anyURI">
+							<RefSemantic CorrespondingAttributePath="AAS:File/refURI"/>
+						</Attribute>
 					</ExternalInterface>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/File"/>
 				</InternalElement>
