@@ -22,19 +22,21 @@ import java.io.FileNotFoundException;
 import org.junit.Test;
 
 import io.adminshell.aas.v3.dataformat.DeserializationException;
+import io.adminshell.aas.v3.dataformat.core.AASFull;
+import io.adminshell.aas.v3.dataformat.core.AASSimple;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 
 public class XMLDeserializerTest {
 
     @Test
     public void deserializeAASSimple() throws Exception {
-        AssetAdministrationShellEnvironment env = new XmlDeserializer().read(AASSimple.FILE);
+        AssetAdministrationShellEnvironment env = new XmlDeserializer().read(XmlSerializerTest.AASSIMPLE_FILE);
         assertEquals(AASSimple.ENVIRONMENT, env);
     }
 
     @Test
     public void deserializeAASFull() throws FileNotFoundException, DeserializationException {
-        AssetAdministrationShellEnvironment env = new XmlDeserializer().read(AASFull.FILE);
+        AssetAdministrationShellEnvironment env = new XmlDeserializer().read(XmlSerializerTest.AASFULL_FILE);
         assertEquals(AASFull.ENVIRONMENT, env);
     }
 }

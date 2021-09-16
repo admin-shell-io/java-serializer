@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.aasx.serialization;
 
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
@@ -35,6 +36,7 @@ import org.junit.Test;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.aasx.AASXSerializer;
 import io.adminshell.aas.v3.dataformat.aasx.InMemoryFile;
+import io.adminshell.aas.v3.dataformat.core.AASSimple;
 
 public class AASXSerializerTest {
 

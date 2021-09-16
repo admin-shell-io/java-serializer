@@ -15,14 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.json;
 
-import io.adminshell.aas.v3.dataformat.DeserializationException;
-import io.adminshell.aas.v3.dataformat.Deserializer;
-import io.adminshell.aas.v3.model.*;
-import io.adminshell.aas.v3.model.impl.DefaultProperty;
-import io.adminshell.aas.v3.model.impl.DefaultSubmodel;
-import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import static org.junit.Assert.assertEquals;
 
 import java.io.File;
 import java.io.IOException;
@@ -30,7 +23,17 @@ import java.nio.file.Files;
 import java.util.Arrays;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import io.adminshell.aas.v3.dataformat.DeserializationException;
+import io.adminshell.aas.v3.dataformat.core.AASFull;
+import io.adminshell.aas.v3.model.AssetAdministrationShell;
+import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
+import io.adminshell.aas.v3.model.Submodel;
+import io.adminshell.aas.v3.model.SubmodelElement;
+import io.adminshell.aas.v3.model.SubmodelElementCollection;
 
 public class JsonReferableDeserializerTest {
 
