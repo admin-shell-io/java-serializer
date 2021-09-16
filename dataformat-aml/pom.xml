@@ -23,6 +23,13 @@
             <version>${revision}</version>
             <scope>compile</scope>
         </dependency>
+		<dependency>
+			<groupId>io.admin-shell.aas</groupId>
+			<artifactId>dataformat-core</artifactId>
+			<version>${revision}</version>
+			<classifier>tests</classifier>
+			<scope>test</scope>
+		</dependency>
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
