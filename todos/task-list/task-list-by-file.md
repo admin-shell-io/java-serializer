@@ -116,3 +116,30 @@ Sebastian Bader
 Michael Jacoby
 
     Add field name according to template type
+
+## dataformat/aml/serialization/mappers/EmbeddedDataSpecificationCollectionMapper.java
+[Line 82-84](https://github.com/admin-shell-io/java-serializer/blob/9b728f129538135142b6a336e6e6b5233438c689/dataformat-aml/src/main/java/io/adminshell/aas/v3/dataformat/aml/serialization/mappers/EmbeddedDataSpecificationCollectionMapper.java#L82-L84),
+Michael Jacoby
+
+    should be resolved using DataSpecificationManager but this requires fundamental changes to
+    DataSpecificationManager as it currently is based on Reference instead of name
+    workaround: go up superclasses/interfaces and find most-specific interface that extends DataSpecificationContent
+
+## dataformat/aml/deserialization/mappers/AssetAdministrationShellEnvironmentMapper.java
+[Line 43](https://github.com/admin-shell-io/java-serializer/blob/529d659f9cdfd66e310e3a50906ff42913825b75/dataformat-aml/src/main/java/io/adminshell/aas/v3/dataformat/aml/deserialization/mappers/AssetAdministrationShellEnvironmentMapper.java#L43),
+Michael Jacoby
+
+    use typeFactory instead of explicitly using Default... classes
+
+## dataformat/rdf/preprocessing/TypeNamePreprocessor.java
+[Line 139](https://github.com/admin-shell-io/java-serializer/blob/40ec29c3e78ca66624d7c87c40d8bc6b34a9093c/dataformat-rdf/src/main/java/io/adminshell/aas/v3/dataformat/rdf/preprocessing/TypeNamePreprocessor.java#L139),
+Sebastian Bader
+
+    What happens with an Array inside the Array?
+
+## dataformat/rdf/Parser.java
+[Line 496-497](https://github.com/admin-shell-io/java-serializer/blob/c0710df3980a787daa19c9c3410d103053bb383f/dataformat-rdf/src/main/java/io/adminshell/aas/v3/dataformat/rdf/Parser.java#L496-L497),
+Sebastian Bader
+
+    Note: This would not yield full results yet in case some of the values are encapsulated
+    in blank nodes and some are not, for the same property
