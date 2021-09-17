@@ -51,3 +51,38 @@ Arno Weiss
 Sebastian Bader
 
     should be true but requires adjustments in the Java Model
+
+## dataformat/aml/deserialization/mappers/ConstraintCollectionMapper.java
+
+[Line 38](https://github.com/admin-shell-io/java-serializer/blob/74b9a5de98e3dcb219180c29a39a9f2d607df7be/dataformat-aml/src/main/java/io/adminshell/aas/v3/dataformat/aml/deserialization/mappers/ConstraintCollectionMapper.java#L38),
+Jens Mueller
+
+    Need to register specific type Qualifiable
+
+## dataformat/aml/deserialization/mappers/QualifierMapper.java
+
+[Line 59](https://github.com/admin-shell-io/java-serializer/blob/74b9a5de98e3dcb219180c29a39a9f2d607df7be/dataformat-aml/src/main/java/io/adminshell/aas/v3/dataformat/aml/deserialization/mappers/QualifierMapper.java#L59),
+Jens Mueller
+
+    use Type Factory instead of hardcoded DefaultQualifier.class
+
+## dataformat/i4aas/mappers/HasDataSpecificationMapper.java
+
+[Line 42-43](https://github.com/admin-shell-io/java-serializer/blob/fcef0f9f379d7711365a5f26ccdeec18dc938d47/dataformat-uanodeset/src/main/java/io/adminshell/aas/v3/dataformat/i4aas/mappers/HasDataSpecificationMapper.java#L42-L43),
+Arno Weiss
+
+    The embedding is not uniquely bound to the reference. Naming convention
+    fixes this partially, but a wrapper object should be specified in I4AAS.
+
+## model/validator/TestAASd_077.java
+
+[Line 44](https://github.com/admin-shell-io/java-serializer/blob/d3996a65b4d6401dc2c1ce76cf9708a93fd14f12/validator/src/test/java/io/adminshell/aas/v3/model/validator/TestAASd_077.java#L44),
+Sebastian Bader
+
+    Add HasExtensions to Referables in the Java Model and then uncomment the lines in the tests.
+
+## model/validator/TestAASd_020.java
+[Line 60](https://github.com/admin-shell-io/java-serializer/blob/d3996a65b4d6401dc2c1ce76cf9708a93fd14f12/validator/src/test/java/io/adminshell/aas/v3/model/validator/TestAASd_020.java#L60),
+Sebastian Bader
+
+    non-strings can not be passed as Qualifier.value --> Strings will always pass, others are not recognized.
