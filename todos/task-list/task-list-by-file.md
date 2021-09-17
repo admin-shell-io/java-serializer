@@ -143,3 +143,37 @@ Sebastian Bader
 
     Note: This would not yield full results yet in case some of the values are encapsulated
     in blank nodes and some are not, for the same property
+
+## dataformat/aml/deserialization/DefaultMapper.java
+[Line 466](https://github.com/admin-shell-io/java-serializer/blob/74b9a5de98e3dcb219180c29a39a9f2d607df7be/dataformat-aml/src/main/java/io/adminshell/aas/v3/dataformat/aml/deserialization/DefaultMapper.java#L466),
+Michael Jacoby
+
+    not working because of missing property renaming strategy
+
+## dataformat/core/AASFull.java
+[Line 1588](https://github.com/admin-shell-io/java-serializer/blob/97882cb9096408a1e13b43a0ff6f3dd0c987e39d/dataformat-core/src/test/java/io/adminshell/aas/v3/dataformat/core/AASFull.java#L1588),
+Daespen
+
+    valueType
+
+[Line 1599](https://github.com/admin-shell-io/java-serializer/blob/97882cb9096408a1e13b43a0ff6f3dd0c987e39d/dataformat-core/src/test/java/io/adminshell/aas/v3/dataformat/core/AASFull.java#L1599),
+Daespen
+
+    valueType
+
+## dataformat/aml/fixtures/FullExample.java
+[Line 1728](https://github.com/admin-shell-io/java-serializer/blob/16f4d1ae74f951867e3bea79068888d5f67187e4/dataformat-aml/src/test/java/io/adminshell/aas/v3/dataformat/aml/fixtures/FullExample.java#L1728),
+Michael Jacoby
+
+    valueType
+
+[Line 1739](https://github.com/admin-shell-io/java-serializer/blob/16f4d1ae74f951867e3bea79068888d5f67187e4/dataformat-aml/src/test/java/io/adminshell/aas/v3/dataformat/aml/fixtures/FullExample.java#L1739),
+Michael Jacoby
+
+    valueType
+
+## main/resources/constraint_shapes.ttl
+[Line 228](https://github.com/admin-shell-io/java-serializer/blob/d3996a65b4d6401dc2c1ce76cf9708a93fd14f12/validator/src/main/resources/constraint_shapes.ttl#L228),
+Sebastian Bader
+
+    only works with complete URIs, for instance ?valueType:='http://www.w3.org/2001/XMLSchema#string' works but ?valueType:='string' fails.
