@@ -43,7 +43,7 @@ br-iosb
 [Line 39](https://github.com/admin-shell-io/java-serializer/blob/fcef0f9f379d7711365a5f26ccdeec18dc938d47/dataformat-uanodeset/src/test/java/io/adminshell/aas/v3/dataformat/i4aas/DeserializerTest.java#L39),
 Arno Weiss
 
-    asset
+    assert
 
 ## model/validator/TestAASd_003.java
 
