@@ -86,3 +86,33 @@ Sebastian Bader
 Sebastian Bader
 
     non-strings can not be passed as Qualifier.value --> Strings will always pass, others are not recognized.
+
+## dataformat/aml/deserialization/mappers/ConceptDescriptionMapper.java
+[Line 54](https://github.com/admin-shell-io/java-serializer/blob/74b9a5de98e3dcb219180c29a39a9f2d607df7be/dataformat-aml/src/main/java/io/adminshell/aas/v3/dataformat/aml/deserialization/mappers/ConceptDescriptionMapper.java#L54),
+Jens Mueller
+
+    How to handle multiple references in isCaseOf?
+
+## dataformat/i4aas/parsers/DataSpecificationsParser.java
+[Line 49](https://github.com/admin-shell-io/java-serializer/blob/fcef0f9f379d7711365a5f26ccdeec18dc938d47/dataformat-uanodeset/src/main/java/io/adminshell/aas/v3/dataformat/i4aas/parsers/DataSpecificationsParser.java#L49),
+br-iosb
+
+    split("_") used for naming convention to fix I4AAS uniqueness issues
+
+## dataformat/i4aas/mappers/LangStringPropertyMapper.java
+[Line 62](https://github.com/admin-shell-io/java-serializer/blob/fcef0f9f379d7711365a5f26ccdeec18dc938d47/dataformat-uanodeset/src/main/java/io/adminshell/aas/v3/dataformat/i4aas/mappers/LangStringPropertyMapper.java#L62),
+Arno Weiss
+
+    Auto-generated method stub
+
+## model/validator/TestAASd_015.java
+[Line 71](https://github.com/admin-shell-io/java-serializer/blob/d3996a65b4d6401dc2c1ce76cf9708a93fd14f12/validator/src/test/java/io/adminshell/aas/v3/model/validator/TestAASd_015.java#L71),
+Sebastian Bader
+
+    I really have no clue what this constraint shall check...
+
+## dataformat/xml/serialization/EmbeddedDataSpecificationSerializer.java
+[Line 84](https://github.com/admin-shell-io/java-serializer/blob/9b728f129538135142b6a336e6e6b5233438c689/dataformat-xml/src/main/java/io/adminshell/aas/v3/dataformat/xml/serialization/EmbeddedDataSpecificationSerializer.java#L84),
+Michael Jacoby
+
+    Add field name according to template type
