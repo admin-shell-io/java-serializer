@@ -53,7 +53,7 @@ We always look for contributions, bug reports, feature requests etc. Simply open
 | Matthias Böckmann | Fraunhofer IAIS | [maboeckmann](https://github.com/maboeckmann) | x |  |  |  |  | x |  | x |  |
 | Maximilian Conradi | Fraunhofer IESE | []() |  |  | x |  | x |  |  |  |  |
 | Helge Dickel | SAP SE | [heldic](https://github.com/heldic) | x |  |  | x | x |  |  |  |  |
-| Daniel Espen | Fraunhofer IESE | [daespen](https://github.com/daespen) |  | x | x | x | x |  |  |  |  |
+| Daniel Espen | Fraunhofer IESE | [daespen](https://github.com/daespen) | x | x | x | x | x |  |  |  |  |
 | Michael Jacoby | Fraunhofer IOSB| [mjacoby](https://github.com/mjacoby) | x | x |  | x | x |  |  |  | x |
 | Jens Müller | Fraunhofer IOSB | [JensMueller2709](https://github.com/JensMueller2709) |  |  |  | x |  |  |  |  | x |
 | Orthodoxos Kipouridis | SAP SE | [akiskips](https://github.com/akiskips) | x |  |  | x | x |  |  |  |  |

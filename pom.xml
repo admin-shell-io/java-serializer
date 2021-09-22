@@ -42,17 +42,27 @@
     <properties>
         <revision>1.1.0</revision>
         <model.version>${revision}</model.version>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <gpg.keyname>0xDFCC34A6</gpg.keyname>
+
+        <plugin.compiler.version>3.8.1</plugin.compiler.version>
         <plugin.cxf.version>3.3.1</plugin.cxf.version>
         <plugin.flatten.version>1.2.2</plugin.flatten.version>
-        <plugin.javadoc.version>3.2.0</plugin.javadoc.version>
+        <plugin.gpg.version>3.0.1</plugin.gpg.version>
+        <plugin.javadoc.version>3.3.0</plugin.javadoc.version>
         <plugin.license.version>4.1</plugin.license.version>
         <plugin.projectinfo.version>3.1.2</plugin.projectinfo.version>
+        <plugin.source.version>3.2.0</plugin.source.version>
+
         <classgraph.version>4.8.109</classgraph.version>
+        <commons-codec.version>1.15</commons-codec.version>
         <commons-io.version>2.6</commons-io.version>
+        <commons-compress.version>1.21</commons-compress.version>
+        <commons-lang3.version>3.12.0</commons-lang3.version>
+        <guava.version>30.1.1-jre</guava.version>
+        <guice.version>5.0.1</guice.version>
         <jackson.version>2.12.3</jackson.version>
         <javax-validation.version>2.0.1.Final</javax-validation.version>
         <jaxb.version>2.3.1</jaxb.version>
@@ -65,19 +75,21 @@
         <moxy.version>2.7.8</moxy.version>
         <poi.version>4.1.2</poi.version>
         <slf4j.version>1.7.31</slf4j.version>
-        <xmlunit.version>2.8.2</xmlunit.version>
-        <woodstox-core-asl.version>4.4.1</woodstox-core-asl.version>
-        <commons-codec.version>1.15</commons-codec.version>
-        <commons-io.version>2.6</commons-io.version>
-        <commons-compress.version>1.21</commons-compress.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
         <shacl.version>1.3.2</shacl.version>
-        <commons-lang3.version>3.12.0</commons-lang3.version>
-        <gpg.keyname>0xDFCC34A6</gpg.keyname>
-        <guava.version>30.1.1-jre</guava.version>
+        <woodstox-core-asl.version>4.4.1</woodstox-core-asl.version>
+        <xerces.version>2.12.1</xerces.version>
+        <xmlunit.version>2.8.2</xmlunit.version>
     </properties>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${plugin.compiler.version}</version>
+                <configuration>
+                    <release>11</release>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>flatten-maven-plugin</artifactId>
@@ -120,8 +132,8 @@
                                 <include>**/src/**/*.java</include>
                             </includes>
                             <excludes>
-                            	<exclude>**/target/generated/**/*.java</exclude>
-                            	<exclude>**/src/main/java/org/opcfoundation/ua/_2008/_02/types/*.java</exclude>
+                                <exclude>**/target/generated/**/*.java</exclude>
+                                <exclude>**/src/main/java/org/opcfoundation/ua/_2008/_02/types/*.java</exclude>
                             </excludes>
                         </licenseSet>
                     </licenseSets>
@@ -137,7 +149,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
-                <version>3.2.0</version>
+                <version>${plugin.source.version}</version>
                 <executions>
                     <execution>
                         <id>attach-sources</id>
@@ -150,7 +162,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>${plugin.javadoc.version}</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -172,7 +184,7 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-gpg-plugin</artifactId>
-                        <version>3.0.1</version>
+                        <version>{plugin.gpg.version}</version>
                         <configuration>
                             <keyname>${gpg.keyname}</keyname>
                             <passphraseServerId>${gpg.keyname}</passphraseServerId>
@@ -191,6 +203,20 @@
             </build>
         </profile>
     </profiles>
+
+    <dependencies>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+    </dependencies>
 
     <dependencyManagement>
         <dependencies>
