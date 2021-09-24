@@ -38,11 +38,13 @@ public class ReferableMapper<T extends Referable> extends I4AASMapper<T, UAObjec
 
 	@Override
 	protected void mapAndAttachChildren() {
-		
-		String category = source.getCategory() == null ? "" : source.getCategory();
-		UAVariable categoryProperty = new StringPropertyMapper(CATEGORY_BROWSENAME, category, ctx, ctx.getI4aasNsIndex()).map();
-		attachAsProperty(target, categoryProperty);
-		
+
+		if (source.getCategory() != null) {
+			UAVariable categoryProperty = new StringPropertyMapper(CATEGORY_BROWSENAME, source.getCategory(), ctx,
+					ctx.getI4aasNsIndex()).map();
+			attachAsProperty(target, categoryProperty);
+		}
+
 		for (LangString description : source.getDescriptions()) {
 			target.getDescription().add(mapLangString(description));
 		}
