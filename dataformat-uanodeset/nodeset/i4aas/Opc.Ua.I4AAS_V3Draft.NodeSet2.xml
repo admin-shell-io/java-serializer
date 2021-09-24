@@ -46,7 +46,7 @@
     </Aliases>
     <Extensions>
         <Extension>
-            <ua:ModelInfo Tool="UaModeler" Hash="UV6W0HdkeSd9Lkh05F+NJA==" Version="1.6.4"/>
+            <ua:ModelInfo Tool="UaModeler" Hash="zMJ8+EUbU/yZluyvXxXCxg==" Version="1.6.4"/>
         </Extension>
     </Extensions>
     <UADataType NodeId="ns=1;i=3003" BrowseName="1:AASAssetKindDataType">
@@ -1770,7 +1770,7 @@ Note: In an object oriented view, an instance denotes an object of a template (c
         <DisplayName>Category</DisplayName>
         <References>
             <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=5362</Reference>
-            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+            <Reference ReferenceType="HasModellingRule">i=80</Reference>
             <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
         </References>
     </UAVariable>
@@ -2371,7 +2371,7 @@ Note: In an object oriented view, an instance denotes an object of a template (c
         <DisplayName>Category</DisplayName>
         <References>
             <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=5010</Reference>
-            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+            <Reference ReferenceType="HasModellingRule">i=80</Reference>
             <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
         </References>
     </UAVariable>
@@ -2434,21 +2434,12 @@ Note: In an object oriented view, an instance denotes an object of a template (c
         <Documentation>https://reference.opcfoundation.org/v104/I4AAS/v100/docs/6.8.1</Documentation>
         <References>
             <Reference ReferenceType="HasSubtype" IsForward="false">ns=1;i=1003</Reference>
-            <Reference ReferenceType="HasProperty">ns=1;i=6126</Reference>
             <Reference ReferenceType="HasComponent">ns=1;i=5011</Reference>
             <Reference ReferenceType="HasInterface">ns=1;i=1033</Reference>
             <Reference ReferenceType="HasProperty">ns=1;i=6013</Reference>
             <Reference ReferenceType="HasComponent">ns=1;i=5031</Reference>
         </References>
     </UAObjectType>
-    <UAVariable DataType="String" ParentNodeId="ns=1;i=1009" NodeId="ns=1;i=6126" BrowseName="1:Category" AccessLevel="3">
-        <DisplayName>Category</DisplayName>
-        <References>
-            <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=1009</Reference>
-            <Reference ReferenceType="HasModellingRule">i=78</Reference>
-            <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
-        </References>
-    </UAVariable>
     <UAObject ParentNodeId="ns=1;i=1009" NodeId="ns=1;i=5011" BrowseName="1:DataSpecification">
         <DisplayName>DataSpecification</DisplayName>
         <References>
@@ -3304,7 +3295,7 @@ Note: In an object oriented view, an instance denotes an object of a template (c
         <DisplayName>Category</DisplayName>
         <References>
             <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=5012</Reference>
-            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+            <Reference ReferenceType="HasModellingRule">i=80</Reference>
             <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
         </References>
     </UAVariable>
@@ -3370,7 +3361,7 @@ Note: In an object oriented view, an instance denotes an object of a template (c
         <DisplayName>Category</DisplayName>
         <References>
             <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=5042</Reference>
-            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+            <Reference ReferenceType="HasModellingRule">i=80</Reference>
             <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
         </References>
     </UAVariable>
@@ -3513,15 +3504,15 @@ Note: In an object oriented view, an instance denotes an object of a template (c
         <References>
             <Reference ReferenceType="HasTypeDefinition">ns=1;i=1030</Reference>
             <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=1026</Reference>
-            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+            <Reference ReferenceType="HasModellingRule">i=80</Reference>
         </References>
     </UAObject>
     <UAVariable DataType="String" ParentNodeId="ns=1;i=1026" NodeId="ns=1;i=6025" BrowseName="1:Category" AccessLevel="3">
         <DisplayName>Category</DisplayName>
         <References>
             <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=1026</Reference>
-            <Reference ReferenceType="HasModellingRule">i=78</Reference>
             <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+            <Reference ReferenceType="HasModellingRule">i=80</Reference>
         </References>
     </UAVariable>
     <UAObject ParentNodeId="ns=1;i=1026" NodeId="ns=1;i=5043" BrowseName="1:DataSpecification">
@@ -3590,15 +3581,15 @@ Note: In an object oriented view, an instance denotes an object of a template (c
         <References>
             <Reference ReferenceType="HasTypeDefinition">ns=1;i=1030</Reference>
             <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=1024</Reference>
-            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+            <Reference ReferenceType="HasModellingRule">i=80</Reference>
         </References>
     </UAObject>
     <UAVariable DataType="String" ParentNodeId="ns=1;i=1024" NodeId="ns=1;i=6028" BrowseName="1:Category" AccessLevel="3">
         <DisplayName>Category</DisplayName>
         <References>
             <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=1024</Reference>
-            <Reference ReferenceType="HasModellingRule">i=78</Reference>
             <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+            <Reference ReferenceType="HasModellingRule">i=80</Reference>
         </References>
     </UAVariable>
     <UAObject ParentNodeId="ns=1;i=1024" NodeId="ns=1;i=5024" BrowseName="1:DataSpecification">
@@ -3667,15 +3658,15 @@ Note: In an object oriented view, an instance denotes an object of a template (c
         <References>
             <Reference ReferenceType="HasTypeDefinition">ns=1;i=1030</Reference>
             <Reference ReferenceType="HasComponent" IsForward="false">ns=1;i=1025</Reference>
-            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+            <Reference ReferenceType="HasModellingRule">i=80</Reference>
         </References>
     </UAObject>
     <UAVariable DataType="String" ParentNodeId="ns=1;i=1025" NodeId="ns=1;i=6031" BrowseName="1:Category" AccessLevel="3">
         <DisplayName>Category</DisplayName>
         <References>
             <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=1025</Reference>
-            <Reference ReferenceType="HasModellingRule">i=78</Reference>
             <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
+            <Reference ReferenceType="HasModellingRule">i=80</Reference>
         </References>
     </UAVariable>
     <UAObject ParentNodeId="ns=1;i=1025" NodeId="ns=1;i=5025" BrowseName="1:DataSpecification">
@@ -4142,7 +4133,7 @@ Note: In an object oriented view, an instance denotes an object of a template (c
         <DisplayName>Category</DisplayName>
         <References>
             <Reference ReferenceType="HasProperty" IsForward="false">ns=1;i=5615</Reference>
-            <Reference ReferenceType="HasModellingRule">i=78</Reference>
+            <Reference ReferenceType="HasModellingRule">i=80</Reference>
             <Reference ReferenceType="HasTypeDefinition">i=68</Reference>
         </References>
     </UAVariable>
