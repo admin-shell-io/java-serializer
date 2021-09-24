@@ -70,9 +70,14 @@ public enum I4AASIdentifier implements BasicIdentifier {
 	AASPropertyValueDataType("AASPropertyValueDataType", 3014),
 	AASModelingKindDataType("AASModelingKindDataType", 3015),
 	AASMimeDataType("AASMimeDataType", 3016),
-	AASKeyDataType_Encoding_DefaultXml("AASKeyDataType_Encoding_DefaultXml",5039);
-
-;
+	AASKeyDataType_Encoding_DefaultXml("AASKeyDataType_Encoding_DefaultXml",5039),
+	AASOperationType_Operation("AASOperationType_Operation",7001),
+	AASFileType_File_Close("AASFileType_File_Close",7008),
+	AASFileType_File_GetPosition("AASFileType_File_GetPosition",7009),
+	AASFileType_File_Open("AASFileType_File_Open",7010),
+	AASFileType_File_Read("AASFileType_File_Read",7011),
+	AASFileType_File_SetPosition("AASFileType_File_SetPosition",7012),
+	AASFileType_File_Write("AASFileType_File_Write",7013);
 
 	private String name;
 	private Integer id;

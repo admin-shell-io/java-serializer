@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas.mappers.sme;
 
+import org.opcfoundation.ua._2011._03.uanodeset.UAMethod;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
@@ -26,18 +27,23 @@ public class OperationMapper extends SubmodelElementMapper<Operation> {
 	public OperationMapper(Operation src, MappingContext ctx) {
 		super(src, ctx);
 	}
-	
+
 	@Override
 	protected UAObject createTargetObject() {
 		super.createTargetObject();
 		addTypeReference(I4AASIdentifier.AASOperationType);
 		return target;
 	}
-	
+
 	@Override
 	protected void mapAndAttachChildren() {
 		super.mapAndAttachChildren();
-		//not applicable for I4AAS
+		UAMethod operation = UAMethod.builder().withBrowseName(createI4AASBrowseName("Operation"))
+				.addDisplayName(createLocalizedText("Operation"))
+				.withMethodDeclarationId(ctx.getI4aasNodeIdAsString(I4AASIdentifier.AASOperationType_Operation))
+				.withNodeId(ctx.newModelNodeIdAsString()).build();
+		this.addToNodeset(operation);
+		attachAsComponent(target, operation);
 	}
 
 }
