@@ -23,6 +23,7 @@ import io.adminshell.aas.v3.dataformat.aml.model.caex.InterfaceClassType;
 import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.model.File;
+
 import java.beans.PropertyDescriptor;
 import java.util.List;
 
@@ -35,8 +36,8 @@ public class FileMapper extends DefaultMapper<File> {
     protected static PropertyDescriptor PROPERTY_MIME_TYPE = AasUtils.getProperty(File.class, "mimeType");
 
     private static final String FILE_DATA_REFERENCE = "AssetAdministrationShellInterfaceClassLib/FileDataReference";
-    private static final String MIME_TYPE_ATTRIBUTE_NAME = "MIMEType";
-    private static final String REF_URI_ATTRIBUTE_NAME = "refUri";
+    private static final String MIME_TYPE_ATTRIBUTE_PATH = "AAS:File/MIMEType";
+    private static final String REF_URI_ATTRIBUTE_PATH = "AAS:File/refURI";
 
     public FileMapper() {
         super(PROPERTY_VALUE.getName(), PROPERTY_MIME_TYPE.getName());
@@ -56,11 +57,12 @@ public class FileMapper extends DefaultMapper<File> {
             throw new MappingException(String.format("multiple external interfaces are found in file %s %s", parser.getCurrent().getID(), parser.getCurrent().getName()));
 
         List<AttributeType> attributeTypes = externalInterfaces.get(0).getAttribute();
+
         AttributeType mimeTypeAttribute = attributeTypes.stream()
-                .filter(x -> x.getName().equalsIgnoreCase(MIME_TYPE_ATTRIBUTE_NAME))
+                .filter(x -> x.getRefSemantic().get(0).getCorrespondingAttributePath().equalsIgnoreCase(MIME_TYPE_ATTRIBUTE_PATH))
                 .findFirst().orElse(null);
         AttributeType refUriAttribute = attributeTypes.stream()
-                .filter(x -> x.getName().equalsIgnoreCase(REF_URI_ATTRIBUTE_NAME)).findFirst().orElse(null);
+                .filter(x -> x.getRefSemantic().get(0).getCorrespondingAttributePath().equalsIgnoreCase(REF_URI_ATTRIBUTE_PATH)).findFirst().orElse(null);
 
         if (refUriAttribute != null)
             ((File) parent).setValue(refUriAttribute.getValue() == null ? null : refUriAttribute.getValue().toString());

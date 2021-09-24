@@ -101,7 +101,7 @@ public class AASXSerializer {
         String xml = xmlSerializer.write(environment);
 
         // Save the XML to aasx/xml/content.xml
-        PackagePart xmlPart = createAASXPart(rootPackage, origin, XML_PATH, MIME_XML, AASSPEC_RELTYPE, xml.getBytes());
+        PackagePart xmlPart = createAASXPart(rootPackage, origin, XML_PATH, MIME_XML, AASSPEC_RELTYPE, xml.getBytes(Serializer.DEFAULT_CHARSET));
 
         storeFilesInAASX(environment.getSubmodels(), files, rootPackage, xmlPart);
 

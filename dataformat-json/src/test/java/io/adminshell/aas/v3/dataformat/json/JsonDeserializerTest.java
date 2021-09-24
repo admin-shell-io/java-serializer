@@ -22,6 +22,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import io.adminshell.aas.v3.dataformat.Deserializer;
+import io.adminshell.aas.v3.dataformat.core.AASFull;
+import io.adminshell.aas.v3.dataformat.core.AASSimple;
+import io.adminshell.aas.v3.dataformat.core.CustomProperty;
+import io.adminshell.aas.v3.dataformat.core.CustomSubmodel;
+import io.adminshell.aas.v3.dataformat.core.CustomSubmodel2;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.Property;
 import io.adminshell.aas.v3.model.Submodel;
@@ -34,19 +39,19 @@ public class JsonDeserializerTest {
 
     @Test
     public void testReadFromFile() throws Exception {
-        new JsonDeserializer().read(AASSimple.FILE);
+        new JsonDeserializer().read(JsonSerializerTest.AASFULL_FILE);
     }
 
     @Test
     public void testSimpleExample() throws Exception {
-        AssetAdministrationShellEnvironment env = new JsonDeserializer().read(AASSimple.FILE);
-        assertEquals(env, AASSimple.ENVIRONMENT);
+        AssetAdministrationShellEnvironment env = new JsonDeserializer().read(JsonSerializerTest.AASSIMPLE_FILE);
+        assertEquals(AASSimple.ENVIRONMENT, env);
     }
 
     @Test
     public void testFullExample() throws Exception {
-        AssetAdministrationShellEnvironment env = new JsonDeserializer().read(AASFull.FILE);
-        assertEquals(env, AASFull.ENVIRONMENT);
+        AssetAdministrationShellEnvironment env = new JsonDeserializer().read(JsonSerializerTest.AASFULL_FILE);
+        assertEquals(AASFull.ENVIRONMENT, env);
     }
 
     @Test

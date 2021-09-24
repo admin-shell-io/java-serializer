@@ -13,9 +13,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.xml.serialization;
+package io.adminshell.aas.v3.dataformat.core;
 
-import io.adminshell.aas.v3.model.LangString;
-
-public class LangStringsSerializer extends NoEntryWrapperListSerializer<LangString> {
+public class CustomSubProperty extends CustomProperty {
+    
 }

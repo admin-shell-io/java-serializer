@@ -38,7 +38,7 @@ import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.aasx.AASXDeserializer;
 import io.adminshell.aas.v3.dataformat.aasx.AASXSerializer;
 import io.adminshell.aas.v3.dataformat.aasx.InMemoryFile;
-import io.adminshell.aas.v3.dataformat.aasx.serialization.AASSimple;
+import io.adminshell.aas.v3.dataformat.core.AASSimple;
 
 public class AASXDeserializerTest {
 

@@ -46,12 +46,14 @@ public class FileMapper extends DefaultMapper<File> {
                     .addAttribute(AttributeType.builder()
                             .withName(ATTRIBUTE_MIMETYPE_NAME)
                             .withAttributeDataType(ATTRIBUTE_MIMETYPE_DATATYPE)
+                            .withRefSemantic(generator.refSemantic(File.class, ATTRIBUTE_MIMETYPE_NAME))
                             .withValue(value.getMimeType())
                             .build())
                     .addAttribute(AttributeType.builder()
                             .withName(ATTRIBUTE_REFURI_NAME)
                             .withValue(value.getValue())
                             .withAttributeDataType(ATTRIBUTE_REFURI_DATATYPE)
+                            .withRefSemantic(generator.refSemantic(File.class, ATTRIBUTE_REFURI_NAME))
                             .build())
                     .build());
         }

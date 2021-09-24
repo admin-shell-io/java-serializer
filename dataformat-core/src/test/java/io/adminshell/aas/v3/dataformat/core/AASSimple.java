@@ -13,12 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.i4aas;
+package io.adminshell.aas.v3.dataformat.core;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 import io.adminshell.aas.v3.model.Asset;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
@@ -332,21 +329,4 @@ public class AASSimple {
 			.conceptDescriptions(CONCEPT_DESCRIPTION_ROTATIONSPEED).conceptDescriptions(CONCEPT_DESCRIPTION_DOCUMENT)
 			.assets(ASSET)
 			.build();
-
-	public static void main(String[] args) throws IllegalArgumentException, IllegalAccessException {
-		for (String string : getContainedStrings()) {
-			System.out.println(string);
-		}
-	}
-
-	public static List<String> getContainedStrings() throws IllegalArgumentException, IllegalAccessException {
-		List<String> results = new ArrayList<>();
-		for (Field field : AASSimple.class.getDeclaredFields()) {
-			if (field.getType() == String.class) {
-				Object object = field.get(null);
-				results.add((String) object);
-			}
-		}
-		return results;
-	}
 }

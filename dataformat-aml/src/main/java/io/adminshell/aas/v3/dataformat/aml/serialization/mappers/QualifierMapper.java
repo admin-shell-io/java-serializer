@@ -30,19 +30,25 @@ public class QualifierMapper extends AbstractElementMapperWithValueType<Qualifie
 
     @Override
     protected String getAttributeName(Qualifier value, MappingContext context) {
-        return context.getPropertyNamingStrategy().getName(
-                Qualifier.class,
-                value,
-                context.getProperty().getName());
+        if (value != null && Qualifier.class.isAssignableFrom(value.getClass())) {
+            return context.getPropertyNamingStrategy().getName(
+                    Qualifier.class,
+                    value,
+                    context.getProperty().getName());
+        }
+        return super.getAttributeName(value, context);
     }
 
     @Override
     protected AttributeType.RefSemantic getRefSemantic(Qualifier value, AmlGenerator generator, MappingContext context) {
-        return generator.refSemantic(
-                context.getProperty(),
-                context.getPropertyNamingStrategy().getNameForRefSemantic(
-                        Qualifier.class,
-                        value,
-                        context.getProperty().getName()));
+        if (value != null && Qualifier.class.isAssignableFrom(value.getClass())) {
+            return generator.refSemantic(
+                    context.getProperty(),
+                    context.getPropertyNamingStrategy().getNameForRefSemantic(
+                            Qualifier.class,
+                            value,
+                            context.getProperty().getName()));
+        }
+        return super.getRefSemantic(value, generator, context);
     }
 }

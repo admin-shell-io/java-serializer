@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.xml;
+package io.adminshell.aas.v3.dataformat.core;
 
 import java.util.Base64;
 import java.util.List;
@@ -62,9 +62,6 @@ import io.adminshell.aas.v3.model.impl.DefaultValueReferencePair;
 import io.adminshell.aas.v3.model.impl.DefaultView;
 
 public class AASFull {
-
-    public static final java.io.File FILE = new java.io.File("src/test/resources/test_demo_full_example.xml");
-
     public static final AssetAdministrationShell AAS_1 = new DefaultAssetAdministrationShell.Builder()
             .idShort("TestAssetAdministrationShell")
             .description(new LangString("An Example Asset Administration Shell for the test application", "en-us"))
@@ -239,12 +236,8 @@ public class AASFull {
                     .build())
             .submodelElement(new DefaultProperty.Builder()
                     .idShort("ManufacturerName")
-                    .description(new LangString(
-                            "Legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation.",
-                            "en-us"))
-                    .description(new LangString(
-                            "Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist",
-                            "de"))
+                    .description(new LangString("Legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation.", "en-us"))
+                    .description(new LangString("Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist", "de"))
                     .semanticId(new DefaultReference.Builder()
                             .key(new DefaultKey.Builder()
                                     .type(KeyElements.GLOBAL_REFERENCE)
@@ -288,12 +281,8 @@ public class AASFull {
                     .build())
             .submodelElement(new DefaultProperty.Builder()
                     .idShort("InstanceId")
-                    .description(new LangString(
-                            "Legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation.",
-                            "en-us"))
-                    .description(new LangString(
-                            "Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist",
-                            "de"))
+                    .description(new LangString("Legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation.", "en-us"))
+                    .description(new LangString("Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist", "de"))
                     .semanticId(new DefaultReference.Builder()
                             .key(new DefaultKey.Builder()
                                     .type(KeyElements.GLOBAL_REFERENCE)
@@ -333,12 +322,8 @@ public class AASFull {
                     .build())
             .submodelElement(new DefaultEntity.Builder()
                     .idShort("ExampleEntity")
-                    .description(new LangString(
-                            "Legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation.",
-                            "en-us"))
-                    .description(new LangString(
-                            "Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist",
-                            "de"))
+                    .description(new LangString("Legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation.", "en-us"))
+                    .description(new LangString("Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist", "de"))
                     .semanticId(new DefaultReference.Builder()
                             .key(new DefaultKey.Builder()
                                     .type(KeyElements.GLOBAL_REFERENCE)
@@ -394,12 +379,8 @@ public class AASFull {
                     .build())
             .submodelElement(new DefaultEntity.Builder()
                     .idShort("ExampleEntity2")
-                    .description(new LangString(
-                            "Legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation.",
-                            "en-us"))
-                    .description(new LangString(
-                            "Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist",
-                            "de"))
+                    .description(new LangString("Legally valid designation of the natural or judicial person which is directly responsible for the design, production, packaging and labeling of a product in respect to its being brought into circulation.", "en-us"))
+                    .description(new LangString("Bezeichnung für eine natürliche oder juristische Person, die für die Auslegung, Herstellung und Verpackung sowie die Etikettierung eines Produkts im Hinblick auf das 'Inverkehrbringen' im eigenen Namen verantwortlich ist", "de"))
                     .semanticId(new DefaultReference.Builder()
                             .key(new DefaultKey.Builder()
                                     .type(KeyElements.GLOBAL_REFERENCE)
@@ -1619,7 +1600,8 @@ public class AASFull {
                                             .build())
                                     .build())
                             .build())
-                    .build())
+                    .build()
+            )
             .build();
 
     public static final AssetAdministrationShellEnvironment ENVIRONMENT = new DefaultAssetAdministrationShellEnvironment.Builder()
