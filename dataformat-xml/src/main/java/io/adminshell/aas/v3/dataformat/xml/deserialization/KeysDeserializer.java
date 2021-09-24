@@ -15,11 +15,10 @@
  */
 package io.adminshell.aas.v3.dataformat.xml.deserialization;
 
-import java.io.IOException;
+import io.adminshell.aas.v3.model.Key;
 
-import com.fasterxml.jackson.core.JsonParser;
-import com.fasterxml.jackson.databind.JsonNode;
-
-public interface CustomJsonNodeDeserializer<T extends Object> {
-    public T readValue(JsonNode node, JsonParser parser) throws IOException;
+public class KeysDeserializer extends NoEntryWrapperListDeserializer<Key> {
+    public KeysDeserializer() {
+        super("key", new KeyDeserializer());
+    }
 }
