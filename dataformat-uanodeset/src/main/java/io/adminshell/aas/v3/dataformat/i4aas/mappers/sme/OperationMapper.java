@@ -21,6 +21,8 @@ import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.model.Operation;
+import io.adminshell.aas.v3.model.OperationVariable;
+import io.adminshell.aas.v3.model.SubmodelElement;
 
 public class OperationMapper extends SubmodelElementMapper<Operation> {
 
@@ -38,6 +40,34 @@ public class OperationMapper extends SubmodelElementMapper<Operation> {
 	@Override
 	protected void mapAndAttachChildren() {
 		super.mapAndAttachChildren();
+
+		if (!source.getInputVariables().isEmpty()) {
+			UAObject folder = createSubmodelElementList("InputVariable");
+			for (OperationVariable operationVariable : source.getInputVariables()) {
+				SubmodelElement value = operationVariable.getValue();
+				UAObject mappedVariable = SubmodelElementMappers.getMapper(value, ctx).map();
+				attachAsComponent(folder, mappedVariable);
+			}
+		}
+		
+		if (!source.getOutputVariables().isEmpty()) {
+			UAObject folder = createSubmodelElementList("OutputVariable");
+			for (OperationVariable operationVariable : source.getOutputVariables()) {
+				SubmodelElement value = operationVariable.getValue();
+				UAObject mappedVariable = SubmodelElementMappers.getMapper(value, ctx).map();
+				attachAsComponent(folder, mappedVariable);
+			}
+		}
+		
+		if (!source.getInoutputVariables().isEmpty()) {
+			UAObject folder = createSubmodelElementList("InOutputVariable");
+			for (OperationVariable operationVariable : source.getInoutputVariables()) {
+				SubmodelElement value = operationVariable.getValue();
+				UAObject mappedVariable = SubmodelElementMappers.getMapper(value, ctx).map();
+				attachAsComponent(folder, mappedVariable);
+			}
+		}
+
 		UAMethod operation = UAMethod.builder().withBrowseName(createI4AASBrowseName("Operation"))
 				.addDisplayName(createLocalizedText("Operation"))
 				.withMethodDeclarationId(ctx.getI4aasNodeIdAsString(I4AASIdentifier.AASOperationType_Operation))
