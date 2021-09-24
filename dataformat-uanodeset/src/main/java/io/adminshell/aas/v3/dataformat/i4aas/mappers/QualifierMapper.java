@@ -18,6 +18,7 @@ package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.sme.MimeTypeMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.sme.ValueTypeMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.model.Qualifier;
@@ -50,9 +51,8 @@ public class QualifierMapper extends I4AASMapper<Qualifier, UAObject> {
 			attachAsComponent(target, map);
 		}
 
-		String type = source.getType();
-		if (type != null) {
-			UAVariable map = new StringPropertyMapper("Type", type, ctx, ctx.getI4aasNsIndex()).map();
+		if (source.getType() != null) {
+			UAVariable map = new QualifierTypeMapper(source.getType(), ctx).map();
 			attachAsProperty(target, map);
 		}
 

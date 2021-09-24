@@ -69,6 +69,7 @@ public interface I4AASConstants {
 	public static final String IKVP_VALUE_BROWSENAME = "Value";
 	
 	public static final String MIME_TYPE_BROWSENAME = "MimeType";
+	public static final String QUALIFIER_TYPE_BROWSENAME = "Type";
 
 
 }
