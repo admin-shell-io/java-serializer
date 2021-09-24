@@ -23,7 +23,8 @@ import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetInformation;
 
-public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdministrationShell> implements HasDataSpecificationMapper {
+public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdministrationShell>
+		implements HasDataSpecificationMapper {
 
 	public AssetAdministrationShellMapper(AssetAdministrationShell src, MappingContext ctx) {
 		super(src, ctx);
@@ -47,14 +48,15 @@ public class AssetAdministrationShellMapper extends IdentifiableMapper<AssetAdmi
 
 	private void mapAsset() {
 		AssetInformation assetInformation = source.getAssetInformation();
-		if (assetInformation != null) {			
+		if (assetInformation != null) {
 			UAObject uaAsset = new AssetInformationMapper(assetInformation, ctx).map();
 			attachAsComponent(target, uaAsset);
 		}
 	}
 
 	private void mapSubmodels() {
-		UAObject smFolder = createReferenceList(AAS_SUBMODELREFERENCES_LIST_BROWSENAME);
+		UAObject smFolder = source.getSubmodels().isEmpty() ? null
+				: createReferenceList(AAS_SUBMODELREFERENCES_LIST_BROWSENAME);
 		List<io.adminshell.aas.v3.model.Reference> submodels = source.getSubmodels();
 		for (int i = 0; i < submodels.size(); i++) {
 			io.adminshell.aas.v3.model.Reference reference = submodels.get(i);

@@ -55,8 +55,8 @@ public class AssetInformationMapper extends I4AASMapper<AssetInformation, UAObje
 			attachAsComponent(target, uaIdentification);
 		}
 
-		UAObject uaBomList = createReferenceList(ASSETINFO_BILL_OF_MATERIAL_BROWSENAME);
 		List<Reference> billOfMaterials = source.getBillOfMaterials();
+		UAObject uaBomList = billOfMaterials.isEmpty() ? null : createReferenceList(ASSETINFO_BILL_OF_MATERIAL_BROWSENAME);
 		for (int i = 0; i < billOfMaterials.size(); i++) {
 			Reference reference = billOfMaterials.get(i);
 			UAObject uaBomListEntry = new ReferenceMapper(reference, ctx, ASSETINFO_BILL_OF_MATERIAL_BROWSENAME + "_" + i).map();
@@ -70,7 +70,7 @@ public class AssetInformationMapper extends I4AASMapper<AssetInformation, UAObje
 			attachAsComponent(target, uaThumbnail);
 		}
 
-		UAObject folder = createIdentifierKeyValuePairList(ASSETINFO_SPECIFIC_ASSET_ID_BROWSENAME);
+		UAObject folder = source.getSpecificAssetIds().isEmpty() ? null : createIdentifierKeyValuePairList(ASSETINFO_SPECIFIC_ASSET_ID_BROWSENAME);
 		for (IdentifierKeyValuePair identifierKeyValuePair : source.getSpecificAssetIds()) {
 			UAObject uaIdKVP = new IdentifierKeyValuePairMapper(identifierKeyValuePair, ctx).map();
 			attachAsComponent(folder, uaIdKVP);
