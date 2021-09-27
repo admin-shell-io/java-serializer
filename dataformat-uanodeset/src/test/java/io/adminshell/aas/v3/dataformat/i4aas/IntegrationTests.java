@@ -75,9 +75,13 @@ public class IntegrationTests {
 		// test frame model
 		env = new DefaultAssetAdministrationShellEnvironment();
 		aas = new DefaultAssetAdministrationShell();
+		aas.setIdShort("aas");
 		asset = new DefaultAsset();
+		asset.setIdShort("asset");
 		sm = new DefaultSubmodel();
+		sm.setIdShort("sm");
 		cd = new DefaultConceptDescription();
+		cd.setIdShort("cd");
 		env.getAssetAdministrationShells().add(aas);
 		env.getAssets().add(asset);
 		env.getSubmodels().add(sm);

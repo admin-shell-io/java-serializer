@@ -31,7 +31,7 @@ public class ReferableMapper<T extends Referable> extends I4AASMapper<T, UAObjec
 	@Override
 	protected UAObject createTargetObject() {
 		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
-				.withBrowseName(createModelBrowseName(source.getIdShort()))
+				.withBrowseName(createModelBrowseName(source))
 				.withDisplayName(I4AASUtils.createDisplayName(source)).build();
 		return target;
 	}

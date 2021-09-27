@@ -25,11 +25,14 @@ import org.opcfoundation.ua._2011._03.uanodeset.UANode;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
+import com.google.common.base.Strings;
+
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.BasicIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASConstants;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.LangString;
+import io.adminshell.aas.v3.model.Referable;
 
 /**
  * Generic base class used for all mapper implementation.
@@ -138,6 +141,13 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> implements I4AA
 
 	protected final String createModelBrowseName(String name) {
 		return ctx.getModelNsIndex() + ":" + name;
+	}
+
+	protected final String createModelBrowseName(Referable ref) {
+		if (ref != null && !Strings.isNullOrEmpty(ref.getIdShort())) {
+			return ctx.getModelNsIndex() + ":" + ref.getIdShort();
+		}
+		throw new IllegalArgumentException("Referable is null or does not contain a valid IdShort.");
 	}
 
 	protected final String createI4AASBrowseName(String name) {
