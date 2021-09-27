@@ -50,7 +50,6 @@ public class ReferenceMapper extends I4AASMapper<Reference, UAObject> {
 		target = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString()).withBrowseName(createI4AASBrowseName(browseName))
 				.withDisplayName(createLocalizedText(browseName)).build();
 		addTypeReference(I4AASIdentifier.AASReferenceType);
-		ctx.addAASReferenceType(target, source);
 		return target;
 	}
 
@@ -89,6 +88,7 @@ public class ReferenceMapper extends I4AASMapper<Reference, UAObject> {
 			}			
 			UAKeyVariable.getValue().setAny(extensionObjectFactory.createListOfExtensionObject(listOfExtensions));
 		}
+		ctx.registerReferenceMapped(target, source);
 	}
 
 }

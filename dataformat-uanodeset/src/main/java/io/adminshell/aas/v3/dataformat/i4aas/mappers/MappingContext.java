@@ -33,12 +33,14 @@ import org.opcfoundation.ua._2011._03.uanodeset.UANodeSet;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UriTable;
 
+import io.adminshell.aas.v3.dataformat.core.util.AasUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASConstants;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.Identifier;
+import io.adminshell.aas.v3.model.Referable;
 import io.adminshell.aas.v3.model.Reference;
 
 public class MappingContext {
@@ -157,46 +159,37 @@ public class MappingContext {
 		return i4aasNsIndex;
 	}
 
-	private Map<Identifier, UAObject> sourceIdentifierToTargetIdentifier = new HashMap<>();
-	private Map<UAObject, Reference> targetReferenceToSourceReference = new HashMap<>();
+	private Map<Referable, UAObject> sourceReferableToTargetIdentifier = new HashMap<>();
+	private Map<Reference, UAObject> sourceReferenceToTargetReference = new HashMap<>();
 
-	public void addIdentifierUaObject(Identifier identifier, UAObject identifiable) {
-		sourceIdentifierToTargetIdentifier.put(identifier, identifiable);
+	public void registerReferableMapped(Referable sourceReferable, UAObject targetReferable) {
+		sourceReferableToTargetIdentifier.put(sourceReferable, targetReferable);
+
 		// try a local, native UA reference binding
-		for (Entry<UAObject, Reference> entry : targetReferenceToSourceReference.entrySet()) {
-			if (match(identifier, entry.getValue())) {
-				I4AASMapper.attachAsAddIn(entry.getKey(), identifiable);
+		for (Entry<Reference, UAObject> entry : sourceReferenceToTargetReference.entrySet()) {
+			Referable resolve = AasUtils.resolve(entry.getKey(), aasEnvironment);
+			if (resolve == sourceReferable) {
+				I4AASMapper.attachAsAddIn(entry.getValue(), targetReferable);
 			}
 		}
 	}
 
-	public void addAASReferenceType(UAObject reference, Reference source) {
-		targetReferenceToSourceReference.put(reference, source);
+	public void registerReferenceMapped(UAObject targetReference, Reference sourceReference) {
+		sourceReferenceToTargetReference.put(sourceReference, targetReference);
+
 		// try a local, native UA reference binding
-		UAObject targetNodeForReference = getTargetNodeForReference(source);
-		if (targetNodeForReference != null) {
-			I4AASMapper.attachAsAddIn(reference, targetNodeForReference);
+		Referable resolve = AasUtils.resolve(sourceReference, aasEnvironment);
+		if (resolve != null) {
+			UAObject uaObject = sourceReferableToTargetIdentifier.get(resolve);
+			if (uaObject != null) {
+				I4AASMapper.attachAsAddIn(targetReference, uaObject);
+			}
 		}
 	}
 
 	public final UAObject getTargetNodeForReference(Reference semanticId) {
-		for (Entry<Identifier, UAObject> entry : sourceIdentifierToTargetIdentifier.entrySet()) {
-			if (match(entry.getKey(), semanticId)) {
-				return entry.getValue();
-			}
-		}
-		return null;
+		return sourceReferenceToTargetReference.get(semanticId);
 	}
-	
-	private boolean match(Identifier identifier, Reference reference) {
-		try {
-			String firstReferenceEntry = reference.getKeys().get(0).getValue();
-			return firstReferenceEntry.equals(identifier.getIdentifier());
-		} catch (NullPointerException npe) {
-			return false;
-		}
-	}
-
 
 	public void setAddMissingSemanticIdsToDictionary(boolean addMissingSemanticIdsToDictionary) {
 		this.addMissingSemanticIdsToDictionary = addMissingSemanticIdsToDictionary;

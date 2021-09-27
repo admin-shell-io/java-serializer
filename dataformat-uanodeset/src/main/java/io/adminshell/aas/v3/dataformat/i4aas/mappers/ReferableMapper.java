@@ -38,7 +38,6 @@ public class ReferableMapper<T extends Referable> extends I4AASMapper<T, UAObjec
 
 	@Override
 	protected void mapAndAttachChildren() {
-
 		if (source.getCategory() != null) {
 			UAVariable categoryProperty = new StringPropertyMapper(CATEGORY_BROWSENAME, source.getCategory(), ctx,
 					ctx.getI4aasNsIndex()).map();
@@ -51,6 +50,7 @@ public class ReferableMapper<T extends Referable> extends I4AASMapper<T, UAObjec
 		for (LangString displayName : source.getDisplayNames()) {
 			target.getDisplayName().add(mapLangString(displayName));
 		}
+		ctx.registerReferableMapped(source, target);
 	}
 
 }

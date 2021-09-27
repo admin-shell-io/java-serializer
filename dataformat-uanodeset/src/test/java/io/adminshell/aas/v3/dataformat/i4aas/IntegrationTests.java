@@ -35,6 +35,7 @@ import io.adminshell.aas.v3.model.Blob;
 import io.adminshell.aas.v3.model.ConceptDescription;
 import io.adminshell.aas.v3.model.IdentifierKeyValuePair;
 import io.adminshell.aas.v3.model.IdentifierType;
+import io.adminshell.aas.v3.model.KeyElements;
 import io.adminshell.aas.v3.model.KeyType;
 import io.adminshell.aas.v3.model.LangString;
 import io.adminshell.aas.v3.model.MultiLanguageProperty;
@@ -195,7 +196,7 @@ public class IntegrationTests {
 		// ARRANGE
 		cd.setIdentification(new DefaultIdentifier.Builder().identifier("myCD").idType(IdentifierType.CUSTOM).build());
 		cd.getIsCaseOfs().add(new DefaultReference.Builder()
-				.key(new DefaultKey.Builder().value("myCaseOfRef").idType(KeyType.CUSTOM).build()).build());
+				.key(new DefaultKey.Builder().value("myCaseOfRef").type(KeyElements.CONCEPT_DESCRIPTION).idType(KeyType.CUSTOM).build()).build());
 
 		// ACT
 		AssetAdministrationShellEnvironment result = inAndOut();
