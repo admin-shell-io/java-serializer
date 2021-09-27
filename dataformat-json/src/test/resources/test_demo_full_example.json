@@ -266,6 +266,7 @@
                         "id": "http://acplt.org/Submodels/Assets/TestAsset/Identification",
                         "idType": "Iri"
                     },
+            "kind": "Instance",
             "administration":
                     {
                         "version": "0.9",
@@ -423,6 +424,7 @@
                         "id": "http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial",
                         "idType": "Iri"
                     },
+            "kind": "Instance",
             "administration":
                     {
                         "version": "0.9"
@@ -609,6 +611,7 @@
                         "id": "https://acplt.org/Test_Submodel",
                         "idType": "Iri"
                     },
+            "kind": "Instance",
             "administration":
                     {
                         "version": "0.9",
@@ -656,8 +659,18 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
+                                        "idType": "Iri",
+                                        "type": "Submodel",
+                                        "value": "https://acplt.org/Test_Submodel"
+                                    },
+                                    {
                                         "idType": "IdShort",
+                                        "type": "SubmodelElementCollection",
+                                        "value": "ExampleSubmodelCollectionOrdered"
+                                    },
+                                    {
+                                        "idType": "IdShort",
+                                        "type": "Property",
                                         "value": "ExampleProperty"
                                     }
                                 ]
@@ -666,8 +679,18 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
+                                        "idType": "Iri",
+                                        "type": "Submodel",
+                                        "value": "http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial"
+                                    },
+                                    {
                                         "idType": "IdShort",
+                                        "type": "Entity",
+                                        "value": "ExampleEntity"
+                                    },
+                                    {
+                                        "idType": "IdShort",
+                                        "type": "Property",
                                         "value": "ExampleProperty2"
                                     }
                                 ]
@@ -704,8 +727,18 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
+                                        "idType": "Iri",
+                                        "type": "Submodel",
+                                        "value": "https://acplt.org/Test_Submodel"
+                                    },
+                                    {
                                         "idType": "IdShort",
+                                        "type": "SubmodelElementCollection",
+                                        "value": "ExampleSubmodelCollectionOrdered"
+                                    },
+                                    {
+                                        "idType": "IdShort",
+                                        "type": "Property",
                                         "value": "ExampleProperty"
                                     }
                                 ]
@@ -714,8 +747,18 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
+                                        "idType": "Iri",
+                                        "type": "Submodel",
+                                        "value": "http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial"
+                                    },
+                                    {
                                         "idType": "IdShort",
+                                        "type": "Entity",
+                                        "value": "ExampleEntity"
+                                    },
+                                    {
+                                        "idType": "IdShort",
+                                        "type": "Property",
                                         "value": "ExampleProperty2"
                                     }
                                 ]
@@ -765,7 +808,7 @@
                         {
                             "value":
                                     {
-                                        "idShort": "ExampleProperty",
+                                        "idShort": "ExampleProperty1",
                                         "category": "Constant",
                                         "description": [
                                             {
@@ -810,7 +853,7 @@
                         {
                             "value":
                                     {
-                                        "idShort": "ExampleProperty",
+                                        "idShort": "ExampleProperty2",
                                         "category": "Constant",
                                         "description": [
                                             {
@@ -855,7 +898,7 @@
                         {
                             "value":
                                     {
-                                        "idShort": "ExampleProperty",
+                                        "idShort": "ExampleProperty3",
                                         "category": "Constant",
                                         "description": [
                                             {
@@ -956,8 +999,18 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
+                                        "idType": "Iri",
+                                        "type": "Submodel",
+                                        "value": "https://acplt.org/Test_Submodel"
+                                    },
+                                    {
                                         "idType": "IdShort",
+                                        "type": "SubmodelElementCollection",
+                                        "value": "ExampleSubmodelCollectionOrdered"
+                                    },
+                                    {
+                                        "idType": "IdShort",
+                                        "type": "Property",
                                         "value": "ExampleProperty"
                                     }
                                 ]
@@ -1232,8 +1285,18 @@
                                     {
                                         "keys": [
                                             {
-                                                "type": "Property",
+                                                "idType": "Iri",
+                                                "type": "Submodel",
+                                                "value": "https://acplt.org/Test_Submodel"
+                                            },
+                                            {
                                                 "idType": "IdShort",
+                                                "type": "SubmodelElementCollection",
+                                                "value": "ExampleSubmodelCollectionOrdered"
+                                            },
+                                            {
+                                                "idType": "IdShort",
+                                                "type": "Property",
                                                 "value": "ExampleProperty"
                                             }
                                         ]
@@ -1254,6 +1317,7 @@
                         "id": "https://acplt.org/Test_Submodel_Mandatory",
                         "idType": "Iri"
                     },
+            "kind": "Template",
             "submodelElements": [
                 {
                     "idShort": "ExampleRelationshipElement",
@@ -1265,8 +1329,18 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
+                                        "idType": "Iri",
+                                        "type": "Submodel",
+                                        "value": "https://acplt.org/Test_Submodel_Mandatory"
+                                    },
+                                    {
                                         "idType": "IdShort",
+                                        "type": "SubmodelElementCollection",
+                                        "value": "ExampleSubmodelCollectionOrdered"
+                                    },
+                                    {
+                                        "idType": "IdShort",
+                                        "type": "Property",
                                         "value": "ExampleProperty"
                                     }
                                 ]
@@ -1275,9 +1349,19 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
+                                        "idType": "Iri",
+                                        "type": "Submodel",
+                                        "value": "https://acplt.org/Test_Submodel_Mandatory"
+                                    },
+                                    {
                                         "idType": "IdShort",
-                                        "value": "ExampleProperty"
+                                        "type": "SubmodelElementCollection",
+                                        "value": "ExampleSubmodelCollectionOrdered"
+                                    },
+                                    {
+                                        "idType": "IdShort",
+                                        "type": "MultiLanguageProperty",
+                                        "value": "ExampleMultiLanguageProperty"
                                     }
                                 ]
                             }
@@ -1292,8 +1376,18 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
+                                        "idType": "Iri",
+                                        "type": "Submodel",
+                                        "value": "https://acplt.org/Test_Submodel_Mandatory"
+                                    },
+                                    {
                                         "idType": "IdShort",
+                                        "type": "SubmodelElementCollection",
+                                        "value": "ExampleSubmodelCollectionOrdered"
+                                    },
+                                    {
+                                        "idType": "IdShort",
+                                        "type": "Property",
                                         "value": "ExampleProperty"
                                     }
                                 ]
@@ -1302,9 +1396,19 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
+                                        "idType": "Iri",
+                                        "type": "Submodel",
+                                        "value": "https://acplt.org/Test_Submodel_Mandatory"
+                                    },
+                                    {
                                         "idType": "IdShort",
-                                        "value": "ExampleProperty"
+                                        "type": "SubmodelElementCollection",
+                                        "value": "ExampleSubmodelCollectionOrdered"
+                                    },
+                                    {
+                                        "idType": "IdShort",
+                                        "type": "MultiLanguageProperty",
+                                        "value": "ExampleMultiLanguageProperty"
                                     }
                                 ]
                             }
@@ -1333,8 +1437,18 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
+                                        "idType": "Iri",
+                                        "type": "Submodel",
+                                        "value": "https://acplt.org/Test_Submodel_Mandatory"
+                                    },
+                                    {
                                         "idType": "IdShort",
+                                        "type": "SubmodelElementCollection",
+                                        "value": "ExampleSubmodelCollectionOrdered"
+                                    },
+                                    {
+                                        "idType": "IdShort",
+                                        "type": "Property",
                                         "value": "ExampleProperty"
                                     }
                                 ]
@@ -1424,7 +1538,8 @@
                     {
                         "id": "https://acplt.org/Test_Submodel2_Mandatory",
                         "idType": "Iri"
-                    }
+                    },
+            "kind": "Instance"
         },
         {
             "idShort": "TestSubmodel",
@@ -1447,6 +1562,7 @@
                         "id": "https://acplt.org/Test_Submodel_Missing",
                         "idType": "Iri"
                     },
+            "kind": "Instance",
             "administration":
                     {
                         "version": "0.9",
@@ -1494,8 +1610,18 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
+                                        "idType": "Iri",
+                                        "type": "Submodel",
+                                        "value": "https://acplt.org/Test_Submodel_Missing"
+                                    },
+                                    {
                                         "idType": "IdShort",
+                                        "type": "SubmodelElementCollection",
+                                        "value": "ExampleSubmodelCollectionOrdered"
+                                    },
+                                    {
+                                        "idType": "IdShort",
+                                        "type": "Property",
                                         "value": "ExampleProperty"
                                     }
                                 ]
@@ -1504,9 +1630,19 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
+                                        "idType": "Iri",
+                                        "type": "Submodel",
+                                        "value": "https://acplt.org/Test_Submodel_Missing"
+                                    },
+                                    {
                                         "idType": "IdShort",
-                                        "value": "ExampleProperty"
+                                        "type": "SubmodelElementCollection",
+                                        "value": "ExampleSubmodelCollectionOrdered"
+                                    },
+                                    {
+                                        "idType": "IdShort",
+                                        "type": "MultiLanguageProperty",
+                                        "value": "ExampleMultiLanguageProperty"
                                     }
                                 ]
                             }
@@ -1542,8 +1678,18 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
+                                        "idType": "Iri",
+                                        "type": "Submodel",
+                                        "value": "https://acplt.org/Test_Submodel_Missing"
+                                    },
+                                    {
                                         "idType": "IdShort",
+                                        "type": "SubmodelElementCollection",
+                                        "value": "ExampleSubmodelCollectionOrdered"
+                                    },
+                                    {
+                                        "idType": "IdShort",
+                                        "type": "Property",
                                         "value": "ExampleProperty"
                                     }
                                 ]
@@ -1552,9 +1698,19 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
+                                        "idType": "Iri",
+                                        "type": "Submodel",
+                                        "value": "https://acplt.org/Test_Submodel_Missing"
+                                    },
+                                    {
                                         "idType": "IdShort",
-                                        "value": "ExampleProperty"
+                                        "type": "SubmodelElementCollection",
+                                        "value": "ExampleSubmodelCollectionOrdered"
+                                    },
+                                    {
+                                        "idType": "IdShort",
+                                        "type": "MultiLanguageProperty",
+                                        "value": "ExampleMultiLanguageProperty"
                                     }
                                 ]
                             },
@@ -1603,7 +1759,7 @@
                         {
                             "value":
                                     {
-                                        "idShort": "ExampleProperty",
+                                        "idShort": "ExampleProperty1",
                                         "category": "Constant",
                                         "description": [
                                             {
@@ -1648,7 +1804,7 @@
                         {
                             "value":
                                     {
-                                        "idShort": "ExampleProperty",
+                                        "idShort": "ExampleProperty2",
                                         "category": "Constant",
                                         "description": [
                                             {
@@ -1693,7 +1849,7 @@
                         {
                             "value":
                                     {
-                                        "idShort": "ExampleProperty",
+                                        "idShort": "ExampleProperty3",
                                         "category": "Constant",
                                         "description": [
                                             {
@@ -1794,8 +1950,18 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
+                                        "idType": "Iri",
+                                        "type": "Submodel",
+                                        "value": "https://acplt.org/Test_Submodel_Missing"
+                                    },
+                                    {
                                         "idType": "IdShort",
+                                        "type": "SubmodelElementCollection",
+                                        "value": "ExampleSubmodelCollectionOrdered"
+                                    },
+                                    {
+                                        "idType": "IdShort",
+                                        "type": "Property",
                                         "value": "ExampleProperty"
                                     }
                                 ]
@@ -2060,8 +2226,18 @@
                                     {
                                         "keys": [
                                             {
-                                                "type": "Property",
+                                                "idType": "Iri",
+                                                "type": "Submodel",
+                                                "value": "https://acplt.org/Test_Submodel_Missing"
+                                            },
+                                            {
                                                 "idType": "IdShort",
+                                                "type": "SubmodelElementCollection",
+                                                "value": "ExampleSubmodelCollectionOrdered"
+                                            },
+                                            {
+                                                "idType": "IdShort",
+                                                "type": "Property",
                                                 "value": "ExampleProperty"
                                             }
                                         ]
@@ -2402,8 +2578,8 @@
                             {
                                 "keys": [
                                     {
-                                        "type": "Property",
                                         "idType": "IdShort",
+                                        "type": "Property",
                                         "value": "ExampleProperty"
                                     }
                                 ]
@@ -2720,7 +2896,7 @@
             "description": [
                 {
                     "language": "en-us",
-                    "text": "An example concept description  for the test application"
+                    "text": "An example concept description for the test application"
                 },
                 {
                     "language": "de",
@@ -2766,11 +2942,11 @@
                     }
         },
         {
-            "idShort": "TestConceptDescription",
+            "idShort": "TestConceptDescription1",
             "description": [
                 {
                     "language": "en-us",
-                    "text": "An example concept description  for the test application"
+                    "text": "An example concept description for the test application"
                 },
                 {
                     "language": "de",

@@ -28,19 +28,16 @@ import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.Deserializer;
 import io.adminshell.aas.v3.dataformat.core.ReflectionHelper;
 import io.adminshell.aas.v3.dataformat.core.deserialization.EnumDeserializer;
-import io.adminshell.aas.v3.dataformat.xml.deserialization.KeyDeserializer;
 import io.adminshell.aas.v3.dataformat.xml.deserialization.SubmodelElementDeserializer;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import io.adminshell.aas.v3.model.SubmodelElement;
-import io.adminshell.aas.v3.model.impl.DefaultKey;
 
 public class XmlDeserializer implements Deserializer {
 
     protected XmlMapper mapper;
     protected SimpleAbstractTypeResolver typeResolver;
     protected static Map<Class<?>, com.fasterxml.jackson.databind.JsonDeserializer> customDeserializers = Map.of(
-            SubmodelElement.class, new SubmodelElementDeserializer(),
-            DefaultKey.class, new KeyDeserializer());
+            SubmodelElement.class, new SubmodelElementDeserializer());
 
     public XmlDeserializer() {
         initTypeResolver();

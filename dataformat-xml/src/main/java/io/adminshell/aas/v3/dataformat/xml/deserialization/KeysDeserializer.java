@@ -13,10 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package io.adminshell.aas.v3.dataformat.aml.fixtures;
+package io.adminshell.aas.v3.dataformat.xml.deserialization;
 
-public class FullExample {
+import io.adminshell.aas.v3.model.Key;
 
-    public static final java.io.File FILE = new java.io.File("src/test/resources/test_demo_full_example.aml");
-
+public class KeysDeserializer extends NoEntryWrapperListDeserializer<Key> {
+    public KeysDeserializer() {
+        super("key", new KeyDeserializer());
+    }
 }

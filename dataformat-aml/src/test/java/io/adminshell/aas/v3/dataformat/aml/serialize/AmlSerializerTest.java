@@ -20,6 +20,7 @@ import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.aml.AmlSerializationConfig;
 import io.adminshell.aas.v3.dataformat.aml.AmlSerializer;
 import io.adminshell.aas.v3.dataformat.aml.serialization.id.IntegerIdGenerator;
+import io.adminshell.aas.v3.dataformat.core.AASFull;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import java.io.File;
 import java.io.IOException;
@@ -37,7 +38,7 @@ public class AmlSerializerTest {
 
     @Test
     public void testSAPFullExample() throws SerializationException, SAXException, IOException {
-        validateAmlSerializer(FullExample.FILE, FullExample.ENVIRONMENT);
+        validateAmlSerializer(FullExample.FILE, AASFull.ENVIRONMENT);
     }
 
     private void validateAmlSerializer(File expectedFile, AssetAdministrationShellEnvironment environment)
