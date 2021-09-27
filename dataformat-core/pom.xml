@@ -18,6 +18,11 @@
             <version>${model.version}</version>
         </dependency>
         <dependency>
+            <groupId>io.admin-shell.aas</groupId>
+            <artifactId>validator</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-annotations</artifactId>
             <version>${jackson.version}</version>
