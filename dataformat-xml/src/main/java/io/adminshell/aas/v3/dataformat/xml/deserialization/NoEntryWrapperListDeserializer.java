@@ -47,23 +47,23 @@ public class NoEntryWrapperListDeserializer<T extends Object> extends JsonDeseri
         ObjectNode node = DeserializationHelper.getRootObjectNode(parser);
         JsonNode langStringNode = node.get(elementName);
         if (langStringNode.isObject()) {
-            return createEntriesFromObjectNode(langStringNode);
+            return createEntriesFromObjectNode(langStringNode, parser);
         } else {
-            return createEntriesFromArrayNode((ArrayNode) langStringNode);
+            return createEntriesFromArrayNode((ArrayNode) langStringNode, parser);
         }
     }
 
-    private List<T> createEntriesFromArrayNode(ArrayNode langStringsNode) {
+    private List<T> createEntriesFromArrayNode(ArrayNode langStringsNode, JsonParser parser) throws IOException {
         List<T> entries = new ArrayList<>();
         for (int i = 0; i < langStringsNode.size(); i++) {
             JsonNode nextNode = langStringsNode.get(i);
-            entries.add(nodeDeserializer.readValue(nextNode));
+            entries.add(nodeDeserializer.readValue(nextNode, parser));
         }
         return entries;
     }
 
-    private List<T> createEntriesFromObjectNode(JsonNode langStringNode) {
-        T entry = nodeDeserializer.readValue(langStringNode);
+    private List<T> createEntriesFromObjectNode(JsonNode langStringNode, JsonParser parser) throws IOException {
+        T entry = nodeDeserializer.readValue(langStringNode, parser);
         return Collections.singletonList(entry);
     }
 }

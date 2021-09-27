@@ -137,7 +137,7 @@
       <aas:conceptDescription>
          <aas:idShort>TestConceptDescription</aas:idShort>
          <aas:description>
-            <aas:langString lang="en-us">An example concept description  for the test application</aas:langString>
+            <aas:langString lang="en-us">An example concept description for the test application</aas:langString>
             <aas:langString lang="de">Ein Beispiel-ConceptDescription für eine Test-Anwendung</aas:langString>
          </aas:description>
          <aas:administration>
@@ -156,9 +156,9 @@
          <aas:identification idType="Iri">https://acplt.org/Test_ConceptDescription_Mandatory</aas:identification>
       </aas:conceptDescription>
       <aas:conceptDescription>
-         <aas:idShort>TestConceptDescription</aas:idShort>
+         <aas:idShort>TestConceptDescription1</aas:idShort>
          <aas:description>
-            <aas:langString lang="en-us">An example concept description  for the test application</aas:langString>
+            <aas:langString lang="en-us">An example concept description for the test application</aas:langString>
             <aas:langString lang="de">Ein Beispiel-ConceptDescription für eine Test-Anwendung</aas:langString>
          </aas:description>
          <aas:administration>
@@ -247,6 +247,7 @@
             <aas:version>0.9</aas:version>
          </aas:administration>
          <aas:identification idType="Iri">http://acplt.org/Submodels/Assets/TestAsset/Identification</aas:identification>
+         <aas:kind>Instance</aas:kind>
          <aas:semanticId>
             <aas:keys>
                <aas:key idType="Iri" type="Submodel">http://acplt.org/SubmodelTemplates/AssetIdentification</aas:key>
@@ -329,6 +330,7 @@
             <aas:version>0.9</aas:version>
          </aas:administration>
          <aas:identification idType="Iri">http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial</aas:identification>
+         <aas:kind>Instance</aas:kind>
          <aas:semanticId>
             <aas:keys>
                <aas:key idType="Iri" type="Submodel">http://acplt.org/SubmodelTemplates/BillOfMaterial</aas:key>
@@ -430,6 +432,7 @@
             <aas:version>0.9</aas:version>
          </aas:administration>
          <aas:identification idType="Iri">https://acplt.org/Test_Submodel</aas:identification>
+         <aas:kind>Instance</aas:kind>
          <aas:semanticId>
             <aas:keys>
                <aas:key idType="Iri" type="GlobalReference">http://acplt.org/SubmodelTemplates/ExampleSubmodel</aas:key>
@@ -451,11 +454,15 @@
                   </aas:semanticId>
                   <aas:first>
                      <aas:keys>
+                        <aas:key idType="Iri" type="Submodel">https://acplt.org/Test_Submodel</aas:key>
+                        <aas:key idType="IdShort" type="SubmodelElementCollection">ExampleSubmodelCollectionOrdered</aas:key>
                         <aas:key idType="IdShort" type="Property">ExampleProperty</aas:key>
                      </aas:keys>
                   </aas:first>
                   <aas:second>
                      <aas:keys>
+                        <aas:key idType="Iri" type="Submodel">http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial</aas:key>
+                        <aas:key idType="IdShort" type="Entity">ExampleEntity</aas:key>
                         <aas:key idType="IdShort" type="Property">ExampleProperty2</aas:key>
                      </aas:keys>
                   </aas:second>
@@ -476,11 +483,15 @@
                   </aas:semanticId>
                   <aas:first>
                      <aas:keys>
+                        <aas:key idType="Iri" type="Submodel">https://acplt.org/Test_Submodel</aas:key>
+                        <aas:key idType="IdShort" type="SubmodelElementCollection">ExampleSubmodelCollectionOrdered</aas:key>
                         <aas:key idType="IdShort" type="Property">ExampleProperty</aas:key>
                      </aas:keys>
                   </aas:first>
                   <aas:second>
                      <aas:keys>
+                        <aas:key idType="Iri" type="Submodel">http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial</aas:key>
+                        <aas:key idType="IdShort" type="Entity">ExampleEntity</aas:key>
                         <aas:key idType="IdShort" type="Property">ExampleProperty2</aas:key>
                      </aas:keys>
                   </aas:second>
@@ -513,7 +524,7 @@
                   <aas:inoutputVariable>
                      <aas:value>
                         <aas:property>
-                           <aas:idShort>ExampleProperty</aas:idShort>
+                           <aas:idShort>ExampleProperty3</aas:idShort>
                            <aas:category>Constant</aas:category>
                            <aas:description>
                               <aas:langString lang="en-us">Example Property object</aas:langString>
@@ -537,7 +548,7 @@
                   <aas:inputVariable>
                      <aas:value>
                         <aas:property>
-                           <aas:idShort>ExampleProperty</aas:idShort>
+                           <aas:idShort>ExampleProperty1</aas:idShort>
                            <aas:category>Constant</aas:category>
                            <aas:description>
                               <aas:langString lang="en-us">Example Property object</aas:langString>
@@ -561,7 +572,7 @@
                   <aas:outputVariable>
                      <aas:value>
                         <aas:property>
-                           <aas:idShort>ExampleProperty</aas:idShort>
+                           <aas:idShort>ExampleProperty2</aas:idShort>
                            <aas:category>Constant</aas:category>
                            <aas:description>
                               <aas:langString lang="en-us">Example Property object</aas:langString>
@@ -614,6 +625,8 @@
                   </aas:semanticId>
                   <aas:observed>
                      <aas:keys>
+	                    <aas:key idType="Iri" type="Submodel">https://acplt.org/Test_Submodel</aas:key>
+                        <aas:key idType="IdShort" type="SubmodelElementCollection">ExampleSubmodelCollectionOrdered</aas:key>
                         <aas:key idType="IdShort" type="Property">ExampleProperty</aas:key>
                      </aas:keys>
                   </aas:observed>
@@ -767,6 +780,8 @@
                            </aas:semanticId>
                            <aas:value>
                               <aas:keys>
+                                 <aas:key idType="Iri" type="Submodel">https://acplt.org/Test_Submodel</aas:key>
+                                 <aas:key idType="IdShort" type="SubmodelElementCollection">ExampleSubmodelCollectionOrdered</aas:key>
                                  <aas:key idType="IdShort" type="Property">ExampleProperty</aas:key>
                               </aas:keys>
                            </aas:value>
@@ -780,18 +795,23 @@
       <aas:submodel>
          <aas:idShort></aas:idShort>
          <aas:identification idType="Iri">https://acplt.org/Test_Submodel_Mandatory</aas:identification>
+         <aas:kind>Template</aas:kind>
          <aas:submodelElements>
             <aas:submodelElement>
                <aas:relationshipElement>
                   <aas:idShort>ExampleRelationshipElement</aas:idShort>
                   <aas:first>
                      <aas:keys>
+                        <aas:key idType="Iri" type="Submodel">https://acplt.org/Test_Submodel_Mandatory</aas:key>
+                        <aas:key idType="IdShort" type="SubmodelElementCollection">ExampleSubmodelCollectionOrdered</aas:key>
                         <aas:key idType="IdShort" type="Property">ExampleProperty</aas:key>
                      </aas:keys>
                   </aas:first>
                   <aas:second>
                      <aas:keys>
-                        <aas:key idType="IdShort" type="Property">ExampleProperty</aas:key>
+	                    <aas:key idType="Iri" type="Submodel">https://acplt.org/Test_Submodel_Mandatory</aas:key>
+                        <aas:key idType="IdShort" type="SubmodelElementCollection">ExampleSubmodelCollectionOrdered</aas:key>
+                        <aas:key idType="IdShort" type="MultiLanguageProperty">ExampleMultiLanguageProperty</aas:key>
                      </aas:keys>
                   </aas:second>
                </aas:relationshipElement>
@@ -801,12 +821,16 @@
                   <aas:idShort>ExampleAnnotatedRelationshipElement</aas:idShort>
                   <aas:first>
                      <aas:keys>
+                        <aas:key idType="Iri" type="Submodel">https://acplt.org/Test_Submodel_Mandatory</aas:key>
+                        <aas:key idType="IdShort" type="SubmodelElementCollection">ExampleSubmodelCollectionOrdered</aas:key>
                         <aas:key idType="IdShort" type="Property">ExampleProperty</aas:key>
                      </aas:keys>
                   </aas:first>
                   <aas:second>
                      <aas:keys>
-                        <aas:key idType="IdShort" type="Property">ExampleProperty</aas:key>
+	                    <aas:key idType="Iri" type="Submodel">https://acplt.org/Test_Submodel_Mandatory</aas:key>
+                        <aas:key idType="IdShort" type="SubmodelElementCollection">ExampleSubmodelCollectionOrdered</aas:key>
+                        <aas:key idType="IdShort" type="MultiLanguageProperty">ExampleMultiLanguageProperty</aas:key>
                      </aas:keys>
                   </aas:second>
                   <aas:annotations />
@@ -827,6 +851,8 @@
                   <aas:idShort>ExampleBasicEvent</aas:idShort>
                   <aas:observed>
                      <aas:keys>
+                        <aas:key idType="Iri" type="Submodel">https://acplt.org/Test_Submodel_Mandatory</aas:key>
+                        <aas:key idType="IdShort" type="SubmodelElementCollection">ExampleSubmodelCollectionOrdered</aas:key>
                         <aas:key idType="IdShort" type="Property">ExampleProperty</aas:key>
                      </aas:keys>
                   </aas:observed>
@@ -897,6 +923,7 @@
       <aas:submodel>
          <aas:idShort></aas:idShort>
          <aas:identification idType="Iri">https://acplt.org/Test_Submodel2_Mandatory</aas:identification>
+         <aas:kind>Instance</aas:kind>
          <aas:submodelElements />
       </aas:submodel>
       <aas:submodel>
@@ -910,6 +937,7 @@
             <aas:version>0.9</aas:version>
          </aas:administration>
          <aas:identification idType="Iri">https://acplt.org/Test_Submodel_Missing</aas:identification>
+         <aas:kind>Instance</aas:kind>
          <aas:semanticId>
             <aas:keys>
                <aas:key idType="Iri" type="GlobalReference">http://acplt.org/SubmodelTemplates/ExampleSubmodel</aas:key>
@@ -931,12 +959,16 @@
                   </aas:semanticId>
                   <aas:first>
                      <aas:keys>
+                        <aas:key idType="Iri" type="Submodel">https://acplt.org/Test_Submodel_Missing</aas:key>
+                        <aas:key idType="IdShort" type="SubmodelElementCollection">ExampleSubmodelCollectionOrdered</aas:key>
                         <aas:key idType="IdShort" type="Property">ExampleProperty</aas:key>
                      </aas:keys>
                   </aas:first>
                   <aas:second>
                      <aas:keys>
-                        <aas:key idType="IdShort" type="Property">ExampleProperty</aas:key>
+                        <aas:key idType="Iri" type="Submodel">https://acplt.org/Test_Submodel_Missing</aas:key>
+                        <aas:key idType="IdShort" type="SubmodelElementCollection">ExampleSubmodelCollectionOrdered</aas:key>
+                        <aas:key idType="IdShort" type="MultiLanguageProperty">ExampleMultiLanguageProperty</aas:key>
                      </aas:keys>
                   </aas:second>
                </aas:relationshipElement>
@@ -956,12 +988,16 @@
                   </aas:semanticId>
                   <aas:first>
                      <aas:keys>
+                        <aas:key idType="Iri" type="Submodel">https://acplt.org/Test_Submodel_Missing</aas:key>
+                        <aas:key idType="IdShort" type="SubmodelElementCollection">ExampleSubmodelCollectionOrdered</aas:key>
                         <aas:key idType="IdShort" type="Property">ExampleProperty</aas:key>
                      </aas:keys>
                   </aas:first>
                   <aas:second>
                      <aas:keys>
-                        <aas:key idType="IdShort" type="Property">ExampleProperty</aas:key>
+                        <aas:key idType="Iri" type="Submodel">https://acplt.org/Test_Submodel_Missing</aas:key>
+                        <aas:key idType="IdShort" type="SubmodelElementCollection">ExampleSubmodelCollectionOrdered</aas:key>
+                        <aas:key idType="IdShort" type="MultiLanguageProperty">ExampleMultiLanguageProperty</aas:key>
                      </aas:keys>
                   </aas:second>
                   <aas:annotations>
@@ -993,7 +1029,7 @@
                   <aas:inoutputVariable>
                      <aas:value>
                         <aas:property>
-                           <aas:idShort>ExampleProperty</aas:idShort>
+                           <aas:idShort>ExampleProperty3</aas:idShort>
                            <aas:category>Constant</aas:category>
                            <aas:description>
                               <aas:langString lang="en-us">Example Property object</aas:langString>
@@ -1018,7 +1054,7 @@
                   <aas:inputVariable>
                      <aas:value>
                         <aas:property>
-                           <aas:idShort>ExampleProperty</aas:idShort>
+                           <aas:idShort>ExampleProperty1</aas:idShort>
                            <aas:category>Constant</aas:category>
                            <aas:description>
                               <aas:langString lang="en-us">Example Property object</aas:langString>
@@ -1043,7 +1079,7 @@
                   <aas:outputVariable>
                      <aas:value>
                         <aas:property>
-                           <aas:idShort>ExampleProperty</aas:idShort>
+                           <aas:idShort>ExampleProperty2</aas:idShort>
                            <aas:category>Constant</aas:category>
                            <aas:description>
                               <aas:langString lang="en-us">Example Property object</aas:langString>
@@ -1097,6 +1133,8 @@
                   </aas:semanticId>
                   <aas:observed>
                      <aas:keys>
+                        <aas:key idType="Iri" type="Submodel">https://acplt.org/Test_Submodel_Missing</aas:key>
+                        <aas:key idType="IdShort" type="SubmodelElementCollection">ExampleSubmodelCollectionOrdered</aas:key>
                         <aas:key idType="IdShort" type="Property">ExampleProperty</aas:key>
                      </aas:keys>
                   </aas:observed>
@@ -1246,6 +1284,8 @@
                            </aas:semanticId>
                            <aas:value>
                               <aas:keys>
+                                 <aas:key idType="Iri" type="Submodel">https://acplt.org/Test_Submodel_Missing</aas:key>
+                                 <aas:key idType="IdShort" type="SubmodelElementCollection">ExampleSubmodelCollectionOrdered</aas:key>
                                  <aas:key idType="IdShort" type="Property">ExampleProperty</aas:key>
                               </aas:keys>
                            </aas:value>

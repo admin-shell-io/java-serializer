@@ -18,6 +18,7 @@ package io.adminshell.aas.v3.dataformat.aml.deserialize;
 import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.aml.AmlDeserializer;
 import io.adminshell.aas.v3.dataformat.aml.fixtures.FullExample;
+import io.adminshell.aas.v3.dataformat.core.AASFull;
 import io.adminshell.aas.v3.model.*;
 
 import java.io.FileNotFoundException;
@@ -41,7 +42,7 @@ public class AmlDeserializerTest {
     @Before
     public void init() throws FileNotFoundException, DeserializationException {
         actual = deserializer.read(FullExample.FILE);
-        expected = FullExample.ENVIRONMENT;
+        expected = AASFull.ENVIRONMENT;
     }
 
     @Test
