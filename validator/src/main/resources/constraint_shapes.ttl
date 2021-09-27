@@ -1048,7 +1048,7 @@ aas:DataElementExcludingFileAndBlobCorrectCategory a sh:NodeShape ;
   sh:targetClass aas:DataElement;
   sh:sparql [
   a sh:SPARQLConstraint ;
-  sh:message "For data elements DataElement/category shall be one of the following values: CONSTANT, PARAMETER or VARIABLE. Exception: File and Blob data elements." ;
+  sh:message "For data elements DataElement/category shall be one of the following values: Constant, Parameter or Variable. Exception: File and Blob data elements." ;
   sh:prefixes rdf: ;
   sh:select """
   	SELECT ?element
@@ -1057,7 +1057,7 @@ aas:DataElementExcludingFileAndBlobCorrectCategory a sh:NodeShape ;
 			FILTER(?subclass != <https://admin-shell.io/aas/3/0/RC01/File> && ?subclass != <https://admin-shell.io/aas/3/0/RC01/Blob>)
 			?element a ?subclass .
 			?element <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
-			FILTER(?category != "CONSTANT" && ?category != "PARAMETER" && ?category != "VARIABLE")
+			FILTER(?category != "Constant" && ?category != "Parameter" && ?category != "Variable")
 		}
         """ ;
 ] .
