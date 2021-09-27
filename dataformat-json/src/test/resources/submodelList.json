@@ -20,6 +20,7 @@
       "id": "http://acplt.org/Submodels/Assets/TestAsset/Identification",
       "idType": "Iri"
     },
+    "kind": "Instance",
     "administration":
     {
       "version": "0.9",
@@ -177,6 +178,7 @@
       "id": "http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial",
       "idType": "Iri"
     },
+    "kind": "Instance",
     "administration":
     {
       "version": "0.9"
