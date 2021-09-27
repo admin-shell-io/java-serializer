@@ -513,6 +513,11 @@ public class AasUtils {
         int i = reference.getKeys().size() - 1;
         if (type != null) {
             Class<?> actualType = keyTypeToClass(reference.getKeys().get(i).getType());
+            if (actualType == null) {
+                log.warn("reference {} could not be resolved as target type is not assignable from actual type (target: {}, actual: null)",
+                        asString(reference), type.getName());
+                return null;
+            }
             if (!type.isAssignableFrom(actualType)) {
                 log.warn("reference {} could not be resolved as target type is not assignable from actual type (target: {}, actual: {})",
                         asString(reference), type.getName(), actualType.getName());
