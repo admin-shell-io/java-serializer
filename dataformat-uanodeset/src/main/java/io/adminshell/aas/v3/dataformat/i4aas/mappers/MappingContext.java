@@ -160,22 +160,22 @@ public class MappingContext {
 	}
 
 	private Map<Referable, UAObject> sourceReferableToTargetIdentifier = new HashMap<>();
-	private Map<Reference, UAObject> sourceReferenceToTargetReference = new HashMap<>();
+	private Map<UAObject, Reference> targetReferenceToSourceReference = new HashMap<>();
 
 	public void registerReferableMapped(Referable sourceReferable, UAObject targetReferable) {
 		sourceReferableToTargetIdentifier.put(sourceReferable, targetReferable);
 
 		// try a local, native UA reference binding
-		for (Entry<Reference, UAObject> entry : sourceReferenceToTargetReference.entrySet()) {
-			Referable resolve = AasUtils.resolve(entry.getKey(), aasEnvironment);
-			if (resolve == sourceReferable) {
-				I4AASMapper.attachAsAddIn(entry.getValue(), targetReferable);
+		for (Entry<UAObject, Reference> entry : targetReferenceToSourceReference.entrySet()) {
+			Referable resolve = AasUtils.resolve(entry.getValue(), aasEnvironment);
+			if (sourceReferable.equals(resolve)) {
+				I4AASMapper.attachAsAddIn(entry.getKey(), targetReferable);
 			}
 		}
 	}
 
 	public void registerReferenceMapped(UAObject targetReference, Reference sourceReference) {
-		sourceReferenceToTargetReference.put(sourceReference, targetReference);
+		targetReferenceToSourceReference.put(targetReference, sourceReference);
 
 		// try a local, native UA reference binding
 		Referable resolve = AasUtils.resolve(sourceReference, aasEnvironment);
@@ -188,7 +188,8 @@ public class MappingContext {
 	}
 
 	public final UAObject getTargetNodeForReference(Reference semanticId) {
-		return sourceReferenceToTargetReference.get(semanticId);
+		Referable resolve = AasUtils.resolve(semanticId, aasEnvironment);
+		return sourceReferableToTargetIdentifier.get(resolve);
 	}
 
 	public void setAddMissingSemanticIdsToDictionary(boolean addMissingSemanticIdsToDictionary) {
