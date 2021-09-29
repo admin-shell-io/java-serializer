@@ -124,7 +124,7 @@ public class AASFull {
             .build();
 
     public static final AssetAdministrationShell AAS_2 = new DefaultAssetAdministrationShell.Builder()
-            .idShort("")
+            .idShort("Test_AssetAdministrationShell_Mandatory")
             .identification(new DefaultIdentifier.Builder()
                     .idType(IdentifierType.IRI)
                     .identifier("https://acplt.org/Test_AssetAdministrationShell_Mandatory")
@@ -156,7 +156,7 @@ public class AASFull {
             .build();
 
     public static final AssetAdministrationShell AAS_3 = new DefaultAssetAdministrationShell.Builder()
-            .idShort("")
+            .idShort("Test_AssetAdministrationShell2_Mandatory")
             .identification(new DefaultIdentifier.Builder()
                     .idType(IdentifierType.IRI)
                     .identifier("https://acplt.org/Test_AssetAdministrationShell2_Mandatory")
@@ -802,7 +802,7 @@ public class AASFull {
             .build();
 
     public static final Submodel SUBMODEL_4 = new DefaultSubmodel.Builder()
-            .idShort("")
+            .idShort("Test_Submodel_Mandatory")
             .identification(new DefaultIdentifier.Builder()
                     .idType(IdentifierType.IRI)
                     .identifier("https://acplt.org/Test_Submodel_Mandatory")
@@ -949,7 +949,7 @@ public class AASFull {
             .build();
 
     public static final Submodel SUBMODEL_5 = new DefaultSubmodel.Builder()
-            .idShort("")
+            .idShort("Test_Submodel2_Mandatory")
             .kind(ModelingKind.INSTANCE)
             .identification(new DefaultIdentifier.Builder()
                     .idType(IdentifierType.IRI)
@@ -1693,7 +1693,7 @@ public class AASFull {
             .build();
 
     public final static ConceptDescription CONCEPT_DESCRIPTION_2 = new DefaultConceptDescription.Builder()
-            .idShort("")
+            .idShort("Test_ConceptDescription_Mandatory")
             .identification(new DefaultIdentifier.Builder()
                     .idType(IdentifierType.IRI)
                     .identifier("https://acplt.org/Test_ConceptDescription_Mandatory")

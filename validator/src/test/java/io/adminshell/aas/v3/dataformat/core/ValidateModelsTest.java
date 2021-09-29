@@ -49,6 +49,7 @@ public class ValidateModelsTest {
     private void validate(AssetAdministrationShellEnvironment aasEnv) throws ValidationException, IOException {
         ValidationReport report = ShaclValidator.getInstance().validateGetReport(aasEnv);
         ShLib.printReport(report);
+        System.out.println("Report entry size: " + report.getEntries().size());
         assertTrue(report.conforms());
     }
 }
