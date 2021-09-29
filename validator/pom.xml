@@ -18,6 +18,13 @@
             <version>${revision}</version>
         </dependency>
         <dependency>
+            <groupId>io.admin-shell.aas</groupId>
+            <artifactId>dataformat-core</artifactId>
+            <version>${revision}</version>
+            <classifier>tests</classifier>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
             <groupId>org.apache.jena</groupId>
             <artifactId>jena-shacl</artifactId>
             <version>${jena.version}</version>
