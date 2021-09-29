@@ -15,17 +15,26 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.json.JSONException;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.core.AASFull;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
+import io.adminshell.aas.v3.dataformat.json.JsonSerializer;
 import io.adminshell.aas.v3.model.Asset;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
@@ -83,6 +92,7 @@ public class IntegrationTests {
 		sm.setIdShort("sm");
 		cd = new DefaultConceptDescription();
 		cd.setIdShort("cd");
+		cd.setIdentification(new DefaultIdentifier.Builder().identifier("mycd").idType(IdentifierType.CUSTOM).build());
 		env.getAssetAdministrationShells().add(aas);
 		env.getAssets().add(asset);
 		env.getSubmodels().add(sm);
@@ -98,7 +108,7 @@ public class IntegrationTests {
 		blob.setIdShort("testblob");
 
 		blob.setSemanticId(new DefaultReference.Builder()
-				.key(new DefaultKey.Builder().value("mySemanticId").idType(KeyType.CUSTOM).build()).build());
+				.key(new DefaultKey.Builder().value("mySemanticId").type(KeyElements.CONCEPT_DESCRIPTION).idType(KeyType.CUSTOM).build()).build());
 
 		sm.getSubmodelElements().add(blob);
 
@@ -224,6 +234,21 @@ public class IntegrationTests {
 		Assert.assertEquals(4, result.getAssetAdministrationShells().size());
 		Assert.assertEquals(7, result.getSubmodels().size());
 		Assert.assertEquals(4, result.getConceptDescriptions().size());
+	}
+	
+	@Test
+	@Ignore(value="highly dependent on other json dependencies, just used for manual comparison if json serializer is seen as complete reference implementation")
+	public void testAASFullwithJsonCompare() throws SerializationException, DeserializationException, JSONException, IOException {
+		// ARRANGE
+		String expected = new JsonSerializer().write(AASFull.ENVIRONMENT);
+		Files.writeString(Paths.get("./jsonExpected.json"), expected, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+
+		AssetAdministrationShellEnvironment result = deserializer.read(serializer.write(AASFull.ENVIRONMENT));
+
+		String actual = new JsonSerializer().write(result);
+		Files.writeString(Paths.get("./jsonActual.json"), actual, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+
+		JSONAssert.assertEquals(expected, actual, JSONCompareMode.NON_EXTENSIBLE);
 	}
 
 	public AssetAdministrationShellEnvironment inAndOut() throws SerializationException, DeserializationException {
