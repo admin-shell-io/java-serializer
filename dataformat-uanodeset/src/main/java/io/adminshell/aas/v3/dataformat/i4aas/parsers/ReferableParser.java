@@ -84,6 +84,7 @@ public abstract class ReferableParser<T extends Referable> extends I4AASParser<T
 	}
 
 	private void parseSemantics(HasSemantics target) {
+		//TODO I4AAS currently lacks with handling of KeyElements within ConceptDescriptions
 		source.getAASDictionaryEntry().ifPresent(p -> {
 			ConceptDescription cd = new ConceptDescriptionParser(p, ctx).parse();
 			Identifier identification = cd.getIdentification();
