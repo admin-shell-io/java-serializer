@@ -22,6 +22,8 @@ import org.opcfoundation.ua._2011._03.uanodeset.LocalizedText;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASUtils;
+import io.adminshell.aas.v3.model.Asset;
 import io.adminshell.aas.v3.model.ConceptDescription;
 import io.adminshell.aas.v3.model.Constraint;
 import io.adminshell.aas.v3.model.EmbeddedDataSpecification;
@@ -48,12 +50,13 @@ public abstract class ReferableParser<T extends Referable> extends I4AASParser<T
 		target.setIdShort(source.getBrowseNameStringPart());
 
 		for (LocalizedText localizedText : source.getDescription()) {
-			LangString langString = new LangString(localizedText.getLocale(), localizedText.getValue());
+			LangString langString = new LangString(localizedText.getValue(), localizedText.getLocale());
 			target.getDescriptions().add(langString);
 		}
 
 		for (LocalizedText localizedText : source.getDisplayName()) {
-			LangString langString = new LangString(localizedText.getLocale(), localizedText.getValue());
+			String displayName = I4AASUtils.parseDisplayName(target, localizedText.getValue());
+			LangString langString = new LangString(displayName, localizedText.getLocale());
 			target.getDisplayNames().add(langString);
 		}
 

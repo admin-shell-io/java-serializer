@@ -34,3 +34,5 @@ local.properties
 **.flattened-pom.xml
 nbactions.xml
 testJsonSerialization.json
+dataformat-uanodeset/jsonExpected.json
+dataformat-uanodeset/jsonActual.json

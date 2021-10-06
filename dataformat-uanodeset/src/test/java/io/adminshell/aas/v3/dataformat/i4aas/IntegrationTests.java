@@ -33,6 +33,7 @@ import org.skyscreamer.jsonassert.JSONCompareMode;
 import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.core.AASFull;
+import io.adminshell.aas.v3.dataformat.core.AASSimple;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
 import io.adminshell.aas.v3.dataformat.json.JsonSerializer;
 import io.adminshell.aas.v3.model.Asset;
@@ -132,8 +133,8 @@ public class IntegrationTests {
 		defaultMultiLanguageProperty.setIdShort("mymultilang");
 
 		List<LangString> values = new ArrayList<>();
-		values.add(new LangString("de", "delang"));
-		values.add(new LangString("en", "enlang"));
+		values.add(new LangString("delang", "de"));
+		values.add(new LangString("enlang", "en"));
 		defaultMultiLanguageProperty.setValues(values);
 		sm.getSubmodelElements().add(defaultMultiLanguageProperty);
 
@@ -237,7 +238,7 @@ public class IntegrationTests {
 	}
 	
 	@Test
-	@Ignore(value="highly dependent on other json dependencies, just used for manual comparison if json serializer is seen as complete reference implementation")
+//	@Ignore(value="highly dependent on other json dependencies, just used for manual comparison if json serializer is seen as complete reference implementation")
 	public void testAASFullwithJsonCompare() throws SerializationException, DeserializationException, JSONException, IOException {
 		// ARRANGE
 		String expected = new JsonSerializer().write(AASFull.ENVIRONMENT);
@@ -248,7 +249,7 @@ public class IntegrationTests {
 		String actual = new JsonSerializer().write(result);
 		Files.writeString(Paths.get("./jsonActual.json"), actual, StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
 
-		JSONAssert.assertEquals(expected, actual, JSONCompareMode.NON_EXTENSIBLE);
+		JSONAssert.assertEquals(expected, actual, JSONCompareMode.LENIENT);
 	}
 
 	public AssetAdministrationShellEnvironment inAndOut() throws SerializationException, DeserializationException {

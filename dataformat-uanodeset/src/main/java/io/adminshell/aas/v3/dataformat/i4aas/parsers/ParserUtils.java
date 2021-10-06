@@ -94,8 +94,8 @@ public class ParserUtils {
 					List<LocalizedText> localizedTexts = ((ListOfLocalizedText) anyJaxbElement.getValue())
 							.getLocalizedText();
 					for (LocalizedText localizedText : localizedTexts) {
-						LangString langString = new LangString(localizedText.getLocale().getValue(),
-								localizedText.getText().getValue());
+						LangString langString = new LangString(localizedText.getText().getValue(),
+								localizedText.getLocale().getValue());
 						result.add(langString);
 					}
 				} else if (anyJaxbElement.getValue() != null) {

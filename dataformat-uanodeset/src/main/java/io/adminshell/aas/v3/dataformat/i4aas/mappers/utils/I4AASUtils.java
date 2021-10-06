@@ -44,4 +44,20 @@ public class I4AASUtils {
 		}
 	}
 	
+	public static String parseDisplayName(Referable ref, String rawstring) {
+		if (rawstring == null) {
+			return null;
+		}
+		if (ref instanceof Submodel && rawstring.startsWith(I4AASConstants.SM_DISPLAYNAME_PREFIX)) {
+			return rawstring.substring(I4AASConstants.SM_DISPLAYNAME_PREFIX.length());
+		} else if (ref instanceof AssetAdministrationShell
+				&& rawstring.startsWith(I4AASConstants.AAS_DISPLAYNAME_PREFIX)) {
+			return rawstring.substring(I4AASConstants.AAS_DISPLAYNAME_PREFIX.length());
+		} else if (ref instanceof Asset && rawstring.startsWith(I4AASConstants.ASSET_DISPLAYNAME_PREFIX)) {
+			return rawstring.substring(I4AASConstants.ASSET_DISPLAYNAME_PREFIX.length());
+		} else {
+			return rawstring;
+		}
+	}
+	
 }
