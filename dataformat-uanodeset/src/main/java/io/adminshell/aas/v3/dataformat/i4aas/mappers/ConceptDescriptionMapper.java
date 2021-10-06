@@ -45,7 +45,7 @@ public class ConceptDescriptionMapper extends IdentifiableMapper<ConceptDescript
 				addTypeReference(I4AASIdentifier.AASCustomConceptDescriptionType);
 			}
 			if (identification.getIdentifier() != null) {
-				// conflict: I4AAS says idshort, OPC UA says value
+				// TODO: I4AAS says idshort, OPC UA says value. Currently there is no mapping target for IdShort of ConceptDescription
 				target.setBrowseName(createModelBrowseName(identification.getIdentifier()));
 			}
 		}
