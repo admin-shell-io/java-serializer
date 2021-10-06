@@ -238,7 +238,7 @@ public class IntegrationTests {
 	}
 	
 	@Test
-//	@Ignore(value="highly dependent on other json dependencies, just used for manual comparison if json serializer is seen as complete reference implementation")
+	@Ignore(value="highly dependent on other json dependencies, just used for manual comparison if json serializer is seen as complete reference implementation")
 	public void testAASFullwithJsonCompare() throws SerializationException, DeserializationException, JSONException, IOException {
 		// ARRANGE
 		String expected = new JsonSerializer().write(AASFull.ENVIRONMENT);
