@@ -1,6 +1,6 @@
 {
   "homepages": [],
-  "source_base_path": "D:/a/aasx-package-explorer/aasx-package-explorer/docdev/docfx_project",
+  "source_base_path": "C:/Users/espen/Downloads/docfx/docfx_project",
   "xrefmap": "xrefmap.yml",
   "files": [
     {
@@ -13,15 +13,12 @@
       "is_incremental": false
     },
     {
-      "log_codes": [
-        "InvalidFileLink"
-      ],
       "type": "Conceptual",
-      "source_relative_path": "api/index.md",
+      "source_relative_path": "articles/building.md",
       "output": {
         ".html": {
-          "relative_path": "api/index.html",
-          "hash": "05eQrvr5oeJ5h3H1m6IBhg=="
+          "relative_path": "articles/building.html",
+          "hash": "gEJAFPrEZdVkd15HPthGL620UfYkbMWpbUJ3XJeumno="
         }
       },
       "is_incremental": false,
@@ -29,11 +26,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "getting-started/continuous-integration.md",
+      "source_relative_path": "articles/development_workflow.md",
       "output": {
         ".html": {
-          "relative_path": "getting-started/continuous-integration.html",
-          "hash": "57vbLnGaCQTM/BzQtgUmmw=="
+          "relative_path": "articles/development_workflow.html",
+          "hash": "swrfCxLmtqLNe4jpD02Zhd5yKpVqH175kP1U1EMhqgw="
         }
       },
       "is_incremental": false,
@@ -41,11 +38,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "getting-started/development-workflow.md",
+      "source_relative_path": "articles/intro.md",
       "output": {
         ".html": {
-          "relative_path": "getting-started/development-workflow.html",
-          "hash": "v2Pn1SXAKiCuCgxkBtuPfg=="
+          "relative_path": "articles/intro.html",
+          "hash": "+s6ozJzfCQbFe4nXVmfveE47be9F13g0CdXJh8z4kj4="
         }
       },
       "is_incremental": false,
@@ -53,47 +50,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "getting-started/installing-the-dependencies.md",
+      "source_relative_path": "articles/releasing.md",
       "output": {
         ".html": {
-          "relative_path": "getting-started/installing-the-dependencies.html",
-          "hash": "Vp13jEhc7B1SbC3+FZMDYg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "getting-started/intro.md",
-      "output": {
-        ".html": {
-          "relative_path": "getting-started/intro.html",
-          "hash": "NpW4kYqjpe4aKSNJQim/yg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "getting-started/licenses-and-copyrights.md",
-      "output": {
-        ".html": {
-          "relative_path": "getting-started/licenses-and-copyrights.html",
-          "hash": "q1V4EFfbXXsA8Key2PWWyg=="
-        }
-      },
-      "is_incremental": false,
-      "version": ""
-    },
-    {
-      "type": "Conceptual",
-      "source_relative_path": "getting-started/releasing.md",
-      "output": {
-        ".html": {
-          "relative_path": "getting-started/releasing.html",
-          "hash": "dmj1QcoPt6sVq/4K1BMY+g=="
+          "relative_path": "articles/releasing.html",
+          "hash": "9rtUytPaFJz0nt4qj5ZhDB4fn0akv9JkXxOPW/kEJ1E="
         }
       },
       "is_incremental": false,
@@ -101,11 +62,11 @@
     },
     {
       "type": "Toc",
-      "source_relative_path": "getting-started/toc.yml",
+      "source_relative_path": "articles/toc.yml",
       "output": {
         ".html": {
-          "relative_path": "getting-started/toc.html",
-          "hash": "DB5RIXIZBBw9wYEoEOVMFg=="
+          "relative_path": "articles/toc.html",
+          "hash": "encCwDt0NWM9ogwIBMK0sbs6Q6LTkYe8ESYs7BspNHg="
         }
       },
       "is_incremental": false,
@@ -113,11 +74,11 @@
     },
     {
       "type": "Conceptual",
-      "source_relative_path": "getting-started/troubleshooting.md",
+      "source_relative_path": "articles/usage.md",
       "output": {
         ".html": {
-          "relative_path": "getting-started/troubleshooting.html",
-          "hash": "wJZAMEiLRCZwpYGeqZueuw=="
+          "relative_path": "articles/usage.html",
+          "hash": "ridXd1t4Rjo/1iJ1c+oPLcnlgbRe+PWuh1FPH3j0zBU="
         }
       },
       "is_incremental": false,
@@ -184,7 +145,7 @@
       "output": {
         ".html": {
           "relative_path": "index.html",
-          "hash": "QBT4MVBdf0Ua0bzO+XYYyA=="
+          "hash": "78X5caIfqfgUddO3U/vWyrfWFxdKGDsTrKHO4qlQOd4="
         }
       },
       "is_incremental": false,
@@ -196,7 +157,7 @@
       "output": {
         ".html": {
           "relative_path": "toc.html",
-          "hash": "ZbxMI+BoWjvZUvA8Jdzitw=="
+          "hash": "1EuWErQM8dhaphdSxQ5tuO6L8J8KZH8afTnqVg9RMqE="
         }
       },
       "is_incremental": false,
@@ -206,19 +167,17 @@
   "incremental_info": [
     {
       "status": {
-        "can_incremental": false,
-        "details": "Cannot build incrementally because last build info is missing.",
+        "can_incremental": true,
         "incrementalPhase": "build",
         "total_file_count": 0,
-        "skipped_file_count": 0,
-        "full_build_reason_code": "NoAvailableBuildCache"
+        "skipped_file_count": 0
       },
       "processors": {
         "ConceptualDocumentProcessor": {
-          "can_incremental": false,
+          "can_incremental": true,
           "incrementalPhase": "build",
-          "total_file_count": 9,
-          "skipped_file_count": 0
+          "total_file_count": 6,
+          "skipped_file_count": 5
         },
         "ResourceDocumentProcessor": {
           "can_incremental": false,
