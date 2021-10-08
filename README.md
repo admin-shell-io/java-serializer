@@ -9,6 +9,8 @@ the document 'Details of the Asset Administration Shell', published on
 
 # Build and Use
 
+Some examples can be found on the [documentation webpage](https://admin-shell-io.github.io/java-serializer/).
+
 You can build the project using Maven by simply executing at the repository
 root:
 
