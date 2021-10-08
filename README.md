@@ -37,6 +37,8 @@ The project contains several modules:
 - `dataformat-uanodeset` OPC UA I4AAS NodeSet de-/serializer
 - `dataformat-aml` AutomationML serializer (deserializer is currently under development)
 
+Additionally, the sources that are used for generating the static documentation using [DocFX](https://dotnet.github.io/docfx/) in the `gh-pages` branch are located in the `docs` folder.
+
 
 
 # How to Contribute
