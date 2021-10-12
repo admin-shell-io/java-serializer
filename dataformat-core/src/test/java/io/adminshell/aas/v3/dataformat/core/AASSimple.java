@@ -121,7 +121,7 @@ public class AASSimple {
 	private static final String SUBMODEL_OPERATIONAL_DATA_ID = "http://i40.customer.com/instance/1/1/AC69B1CB44F07935";
 	private static final String SUBMODEL_OPERATIONAL_DATA_SEMANTIC_ID_PROPERTY = HTTP_CUSTOMER_COM_CD_1_1_18EBD56F6B43D895;
 	private static final String SUBMODEL_OPERATIONAL_DATA_PROPERTY_ID_SHORT = ROTATION_SPEED;
-	private static final String SUBMODEL_OPERATIONAL_DATA_PROPERTY_CATEGORY = "VARIABLE";
+	private static final String SUBMODEL_OPERATIONAL_DATA_PROPERTY_CATEGORY = "Variable";
 	private static final String SUBMODEL_OPERATIONAL_DATA_PROPERTY_VALUE = "4370";
 	private static final String SUBMODEL_OPERATIONAL_DATA_PROPERTY_VALUETYPE = "integer";
 
@@ -235,11 +235,18 @@ public class AASSimple {
 					.identifier(WWW_VDI2770_COM_BLATT1_ENTWURF_OKT18_CD_DESCRIPTION_TITLE).idType(IdentifierType.IRI)
 					.build())
 			.embeddedDataSpecification(new DefaultEmbeddedDataSpecification.Builder()
+			    .dataSpecification(new DefaultReference.Builder()
+							.key(new DefaultKey.Builder()
+											.type(KeyElements.GLOBAL_REFERENCE)
+											.idType(KeyType.IRI)
+											.value("DataSpecificationIEC61360")
+											.build())
+							.build())
 					.dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder()
 							.preferredName(new LangString(TITLE, "EN")).preferredName(new LangString(TITEL, "DE"))
-							.shortName(new LangString(TITLE, "EN")).shortName(new LangString(TITEL, "DE")).unit("")
-							.sourceOfDefinition("").dataType(DataTypeIEC61360.STRING_TRANSLATABLE)
-							.definition(new LangString(SPRACHABHÄNGIGER_TITELDES_DOKUMENTS, "DE")).build())
+							.shortName(new LangString(TITLE, "EN")).shortName(new LangString(TITEL, "DE")).unit("ExampleString")
+							.sourceOfDefinition("ExampleString").dataType(DataTypeIEC61360.STRING_TRANSLATABLE)
+							.definition(new LangString(SPRACHABHÄNGIGER_TITELDES_DOKUMENTS, "EN")).build())
 					.build())
 			.build();
 
@@ -248,24 +255,39 @@ public class AASSimple {
 			.identification(new DefaultIdentifier.Builder()
 					.identifier(WWW_VDI2770_COM_BLATT1_ENTWURF_OKT18_CD_STORED_DOCUMENT_REPRESENTATION_DIGITAL_FILE)
 					.idType(IdentifierType.IRI).build())
-			.embeddedDataSpecification(new DefaultEmbeddedDataSpecification.Builder().dataSpecificationContent(
+			.embeddedDataSpecification(new DefaultEmbeddedDataSpecification.Builder()
+					.dataSpecification(new DefaultReference.Builder()
+							.key(new DefaultKey.Builder()
+											.type(KeyElements.GLOBAL_REFERENCE)
+											.idType(KeyType.IRI)
+											.value("DataSpecificationIEC61360")
+											.build())
+							.build())
+					.dataSpecificationContent(
 					new DefaultDataSpecificationIEC61360.Builder().preferredName(new LangString(DIGITAL_FILE, "EN"))
-							.preferredName(new LangString(DIGITALE_DATEI, "DE"))
+							.preferredName(new LangString(DIGITAL_FILE, "EN"))
 							.shortName(new LangString(DIGITAL_FILE, "EN"))
-							.shortName(new LangString(DIGITALE_DATEI, "DE")).unit("").sourceOfDefinition("")
-							.dataType(DataTypeIEC61360.STRING).definition(new LangString(DIGITAL_FILE_DEFINITION, "DE"))
+							.shortName(new LangString(DIGITALE_DATEI, "DE")).unit("ExampleString").sourceOfDefinition("ExampleString")
+							.dataType(DataTypeIEC61360.STRING).definition(new LangString(DIGITAL_FILE_DEFINITION, "EN"))
 							.build())
 					.build())
 			.build();
 
 	public static final ConceptDescription CONCEPT_DESCRIPTION_MAXROTATIONSPEED = new DefaultConceptDescription.Builder()
 			.idShort(MAX_ROTATION_SPEED).category(PROPERTY)
-			.administration(new DefaultAdministrativeInformation.Builder().version("").revision("2").build())
+			.administration(new DefaultAdministrativeInformation.Builder().version("2").revision("2.1").build())
 			.identification(new DefaultIdentifier.Builder().identifier(_0173_1_02_BAA120_008)
 					.idType(IdentifierType.IRDI).build())
 			.embeddedDataSpecifications(
 					Arrays.asList(
 							new DefaultEmbeddedDataSpecification.Builder()
+									.dataSpecification(new DefaultReference.Builder()
+											.key(new DefaultKey.Builder()
+															.type(KeyElements.GLOBAL_REFERENCE)
+															.idType(KeyType.IRI)
+															.value("DataSpecificationIEC61360")
+															.build())
+											.build())
 									.dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder()
 											.preferredName(new LangString(MAX_DREHZAHL, "de"))
 											.preferredName(new LangString(MAX_ROTATIONSPEED, "en")).unit(_1_MIN)
@@ -273,9 +295,9 @@ public class AASSimple {
 													.key(new DefaultKey.Builder().type(KeyElements.GLOBAL_REFERENCE)
 															.value(_0173_1_05_AAA650_002).idType(KeyType.IRDI).build())
 													.build())
-											.sourceOfDefinition("").dataType(DataTypeIEC61360.REAL_MEASURE)
+											.sourceOfDefinition("ExampleString").dataType(DataTypeIEC61360.REAL_MEASURE)
 											.definition(new LangString(MAX_ROTATE_DEF_DE, "de"))
-											.definition(new LangString(MAX_ROTATE_DEF_EN, "en")).build())
+											.definition(new LangString(MAX_ROTATE_DEF_EN, "EN")).build())
 									.build()))
 			.build();
 
@@ -285,6 +307,13 @@ public class AASSimple {
 					.idType(IdentifierType.IRI).build())
 			.embeddedDataSpecification(
 					new DefaultEmbeddedDataSpecification.Builder()
+							.dataSpecification(new DefaultReference.Builder()
+									.key(new DefaultKey.Builder()
+													.type(KeyElements.GLOBAL_REFERENCE)
+													.idType(KeyType.IRI)
+													.value("DataSpecificationIEC61360")
+													.build())
+									.build())
 							.dataSpecificationContent(
 									new DefaultDataSpecificationIEC61360.Builder()
 											.preferredName(new LangString(AKTUELLE_DREHZAHL, "DE"))
@@ -295,7 +324,7 @@ public class AASSimple {
 													.key(new DefaultKey.Builder().type(KeyElements.GLOBAL_REFERENCE)
 															.value(_0173_1_05_AAA650_002).idType(KeyType.IRDI).build())
 													.build())
-											.sourceOfDefinition("").dataType(DataTypeIEC61360.REAL_MEASURE)
+											.sourceOfDefinition("ExampleString").dataType(DataTypeIEC61360.REAL_MEASURE)
 											.definition(new LangString(
 													AKTUELLE_DREHZAHL_MITWELCHER_DER_MOTOR_ODER_DIE_SPEISEINHEIT_BETRIEBEN_WIRD,
 													"DE"))
@@ -311,12 +340,20 @@ public class AASSimple {
 			.identification(new DefaultIdentifier.Builder().identifier(WWW_VDI2770_COM_BLATT1_ENTWURF_OKT18_CD_DOCUMENT)
 					.idType(IdentifierType.IRI).build())
 			.embeddedDataSpecification(new DefaultEmbeddedDataSpecification.Builder()
+					.dataSpecification(new DefaultReference.Builder()
+							.key(new DefaultKey.Builder()
+											.type(KeyElements.GLOBAL_REFERENCE)
+											.idType(KeyType.IRI)
+											.value("DataSpecificationIEC61360")
+											.build())
+							.build())
 					.dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder()
+					    .preferredName(new LangString(DOCUMENT, "EN"))
 							.shortName(new LangString(DOCUMENT, "EN")).shortName(new LangString(DOKUMENT, "DE"))
-							.unit("").sourceOfDefinition(ISO15519_1_2010).dataType(DataTypeIEC61360.STRING)
+							.unit("ExampleString").sourceOfDefinition(ISO15519_1_2010).dataType(DataTypeIEC61360.STRING)
 							.definition(new LangString(
 									DOCUMENT_DEF,
-									"DE"))
+									"EN"))
 							.build())
 					.build())
 			.build();
