@@ -898,89 +898,56 @@ aas:ConceptDescriptionWithCategoryDocumentAndIEC61360CorrectDataType a sh:NodeSh
 # AASd-074
 aas:ConceptDescriptionDefinitionInEnglishIfNotValueCategory a sh:NodeShape ;
   sh:targetClass aas:ConceptDescription ;
-  sh:message "For all ConceptDescriptions except for ConceptDescriptions of category VALUE using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/definition is mandatory and shall be defined at least in English." ^^xsd:string ;
-	sh:or(
-	[
-		sh:or(
-			[
-			sh:property [
-			a sh:PropertyShape ;
-			sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
-			sh:class aas:EmbeddedDataSpecification ;
-			sh:minCount 1 ;
-			sh:property [
-				a sh:PropertyShape ;
-				sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
-				sh:class aas:DataSpecificationContent ;
-				sh:minCount 1 ;
-					sh:property [
-						a sh:PropertyShape ;
-						sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/definition> ;
-						sh:minCount 1 ;
-						sh:languageIn ("en");
-					] ;
-				] ;
-			];
-			]
-			[
-				sh:property [
-				a sh:PropertyShape ;
-				sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
-				sh:class aas:EmbeddedDataSpecification ;
-				sh:maxCount 0 ;
-				]
-			]
-		)
-	]
-	[
-		sh:property [
-			a sh:PropertyShape ;
-			sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
-			sh:datatype xsd:string ;
-			sh:maxCount 1 ;
-			sh:minCount 1 ;
-			sh:pattern "^VALUE";
-		];
-	]
-)
-.
+  
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "For all ConceptDescriptions except for ConceptDescriptions of category VALUE using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/definition is mandatory and shall be defined at least in English." ; 
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?dataSpecification
+  		WHERE {
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			MINUS {
+				?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+				?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecificationEn .
+				?embeddedDataSpecificationEn <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecificationEn .
+				?dataSpecificationEn <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/definition> ?preferredNameEn .
+				FILTER(LANGMATCHES(LANG(?preferredNameEn), "en"))
+			}
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "VALUE")
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecification .
+			?embeddedDataSpecification <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecification .
+		}
+        """ ;
+] .
 
 
 # AASd-076
 aas:ConceptDescriptionPreferredNameInEnglish a sh:NodeShape ;
   sh:targetClass aas:ConceptDescription ;
+  
+  sh:sparql [
+  a sh:SPARQLConstraint ;
   sh:message "For all ConceptDescriptions using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) at least a preferred name in English shall be defined." ^^xsd:string ;
-  sh:or(
-  	[
-	  	sh:property [
-			a sh:PropertyShape ;
-			sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
-			sh:class aas:EmbeddedDataSpecification ;
-			sh:minCount 1 ;
-			sh:property [
-				a sh:PropertyShape ;
-				sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
-				sh:class aas:DataSpecificationContent ;
-				sh:minCount 1 ;
-					sh:property [
-						a sh:PropertyShape ;
-						sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/preferredName> ;
-						sh:minCount 1 ;
-						sh:languageIn ("en");
-					] ;
-				] ;
-		]
-	]
-	[
-		sh:property [
-			a sh:PropertyShape ;
-			sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
-			sh:class aas:EmbeddedDataSpecification ;
-			sh:maxCount 0 ;
-		];
-	]
-) .
-
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?dataSpecification
+  		WHERE {
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			MINUS {
+				?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+				?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecificationEn .
+				?embeddedDataSpecificationEn <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecificationEn .
+				?dataSpecificationEn <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/preferredName> ?preferredNameEn .
+				FILTER(LANGMATCHES(LANG(?preferredNameEn), "en"))
+			}
+			
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecification .
+			?embeddedDataSpecification <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecification .
+		}
+        """ ;
+] .
 
 # AASd-077
 aas:UniqueExtensionNames a sh:NodeShape ;

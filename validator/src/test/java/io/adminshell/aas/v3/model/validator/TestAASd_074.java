@@ -81,6 +81,13 @@ public class TestAASd_074 {
 		ShaclValidator.getInstance().validate(cd);
 	}
 
+	@Test
+	public void noIEC61360DataSpecification() throws ValidationException {
+		ConceptDescription description = ConstraintTestHelper.createConceptDescription("testIdShort", "testId",
+				"PROPERTY");
+
+		ShaclValidator.getInstance().validate(description);
+	}
 	private ConceptDescription createConceptDescription(LangString definition) {
 		ConceptDescription cd = ConstraintTestHelper.createConceptDescription("idShort1", "id",
 				"QUALIFIER");
@@ -88,6 +95,7 @@ public class TestAASd_074 {
 		DataSpecificationIEC61360 urlDataTypeDS = new DefaultDataSpecificationIEC61360.Builder()
 				.preferredName(new LangString("ds", "en"))
 				.definition(definition)
+				.definition(new LangString("test", "de"))
 				.dataType(DataTypeIEC61360.URL)
 				.build();
 		
