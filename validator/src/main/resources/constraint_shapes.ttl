@@ -32,7 +32,7 @@
 
 # AASd-002
 aas:IdShortShape a sh:NodeShape ;
-  sh:targetClass aas:Submodel ;
+  sh:targetClass aas:Referable ;
   sh:property [
       a sh:PropertyShape ;
       sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/idShort> ;
