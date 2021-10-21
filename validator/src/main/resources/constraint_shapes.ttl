@@ -222,11 +222,33 @@ aas:AASd-020Shape  a sh:NodeShape ;
       	a sh:SPARQLConstraint ;
       	sh:message "(AASd-020Shape) - The value of Qualifier/value shall be consistent to the data type as defined in Qualifier/valueType." ;
       	sh:select """
-      	  SELECT ?this ?value WHERE {
+      	  SELECT ?this ?value ?claimedValueType WHERE {
       		?this <https://admin-shell.io/aas/3/0/RC01/Qualifier/value> ?value .
-            ?this <https://admin-shell.io/aas/3/0/RC01/Qualifier/valueType> ?valueType .
-      		FILTER (DATATYPE(?value) != URI(?valueType) ) # TODO only works with complete URIs, for instance ?valueType:='http://www.w3.org/2001/XMLSchema#string' works but ?valueType:='string' fails.
-      	  }
+            ?this <https://admin-shell.io/aas/3/0/RC01/Qualifier/valueType> ?claimedValueType .
+
+            # reference for the constructor functions: https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#FunctionMapping
+            BIND(IF( <http://www.w3.org/2001/XMLSchema#dateTime>(?value), true, false) AS ?isDateTime)
+            BIND(IF( <http://www.w3.org/2001/XMLSchema#boolean>(?value), true, false) AS ?isBoolean)
+            BIND(IF( <http://www.w3.org/2001/XMLSchema#integer>(?value), true, false) AS ?isInteger)
+            BIND(IF( <http://www.w3.org/2001/XMLSchema#double>(?value), true, false) AS ?isDouble)
+            BIND(IF( <http://www.w3.org/2001/XMLSchema#long>(?value), true, false) AS ?isLong)
+            BIND(IF( <http://www.w3.org/2001/XMLSchema#float>(?value), true, false) AS ?isFloat)
+            BIND( isURI(?value) AS ?isUri)
+            BIND( isIRI(?value) AS ?isIri)
+            BIND(IF( <http://www.w3.org/2001/XMLSchema#string>(?value), true, false) AS ?isString)
+
+            FILTER( ?claimedValueType = "integer" || ?claimedValueType = "int" || ?claimedValueType = "boolean" || ?claimedValueType = "dateTime" || ?claimedValueType = "double" || ?claimedValueType = "long" || ?claimedValueType = "float" || ?claimedValueType = "uri" || ?claimedValueType = "iri" || ?claimedValueType = "string" )
+
+            FILTER( IF( ?claimedValueType = "dateTime", IF(BOUND(?isDateTime), false, true), true ) )
+            FILTER( IF( ?claimedValueType = "boolean", IF(BOUND(?isBoolean), false, true), true ) )
+            FILTER( IF( ?claimedValueType = "long", IF(BOUND(?isLong), false, true), true ) )
+            FILTER( IF( ?claimedValueType = "float", IF(BOUND(?isFloat), false, true), true ) )
+            FILTER( IF( ?claimedValueType = "integer" || ?claimedValueType = "int", IF(BOUND(?isInteger), false, true), true ) )
+            FILTER( IF( ?claimedValueType = "double", IF(BOUND(?isDouble), false, true), true ) )
+            FILTER( IF( ?claimedValueType = "string", IF(BOUND(?isString), false, true), true ) )
+            FILTER( IF( ?claimedValueType = "uri", IF(?isUri, false, true), true ) )
+            FILTER( IF( ?claimedValueType = "iri", IF(?isIri, false, true), true ) )
+          }
       	"""
      ]
     ];
