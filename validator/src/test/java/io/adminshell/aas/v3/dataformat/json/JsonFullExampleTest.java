@@ -45,7 +45,8 @@ public class JsonFullExampleTest {
 
     @Test
     public void validateFullJson() throws ValidationException, IOException, DeserializationException {
-        String object = ValidatorUtil.readResourceToString("jsonExample.json");
+        String object = ValidatorUtil.readResourceToString("test_demo_full_example.json");
+
         ShaclValidator.getInstance().validate(new JsonDeserializer().read(object));
     }
 
