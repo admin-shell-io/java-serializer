@@ -85,7 +85,7 @@
     ]
   },
   {
-    "idShort": "",
+    "idShort": "Test_AssetAdministrationShell_Mandatory",
     "modelType": {
       "name": "AssetAdministrationShell"
     },

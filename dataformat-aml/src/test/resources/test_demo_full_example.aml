@@ -192,6 +192,10 @@
 						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleOperation</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
+					<Attribute Name="kind">
+						<Value>TEMPLATE</Value>
+						<RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
+					</Attribute>
 					<Attribute Name="semanticId">
 						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Operations/ExampleOperation</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
@@ -224,7 +228,7 @@
 								<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 							</Attribute>
 							<Attribute Name="value" AttributeDataType="xs:string">
-								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">exampleValue</Value>
+								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/ValueId/ExampleValueId</Value>
 								<RefSemantic CorrespondingAttributePath="AAS:Property/value"/>
 							</Attribute>
 							<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Property"/>
@@ -259,7 +263,7 @@
 								<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 							</Attribute>
 							<Attribute Name="value" AttributeDataType="xs:string">
-								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">exampleValue</Value>
+								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/ValueId/ExampleValueId</Value>
 								<RefSemantic CorrespondingAttributePath="AAS:Property/value"/>
 							</Attribute>
 							<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Property"/>
@@ -294,7 +298,7 @@
 								<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 							</Attribute>
 							<Attribute Name="value" AttributeDataType="xs:string">
-								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">exampleValue</Value>
+								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/ValueId/ExampleValueId</Value>
 								<RefSemantic CorrespondingAttributePath="AAS:Property/value"/>
 							</Attribute>
 							<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Property"/>
@@ -412,7 +416,7 @@
 							<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 						</Attribute>
 						<Attribute Name="value" AttributeDataType="xs:string">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">exampleValue</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/ValueId/ExampleValueId</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Property/value"/>
 						</Attribute>
 						<ExternalInterface ID="23" Name="ReferableReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/ReferableReference"/>
@@ -708,11 +712,11 @@
 							<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 						</Attribute>
 						<Attribute Name="valueId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ValueId/ExampleValueId</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ValueId/ExampleValue2</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 						</Attribute>
 						<Attribute Name="value" AttributeDataType="xs:string">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">exampleValue2</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/ValueId/ExampleValue2</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Property/value"/>
 						</Attribute>
 						<ExternalInterface ID="35" Name="ReferableReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/ReferableReference"/>
@@ -745,7 +749,7 @@
 							<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 						</Attribute>
 						<Attribute Name="value" AttributeDataType="xs:string">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">exampleValue</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/ValueId/ExampleValueId</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Property/value"/>
 						</Attribute>
 						<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Property"/>
@@ -846,10 +850,6 @@
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>
 						</Attribute>
-						<Attribute Name="valueId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ValueId/ExampleValueId</Value>
-							<RefSemantic CorrespondingAttributePath="AAS:Qualifier/valueId"/>
-						</Attribute>
 						<Attribute Name="value" AttributeDataType="xs:int">
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">100</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Qualifier/value"/>
@@ -861,10 +861,6 @@
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/Qualifier/ExampleQualifier2</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Qualifier/type"/>
 						</Attribute>
-						<Attribute Name="valueId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ValueId/ExampleValueId</Value>
-							<RefSemantic CorrespondingAttributePath="AAS:Qualifier/valueId"/>
-						</Attribute>
 						<Attribute Name="value" AttributeDataType="xs:int">
 							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">50</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Qualifier/value"/>
@@ -875,11 +871,11 @@
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<Attribute Name="valueId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ValueId/ExampleValueId</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ValueId/ACPLT</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 					</Attribute>
 					<Attribute Name="value" AttributeDataType="xs:string">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ACPLT</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">http://acplt.org/ValueId/ACPLT</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:Property/value"/>
 					</Attribute>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Property"/>
@@ -903,7 +899,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<Attribute Name="valueId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ValueId/ExampleValueId</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]978-8234-234-342</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 					</Attribute>
 					<Attribute Name="value" AttributeDataType="xs:string">
@@ -916,7 +912,7 @@
 			</InternalElement>
 			<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/AssetAdministrationShell"/>
 		</InternalElement>
-		<InternalElement ID="71" Name="AssetAdministrationShell_1" RefBaseSystemUnitPath="AssetAdministrationShellSystemUnitClasses/AssetAdministrationShell_1">
+		<InternalElement ID="71" Name="Test_AssetAdministrationShell_Mandatory" RefBaseSystemUnitPath="AssetAdministrationShellSystemUnitClasses/Test_AssetAdministrationShell_Mandatory">
 			<Attribute Name="assetInformation">
 				<RefSemantic CorrespondingAttributePath="AAS:AssetAdministrationShell/assetInformation"/>
 				<Attribute Name="assetKind">
@@ -929,7 +925,7 @@
 				</Attribute>
 			</Attribute>
 			<Attribute Name="idShort">
-				<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+				<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Test_AssetAdministrationShell_Mandatory</Value>
 				<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 			</Attribute>
 			<Attribute Name="identification">
@@ -943,9 +939,9 @@
 					<RefSemantic CorrespondingAttributePath="AAS:Identifier/identifier"/>
 				</Attribute>
 			</Attribute>
-			<InternalElement ID="69" Name="Submodel_1" RefBaseSystemUnitPath="AssetAdministrationShellSystemUnitClasses/Submodel_1">
+			<InternalElement ID="69" Name="Test_Submodel_Mandatory" RefBaseSystemUnitPath="AssetAdministrationShellSystemUnitClasses/Test_Submodel_Mandatory">
 				<Attribute Name="idShort">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Test_Submodel_Mandatory</Value>
 					<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 				</Attribute>
 				<Attribute Name="identification">
@@ -987,6 +983,10 @@
 					<Attribute Name="idShort">
 						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleOperation</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+					</Attribute>
+					<Attribute Name="kind">
+						<Value>TEMPLATE</Value>
+						<RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
 					</Attribute>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Operation"/>
 				</InternalElement>
@@ -1125,9 +1125,9 @@
 				</InternalElement>
 				<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Submodel"/>
 			</InternalElement>
-			<InternalElement ID="70" Name="Submodel_2">
+			<InternalElement ID="70" Name="Test_Submodel2_Mandatory">
 				<Attribute Name="idShort">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Test_Submodel2_Mandatory</Value>
 					<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 				</Attribute>
 				<Attribute Name="identification">
@@ -1345,6 +1345,10 @@
 					<Attribute Name="idShort">
 						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleOperation</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+					</Attribute>
+					<Attribute Name="kind">
+						<Value>TEMPLATE</Value>
+						<RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
 					</Attribute>
 					<Attribute Name="semanticId">
 						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Operations/ExampleOperation</Value>
@@ -1844,9 +1848,9 @@
 			</Attribute>
 			<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/ConceptDescription"/>
 		</InternalElement>
-		<InternalElement ID="111" Name="ConceptDescription_1">
+		<InternalElement ID="111" Name="Test_ConceptDescription_Mandatory">
 			<Attribute Name="idShort">
-				<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+				<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Test_ConceptDescription_Mandatory</Value>
 				<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 			</Attribute>
 			<Attribute Name="identification">
@@ -3285,7 +3289,7 @@
 		<RoleClass Name="ExternalData" RefBaseClassPath="AutomationMLBaseRoleClassLib/AutomationMLBaseRole"/>
 	</RoleClassLib>
 	<SystemUnitClassLib Name="AssetAdministrationShellSystemUnitClasses">
-		<SystemUnitClass ID="143" Name="AssetAdministrationShell_1">
+		<SystemUnitClass ID="143" Name="Test_AssetAdministrationShell_Mandatory">
 			<Attribute Name="assetInformation">
 				<RefSemantic CorrespondingAttributePath="AAS:AssetAdministrationShell/assetInformation"/>
 				<Attribute Name="assetKind">
@@ -3298,7 +3302,7 @@
 				</Attribute>
 			</Attribute>
 			<Attribute Name="idShort">
-				<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+				<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Test_AssetAdministrationShell_Mandatory</Value>
 				<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 			</Attribute>
 			<Attribute Name="identification">
@@ -3312,9 +3316,9 @@
 					<RefSemantic CorrespondingAttributePath="AAS:Identifier/identifier"/>
 				</Attribute>
 			</Attribute>
-			<InternalElement ID="141" Name="Submodel_1" RefBaseSystemUnitPath="AssetAdministrationShellSystemUnitClasses/Submodel_1">
+			<InternalElement ID="141" Name="Test_Submodel_Mandatory" RefBaseSystemUnitPath="AssetAdministrationShellSystemUnitClasses/Test_Submodel_Mandatory">
 				<Attribute Name="idShort">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Test_Submodel_Mandatory</Value>
 					<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 				</Attribute>
 				<Attribute Name="identification">
@@ -3356,6 +3360,10 @@
 					<Attribute Name="idShort">
 						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleOperation</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+					</Attribute>
+					<Attribute Name="kind">
+						<Value>TEMPLATE</Value>
+						<RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
 					</Attribute>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Operation"/>
 				</InternalElement>
@@ -3494,9 +3502,9 @@
 				</InternalElement>
 				<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Submodel"/>
 			</InternalElement>
-			<InternalElement ID="142" Name="Submodel_2">
+			<InternalElement ID="142" Name="Test_Submodel2_Mandatory">
 				<Attribute Name="idShort">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Test_Submodel2_Mandatory</Value>
 					<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 				</Attribute>
 				<Attribute Name="identification">
@@ -3518,9 +3526,9 @@
 			</InternalElement>
 			<SupportedRoleClass RefRoleClassPath="AssetAdministrationShellRoleClassLib/AssetAdministrationShell"/>
 		</SystemUnitClass>
-		<SystemUnitClass ID="169" Name="Submodel_1">
+		<SystemUnitClass ID="169" Name="Test_Submodel_Mandatory">
 			<Attribute Name="idShort">
-				<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string"/>
+				<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">Test_Submodel_Mandatory</Value>
 				<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 			</Attribute>
 			<Attribute Name="identification">
@@ -3562,6 +3570,10 @@
 				<Attribute Name="idShort">
 					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">ExampleOperation</Value>
 					<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
+				</Attribute>
+				<Attribute Name="kind">
+					<Value>TEMPLATE</Value>
+					<RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
 				</Attribute>
 				<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Operation"/>
 			</InternalElement>

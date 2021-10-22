@@ -1,530 +1,585 @@
+
 {
     "assetAdministrationShells": [
         {
-            "modelType": {
-                "name": "AssetAdministrationShell"
-            },
-            "idShort": "ExampleMotor",
-            "identification": {
-                "idType": "Iri",
-                "id": "http://customer.com/aas/9175_7013_7091_9168"
-            },
-            "assetInformation": {
-                "assetKind": "Instance",
-                "globalAssetId": {
-                    "keys": [
-                        {
-                            "type": "Asset",
-                            "value": "http://customer.com/assets/KHBVZJSQKIY",
-                            "idType": "Iri"
-                        }
-                    ]
-                },
-                "specificAssetIds": [
+            "modelType":
                     {
-                        "key": "EquipmentID",
-                        "value": "538fd1b3-f99f-4a52-9c75-72e9fa921270",
-                        "subjectId": {
-                            "keys": [
-                                {
-                                    "type": "GlobalReference",
-                                    "value": "http://customer.com/Systems/ERP/012",
-                                    "idType": "Iri"
-                                }
-                            ]
-                        }
+                        "name": "AssetAdministrationShell"
                     },
+            "assetInformation":
                     {
-                        "key": "DeviceID",
-                        "value": "QjYgPggjwkiHk4RrQiYSLg==",
-                        "subjectId": {
-                            "keys": [
+                        "assetKind": "Instance",
+                        "globalAssetId":
                                 {
-                                    "type": "GlobalReference",
-                                    "value": "http://customer.com/Systems/IoT/1",
-                                    "idType": "Iri"
+                                    "keys": [
+                                        {
+                                            "idType": "Iri",
+                                            "type": "Asset",
+                                            "value": "http://customer.com/assets/KHBVZJSQKIY"
+                                        }
+                                    ]
+                                },
+                        "specificAssetIds": [
+                            {
+                                "key": "EquipmentID",
+                                "value": "538fd1b3-f99f-4a52-9c75-72e9fa921270",
+                                "subjectId":
+                                        {
+                                            "keys": [
+                                                {
+                                                    "idType": "Iri",
+                                                    "type": "GlobalReference",
+                                                    "value": "http://customer.com/Systems/ERP/012"
+                                                }
+                                            ]
+                                        }
+                            },
+                            {
+                                "key": "DeviceID",
+                                "value": "QjYgPggjwkiHk4RrQiYSLg==",
+                                "subjectId":
+                                        {
+                                            "keys": [
+                                                {
+                                                    "idType": "Iri",
+                                                    "type": "GlobalReference",
+                                                    "value": "http://customer.com/Systems/IoT/1"
+                                                }
+                                            ]
+                                        }
+                            }
+                        ],
+                        "thumbnail":
+                                {
+                                    "modelType":
+                                            {
+                                                "name": "File"
+                                            },
+                                    "mimeType": "image/png",
+                                    "value": "https://github.com/admin-shell/io/blob/master/verwaltungsschale-detail-part1.png",
+                                    "kind": "Instance",
+                                    "idShort": "thumbnail"
                                 }
-                            ]
-                        }
-                    }
-                ],
-                "thumbnail": {
-                    "modelType": {
-                        "name": "File"
                     },
-                    "kind": "Instance",
-                    "idShort": "thumbnail",
-                    "mimeType": "image/png",
-                    "value": "https://github.com/admin-shell/io/blob/master/verwaltungsschale-detail-part1.png"
-                }
-            },
             "submodels": [
                 {
                     "keys": [
                         {
+                            "idType": "Iri",
                             "type": "Submodel",
-                            "value": "http://i40.customer.com/type/1/1/7A7104BDAB57E184",
-                            "idType": "Iri"
+                            "value": "http://i40.customer.com/type/1/1/7A7104BDAB57E184"
                         }
                     ]
                 },
                 {
                     "keys": [
                         {
+                            "idType": "Iri",
                             "type": "Submodel",
-                            "value": "http://i40.customer.com/instance/1/1/AC69B1CB44F07935",
-                            "idType": "Iri"
+                            "value": "http://i40.customer.com/instance/1/1/AC69B1CB44F07935"
                         }
                     ]
                 },
                 {
                     "keys": [
                         {
+                            "idType": "Iri",
                             "type": "Submodel",
-                            "value": "http://i40.customer.com/type/1/1/1A7B62B529F19152",
-                            "idType": "Iri"
+                            "value": "http://i40.customer.com/type/1/1/1A7B62B529F19152"
                         }
                     ]
                 }
-            ]
+            ],
+            "identification":
+                    {
+                        "idType": "Iri",
+                        "id": "http://customer.com/aas/9175_7013_7091_9168"
+                    },
+            "idShort": "ExampleMotor"
         }
     ],
-   "assets": [
-      {
-         "modelType": {
-            "name": "Asset"
-         },
-         "idShort": "ServoDCMotor",
-         "identification": {
-            "idType": "Iri",
-            "id": "http://customer.com/assets/KHBVZJSQKIY"
-         }
-      }
-   ],
-    "submodels": [
+    "assets": [
         {
-            "modelType": {
-                "name": "Submodel"
-            },
-            "semanticId": {
-                "keys": [
+            "modelType":
                     {
-                        "type": "GlobalReference",
-                        "value": "0173-1#01-AFZ615#016",
-                        "idType": "Irdi"
-                    }
-                ]
-            },
-            "kind": "Instance",
-            "idShort": "TechnicalData",
-            "identification": {
-                "idType": "Iri",
-                "id": "http://i40.customer.com/type/1/1/7A7104BDAB57E184"
-            },
-            "submodelElements": [
-                {
-                    "modelType": {
-                        "name": "Property"
+                        "name": "Asset"
                     },
-                    "kind": "Instance",
-                    "semanticId": {
-                        "keys": [
-                            {
-                                "type": "ConceptDescription",
-                                "value": "0173-1#02-BAA120#008",
-                                "idType": "Irdi"
-                            }
-                        ]
+            "identification":
+                    {
+                        "idType": "Iri",
+                        "id": "http://customer.com/assets/KHBVZJSQKIY"
                     },
-                    "idShort": "MaxRotationSpeed",
-                    "category": "Parameter",
-                    "value": "5000",
-                    "valueType": "integer"
-                }
-            ]
-        },
-        {
-            "modelType": {
-                "name": "Submodel"
-            },
-            "kind": "Instance",
-            "idShort": "Documentation",
-            "identification": {
-                "idType": "Iri",
-                "id": "http://i40.customer.com/type/1/1/1A7B62B529F19152"
-            },
-            "submodelElements": [
-                {
-                    "modelType": {
-                        "name": "SubmodelElementCollection"
-                    },
-                    "kind": "Instance",
-                    "semanticId": {
-                        "keys": [
-                            {
-                                "type": "ConceptDescription",
-                                "value": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Document",
-                                "idType": "Iri"
-                            }
-                        ]
-                    },
-                    "idShort": "OperatingManual",
-                    "value": [
-                        {
-                            "modelType": {
-                                "name": "Property"
-                            },
-                            "kind": "Instance",
-                            "semanticId": {
-                                "keys": [
-                                    {
-                                        "type": "ConceptDescription",
-                                        "value": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Description/Title",
-                                        "idType": "Iri"
-                                    }
-                                ]
-                            },
-                            "idShort": "Title",
-                            "value": "OperatingManual",
-                            "valueType": "langString"
-                        },
-                        {
-                            "modelType": {
-                                "name": "File"
-                            },
-                            "kind": "Instance",
-                            "semanticId": {
-                                "keys": [
-                                    {
-                                        "type": "ConceptDescription",
-                                        "value": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/StoredDocumentRepresentation/DigitalFile",
-                                        "idType": "Iri"
-                                    }
-                                ]
-                            },
-                            "idShort": "DigitalFile_PDF",
-                            "mimeType": "application/pdf",
-                            "value": "/aasx/OperatingManual.pdf"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "modelType": {
-                "name": "Submodel"
-            },
-            "kind": "Instance",
-            "idShort": "OperationalData",
-            "identification": {
-                "idType": "Iri",
-                "id": "http://i40.customer.com/instance/1/1/AC69B1CB44F07935"
-            },
-            "submodelElements": [
-                {
-                    "modelType": {
-                        "name": "Property"
-                    },
-                    "kind": "Instance",
-                    "semanticId": {
-                        "keys": [
-                            {
-                                "type": "ConceptDescription",
-                                "value": "http://customer.com/cd/1/1/18EBD56F6B43D895",
-                                "idType": "Iri"
-                            }
-                        ]
-                    },
-                    "idShort": "RotationSpeed",
-                    "category": "VARIABLE",
-                    "value": "4370",
-                    "valueType": "integer"
-                }
-            ]
+            "idShort": "ServoDCMotor"
         }
     ],
     "conceptDescriptions": [
         {
-            "modelType": {
-                "name": "ConceptDescription"
-            },
-            "idShort": "Title",
-            "identification": {
-                "idType": "Iri",
-                "id": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Description/Title"
-            },
+            "modelType":
+                    {
+                        "name": "ConceptDescription"
+                    },
             "embeddedDataSpecifications": [
                 {
-                    "dataSpecification": {
-                        "keys": [
+                    "dataSpecification":
                             {
-                                "type": "GlobalReference",
-                                "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0",
-                                "idType": "Iri"
-                            }
-                        ]
-                    },
-                    "dataSpecificationContent": {
-                        "preferredName": [
-                            {
-                                "language": "EN",
-                                "text": "Title"
+                                "keys": [
+                                    {
+                                        "idType": "Iri",
+                                        "type": "GlobalReference",
+                                        "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0"
+                                    }
+                                ]
                             },
+                    "dataSpecificationContent":
                             {
-                                "language": "DE",
-                                "text": "Titel"
+                                "dataType": "StringTranslatable",
+                                "sourceOfDefinition": "ExampleString",
+                                "unit": "ExampleString",
+                                "definition": [
+                                    {
+                                        "language": "EN",
+                                        "text": "SprachabhängigerTiteldesDokuments."
+                                    }
+                                ],
+                                "preferredName": [
+                                    {
+                                        "language": "EN",
+                                        "text": "Title"
+                                    },
+                                    {
+                                        "language": "DE",
+                                        "text": "Titel"
+                                    }
+                                ],
+                                "shortName": [
+                                    {
+                                        "language": "EN",
+                                        "text": "Title"
+                                    },
+                                    {
+                                        "language": "DE",
+                                        "text": "Titel"
+                                    }
+                                ]
                             }
-                        ],
-                        "shortName": [
-                            {
-                                "language": "EN",
-                                "text": "Title"
-                            },
-                            {
-                                "language": "DE",
-                                "text": "Titel"
-                            }
-                        ],
-                        "unit": "",
-                        "sourceOfDefinition": "",
-                        "dataType": "StringTranslatable",
-                        "definition": [
-                            {
-                                "language": "DE",
-                                "text": "SprachabhängigerTiteldesDokuments."
-                            }
-                        ]
-                    }
                 }
-            ]
+            ],
+            "identification":
+                    {
+                        "idType": "Iri",
+                        "id": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Description/Title"
+                    },
+            "idShort": "Title"
         },
         {
-            "modelType": {
-                "name": "ConceptDescription"
-            },
-            "idShort": "DigitalFile",
-            "identification": {
-                "idType": "Iri",
-                "id": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/StoredDocumentRepresentation/DigitalFile"
-            },
+            "modelType":
+                    {
+                        "name": "ConceptDescription"
+                    },
             "embeddedDataSpecifications": [
                 {
-                    "dataSpecification": {
-                        "keys": [
+                    "dataSpecification":
                             {
-                                "type": "GlobalReference",
-                                "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0",
-                                "idType": "Iri"
-                            }
-                        ]
-                    },
-                    "dataSpecificationContent": {
-                        "preferredName": [
-                            {
-                                "language": "EN",
-                                "text": "DigitalFile"
+                                "keys": [
+                                    {
+                                        "idType": "Iri",
+                                        "type": "GlobalReference",
+                                        "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0"
+                                    }
+                                ]
                             },
+                    "dataSpecificationContent":
                             {
-                                "language": "DE",
-                                "text": "DigitaleDatei"
+                                "dataType": "String",
+                                "sourceOfDefinition": "ExampleString",
+                                "unit": "ExampleString",
+                                "definition": [
+                                    {
+                                        "language": "EN",
+                                        "text": "Eine Datei, die die Document Version repräsentiert. Neben der obligatorischen PDF Datei können weitere Dateien angegeben werden."
+                                    }
+                                ],
+                                "preferredName": [
+                                    {
+                                        "language": "EN",
+                                        "text": "DigitalFile"
+                                    },
+                                    {
+                                        "language": "EN",
+                                        "text": "DigitalFile"
+                                    }
+                                ],
+                                "shortName": [
+                                    {
+                                        "language": "EN",
+                                        "text": "DigitalFile"
+                                    },
+                                    {
+                                        "language": "DE",
+                                        "text": "DigitaleDatei"
+                                    }
+                                ]
                             }
-                        ],
-                        "shortName": [
-                            {
-                                "language": "EN",
-                                "text": "DigitalFile"
-                            },
-                            {
-                                "language": "DE",
-                                "text": "DigitaleDatei"
-                            }
-                        ],
-                        "unit": "",
-                        "sourceOfDefinition": "",
-                        "dataType": "String",
-                        "definition": [
-                            {
-                                "language": "DE",
-                                "text": "Eine Datei, die die Document Version repräsentiert. Neben der obligatorischen PDF Datei können weitere Dateien angegeben werden."
-                            }
-                        ]
-                    }
                 }
-            ]
+            ],
+            "identification":
+                    {
+                        "idType": "Iri",
+                        "id": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/StoredDocumentRepresentation/DigitalFile"
+                    },
+            "idShort": "DigitalFile"
         },
         {
-            "modelType": {
-                "name": "ConceptDescription"
-            },
-            "idShort": "MaxRotationSpeed",
+            "modelType":
+                    {
+                        "name": "ConceptDescription"
+                    },
+            "embeddedDataSpecifications": [
+                {
+                    "dataSpecification":
+                            {
+                                "keys": [
+                                    {
+                                        "idType": "Iri",
+                                        "type": "GlobalReference",
+                                        "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0"
+                                    }
+                                ]
+                            },
+                    "dataSpecificationContent":
+                            {
+                                "dataType": "RealMeasure",
+                                "sourceOfDefinition": "ExampleString",
+                                "unit": "1/min",
+                                "unitId":
+                                        {
+                                            "keys": [
+                                                {
+                                                    "idType": "Irdi",
+                                                    "type": "GlobalReference",
+                                                    "value": "0173-1#05-AAA650#002"
+                                                }
+                                            ]
+                                        },
+                                "definition": [
+                                    {
+                                        "language": "de",
+                                        "text": "HöchstezulässigeDrehzahl,mitwelcherderMotoroderdieSpeiseinheitbetriebenwerdendarf"
+                                    },
+                                    {
+                                        "language": "EN",
+                                        "text": "Greatestpermissiblerotationspeedwithwhichthemotororfeedingunitmaybeoperated"
+                                    }
+                                ],
+                                "preferredName": [
+                                    {
+                                        "language": "de",
+                                        "text": "max.Drehzahl"
+                                    },
+                                    {
+                                        "language": "en",
+                                        "text": "Max.rotationspeed"
+                                    }
+                                ]
+                            }
+                }
+            ],
+            "administration":
+                    {
+                        "revision": "2.1",
+                        "version": "2"
+                    },
+            "identification":
+                    {
+                        "idType": "Irdi",
+                        "id": "0173-1#02-BAA120#008"
+                    },
             "category": "PROPERTY",
-            "administration": {
-                "version": "",
-                "revision": "2"
-            },
-            "identification": {
-                "idType": "Irdi",
-                "id": "0173-1#02-BAA120#008"
-            },
-            "embeddedDataSpecifications": [
-                {
-                    "dataSpecification": {
-                        "keys": [
-                            {
-                                "type": "GlobalReference",
-                                "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0",
-                                "idType": "Iri"
-                            }
-                        ]
-                    },
-                    "dataSpecificationContent": {
-                        "preferredName": [
-                            {
-                                "language": "de",
-                                "text": "max.Drehzahl"
-                            },
-                            {
-                                "language": "en",
-                                "text": "Max.rotationspeed"
-                            }
-                        ],
-                        "unit": "1/min",
-                        "unitId": {
-                            "keys": [
-                                {
-                                    "type": "GlobalReference",
-                                    "value": "0173-1#05-AAA650#002",
-                                    "idType": "Irdi"
-                                }
-                            ]
-                        },
-                        "sourceOfDefinition": "",
-                        "dataType": "RealMeasure",
-                        "definition": [
-                            {
-                                "language": "de",
-                                "text": "HöchstezulässigeDrehzahl,mitwelcherderMotoroderdieSpeiseinheitbetriebenwerdendarf"
-                            },
-                            {
-                                "language": "en",
-                                "text": "Greatestpermissiblerotationspeedwithwhichthemotororfeedingunitmaybeoperated"
-                            }
-                        ]
-                    }
-                }
-            ]
+            "idShort": "MaxRotationSpeed"
         },
         {
-            "modelType": {
-                "name": "ConceptDescription"
-            },
-            "idShort": "RotationSpeed",
+            "modelType":
+                    {
+                        "name": "ConceptDescription"
+                    },
+            "embeddedDataSpecifications": [
+                {
+                    "dataSpecification":
+                            {
+                                "keys": [
+                                    {
+                                        "idType": "Iri",
+                                        "type": "GlobalReference",
+                                        "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0"
+                                    }
+                                ]
+                            },
+                    "dataSpecificationContent":
+                            {
+                                "dataType": "RealMeasure",
+                                "sourceOfDefinition": "ExampleString",
+                                "unit": "1/min",
+                                "unitId":
+                                        {
+                                            "keys": [
+                                                {
+                                                    "idType": "Irdi",
+                                                    "type": "GlobalReference",
+                                                    "value": "0173-1#05-AAA650#002"
+                                                }
+                                            ]
+                                        },
+                                "definition": [
+                                    {
+                                        "language": "DE",
+                                        "text": "Aktuelle Drehzahl, mitwelcher der Motor oder die Speiseinheit betrieben wird"
+                                    },
+                                    {
+                                        "language": "EN",
+                                        "text": "Actual rotationspeed with which the motor or feedingunit is operated"
+                                    }
+                                ],
+                                "preferredName": [
+                                    {
+                                        "language": "DE",
+                                        "text": "AktuelleDrehzahl"
+                                    },
+                                    {
+                                        "language": "EN",
+                                        "text": "Actualrotationspeed"
+                                    }
+                                ],
+                                "shortName": [
+                                    {
+                                        "language": "DE",
+                                        "text": "AktuelleDrehzahl"
+                                    },
+                                    {
+                                        "language": "EN",
+                                        "text": "ActualRotationSpeed"
+                                    }
+                                ]
+                            }
+                }
+            ],
+            "identification":
+                    {
+                        "idType": "Iri",
+                        "id": "http://customer.com/cd/1/1/18EBD56F6B43D895"
+                    },
             "category": "PROPERTY",
-            "identification": {
-                "idType": "Iri",
-                "id": "http://customer.com/cd/1/1/18EBD56F6B43D895"
-            },
+            "idShort": "RotationSpeed"
+        },
+        {
+            "modelType":
+                    {
+                        "name": "ConceptDescription"
+                    },
             "embeddedDataSpecifications": [
                 {
-                    "dataSpecification": {
+                    "dataSpecification":
+                            {
+                                "keys": [
+                                    {
+                                        "idType": "Iri",
+                                        "type": "GlobalReference",
+                                        "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0"
+                                    }
+                                ]
+                            },
+                    "dataSpecificationContent":
+                            {
+                                "dataType": "String",
+                                "sourceOfDefinition": "[ISO15519-1:2010]",
+                                "unit": "ExampleString",
+                                "definition": [
+                                    {
+                                        "language": "EN",
+                                        "text": "Feste und geordnete Menge von für die Verwendung durch Personen bestimmte Informationen, die verwaltet und als Einheit zwischen Benutzern und System ausgetauscht werden kann."
+                                    }
+                                ],
+                                "preferredName": [
+                                    {
+                                        "language": "EN",
+                                        "text": "Document"
+                                    }
+                                ],
+                                "shortName": [
+                                    {
+                                        "language": "EN",
+                                        "text": "Document"
+                                    },
+                                    {
+                                        "language": "DE",
+                                        "text": "Dokument"
+                                    }
+                                ]
+                            }
+                }
+            ],
+            "identification":
+                    {
+                        "idType": "Iri",
+                        "id": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Document"
+                    },
+            "idShort": "Document"
+        }
+    ],
+    "submodels": [
+        {
+            "modelType":
+                    {
+                        "name": "Submodel"
+                    },
+            "kind": "Instance",
+            "semanticId":
+                    {
                         "keys": [
                             {
+                                "idType": "Irdi",
                                 "type": "GlobalReference",
-                                "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0",
-                                "idType": "Iri"
+                                "value": "0173-1#01-AFZ615#016"
                             }
                         ]
                     },
-                    "dataSpecificationContent": {
-                        "preferredName": [
+            "identification":
+                    {
+                        "idType": "Iri",
+                        "id": "http://i40.customer.com/type/1/1/7A7104BDAB57E184"
+                    },
+            "idShort": "TechnicalData",
+            "submodelElements": [
+                {
+                    "modelType":
                             {
-                                "language": "DE",
-                                "text": "AktuelleDrehzahl"
+                                "name": "Property"
                             },
+                    "kind": "Instance",
+                    "semanticId":
                             {
-                                "language": "EN",
-                                "text": "Actualrotationspeed"
-                            }
-                        ],
-                        "shortName": [
-                            {
-                                "language": "DE",
-                                "text": "AktuelleDrehzahl"
+                                "keys": [
+                                    {
+                                        "idType": "Irdi",
+                                        "type": "ConceptDescription",
+                                        "value": "0173-1#02-BAA120#008"
+                                    }
+                                ]
                             },
-                            {
-                                "language": "EN",
-                                "text": "ActualRotationSpeed"
-                            }
-                        ],
-                        "unit": "1/min",
-                        "unitId": {
-                            "keys": [
-                                {
-                                    "type": "GlobalReference",
-                                    "value": "0173-1#05-AAA650#002",
-                                    "idType": "Irdi"
-                                }
-                            ]
-                        },
-                        "sourceOfDefinition": "",
-                        "dataType": "RealMeasure",
-                        "definition": [
-                            {
-                                "language": "DE",
-                                "text": "Aktuelle Drehzahl, mitwelcher der Motor oder die Speiseinheit betrieben wird"
-                            },
-                            {
-                                "language": "EN",
-                                "text": "Actual rotationspeed with which the motor or feedingunit is operated"
-                            }
-                        ]
-                    }
+                    "value": "5000",
+                    "valueType": "integer",
+                    "category": "Parameter",
+                    "idShort": "MaxRotationSpeed"
                 }
             ]
         },
         {
-            "modelType": {
-                "name": "ConceptDescription"
-            },
-            "idShort": "Document",
-            "identification": {
-                "idType": "Iri",
-                "id": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Document"
-            },
-            "embeddedDataSpecifications": [
-                {
-                    "dataSpecification": {
-                        "keys": [
-                            {
-                                "type": "GlobalReference",
-                                "value": "http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0",
-                                "idType": "Iri"
-                            }
-                        ]
+            "modelType":
+                    {
+                        "name": "Submodel"
                     },
-                    "dataSpecificationContent": {
-                        "preferredName": [
-                        ],
-                        "shortName": [
+            "kind": "Instance",
+            "identification":
+                    {
+                        "idType": "Iri",
+                        "id": "http://i40.customer.com/type/1/1/1A7B62B529F19152"
+                    },
+            "idShort": "Documentation",
+            "submodelElements": [
+                {
+                    "modelType":
                             {
-                                "language": "EN",
-                                "text": "Document"
+                                "name": "SubmodelElementCollection"
                             },
+                    "kind": "Instance",
+                    "semanticId":
                             {
-                                "language": "DE",
-                                "text": "Dokument"
-                            }
-                        ],
-                        "unit": "",
-                        "sourceOfDefinition": "[ISO15519-1:2010]",
-                        "dataType": "String",
-                        "definition": [
+                                "keys": [
+                                    {
+                                        "idType": "Iri",
+                                        "type": "ConceptDescription",
+                                        "value": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Document"
+                                    }
+                                ]
+                            },
+                    "idShort": "OperatingManual",
+                    "value": [
+                        {
+                            "modelType":
+                                    {
+                                        "name": "Property"
+                                    },
+                            "kind": "Instance",
+                            "semanticId":
+                                    {
+                                        "keys": [
+                                            {
+                                                "idType": "Iri",
+                                                "type": "ConceptDescription",
+                                                "value": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Description/Title"
+                                            }
+                                        ]
+                                    },
+                            "value": "OperatingManual",
+                            "valueType": "langString",
+                            "idShort": "Title"
+                        },
+                        {
+                            "modelType":
+                                    {
+                                        "name": "File"
+                                    },
+                            "mimeType": "application/pdf",
+                            "value": "/aasx/OperatingManual.pdf",
+                            "kind": "Instance",
+                            "semanticId":
+                                    {
+                                        "keys": [
+                                            {
+                                                "idType": "Iri",
+                                                "type": "ConceptDescription",
+                                                "value": "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/StoredDocumentRepresentation/DigitalFile"
+                                            }
+                                        ]
+                                    },
+                            "idShort": "DigitalFile_PDF"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "modelType":
+                    {
+                        "name": "Submodel"
+                    },
+            "kind": "Instance",
+            "identification":
+                    {
+                        "idType": "Iri",
+                        "id": "http://i40.customer.com/instance/1/1/AC69B1CB44F07935"
+                    },
+            "idShort": "OperationalData",
+            "submodelElements": [
+                {
+                    "modelType":
                             {
-                                "language": "DE",
-                                "text": "Feste und geordnete Menge von für die Verwendung durch Personen bestimmte Informationen, die verwaltet und als Einheit zwischen Benutzern und System ausgetauscht werden kann."
-                            }
-                        ]
-                    }
+                                "name": "Property"
+                            },
+                    "kind": "Instance",
+                    "semanticId":
+                            {
+                                "keys": [
+                                    {
+                                        "idType": "Iri",
+                                        "type": "ConceptDescription",
+                                        "value": "http://customer.com/cd/1/1/18EBD56F6B43D895"
+                                    }
+                                ]
+                            },
+                    "value": "4370",
+                    "valueType": "integer",
+                    "category": "Variable",
+                    "idShort": "RotationSpeed"
                 }
             ]
         }
