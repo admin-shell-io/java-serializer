@@ -256,8 +256,7 @@ public class AASFull {
                             .build())
                     .qualifier(new DefaultQualifier.Builder()
                             .value("50")
-
-                            .valueType("http://www.w3.org/2001/XMLSchema#int")
+                            .valueType("int")
                             .type("http://acplt.org/Qualifier/ExampleQualifier2")
                             .build())
                     .value("http://acplt.org/ValueId/ACPLT")

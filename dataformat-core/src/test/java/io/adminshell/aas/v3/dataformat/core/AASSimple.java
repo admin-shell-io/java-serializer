@@ -69,7 +69,7 @@ public class AASSimple {
 	private static final String _0173_1_02_BAA120_008 = "0173-1#02-BAA120#008";
 	private static final String PROPERTY = "PROPERTY";
 	private static final String MAX_ROTATION_SPEED = "MaxRotationSpeed";
-	private static final String DIGITAL_FILE_DEFINITION = "Eine Datei, die die Document Version repräsentiert. Neben der obligatorischen PDF Datei können weitere Dateien angegeben werden.";
+	private static final String DIGITAL_FILE_DEFINITION = "A file representing the document version. In addition to the mandatory PDF file, other files can be specified."; //"Eine Datei, die die Document Version repräsentiert. Neben der obligatorischen PDF Datei können weitere Dateien angegeben werden.";
 	private static final String DIGITALE_DATEI = "DigitaleDatei";
 	private static final String WWW_VDI2770_COM_BLATT1_ENTWURF_OKT18_CD_STORED_DOCUMENT_REPRESENTATION_DIGITAL_FILE = "www.vdi2770.com/blatt1/Entwurf/Okt18/cd/StoredDocumentRepresentation/DigitalFile";
 	private static final String DIGITAL_FILE = "DigitalFile";
