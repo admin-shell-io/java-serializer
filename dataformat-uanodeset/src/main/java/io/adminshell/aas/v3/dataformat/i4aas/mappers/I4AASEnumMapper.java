@@ -85,6 +85,9 @@ public class I4AASEnumMapper extends I4AASMapper<Enum<?>, UAVariable> {
 		if (source instanceof io.adminshell.aas.v3.model.IdentifierType) {
 			return IDENTIFICATION_IDTYPE_BROWSENAME;
 		}
+		if (source instanceof io.adminshell.aas.v3.model.DataTypeIEC61360) {
+			return IDENTIFICATION_DATATYPE_BROWSENAME;
+		}
 		return source.getClass().getSimpleName();
 	}
 
