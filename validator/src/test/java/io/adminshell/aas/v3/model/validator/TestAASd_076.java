@@ -1,5 +1,4 @@
-/*******************************************************************************
- *
+/*
  * Copyright (c) 2021 Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e. V.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,9 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- ******************************************************************************/
-
+ */
 
 package io.adminshell.aas.v3.model.validator;
 
@@ -59,6 +56,15 @@ public class TestAASd_076 {
 	}
 
 	@Test
+	public void noIEC61360DataSpecification() throws ValidationException {
+		ConceptDescription description = ConstraintTestHelper.createConceptDescription("testIdShort", "testId",
+				"PROPERTY");
+
+		ShaclValidator.getInstance().validate(description);
+	}
+
+
+	@Test
 	public void noEnglishPreferredName() {
 		LangString preferredName = new LangString("deutsch", "DE");
 		ConceptDescription cd = createConceptDescription(preferredName);
@@ -79,6 +85,7 @@ public class TestAASd_076 {
 
 		DataSpecificationIEC61360 urlDataTypeDS = new DefaultDataSpecificationIEC61360.Builder()
 				.preferredName(preferredName)
+				.preferredName(new LangString("test", "de"))
 				.definition(new LangString("definition", "en"))
 				.dataType(DataTypeIEC61360.URL)
 				.build();

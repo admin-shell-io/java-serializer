@@ -1,5 +1,4 @@
-/*******************************************************************************
- *
+/*
  * Copyright (c) 2021 Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e. V.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,9 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- ******************************************************************************/
-
+ */
 package io.adminshell.aas.v3.model.validator;
 
 import io.adminshell.aas.v3.model.ModelingKind;
@@ -43,7 +40,7 @@ public class TestAASd_020 {
 	public void wrongIntegerValue() throws ValidationException {
 
 		Qualifier wrongQualifier = new DefaultQualifier.Builder()
-				.valueType("http://www.w3.org/2001/XMLSchema#int")
+				.valueType("int")
 				.value("test")
 				.type("integer")
 				.build();
@@ -57,13 +54,11 @@ public class TestAASd_020 {
 		}
 	}
 
-	// TODO: non-strings can not be passed as Qualifier.value --> Strings will always pass, others are not recognized.
 	@Test
-	@Ignore
-	public void wrongStringValue() throws ValidationException {
+	public void wrongUriValue() throws ValidationException {
 
 		Qualifier wrongQualifier = new DefaultQualifier.Builder()
-				.valueType("http://www.w3.org/2001/XMLSchema#string")
+				.valueType("uri")
 				.value("1")
 				.type("integer")
 				.build();
@@ -82,7 +77,7 @@ public class TestAASd_020 {
 	public void correctString() throws ValidationException {
 
 		Qualifier qualifier = new DefaultQualifier.Builder()
-				.valueType("http://www.w3.org/2001/XMLSchema#string")
+				.valueType("string")
 				.value("a string")
 				.type("string")
 				.build();
