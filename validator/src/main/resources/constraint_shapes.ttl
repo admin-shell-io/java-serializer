@@ -32,7 +32,7 @@
 
 # AASd-002
 aas:IdShortShape a sh:NodeShape ;
-  sh:targetClass aas:Submodel ;
+  sh:targetClass aas:Referable ;
   sh:property [
       a sh:PropertyShape ;
       sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/idShort> ;
@@ -222,11 +222,33 @@ aas:AASd-020Shape  a sh:NodeShape ;
       	a sh:SPARQLConstraint ;
       	sh:message "(AASd-020Shape) - The value of Qualifier/value shall be consistent to the data type as defined in Qualifier/valueType." ;
       	sh:select """
-      	  SELECT ?this ?value WHERE {
+      	  SELECT ?this ?value ?claimedValueType WHERE {
       		?this <https://admin-shell.io/aas/3/0/RC01/Qualifier/value> ?value .
-            ?this <https://admin-shell.io/aas/3/0/RC01/Qualifier/valueType> ?valueType .
-      		FILTER (DATATYPE(?value) != URI(?valueType) ) # TODO only works with complete URIs, for instance ?valueType:='http://www.w3.org/2001/XMLSchema#string' works but ?valueType:='string' fails.
-      	  }
+            ?this <https://admin-shell.io/aas/3/0/RC01/Qualifier/valueType> ?claimedValueType .
+
+            # reference for the constructor functions: https://www.w3.org/TR/2013/REC-sparql11-query-20130321/#FunctionMapping
+            BIND(IF( <http://www.w3.org/2001/XMLSchema#dateTime>(?value), true, false) AS ?isDateTime)
+            BIND(IF( <http://www.w3.org/2001/XMLSchema#boolean>(?value), true, false) AS ?isBoolean)
+            BIND(IF( <http://www.w3.org/2001/XMLSchema#integer>(?value), true, false) AS ?isInteger)
+            BIND(IF( <http://www.w3.org/2001/XMLSchema#double>(?value), true, false) AS ?isDouble)
+            BIND(IF( <http://www.w3.org/2001/XMLSchema#long>(?value), true, false) AS ?isLong)
+            BIND(IF( <http://www.w3.org/2001/XMLSchema#float>(?value), true, false) AS ?isFloat)
+            BIND( isURI(?value) AS ?isUri)
+            BIND( isIRI(?value) AS ?isIri)
+            BIND(IF( <http://www.w3.org/2001/XMLSchema#string>(?value), true, false) AS ?isString)
+
+            FILTER( ?claimedValueType = "integer" || ?claimedValueType = "int" || ?claimedValueType = "boolean" || ?claimedValueType = "dateTime" || ?claimedValueType = "double" || ?claimedValueType = "long" || ?claimedValueType = "float" || ?claimedValueType = "uri" || ?claimedValueType = "iri" || ?claimedValueType = "string" )
+
+            FILTER( IF( ?claimedValueType = "dateTime", IF(BOUND(?isDateTime), false, true), true ) )
+            FILTER( IF( ?claimedValueType = "boolean", IF(BOUND(?isBoolean), false, true), true ) )
+            FILTER( IF( ?claimedValueType = "long", IF(BOUND(?isLong), false, true), true ) )
+            FILTER( IF( ?claimedValueType = "float", IF(BOUND(?isFloat), false, true), true ) )
+            FILTER( IF( ?claimedValueType = "integer" || ?claimedValueType = "int", IF(BOUND(?isInteger), false, true), true ) )
+            FILTER( IF( ?claimedValueType = "double", IF(BOUND(?isDouble), false, true), true ) )
+            FILTER( IF( ?claimedValueType = "string", IF(BOUND(?isString), false, true), true ) )
+            FILTER( IF( ?claimedValueType = "uri", IF(?isUri, false, true), true ) )
+            FILTER( IF( ?claimedValueType = "iri", IF(?isIri, false, true), true ) )
+          }
       	"""
      ]
     ];
@@ -898,89 +920,56 @@ aas:ConceptDescriptionWithCategoryDocumentAndIEC61360CorrectDataType a sh:NodeSh
 # AASd-074
 aas:ConceptDescriptionDefinitionInEnglishIfNotValueCategory a sh:NodeShape ;
   sh:targetClass aas:ConceptDescription ;
-  sh:message "For all ConceptDescriptions except for ConceptDescriptions of category VALUE using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/definition is mandatory and shall be defined at least in English." ^^xsd:string ;
-	sh:or(
-	[
-		sh:or(
-			[
-			sh:property [
-			a sh:PropertyShape ;
-			sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
-			sh:class aas:EmbeddedDataSpecification ;
-			sh:minCount 1 ;
-			sh:property [
-				a sh:PropertyShape ;
-				sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
-				sh:class aas:DataSpecificationContent ;
-				sh:minCount 1 ;
-					sh:property [
-						a sh:PropertyShape ;
-						sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/definition> ;
-						sh:minCount 1 ;
-						sh:languageIn ("en");
-					] ;
-				] ;
-			];
-			]
-			[
-				sh:property [
-				a sh:PropertyShape ;
-				sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
-				sh:class aas:EmbeddedDataSpecification ;
-				sh:maxCount 0 ;
-				]
-			]
-		)
-	]
-	[
-		sh:property [
-			a sh:PropertyShape ;
-			sh:path <https://admin-shell.io/aas/3/0/RC01/Referable/category> ;
-			sh:datatype xsd:string ;
-			sh:maxCount 1 ;
-			sh:minCount 1 ;
-			sh:pattern "^VALUE";
-		];
-	]
-)
-.
+  
+  sh:sparql [
+  a sh:SPARQLConstraint ;
+  sh:message "For all ConceptDescriptions except for ConceptDescriptions of category VALUE using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) - DataSpecificationIEC61360/definition is mandatory and shall be defined at least in English." ; 
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?dataSpecification
+  		WHERE {
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			MINUS {
+				?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+				?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecificationEn .
+				?embeddedDataSpecificationEn <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecificationEn .
+				?dataSpecificationEn <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/definition> ?preferredNameEn .
+				FILTER(LANGMATCHES(LANG(?preferredNameEn), "en"))
+			}
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
+			FILTER (?category != "VALUE")
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecification .
+			?embeddedDataSpecification <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecification .
+		}
+        """ ;
+] .
 
 
 # AASd-076
 aas:ConceptDescriptionPreferredNameInEnglish a sh:NodeShape ;
   sh:targetClass aas:ConceptDescription ;
+  
+  sh:sparql [
+  a sh:SPARQLConstraint ;
   sh:message "For all ConceptDescriptions using data specification template IEC61360 (http://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/2/0) at least a preferred name in English shall be defined." ^^xsd:string ;
-  sh:or(
-  	[
-	  	sh:property [
-			a sh:PropertyShape ;
-			sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
-			sh:class aas:EmbeddedDataSpecification ;
-			sh:minCount 1 ;
-			sh:property [
-				a sh:PropertyShape ;
-				sh:path <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ;
-				sh:class aas:DataSpecificationContent ;
-				sh:minCount 1 ;
-					sh:property [
-						a sh:PropertyShape ;
-						sh:path <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/preferredName> ;
-						sh:minCount 1 ;
-						sh:languageIn ("en");
-					] ;
-				] ;
-		]
-	]
-	[
-		sh:property [
-			a sh:PropertyShape ;
-			sh:path <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ;
-			sh:class aas:EmbeddedDataSpecification ;
-			sh:maxCount 0 ;
-		];
-	]
-) .
-
+  sh:prefixes rdf: ;
+  sh:select """
+  	SELECT ?dataSpecification
+  		WHERE {
+			?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+			MINUS {
+				?conceptDescription a <https://admin-shell.io/aas/3/0/RC01/ConceptDescription> .
+				?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecificationEn .
+				?embeddedDataSpecificationEn <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecificationEn .
+				?dataSpecificationEn <https://admin-shell.io/DataSpecificationTemplates/DataSpecificationIEC61360/3/0/RC01/DataSpecificationIEC61360/preferredName> ?preferredNameEn .
+				FILTER(LANGMATCHES(LANG(?preferredNameEn), "en"))
+			}
+			
+			?conceptDescription <https://admin-shell.io/aas/3/0/RC01/HasDataSpecification/embeddedDataSpecification> ?embeddedDataSpecification .
+			?embeddedDataSpecification <https://admin-shell.io/aas/3/0/RC01/EmbeddedDataSpecification/dataSpecificationContent> ?dataSpecification .
+		}
+        """ ;
+] .
 
 # AASd-077
 aas:UniqueExtensionNames a sh:NodeShape ;
@@ -1048,7 +1037,7 @@ aas:DataElementExcludingFileAndBlobCorrectCategory a sh:NodeShape ;
   sh:targetClass aas:DataElement;
   sh:sparql [
   a sh:SPARQLConstraint ;
-  sh:message "For data elements DataElement/category shall be one of the following values: CONSTANT, PARAMETER or VARIABLE. Exception: File and Blob data elements." ;
+  sh:message "For data elements DataElement/category shall be one of the following values: Constant, Parameter or Variable. Exception: File and Blob data elements." ;
   sh:prefixes rdf: ;
   sh:select """
   	SELECT ?element
@@ -1057,7 +1046,7 @@ aas:DataElementExcludingFileAndBlobCorrectCategory a sh:NodeShape ;
 			FILTER(?subclass != <https://admin-shell.io/aas/3/0/RC01/File> && ?subclass != <https://admin-shell.io/aas/3/0/RC01/Blob>)
 			?element a ?subclass .
 			?element <https://admin-shell.io/aas/3/0/RC01/Referable/category> ?category .
-			FILTER(?category != "CONSTANT" && ?category != "PARAMETER" && ?category != "VARIABLE")
+			FILTER(?category != "Constant" && ?category != "Parameter" && ?category != "Variable")
 		}
         """ ;
 ] .

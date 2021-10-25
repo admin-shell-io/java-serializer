@@ -9,6 +9,8 @@ the document 'Details of the Asset Administration Shell', published on
 
 # Build and Use
 
+Some examples can be found on the [documentation webpage](https://admin-shell-io.github.io/java-serializer/).
+
 You can build the project using Maven by simply executing at the repository
 root:
 
@@ -36,6 +38,8 @@ The project contains several modules:
 - `dataformat-xml` XML de-/serializer
 - `dataformat-uanodeset` OPC UA I4AAS NodeSet de-/serializer
 - `dataformat-aml` AutomationML serializer (deserializer is currently under development)
+
+Additionally, the sources that are used for generating the static documentation using [DocFX](https://dotnet.github.io/docfx/) in the `gh-pages` branch are located in the `docs` folder.
 
 
 

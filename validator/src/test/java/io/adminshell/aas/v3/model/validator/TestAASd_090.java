@@ -1,5 +1,4 @@
-/*******************************************************************************
- *
+/*
  * Copyright (c) 2021 Fraunhofer-Gesellschaft zur Foerderung der angewandten Forschung e. V.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -13,9 +12,7 @@
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
- *
- ******************************************************************************/
-
+ */
 
 package io.adminshell.aas.v3.model.validator;
 
@@ -45,17 +42,17 @@ import io.adminshell.aas.v3.model.impl.DefaultProperty;
 public class TestAASd_090 {
 	@Test
 	public void correctCategoryConstant() throws ValidationException {
-		ShaclValidator.getInstance().validate(createProperty("idShort1", "CONSTANT"));
+		ShaclValidator.getInstance().validate(createProperty("idShort1", "Constant"));
 	}
 
 	@Test
 	public void correctCategoryParameter() throws ValidationException {
-		ShaclValidator.getInstance().validate(createProperty("idShort1", "PARAMETER"));
+		ShaclValidator.getInstance().validate(createProperty("idShort1", "Parameter"));
 	}
 
 	@Test
 	public void correctCategoryVariable() throws ValidationException {
-		ShaclValidator.getInstance().validate(createProperty("idShort1", "VARIABLE"));
+		ShaclValidator.getInstance().validate(createProperty("idShort1", "Variable"));
 	}
 
 	@Test
@@ -75,7 +72,7 @@ public class TestAASd_090 {
 			fail();
 		} catch (ValidationException e) {
 			assertTrue(e.getMessage().endsWith(
-					"For data elements DataElement/category shall be one of the following values: CONSTANT, PARAMETER or VARIABLE. Exception: File and Blob data elements."));
+					"For data elements DataElement/category shall be one of the following values: Constant, Parameter or Variable. Exception: File and Blob data elements."));
 		}
 	}
 
