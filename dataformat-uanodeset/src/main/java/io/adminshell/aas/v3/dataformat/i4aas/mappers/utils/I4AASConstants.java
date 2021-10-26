@@ -34,6 +34,7 @@ public interface I4AASConstants {
 	public static final String IDENTIFICATION_BROWSENAME = "Identification";
 	public static final String IDENTIFICATION_ID_BROWSENAME = "Id";
 	public static final String IDENTIFICATION_IDTYPE_BROWSENAME = "IdType";
+	public static final String IDENTIFICATION_DATATYPE_BROWSENAME = "DataType";
 	
 	public static final String ADMINISTRATION_BROWSENAME = "Administration";
 	public static final String ADMINISTRATION_REVISION_BROWSENAME = "Revision";
@@ -69,6 +70,7 @@ public interface I4AASConstants {
 	public static final String IKVP_VALUE_BROWSENAME = "Value";
 	
 	public static final String MIME_TYPE_BROWSENAME = "MimeType";
+	public static final String QUALIFIER_TYPE_BROWSENAME = "Type";
 
 
 }

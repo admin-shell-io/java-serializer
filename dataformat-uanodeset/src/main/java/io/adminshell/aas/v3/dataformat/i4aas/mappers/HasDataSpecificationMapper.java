@@ -31,8 +31,9 @@ public interface HasDataSpecificationMapper {
 
 	public default void mapDataSpecification(HasDataSpecification source, UAObject target, MappingContext ctx) {
 
-		UAObject folder = I4AASMapper.createFolder(target, I4AASConstants.DATASPECIFICATION_BROWSENAME, ctx,
-				I4AASIdentifier.AASReferenceList);
+		UAObject folder = source.getEmbeddedDataSpecifications().isEmpty() ? null
+				: I4AASMapper.createFolder(target, I4AASConstants.DATASPECIFICATION_BROWSENAME, ctx,
+						I4AASIdentifier.AASReferenceList);
 
 		List<EmbeddedDataSpecification> embeddedDataSpecifications = source.getEmbeddedDataSpecifications();
 		for (int i = 0; i < embeddedDataSpecifications.size(); i++) {

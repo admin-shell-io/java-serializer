@@ -38,11 +38,11 @@ public class AnnotatedRelationshipElementMapper extends SubmodelElementMapper<An
 		addTypeReference(I4AASIdentifier.AASAnnotatedRelationshipElementType);
 		return target;
 	}
-	
+
 	@Override
 	protected void mapAndAttachChildren() {
 		super.mapAndAttachChildren();
-		UAObject createFolder = createSubmodelElementList("Annotation");
+		UAObject createFolder = source.getAnnotations().isEmpty() ? null : createSubmodelElementList("Annotation");
 		List<DataElement> annotations = source.getAnnotations();
 		for (DataElement dataElement : annotations) {
 			UAObject uaDataElement = SubmodelElementMappers.getMapper(dataElement, ctx).map();

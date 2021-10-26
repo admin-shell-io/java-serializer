@@ -29,13 +29,16 @@ public interface QualifiableMapper {
 
 	public default void mapQualifiable(Qualifiable source, UAObject target, MappingContext ctx) {
 
-		UAObject folder = I4AASMapper.createFolder(target, I4AASConstants.QUALIFIABLE_BROWSENAME, ctx, I4AASIdentifier.AASQualifierList);
+		UAObject folder = source.getQualifiers().isEmpty() ? null
+				: I4AASMapper.createFolder(target, I4AASConstants.QUALIFIABLE_BROWSENAME, ctx,
+						I4AASIdentifier.AASQualifierList);
 
 		List<Constraint> qualifiers = source.getQualifiers();
 		for (int i = 0; i < qualifiers.size(); i++) {
 			Constraint constraint = qualifiers.get(i);
 			if (constraint instanceof Qualifier) {
-				UAObject uaQualifier = new QualifierMapper((Qualifier) constraint, ctx, "Qualifier_" + i, ctx.getModelNsIndex()).map();
+				UAObject uaQualifier = new QualifierMapper((Qualifier) constraint, ctx, "Qualifier_" + i,
+						ctx.getModelNsIndex()).map();
 				I4AASMapper.attachAsComponent(folder, uaQualifier);
 			}
 		}

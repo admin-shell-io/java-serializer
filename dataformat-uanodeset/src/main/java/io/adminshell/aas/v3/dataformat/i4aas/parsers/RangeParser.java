@@ -44,7 +44,7 @@ public class RangeParser extends ReferableParser<Range> {
 		});
 
 		source.getI4AASProperty("ValueType").ifPresent(p -> {
-			String parse = ParserUtils.extractValueAsString(p.getNodeVariable());
+			String parse = new ValueTypeParser(p, ctx).parse();
 			target.setValueType(parse);
 		});
 	}

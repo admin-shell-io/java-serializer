@@ -15,6 +15,7 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas.parsers;
 
+import io.adminshell.aas.v3.model.AssetKind;
 import io.adminshell.aas.v3.model.Property;
 import io.adminshell.aas.v3.model.Reference;
 import io.adminshell.aas.v3.model.impl.DefaultProperty;
@@ -45,8 +46,9 @@ public class PropertyParser extends ReferableParser<Property> {
 			});
 		});
 
-		source.getI4AASComponent("ValueType").ifPresent(p -> {
-			target.setValueType(ParserUtils.extractValueAsString(p.getNodeVariable()));
+		source.getI4AASProperty("ValueType").ifPresent(p -> {
+			String parse = new ValueTypeParser(p, ctx).parse();
+			target.setValueType(parse);
 		});
 
 	}

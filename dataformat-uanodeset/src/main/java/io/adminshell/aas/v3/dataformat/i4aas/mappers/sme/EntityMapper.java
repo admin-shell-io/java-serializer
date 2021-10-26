@@ -52,20 +52,20 @@ public class EntityMapper extends SubmodelElementMapper<Entity> {
 			UAVariable map = new I4AASEnumMapper(entityType, ctx).map();
 			attachAsProperty(target, map);
 		}
-		
+
 		Reference globalAssetId = source.getGlobalAssetId();
 		if (globalAssetId != null) {
 			UAObject uaIdentification = new ReferenceMapper(globalAssetId, ctx, "GlobalAssetId").map();
 			attachAsComponent(target, uaIdentification);
 		}
-		
+
 		IdentifierKeyValuePair specificAssetId = source.getSpecificAssetId();
 		if (specificAssetId != null) {
 			UAObject map = new IdentifierKeyValuePairMapper(specificAssetId, ctx).map();
 			attachAsComponent(target, map);
 		}
-		
-		UAObject createFolder = createSubmodelElementList("Statement");
+
+		UAObject createFolder = source.getStatements().isEmpty() ? null : createSubmodelElementList("Statement");
 		List<SubmodelElement> statements = source.getStatements();
 		for (SubmodelElement submodelElement : statements) {
 			UAObject map = SubmodelElementMappers.getMapper(submodelElement, ctx).map();

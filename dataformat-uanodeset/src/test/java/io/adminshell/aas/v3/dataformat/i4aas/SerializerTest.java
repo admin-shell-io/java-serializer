@@ -29,6 +29,7 @@ import org.junit.Test;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.core.AASFull;
 import io.adminshell.aas.v3.dataformat.core.AASSimple;
+import io.adminshell.aas.v3.dataformat.i4aas.mappers.I4AASMapper;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
 import io.adminshell.aas.v3.model.impl.DefaultAssetAdministrationShellEnvironment;
 
@@ -37,6 +38,7 @@ public class SerializerTest {
 	@BeforeClass
 	public static void before() {
 		MappingContext.setModelNamespaceNamingStrategy(nodeset -> "http://example.org/SerializerTest");
+		I4AASMapper.CHECK_NS_INTERN_REFERENCES_ATTACHED = true;
 	}
 
 	@Test

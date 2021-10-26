@@ -15,6 +15,8 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas.mappers;
 
+import java.util.List;
+
 import org.opcfoundation.ua._2011._03.uanodeset.ListOfReferences;
 import org.opcfoundation.ua._2011._03.uanodeset.LocalizedText;
 import org.opcfoundation.ua._2011._03.uanodeset.Reference;
@@ -23,19 +25,24 @@ import org.opcfoundation.ua._2011._03.uanodeset.UANode;
 import org.opcfoundation.ua._2011._03.uanodeset.UAObject;
 import org.opcfoundation.ua._2011._03.uanodeset.UAVariable;
 
+import com.google.common.base.Strings;
+
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.BasicIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASConstants;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.I4AASIdentifier;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.utils.UaIdentifier;
 import io.adminshell.aas.v3.model.LangString;
+import io.adminshell.aas.v3.model.Referable;
 
 /**
- * Generic base class used for all mapper implementation. 
+ * Generic base class used for all mapper implementation.
  *
  * @param <SOURCE> mapping source
  * @param <TARGET> mapping target
  */
-public abstract class I4AASMapper<SOURCE, TARGET extends UANode> implements I4AASConstants{
+public abstract class I4AASMapper<SOURCE, TARGET extends UANode> implements I4AASConstants {
+
+	public static boolean CHECK_NS_INTERN_REFERENCES_ATTACHED = false;
 
 	protected MappingContext ctx;
 	protected SOURCE source;
@@ -57,16 +64,37 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> implements I4AA
 		target = createTargetObject();
 		addToNodeset();
 		mapAndAttachChildren();
+		if (CHECK_NS_INTERN_REFERENCES_ATTACHED) {
+			checkChildrenAttached();
+		}
 		return target;
 	}
 
+	private void checkChildrenAttached() {
+		target.getReferences().getReference().forEach(ref -> {
+			if (ref.getValue().startsWith("ns=" + ctx.getModelNsIndex())) {
+				List<UANode> uaObjectOrUAVariableOrUAMethod = ctx.getNodeSet().getUAObjectOrUAVariableOrUAMethod();
+				boolean found = false;
+				for (UANode uaNode : uaObjectOrUAVariableOrUAMethod) {
+					found = found || uaNode.getNodeId().equals(ref.getValue());
+				}
+				if (!found) {
+					throw new IllegalStateException(
+							String.format("parent %s misses child %s", target.getNodeId(), ref.getValue()));
+				}
+			}
+		});
+	}
+
 	/**
-	 * @return return the object filled with attributes directly bound to the target.
+	 * @return return the object filled with attributes directly bound to the
+	 *         target.
 	 */
 	protected abstract TARGET createTargetObject();
 
 	/**
-	 *  action to be called when the children objects must be mapped and attached to the target.
+	 * action to be called when the children objects must be mapped and attached to
+	 * the target.
 	 */
 	protected abstract void mapAndAttachChildren();
 
@@ -92,12 +120,14 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> implements I4AA
 		}
 		ListOfReferences references = anyNode.getReferences();
 		if (idForType instanceof I4AASIdentifier) {
-			references.getReference().add(Reference.builder().withReferenceType(UaIdentifier.HasTypeDefinition.getName())
-					.withValue(ctx.getI4aasNodeIdAsString((I4AASIdentifier) idForType)).build());
+			references.getReference()
+					.add(Reference.builder().withReferenceType(UaIdentifier.HasTypeDefinition.getName())
+							.withValue(ctx.getI4aasNodeIdAsString((I4AASIdentifier) idForType)).build());
 		}
 		if (idForType instanceof UaIdentifier) {
-			references.getReference().add(Reference.builder().withReferenceType(UaIdentifier.HasTypeDefinition.getName())
-					.withValue(ctx.getUaBaseNodeIdAsString((UaIdentifier) idForType)).build());
+			references.getReference()
+					.add(Reference.builder().withReferenceType(UaIdentifier.HasTypeDefinition.getName())
+							.withValue(ctx.getUaBaseNodeIdAsString((UaIdentifier) idForType)).build());
 		}
 	}
 
@@ -108,11 +138,18 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> implements I4AA
 	protected final String createBrowseName(String name, int namespaceIndx) {
 		return namespaceIndx + ":" + name;
 	}
-	
+
 	protected final String createModelBrowseName(String name) {
 		return ctx.getModelNsIndex() + ":" + name;
 	}
-	
+
+	protected final String createModelBrowseName(Referable ref) {
+		if (ref != null && !Strings.isNullOrEmpty(ref.getIdShort())) {
+			return ctx.getModelNsIndex() + ":" + ref.getIdShort();
+		}
+		throw new IllegalArgumentException("Referable is null or does not contain a valid IdShort.");
+	}
+
 	protected final String createI4AASBrowseName(String name) {
 		return ctx.getI4aasNsIndex() + ":" + name;
 	}
@@ -125,7 +162,8 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> implements I4AA
 		return ctx.getI4aasNsIndex() + ":" + name;
 	}
 
-	public static final UAObject createFolder(UAObject target, String folderName, MappingContext ctx, BasicIdentifier folderSubtype) {
+	public static final UAObject createFolder(UAObject target, String folderName, MappingContext ctx,
+			BasicIdentifier folderSubtype) {
 		UAObject folder = UAObject.builder().withNodeId(ctx.newModelNodeIdAsString())
 				.withBrowseName(createI4AASBrowseName(folderName, ctx)).withDisplayName(createLocalizedText(folderName))
 				.build();
@@ -134,18 +172,17 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> implements I4AA
 		attachAsComponent((UAObject) target, folder);
 		return folder;
 	}
-	
 
 	public final UAObject createReferenceList(String folderName) {
 		return createFolder((UAObject) target, folderName, ctx, I4AASIdentifier.AASReferenceList);
 	}
 
-	public final UAObject createSubmodelElementList(String folderName){
-		return createFolder((UAObject)target, folderName, ctx, I4AASIdentifier.AASSubmodelElementList);
+	public final UAObject createSubmodelElementList(String folderName) {
+		return createFolder((UAObject) target, folderName, ctx, I4AASIdentifier.AASSubmodelElementList);
 	}
 
 	public final UAObject createIdentifierKeyValuePairList(String folderName) {
-		return createFolder((UAObject)target, folderName, ctx, I4AASIdentifier.AASIdentifierKeyValuePairList);
+		return createFolder((UAObject) target, folderName, ctx, I4AASIdentifier.AASIdentifierKeyValuePairList);
 	}
 
 	protected static void attachAsType(UAInstance parent, UAInstance child, BasicIdentifier typeId) {
@@ -167,8 +204,8 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> implements I4AA
 		child.setParentNodeId(parent.getNodeId());
 		attachAsType(parent, child, UaIdentifier.HasProperty);
 	}
-	
-	protected static final void attachAsComponent(UAObject parent, UAObject child) {
+
+	protected static final void attachAsComponent(UAObject parent, UAInstance child) {
 		child.setParentNodeId(parent.getNodeId());
 		attachAsType(parent, child, UaIdentifier.HasComponent);
 	}
@@ -177,11 +214,11 @@ public abstract class I4AASMapper<SOURCE, TARGET extends UANode> implements I4AA
 		child.setParentNodeId(parent.getNodeId());
 		attachAsType(parent, child, UaIdentifier.HasOrderedComponent);
 	}
-	
+
 	protected static final void attachAsDictionaryEntry(UAObject parent, UAObject child) {
 		attachAsType(parent, child, UaIdentifier.HasDictionaryEntry);
 	}
-	
+
 	protected static final void attachAsAddIn(UAObject parent, UAObject child) {
 		attachAsType(parent, child, UaIdentifier.HasAddIn);
 	}

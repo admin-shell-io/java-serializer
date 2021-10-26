@@ -66,7 +66,7 @@ public class AASExamples {
 											.build())
 									.dataSpecificationContent(new DefaultDataSpecificationIEC61360.Builder()
 											.dataType(DataTypeIEC61360.BOOLEAN)
-											.definition(new LangString("en", "mydefinition")).symbol("iec61360_symbol")
+											.definition(new LangString("mydefinition", "en")).symbol("iec61360_symbol")
 											.build())
 									.build())
 							.build())

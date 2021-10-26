@@ -15,17 +15,30 @@
  */
 package io.adminshell.aas.v3.dataformat.i4aas;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.jena.graph.Graph;
+import org.apache.jena.shacl.ValidationReport;
+import org.apache.jena.shacl.validation.ReportEntry;
+import org.json.JSONException;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
+import org.skyscreamer.jsonassert.JSONAssert;
+import org.skyscreamer.jsonassert.JSONCompareMode;
 
 import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.core.AASFull;
+import io.adminshell.aas.v3.dataformat.core.AASSimple;
 import io.adminshell.aas.v3.dataformat.i4aas.mappers.MappingContext;
+import io.adminshell.aas.v3.dataformat.json.JsonSerializer;
 import io.adminshell.aas.v3.model.Asset;
 import io.adminshell.aas.v3.model.AssetAdministrationShell;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
@@ -35,6 +48,7 @@ import io.adminshell.aas.v3.model.Blob;
 import io.adminshell.aas.v3.model.ConceptDescription;
 import io.adminshell.aas.v3.model.IdentifierKeyValuePair;
 import io.adminshell.aas.v3.model.IdentifierType;
+import io.adminshell.aas.v3.model.KeyElements;
 import io.adminshell.aas.v3.model.KeyType;
 import io.adminshell.aas.v3.model.LangString;
 import io.adminshell.aas.v3.model.MultiLanguageProperty;
@@ -54,6 +68,8 @@ import io.adminshell.aas.v3.model.impl.DefaultMultiLanguageProperty;
 import io.adminshell.aas.v3.model.impl.DefaultReference;
 import io.adminshell.aas.v3.model.impl.DefaultSubmodel;
 import io.adminshell.aas.v3.model.impl.DefaultSubmodelElementCollection;
+import io.adminshell.aas.v3.model.validator.ShaclValidator;
+import io.adminshell.aas.v3.model.validator.ValidationException;
 
 public class IntegrationTests {
 
@@ -75,9 +91,14 @@ public class IntegrationTests {
 		// test frame model
 		env = new DefaultAssetAdministrationShellEnvironment();
 		aas = new DefaultAssetAdministrationShell();
+		aas.setIdShort("aas");
 		asset = new DefaultAsset();
+		asset.setIdShort("asset");
 		sm = new DefaultSubmodel();
+		sm.setIdShort("sm");
 		cd = new DefaultConceptDescription();
+		cd.setIdShort("cd");
+		cd.setIdentification(new DefaultIdentifier.Builder().identifier("mycd").idType(IdentifierType.CUSTOM).build());
 		env.getAssetAdministrationShells().add(aas);
 		env.getAssets().add(asset);
 		env.getSubmodels().add(sm);
@@ -92,8 +113,8 @@ public class IntegrationTests {
 		blob.setValue("testvalue".getBytes());
 		blob.setIdShort("testblob");
 
-		blob.setSemanticId(new DefaultReference.Builder()
-				.key(new DefaultKey.Builder().value("mySemanticId").idType(KeyType.CUSTOM).build()).build());
+		blob.setSemanticId(new DefaultReference.Builder().key(new DefaultKey.Builder().value("mySemanticId")
+				.type(KeyElements.CONCEPT_DESCRIPTION).idType(KeyType.CUSTOM).build()).build());
 
 		sm.getSubmodelElements().add(blob);
 
@@ -117,8 +138,8 @@ public class IntegrationTests {
 		defaultMultiLanguageProperty.setIdShort("mymultilang");
 
 		List<LangString> values = new ArrayList<>();
-		values.add(new LangString("de", "delang"));
-		values.add(new LangString("en", "enlang"));
+		values.add(new LangString("delang", "de"));
+		values.add(new LangString("enlang", "en"));
 		defaultMultiLanguageProperty.setValues(values);
 		sm.getSubmodelElements().add(defaultMultiLanguageProperty);
 
@@ -190,8 +211,8 @@ public class IntegrationTests {
 	public void testConceptDescription() throws SerializationException, DeserializationException {
 		// ARRANGE
 		cd.setIdentification(new DefaultIdentifier.Builder().identifier("myCD").idType(IdentifierType.CUSTOM).build());
-		cd.getIsCaseOfs().add(new DefaultReference.Builder()
-				.key(new DefaultKey.Builder().value("myCaseOfRef").idType(KeyType.CUSTOM).build()).build());
+		cd.getIsCaseOfs().add(new DefaultReference.Builder().key(new DefaultKey.Builder().value("myCaseOfRef")
+				.type(KeyElements.CONCEPT_DESCRIPTION).idType(KeyType.CUSTOM).build()).build());
 
 		// ACT
 		AssetAdministrationShellEnvironment result = inAndOut();
@@ -204,14 +225,17 @@ public class IntegrationTests {
 	}
 
 	@Test
-	public void testAASFull() throws SerializationException, DeserializationException {
+	public void testAASFull()
+			throws SerializationException, DeserializationException, ValidationException, IOException {
 		// ARRANGE
+		ShaclValidator.getInstance().validate(AASFull.ENVIRONMENT);
+
 		Assert.assertEquals(4, AASFull.ENVIRONMENT.getAssetAdministrationShells().size());
 		Assert.assertEquals(7, AASFull.ENVIRONMENT.getSubmodels().size());
 		Assert.assertEquals(4, AASFull.ENVIRONMENT.getConceptDescriptions().size());
 
 		// ACT
-		serializer = new I4AASSerializer(false); //false = do not add semanticIds automaitcally to concept description
+		serializer = new I4AASSerializer(false); // false = do not add semanticIds automaitcally to concept description
 		deserializer = new I4AASDeserializer();
 		AssetAdministrationShellEnvironment result = deserializer.read(serializer.write(AASFull.ENVIRONMENT));
 
@@ -219,6 +243,32 @@ public class IntegrationTests {
 		Assert.assertEquals(4, result.getAssetAdministrationShells().size());
 		Assert.assertEquals(7, result.getSubmodels().size());
 		Assert.assertEquals(4, result.getConceptDescriptions().size());
+		ValidationReport validateGetReport = ShaclValidator.getInstance().validateGetReport(result);
+		for (ReportEntry reportEntry : validateGetReport.getEntries()) {
+			if ("<https://admin-shell.io/aas/3/0/RC01/BasicEvent/observed>".equals(reportEntry.resultPath().toString())) {
+				//observed currently not supported
+				continue;
+			}
+			Assert.fail(reportEntry.toString());
+		}
+	}
+
+	@Test
+	@Ignore(value = "highly dependent on other json dependencies, just used for manual comparison if json serializer is seen as complete reference implementation")
+	public void testAASFullwithJsonCompare()
+			throws SerializationException, DeserializationException, JSONException, IOException {
+		// ARRANGE
+		String expected = new JsonSerializer().write(AASFull.ENVIRONMENT);
+		Files.writeString(Paths.get("./jsonExpected.json"), expected, StandardOpenOption.CREATE,
+				StandardOpenOption.TRUNCATE_EXISTING);
+
+		AssetAdministrationShellEnvironment result = deserializer.read(serializer.write(AASFull.ENVIRONMENT));
+
+		String actual = new JsonSerializer().write(result);
+		Files.writeString(Paths.get("./jsonActual.json"), actual, StandardOpenOption.CREATE,
+				StandardOpenOption.TRUNCATE_EXISTING);
+
+		JSONAssert.assertEquals(expected, actual, JSONCompareMode.LENIENT);
 	}
 
 	public AssetAdministrationShellEnvironment inAndOut() throws SerializationException, DeserializationException {

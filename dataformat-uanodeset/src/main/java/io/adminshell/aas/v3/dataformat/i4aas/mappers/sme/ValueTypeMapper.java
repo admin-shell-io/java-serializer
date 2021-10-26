@@ -41,6 +41,7 @@ public class ValueTypeMapper extends I4AASMapper<String, UAVariable> {
 		staticMap.put("float", AASValueTypeDataType.FLOAT_9);
 		staticMap.put("double", AASValueTypeDataType.DOUBLE_10);
 		staticMap.put("long", AASValueTypeDataType.INT_64_7);
+		staticMap.put("http://www.w3.org/2001/XMLSchema#int", AASValueTypeDataType.INT_32_5);
 		//to be extended
 	}
 

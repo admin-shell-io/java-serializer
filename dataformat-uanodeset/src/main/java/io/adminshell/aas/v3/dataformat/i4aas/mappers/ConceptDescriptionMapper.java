@@ -23,7 +23,8 @@ import io.adminshell.aas.v3.model.Identifier;
 import io.adminshell.aas.v3.model.IdentifierType;
 import io.adminshell.aas.v3.model.Reference;
 
-public class ConceptDescriptionMapper extends IdentifiableMapper<ConceptDescription> implements HasDataSpecificationMapper {
+public class ConceptDescriptionMapper extends IdentifiableMapper<ConceptDescription>
+		implements HasDataSpecificationMapper {
 
 	public ConceptDescriptionMapper(ConceptDescription src, MappingContext ctx) {
 		super(src, ctx);
@@ -43,12 +44,12 @@ public class ConceptDescriptionMapper extends IdentifiableMapper<ConceptDescript
 			} else if (IdentifierType.CUSTOM == idType) {
 				addTypeReference(I4AASIdentifier.AASCustomConceptDescriptionType);
 			}
-			if (identification.getIdentifier() != null) {
-				//conflict: I4AAS says idshort, OPC UA says value
-				target.setBrowseName(createModelBrowseName(identification.getIdentifier()));
-			}
+//			if (identification.getIdentifier() != null) {
+//				// TODO: I4AAS says idshort, OPC UA says value. Currently there is no mapping target for IdShort of ConceptDescription
+//				target.setBrowseName(createModelBrowseName(identification.getIdentifier()));
+//			}
 		}
-		
+
 		return target;
 	}
 
@@ -58,12 +59,11 @@ public class ConceptDescriptionMapper extends IdentifiableMapper<ConceptDescript
 
 		mapDataSpecification(source, target, ctx);
 
-		UAObject createFolder = createReferenceList("IsCaseOf");
+		UAObject createFolder = source.getIsCaseOfs().isEmpty() ? null : createReferenceList("IsCaseOf");
 		for (Reference reference : source.getIsCaseOfs()) {
 			UAObject uaRef = new ReferenceMapper(reference, ctx, reference.getKeys().get(0).getValue()).map();
 			attachAsComponent(createFolder, uaRef);
 		}
 	}
-
 
 }
