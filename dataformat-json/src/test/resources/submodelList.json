@@ -71,7 +71,7 @@
                                 },
                         "type": "http://acplt.org/Qualifier/ExampleQualifier2",
                         "value": "50",
-                        "valueType": "http://www.w3.org/2001/XMLSchema#int"
+                        "valueType": "int"
                     }
                 ],
                 "idShort": "ManufacturerName",

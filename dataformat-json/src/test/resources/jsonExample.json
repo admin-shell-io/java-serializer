@@ -196,7 +196,7 @@
                                 "definition": [
                                     {
                                         "language": "EN",
-                                        "text": "Eine Datei, die die Document Version repräsentiert. Neben der obligatorischen PDF Datei können weitere Dateien angegeben werden."
+                                        "text": "A file representing the document version. In addition to the mandatory PDF file, other files can be specified."
                                     }
                                 ],
                                 "preferredName": [
