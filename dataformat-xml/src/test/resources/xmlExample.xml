@@ -73,10 +73,6 @@
             <aas:embeddedDataSpecification>
                 <aas:dataSpecificationContent>
                     <aas:dataSpecificationIEC61360>
-                        <IEC61360:dataType>StringTranslatable</IEC61360:dataType>
-                        <IEC61360:definition>
-                            <IEC61360:langString lang="DE">SprachabhängigerTiteldesDokuments.</IEC61360:langString>
-                        </IEC61360:definition>
                         <IEC61360:preferredName>
                             <IEC61360:langString lang="EN">Title</IEC61360:langString>
                             <IEC61360:langString lang="DE">Titel</IEC61360:langString>
@@ -85,8 +81,12 @@
                             <IEC61360:langString lang="EN">Title</IEC61360:langString>
                             <IEC61360:langString lang="DE">Titel</IEC61360:langString>
                         </IEC61360:shortName>
-                        <IEC61360:unit/>
-                        <IEC61360:sourceOfDefinition/>
+                        <IEC61360:unit>ExampleString</IEC61360:unit>
+                        <IEC61360:sourceOfDefinition>ExampleString</IEC61360:sourceOfDefinition>
+                        <IEC61360:dataType>StringTranslatable</IEC61360:dataType>
+                        <IEC61360:definition>
+                            <IEC61360:langString lang="EN">SprachabhängigerTiteldesDokuments.</IEC61360:langString>
+                        </IEC61360:definition>
                     </aas:dataSpecificationIEC61360>
                 </aas:dataSpecificationContent>
                 <aas:dataSpecification>
@@ -102,20 +102,20 @@
             <aas:embeddedDataSpecification>
                 <aas:dataSpecificationContent>
                     <aas:dataSpecificationIEC61360>
-                        <IEC61360:dataType>String</IEC61360:dataType>
-                        <IEC61360:definition>
-                            <IEC61360:langString lang="DE">Eine Datei, die die Document Version repräsentiert. Neben der obligatorischen PDF Datei können weitere Dateien angegeben werden.</IEC61360:langString>
-                        </IEC61360:definition>
                         <IEC61360:preferredName>
                             <IEC61360:langString lang="EN">DigitalFile</IEC61360:langString>
-                            <IEC61360:langString lang="DE">DigitaleDatei</IEC61360:langString>
+                            <IEC61360:langString lang="EN">DigitalFile</IEC61360:langString>
                         </IEC61360:preferredName>
                         <IEC61360:shortName>
                             <IEC61360:langString lang="EN">DigitalFile</IEC61360:langString>
                             <IEC61360:langString lang="DE">DigitaleDatei</IEC61360:langString>
                         </IEC61360:shortName>
-                        <IEC61360:unit/>
-                        <IEC61360:sourceOfDefinition/>
+                        <IEC61360:unit>ExampleString</IEC61360:unit>
+                        <IEC61360:sourceOfDefinition>ExampleString</IEC61360:sourceOfDefinition>
+                        <IEC61360:dataType>String</IEC61360:dataType>
+                        <IEC61360:definition>
+                            <IEC61360:langString lang="EN">A file representing the document version. In addition to the mandatory PDF file, other files can be specified.</IEC61360:langString>
+                        </IEC61360:definition>
                     </aas:dataSpecificationIEC61360>
                 </aas:dataSpecificationContent>
                 <aas:dataSpecification>
@@ -129,8 +129,8 @@
             <aas:idShort>MaxRotationSpeed</aas:idShort>
             <aas:category>PROPERTY</aas:category>
             <aas:administration>
-            	<aas:version></aas:version>
-                <aas:revision>2</aas:revision>
+            	<aas:version>2</aas:version>
+                <aas:revision>2.1</aas:revision>
             </aas:administration>
             <aas:identification idType="Irdi">0173-1#02-BAA120#008</aas:identification>
             <aas:embeddedDataSpecification>
@@ -142,11 +142,11 @@
                                 <IEC61360:key idType="Irdi" type="GlobalReference">0173-1#05-AAA650#002</IEC61360:key>
                             </IEC61360:keys>
                         </IEC61360:unitId>
-                        <IEC61360:sourceOfDefinition/>
+                        <IEC61360:sourceOfDefinition>ExampleString</IEC61360:sourceOfDefinition>
                         <IEC61360:dataType>RealMeasure</IEC61360:dataType>
                         <IEC61360:definition>
                             <IEC61360:langString lang="de">HöchstezulässigeDrehzahl,mitwelcherderMotoroderdieSpeiseinheitbetriebenwerdendarf</IEC61360:langString>
-                            <IEC61360:langString lang="en">Greatestpermissiblerotationspeedwithwhichthemotororfeedingunitmaybeoperated</IEC61360:langString>
+                            <IEC61360:langString lang="EN">Greatestpermissiblerotationspeedwithwhichthemotororfeedingunitmaybeoperated</IEC61360:langString>
                         </IEC61360:definition>
                         <IEC61360:preferredName>
                             <IEC61360:langString lang="de">max.Drehzahl</IEC61360:langString>
@@ -174,7 +174,7 @@
                                 <IEC61360:key idType="Irdi" type="GlobalReference">0173-1#05-AAA650#002</IEC61360:key>
                             </IEC61360:keys>
                         </IEC61360:unitId>
-                        <IEC61360:sourceOfDefinition/>
+                        <IEC61360:sourceOfDefinition>ExampleString</IEC61360:sourceOfDefinition>
                         <IEC61360:dataType>RealMeasure</IEC61360:dataType>
                         <IEC61360:definition>
                             <IEC61360:langString lang="DE">Aktuelle Drehzahl, mitwelcher der Motor oder die Speiseinheit betrieben wird</IEC61360:langString>
@@ -203,11 +203,14 @@
             <aas:embeddedDataSpecification>
                 <aas:dataSpecificationContent>
                     <aas:dataSpecificationIEC61360>
-                    	<IEC61360:unit></IEC61360:unit>
+                        <IEC61360:preferredName>
+                            <IEC61360:langString lang="EN">Document</IEC61360:langString>
+                        </IEC61360:preferredName>
+                    	<IEC61360:unit>ExampleString</IEC61360:unit>
                         <IEC61360:sourceOfDefinition>[ISO15519-1:2010]</IEC61360:sourceOfDefinition>
                         <IEC61360:dataType>String</IEC61360:dataType>
                         <IEC61360:definition>
-                            <IEC61360:langString lang="DE">Feste und geordnete Menge von für die Verwendung durch Personen bestimmte Informationen, die verwaltet und als Einheit zwischen Benutzern und System ausgetauscht werden kann.</IEC61360:langString>
+                            <IEC61360:langString lang="EN">Feste und geordnete Menge von für die Verwendung durch Personen bestimmte Informationen, die verwaltet und als Einheit zwischen Benutzern und System ausgetauscht werden kann.</IEC61360:langString>
                         </IEC61360:definition>
                         <IEC61360:shortName>
                             <IEC61360:langString lang="EN">Document</IEC61360:langString>
@@ -306,7 +309,7 @@
                 <aas:submodelElement>
                     <aas:property>
                         <aas:idShort>RotationSpeed</aas:idShort>
-                        <aas:category>VARIABLE</aas:category>
+                        <aas:category>Variable</aas:category>
                         <aas:kind>Instance</aas:kind>
                         <aas:semanticId>
                             <aas:keys>

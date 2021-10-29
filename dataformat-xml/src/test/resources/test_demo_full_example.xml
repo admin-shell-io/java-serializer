@@ -54,7 +54,7 @@
          </aas:assetInformation>
       </aas:assetAdministrationShell>
       <aas:assetAdministrationShell>
-         <aas:idShort></aas:idShort>
+         <aas:idShort>Test_AssetAdministrationShell_Mandatory</aas:idShort>
          <aas:identification idType="Iri">https://acplt.org/Test_AssetAdministrationShell_Mandatory</aas:identification>
          <aas:submodelRefs>
             <aas:submodelRef>
@@ -78,7 +78,7 @@
          </aas:assetInformation>
       </aas:assetAdministrationShell>
       <aas:assetAdministrationShell>
-         <aas:idShort></aas:idShort>
+         <aas:idShort>Test_AssetAdministrationShell2_Mandatory</aas:idShort>
          <aas:identification idType="Iri">https://acplt.org/Test_AssetAdministrationShell2_Mandatory</aas:identification>
          <aas:assetInformation>
             <aas:globalAssetId>
@@ -152,7 +152,7 @@
          </aas:isCaseOf>
       </aas:conceptDescription>
       <aas:conceptDescription>
-         <aas:idShort></aas:idShort>
+         <aas:idShort>Test_ConceptDescription_Mandatory</aas:idShort>
          <aas:identification idType="Iri">https://acplt.org/Test_ConceptDescription_Mandatory</aas:identification>
       </aas:conceptDescription>
       <aas:conceptDescription>
@@ -206,7 +206,7 @@
                               <IEC61360:key idType="Iri" type="GlobalReference">http://acplt.org/ValueId/ExampleValueId</IEC61360:key>
                            </IEC61360:keys>
                         </IEC61360:valueId>
-                        <IEC61360:value>exampleValue</IEC61360:value>
+                        <IEC61360:value>http://acplt.org/ValueId/ExampleValueId</IEC61360:value>
                      </IEC61360:valueReferencePair>
                      <IEC61360:valueReferencePair>
                         <IEC61360:valueId>
@@ -214,7 +214,7 @@
                               <IEC61360:key idType="Iri" type="GlobalReference">http://acplt.org/ValueId/ExampleValueId2</IEC61360:key>
                            </IEC61360:keys>
                         </IEC61360:valueId>
-                        <IEC61360:value>exampleValue2</IEC61360:value>
+                        <IEC61360:value>http://acplt.org/ValueId/ExampleValueId2</IEC61360:value>
                      </IEC61360:valueReferencePair>
                   </IEC61360:valueList>
                   <IEC61360:value>TEST</IEC61360:value>
@@ -268,21 +268,11 @@
                   </aas:semanticId>
                   <aas:qualifiers>
                      <aas:qualifier>
-                        <aas:valueId>
-                           <aas:keys>
-                              <aas:key idType="Iri" type="GlobalReference">http://acplt.org/ValueId/ExampleValueId</aas:key>
-                           </aas:keys>
-                        </aas:valueId>
                         <aas:value>100</aas:value>
                         <aas:type>http://acplt.org/Qualifier/ExampleQualifier</aas:type>
                         <aas:valueType>int</aas:valueType>
                      </aas:qualifier>
                      <aas:qualifier>
-                        <aas:valueId>
-                           <aas:keys>
-                              <aas:key idType="Iri" type="GlobalReference">http://acplt.org/ValueId/ExampleValueId</aas:key>
-                           </aas:keys>
-                        </aas:valueId>
                         <aas:value>50</aas:value>
                         <aas:type>http://acplt.org/Qualifier/ExampleQualifier2</aas:type>
                         <aas:valueType>int</aas:valueType>
@@ -290,10 +280,10 @@
                   </aas:qualifiers>
                   <aas:valueId>
                      <aas:keys>
-                        <aas:key idType="Iri" type="GlobalReference">http://acplt.org/ValueId/ExampleValueId</aas:key>
+                        <aas:key idType="Iri" type="GlobalReference">http://acplt.org/ValueId/ACPLT</aas:key>
                      </aas:keys>
                   </aas:valueId>
-                  <aas:value>ACPLT</aas:value>
+                  <aas:value>http://acplt.org/ValueId/ACPLT</aas:value>
                   <aas:valueType>string</aas:valueType>
                </aas:property>
             </aas:submodelElement>
@@ -311,7 +301,7 @@
                   </aas:semanticId>
                   <aas:valueId>
                      <aas:keys>
-                        <aas:key idType="Iri" type="GlobalReference">http://acplt.org/ValueId/ExampleValueId</aas:key>
+                        <aas:key idType="Iri" type="GlobalReference">978-8234-234-342</aas:key>
                      </aas:keys>
                   </aas:valueId>
                   <aas:value>978-8234-234-342</aas:value>
@@ -366,10 +356,10 @@
                            </aas:semanticId>
                            <aas:valueId>
                               <aas:keys>
-                                 <aas:key idType="Iri" type="GlobalReference">http://acplt.org/ValueId/ExampleValueId</aas:key>
+                                 <aas:key idType="Iri" type="GlobalReference">http://acplt.org/ValueId/ExampleValue2</aas:key>
                               </aas:keys>
                            </aas:valueId>
-                           <aas:value>exampleValue2</aas:value>
+                           <aas:value>http://acplt.org/ValueId/ExampleValue2</aas:value>
                            <aas:valueType>string</aas:valueType>
                         </aas:property>
                      </aas:submodelElement>
@@ -391,7 +381,7 @@
                                  <aas:key idType="Iri" type="GlobalReference">http://acplt.org/ValueId/ExampleValueId</aas:key>
                               </aas:keys>
                            </aas:valueId>
-                           <aas:value>exampleValue</aas:value>
+                           <aas:value>http://acplt.org/ValueId/ExampleValueId</aas:value>
                            <aas:valueType>string</aas:valueType>
                         </aas:property>
                      </aas:submodelElement>
@@ -516,6 +506,7 @@
                      <aas:langString lang="en-us">Example Operation object</aas:langString>
                      <aas:langString lang="de">Beispiel Operation Element</aas:langString>
                   </aas:description>
+                  <aas:kind>Template</aas:kind>
                   <aas:semanticId>
                      <aas:keys>
                         <aas:key idType="Iri" type="GlobalReference">http://acplt.org/Operations/ExampleOperation</aas:key>
@@ -540,7 +531,7 @@
                                  <aas:key idType="Iri" type="GlobalReference">http://acplt.org/ValueId/ExampleValueId</aas:key>
                               </aas:keys>
                            </aas:valueId>
-                           <aas:value>exampleValue</aas:value>
+                           <aas:value>http://acplt.org/ValueId/ExampleValueId</aas:value>
                            <aas:valueType>string</aas:valueType>
                         </aas:property>
                      </aas:value>
@@ -564,7 +555,7 @@
                                  <aas:key idType="Iri" type="GlobalReference">http://acplt.org/ValueId/ExampleValueId</aas:key>
                               </aas:keys>
                            </aas:valueId>
-                           <aas:value>exampleValue</aas:value>
+                           <aas:value>http://acplt.org/ValueId/ExampleValueId</aas:value>
                            <aas:valueType>string</aas:valueType>
                         </aas:property>
                      </aas:value>
@@ -588,7 +579,7 @@
                                  <aas:key idType="Iri" type="GlobalReference">http://acplt.org/ValueId/ExampleValueId</aas:key>
                               </aas:keys>
                            </aas:valueId>
-                           <aas:value>exampleValue</aas:value>
+                           <aas:value>http://acplt.org/ValueId/ExampleValueId</aas:value>
                            <aas:valueType>string</aas:valueType>
                         </aas:property>
                      </aas:value>
@@ -666,7 +657,7 @@
                                  <aas:key idType="Iri" type="GlobalReference">http://acplt.org/ValueId/ExampleValueId</aas:key>
                               </aas:keys>
                            </aas:valueId>
-                           <aas:value>exampleValue</aas:value>
+                           <aas:value>http://acplt.org/ValueId/ExampleValueId</aas:value>
                            <aas:valueType>string</aas:valueType>
                         </aas:property>
                      </aas:submodelElement>
@@ -793,7 +784,7 @@
          </aas:submodelElements>
       </aas:submodel>
       <aas:submodel>
-         <aas:idShort></aas:idShort>
+         <aas:idShort>Test_Submodel_Mandatory</aas:idShort>
          <aas:identification idType="Iri">https://acplt.org/Test_Submodel_Mandatory</aas:identification>
          <aas:kind>Template</aas:kind>
          <aas:submodelElements>
@@ -839,6 +830,7 @@
             <aas:submodelElement>
                <aas:operation>
                   <aas:idShort>ExampleOperation</aas:idShort>
+                  <aas:kind>Template</aas:kind>
                </aas:operation>
             </aas:submodelElement>
             <aas:submodelElement>
@@ -921,7 +913,7 @@
          </aas:submodelElements>
       </aas:submodel>
       <aas:submodel>
-         <aas:idShort></aas:idShort>
+         <aas:idShort>Test_Submodel2_Mandatory</aas:idShort>
          <aas:identification idType="Iri">https://acplt.org/Test_Submodel2_Mandatory</aas:identification>
          <aas:kind>Instance</aas:kind>
          <aas:submodelElements />
@@ -1021,6 +1013,7 @@
                      <aas:langString lang="en-us">Example Operation object</aas:langString>
                      <aas:langString lang="de">Beispiel Operation Element</aas:langString>
                   </aas:description>
+                  <aas:kind>Template</aas:kind>
                   <aas:semanticId>
                      <aas:keys>
                         <aas:key idType="Iri" type="GlobalReference">http://acplt.org/Operations/ExampleOperation</aas:key>
