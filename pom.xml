@@ -251,7 +251,7 @@
       <repository>
         <id>github</id>
         <name>GitHub Apache Maven Packages</name>
-        <url>https://maven.pkg.github.com/frankschnicke/java-serializer</url>
+        <url>https://maven.pkg.github.com/admin-shell-io/java-serializer</url>
       </repository>
     </distributionManagement>
 
