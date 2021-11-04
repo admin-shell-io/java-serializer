@@ -180,20 +180,7 @@
     <!-- This profile is for the continuous integration pipeline for deploying to the central repository, which requires artifacts to be signed -->
     <profiles>
         <profile>
-            <id>deploy_maven_central</id>
-			
-			<!-- Central Repository deployment configuration -->
-			<distributionManagement>
-				<snapshotRepository>
-					<id>ossrh</id>
-					<url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-				</snapshotRepository>
-				<repository>
-					<id>ossrh</id>
-					<url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-				</repository>
-			</distributionManagement>
-			
+            <id>MavenCentral</id>
             <build>
                 <plugins>
                     <plugin>
@@ -216,6 +203,18 @@
                     </plugin>
                 </plugins>
             </build>
+            
+            <!-- Central Repository deployment configuration -->
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
         </profile>
     </profiles>
 
@@ -248,14 +247,14 @@
         </dependencies>
     </dependencyManagement>
 
-	<distributionManagement>
-		<repository>
-			<id>github</id>
-			<name>GitHub Apache Maven Packages</name>
-			<url>https://maven.pkg.github.com/frankschnicke/java-serializer</url>
-		</repository>
-	</distributionManagement>
-			
+    <distributionManagement>
+      <repository>
+        <id>github</id>
+        <name>GitHub Apache Maven Packages</name>
+        <url>https://maven.pkg.github.com/frankschnicke/java-serializer</url>
+      </repository>
+    </distributionManagement>
+
     <licenses>
         <license>
             <name>Apache License, Version 2.0</name>
