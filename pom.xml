@@ -180,7 +180,7 @@
     <!-- This profile is for the continuous integration pipeline for deploying to the central repository, which requires artifacts to be signed -->
     <profiles>
         <profile>
-            <id>CI</id>
+            <id>MavenCentral</id>
             <build>
                 <plugins>
                     <plugin>
@@ -203,6 +203,18 @@
                     </plugin>
                 </plugins>
             </build>
+            
+            <!-- Central Repository deployment configuration -->
+            <distributionManagement>
+                <snapshotRepository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
+                </snapshotRepository>
+                <repository>
+                    <id>ossrh</id>
+                    <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
+                </repository>
+            </distributionManagement>
         </profile>
     </profiles>
 
@@ -234,18 +246,6 @@
             </dependency>
         </dependencies>
     </dependencyManagement>
-
-    <!-- Central Repository deployment configuration -->
-    <distributionManagement>
-        <snapshotRepository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/content/repositories/snapshots</url>
-        </snapshotRepository>
-        <repository>
-            <id>ossrh</id>
-            <url>https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/</url>
-        </repository>
-    </distributionManagement>
 
     <licenses>
         <license>

@@ -36,13 +36,13 @@ public class AmlDeserializerTest {
 
     private final AmlDeserializer deserializer = new AmlDeserializer();
 
-    AssetAdministrationShellEnvironment actual;
-    AssetAdministrationShellEnvironment expected;
+    private AssetAdministrationShellEnvironment actual;
+    private AssetAdministrationShellEnvironment expected;
 
     @Before
     public void init() throws FileNotFoundException, DeserializationException {
         actual = deserializer.read(FullExample.FILE);
-        expected = AASFull.ENVIRONMENT;
+        expected = AASFull.createEnvironment();
     }
 
     @Test
