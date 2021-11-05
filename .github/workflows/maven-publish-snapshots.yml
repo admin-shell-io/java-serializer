@@ -61,6 +61,7 @@ jobs:
         
     - name: Delete old dataformat-rdf package
       uses: actions/delete-package-versions@v1
+      continue-on-error: true
       with:
         package-name: 'io.admin-shell.aas.dataformat-rdf'
 
