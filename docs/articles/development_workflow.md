@@ -2,9 +2,9 @@
 
 We develop with Github using pull requests (see this [Github guide](https://guides.github.com/introduction/flow/) for a short introduction).
 
-**Development branch.** The development branch is always `master`. Expect changes on this branch from time to time.
+**Development branch.** The development branch is always `development`. Expect changes on this branch from time to time.
 
-**Releases.** The releases mark the development milestones on the `master` branch with a certain feature completeness.
+**Releases.** The releases mark the development milestones on the `main` branch with a certain feature completeness.
 
 ## Pull Requests
 
@@ -17,6 +17,12 @@ Otherwise, if you are a non-member contributor, fork the repository and create t
 **Branch Prefix.** Each PullRequest must contained a list of the changed topics, for instance as a list of bulletpoints. Simply refering to the commit messages is not sufficient.
 
 **Reviews.** Each PullRequest is reviewed by the Maintainers of the project. In order to simplify the workflow, please assign the PullRequest directly to the Maintainer you think is most knowledgable about your changes.
+
+## CI Workflows
+There are three workflows that will automatically handle specific events for the repository: 
+- Pull requests on one of the branches mentioned above will trigger CI actions that will automatically check, if all tests pass successfully
+- Additionally, new commits on `main` will build the release artifacts and publish them on [Maven Central](https://mvnrepository.com/artifact/io.admin-shell.aas)
+- The documentation found in /docs is automatically build with docFX and published to gh-pages, when a new release is pushed to the `main` branch
 
 ## Commit Messages
 
