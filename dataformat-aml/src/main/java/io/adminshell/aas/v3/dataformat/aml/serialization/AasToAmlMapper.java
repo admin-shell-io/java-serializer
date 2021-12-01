@@ -38,6 +38,7 @@ import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.SubmodelMapper;
 import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.ViewMapper;
 import io.adminshell.aas.v3.dataformat.aml.model.caex.CAEXFile;
 import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.ConceptDescriptionMapper;
+import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.IdentifierKeyValuePairCollectionMapper;
 import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.PropertyMapper;
 import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.RangeMapper;
 import io.adminshell.aas.v3.dataformat.aml.serialization.mappers.ReferenceMapper;
@@ -99,6 +100,7 @@ public class AasToAmlMapper {
         mappingProvider.register(new PropertyMapper());
         mappingProvider.register(new RangeMapper());
         mappingProvider.register(new ConceptDescriptionMapper());
+        mappingProvider.register(new IdentifierKeyValuePairCollectionMapper());
         MappingContext context = new MappingContext(
                 mappingProvider,
                 classNamingStrategy,
