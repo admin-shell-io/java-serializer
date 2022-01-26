@@ -21,16 +21,16 @@
 					<RefSemantic CorrespondingAttributePath="AAS:AssetInformation/assetKind"/>
 				</Attribute>
 				<Attribute Name="billOfMaterials">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[IRI]http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial</Value>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[Iri]http://acplt.org/Submodels/Assets/TestAsset/BillOfMaterial</Value>
 					<RefSemantic CorrespondingAttributePath="AAS:AssetInformation/billOfMaterials"/>
 				</Attribute>
 				<Attribute Name="globalAssetId">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Asset)[IRI]https://acplt.org/Test_Asset</Value>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Asset)[Iri]https://acplt.org/Test_Asset</Value>
 					<RefSemantic CorrespondingAttributePath="AAS:AssetInformation/globalAssetId"/>
 				</Attribute>
 			</Attribute>
 			<Attribute Name="derivedFrom">
-				<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(AssetAdministrationShell)[IRI]https://acplt.org/TestAssetAdministrationShell2</Value>
+				<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(AssetAdministrationShell)[Iri]https://acplt.org/TestAssetAdministrationShell2</Value>
 				<RefSemantic CorrespondingAttributePath="AAS:AssetAdministrationShell/derivedFrom"/>
 			</Attribute>
 			<Attribute Name="description">
@@ -98,7 +98,7 @@
 					<RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
 				</Attribute>
 				<Attribute Name="semanticId">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/SubmodelTemplates/ExampleSubmodel</Value>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/SubmodelTemplates/ExampleSubmodel</Value>
 					<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 				</Attribute>
 				<InternalElement ID="3" Name="ExampleRelationshipElement">
@@ -120,7 +120,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/RelationshipElements/ExampleRelationshipElement</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/RelationshipElements/ExampleRelationshipElement</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<ExternalInterface ID="1" Name="ReferableReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/ReferableReference"/>
@@ -147,7 +147,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/RelationshipElements/ExampleAnnotatedRelationshipElement</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/RelationshipElements/ExampleAnnotatedRelationshipElement</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<ExternalInterface ID="9" Name="ReferableReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/ReferableReference"/>
@@ -197,7 +197,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Operations/ExampleOperation</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Operations/ExampleOperation</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<InternalElement ID="14" Name="InoutputVariables">
@@ -220,11 +220,11 @@
 								<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 							</Attribute>
 							<Attribute Name="semanticId">
-								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Properties/ExampleProperty</Value>
+								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Properties/ExampleProperty</Value>
 								<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 							</Attribute>
 							<Attribute Name="valueId">
-								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ValueId/ExampleValueId</Value>
+								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/ValueId/ExampleValueId</Value>
 								<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 							</Attribute>
 							<Attribute Name="value" AttributeDataType="xs:string">
@@ -255,11 +255,11 @@
 								<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 							</Attribute>
 							<Attribute Name="semanticId">
-								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Properties/ExampleProperty</Value>
+								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Properties/ExampleProperty</Value>
 								<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 							</Attribute>
 							<Attribute Name="valueId">
-								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ValueId/ExampleValueId</Value>
+								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/ValueId/ExampleValueId</Value>
 								<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 							</Attribute>
 							<Attribute Name="value" AttributeDataType="xs:string">
@@ -290,11 +290,11 @@
 								<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 							</Attribute>
 							<Attribute Name="semanticId">
-								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Properties/ExampleProperty</Value>
+								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Properties/ExampleProperty</Value>
 								<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 							</Attribute>
 							<Attribute Name="valueId">
-								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ValueId/ExampleValueId</Value>
+								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/ValueId/ExampleValueId</Value>
 								<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 							</Attribute>
 							<Attribute Name="value" AttributeDataType="xs:string">
@@ -326,7 +326,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Capabilities/ExampleCapability</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Capabilities/ExampleCapability</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Capability"/>
@@ -350,11 +350,11 @@
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
 					<Attribute Name="observed">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[IRI]https://acplt.org/Test_Submodel,(SubmodelElementCollection)[ID_SHORT]ExampleSubmodelCollectionOrdered,(Property)[ID_SHORT]ExampleProperty</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[Iri]https://acplt.org/Test_Submodel,(SubmodelElementCollection)[IdShort]ExampleSubmodelCollectionOrdered,(Property)[IdShort]ExampleProperty</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:BasicEvent/observed"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Events/ExampleBasicEvent</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Events/ExampleBasicEvent</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/BasicEvent"/>
@@ -386,7 +386,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:SubmodelElementCollection/ordered"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/SubmodelElementCollections/ExampleSubmodelElementCollectionOrdered</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/SubmodelElementCollections/ExampleSubmodelElementCollectionOrdered</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<InternalElement ID="4" Name="ExampleProperty">
@@ -408,11 +408,11 @@
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 						</Attribute>
 						<Attribute Name="semanticId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Properties/ExampleProperty</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Properties/ExampleProperty</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 						</Attribute>
 						<Attribute Name="valueId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ValueId/ExampleValueId</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/ValueId/ExampleValueId</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 						</Attribute>
 						<Attribute Name="value" AttributeDataType="xs:string">
@@ -441,11 +441,11 @@
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 						</Attribute>
 						<Attribute Name="semanticId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/MultiLanguageProperties/ExampleMultiLanguageProperty</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/MultiLanguageProperties/ExampleMultiLanguageProperty</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 						</Attribute>
 						<Attribute Name="valueId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ValueId/ExampleMultiLanguageValueId</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/ValueId/ExampleMultiLanguageValueId</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:MultiLanguageProperty/valueId"/>
 						</Attribute>
 						<Attribute Name="value">
@@ -478,7 +478,7 @@
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 						</Attribute>
 						<Attribute Name="semanticId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Ranges/ExampleRange</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Ranges/ExampleRange</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 						</Attribute>
 						<Attribute Name="min" AttributeDataType="xs:int">
@@ -520,7 +520,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:SubmodelElementCollection/ordered"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/SubmodelElementCollections/ExampleSubmodelElementCollectionUnordered</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/SubmodelElementCollections/ExampleSubmodelElementCollectionUnordered</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<InternalElement ID="27" Name="ExampleBlob">
@@ -546,7 +546,7 @@
 							<RefSemantic CorrespondingAttributePath="AAS:Blob/mimeType"/>
 						</Attribute>
 						<Attribute Name="semanticId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Blobs/ExampleBlob</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Blobs/ExampleBlob</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 						</Attribute>
 						<Attribute Name="value">
@@ -578,7 +578,7 @@
 							<RefSemantic CorrespondingAttributePath="AAS:File/mimeType"/>
 						</Attribute>
 						<Attribute Name="semanticId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Files/ExampleFile</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Files/ExampleFile</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 						</Attribute>
 						<Attribute Name="value">
@@ -616,7 +616,7 @@
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 						</Attribute>
 						<Attribute Name="semanticId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ReferenceElements/ExampleReferenceElement</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/ReferenceElements/ExampleReferenceElement</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 						</Attribute>
 						<ExternalInterface ID="30" Name="ReferableReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/ReferableReference"/>
@@ -664,7 +664,7 @@
 					<RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
 				</Attribute>
 				<Attribute Name="semanticId">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[IRI]http://acplt.org/SubmodelTemplates/BillOfMaterial</Value>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[Iri]http://acplt.org/SubmodelTemplates/BillOfMaterial</Value>
 					<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 				</Attribute>
 				<InternalElement ID="37" Name="ExampleEntity">
@@ -686,7 +686,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<InternalElement ID="7" Name="ExampleProperty2">
@@ -708,11 +708,11 @@
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 						</Attribute>
 						<Attribute Name="semanticId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Properties/ExampleProperty</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Properties/ExampleProperty</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 						</Attribute>
 						<Attribute Name="valueId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ValueId/ExampleValue2</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/ValueId/ExampleValue2</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 						</Attribute>
 						<Attribute Name="value" AttributeDataType="xs:string">
@@ -741,11 +741,11 @@
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 						</Attribute>
 						<Attribute Name="semanticId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Properties/ExampleProperty</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Properties/ExampleProperty</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 						</Attribute>
 						<Attribute Name="valueId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ValueId/ExampleValueId</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/ValueId/ExampleValueId</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 						</Attribute>
 						<Attribute Name="value" AttributeDataType="xs:string">
@@ -771,7 +771,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:Entity/entityType"/>
 					</Attribute>
 					<Attribute Name="globalAssetId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Asset)[IRI]https://acplt.org/Test_Asset2</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Asset)[Iri]https://acplt.org/Test_Asset2</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:Entity/globalAssetId"/>
 					</Attribute>
 					<Attribute Name="idShort">
@@ -779,7 +779,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Entity"/>
@@ -827,7 +827,7 @@
 					<RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
 				</Attribute>
 				<Attribute Name="semanticId">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[IRI]http://acplt.org/SubmodelTemplates/AssetIdentification</Value>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[Iri]http://acplt.org/SubmodelTemplates/AssetIdentification</Value>
 					<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 				</Attribute>
 				<InternalElement ID="40" Name="ManufacturerName">
@@ -867,11 +867,11 @@
 						</Attribute>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]0173-1#02-AAO677#002</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]0173-1#02-AAO677#002</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<Attribute Name="valueId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ValueId/ACPLT</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/ValueId/ACPLT</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 					</Attribute>
 					<Attribute Name="value" AttributeDataType="xs:string">
@@ -895,11 +895,11 @@
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://opcfoundation.org/UA/DI/1.1/DeviceType/Serialnumber</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<Attribute Name="valueId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]978-8234-234-342</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]978-8234-234-342</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:Property/valueId"/>
 					</Attribute>
 					<Attribute Name="value" AttributeDataType="xs:string">
@@ -920,7 +920,7 @@
 					<RefSemantic CorrespondingAttributePath="AAS:AssetInformation/assetKind"/>
 				</Attribute>
 				<Attribute Name="globalAssetId">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Asset)[IRI]https://acplt.org/Test_Asset_Mandatory</Value>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Asset)[Iri]https://acplt.org/Test_Asset_Mandatory</Value>
 					<RefSemantic CorrespondingAttributePath="AAS:AssetInformation/globalAssetId"/>
 				</Attribute>
 			</Attribute>
@@ -1003,7 +1003,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
 					<Attribute Name="observed">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[IRI]https://acplt.org/Test_Submodel_Mandatory,(SubmodelElementCollection)[ID_SHORT]ExampleSubmodelCollectionOrdered,(Property)[ID_SHORT]ExampleProperty</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[Iri]https://acplt.org/Test_Submodel_Mandatory,(SubmodelElementCollection)[IdShort]ExampleSubmodelCollectionOrdered,(Property)[IdShort]ExampleProperty</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:BasicEvent/observed"/>
 					</Attribute>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/BasicEvent"/>
@@ -1168,7 +1168,7 @@
 					<RefSemantic CorrespondingAttributePath="AAS:AssetInformation/assetKind"/>
 				</Attribute>
 				<Attribute Name="globalAssetId">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Asset)[IRI]https://acplt.org/Test_Asset_Missing</Value>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Asset)[Iri]https://acplt.org/Test_Asset_Missing</Value>
 					<RefSemantic CorrespondingAttributePath="AAS:AssetInformation/globalAssetId"/>
 				</Attribute>
 			</Attribute>
@@ -1252,7 +1252,7 @@
 					<RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
 				</Attribute>
 				<Attribute Name="semanticId">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/SubmodelTemplates/ExampleSubmodel</Value>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/SubmodelTemplates/ExampleSubmodel</Value>
 					<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 				</Attribute>
 				<InternalElement ID="78" Name="ExampleRelationshipElement">
@@ -1274,7 +1274,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/RelationshipElements/ExampleRelationshipElement</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/RelationshipElements/ExampleRelationshipElement</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<ExternalInterface ID="76" Name="ReferableReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/ReferableReference"/>
@@ -1301,7 +1301,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/RelationshipElements/ExampleAnnotatedRelationshipElement</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/RelationshipElements/ExampleAnnotatedRelationshipElement</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<ExternalInterface ID="84" Name="ReferableReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/ReferableReference"/>
@@ -1351,7 +1351,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Operations/ExampleOperation</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Operations/ExampleOperation</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<InternalElement ID="89" Name="InoutputVariables">
@@ -1384,7 +1384,7 @@
 								</Attribute>
 							</Attribute>
 							<Attribute Name="semanticId">
-								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Properties/ExampleProperty</Value>
+								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Properties/ExampleProperty</Value>
 								<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 							</Attribute>
 							<Attribute Name="value" AttributeDataType="xs:string">
@@ -1425,7 +1425,7 @@
 								</Attribute>
 							</Attribute>
 							<Attribute Name="semanticId">
-								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Properties/ExampleProperty</Value>
+								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Properties/ExampleProperty</Value>
 								<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 							</Attribute>
 							<Attribute Name="value" AttributeDataType="xs:string">
@@ -1466,7 +1466,7 @@
 								</Attribute>
 							</Attribute>
 							<Attribute Name="semanticId">
-								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Properties/ExampleProperty</Value>
+								<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Properties/ExampleProperty</Value>
 								<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 							</Attribute>
 							<Attribute Name="value" AttributeDataType="xs:string">
@@ -1498,7 +1498,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Capabilities/ExampleCapability</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Capabilities/ExampleCapability</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/Capability"/>
@@ -1522,11 +1522,11 @@
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
 					<Attribute Name="observed">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[IRI]https://acplt.org/Test_Submodel_Missing,(SubmodelElementCollection)[ID_SHORT]ExampleSubmodelCollectionOrdered,(Property)[ID_SHORT]ExampleProperty</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[Iri]https://acplt.org/Test_Submodel_Missing,(SubmodelElementCollection)[IdShort]ExampleSubmodelCollectionOrdered,(Property)[IdShort]ExampleProperty</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:BasicEvent/observed"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Events/ExampleBasicEvent</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Events/ExampleBasicEvent</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/BasicEvent"/>
@@ -1558,7 +1558,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:SubmodelElementCollection/ordered"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/SubmodelElementCollections/ExampleSubmodelElementCollectionOrdered</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/SubmodelElementCollections/ExampleSubmodelElementCollectionOrdered</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<InternalElement ID="79" Name="ExampleProperty">
@@ -1590,7 +1590,7 @@
 							</Attribute>
 						</Attribute>
 						<Attribute Name="semanticId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Properties/ExampleProperty</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Properties/ExampleProperty</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 						</Attribute>
 						<Attribute Name="value" AttributeDataType="xs:string">
@@ -1619,7 +1619,7 @@
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 						</Attribute>
 						<Attribute Name="semanticId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/MultiLanguageProperties/ExampleMultiLanguageProperty</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/MultiLanguageProperties/ExampleMultiLanguageProperty</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 						</Attribute>
 						<Attribute Name="value">
@@ -1653,7 +1653,7 @@
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 						</Attribute>
 						<Attribute Name="semanticId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Ranges/ExampleRange</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Ranges/ExampleRange</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 						</Attribute>
 						<Attribute Name="min" AttributeDataType="xs:int">
@@ -1695,7 +1695,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:SubmodelElementCollection/ordered"/>
 					</Attribute>
 					<Attribute Name="semanticId">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/SubmodelElementCollections/ExampleSubmodelElementCollectionUnordered</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/SubmodelElementCollections/ExampleSubmodelElementCollectionUnordered</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 					</Attribute>
 					<InternalElement ID="102" Name="ExampleBlob">
@@ -1721,7 +1721,7 @@
 							<RefSemantic CorrespondingAttributePath="AAS:Blob/mimeType"/>
 						</Attribute>
 						<Attribute Name="semanticId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Blobs/ExampleBlob</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Blobs/ExampleBlob</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 						</Attribute>
 						<Attribute Name="value">
@@ -1753,7 +1753,7 @@
 							<RefSemantic CorrespondingAttributePath="AAS:File/mimeType"/>
 						</Attribute>
 						<Attribute Name="semanticId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Files/ExampleFile</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Files/ExampleFile</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 						</Attribute>
 						<Attribute Name="value">
@@ -1791,7 +1791,7 @@
 							<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 						</Attribute>
 						<Attribute Name="semanticId">
-							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ReferenceElements/ExampleReferenceElement</Value>
+							<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/ReferenceElements/ExampleReferenceElement</Value>
 							<RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
 						</Attribute>
 						<ExternalInterface ID="105" Name="ReferableReference" RefBaseClassPath="AssetAdministrationShellInterfaceClassLib/ReferableReference"/>
@@ -1843,7 +1843,7 @@
 				</Attribute>
 			</Attribute>
 			<Attribute Name="isCaseOf">
-				<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/DataSpecifications/ConceptDescriptions/TestConceptDescription</Value>
+				<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/DataSpecifications/ConceptDescriptions/TestConceptDescription</Value>
 				<RefSemantic CorrespondingAttributePath="AAS:ConceptDescription/isCaseOf"/>
 			</Attribute>
 			<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/ConceptDescription"/>
@@ -1932,7 +1932,7 @@
 				</Attribute>
 			</Attribute>
 			<Attribute Name="isCaseOf">
-				<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/ReferenceElements/ConceptDescriptionX</Value>
+				<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/ReferenceElements/ConceptDescriptionX</Value>
 				<RefSemantic CorrespondingAttributePath="AAS:ConceptDescription/isCaseOf"/>
 			</Attribute>
 			<InternalElement ID="114" Name="EmbeddedDataSpecification" RefBaseSystemUnitPath="AssetAdministrationShellDataSpecificationTemplates/DataSpecificationIEC61360Template/DataSpecificationIEC61360">
@@ -1980,7 +1980,7 @@
 					<RefSemantic CorrespondingAttributePath="IEC:DataSpecificationIEC61360/unit"/>
 				</Attribute>
 				<Attribute Name="unitId">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://acplt.org/Units/SpaceUnit</Value>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://acplt.org/Units/SpaceUnit</Value>
 					<RefSemantic CorrespondingAttributePath="IEC:DataSpecificationIEC61360/unitId"/>
 				</Attribute>
 				<Attribute Name="value">
@@ -3297,7 +3297,7 @@
 					<RefSemantic CorrespondingAttributePath="AAS:AssetInformation/assetKind"/>
 				</Attribute>
 				<Attribute Name="globalAssetId">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Asset)[IRI]https://acplt.org/Test_Asset_Mandatory</Value>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Asset)[Iri]https://acplt.org/Test_Asset_Mandatory</Value>
 					<RefSemantic CorrespondingAttributePath="AAS:AssetInformation/globalAssetId"/>
 				</Attribute>
 			</Attribute>
@@ -3380,7 +3380,7 @@
 						<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 					</Attribute>
 					<Attribute Name="observed">
-						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[IRI]https://acplt.org/Test_Submodel_Mandatory,(SubmodelElementCollection)[ID_SHORT]ExampleSubmodelCollectionOrdered,(Property)[ID_SHORT]ExampleProperty</Value>
+						<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[Iri]https://acplt.org/Test_Submodel_Mandatory,(SubmodelElementCollection)[IdShort]ExampleSubmodelCollectionOrdered,(Property)[IdShort]ExampleProperty</Value>
 						<RefSemantic CorrespondingAttributePath="AAS:BasicEvent/observed"/>
 					</Attribute>
 					<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/BasicEvent"/>
@@ -3590,7 +3590,7 @@
 					<RefSemantic CorrespondingAttributePath="AAS:Referable/idShort"/>
 				</Attribute>
 				<Attribute Name="observed">
-					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[IRI]https://acplt.org/Test_Submodel_Mandatory,(SubmodelElementCollection)[ID_SHORT]ExampleSubmodelCollectionOrdered,(Property)[ID_SHORT]ExampleProperty</Value>
+					<Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Submodel)[Iri]https://acplt.org/Test_Submodel_Mandatory,(SubmodelElementCollection)[IdShort]ExampleSubmodelCollectionOrdered,(Property)[IdShort]ExampleProperty</Value>
 					<RefSemantic CorrespondingAttributePath="AAS:BasicEvent/observed"/>
 				</Attribute>
 				<RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/BasicEvent"/>

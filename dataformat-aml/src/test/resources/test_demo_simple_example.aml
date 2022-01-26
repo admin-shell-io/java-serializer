@@ -10,14 +10,14 @@
                     <RefSemantic CorrespondingAttributePath="AAS:AssetInformation/assetKind"/>
                 </Attribute>
                 <Attribute Name="globalAssetId">
-                    <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Asset)[IRI]http://customer.com/assets/KHBVZJSQKIY</Value>
+                    <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(Asset)[Iri]http://customer.com/assets/KHBVZJSQKIY</Value>
                     <RefSemantic CorrespondingAttributePath="AAS:AssetInformation/globalAssetId"/>
                 </Attribute>
                 <Attribute Name="specificAssetId">
                     <RefSemantic CorrespondingAttributePath="AAS:AssetInformation/specificAssetId"/>
                     <Attribute Name="specificAssetId_1">
                         <Attribute Name="externalSubjectId">
-                            <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://customer.com/Systems/ERP/012</Value>
+                            <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://customer.com/Systems/ERP/012</Value>
                             <RefSemantic CorrespondingAttributePath="AAS:IdentifierKeyValuePair/externalSubjectId"/>
                         </Attribute>
                         <Attribute Name="key">
@@ -31,7 +31,7 @@
                     </Attribute>
                     <Attribute Name="specificAssetId_2">
                         <Attribute Name="externalSubjectId">
-                            <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRI]http://customer.com/Systems/IoT/1</Value>
+                            <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Iri]http://customer.com/Systems/IoT/1</Value>
                             <RefSemantic CorrespondingAttributePath="AAS:IdentifierKeyValuePair/externalSubjectId"/>
                         </Attribute>
                         <Attribute Name="key">
@@ -81,7 +81,7 @@
                     <RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
                 </Attribute>
                 <Attribute Name="semanticId">
-                    <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRDI]0173-1#01-AFZ615#016</Value>
+                    <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Irdi]0173-1#01-AFZ615#016</Value>
                     <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
                 </Attribute>
                 <InternalElement ID="3" Name="MaxRotationSpeed">
@@ -98,7 +98,7 @@
                         <RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
                     </Attribute>
                     <Attribute Name="semanticId">
-                        <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ConceptDescription)[IRDI]0173-1#02-BAA120#008</Value>
+                        <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ConceptDescription)[Irdi]0173-1#02-BAA120#008</Value>
                         <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
                     </Attribute>
                     <Attribute Name="value" AttributeDataType="xs:integer">
@@ -143,7 +143,7 @@
                         <RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
                     </Attribute>
                     <Attribute Name="semanticId">
-                        <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ConceptDescription)[IRI]http://customer.com/cd/1/1/18EBD56F6B43D895</Value>
+                        <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ConceptDescription)[Iri]http://customer.com/cd/1/1/18EBD56F6B43D895</Value>
                         <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
                     </Attribute>
                     <Attribute Name="value" AttributeDataType="xs:integer">
@@ -192,7 +192,7 @@
                         <RefSemantic CorrespondingAttributePath="AAS:SubmodelElementCollection/ordered"/>
                     </Attribute>
                     <Attribute Name="semanticId">
-                        <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ConceptDescription)[IRI]www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Document</Value>
+                        <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ConceptDescription)[Iri]www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Document</Value>
                         <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
                     </Attribute>
                     <InternalElement ID="7" Name="Title">
@@ -205,7 +205,7 @@
                             <RefSemantic CorrespondingAttributePath="AAS:HasKind/kind"/>
                         </Attribute>
                         <Attribute Name="semanticId">
-                            <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ConceptDescription)[IRI]www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Description/Title</Value>
+                            <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ConceptDescription)[Iri]www.vdi2770.com/blatt1/Entwurf/Okt18/cd/Description/Title</Value>
                             <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
                         </Attribute>
                         <Attribute Name="value" AttributeDataType="xs:langString">
@@ -228,7 +228,7 @@
                             <RefSemantic CorrespondingAttributePath="AAS:File/mimeType"/>
                         </Attribute>
                         <Attribute Name="semanticId">
-                            <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ConceptDescription)[IRI]www.vdi2770.com/blatt1/Entwurf/Okt18/cd/StoredDocumentRepresentation/DigitalFile</Value>
+                            <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(ConceptDescription)[Iri]www.vdi2770.com/blatt1/Entwurf/Okt18/cd/StoredDocumentRepresentation/DigitalFile</Value>
                             <RefSemantic CorrespondingAttributePath="AAS:HasSemantics/semanticId"/>
                         </Attribute>
                         <Attribute Name="value">
@@ -432,7 +432,7 @@
                     <RefSemantic CorrespondingAttributePath="IEC:DataSpecificationIEC61360/unit"/>
                 </Attribute>
                 <Attribute Name="unitId">
-                    <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRDI]0173-1#05-AAA650#002</Value>
+                    <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Irdi]0173-1#05-AAA650#002</Value>
                     <RefSemantic CorrespondingAttributePath="IEC:DataSpecificationIEC61360/unitId"/>
                 </Attribute>
                 <RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/DataSpecificationContent"/>
@@ -500,7 +500,7 @@
                     <RefSemantic CorrespondingAttributePath="IEC:DataSpecificationIEC61360/unit"/>
                 </Attribute>
                 <Attribute Name="unitId">
-                    <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[IRDI]0173-1#05-AAA650#002</Value>
+                    <Value xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:type="xsd:string">(GlobalReference)[Irdi]0173-1#05-AAA650#002</Value>
                     <RefSemantic CorrespondingAttributePath="IEC:DataSpecificationIEC61360/unitId"/>
                 </Attribute>
                 <RoleRequirements RefBaseRoleClassPath="AssetAdministrationShellRoleClassLib/DataSpecificationContent"/>
