@@ -43,7 +43,7 @@
         <revision.major>1</revision.major>
         <revision.minor>2</revision.minor>
         <revision.patch>1</revision.patch>
-        <revision.suffix>-SNAPSHOT</revision.suffix>
+        <revision.suffix></revision.suffix>
         <revision>${revision.major}.${revision.minor}.${revision.patch}${revision.suffix}</revision>
         <model.version>[${revision.major}.${revision.minor},)</model.version>
 
