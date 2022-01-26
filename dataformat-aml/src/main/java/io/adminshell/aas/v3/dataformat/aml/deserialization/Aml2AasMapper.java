@@ -25,11 +25,11 @@ import io.adminshell.aas.v3.dataformat.aml.common.naming.PropertyNamingStrategy;
 import io.adminshell.aas.v3.dataformat.mapping.MappingException;
 import io.adminshell.aas.v3.dataformat.mapping.MappingProvider;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
+import io.adminshell.aas.v3.model.AssetInformation;
 import io.adminshell.aas.v3.model.Identifiable;
 import io.adminshell.aas.v3.model.MultiLanguageProperty;
 import io.adminshell.aas.v3.model.Referable;
 import io.adminshell.aas.v3.model.Qualifiable;
-
 
 import java.util.List;
 
@@ -64,8 +64,8 @@ public class Aml2AasMapper {
         mappingProvider.register(new LangStringCollectionMapper());
         mappingProvider.register(new RelationshipElementMapper());
         mappingProvider.register(new ReferenceElementMapper());
-        mappingProvider.register(new ReferableMapper<Referable>());
-        mappingProvider.register(new IdentifiableMapper<Identifiable>());
+        mappingProvider.register(new ReferableMapper<>());
+        mappingProvider.register(new IdentifiableMapper<>());
         mappingProvider.register(new ConstraintCollectionMapper());
         mappingProvider.register(new QualifierMapper());
         mappingProvider.register(new OperationCollectionMapper());
@@ -77,12 +77,15 @@ public class Aml2AasMapper {
         mappingProvider.register(new EmbeddedDataSpecificationCollectionMapper());
         mappingProvider.register(new DataSpecificationIEC61360Mapper());
         mappingProvider.register(new EnumDataTypeIEC61360Mapper());
+        mappingProvider.register(new IdentifierKeyValuePairCollectionMapper());
+
         AbstractClassNamingStrategy classNamingStrategy = new NumberingClassNamingStrategy();
 
         PropertyNamingStrategy propertyNamingStrategy = new PropertyNamingStrategy();
         propertyNamingStrategy.registerCustomNaming(Referable.class, "descriptions", "description");
         propertyNamingStrategy.registerCustomNaming(MultiLanguageProperty.class, "values", "value");
-        propertyNamingStrategy.registerCustomNaming(Qualifiable.class, "qualifiers", "qualifier","qualifier");
+        propertyNamingStrategy.registerCustomNaming(Qualifiable.class, "qualifiers", "qualifier", "qualifier");
+        propertyNamingStrategy.registerCustomNaming(AssetInformation.class, "specificAssetIds", "specificAssetId");
         MappingContext context = new MappingContext(mappingProvider, classNamingStrategy, propertyNamingStrategy, config.getTypeFactory());
         context.setDocumentInfo(AmlDocumentInfo.fromFile(aml));
         AssetAdministrationShellEnvironment result = context.map(AssetAdministrationShellEnvironment.class, parser);

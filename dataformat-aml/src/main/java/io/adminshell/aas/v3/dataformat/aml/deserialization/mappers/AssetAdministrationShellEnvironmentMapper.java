@@ -73,7 +73,7 @@ public class AssetAdministrationShellEnvironmentMapper implements Mapper<AssetAd
         CAEXFile.SystemUnitClassLib systemUnitClassLib = parser.getContent().getSystemUnitClassLib().stream()
                 .filter(x -> x.getName().equalsIgnoreCase(ASSET_ADMINISTRATION_SHELL_SYSTEM_UNIT_CLASSES))
                 .findFirst()
-                .orElse(null);
+                .orElse(CAEXFile.SystemUnitClassLib.builder().build());
 
         List<SystemUnitFamilyType> systemUnitFamilyTypeShells = systemUnitClassLib.getSystemUnitClass().stream()
                 .filter(x ->x.getSupportedRoleClass().get(0).getRefRoleClassPath().equalsIgnoreCase(ROLE_CLASS_LIB_ASSET_ADMINISTRATION_SHELL))

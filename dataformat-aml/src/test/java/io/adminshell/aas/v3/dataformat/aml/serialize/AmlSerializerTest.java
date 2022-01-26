@@ -15,12 +15,15 @@
  */
 package io.adminshell.aas.v3.dataformat.aml.serialize;
 
+import io.adminshell.aas.v3.dataformat.DeserializationException;
 import io.adminshell.aas.v3.dataformat.aml.fixtures.FullExample;
 import io.adminshell.aas.v3.dataformat.SerializationException;
 import io.adminshell.aas.v3.dataformat.aml.AmlSerializationConfig;
 import io.adminshell.aas.v3.dataformat.aml.AmlSerializer;
+import io.adminshell.aas.v3.dataformat.aml.fixtures.SimpleExample;
 import io.adminshell.aas.v3.dataformat.aml.serialization.id.IntegerIdGenerator;
 import io.adminshell.aas.v3.dataformat.core.AASFull;
+import io.adminshell.aas.v3.dataformat.core.AASSimple;
 import io.adminshell.aas.v3.model.AssetAdministrationShellEnvironment;
 import java.io.File;
 import java.io.IOException;
@@ -39,6 +42,11 @@ public class AmlSerializerTest {
     @Test
     public void testSAPFullExample() throws SerializationException, SAXException, IOException {
         validateAmlSerializer(FullExample.FILE, AASFull.ENVIRONMENT);
+    }
+
+    @Test
+    public void testSimpleExample() throws SerializationException, SAXException, IOException, DeserializationException {
+        validateAmlSerializer(SimpleExample.FILE, AASSimple.ENVIRONMENT);
     }
 
     private void validateAmlSerializer(File expectedFile, AssetAdministrationShellEnvironment environment)

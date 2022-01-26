@@ -82,7 +82,10 @@ public class AasUtils {
             return null;
         }
         return reference.getKeys().stream()
-                .map(x -> String.format("(%s)[%s]%s", serializeEnumName(x.getType().name()), x.getIdType(), x.getValue()))
+                .map(x -> String.format("(%s)[%s]%s",
+                serializeEnumName(x.getType().name()),
+                serializeEnumName(x.getIdType().name()),
+                x.getValue()))
                 .collect(Collectors.joining(","));
     }
 
@@ -181,7 +184,7 @@ public class AasUtils {
         Matcher matcher = KEY_REGEX.matcher(value);
         if (matcher.find()) {
             KeyElements keyElements = KeyElements.valueOf(deserializeEnumName(matcher.group(KEY_REGEX_GROUP_TYPE)));
-            KeyType keyType = KeyType.valueOf(matcher.group(KEY_REGEX_GROUP_ID_TYPE));
+            KeyType keyType = KeyType.valueOf(deserializeEnumName(matcher.group(KEY_REGEX_GROUP_ID_TYPE)));
             return new DefaultKey.Builder()
                     .type(keyElements)
                     .idType(keyType)
