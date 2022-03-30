@@ -23,6 +23,7 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectWriter;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.dataformat.xml.XmlFactory;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.fasterxml.jackson.dataformat.xml.ser.ToXmlGenerator;
 
@@ -42,6 +43,7 @@ import io.adminshell.aas.v3.model.LangString;
 import io.adminshell.aas.v3.model.Reference;
 
 public class XmlSerializer implements Serializer {
+    protected final XmlFactory xmlFactory;
     protected XmlMapper mapper;
     protected Map<String, String> namespacePrefixes;
 
@@ -50,6 +52,11 @@ public class XmlSerializer implements Serializer {
     }
 
     public XmlSerializer(Map<String, String> namespacePrefixes) {
+        this(new XmlFactory(), namespacePrefixes);
+    }
+
+    public XmlSerializer(XmlFactory xmlFactory, Map<String, String> namespacePrefixes) {
+        this.xmlFactory = xmlFactory;
         this.namespacePrefixes = namespacePrefixes;
         buildMapper();
     }
