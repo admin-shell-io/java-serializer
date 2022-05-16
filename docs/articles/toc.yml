@@ -6,5 +6,3 @@
   href: building.md
 - name: Development Workflow
   href: development_workflow.md
-- name: Releasing
-  href: releasing.md
