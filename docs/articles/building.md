@@ -5,7 +5,7 @@ You can download and build the repository by yourself by following these steps:
 - Clone the GitHub repository:
 
 ```sh
-        git clone https://github.com/admin-shell-io/aasx-package-explorer
+        git clone https://github.com/admin-shell-io/java-serializer.git
 ```
 
 - Use [Maven](https://maven.apache.org/) to build the project
