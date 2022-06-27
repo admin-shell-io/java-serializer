@@ -34,4 +34,28 @@ public class AasUtilsTest {
         Assert.assertEquals(KeyType.ID_SHORT, reference.getKeys().get(0).getIdType());
         Assert.assertEquals("Temperature", reference.getKeys().get(0).getValue());
     }
+
+    @Test
+    public void deserializeEnumName_IdShort_to_ID_SHORT(){
+        String input = "IdShort";
+        String result = AasUtils.deserializeEnumName(input);
+
+        Assert.assertEquals("ID_SHORT", result);
+    }
+
+    @Test
+    public void deserializeEnumName_Iri_to_IRI(){
+        String input = "Iri";
+        String result = AasUtils.deserializeEnumName(input);
+
+        Assert.assertEquals("IRI", result);
+    }
+
+    @Test
+    public void deserializeEnumName_IRI_to_IRI(){
+        String input = "IRI";
+        String result = AasUtils.deserializeEnumName(input);
+
+        Assert.assertEquals("IRI", result);
+    }
 }

@@ -30,7 +30,6 @@ import io.adminshell.aas.v3.model.Referable;
 import io.adminshell.aas.v3.model.Reference;
 import io.adminshell.aas.v3.model.Submodel;
 import io.adminshell.aas.v3.model.impl.DefaultKey;
-import io.adminshell.aas.v3.model.impl.DefaultReference;
 import java.beans.IntrospectionException;
 import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
@@ -47,6 +46,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -308,15 +308,20 @@ public class AasUtils {
         if (input == null || input.isEmpty()) {
             return result;
         }
-        result += input.charAt(0);
-        for (int i = 1; i < input.length(); i++) {
-            char currentChar = input.charAt(i);
-            if (Character.isUpperCase(currentChar)) {
-                result += UNDERSCORE;
+        if (StringUtils.isAllUpperCase(input)) {
+            result = input;
+        } else {
+            result += input.charAt(0);
+            for (int i = 1; i < input.length(); i++) {
+                char currentChar = input.charAt(i);
+                if (Character.isUpperCase(currentChar)) {
+                    result += UNDERSCORE;
+                }
+                result += currentChar;
             }
-            result += Character.toUpperCase(currentChar);
         }
-        return result;
+
+        return result.toUpperCase();
     }
 
     /**
